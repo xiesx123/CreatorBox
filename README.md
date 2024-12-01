@@ -14,9 +14,6 @@
 基于x64处理器，下载[最新版本](https://github.com/xiesx123/CreatorBox/tags)安裝即可
 
 ```sh
-root@DELL MINGW64 /d/Projects/app
-$ ll
-total 61732
 -rwxr-xr-x 1 root 197608 59787264 12月  1 20:23 CreatorBox.exe*
 drwxr-xr-x 1 root 197608        0 12月  1 20:42 data/
 drwxr-xr-x 1 root 197608        0 12月  1 20:45 edge/
