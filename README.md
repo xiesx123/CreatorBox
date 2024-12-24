@@ -14,7 +14,6 @@ $ ll
 total 61732
 -rwxr-xr-x 1 root 197608 102867456 12月 12 18:16 CreatorBox.exe* # 主程序
 drwxr-xr-x 1 root 197608         0 12月 12 18:18 data/            # Data  数据目录
-drwxr-xr-x 1 root 197608         0 12月 12 18:18 jre/             # Java  运行环境
 drwxr-xr-x 1 root 197608         0 12月  1 20:43 logs/            # Logs  日志目录
 drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚本目录
 -rw-r--r-- 1 root 197608    143888 12月 12 18:18 unins000.dat     # 卸载文件列表
