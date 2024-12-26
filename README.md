@@ -52,17 +52,11 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
 
 ***
 
-> 选择音视频
+> 选择音视频及生成方式
 <div style="display: flex; justify-content: space-between;">
   <img src="screenshot/s1-2.png" alt="CreatorBox" width="380"/> 
   <img src="screenshot/s2-1.png" alt="CreatorBox" width="380"/> 
   <img src="screenshot/s2-2.png" alt="CreatorBox" width="380"/> 
-</div>
-
-***
-
-> 选择生成方式
-<div style="display: flex; justify-content: space-between;">
   <img src="screenshot/s2-3.png" alt="CreatorBox" width="380"/> 
 </div>
 
