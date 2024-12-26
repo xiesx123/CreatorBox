@@ -19,6 +19,7 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
 -rw-r--r-- 1 root 197608    143888 12月 12 18:18 unins000.dat     # 卸载文件列表
 -rwxr-xr-x 1 root 197608   3376121 12月 12 18:17 unins000.exe*    # 卸载程序
 ```
+
 <img src="screenshot/s1-1.png" alt="CreatorBox" width="280"/> 
 <img src="screenshot/s1-2.png" alt="CreatorBox" width="280"/> 
 
@@ -30,6 +31,7 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
 <img src="screenshot/s3-2.png" alt="CreatorBox" width="280"/>
 <img src="screenshot/s3-3.png" alt="CreatorBox" width="280"/>
 <img src="screenshot/s3-4.png" alt="CreatorBox" width="280"/>
+<img src="screenshot/s3-5.png" alt="CreatorBox" width="280"/>
 
 <img src="screenshot/s4.png" alt="CreatorBox" width="280"/>
 
