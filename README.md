@@ -47,50 +47,50 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
 ## 功能截图
 > 链接提取、下载、分割
 <div style="display: flex; justify-content: space-between;">
-  <img src="screenshot/s1-1.png" alt="CreatorBox" width="280"/> 
+  <img src="screenshot/s1-1.png" alt="CreatorBox" width="380"/> 
 </div>
 
 ***
 
 > 选择音视频
 <div style="display: flex; justify-content: space-between;">
-  <img src="screenshot/s1-2.png" alt="CreatorBox" width="280"/> 
-  <img src="screenshot/s2-1.png" alt="CreatorBox" width="280"/> 
-  <img src="screenshot/s2-2.png" alt="CreatorBox" width="280"/> 
+  <img src="screenshot/s1-2.png" alt="CreatorBox" width="380"/> 
+  <img src="screenshot/s2-1.png" alt="CreatorBox" width="380"/> 
+  <img src="screenshot/s2-2.png" alt="CreatorBox" width="380"/> 
 </div>
 
 ***
 
 > 选择生成方式
 <div style="display: flex; justify-content: space-between;">
-  <img src="screenshot/s2-3.png" alt="CreatorBox" width="280"/> 
+  <img src="screenshot/s2-3.png" alt="CreatorBox" width="380"/> 
 </div>
 
 ***
 
 > 直接生成视频
 <div style="display: flex; justify-content: space-between;">
-  <img src="screenshot/s3-1.png" alt="CreatorBox" width="280"/> 
-  <img src="screenshot/s3-2.png" alt="CreatorBox" width="280"/>
+  <img src="screenshot/s3-1.png" alt="CreatorBox" width="380"/> 
+  <img src="screenshot/s3-2.png" alt="CreatorBox" width="380"/>
 </div>
 
 ***
 
 > 导出或覆盖现有剪映草稿
 <div style="display: flex; justify-content: space-between;">
-  <img src="screenshot/s3-3.png" alt="CreatorBox" width="280"/>
-  <img src="screenshot/s3-4.png" alt="CreatorBox" width="280"/>
+  <img src="screenshot/s3-3.png" alt="CreatorBox" width="380"/>
+  <img src="screenshot/s3-4.png" alt="CreatorBox" width="380"/>
 </div>
 
 ***
 
 > 使用剪映打开剪映项目（目前只实现了音频、视频轨、转场）
-<img src="screenshot/s3-5.png" alt="CreatorBox" width="280"/>
+<img src="screenshot/s3-5.png" alt="CreatorBox" width="380"/>
 
 ***
 
 > LLM 大模型（目前只实现了Gemini，免费额度基本够用）
-<img src="screenshot/s4.png" alt="CreatorBox" width="280"/>
+<img src="screenshot/s4.png" alt="CreatorBox" width="380"/>
 
 ## 无头模式
 无头模式下启动会打印此日志，此时可通过接口方式批量调用
@@ -99,7 +99,7 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
 2024-12-26 23:57:06 - Currently in headless environment, unable to start the interface
 ```
 > 外部接口（上述GUI所有操作均支持api接口调用）
-<img src="screenshot/s10-1.png" alt="CreatorBox" width="280"/>
+<img src="screenshot/s10-1.png" alt="CreatorBox" width="380"/>
 
 ## 后续计划
 - 自动发布
