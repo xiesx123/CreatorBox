@@ -2,7 +2,7 @@
 
 # CreatorBox
 
-[CreatorBox](https://github.com/xiesx123/CreatorBox) 自媒体创作者工具箱；
+[CreatorBox](https://github.com/xiesx123/CreatorBox) 🚀🎬轻量、灵活、易上手的创作者工具箱，构建全自动化视频剪辑/混剪流水线；
 
 ## 安装下载
 
