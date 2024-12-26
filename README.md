@@ -20,20 +20,55 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
 -rwxr-xr-x 1 root 197608   3376121 12月 12 18:17 unins000.exe*    # 卸载程序
 ```
 
-<img src="screenshot/s1-1.png" alt="CreatorBox" width="280"/> 
-<img src="screenshot/s1-2.png" alt="CreatorBox" width="280"/> 
+## 功能截图
 
-<img src="screenshot/s2-1.png" alt="CreatorBox" width="280"/> 
-<img src="screenshot/s2-2.png" alt="CreatorBox" width="280"/> 
-<img src="screenshot/s2-3.png" alt="CreatorBox" width="280"/> 
+> 链接提取、下载、分割
+<div style="display: flex; justify-content: space-between;">
+  <img src="screenshot/s1-1.png" alt="CreatorBox" width="280"/> 
+</div>
 
-<img src="screenshot/s3-1.png" alt="CreatorBox" width="280"/> 
-<img src="screenshot/s3-2.png" alt="CreatorBox" width="280"/>
-<img src="screenshot/s3-3.png" alt="CreatorBox" width="280"/>
-<img src="screenshot/s3-4.png" alt="CreatorBox" width="280"/>
+***
+
+> 选择音视频
+<div style="display: flex; justify-content: space-between;">
+  <img src="screenshot/s1-2.png" alt="CreatorBox" width="280"/> 
+  <img src="screenshot/s2-1.png" alt="CreatorBox" width="280"/> 
+  <img src="screenshot/s2-2.png" alt="CreatorBox" width="280"/> 
+</div>
+
+***
+
+> 选择生成方式
+<div style="display: flex; justify-content: space-between;">
+  <img src="screenshot/s2-3.png" alt="CreatorBox" width="280"/> 
+</div>
+
+***
+
+> 直接生成视频
+<div style="display: flex; justify-content: space-between;">
+  <img src="screenshot/s3-1.png" alt="CreatorBox" width="280"/> 
+  <img src="screenshot/s3-2.png" alt="CreatorBox" width="280"/>
+</div>
+
+***
+
+> 导出或覆盖现有剪映草稿
+<div style="display: flex; justify-content: space-between;">
+  <img src="screenshot/s3-3.png" alt="CreatorBox" width="280"/>
+  <img src="screenshot/s3-4.png" alt="CreatorBox" width="280"/>
+</div>
+
+***
+
+> 使用剪映打开剪映项目（目前只实现了音频、视频轨、转场）
 <img src="screenshot/s3-5.png" alt="CreatorBox" width="280"/>
 
+> LLM 大模型（目前只实现了Gemini，免费额度基本够用）
 <img src="screenshot/s4.png" alt="CreatorBox" width="280"/>
+
+> 外部接口（页面所有操作均支持接口操作）
+<img src="screenshot/s10-1.png" alt="CreatorBox" width="280"/>
 
 ## 后续计划
 
