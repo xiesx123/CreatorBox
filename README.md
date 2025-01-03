@@ -47,7 +47,7 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
 - [x] 资源提取下载分割
 - [x] 自定义视频片段集合合并
 - [x] 导出或覆盖现有剪映草稿
-- [ ] 视频翻译 (1.0.5 [示例效果](https://github.com/xiesx123/CreatorBox/blob/master/trans))
+- [ ] 视频翻译 (1.0.5 [英](https://github.com/xiesx123/CreatorBox/blob/master/trans/test.mp4) [中](https://github.com/xiesx123/CreatorBox/blob/master/trans/test_trans.mp4) )
    - [x] 音频提取：提取视频音频、分离音轨
    - [x] 字幕提取：音频转录获取源字幕
    - [x] 字幕转译：自动转译目标字幕
@@ -56,10 +56,6 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
    - [x] 视频合成：合成视频并导出剪映草稿
 - [ ] 自动化投稿
 - [ ] 生成视频脚本 (待定，欢迎交流)
-
-<div style="display: flex; justify-content: space-between;">
-  <video src="https://github.com/xiesx123/CreatorBox/blob/master/trans/test5.mp4" controls="controls" width="500" height="300">
-</div>
 
 ## 功能截图
 > 链接提取、下载、分割
