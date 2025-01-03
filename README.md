@@ -57,6 +57,9 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
 - [ ] 自动化投稿
 - [ ] 生成视频脚本 (待定，欢迎交流)
 
+<div style="display: flex; justify-content: space-between;">
+  <video src="https://github.com/xiesx123/CreatorBox/blob/master/trans/test5.mp4" controls="controls" width="500" height="300">
+</div>
 
 ## 功能截图
 > 链接提取、下载、分割
