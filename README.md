@@ -47,7 +47,7 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
 - [x] 资源提取下载分割
 - [x] 自定义视频片段集合合并
 - [x] 导出或覆盖现有剪映草稿
-- [ ] 视频翻译 1.0.5 (还未发布..)
+- [ ] 视频翻译 1.0.5 (待发布..[英](https://drive.google.com/file/d/1aYRq0DucQpycrXvctZq2njP6V1QGvNFG/view) 转 [中](https://drive.google.com/file/d/1F8GnaB1OjuU3p1_-pU7Wn20bop5j8dxR/view?usp=sharing))
    - [x] 音频提取：提取视频音频、音轨
    - [x] 字幕提取：音频转录获取源字幕
    - [x] 字幕转译：自动转译目标字幕
