@@ -6,7 +6,7 @@
 
 ## 安装下载
 
-基于x64处理器，下载[最新版本](https://github.com/xiesx123/CreatorBox/tags)安裝即可
+基于windows x64处理器，下载[最新版本](https://github.com/xiesx123/CreatorBox/tags)安裝即可
 
 ```sh
 root@DELL MINGW64 /d/Projects/app
@@ -43,16 +43,12 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
 #########################################################################
 ```
 
-## 后续计划
-2025-01-04 ：
-
-先得写Python实现功能，再得写Java Api，最后写Swing Client Gui，需要一个过程哈~，这次1.0.5之后对电脑配置就得有要求了...
-
+## 项目计划
 - [x] 资源提取下载分割
 - [x] 自定义视频片段集合合并
 - [x] 导出或覆盖现有剪映草稿
-- [ ] 视频翻译 (1.0.5 [英](https://github.com/xiesx123/CreatorBox/blob/master/trans/test.mp4) [中](https://github.com/xiesx123/CreatorBox/blob/master/trans/test_trans.mp4) )
-   - [x] 音频提取：提取视频音频、分离音轨
+- [ ] 视频翻译 1.0.5 
+   - [x] 音频提取：提取视频音频、音轨
    - [x] 字幕提取：音频转录获取源字幕
    - [x] 字幕转译：自动转译目标字幕
    - [x] 字幕配音：文本转多风格语音，更加自然
@@ -60,6 +56,12 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
    - [x] 视频合成：合成视频并导出剪映草稿
 - [ ] 自动化投稿
 - [ ] 生成视频脚本 (待定，欢迎交流)
+
+2025-01-04 ：
+先得写Python实现功能，再得写Java Api，最后写Swing Client Gui，需要一个过程哈~，这次1.0.5之后对电脑配置就得有要求了...
+
+2025-01-07 ：
+这里使用 [Colab ](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing) 加快任务处理速度...
 
 ## 功能截图
 > 链接提取、下载、分割
@@ -112,10 +114,23 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
 > 外部接口（上述GUI所有操作均支持api接口调用）
 <img src="screenshot/s10-1.png" alt="CreatorBox" width="380"/>
 
+## 交互式环境
+Colab 是一个允许您编写和执行代码的交互式环境，称为 Colab 笔记本，[这里](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)你可以借助GPU来加快任务处理速度
+<div style="display: flex; justify-content: space-between;">
+  <img src="screenshot/colab1.png" alt="CreatorBox" width="380"/> 
+  <img src="screenshot/colab2.png" alt="CreatorBox" width="380"/>
+</div>
+
 ## 常见问题
 
-> #### 安装
-内置 `Jre_v21.0.5_11` `Python-v3.12.7` `Node-v20.12.1-x64` 环境，无需手动处理，在选择安装目录时不要含有空格
+> #### 环境
+内置 `Jre_v21.0.5_11` `Conda-v24.11.1` `Node-v20.12.1-x64` 环境，无需手动处理，在选择安装目录时不要含有空格
+
+> #### 配置
+1.0.5 开始使用Conda管理环境，不影响本机环境
+```
+conda create --name creatorbox python=3.10.16
+```
 
 > #### 环境
 机器配置差异导致运行异常
