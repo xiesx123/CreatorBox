@@ -53,7 +53,7 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
    - [x] 字幕转译：自动转译目标字幕
    - [x] 字幕配音：文本转多风格语音，更加自然
    - [x] 配音对齐：将配音与视频同步对齐
-   - [x] 视频合成：合成视频并导出剪映草稿
+   - [] 视频合成：合成视频并导出剪映草稿
 - [ ] 自动化投稿
 - [ ] 生成视频脚本 (待定，欢迎交流)
 
@@ -62,6 +62,17 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
 
 2025-01-07 ：
 这里使用 [Colab](https://github.com/xiesx123/CreatorBox/blob/master/README.md#%E4%BA%A4%E4%BA%92%E5%BC%8F%E7%8E%AF%E5%A2%83) 加快任务处理速度...
+
+2025-01-10 ：
+新增 creatorbox cli 
+```
+# 所有模块
+!cb --help
+# 视频模块
+!cb video --help
+# 视频模块 -> 视频翻译功能
+!cb video translate --help
+```
 
 ## 功能截图
 > 链接提取、下载、分割
