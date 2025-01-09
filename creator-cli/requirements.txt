@@ -30,6 +30,7 @@ edge_tts>=7.0.0
 
 # other
 click>=7.1.2
+asyncclick>=8.1.8
 loguru>=0.7.3
 pydantic-settings>=2.7.1
 # shortuuid>=1.0.13

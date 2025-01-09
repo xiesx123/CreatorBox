@@ -1,11 +1,10 @@
 _A=True
 import os,sys
 sys.path.insert(0,os.getcwd())
+sys.path.insert(0,os.path.dirname(os.getcwd()))
 import yt_dlp,requests
 from tqdm import tqdm
 from loguru import logger
-from utils import cbenv
-env=cbenv.SingletonCBEnv.get_instance()
 def ytdlp_download(url,save_folder):
 	B=save_folder
 	try:
@@ -16,7 +15,7 @@ def ytdlp_download(url,save_folder):
 		F={'outtmpl':os.path.join(B,'%(title)s.%(ext)s'),'format':'best','postprocessors':[{'key':'FFmpegVideoConvertor','preferedformat':'mp4'}]}
 		with yt_dlp.YoutubeDL(F)as A:C=A.extract_info(url,download=_A);D=A.prepare_filename(C)
 		return os.path.abspath(D)
-	except Exception as G:print(f"Error occurred: {G}");return
+	except Exception as G:logger.error(f"Error occurred: {G}");return
 def request_download(url,save_folder,filename=None):
 	D=save_folder;A=filename
 	if not A:A=url.split('/')[-1]

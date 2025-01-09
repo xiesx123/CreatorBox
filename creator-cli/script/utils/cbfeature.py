@@ -1,13 +1,13 @@
-import os,argparse
-os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
-os.environ['TF_ENABLE_ONEDNN_OPTS']='0'
-import cv2,numpy as np
+import os,sys
+sys.path.insert(0,os.getcwd())
+sys.path.insert(0,os.path.dirname(os.getcwd()))
+import argparse,cv2,numpy as np
+from script.utils import cbdownload,cblogger,cbutils
+from script.support.keras_ import load_resnet50_model
 from loguru import logger
-from support.keras_ import load_resnet50_model
 from tensorflow.keras.applications import ResNet50
 from tensorflow.keras.applications.resnet50 import preprocess_input
 from tensorflow.keras.preprocessing import image
-from utils import cbdownload,cbenv,cblogger,cbutils
 resnet_model=None
 def extract_feature_from_image(image_path):
 	C=image_path;D=cv2.imread(C)
