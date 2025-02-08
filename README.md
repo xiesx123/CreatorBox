@@ -103,6 +103,37 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
 }
 ```
 
+<img src="screenshot/server1.png" alt="CreatorBox" width="380"/>
+
+> 1、先调用 `/video/translate` 得到任务id（url 和 input 二选一，如果是input先可以调用 `/downloader/ytdlp` 下载）
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "task_id": "0a772286-463e-4ea2-a5c5-02dcefa6599b"
+  }
+}
+```
+> 2、等待服务器处理完毕，在未处理完毕前，可调用 `/app/result/{task_id}` 获取任务结果
+```
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "task_id": "0a772286-463e-4ea2-a5c5-02dcefa6599b",
+    "result": {
+      "path": "/content/creatorbox/webapp/temp/27918d2db14c2b0ecad390a5a3e44624/xTbN6lumdPQ_trans_zh-CN.mp4"
+    }
+  }
+}
+```
+
+> 3、调用 `/downloader/local` 获取完整下载链接
+```
+https://toucan-real-informally.ngrok-free.app/downloader/local?file_path=%2Fcontent%2Fcreatorbox%2Fwebapp%2Ftemp%2F27918d2db14c2b0ecad390a5a3e44624%2FxTbN6lumdPQ_trans_zh-CN.mp4
+```
+
 ## 功能截图
 > 链接提取、下载、分割
 <div style="display: flex; justify-content: space-between;">
