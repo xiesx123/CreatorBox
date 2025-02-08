@@ -129,7 +129,13 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
 }
 ```
 
-> 3、调用 `/downloader/local` 获取完整下载链接
+> 3、调用 `/downloader/local` 获取完整下载链接（所有在webapp目录下均可下载）
+
+原始视频，地址格式 = /content/creatorbox/webapp/ytdlp/{id}.mp4
+```
+https://toucan-real-informally.ngrok-free.app/downloader/local?file_path=%2Fcontent%2Fcreatorbox%2Fwebapp%2Fytdlp%2FxTbN6lumdPQ.mp4
+```
+翻译视频
 ```
 https://toucan-real-informally.ngrok-free.app/downloader/local?file_path=%2Fcontent%2Fcreatorbox%2Fwebapp%2Ftemp%2F27918d2db14c2b0ecad390a5a3e44624%2FxTbN6lumdPQ_trans_zh-CN.mp4
 ```
