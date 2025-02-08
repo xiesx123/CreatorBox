@@ -69,7 +69,7 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
 2025-02-08 ：
 新增 creatorbox api ， [接口文档](https://toucan-real-informally.ngrok-free.app/docs#/)  [实时日志](https://toucan-real-informally.ngrok-free.app/static/logs.html)，免费版大概3个小时左右会掉线
 
-<img src="screenshot/colab4.png" alt="CreatorBox" width="380"/>
+<img src="screenshot/colab3.png" alt="CreatorBox" width="380"/>
 
 ```
 {
@@ -163,7 +163,7 @@ creatorbox cli
 </div>
 creatorbox api
 <div style="display: flex; justify-content: space-between;">
-  <img src="screenshot/colab3.png" alt="CreatorBox" width="380"/> 
+  <img src="screenshot/colab4.jpeg" alt="CreatorBox" width="380"/> 
 </div>
 
 ## 常见问题
