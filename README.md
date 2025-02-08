@@ -82,17 +82,17 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
     "machine": "x86_64",
     "processor": "x86_64",
     "cpu_percent": 0,
-    "memory_total": 12.67477035522461,
+    "memory_total": 12.67477035522461,   // 12.7G
     "memory_used": 1.6868972778320312,
     "memory_percent": 15.8,
-    "disk_usage": 28.3,
+    "disk_usage": 28.3,                  // 112.6G
     "internal_ip": "172.28.0.12",
     "external_ip": "34.87.123.59",
     "gpu": [
       {
-        "name": "Tesla T4",
+        "name": "Tesla T4", 
         "driver": "550.54.15",
-        "memory_total": 15360,
+        "memory_total": 15360,           // 15G
         "memory_used": 0,
         "memory_free": 15095,
         "gpu_util": 0,
@@ -105,7 +105,7 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
 
 <img src="screenshot/server1.png" alt="CreatorBox" width="380"/>
 
-> 1、先调用 `/video/translate` 得到任务id（url 和 input 二选一，如果是input先可以调用 `/downloader/ytdlp` 下载）
+> 1、先调用 `/video/translate` 得到任务id（url/input 二选一，input先可以调用 `/downloader/ytdlp` 下载）
 ```
 {
   "code": 0,
@@ -139,6 +139,7 @@ https://toucan-real-informally.ngrok-free.app/downloader/local?file_path=%2Fcont
 ```
 https://toucan-real-informally.ngrok-free.app/downloader/local?file_path=%2Fcontent%2Fcreatorbox%2Fwebapp%2Ftemp%2F27918d2db14c2b0ecad390a5a3e44624%2FxTbN6lumdPQ_trans_zh-CN.mp4
 ```
+等等
 
 ## 功能截图
 > 链接提取、下载、分割
