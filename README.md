@@ -58,20 +58,49 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
 - [ ] 生成视频脚本 (待定，欢迎交流)
 
 2025-01-04 ：
-先得写Python实现功能，再得写Java Api，最后写Swing Client Gui，需要一个过程哈~，这次1.0.5之后对电脑配置就得有要求了...
+先得实现功能，再得写Api，最后写Gui，需要一个过程哈~，这次1.0.5之后对电脑配置就得有要求了...
 
 2025-01-07 ：
 这里使用 [Colab](https://github.com/xiesx123/CreatorBox/blob/master/README.md#%E4%BA%A4%E4%BA%92%E5%BC%8F%E7%8E%AF%E5%A2%83) 加快任务处理速度...
 
 2025-01-10 ：
-新增 creatorbox cli 
+新增 creatorbox cli
+
+2025-02-08 ：
+新增 creatorbox api ， [接口文档](https://toucan-real-informally.ngrok-free.app/docs#/)  [实时日志](https://toucan-real-informally.ngrok-free.app/static/logs.html)，免费版大概3个小时左右会掉线
+
+<img src="screenshot/colab4.png" alt="CreatorBox" width="380"/>
+
 ```
-# 所有模块
-!cb --help
-# 视频模块
-!cb video --help
-# 视频模块 -> 视频翻译功能
-!cb video translate --help
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "system": "Linux",
+    "node": "b8994b700a17",
+    "version": "#1 SMP PREEMPT_DYNAMIC Thu Jun 27 21:05:47 UTC 2024",
+    "machine": "x86_64",
+    "processor": "x86_64",
+    "cpu_percent": 0,
+    "memory_total": 12.67477035522461,
+    "memory_used": 1.6868972778320312,
+    "memory_percent": 15.8,
+    "disk_usage": 28.3,
+    "internal_ip": "172.28.0.12",
+    "external_ip": "34.87.123.59",
+    "gpu": [
+      {
+        "name": "Tesla T4",
+        "driver": "550.54.15",
+        "memory_total": 15360,
+        "memory_used": 0,
+        "memory_free": 15095,
+        "gpu_util": 0,
+        "temperature": 42
+      }
+    ]
+  }
+}
 ```
 
 ## 功能截图
@@ -127,9 +156,14 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
 
 ## 交互式环境
 Colab 是一个允许您编写和执行代码的交互式环境，称为 Colab 笔记本，[这里](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)你可以借助GPU来加快任务处理速度
+creatorbox cli
 <div style="display: flex; justify-content: space-between;">
   <img src="screenshot/colab1.png" alt="CreatorBox" width="380"/> 
   <img src="screenshot/colab2.png" alt="CreatorBox" width="380"/>
+</div>
+creatorbox api
+<div style="display: flex; justify-content: space-between;">
+  <img src="screenshot/colab3.png" alt="CreatorBox" width="380"/> 
 </div>
 
 ## 常见问题
