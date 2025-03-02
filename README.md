@@ -10,8 +10,6 @@ https://github.com/user-attachments/assets/27e466a9-1817-4276-ad04-42b8b9ffafe3
 
 https://github.com/user-attachments/assets/69c1dfa6-f89a-4019-b76f-3503c581762d
 
-[更多视频](https://github.com/xiesx123/CreatorBox/discussions/categories/announcements)
-
 ## 功能说明
 - [x] 资源提取下载分割
 - [x] 自定义视频片段集合合并
@@ -37,7 +35,7 @@ https://github.com/user-attachments/assets/69c1dfa6-f89a-4019-b76f-3503c581762d
 新增 creatorbox cli
 
 2025-02-08 ：
-新增 creatorbox api ， 视频翻译 [接口文档](https://toucan-real-informally.ngrok-free.app/docs#/)  [在线日志](https://toucan-real-informally.ngrok-free.app/static/logs.html) [视频预览](https://toucan-real-informally.ngrok-free.app/static/player.html)，免费版大概3个小时左右会掉线
+新增 creatorbox api ， 视频翻译 [接口文档](https://toucan-real-informally.ngrok-free.app/docs#/) · [在线日志](https://toucan-real-informally.ngrok-free.app/static/logs.html) · [视频预览](https://toucan-real-informally.ngrok-free.app/static/player.html)，免费版大概3个小时左右会掉线
 
 2025-03-01 ：
 新增 视频多角色配音及翻译
@@ -241,16 +239,5 @@ conda create --name creatorbox python=3.11.11
 > #### 网络
 科学上网，LLM模型会使用
 
-## 参数定制
-配置有一点点多，先默认满足基本需求，后续会逐步放开配置；如：
-
-下载时会默认选择最佳的音视频、字幕、缩略图；
-
-分割时会默认生成3张jpg缩略图（起始帧+中帧）、1个cvs统计文件、1个html场景文件；
-
-...
-
-如果你特别需要某个配置，请联系我，欢迎交流~
- 
 ## 联系作者
-xiesx123@gmail.com
+xiesx123@gmail.com [在线交流](https://github.com/xiesx123/CreatorBox/discussions/categories/announcements)
