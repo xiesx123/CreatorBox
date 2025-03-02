@@ -6,6 +6,12 @@
 
 ## 演示视频
 
+https://github.com/user-attachments/assets/27e466a9-1817-4276-ad04-42b8b9ffafe3
+
+https://github.com/user-attachments/assets/69c1dfa6-f89a-4019-b76f-3503c581762d
+
+[更多视频](https://github.com/xiesx123/CreatorBox/discussions/categories/announcements)
+
 ## 功能说明
 - [x] 资源提取下载分割
 - [x] 自定义视频片段集合合并
