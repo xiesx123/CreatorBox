@@ -1,0 +1,52 @@
+# download
+yt-dlp>=2025.1.26
+scenedetect>=0.6.5.2
+
+# editor
+librosa==0.10.2
+moviepy==1.0.3
+
+# draft
+pymediainfo>=6.1.0
+uiautomation>=2.0.20
+
+# transcribe
+faster_whisper>=1.1.1
+
+# spleeter
+demucs>=4.0.1
+pyannote.audio>=3.3.2
+
+# translate
+pygtrans>=1.6.1
+
+# tts
+edge_tts>=7.0.0
+
+# web
+uvicorn==0.20.0
+fastapi==0.103.2
+pyngrok>=7.2.3
+websockets>14.2
+python-multipart>=0.0.20
+requests-cache>=1.2.1
+
+# llm
+google.generativeai>=0.8.4
+
+# language
+langdetect>=1.0.9
+language-tags>=1.2.0
+
+# other
+jieba>=0.42.1
+pydub>=0.25.1
+psutil>=6.1.1
+gputil>=1.4.0
+loguru>=0.7.3
+asyncio>=3.4.3
+tenacity>=9.0.0
+apscheduler>=3.11.0
+ffmpeg-python>=0.2.0
+opencv_python>=4.11.0
+email-validator>=2.2.0

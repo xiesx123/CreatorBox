@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreatorBox - Logs</title>
+</head>
+
+<body>
+    <pre id="log"></pre>
+    <script>
+        const logContainer = document.getElementById("log");
+        const reconnectInterval = 5000;
+        let socket;
+        function connect() {
+            // 获取当前页面 URL
+            const currentUrl = window.location.href;
+            // 获取当前页面协议
+            const currentProtocol = window.location.protocol;
+            // 动态获取 WebSocket 地址
+            let websocketUrl;
+            // 判断是否为本地环境
+            if (currentUrl.includes('localhost') || currentUrl.includes('127.0.0.1')) {
+                // 本地环境使用 ws 协议
+                websocketUrl = 'ws://127.0.0.1:8000/logs';
+            } else {
+                // 根据当前页面协议选择 ws 或 wss
+                const wsProtocol = currentProtocol === 'https:' ? 'wss:' : 'ws:';
+                const domain = window.location.host;
+                websocketUrl = `${wsProtocol}//${domain}/logs`;
+            }
+            socket = new WebSocket(websocketUrl);
+
+            // 建立连接
+            socket.onopen = function () {
+                console.log("WebSocket connection established");
+            };
+
+            // 接收消息并更新日志
+            socket.onmessage = function (event) {
+                console.log(event.data);
+                logContainer.textContent += event.data;
+                logContainer.scrollTop = logContainer.scrollHeight;
+            };
+
+            // 处理关闭事件
+            socket.onclose = function () {
+                console.log("WebSocket connection closed. Reconnecting in " + reconnectInterval / 1000 + " seconds...");
+                setTimeout(connect, reconnectInterval);
+            };
+
+            // 处理错误事件
+            socket.onerror = function (error) {
+                console.error("WebSocket error: ", error);
+                socket.close();
+            };
+        }
+        connect();
+    </script>
+</body>
+
+</html>
+
+<!-- <script>
+    var _hmt = _hmt || [];
+    (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?0f28a627b93e9c2e599680e1827e1314";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script> -->
