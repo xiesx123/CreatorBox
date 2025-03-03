@@ -1,10 +1,5 @@
 .project
 **/__pycache__/
-script/backup/
-script/pretrained_models/
-script/support/draft_jianying/
-script/temp/098f6bcd4621d373cade4e832627b4f6/test.json
-script/temp/
-script/video/
-script/cbdraft.py
-script/_merge.py
+creator-server/logs/creator_2025-03-03.log
+creator-server/static/watermark.png
+creator-server/webapp/
