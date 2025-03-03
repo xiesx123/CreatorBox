@@ -6,9 +6,20 @@
 
 ## 演示视频
 
+### 翻译模式
+
+- 单人
+
 https://github.com/user-attachments/assets/27e466a9-1817-4276-ad04-42b8b9ffafe3
 
-https://github.com/user-attachments/assets/69c1dfa6-f89a-4019-b76f-3503c581762d
+https://github.com/user-attachments/assets/35f05c2d-7b55-41af-8c1c-31cf4d30216a
+
+
+- 多人
+
+https://github.com/user-attachments/assets/7e6d0311-dc60-409b-bc5a-a71c93e6fdb3
+
+https://github.com/user-attachments/assets/6dd07326-1a05-4fe8-b484-fc4996ea7ca2
 
 ## 功能说明
 - [x] 资源提取下载分割
