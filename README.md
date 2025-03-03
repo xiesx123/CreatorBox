@@ -6,50 +6,43 @@
 
 ## 演示视频
 
-### 翻译模式
-
-- 单人
-
-https://github.com/user-attachments/assets/27e466a9-1817-4276-ad04-42b8b9ffafe3
-
-https://github.com/user-attachments/assets/35f05c2d-7b55-41af-8c1c-31cf4d30216a
-
-
-- 多人
-
 https://github.com/user-attachments/assets/7e6d0311-dc60-409b-bc5a-a71c93e6fdb3
 
 https://github.com/user-attachments/assets/6dd07326-1a05-4fe8-b484-fc4996ea7ca2
+
+
+- [翻译模式] (https://github.com/xiesx123/CreatorBox/discussions/1)
+- [配音模式] (https://github.com/xiesx123/CreatorBox/discussions/2)
 
 ## 功能说明
 - [x] 资源提取下载分割
 - [x] 自定义视频片段集合合并
 - [x] 导出或覆盖现有剪映草稿
 - [x] 视频翻译 1.0.5 (待发布)
-   - [x] 音频提取：提取视频音频、音轨分离、背景降噪
-   - [x] 转录转译：转录转译目标字幕
-   - [x] 单人配音：文本转多风格语音，更加自然
-   - [x] 人声对齐：将配音与视频同步对齐
+   - [x] 音频提取：音频提取、分离、降噪、变速..
+   - [x] 转录转译：转录并转译目标字幕
+   - [x] 人声对齐：将配音与视频同步对齐，支持（自适应、视频优先、音频优先）
 - [x] 视频配音 1.0.5 (待发布)
-   - [x] 多人识别：多人角色识别提取
+   - [x] 多人识别：说话人及性别识别
    - [x] 多人配音：为不同的角色配音
 - [ ] 自动化投稿
 
 ## 项目计划
 2025-01-04 ：
-先得实现功能，再得写Api，最后写Gui，1.0.5之后对电脑配置就得有要求了，支持(cpu、cuda)
+1.0.5之后对电脑配置就得有要求了，支持(cpu、cuda)
 
 2025-01-07 ：
-这里使用 [Colab](https://github.com/xiesx123/CreatorBox/blob/master/README.md#%E4%BA%A4%E4%BA%92%E5%BC%8F%E7%8E%AF%E5%A2%83) 加快任务处理速度...
+新增 creatorbox cil （弃用）
+使用 [Colab](https://github.com/xiesx123/CreatorBox/blob/master/README.md#%E4%BA%A4%E4%BA%92%E5%BC%8F%E7%8E%AF%E5%A2%83) 加快任务处理速度...
 
 2025-01-10 ：
-新增 creatorbox cli
+新增 creatorbox api
 
 2025-02-08 ：
-新增 creatorbox api ， 视频翻译 [接口文档](https://toucan-real-informally.ngrok-free.app/docs#/) · [在线日志](https://toucan-real-informally.ngrok-free.app/static/logs.html) · [视频预览](https://toucan-real-informally.ngrok-free.app/static/player.html)，免费版大概3个小时左右会掉线
+新增 视频翻译 [接口文档](https://toucan-real-informally.ngrok-free.app/docs#/) · [在线日志](https://toucan-real-informally.ngrok-free.app/static/logs.html) · [视频预览](https://toucan-real-informally.ngrok-free.app/static/player.html)
 
 2025-03-01 ：
-新增 视频多角色配音及翻译
+新增 视频配音、支持多角色
 
 ## 服务端
 
@@ -242,6 +235,25 @@ creatorbox api
 1.0.5 开始使用Conda管理环境，不影响本机环境
 ```
 conda create --name creatorbox python=3.11.11
+```
+
+> #### 数据
+```
+[
+    {
+        "idx": 0,
+        "speaker": 0,
+        "gender": "female",
+        "start": "00:00:01,560",
+        "end": "00:00:02,000",
+        "duration": 0.44,
+        "text": "Hi.",
+        "text_trans": "你好。",
+        "voice": "zh-CN-XiaoxiaoNeural",
+        "path": "webapp/temp\\b04083e53e242626595e2b8ea327e525\\zh_CN\\idx_0.wav",
+        "speed": 1.7840909090909092
+    }
+]
 ```
 
 > #### 环境
