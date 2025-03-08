@@ -28,11 +28,14 @@ uvicorn==0.20.0
 fastapi==0.103.2
 pyngrok>=7.2.3
 websockets>14.2
-python-multipart>=0.0.20
 requests-cache>=1.2.1
+python-multipart>=0.0.20
 
 # llm
-google.generativeai>=0.8.4
+langchain>=0.3.19
+langchain_community>=0.3.18
+langchain_google_genai>=2.0.11
+langchain-deepseek>=0.1.2
 
 # language
 langdetect>=1.0.9
@@ -46,6 +49,7 @@ gputil>=1.4.0
 loguru>=0.7.3
 asyncio>=3.4.3
 tenacity>=9.0.0
+playsound==1.2.2
 apscheduler>=3.11.0
 ffmpeg-python>=0.2.0
 opencv_python>=4.11.0

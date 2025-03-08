@@ -33,7 +33,7 @@
     <div class="layui-form">
         <div class="layui-form-item">
             <div class="layui-input-group">
-                <input id="videoUrl" type="text" placeholder="输入视频地址..." class="layui-input">
+                <input id="videoUrl" type="text" placeholder="请输入任务ID/视频地址" class="layui-input">
                 <div class="layui-input-suffix">
                     <button class="layui-btn layui-btn-normal" onclick="playVideo()">播放</button>
                 </div>
@@ -48,7 +48,7 @@
             // 获取值
             const videoUrl = document.getElementById('videoUrl').value;
             if (!videoUrl) {
-                alert('请输入视频地址！');
+                layer.msg('请输入任务ID/视频地址');
                 return;
             }
 
