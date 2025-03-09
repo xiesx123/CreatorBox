@@ -14,10 +14,8 @@ https://github.com/user-attachments/assets/7e6d0311-dc60-409b-bc5a-a71c93e6fdb3
 
 https://github.com/user-attachments/assets/6dd07326-1a05-4fe8-b484-fc4996ea7ca2
 
-
-- [在线交流] (https://github.com/xiesx123/CreatorBox/discussions/categories/announcements)
-- [翻译模式] (https://github.com/xiesx123/CreatorBox/discussions/1)
-- [配音模式] (https://github.com/xiesx123/CreatorBox/discussions/2)
+- [翻译模式](https://github.com/xiesx123/CreatorBox/discussions/1)
+- [配音模式](https://github.com/xiesx123/CreatorBox/discussions/2)
 
 
 ## 功能说明
@@ -49,6 +47,8 @@ https://github.com/user-attachments/assets/6dd07326-1a05-4fe8-b484-fc4996ea7ca2
 
 2025-03-01 ：
 新增 视频配音、支持多角色
+
+[在线交流](https://github.com/xiesx123/CreatorBox/discussions/categories/announcements)
 
 ## 服务端
 
@@ -178,7 +178,7 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
 ## 常见问题
 
 > #### 环境
-客户端内置 `Jre_v21.0.5_11` `Conda-v24.11.1` `Node-v20.12.1-x64` 环境，无需手动处理，在选择安装目录时不要含有空格
+客户端内置 `Jre_v21.0.5_11` `Conda-v24.11.1` `Node-v20.12.1-x64`，无需手动处理，在选择安装目录时不要含有空格
 
 > #### 数据
 ```
