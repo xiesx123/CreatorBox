@@ -47,6 +47,7 @@ pydub>=0.25.1
 psutil>=6.1.1
 gputil>=1.4.0
 loguru>=0.7.3
+pyarmor==9.1.1
 asyncio>=3.4.3
 tenacity>=9.0.0
 playsound==1.2.2

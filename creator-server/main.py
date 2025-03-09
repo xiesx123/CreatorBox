@@ -1,6 +1,11 @@
 # coding=utf-8
 import os
+
+print("Current working directory:", os.getcwd())
 import sys
+
+sys.path.insert(0, os.getcwd())
+sys.path.insert(0, os.path.dirname(os.getcwd()))
 
 from fastapi import FastAPI, HTTPException, Response, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
@@ -17,9 +22,6 @@ from src.router.response import ResponseModel
 from src.support.tts_ import router as tts_router
 from src.utils import cbutils
 from src.utils.cblogger import CBLogger, wsc
-
-sys.path.insert(0, os.getcwd())
-sys.path.insert(0, os.path.dirname(os.getcwd()))
 
 # 日志设置
 CBLogger()
