@@ -49,7 +49,7 @@ https://github.com/user-attachments/assets/6dd07326-1a05-4fe8-b484-fc4996ea7ca2
 新增 视频配音、支持多角色
 
 2025-03-13 ：
-新增 webui 页面参数配置 · [参数配置](https://toucan-real-informally.ngrok-free.app)
+新增 [参数配置](https://toucan-real-informally.ngrok-free.app) 页面，方便调试
 
 [在线交流](https://github.com/xiesx123/CreatorBox/discussions/categories/announcements)
 
