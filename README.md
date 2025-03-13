@@ -43,10 +43,13 @@ https://github.com/user-attachments/assets/6dd07326-1a05-4fe8-b484-fc4996ea7ca2
 新增 Creatorbox api
 
 2025-02-08 ：
-新增 视频翻译 [接口文档](https://toucan-real-informally.ngrok-free.app/docs#/) · [在线日志](https://toucan-real-informally.ngrok-free.app/static/logs.html) · [视频预览](https://toucan-real-informally.ngrok-free.app/static/player.html)
+新增 视频翻译 [接口文档](https://toucan-real-informally.ngrok-free.app/docs#/) · [在线日志](https://toucan-real-informally.ngrok-free.app/logs) · [视频预览](https://toucan-real-informally.ngrok-free.app/player)
 
 2025-03-01 ：
 新增 视频配音、支持多角色
+
+2025-03-13 ：
+新增 webui 页面参数配置 · [参数配置](https://toucan-real-informally.ngrok-free.app)
 
 [在线交流](https://github.com/xiesx123/CreatorBox/discussions/categories/announcements)
 
@@ -76,6 +79,11 @@ conda activate creatorbox
 参考交互式环境👇
 
 ```
+
+### 功能截图
+<div style="display: flex; justify-content: space-between;">
+  <img src="docs/images/s0.png" alt="CreatorBox" width="380"/> 
+</div>
 
 ### 交互式环境
 

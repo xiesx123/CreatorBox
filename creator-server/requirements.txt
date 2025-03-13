@@ -17,9 +17,6 @@ faster_whisper>=1.1.1
 demucs>=4.0.1
 pyannote.audio>=3.3.2
 
-# translate
-pygtrans>=1.6.1
-
 # tts
 edge_tts>=7.0.0
 
