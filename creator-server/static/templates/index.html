@@ -52,45 +52,64 @@
       <div style="padding: 15px">
 
         <form class="layui-form layui-form-pane" lay-filter="form_filter">
+
           <div class="layui-row layui-col-space15">
 
-            <!-- 大模型 -->
+            <!-- 文件 -->
             <div class="layui-col-md12">
-              <div class="layui-card layui-panel">
-                <div class="layui-card-header">大模型</div>
-                <div class="layui-card-body">
+              <div class="layui-collapse">
+                <div class="layui-colla-item">
 
-                  <div class="layui-form-item">
-                    <label class="layui-form-label">提供商</label>
-                    <div class="layui-input-block">
-                      <select name="llm_provider" lay-verify="required" lay-filter="llm_provider_filter">
-                        <option value=""></option>
-                        {% for item in data.llm.providers %}
-                        <option value="{{ item.provider}}" {% if not item.enable %}disabled{% endif %}>
-                          {{ item.provider }} - {{ '已配置' if item.valid else '未配置' }}
-                        </option>
-                        {% endfor %}
-                      </select>
-                    </div>
-                  </div>
+                  <div class="layui-card layui-panel">
+                    <div class="layui-colla-title">文件</div>
+                    <div class="layui-colla-content">
 
-                  <div class="layui-form-item">
-                    <label class="layui-form-label">模型</label>
-                    <div class="layui-input-block">
-                      <input type="text" name="llm_model" lay-verify="required" placeholder="请输入模型名称" value=""
-                        autocomplete="off" class="layui-input" lay-affix="clear">
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">链接</label>
+                        <div class="layui-input-block">
+                          <input id="url" type="text" name="url" lay-verify="required" placeholder="请输入视频本地路径、网络链接"
+                            autocomplete="off" class="layui-input" lay-affix="clear">
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item">
+                        <div id="video_upload_drag" class="layui-upload-drag" style="display: block;">
+                          <i class="layui-icon layui-icon-upload"></i>
+                          <div>或将本地文件拖拽到此处</div>
+                          <div class="layui-hide layui-progress layui-progress" lay-showPercent="yes"
+                            lay-filter="progress_filter">
+                            <div class="layui-progress-bar" lay-percent=""></div>
+                          </div>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
 
                 </div>
               </div>
+
+
             </div>
 
             <!-- 转录 -->
-            <div class="layui-col-md6">
+            <div class="layui-col-md4">
               <div class="layui-card layui-panel">
                 <div class="layui-card-header">转录</div>
                 <div class="layui-card-body">
+
+                  <div class="layui-form-item" pane>
+                    <label class="layui-form-label">调试</label>
+                    <div class="layui-input-inline" style="width: auto;">
+                      <input type="checkbox" name="whisper_debug" lay-skin="switch" lay-filter="switch_debug_filter">
+                    </div>
+
+                    <div class="layui-form-mid layui-text-em">
+                      <i class="layui-icon layui-icon-tips"
+                        lay-tips="{content: '注意：开启调试会中断后续步骤', margin: '0 0 0 -10px'}"></i>
+                    </div>
+                  </div>
+
                   <div class="layui-form-item">
                     <label class="layui-form-label">模型</label>
                     <div class="layui-input-block">
@@ -142,8 +161,12 @@
 
                   <div class="layui-form-item" pane>
                     <label class="layui-form-label">过滤无声</label>
-                    <div class="layui-input-block">
+                    <div class="layui-input-inline" style="width: auto;">
                       <input type="checkbox" name="whisper_vad_filter" lay-skin="switch">
+                    </div>
+                    <div class="layui-form-mid layui-text-em">
+                      <i class="layui-icon layui-icon-tips"
+                        lay-tips="{content: '注意：特定场景开启', margin: '0 0 0 -10px'}"></i>
                     </div>
                   </div>
 
@@ -151,29 +174,135 @@
               </div>
             </div>
 
-            <!-- 语音 -->
-            <div class="layui-col-md6">
+            <!-- 说话人 -->
+            <div class="layui-col-md4">
               <div class="layui-card layui-panel">
-                <div class="layui-card-header">语音</div>
+                <div class="layui-card-header">说话人</div>
                 <div class="layui-card-body">
+
+                  <div class="layui-form-item" pane>
+                    <label class="layui-form-label">调试</label>
+                    <div class="layui-input-inline" style="width: auto;">
+                      <input type="checkbox" name="speaker_debug" lay-skin="switch" lay-filter="switch_debug_filter">
+                    </div>
+
+                    <div class="layui-form-mid layui-text-em">
+                      <i class="layui-icon layui-icon-tips"
+                        lay-tips="{content: '注意：开启调试会中断后续步骤', margin: '0 0 0 -10px'}"></i>
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item" pane>
+                    <label class="layui-form-label">开启数量</label>
+                    <div class="layui-input-inline" style="width: auto;">
+                      <input type="checkbox" name="speaker_use_num" lay-skin="switch">
+                    </div>
+
+                    <div class="layui-form-mid layui-text-em">
+                      <i class="layui-icon layui-icon-tips"
+                        lay-tips="{content: '              数量：当确定说话人数量时使用<BR>              范围：当不确定说话人数量时使用<BR>', margin: '0 0 0 -10px'}"></i>
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">目标数量</label>
+                    <div class="layui-input-block">
+                      <input type="number" lay-verify="required|number" name="speaker_num" placeholder="目标值"
+                        autocomplete="off" class="layui-input" min="1" max="10" step="1" lay-affix="number">
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">区间范围</label>
+                    <div class="layui-input-inline" style="width: auto;">
+                      <input type="number" lay-verify="required|number" name="speaker_min" placeholder="最小值"
+                        autocomplete="off" class="layui-input" min="1" max="10" step="1" lay-affix="number">
+                    </div>
+                    <div class="layui-input-inline" style="width: auto;">
+                      <input type="number" name="speaker_max" placeholder="最大值" autocomplete="off" class="layui-input"
+                        min="1" max="10" step="1" lay-affix="number">
+                    </div>
+
+                  </div>
+
+                  <div class="layui-form-item" pane>
+                    <label class="layui-form-label">性别检测</label>
+                    <div class="layui-input-block">
+                      <input type="checkbox" name="speaker_enable_gender" lay-skin="switch">
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- 大模型 -->
+            <div class="layui-col-md4">
+              <div class="layui-card layui-panel">
+                <div class="layui-card-header">大模型</div>
+                <div class="layui-card-body">
+
+                  <div class="layui-form-item" pane>
+                    <label class="layui-form-label">调试</label>
+                    <div class="layui-input-inline" style="width: auto;">
+                      <input type="checkbox" name="speaker_debug" lay-skin="switch" lay-filter="switch_debug_filter">
+                    </div>
+
+                    <div class="layui-form-mid layui-text-em">
+                      <i class="layui-icon layui-icon-tips"
+                        lay-tips="{content: '注意：开启调试会中断后续步骤', margin: '0 0 0 -10px'}"></i>
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">提供商</label>
+                    <div class="layui-input-block">
+                      <select name="llm_provider" lay-verify="required" lay-filter="llm_provider_filter">
+                        <option value=""></option>
+                        {% for item in data.llm.providers %}
+                        <option value="{{ item.provider}}" {% if not item.enable %}disabled{% endif %}>
+                          {{ item.provider }} - {{ '已配置' if item.valid else '未配置' }}
+                        </option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">模型</label>
+                    <div class="layui-input-block">
+                      <input type="text" name="llm_model" lay-verify="required" placeholder="请输入模型名称" value=""
+                        autocomplete="off" class="layui-input" lay-affix="clear">
+                    </div>
+                  </div>
+
                   <div class="layui-form-item">
                     <label class="layui-form-label">地区</label>
                     <div class="layui-input-block">
-                      <select name="tts_locale" lay-verify="required" lay-filter="tts_locale_filter">
+                      <select name="llm_locale" lay-verify="required" lay-filter="llm_locale_filter">
                         <option value="">选择或搜索</option>
-                        {% for item in data.tts.locales %}
+                        {% for item in data.llm.locales %}
                         <option value="{{ item.Locale }}">{{ item.Name }} - {{ item.Locale }}</option>
                         {% endfor %}
                       </select>
                     </div>
                   </div>
 
+                </div>
+              </div>
+            </div>
+
+            <!-- 配音 -->
+            <div class="layui-col-md12">
+              <div class="layui-card layui-panel">
+                <div class="layui-card-header">配音</div>
+                <div class="layui-card-body">
 
                   <div class="layui-form-item" pane>
                     <label class="layui-form-label">性别</label>
                     <div class="layui-input-block">
-                      <input type="checkbox" name="tts_gender" value="1" lay-filter="tts_gender_filter" title="男">
-                      <input type="checkbox" name="tts_gender" value="2" lay-filter="tts_gender_filter" title="女">
+                      <input type="radio" name="tts_gender" value="1" lay-filter="tts_gender_filter" title="男">
+                      <input type="radio" name="tts_gender" value="2" lay-filter="tts_gender_filter" title="女">
                     </div>
                   </div>
 
@@ -192,44 +321,14 @@
                     <div class="layui-input-block">
                       <textarea id="tts_demo" name="tts_demo" placeholder="请输入试听文本" lay-verify="required"
                         lay-reqtext="请输入试听文本" lay-affix="clear" class="layui-textarea tts_demo"
-                        style="min-height: 53px; height: 53px;"></textarea>
+                        style="min-height: 60px;"></textarea>
                     </div>
                   </div>
 
-                </div>
-              </div>
-            </div>
+                  <table id="tts_voices_table" class="layui-table">
 
-            <!-- 说话人 -->
-            <div class="layui-col-md6">
-              <div class="layui-card layui-panel">
-                <div class="layui-card-header">说话人</div>
-                <div class="layui-card-body">
+                  </table>
 
-                  <div class="layui-form-item">
-                    <label class="layui-form-label">数量</label>
-                    <div class="layui-input-inline">
-                      <input type="number" lay-verify="required|number" name="speaker_num" placeholder="目标值"
-                        autocomplete="off" class="layui-input" min="1" max="10" step="1" lay-affix="number">
-                    </div>
-                  </div>
-
-                  <div class="layui-form-item">
-                    <label class="layui-form-label">区间</label>
-                    <div class="layui-input-inline" style="width: auto;">
-                      <input type="number" lay-verify="required|number" name="speaker_min" placeholder="最小值"
-                        autocomplete="off" class="layui-input" min="1" max="10" step="1" lay-affix="number">
-                    </div>
-                    <div class="layui-input-inline" style="width: auto;">
-                      <input type="number" name="speaker_max" placeholder="最大值" autocomplete="off" class="layui-input"
-                        min="1" max="10" step="1" lay-affix="number">
-                    </div>
-
-                    <div class="layui-form-mid layui-text-em">
-                      <i class="layui-icon layui-icon-tips"
-                        lay-tips="{content: '              数量：当确定说话人数量时使用<BR>              区间：当不确定说话人数量时使用<BR>                优先级：<BR>                  1.num 在 min - max 之间，则 num 生效。<BR>                  2.num  <= min，则 min 生效。<BR>                   3.num >= max，则 max 生效。<BR>                  值越大聚合越慢', margin: '0 0 0 -10px'}"></i>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -263,8 +362,8 @@
                   <div class="layui-form-item" pane>
                     <label class="layui-form-label">处理模式</label>
                     <div class="layui-input-block">
-                      <input type="radio" name="mode_type" value="1" title="翻译" checked>
-                      <input type="radio" name="mode_type" value="2" title="配音">
+                      <input type="radio" name="mode_type" value="1" title="配音">
+                      <input type="radio" name="mode_type" value="2" title="翻译">
                       <input type="radio" name="mode_type" value="3" title="解说" disabled>
                     </div>
                   </div>
@@ -295,50 +394,13 @@
                   </div>
 
                   <div class="layui-form-item" pane>
-                    <label class="layui-form-label">监控进度</label>
-                    <div class="layui-input-block">
-                      <input type="checkbox" name="show_progress" lay-skin="switch">
-                    </div>
-                  </div>
-
-                  <div class="layui-form-item" pane>
-                    <label class="layui-form-label">是否重构</label>
+                    <label class="layui-form-label">重新构建</label>
                     <div class="layui-input-block">
                       <input type="checkbox" name="rebuild" lay-skin="switch" lay-filter="switch_rebuild_filter">
                     </div>
                   </div>
 
                 </div>
-              </div>
-            </div>
-
-            <!-- 视频 -->
-            <div class="layui-col-md12">
-              <div class="layui-card layui-panel">
-                <div class="layui-card-header">视频</div>
-                <div class="layui-card-body">
-
-                  <div class="layui-form-item">
-                    <label class="layui-form-label">链接</label>
-                    <div class="layui-input-block">
-                      <input type="text" name="url" lay-verify="required" placeholder="请输入视频本地地址、网络链接"
-                        autocomplete="off" class="layui-input" lay-affix="clear">
-                    </div>
-                  </div>
-
-                  <div class="layui-form-item">
-                    <div class="layui-upload-drag" style="display: block;" id="video_upload_drag">
-                      <i class="layui-icon layui-icon-upload"></i>
-                      <div>或将本地文件拖拽到此处</div>
-                      <div class="layui-hidd layui-progress layui-progress" lay-showPercent="yes"
-                        lay-filter="progress_filter">
-                        <div class="layui-progress-bar" lay-percent=""></div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-
               </div>
             </div>
 
@@ -363,8 +425,6 @@
               </div>
             </div>
 
-          </div>
-
         </form>
 
       </div>
@@ -373,160 +433,42 @@
 
   </div>
 
+  <script type="text/html" id="TPL_tts_voices_table_tools">
+    <div class="layui-btn-container">
+      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="test">试听</a>
+      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="del">删除</a>
+      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="up">上移</a>
+      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="down">下移</a>
+    </div>
+  </script>
+
   <script>
 
-    layui.use(['form', 'layer', 'element', 'upload', 'util', 'notice', 'tool'], function () {
+    layui.use(['form', 'treeTable', 'layer', 'element', 'upload', 'util', 'notice', 'tool'], function () {
 
+      var form = layui.form;
+      var treeTable = layui.treeTable;
       var layer = layui.layer;
       var element = layui.element;
-      var form = layui.form;
       var upload = layui.upload;
       var util = layui.util;
       var toast = layui.notice;
       var tool = layui.tool;
       var $ = layui.$;
 
-      var llm_providers = JSON.parse('{{ data.llm.providers | tojson }}')
+      let CREATORBOX = "creatorbox"
+      let cache = layui.data(CREATORBOX)
+      let player;
 
-      var form_json = JSON.parse('{{ data.form | tojson }}')
+      var init_json = JSON.parse('{{ data.form | tojson }}') // 默认值
+      var table_json = cache.hasOwnProperty('table') ? JSON.parse(cache.table) : []// 表格值
+      var form_json = cache.hasOwnProperty('form') ? JSON.parse(cache.form) : {}// 表单值
+      Object.keys(form_json).length === 0 ? Object.assign(form_json, init_json) : Object.assign(init_json, form_json)
 
-      var history_voice_url = {};
-
-      var task_id = "webapp\\upload\\4d8fb0cecfae2248c8d4d3a4451fbe86.mp4";
+      var taskId = "";
 
       // 表单渲染
       form.val('form_filter', form_json);
-
-      // 语音-地区选择
-      form.on('select(tts_locale_filter)', function (data) {
-        if (data.elem.value != "") {
-          form_json.tts_locale = data.elem.value;
-          form_json.tts_gender = 0;
-          $('input[name="tts_gender"]').prop('checked', false);
-          // 切换语音角色
-          tool.get("/tts/search", voice_search_params(form_json.tts_locale, form_json.tts_gender), voice_search_callback, false);
-          // 切换试听文本
-          tool.post("/trans/translator", JSON.stringify({
-            "llm_provider": form_json.llm_provider,
-            "llm_model": form_json.llm_model,
-            "language": form_json.tts_locale,
-            "text": $("#tts_demo").val()
-          }), function (response) {
-            form_json.tts_demo = response.data;
-            $("#tts_demo").val(form_json.tts_demo)
-          }, true);
-        }
-      });
-
-      // 语音-性别选择
-      form.on('checkbox(tts_gender_filter)', function (data) {
-        var mChecked = $("input[name='tts_gender'][value='1']").prop('checked');
-        var fChecked = $("input[name='tts_gender'][value='2']").prop('checked');
-        if ((!mChecked && !fChecked) || (mChecked && fChecked)) {
-          form_json.tts_gender = 0;
-        } else if (mChecked) {
-          form_json.tts_gender = 1;
-        } else if (fChecked) {
-          form_json.tts_gender = 2;
-        }
-        tool.get("/tts/search", voice_search_params(form_json.tts_locale, form_json.tts_gender), voice_search_callback, true)
-      });
-
-      // 语音-语音选择
-      form.on('select(tts_voice_filter)', function (data) {
-        form_json.tts_voice = data.elem.value;
-        console.log(form_json.tts_gender + "-" + form_json.tts_voice);
-      });
-
-      // 语音-试听点击
-      util.on('id', {
-        "tts_play": function (othis) {
-          var isvalid = form.validate('.tts_demo');
-          if (isvalid) {
-            var url = history_voice_url[form_json.tts_voice]
-            if (url != null) {
-              voice_auto_play(url);
-            } else {
-              tool.post("/tts/generate", JSON.stringify({
-                "text": $("#tts_demo").val(),
-                "voice": form_json.tts_voice,
-                "volume": "+0%",
-                "rate": "+0%",
-                "pitch": "+0Hz",
-                "output": "tts_" + Date.now()
-              }), function (response) {
-                console.log(JSON.stringify(response, null, 2))
-                var url = '/loader/local?file_path=' + response.data.path;
-                history_voice_url[form_json.tts_voice] = url
-                console.log(url);
-                voice_auto_play(url);
-              }, true)
-            }
-          }
-        }
-      });
-
-      // 语音-搜索回调
-      var voice_search_callback = function (response) {
-        // 清空原有选项
-        $("select[name='tts_voice']").empty();
-        toast.success(response.data.length + "条记录")
-        response.data.forEach(function (item) {
-          $("select[name='tts_voice']").append('<option value="' + item.ShortName + '">' + (item.Gender === "Male" ? "男" : "女") + " " + item.ShortName + '</option>');
-        });
-        // 默认选择第一个
-        form_json.tts_voice = response.data[0].ShortName;
-        console.log(form_json.tts_gender + "-" + form_json.tts_voice);
-        // 重绘
-        form.render();
-      };
-
-      var voice_search_params = (locale, gender) => {
-        return { "locale": locale, "gender": gender };
-      };
-
-      // 音频-播放
-      var voice_auto_play = function (url) {
-        sound = new Howl({
-          src: [url],
-          format: ['wav'],
-          html5: true,
-          onload: function () {
-            console.log('audio loaded');
-            sound.play();
-          },
-          onplay: function () {
-            console.log('audio playing');
-          },
-          onpause: function () {
-            console.log('audio paused');
-          },
-          onstop: function () {
-            console.log('audio stopped');
-          },
-          onend: function () {
-            console.log('audio ended');
-          },
-        });
-      };
-
-      // 语音-默认
-      tool.get("/tts/search", voice_search_params(form_json.tts_locale, form_json.tts_gender), voice_search_callback, true)
-
-      // 大模型-提供商选择
-      form.on('select(llm_provider_filter)', function (data) {
-        if (data.elem.value == 0) {
-          return $('input[name="llm_model"]').val("");;
-        }
-        const findItemByProvider = (provider) => {
-          return llm_providers.find(item => item.provider.toLowerCase() === provider.toLowerCase());
-        };
-        item = findItemByProvider(data.elem.value);
-        form_json.llm_provider = item.provider;
-        form_json.llm_model = item.model;
-        $('input[name="llm_model"]').val(form_json.llm_model);
-        form.render();
-      });
 
       // 视频-上传
       upload.render({
@@ -545,17 +487,205 @@
           }
         },
         done: function (response) {
-          console.log(JSON.stringify(response, null, 2))
-          if (response.code > 0) {
-            return toast.error('上传失败');
-          }
-          layer.msg('上传成功');
           $('[name="url"]').val(response.data.location)
+          layer.msg('上传成功');
         },
         error: function () {
           toast.error('上传失败');
         }
       });
+
+      // 大模型-提供商选择
+      form.on('select(llm_provider_filter)', function (data) {
+        if (data.elem.value == 0) {
+          return $('input[name="llm_model"]').val("");
+        }
+        const findItemByProvider = (provider) => {
+          var llm_providers_json = JSON.parse('{{ data.llm.providers | tojson }}')
+          return llm_providers_json.find(item => item.provider.toLowerCase() === provider.toLowerCase());
+        };
+        item = findItemByProvider(data.elem.value);
+        form_json.llm_provider = item.provider;
+        form_json.llm_model = item.model;
+        $('input[name="llm_model"]').val(form_json.llm_model);
+        form.render('text');
+      });
+
+      // 大模型-地区选择
+      form.on('select(llm_locale_filter)', function (data) {
+        if (data.elem.value != "") {
+          form_json.llm_locale = data.elem.value;
+          form_json.tts_gender = 1;
+          // 恢复默认选择
+          $('input[name="tts_gender"][value="1"]').prop('checked', true);
+          form.render('radio');
+          // 切换语音角色
+          tool.get("/tts/search", voice_search_params(form_json.llm_locale, form_json.tts_gender), voice_search_callback, false);
+          // 切换试听文本
+          tool.post("/trans/translator", JSON.stringify({
+            "llm_provider": form_json.llm_provider,
+            "llm_model": form_json.llm_model,
+            "language": form_json.llm_locale,
+            "text": $("#tts_demo").val()
+          }), function (response) {
+            form_json.tts_demo = response.data;
+            $("#tts_demo").val(form_json.tts_demo)
+          }, true);
+        }
+      });
+
+      // 配音-性别选择
+      form.on('radio(tts_gender_filter)', function (data) {
+        form_json.tts_gender = data.elem.value;
+        tool.get("/tts/search", voice_search_params(form_json.llm_locale, form_json.tts_gender), voice_search_callback, true)
+      });
+
+      // 配音-语音选择
+      form.on('select(tts_voice_filter)', function (data) {
+        form_json.tts_voice = data.elem.value;
+        console.log(form_json.tts_gender + "-" + form_json.tts_voice);
+      });
+
+      // 配音-试听点击
+      util.on('id', {
+        "tts_play": function (othis) {
+          var isvalid = form.validate('.tts_demo');
+          if (isvalid) {
+            const findItemByVoice = (voice) => {
+              return table_json.find(item => item.voice === voice);
+            };
+            var item = findItemByVoice(form_json.tts_voice)
+            if (item != null) {
+              return voice_play(item.url);
+            }
+            tool.post("/tts/generate", JSON.stringify({
+              "text": $("#tts_demo").val(),
+              "voice": form_json.tts_voice,
+              "volume": "+0%",
+              "rate": "+0%",
+              "pitch": "+0Hz",
+              "output": "tts_" + Date.now()
+            }), function (response) {
+              console.log(JSON.stringify(response, null, 2))
+              var url = '/loader/local?url=' + response.data.path;
+              voice_play(url);
+              table_json.push({ gender: form_json.tts_gender, voice: form_json.tts_voice, url: url })
+              swapData(0, 0)
+            }, true)
+          }
+        }
+      });
+
+      // 配音-搜索回调
+      var voice_search_callback = function (response) {
+        // 清空原有选项
+        $("select[name='tts_voice']").empty();
+        toast.success(response.data.length + "条记录")
+        response.data.forEach(function (item) {
+          $("select[name='tts_voice']").append('<option value="' + item.ShortName + '">' + (item.Gender === "Male" ? "男" : "女") + " " + item.ShortName + '</option>');
+        });
+        form.render('select');
+        // 默认选择第一个
+        form_json.tts_voice = response.data[0].ShortName;
+        console.log(form_json.tts_gender + "-" + form_json.tts_voice);
+      };
+
+      // 配音-公共参数
+      var voice_search_params = (locale, gender) => {
+        return { "locale": locale, "gender": gender };
+      };
+
+      // 配音-音频播放
+      var voice_play = function (url) {
+        if (player) {
+          player.unload();
+        }
+        player = new Howl({
+          src: [url],
+          format: ['wav'],
+          autoplay: true,
+          html5: true,
+          onload: function () {
+            console.log('audio loaded');
+          },
+          onplay: function () {
+            console.log('audio playing');
+          },
+          onpause: function () {
+            console.log('audio paused');
+          },
+          onstop: function () {
+            console.log('audio stopped');
+          },
+          onend: function () {
+            console.log('audio ended');
+          },
+        });
+      };
+
+      // 配音-语音初始化
+      tool.get("/tts/search", voice_search_params(form_json.llm_locale, form_json.tts_gender), voice_search_callback, true)
+
+      // 配音-说话人表格
+      var inst = treeTable.render({
+        elem: '#tts_voices_table',
+        data: table_json,
+        maxHeight: '500px',
+        cols: [[
+          { title: '序号', fixed: 'left', width: "80", align: "center", templet: d => d.LAY_INDEX },
+          { title: '性别', field: 'gender', width: "80", fixed: 'left', align: "center", templet: d => parseInt(d.gender) === 1 ? '男' : parseInt(d.gender) === 2 ? '女' : '未知' },
+          { title: '语音', field: 'voice', fixed: 'left' },
+          { title: "操作", fixed: 'left', width: "200", align: "center", toolbar: "#TPL_tts_voices_table_tools" }
+        ]],
+      });
+
+      // 配音-说话人表格工具事件
+      treeTable.on('tool(' + inst.config.id + ')', function (obj) {
+        var data = obj.data;
+        var idx = table_json.findIndex(item => item.voice === data.voice);
+        if (obj.event === "test") {
+          voice_play(data.url);
+        } else if (obj.event === "del") {
+          layer.confirm(`确定删除 ${data.voice} 么`, function (index) {
+            obj.del();
+            layer.close(index);
+            if (idx < table_json.length) {
+              table_json.splice(idx, 1);
+            }
+            swapData(0, 0);
+          });
+        } else if (obj.event === 'up') {
+          if (idx === 0) {
+            layer.msg('已置顶');
+            return;
+          }
+          swapData(idx, idx - 1);
+        } else if (obj.event === 'down') {
+          if (idx === table_json.length - 1) {
+            layer.msg('已置底');
+            return;
+          }
+          swapData(idx, idx + 1);
+        }
+      });
+
+      // 交换数组元素并重载表格
+      var swapData = function swapData(i, j) {
+        var temp = table_json[i];
+        if (temp) {
+          table_json[i] = table_json[j];
+          table_json[j] = temp;
+        }
+        // 重载表格数据
+        layui.table.reload('tts_voices_table', {
+          data: table_json
+        });
+        // 本地存储
+        layui.data(CREATORBOX, {
+          key: 'table',
+          value: JSON.stringify(table_json)
+        });
+      }
 
       // 是否重构开关事件
       form.on('switch(switch_rebuild_filter)', function (data) {
@@ -572,26 +702,39 @@
         var field = data.field;
         var elem = data.elem;
         var elemForm = data.form;
+        layui.data(CREATORBOX, {
+          key: 'form',
+          value: JSON.stringify(field)
+        });
+        if (table_json.length < form_json.speaker_num) {
+          layer.msg("配音人数不能低于说话人数");
+          return false;
+        }
+        field.speaker_voices = table_json.map(item => item.voice).join(',');
+        data = JSON.stringify(field, null, 2);
+        console.log(data)
         // 确认提示框
         layer.confirm('确定提交吗？', function (index) {
           layer.close(index);
-          data = JSON.stringify(field, null, 2);
-          console.log(data)
           // 禁用预览
           $("button[lay-on='video_preview']").addClass("layui-btn-disabled").prop("disabled", true);
           // 请求调用
           tool.post("/video/translate", data, function (response) {
-            task_id = response.data.task_id;
+            taskId = response.data.task_id;
             console.log(JSON.stringify(response, null, 2))
           }, true)
         });
+
         return false;
       });
 
-      // 处理通知
+      // 回调通知
       tool.connect(function (data) {
         data = JSON.parse(event.data)
-        if (data.type == "video") {
+        if (data.type == "whisper") {
+          console.log(data.message);
+        }
+        else if (data.type == "video") {
           console.log(data.message);
           // 开启预览
           $("button[lay-on='video_preview']").removeClass("layui-btn-disabled").prop("disabled", false);
@@ -601,7 +744,7 @@
       // 预览事件
       util.on('lay-on', {
         "video_preview": function (othis) {
-          tool.open("player?url=" + task_id, "1100px", "510px");
+          tool.open("player?url=" + taskId + "&autoplay=true", "1100px", "510px");
         }
       });
 
@@ -653,7 +796,7 @@
             });
           } else if (type == "player") {
             util.openWin({
-              url: "player"
+              url: "player?url=" + taskId + "&show_waveform"
             });
           }
         }

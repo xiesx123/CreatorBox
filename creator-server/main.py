@@ -21,21 +21,25 @@ from src.utils import cbutils
 sys.path.insert(0, os.getcwd())
 sys.path.insert(0, os.path.dirname(os.getcwd()))
 
+# 是否调试
+is_debug = cbutils.is_debug()
+
+# 本机地址
+local_url = f"http://{cbutils.get_internal_ip()}:{cbutils.get_port()}"
+
 # 环境设置
 servers = []
-is_debug = cbutils.is_debug()
-local_url = f"http://{cbutils.get_internal_ip()}:{cbutils.get_port()}"
 if is_debug:
     servers.append({"url": f"{local_url}", "description": "Local Server"})
 else:
     servers.append({"url": "https://toucan-real-informally.ngrok-free.app", "description": "Release Server"})
 
-# 应用设置
+# 基础信息
 app = FastAPI(
     debug=is_debug,
     title="CreatorBox",
     summary="CreatorBox Restful API Documentation",
-    description="🚀🎬轻量、灵活、易上手的创作者工具箱，构建全自动化视频剪辑/混剪流水线；",
+    description="🚀🎬轻量、灵活、易上手的创作者工具箱，构建全自动化视频配音流水线；",
     version="1.0.5",
     contact={
         "name": "xiesx123",
@@ -44,9 +48,6 @@ app = FastAPI(
     },
     servers=servers,
 )
-
-# 保存设置
-constant.app = app
 
 # 静态目录
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -73,11 +74,8 @@ app.add_exception_handler(ValidationError, GlobleExceptionHandler.validation_han
 def startup():
     # 启动任务调度器
     task.start_scheduler()
-    # 获取内网ip
-    if is_debug:
-        logger.warning("CreatorBox http://{}:{}/docs Debug Run Success", cbutils.get_internal_ip(), cbutils.get_port())
-    else:
-        logger.info("CreatorBox http://{}:{} Run Success", cbutils.get_internal_ip(), cbutils.get_port())
+    # 打印
+    logger.info("CreatorBox http://{}:{} Run {} Success", cbutils.get_internal_ip(), cbutils.get_port(), "Debug" if is_debug else "")
 
 
 # 关闭时
@@ -91,10 +89,8 @@ def shutdown():
 @app.get("/favicon.ico", include_in_schema=False)
 def favicon():
     try:
-        # 打开 favicon.ico 文件
         with open("static/images/favicon.ico", "rb") as f:
             favicon = f.read()
-        # 返回图标文件，并设置响应头
         return Response(content=favicon, media_type="image/x-icon")
     except FileNotFoundError:
         return {"error": "Favicon not found"}
@@ -108,11 +104,14 @@ async def websocket_endpoint(websocket: WebSocket):
     # 添加 WebSocket 客户端到列表中
     socket.wsc.append(websocket)
     try:
+        # 接收客户端消息
         while True:
-            # 接收客户端消息
             data = await websocket.receive_text()
-            # 收到客户端消息
             print(f"Received message: {data}")
     except WebSocketDisconnect:
         # 断开连接时移除客户端
         socket.wsc.remove(websocket)
+
+
+# 保存设置
+constant.app = app

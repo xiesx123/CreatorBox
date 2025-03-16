@@ -6,7 +6,7 @@
 [![Open In Colab](https://img.shields.io/badge/Colab-F9AB00?style=for-the-badge&logo=googlecolab&color=525252)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
 
 
-[CreatorBox](https://github.com/xiesx123/CreatorBox) 🚀🎬轻量、灵活、易上手的创作者工具箱，构建全自动化视频剪辑/混剪流水线；
+[CreatorBox](https://github.com/xiesx123/CreatorBox) 🚀🎬轻量、灵活、易上手的创作者工具箱，构建全自动化视频剪辑/配音流水线；
 
 ## 演示视频
 
@@ -63,7 +63,6 @@ https://github.com/user-attachments/assets/6dd07326-1a05-4fe8-b484-fc4996ea7ca2
 git clone https://github.com/xiesx123/CreatorBox.git
 ```
 
-
 ### 本地配置
 ```
 # 创建环境
@@ -73,7 +72,7 @@ conda create --name creatorbox python=3.11.11
 conda activate creatorbox
 
 # 安装环境
-!pip install -r requirements.txt
+PIP INSTALL -R REQUIREMENTS.TXT
 ....
 
 参考交互式环境👇
@@ -82,7 +81,8 @@ conda activate creatorbox
 
 ### 功能截图
 <div style="display: flex; justify-content: space-between;">
-  <img src="docs/images/s0.png" alt="CreatorBox" width="380"/> 
+  <img src="docs/images/s0-1.png" alt="CreatorBox" width="380"/> 
+  <img src="docs/images/s0-2.png" alt="CreatorBox" width="380"/> 
 </div>
 
 ### 交互式环境
@@ -90,7 +90,7 @@ conda activate creatorbox
 [Google Colab](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
 
 
-## 客户端
+<!-- ## 客户端
 
 ### 安装下载
 
@@ -182,6 +182,7 @@ drwxr-xr-x 1 root 197608         0 12月 12 18:18 script/          # Script脚�
 > 外部接口（上述GUI所有操作均支持api接口调用）
 <img src="docs/images/s10-1.png" alt="CreatorBox" width="380"/>
 
+ -->
 
 ## 常见问题
 

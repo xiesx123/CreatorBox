@@ -62,7 +62,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 				dataType: 'json',
 				beforeSend: function (xhr, textStatus) {
 					if (progress) {
-						parent.layer.msg('加载中', {
+						layer.msg('加载中', {
 							icon: 16
 						});
 					}
@@ -77,7 +77,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 					}
 				},
 				complete: function (xhr, textStatus) {
-					parent.layer.closeAll();
+					layer.closeAll();
 				},
 				cancel: function () {
 				}
@@ -93,7 +93,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 				dataType: 'json',
 				beforeSend: function (xhr, textStatus) {
 					if (progress) {
-						parent.layer.msg('加载中', {
+						layer.msg('加载中', {
 							icon: 16
 						});
 					}
@@ -108,7 +108,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 					}
 				},
 				complete: function (xhr, textStatus) {
-					parent.layer.closeAll();
+					layer.closeAll();
 				},
 				cancel: function () {
 				}
@@ -116,7 +116,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 		},
 
 		form: function (url, parames, callback) {
-			parent.layer.confirm('确定提交？', {
+			layer.confirm('确定提交？', {
 				icon: 1,
 				title: '提示',
 				btn: ['确定', '取消']
@@ -127,7 +127,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 					data: parames,
 					dataType: 'json',
 					beforeSend: function (xhr, textStatus) {
-						parent.layer.msg('加载中', {
+						layer.msg('加载中', {
 							icon: 16
 						});
 					},
@@ -141,7 +141,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 						}
 					},
 					complete: function (xhr, textStatus) {
-						parent.layer.closeAll();
+						layer.closeAll();
 					},
 					cancel: function () {
 					}
@@ -157,7 +157,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 				toast.error("请选择删除数据");
 				return;
 			}
-			parent.layer.confirm('确认删除？', {
+			layer.confirm('确认删除？', {
 				icon: 3,
 				title: '提示',
 				btn: ['确定', '取消']
@@ -175,7 +175,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 					data: deleteParames,
 					dataType: 'json',
 					beforeSend: function (xhr, textStatus) {
-						parent.layer.msg('加载中', {
+						layer.msg('加载中', {
 							icon: 16
 						});
 					},
@@ -187,7 +187,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 						}
 					},
 					complete: function (xhr, textStatus) {
-						parent.layer.closeAll();
+						layer.closeAll();
 					},
 					cancel: function () {
 					}
@@ -196,7 +196,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 		},
 
 		dialog: function (url, h) {
-			parent.layer.open({
+			layer.open({
 				type: 2,
 				title: false,
 				content: [url],
@@ -213,7 +213,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 					// 得到iframe页的窗口对象
 					// var iframeWin = window[layero.find('iframe')[0]['name']];
 					// iframeWin.reset();
-					var iframeBody = parent.layer.getChildFrame('body', index);
+					var iframeBody = layer.getChildFrame('body', index);
 					iframeBody.find('#submit').click();
 				},
 				btn2: function (index, layero) {
@@ -223,7 +223,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 		},
 
 		open: function (url, w, h) {
-			parent.layer.open({
+			layer.open({
 				type: 2,// iframe层
 				title: false,//弹层标题
 				content: url,//弹层内容
