@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>CreatorBox</title>
+    <title>{{ data.app.title }} - Player</title>
     <meta name="renderer" content="webkit" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -46,7 +46,7 @@
                         <div class="layui-col-md2">
                             <div class="layui-input-wrap">
                                 <button id="play" type="button"
-                                    class="layui-btn layui-btn-normal layui-btn-fluid">播放</button>
+                                    class="layui-btn layui-btn-primary layui-border-blue layui-btn-fluid">播放</button>
                             </div>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                         "url": build_url(url),
                         "playsinline": true,
                         "autoplay": true,
-                        "download": true,
+                        // "download": true,
                         "pip": true,
                         "width": "100%",
                         "volume": volume

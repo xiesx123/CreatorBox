@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>CreatorBox</title>
+  <title>{{ data.app.title }}</title>
   <meta name="renderer" content="webkit" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -16,31 +16,40 @@
   <!-- layui -->
   <link href="static/js/layui/css/layui.css" rel="stylesheet">
   <link href="static/js/layui/css/layui-dark.css" rel="stylesheet">
+  <link href="static/js/layui/css/layui-nav.css" rel="stylesheet">
   <script src="static/js/layui/layui.js"></script>
   <!-- creator -->
   <script src="static/js/creator/creator.js"></script>
+
 </head>
 
-<body>
+<body class="collapse">
   <div class="layui-layout layui-layout-admin">
 
     <!-- 顶部区域 -->
     <div class="layui-header">
-      <ul class="layui-nav layui-layout-left">1
+      <!-- 头部区域（可配合layui 已有的水平导航） -->
+      <ul class="layui-nav layui-layout-left">
+        <!-- 移动端显示 -->
+        <li class="layui-nav-item layui-show-xs-inline-block" lay-header-event="menuLeft">
+          <a href="/docs#" target="_blank" style="padding-left: 0px; padding-right: 0px; background-color: unset">
+            <i class="layui-icon layui-icon-spread-left"></i>
+          </a>
+        </li>
+        <li class="layui-nav-item">
+          <span id="layuiv" style="margin-left: 10px; font-size: 14px">{{ data.app.version }}</span>
+        </li>
       </ul>
+      <!-- <span class="layui-nav-bar" style="left: 22px; top: 58px; width: 0px; opacity: 0;"></span> -->
       <ul class="layui-nav layui-layout-right">
         <li class="layui-nav-item">
-          <a id="change-theme" style="background-color: unset">
-            <i class="layui-icon layui-icon-theme" style="font-size: 20px"></i>
+          <a id="change-theme" style="padding-left: 0px; padding-right: 0px; background-color: unset">
+            <i class="layui-icon layui-icon-moon" style="font-size: 20px"></i>
           </a>
         </li>
         <li class="layui-nav-item">
-          <a href="/docs#" target="_blank" style="background-color: unset">
-            <i class="layui-icon layui-icon-code-circle" style="font-size: 20px"></i>
-          </a>
-        </li>
-        <li class="layui-nav-item">
-          <a href="https://github.com/xiesx123/CreatorBox" target="_blank" style="background-color: unset">
+          <a href="https://github.com/xiesx123/CreatorBox" target="_blank"
+            style="padding-right: 0px; background-color: unset">
             <i class="layui-icon layui-icon-github" style="font-size: 20px"></i>
           </a>
         </li>
@@ -65,9 +74,9 @@
                     <div class="layui-colla-content">
 
                       <div class="layui-form-item">
-                        <label class="layui-form-label">链接</label>
+                        <label class="layui-form-label" id="video_play">链接 </label>
                         <div class="layui-input-block">
-                          <input id="url" type="text" name="url" lay-verify="required" placeholder="请输入视频本地路径、网络链接"
+                          <input id="url" type="text" name="url" lay-verify="path" placeholder="请输入视频本地路径、网络链接"
                             autocomplete="off" class="layui-input" lay-affix="clear">
                         </div>
                       </div>
@@ -88,7 +97,6 @@
 
                 </div>
               </div>
-
 
             </div>
 
@@ -137,7 +145,7 @@
                   <div class="layui-form-item">
                     <label class="layui-form-label">准确性</label>
                     <div class="layui-input-block">
-                      <select name="whisper_beam_size" lay-verify="required" lay-search>
+                      <select name="whisper_size" lay-verify="required" lay-search>
                         <option value="">选择或搜索</option>
                         {% for item in data.whisper.beam_sizes %}
                         <option value="{{ item.val }}">{{ item.desc }} - {{ item.val }}</option>
@@ -149,7 +157,7 @@
                   <div class="layui-form-item">
                     <label class="layui-form-label">连贯性</label>
                     <div class="layui-input-block">
-                      <select name="whisper_chunk_length" lay-verify="required" lay-search>
+                      <select name="whisper_length" lay-verify="required" lay-search>
                         <option value="">选择或搜索</option>
                         {% for item in data.whisper.chunk_lengths %}
                         <option value="{{ item.val }}">{{ item.desc }} {{ item.duration }} - {{ item.val }}s
@@ -162,11 +170,11 @@
                   <div class="layui-form-item" pane>
                     <label class="layui-form-label">过滤无声</label>
                     <div class="layui-input-inline" style="width: auto;">
-                      <input type="checkbox" name="whisper_vad_filter" lay-skin="switch">
+                      <input type="checkbox" name="whisper_vad" lay-skin="switch">
                     </div>
                     <div class="layui-form-mid layui-text-em">
                       <i class="layui-icon layui-icon-tips"
-                        lay-tips="{content: '注意：特定场景开启', margin: '0 0 0 -10px'}"></i>
+                        lay-tips="{content: '提示：特定场景开启', margin: '0 0 0 -10px'}"></i>
                     </div>
                   </div>
 
@@ -193,21 +201,21 @@
                   </div>
 
                   <div class="layui-form-item" pane>
-                    <label class="layui-form-label">开启数量</label>
+                    <label class="layui-form-label">使用数量</label>
                     <div class="layui-input-inline" style="width: auto;">
                       <input type="checkbox" name="speaker_use_num" lay-skin="switch">
                     </div>
 
                     <div class="layui-form-mid layui-text-em">
                       <i class="layui-icon layui-icon-tips"
-                        lay-tips="{content: '              数量：当确定说话人数量时使用<BR>              范围：当不确定说话人数量时使用<BR>', margin: '0 0 0 -10px'}"></i>
+                        lay-tips="{content: '提示：<br>数量：当确定说话人数量时使用<br>范围：当不确定说话人数量时使用<br>', margin: '0 0 0 -10px'}"></i>
                     </div>
                   </div>
 
                   <div class="layui-form-item">
                     <label class="layui-form-label">目标数量</label>
                     <div class="layui-input-block">
-                      <input type="number" lay-verify="required|number" name="speaker_num" placeholder="目标值"
+                      <input type="number" name="speaker_num" lay-verify="required|number|speaker_len" placeholder="目标值"
                         autocomplete="off" class="layui-input" min="1" max="10" step="1" lay-affix="number">
                     </div>
                   </div>
@@ -215,12 +223,12 @@
                   <div class="layui-form-item">
                     <label class="layui-form-label">区间范围</label>
                     <div class="layui-input-inline" style="width: auto;">
-                      <input type="number" lay-verify="required|number" name="speaker_min" placeholder="最小值"
+                      <input type="number" lay-verify="required|number|speaker_len" name="speaker_min" placeholder="最小值"
                         autocomplete="off" class="layui-input" min="1" max="10" step="1" lay-affix="number">
                     </div>
                     <div class="layui-input-inline" style="width: auto;">
-                      <input type="number" name="speaker_max" placeholder="最大值" autocomplete="off" class="layui-input"
-                        min="1" max="10" step="1" lay-affix="number">
+                      <input type="number" lay-verify="required|number|speaker_len" name="speaker_max" placeholder="最大值"
+                        autocomplete="off" class="layui-input" min="1" max="10" step="1" lay-affix="number">
                     </div>
 
                   </div>
@@ -232,6 +240,13 @@
                     </div>
                   </div>
 
+                  <div class="layui-form-item" pane>
+                    <label class="layui-form-label"></label>
+                    <div class="layui-input-block">
+
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -239,13 +254,13 @@
             <!-- 大模型 -->
             <div class="layui-col-md4">
               <div class="layui-card layui-panel">
-                <div class="layui-card-header">大模型</div>
+                <div class="layui-card-header">翻译</div>
                 <div class="layui-card-body">
 
                   <div class="layui-form-item" pane>
                     <label class="layui-form-label">调试</label>
                     <div class="layui-input-inline" style="width: auto;">
-                      <input type="checkbox" name="speaker_debug" lay-skin="switch" lay-filter="switch_debug_filter">
+                      <input type="checkbox" name="llm_debug" lay-skin="switch" lay-filter="switch_debug_filter">
                     </div>
 
                     <div class="layui-form-mid layui-text-em">
@@ -277,6 +292,19 @@
                   </div>
 
                   <div class="layui-form-item">
+                    <label class="layui-form-label">微调</label>
+                    <div class="layui-input-inline" style="width: auto;">
+                      <input type="number" name="llm_temperature" lay-verify="required" placeholder="随机性"
+                        autocomplete="off" class="layui-input" min="0.1" max="1" step="0.1" lay-affix="number">
+                    </div>
+                    <div class="layui-input-inline" style="width: auto;">
+                      <input type="number" name="llm_top_p" lay-verify="required" placeholder="多样性" autocomplete="off"
+                        class="layui-input" min="0.1" max="1" step="0.1" lay-affix="number">
+                    </div>
+
+                  </div>
+
+                  <div class="layui-form-item">
                     <label class="layui-form-label">地区</label>
                     <div class="layui-input-block">
                       <select name="llm_locale" lay-verify="required" lay-filter="llm_locale_filter">
@@ -285,6 +313,18 @@
                         <option value="{{ item.Locale }}">{{ item.Name }} - {{ item.Locale }}</option>
                         {% endfor %}
                       </select>
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item" pane>
+                    <label class="layui-form-label">缓存</label>
+                    <div class="layui-input-inline" style="width: auto;">
+                      <input type="checkbox" name="llm_use_cache" lay-skin="switch">
+                    </div>
+
+                    <div class="layui-form-mid layui-text-em">
+                      <i class="layui-icon layui-icon-tips"
+                        lay-tips="{content: '提示：<br>开启后避免消耗额外token<br>', margin: '0 0 0 -10px'}"></i>
                     </div>
                   </div>
 
@@ -297,6 +337,18 @@
               <div class="layui-card layui-panel">
                 <div class="layui-card-header">配音</div>
                 <div class="layui-card-body">
+
+                  <div class="layui-form-item" pane>
+                    <label class="layui-form-label">调试</label>
+                    <div class="layui-input-inline" style="width: auto;">
+                      <input type="checkbox" name="tts_debug" lay-skin="switch" lay-filter="switch_debug_filter">
+                    </div>
+
+                    <div class="layui-form-mid layui-text-em">
+                      <i class="layui-icon layui-icon-tips"
+                        lay-tips="{content: '注意：开启调试会中断后续步骤', margin: '0 0 0 -10px'}"></i>
+                    </div>
+                  </div>
 
                   <div class="layui-form-item" pane>
                     <label class="layui-form-label">性别</label>
@@ -315,31 +367,49 @@
                     </div>
                   </div>
 
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">克隆</label>
+                    <div class="layui-input-block">
+                      <select name="tts_clone" lay-verify="required" lay-filter="tts_clone_filter" lay-search>
+                        <option value="">选择或搜索（计划中）</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">语速</label>
+                    <div class="layui-input-block">
+                      <div class="layui-input-inline">
+                        <input id="tts_rate" type="number" lay-verify="required" name="tts_rate" placeholder="语速"
+                          autocomplete="off" class="layui-input" min="0" max="2" step="0.1" lay-affix="number">
+                      </div>
+                    </div>
+                  </div>
+
                   <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label" id="tts_play">试听 <i
                         class="layui-icon layui-icon-headset"></i></label>
                     <div class="layui-input-block">
-                      <textarea id="tts_demo" name="tts_demo" placeholder="请输入试听文本" lay-verify="required"
-                        lay-reqtext="请输入试听文本" lay-affix="clear" class="layui-textarea tts_demo"
+                      <textarea id="tts_text" name="tts_text" placeholder="请输入试听文本" lay-verify="required"
+                        lay-reqtext="请输入试听文本" lay-affix="clear" class="layui-textarea tts_text"
                         style="min-height: 60px;"></textarea>
                     </div>
                   </div>
 
                   <table id="tts_voices_table" class="layui-table">
-
                   </table>
 
                 </div>
               </div>
             </div>
 
-            <!-- 其他 -->
+            <!-- 导出 -->
             <div class="layui-col-md12">
               <div class="layui-card layui-panel">
-                <div class="layui-card-header">其他</div>
+                <div class="layui-card-header">导出</div>
                 <div class="layui-card-body">
 
-                  <div class="layui-form-item">
+                  <div class="layui-form-item layui-hide">
                     <label class="layui-form-label">静音检测</label>
                     <div class="layui-input-inline">
                       <input type="number" lay-verify="required" name="silence_threshold" placeholder="检测阈值"
@@ -347,7 +417,7 @@
                     </div>
                     <div class="layui-input-inline">
                       <input type="number" lay-verify="required" name="silence_min" placeholder="静音长度"
-                        autocomplete="off" class="layui-input" min="10" max="100" step="10" lay-affix="number">
+                        autocomplete="off" class="layui-input" min="1" max="1000" step="10" lay-affix="number">
                     </div>
                     <div class="layui-input-inline">
                       <input type="number" lay-verify="required" name="silence_dynamic" placeholder="动态补偿"
@@ -355,48 +425,67 @@
                     </div>
                     <div class="layui-form-mid layui-text-em">
                       <i class="layui-icon layui-icon-tips"
-                        lay-tips="{content: '检测阈值：低于某个阈值则认为是静音<BR>静音长度：最小长度<BR>动态补偿：静音长度的补偿值', margin: '0 0 0 -10px'}"></i>
+                        lay-tips="{content: '提示：<br>检测阈值：低于某个阈值则认为是静音<br>静音长度：最小长度<br>动态补偿：静音长度的补偿值', margin: '0 0 0 -10px'}"></i>
                     </div>
                   </div>
 
                   <div class="layui-form-item" pane>
                     <label class="layui-form-label">处理模式</label>
                     <div class="layui-input-block">
-                      <input type="radio" name="mode_type" value="1" title="配音">
-                      <input type="radio" name="mode_type" value="2" title="翻译">
-                      <input type="radio" name="mode_type" value="3" title="解说" disabled>
+                      {% for item in data.audio.mode_types %}
+                      <input type="radio" name="mode_type" value="{{ item.val }}" title="{{ item.desc }}" {% if not
+                        item.enable %}disabled{% endif %}>
+                      {% endfor %}
                     </div>
                   </div>
 
                   <div class="layui-form-item" pane>
                     <label class="layui-form-label">对齐方式</label>
                     <div class="layui-input-block">
-                      <input type="radio" name="assign_type" value="1" title="视频">
-                      <input type="radio" name="assign_type" value="2" title="音频">
-                      <input type="radio" name="assign_type" value="0" title="自适应" checked>
+                      {% for item in data.audio.assign_types %}
+                      <input type="radio" name="assign_type" value="{{ item.val }}" title="{{ item.desc }}">
+                      {% endfor %}
                     </div>
                   </div>
 
-                  <div class="layui-form-item">
-                    <label class="layui-form-label">说话音量</label>
-                    <div class="layui-input-inline">
-                      <input type="number" lay-verify="required" name="volume_voice" placeholder="说话音量"
-                        autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
+                  <div class="layui-form-item" pane>
+                    <label class="layui-form-label">导出方式</label>
+                    <div class="layui-input-block">
+                      {% for item in data.export.export_types %}
+                      <input type="radio" name="export_type" value="{{ item.val }}" title="{{ item.desc }}" {% if not
+                        item.enable %}disabled{% endif %}>
+                      {% endfor %}
                     </div>
                   </div>
 
-                  <div class="layui-form-item">
-                    <label class="layui-form-label">背景音量</label>
-                    <div class="layui-input-inline">
-                      <input type="number" lay-verify="required" name="volume_background" placeholder="最小值"
-                        autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
+                  <div class="layui-form-item" pane>
+                    <label class="layui-form-label">剪映预览</label>
+                    <div class="layui-input-inline" style="width: auto;">
+                      <input type="checkbox" name="preview" lay-skin="switch">
+                    </div>
+
+                    <div class="layui-form-mid layui-text-em">
+                      <i class="layui-icon layui-icon-tips"
+                        lay-tips="{content: '提示：<br>1、开启后，可通过剪映快速预览/微调<br>2、文件格式：{文件名}_{标识}.mp4<br>3、草稿目录：{文件名}_{标识}', margin: '0 0 0 -10px'}"></i>
                     </div>
                   </div>
 
                   <div class="layui-form-item" pane>
                     <label class="layui-form-label">重新构建</label>
-                    <div class="layui-input-block">
+                    <div class="layui-input-inline" style="width: auto;">
                       <input type="checkbox" name="rebuild" lay-skin="switch" lay-filter="switch_rebuild_filter">
+                    </div>
+                    <div class="layui-form-mid layui-text-em">
+                      <i class="layui-icon layui-icon-tips"
+                        lay-tips="{content: '注意：开启后，会清理所有缓存重新构建', margin: '0 0 0 -10px'}"></i>
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">文件标识</label>
+                    <div class="layui-input-block">
+                      <input type="text" name="suffix" lay-verify="required" placeholder="请输入文件标识" autocomplete="off"
+                        class="layui-input" lay-affix="clear">
                     </div>
                   </div>
 
@@ -404,23 +493,131 @@
               </div>
             </div>
 
-            <!-- 按钮 -->
+            <!-- 草稿 -->
             <div class="layui-col-md12">
               <div class="layui-card layui-panel">
+                <div class="layui-card-header">草稿</div>
                 <div class="layui-card-body">
-                  <div class="layui-form-item layui-col-space15">
-                    <!-- <div class="layui-col-md4">
-                      <button type="reset" class="layui-btn layui-btn-primary layui-btn-fluid">重置</button>
-                    </div> -->
-                    <div class="layui-col-md6">
-                      <button type="submit" class="layui-btn layui-btn-blue layui-btn-fluid" lay-submit
-                        lay-filter="form_submit">提交</button>
+
+                  <div class="layui-form-item" pane>
+                    <label class="layui-form-label">强制刷新</label>
+                    <div class="layui-input-inline" style="width: auto;">
+                      <input type="checkbox" name="draft_refresh" lay-skin="switch">
                     </div>
-                    <div class="layui-col-md6">
-                      <button type="button" class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-disabled"
-                        lay-on="video_preview" disabled>预览</button>
+
+                    <div class="layui-form-mid layui-text-em">
+                      <i class="layui-icon layui-icon-tips"
+                        lay-tips="{content: '提示：<br>自动关闭当前剪映工程编辑窗口，返回剪映主页', margin: '0 0 0 -10px'}"></i>
                     </div>
                   </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">草稿路径</label>
+                    <div class="layui-input-block">
+                      <input type="text" name="draft_jypath" lay-verify="jydraft" placeholder="请输入剪映草稿路径"
+                        autocomplete="off" class="layui-input" lay-affix="clear">
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">声音音量</label>
+
+                    <div class="layui-input-inline">
+                      <input type="number" lay-verify="required" name="draft_volume_native" placeholder="原生音量"
+                        autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
+                    </div>
+
+                    <div class="layui-input-inline">
+                      <input type="number" lay-verify="required" name="draft_volume_voice" placeholder="说话音量"
+                        autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
+                    </div>
+
+                    <div class="layui-input-inline">
+                      <input type="number" lay-verify="required" name="draft_volume_background" placeholder="背景音量"
+                        autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">配音字幕</label>
+
+                    <div class="layui-input-inline">
+                      <input type="number" lay-verify="required|number" name="draft_style_sdts" placeholder="文字大小"
+                        autocomplete="off" class="layui-input" min="1" max="100" step="1" lay-affix="number">
+                    </div>
+
+                    <div class="layui-input-inline">
+                      <input type="number" lay-verify="required|number" name="draft_style_sdty" placeholder="文字高度"
+                        autocomplete="off" class="layui-input" min="-1" max="1" step="0.1" lay-affix="number">
+                    </div>
+
+                    <div style="position: relative;float: left;display: block;">
+                      <div class="layui-input-inline" style="width: 80px;">
+                        <input type="text" name="draft_style_sdtc" placeholder="文字颜色" class="layui-input">
+                      </div>
+                      <div class="layui-inline" style="left: -11px">
+                        <div id="draft_style_sdtc_select"></div>
+                      </div>
+                    </div>
+
+                    <div style="position: relative; float: left;display: block;">
+                      <div class="layui-input-inline" style="width: 80px;">
+                        <input type="text" name="draft_style_sdtbc" placeholder="边框颜色" class="layui-input">
+                      </div>
+                      <div class="layui-inline" style="left: -11px;">
+                        <div id="draft_style_sdtbc_select"></div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="layui-form-item" panel>
+                    <label class="layui-form-label">原始字幕</label>
+
+                    <div class="layui-input-inline">
+                      <input type="number" lay-verify="required|number" name="draft_style_snts" placeholder="文字大小"
+                        autocomplete="off" class="layui-input" min="1" max="100" step="1" lay-affix="number">
+                    </div>
+
+                    <div class="layui-input-inline">
+                      <input type="number" lay-verify="required|number" name="draft_style_snty" placeholder="文字高度"
+                        autocomplete="off" class="layui-input" min="-1" max="1" step="0.1" lay-affix="number">
+                    </div>
+
+                    <div style="position: relative;float: left;display: block;">
+                      <div class="layui-input-inline" style="width: 80px;">
+                        <input type="text" name="draft_style_sntc" placeholder="文字颜色" class="layui-input">
+                      </div>
+                      <div class="layui-inline" style="left: -11px">
+                        <div id="draft_style_sntc_select"></div>
+                      </div>
+                    </div>
+
+                    <div style="position: relative;float: left;display: block;">
+                      <div class="layui-input-inline" style="width: 80px;">
+                        <input type="text" name="draft_style_sntbc" placeholder="边框颜色" class="layui-input">
+                      </div>
+                      <div class="layui-inline" style="left: -11px;">
+                        <div id="draft_style_sntbc_select"></div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- 提交 -->
+            <div class="layui-col-md12">
+              <div class="layui-form-item layui-col-space15">
+                <div class="layui-col-md12">
+                  <button type="submit" class="layui-btn layui-btn-primary layui-border-green layui-btn-fluid"
+                    lay-submit lay-filter="form_submit">执行</button>
+                </div>
+                <div class="layui-col-md12 layui-hide">
+                  <button type="button" class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-disabled"
+                    lay-on="video_preview" disabled>预览</button>
                 </div>
               </div>
             </div>
@@ -444,7 +641,7 @@
 
   <script>
 
-    layui.use(['form', 'treeTable', 'layer', 'element', 'upload', 'util', 'notice', 'tool'], function () {
+    layui.use(['form', 'treeTable', 'layer', 'element', 'upload', 'util', 'colorpicker', 'notice', 'tool'], function () {
 
       var form = layui.form;
       var treeTable = layui.treeTable;
@@ -452,6 +649,7 @@
       var element = layui.element;
       var upload = layui.upload;
       var util = layui.util;
+      var colorpicker = layui.colorpicker;
       var toast = layui.notice;
       var tool = layui.tool;
       var $ = layui.$;
@@ -460,15 +658,48 @@
       let cache = layui.data(CREATORBOX)
       let player;
 
-      var init_json = JSON.parse('{{ data.form | tojson }}') // 默认值
-      var table_json = cache.hasOwnProperty('table') ? JSON.parse(cache.table) : []// 表格值
-      var form_json = cache.hasOwnProperty('form') ? JSON.parse(cache.form) : {}// 表单值
-      Object.keys(form_json).length === 0 ? Object.assign(form_json, init_json) : Object.assign(init_json, form_json)
+      var app = JSON.parse('{{ data.app | tojson }}')
 
-      var taskId = "";
+      var form_json_init = JSON.parse('{{ data.form | tojson }}') // 表单默认值
+      var form_json = cache.hasOwnProperty('form') ? cache.form : {}     // 表单
+      Object.keys(form_json).length === 0 ? Object.assign(form_json, form_json_init) : Object.assign(form_json_init, form_json)
+
+      var table_json = cache.hasOwnProperty('table') ? cache.table : []  // 配音                      
+      var task_ids = cache.hasOwnProperty('task') ? cache.task : []   // 任务
+
+      console.log("%s %s %s", app.title, app.version, app.description);
 
       // 表单渲染
       form.val('form_filter', form_json);
+
+      // 表单验证 
+      form.verify({
+        path: function (value, elem) {
+          if (value.length == 0) {
+            return '请输入视频本地路径、网络链接';
+          }
+        },
+        speaker_len: function (value, elem) {
+          // if ($('input[name="speaker_use_num"]').is(':checked')) {}
+          speaker_num = $('input[name="speaker_num"]').val()
+          if (table_json.length < speaker_num) {
+            return "【配音人数】不能低于【目标数量】";
+          }
+        },
+        jydraft: function (value, elem) {
+          if (!$('input[name="preview"]').is(':checked')) return;
+          if (value.length == 0) {
+            return '请输入剪映草稿路径';
+          }
+        },
+      });
+
+      // 视频-试听点击
+      util.on('id', {
+        "video_play": function (othis) {
+          tool.open("player?url=" + $("#url").val() + "&autoplay=true", "1100px", "510px");
+        }
+      });
 
       // 视频-上传
       upload.render({
@@ -526,10 +757,10 @@
             "llm_provider": form_json.llm_provider,
             "llm_model": form_json.llm_model,
             "language": form_json.llm_locale,
-            "text": $("#tts_demo").val()
+            "text": $("#tts_text").val()
           }), function (response) {
-            form_json.tts_demo = response.data;
-            $("#tts_demo").val(form_json.tts_demo)
+            form_json.tts_text = response.data;
+            $("#tts_text").val(form_json.tts_text)
           }, true);
         }
       });
@@ -543,13 +774,15 @@
       // 配音-语音选择
       form.on('select(tts_voice_filter)', function (data) {
         form_json.tts_voice = data.elem.value;
-        console.log(form_json.tts_gender + "-" + form_json.tts_voice);
+        console.debug(form_json.tts_gender + "-" + form_json.tts_voice);
       });
 
       // 配音-试听点击
       util.on('id', {
         "tts_play": function (othis) {
-          var isvalid = form.validate('.tts_demo');
+          form_json.tts_rate = $("#tts_rate").val();
+          form_json.tts_text = $("#tts_text").val()
+          var isvalid = form.validate('.tts_text');
           if (isvalid) {
             const findItemByVoice = (voice) => {
               return table_json.find(item => item.voice === voice);
@@ -559,17 +792,26 @@
               return voice_play(item.url);
             }
             tool.post("/tts/generate", JSON.stringify({
-              "text": $("#tts_demo").val(),
+              "text": form_json.tts_text,
               "voice": form_json.tts_voice,
-              "volume": "+0%",
-              "rate": "+0%",
-              "pitch": "+0Hz",
-              "output": "tts_" + Date.now()
+              "volume": "1.0",
+              "rate": form_json.tts_rate,
+              "pitch": "0",
+              "output": "tts_" + form_json.tts_voice
             }), function (response) {
-              console.log(JSON.stringify(response, null, 2))
+              console.debug(response.data)
               var url = '/loader/local?url=' + response.data.path;
+              var duration = response.data.duration + "s";
               voice_play(url);
-              table_json.push({ gender: form_json.tts_gender, voice: form_json.tts_voice, url: url })
+              table_json.push({
+                text: form_json.tts_text,
+                gender: form_json.tts_gender,
+                voice: form_json.tts_voice,
+                clone: "",//form_json.tts_clone
+                rate: form_json.tts_rate,
+                duration: duration,
+                url: url
+              })
               swapData(0, 0)
             }, true)
           }
@@ -580,14 +822,14 @@
       var voice_search_callback = function (response) {
         // 清空原有选项
         $("select[name='tts_voice']").empty();
-        toast.success(response.data.length + "条记录")
+        toast.success("已找到 " + response.data.length + " 条语音", "语音列表")
         response.data.forEach(function (item) {
-          $("select[name='tts_voice']").append('<option value="' + item.ShortName + '">' + (item.Gender === "Male" ? "男" : "女") + " " + item.ShortName + '</option>');
+          $("select[name='tts_voice']").append('<option value="' + item.ShortName + '">' + (item.Gender === "Male" ? "男" : "女") + " - " + item.ShortName + '</option>');
         });
         form.render('select');
         // 默认选择第一个
+        console.debug(form_json.tts_gender + "-" + form_json.tts_voice);
         form_json.tts_voice = response.data[0].ShortName;
-        console.log(form_json.tts_gender + "-" + form_json.tts_voice);
       };
 
       // 配音-公共参数
@@ -606,19 +848,19 @@
           autoplay: true,
           html5: true,
           onload: function () {
-            console.log('audio loaded');
+            console.debug('audio loaded');
           },
           onplay: function () {
-            console.log('audio playing');
+            console.debug('audio playing');
           },
           onpause: function () {
-            console.log('audio paused');
+            console.debug('audio paused');
           },
           onstop: function () {
-            console.log('audio stopped');
+            console.debug('audio stopped');
           },
           onend: function () {
-            console.log('audio ended');
+            console.debug('audio ended');
           },
         });
       };
@@ -630,11 +872,14 @@
       var inst = treeTable.render({
         elem: '#tts_voices_table',
         data: table_json,
-        maxHeight: '500px',
+        page: false,
         cols: [[
-          { title: '序号', fixed: 'left', width: "80", align: "center", templet: d => d.LAY_INDEX },
-          { title: '性别', field: 'gender', width: "80", fixed: 'left', align: "center", templet: d => parseInt(d.gender) === 1 ? '男' : parseInt(d.gender) === 2 ? '女' : '未知' },
-          { title: '语音', field: 'voice', fixed: 'left' },
+          { title: '序号', fixed: 'left', width: "80", align: "center", templet: d => '<div title="' + d.text + '">' + d.LAY_INDEX + '</div>' },
+          { title: '性别', fixed: 'left', width: "80", align: "center", field: 'gender', templet: d => '<div title="' + d.text + '">' + (parseInt(d.gender) === 1 ? '男' : parseInt(d.gender) === 2 ? '女' : '未知') + '</div>' },
+          { title: '语音', fixed: 'left', field: 'voice', templet: d => '<div title="' + d.text + '">' + d.voice + '</div>' },
+          // { title: '克隆', fixed: 'left',  field: 'clone', templet: d => '<div title="' + d.text + '">' + d.clone + '</div>' },
+          { title: '语速', fixed: 'left', width: "80", field: 'rate', templet: d => '<div title="' + d.text + '">' + d.rate + '</div>' },
+          { title: '时长', fixed: 'left', width: "80", field: 'duration', templet: d => '<div title="' + d.text + '">' + d.duration + '</div>' },
           { title: "操作", fixed: 'left', width: "200", align: "center", toolbar: "#TPL_tts_voices_table_tools" }
         ]],
       });
@@ -646,7 +891,7 @@
         if (obj.event === "test") {
           voice_play(data.url);
         } else if (obj.event === "del") {
-          layer.confirm(`确定删除 ${data.voice} 么`, function (index) {
+          layer.confirm(`确定删除【${data.voice}】么?`, { title: '提示' }, function (index) {
             obj.del();
             layer.close(index);
             if (idx < table_json.length) {
@@ -681,19 +926,48 @@
           data: table_json
         });
         // 本地存储
-        layui.data(CREATORBOX, {
-          key: 'table',
-          value: JSON.stringify(table_json)
-        });
+        layui.data(CREATORBOX, { key: 'table', value: table_json });
       }
 
       // 是否重构开关事件
       form.on('switch(switch_rebuild_filter)', function (data) {
         if (this.checked) {
-          toast.warning("开启");
+          toast.warning("重新构建已开启", "提示");
           layer.tips('注意：开启重构则会删除缓存重新执行', data.othis)
         } else {
-          toast.success("关闭");
+          toast.info("重新构建已关闭", "提示");
+        }
+      });
+
+      // 字幕原生
+      colorpicker.render({
+        elem: '#draft_style_sntc_select',
+        color: form_json.draft_style_sntc,
+        done: function (color) {
+          $('[name="draft_style_sntc"]').val(color);
+        }
+      });
+      colorpicker.render({
+        elem: '#draft_style_sntbc_select',
+        color: form_json.draft_style_sntbc,
+        done: function (color) {
+          $('[name="draft_style_sntbc"]').val(color);
+        }
+      });
+
+      // 字幕配音
+      colorpicker.render({
+        elem: '#draft_style_sdtc_select',
+        color: form_json.draft_style_sdtc,
+        done: function (color) {
+          $('[name="draft_style_sdtc"]').val(color);
+        }
+      });
+      colorpicker.render({
+        elem: '#draft_style_sdtbc_select',
+        color: form_json.draft_style_sdtbc,
+        done: function (color) {
+          $('[name="draft_style_sdtbc"]').val(color);
         }
       });
 
@@ -701,27 +975,34 @@
       form.on('submit(form_submit)', function (data) {
         var field = data.field;
         var elem = data.elem;
-        var elemForm = data.form;
-        layui.data(CREATORBOX, {
-          key: 'form',
-          value: JSON.stringify(field)
-        });
-        if (table_json.length < form_json.speaker_num) {
-          layer.msg("配音人数不能低于说话人数");
-          return false;
+        // 本地存储
+        layui.data(CREATORBOX, { key: 'form', value: field });
+        // 配音
+        field.tts_dubbing = JSON.stringify(table_json);
+        // 样式
+        style_json = {
+          "srt_nat": { "text_size": field.draft_style_snts, "text_color": field.draft_style_sntc, "text_border_color": field.draft_style_sntbc, "text_transform_y": field.draft_style_snty },
+          "srt_dub": { "text_size": field.draft_style_sdts, "text_color": field.draft_style_sdtc, "text_border_color": field.draft_style_sdtbc, "text_transform_y": field.draft_style_sdty },
         }
-        field.speaker_voices = table_json.map(item => item.voice).join(',');
+        field.draft_style = JSON.stringify(style_json);
+        // 请求数据
         data = JSON.stringify(field, null, 2);
-        console.log(data)
-        // 确认提示框
-        layer.confirm('确定提交吗？', function (index) {
+        console.debug(field)
+        // 确认执行
+        layer.confirm('确定执行吗？', { title: '提示' }, function (index) {
           layer.close(index);
           // 禁用预览
           $("button[lay-on='video_preview']").addClass("layui-btn-disabled").prop("disabled", true);
           // 请求调用
-          tool.post("/video/translate", data, function (response) {
-            taskId = response.data.task_id;
-            console.log(JSON.stringify(response, null, 2))
+          tool.post("/video/dubbing", data, function (response) {
+            console.debug(response.data)
+            var taskId = response.data.task_id
+            toast.success(taskId, "任务提交成功");
+            // 任务存储
+            if (!$('input[name="preview"]').is(':checked')) {
+              task_ids.push(taskId);
+              layui.data(CREATORBOX, { key: 'task', value: task_ids });
+            }
           }, true)
         });
 
@@ -732,10 +1013,10 @@
       tool.connect(function (data) {
         data = JSON.parse(event.data)
         if (data.type == "whisper") {
-          console.log(data.message);
+          console.debug(data.message);
         }
         else if (data.type == "video") {
-          console.log(data.message);
+          console.debug(data.message);
           // 开启预览
           $("button[lay-on='video_preview']").removeClass("layui-btn-disabled").prop("disabled", false);
         }
@@ -744,7 +1025,7 @@
       // 预览事件
       util.on('lay-on', {
         "video_preview": function (othis) {
-          tool.open("player?url=" + taskId + "&autoplay=true", "1100px", "510px");
+          tool.open("player?url=" + task_ids.pop() + "&autoplay=true", "1100px", "510px");
         }
       });
 
@@ -796,7 +1077,7 @@
             });
           } else if (type == "player") {
             util.openWin({
-              url: "player?url=" + taskId + "&show_waveform"
+              url: "player?url=" + task_ids.pop() + "&autoplay=true"
             });
           }
         }

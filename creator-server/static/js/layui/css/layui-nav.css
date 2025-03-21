@@ -1,0 +1,40 @@
+wc-include{
+    padding: 15px;
+    display: block;
+  }
+
+  #app {
+    display: none;
+  }
+
+  .layui-layout-right .layui-nav-bar {
+    background-color: unset !important;
+  }
+
+  .layui-layout-admin .layui-side {
+    top: 0 !important;
+    z-index: 1001;
+  }
+
+  .layui-layout-admin .layui-logo {
+    position: relative !important;
+    height: 60px !important;
+    top: -2px !important;
+  }
+
+  .layui-side,
+  .layui-header,
+  .layui-body,
+  .layui-footer {
+    transition: left 0.3s;
+  }
+
+  .collapse .layui-layout-admin .layui-side,
+  .collapse .layui-layout-admin .layui-header {
+    left: -200px;
+  }
+
+  .collapse .layui-layout-admin .layui-footer,
+  .collapse .layui-layout-admin .layui-body {
+    left: 0px;
+  }

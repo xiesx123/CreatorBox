@@ -2,6 +2,9 @@
 import os
 import sys
 
+sys.path.insert(0, os.getcwd())
+sys.path.insert(0, os.path.dirname(os.getcwd()))
+
 from fastapi import FastAPI, HTTPException, Response, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -17,9 +20,6 @@ from src.router.exception import CreatorException, GlobleExceptionHandler
 from src.support.trans_ import router as trans_router
 from src.support.tts_ import router as tts_router
 from src.utils import cbutils
-
-sys.path.insert(0, os.getcwd())
-sys.path.insert(0, os.path.dirname(os.getcwd()))
 
 # 是否调试
 is_debug = cbutils.is_debug()
@@ -40,7 +40,7 @@ app = FastAPI(
     title="CreatorBox",
     summary="CreatorBox Restful API Documentation",
     description="🚀🎬轻量、灵活、易上手的创作者工具箱，构建全自动化视频配音流水线；",
-    version="1.0.5",
+    version="1.0.6",
     contact={
         "name": "xiesx123",
         "url": "https://github.com/xiesx123/CreatorBox",

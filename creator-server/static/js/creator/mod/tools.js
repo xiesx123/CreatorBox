@@ -47,7 +47,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 
 			// 处理错误事件
 			socket.onerror = function (error) {
-				console.error("WebSocket error: ", error);
+				// console.error("WebSocket error: ", error);
 				socket.close();
 			};
 
@@ -73,7 +73,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 							callback(data);
 						}
 					} else {
-						toast.error(data.message);
+						toast.error(data.message, "提示");
 					}
 				},
 				complete: function (xhr, textStatus) {
@@ -104,7 +104,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 							callback(data);
 						}
 					} else {
-						toast.error(data.message);
+						toast.error(data.message, "提示");
 					}
 				},
 				complete: function (xhr, textStatus) {
@@ -137,7 +137,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 								callback();
 							}
 						} else {
-							toast.error(data.message);
+							toast.error(data.message, "提示");
 						}
 					},
 					complete: function (xhr, textStatus) {
@@ -154,7 +154,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 			var data = checkStatus.data;
 			if (data.length == 0) {
 				layer.msg("请选择删除数据");
-				toast.error("请选择删除数据");
+				toast.error("请选择删除数据", "提示");
 				return;
 			}
 			layer.confirm('确认删除？', {
@@ -181,9 +181,9 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 					},
 					success: function (data, textStatus) {
 						if (data.code == 0) {
-							toast.success(data.message);
+							toast.success(data.message, "提示");
 						} else {
-							toast.error(data.message);
+							toast.error(data.message, "提示");
 						}
 					},
 					complete: function (xhr, textStatus) {

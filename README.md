@@ -72,7 +72,7 @@ conda create --name creatorbox python=3.11.11
 conda activate creatorbox
 
 # 安装环境
-PIP INSTALL -R REQUIREMENTS.TXT
+pip install -r requirements.txt
 ....
 
 参考交互式环境👇
