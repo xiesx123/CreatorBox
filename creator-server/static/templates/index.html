@@ -100,10 +100,10 @@
 
             </div>
 
-            <!-- 转录 -->
+            <!-- 字幕 -->
             <div class="layui-col-md4">
               <div class="layui-card layui-panel">
-                <div class="layui-card-header">转录</div>
+                <div class="layui-card-header">字幕</div>
                 <div class="layui-card-body">
 
                   <div class="layui-form-item" pane>
@@ -370,7 +370,7 @@
                   <div class="layui-form-item">
                     <label class="layui-form-label">克隆</label>
                     <div class="layui-input-block">
-                      <select name="tts_clone" lay-verify="required" lay-filter="tts_clone_filter" lay-search>
+                      <select name="tts_clone" lay-filter="tts_clone_filter" lay-search>
                         <option value="">选择或搜索（计划中）</option>
                       </select>
                     </div>
@@ -1072,13 +1072,10 @@
         },
         click: function (type) {
           if (type == "log") {
-            util.openWin({
-              url: "log"
-            });
+            util.openWin({url: "log"});
           } else if (type == "player") {
-            util.openWin({
-              url: "player?url=" + task_ids.pop() + "&autoplay=true"
-            });
+            tool.open("player?url=" + task_ids.slice(-1)[0] + "&autoplay=true", "1100px", "510px");
+            // util.openWin({url: "player?url=" + task_ids.slice(-1)[0] + "&autoplay=true"});
           }
         }
       });
