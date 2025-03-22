@@ -9,7 +9,7 @@
 
 ![Version](https://img.shields.io/badge/version-v1.0.5-blue)
 ![GitHub stars](https://img.shields.io/github/stars/xiesx123/CreatorBox)
-![Google Colab](https://img.shields.io/badge/Google_Colab-Running-yellow?logo=googlecolab&)
+[![Google Colab](https://img.shields.io/badge/Google_Colab-Running-yellow?logo=googlecolab&)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
 
   <h3><a href="README.md">简体中文</a> | English</h3>  
   🚀🎬 Flexible, efficient, and scalable video editing voice-over pipeline for unleashing creative potential  
@@ -130,7 +130,7 @@
 ### Installation Steps 🐳  
 1. Clone and navigate to the directory  
     ```shell  
-    git clone https://github.com/xiesx123/CreatorBox.git && cd CreatorBox  
+    git clone https://github.com/xiesx123/CreatorBox.git
     ```  
 2. Create a virtual environment  
     ```shell  

@@ -9,7 +9,7 @@
 
 ![Version](https://img.shields.io/badge/version-v1.0.5-blue)
 ![GitHub stars](https://img.shields.io/github/stars/xiesx123/CreatorBox)
-![Google Colab](https://img.shields.io/badge/Google_Colab-Running-yellow?logo=googlecolab&)
+[![Google Colab](https://img.shields.io/badge/Google_Colab-Running-yellow?logo=googlecolab&)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
 
 <h3>简体中文 | <a href="README_EN.md">English</a></h3>
 
@@ -155,7 +155,7 @@
 1. 克隆并进入目录
 
     ```shell
-    git clone https://github.com/xiesx123/CreatorBox.git && cd CreatorBox
+    git clone https://github.com/xiesx123/CreatorBox.git
     ```
  
 2. 创建虚拟环境

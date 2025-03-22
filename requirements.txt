@@ -20,6 +20,9 @@ pyannote.audio>=3.3.2
 # tts
 edge_tts>=7.0.0
 
+# cil
+asyncclick>=8.1.8.0
+
 # web
 uvicorn==0.20.0
 fastapi==0.103.2
