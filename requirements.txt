@@ -6,30 +6,8 @@ scenedetect>=0.6.5.2
 librosa==0.10.2
 moviepy==1.0.3
 
-# draft
-pymediainfo>=6.1.0
-uiautomation>=2.0.20
-
 # transcribe
 faster_whisper>=1.1.1
-
-# spleeter
-demucs>=4.0.1
-pyannote.audio>=3.3.2
-
-# tts
-edge_tts>=7.0.0
-
-# cil
-asyncclick>=8.1.8.0
-
-# web
-uvicorn==0.20.0
-fastapi==0.103.2
-pyngrok>=7.2.3
-websockets>14.2
-requests-cache>=1.2.1
-python-multipart>=0.0.20
 
 # llm
 langchain>=0.3.19
@@ -38,21 +16,43 @@ langchain_google_genai>=2.0.11
 langchain-deepseek>=0.1.2
 dashscope>=1.22.2
 
-# language
+# tts
+edge_tts>=7.0.0
+
+# audio
+demucs>=4.0.1
+playsound==1.2.2
+pyannote.audio>=3.3.2
+
+# draft
+pymediainfo>=6.1.0
+uiautomation>=2.0.20
+
+# lang
 langdetect>=1.0.9
 language-tags>=1.2.0
 
-# other
+# cil
+asyncio>=3.4.3
+asyncclick==8.1.7.2
+
+# web
 jieba>=0.42.1
+uvicorn==0.20.0
+fastapi==0.103.2
+pyngrok>=7.2.3
+websockets>14.2
+apscheduler>=3.11.0
+requests-cache>=1.2.1
+python-multipart>=0.0.20
+
+# other
 pydub>=0.25.1
 psutil>=6.1.1
 gputil>=1.4.0
 loguru>=0.7.3
 pyarmor==9.1.1
-asyncio>=3.4.3
 tenacity>=9.0.0
-playsound==1.2.2
-apscheduler>=3.11.0
 ffmpeg-python>=0.2.0
 opencv_python>=4.11.0
 email-validator>=2.2.0
