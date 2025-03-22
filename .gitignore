@@ -1,6 +1,4 @@
-.project
-**/__pycache__/
-creator-server/logs/creator_2025-03-03.log
-creator-server/static/watermark.png
-creator-server/webapp/
+__pycache__
+logs/
+static/watermark.png
 webapp/

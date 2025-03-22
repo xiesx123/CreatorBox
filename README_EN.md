@@ -118,9 +118,10 @@
 
 ## Quick Start 🚀  
 ### System Requirements 📦  
-- Supports architectures: `windows.x86_64`, `linux.x86_64`  
+- Operating systems: `Windows10+` 、 `MacOS 11+` 、 `Debian12+` 系统
+- Supports architectures： `windows.x86_64` 、 `linux.x86_64` 、 `darwin_x86_64`
 - Recommended minimum CPU: `4 cores` or more, memory: `8GB` or more, GPU is optional, supports `CPU` or `CUDA`  
-- Operating systems: Windows 10+, Debian 12+  
+
 
 ### Prerequisites 📦  
 - Avoid using **Chinese paths** to prevent unexpected issues  

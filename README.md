@@ -141,9 +141,9 @@
 
 ### 配置要求 📦
 
-- 支持架构 `windows.x86_64` , `linux.x86_64`
-- 建议最低 CPU `4核` 或以上，内存 `8G` 或以上，显卡非必须，支持 `cpu` 或 `cuda`
-- Windows10+、Debian12+ 以上系统
+- 操作系统： `Windows10+` 、 `MacOS 11+` 、 `Debian12+` 系统
+- 支持架构： `windows.x86_64` 、 `linux.x86_64` 、 `darwin_x86_64`
+- 建议最低 CPU： `4核` 或以上，内存 `8G` 或以上，显卡非必须，支持 `cpu` 或 `cuda`
 
 ### 前提条件 📦
 
