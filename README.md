@@ -8,18 +8,18 @@
 </p> -->
 
 ![Version](https://img.shields.io/badge/version-v1.0.5-blue)
-![GitHub stars](https://img.shields.io/github/stars/xiesx123/CreatorBox?style=social)
-![Google Colab](https://img.shields.io/badge/Google_Colab-Running-yellow?logo=googlecolab&?style=social)
+![GitHub stars](https://img.shields.io/github/stars/xiesx123/CreatorBox)
+![Google Colab](https://img.shields.io/badge/Google_Colab-Running-yellow?logo=googlecolab&)
 
 <h3>简体中文 | <a href="README_EN.md">English</a></h3>
 
-🚀🎬轻量、灵活、易上手的创作者工具箱，构建全自动化视频剪辑/配音流水线
+🚀🎬灵活、高效、可扩展，专属视频剪辑配音流水线，释放创作潜力
 
 <h4>Web界面</h4>
 
-![](docs/images/s1.jpg)
+![](docs/main.jpg)
 
-<h4>调整与定制</h4>
+<h4>调试与定制</h4>
 
 <table>
 <thead>
@@ -30,32 +30,43 @@
 </thead>
 <tbody>
 <tr>
-<td align="center"><image src="docs/images/s2.jpg"></image></td>
-<td align="center"><image src="docs/images/s3.jpg"></image></td>
+<td align="center"><image src="docs/debug.jpg"></image></td>
+<td align="center"><image src="docs/jianying.jpg"></image></td>
 </tr>
 </tbody>
 </table>
 
 </div>
 
+## 适用场景 🎨
+
+- 🎥 **自媒体创作**：优化配音、剪辑和翻译流程，提高效率
+
+- 🎤 **解说/教程制作**：提供专业配音与精准字幕
+
+- 🌍 **多语言配音/翻译**：支持语言切换，突破语言障碍
+
+- ⚙️ **灵活配置/本地运行**：本地部署，保障隐私，满足定制需求
+
 
 ## 功能特性 🎯
 
 - **🎤 智能转录**
 
-  智能转录视频和音频中的人声，灵活调整配置适应不同设备和场景，确保精准高质量文本生成
+  精准转录视频和音频中的人声，灵活调整配置适应不同设备和场景，确保高质量文本生成
+  
 
 - **🗣️ 说话人识别**
 
-  自动识别视频中的多位说话人，根据性别分配个性化语音，支持灵活配置与调试，满足各种创作需求
+  自动识别视频中的多位说话人，根据性别分配个性化语音，灵活配置，满足多样化创作需求
 
 - **🌐 翻译功能**
 
-  多种语言互译，允许切换翻译提供商并调整高级参数，优化翻译效果，打破语言壁垒
+  多种语言互译，允许切换翻译提供商并调整高级参数，优化翻译效果，轻松跨越语言障碍
 
 - **🎧 语音合成**
 
-  丰富的语音风格与声音选择及试听，满足个性化创作需求，打造独特的配音效果
+  丰富的语音库与定制选项，提供个性化配音体验，满足创作需求，实时试听确保创作精准
 
 - **📤 导出功能**
 
@@ -71,40 +82,22 @@
 
 
 ### 后期计划 📅
-- [x] 视频解析下载
+- [x] 灵活配置调试，支持 **`字幕`**，**`说话人`**，**`翻译`**，**`配音`** 配置调节
+- [x] 语言合成克隆，
+   - [x] **语音合成**，支持 **多种语音** 调速合成，可 **实时试听** 效果
+   - [ ] **语音克隆**，满足个性化需求
+- [x] 生成模式切换，
+   - [x] 支持 [**配音模式**](https://github.com/xiesx123/CreatorBox/discussions/2) ，支持 `视频`、`音频` 、`自适应` 3种配音模式
+   - [x] 支持 [**翻译模式**](https://github.com/xiesx123/CreatorBox/discussions/1) ，将视频从原声语言翻译为另一种语言
+   - [ ] 支持 解说模式，个性化方式对视频进行配音
 - [x] 导出剪映草稿
-   - [ ] [素材多轨道支持]()， 画面、声音、字幕等多维度
-   - [ ] 
-   - [ ] 
-- [x] 模式切换
-   - [x] [翻译模式](https://github.com/xiesx123/CreatorBox/discussions/1)
-   - [x] [配音模式](https://github.com/xiesx123/CreatorBox/discussions/2)
-   - [ ] 解说模式
+   - [x] **轨道控制**，支持 **`画面`**、**`声音`** 、**`字幕`** 最高 **`6`** 个轨道等控制
+   - [x] **字幕生成**，支持 **`大小`**、**`位置`**、**`颜色`、**`描边`** 字体设置
+   - [x] **音量调节**，支持 **`原声`**、**`说话声`、**`背景音乐`** 音量调节
+   - [ ] **背景音乐**，随机或者指定音乐文件
+   - [ ] **转场控制**，配合长视频使用
+- [ ] 长视频支持，分段处理，分段控制，以满足不同机器的处理性能
 - [ ] 自动化发布投稿
-
-
-## 进展动态 📈
-2025-01-04 ：
-支持 cpu、cuda
-
-2025-01-07 ：
-新增 Creatorbox cil （弃用）
-使用 [Google Colab](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing) 加快任务处理速度
-
-2025-01-10 ：
-新增 Creatorbox api
-
-2025-02-08 ：
-新增 视频翻译 [接口文档](https://toucan-real-informally.ngrok-free.app/docs#/) · [在线日志](https://toucan-real-informally.ngrok-free.app/logs) · [视频预览](https://toucan-real-informally.ngrok-free.app/player)
-
-2025-03-01 ：
-新增 视频配音、支持多角色
-
-2025-03-13 ：
-新增 [参数配置](https://toucan-real-informally.ngrok-free.app) 页面，方便调试
-
-2025-03-21 ：
-新增 双语字幕、混音导出、剪映预览；优化代码
 
 
 ## 视频演示 📺
@@ -146,20 +139,11 @@
 
 ## 快速开始 🚀
 
-  支持架构
-- Windows
-  - [x] windows.x86_64
-  - [ ] windows.x86
-- Linuxs
-  - [x] linux.x86_64
-  - [ ] linux.x86
-  - [ ] linux.aarch64
-  - [ ] linux.armv7
-
 ### 配置要求 📦
 
-- 建议最低 CPU 4核或以上，内存 8G 或以上，显卡非必须，支持 cpu、cuda
-- Windows 10、Debian 12 以上系统
+- 支持架构 `windows.x86_64` , `linux.x86_64`
+- 建议最低 CPU `4核` 或以上，内存 `8G` 或以上，显卡非必须，支持 `cpu` 或 `cuda`
+- Windows10+、Debian12+ 以上系统
 
 ### 前提条件 📦
 
@@ -168,37 +152,39 @@
 
 ### 安装步骤 🐳
 
-1. 克隆下载
+1. 克隆并进入目录
 
-```shell
-git clone https://github.com/xiesx123/CreatorBox.git & cd CreatorBox
-```
+    ```shell
+    git clone https://github.com/xiesx123/CreatorBox.git && cd CreatorBox
+    ```
  
 2. 创建虚拟环境
-```shell
-conda create --name creatorbox python=3.11.11
-```
 
-3. 激活虚拟环境
-```shell
-conda activate creatorbox
-```
+    ```shell
+    conda create --name creatorbox python=3.11.11
+    ```
+2. 激活虚拟环境
 
-4. 安装依赖环境
-```shell
-pip install -r requirements.txt
-```
+    ```shell
+    conda activate creatorbox
+    ```
 
-5. 启动
-```shell
-python run.py 
-python run.py --host 0.0.0.0 --port 8000
-```
+4. 安装依赖
+
+    ```shell
+    pip install -r requirements.txt
+    ```
+
+5. 启动运行
+
+    ```shell
+    python run.py
+    ```
 
 ### 访问界面 🌐
 
 - 本机访问 http://127.0.0.1:8000
-- 内外访问 http://172.18.0.1:8000 ip以实际打印为准👇 
+- 内外访问 http://172.18.0.1:8000 以实际为准👇 
 
   ```log
   INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
@@ -209,13 +195,9 @@ python run.py --host 0.0.0.0 --port 8000
 
 ## 常见问题 🤔
 
-- ❓如何使用免费的OpenAI GPT-3.5模型
+- ❓模型下载失败，出现如下错误
 
-  [OpenAI宣布ChatGPT里面3.5已经免费了](https://openai.com/blog/start-using-chatgpt-instantly)，有开发者将其封装成了API，可以直接调用
-
-
-- 模型下载失败，出现如下错误
-  ```code
+  ```log
   An error occured while synchronizing the model Systran/faster-whisper-large-v3 from the Hugging Face Hub:
   An error happened while trying to locate the files on the Hub and we cannot find the appropriate snapshot folder for the
   specified revision on the local disk. Please check your internet connection and try again.
