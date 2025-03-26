@@ -7,7 +7,10 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 
 	const reconnectInterval = 5000;
 
-	// 封装方法
+	const timeout = 30 * 1000;
+
+	var index = 0
+
 	var mod = {
 
 		connect(callback) {
@@ -60,14 +63,12 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 				url: url,
 				data: parames,
 				dataType: 'json',
-				beforeSend: function (xhr, textStatus) {
+				beforeSend: function (xhr, status) {
 					if (progress) {
-						layer.msg('加载中', {
-							icon: 16
-						});
+						index = layer.msg('请稍后', { icon: 16, time: timeout });
 					}
 				},
-				success: function (data, textStatus) {
+				success: function (data, status) {
 					if (data.code == 0) {
 						if (callback) {
 							callback(data);
@@ -75,9 +76,9 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 					} else {
 						toast.error(data.message, "提示");
 					}
+					layer.close(index);
 				},
-				complete: function (xhr, textStatus) {
-					layer.closeAll();
+				complete: function (xhr, status) {
 				},
 				cancel: function () {
 				}
@@ -91,14 +92,12 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 				data: parames,
 				contentType: 'application/json',
 				dataType: 'json',
-				beforeSend: function (xhr, textStatus) {
+				beforeSend: function (xhr, status) {
 					if (progress) {
-						layer.msg('加载中', {
-							icon: 16
-						});
+						index = layer.msg('请稍后', { icon: 16, time: timeout });
 					}
 				},
-				success: function (data, textStatus) {
+				success: function (data, status) {
 					if (data.code == 0) {
 						if (callback) {
 							callback(data);
@@ -106,9 +105,9 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 					} else {
 						toast.error(data.message, "提示");
 					}
+					layer.close(index);
 				},
-				complete: function (xhr, textStatus) {
-					layer.closeAll();
+				complete: function (xhr, status) {
 				},
 				cancel: function () {
 				}
@@ -126,12 +125,10 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 					url: url,
 					data: parames,
 					dataType: 'json',
-					beforeSend: function (xhr, textStatus) {
-						layer.msg('加载中', {
-							icon: 16
-						});
+					beforeSend: function (xhr, status) {
+						index = layer.msg('请稍后', { icon: 16, time: timeout });
 					},
-					success: function (data, textStatus) {
+					success: function (data, status) {
 						if (data.code == 0) {
 							if (callback) {
 								callback();
@@ -139,9 +136,9 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 						} else {
 							toast.error(data.message, "提示");
 						}
+						layer.close(index);
 					},
-					complete: function (xhr, textStatus) {
-						layer.closeAll();
+					complete: function (xhr, status) {
 					},
 					cancel: function () {
 					}
@@ -174,20 +171,18 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 					url: url,
 					data: deleteParames,
 					dataType: 'json',
-					beforeSend: function (xhr, textStatus) {
-						layer.msg('加载中', {
-							icon: 16
-						});
+					beforeSend: function (xhr, status) {
+						index = layer.load(2, { icon: 16 });
 					},
-					success: function (data, textStatus) {
+					success: function (data, status) {
 						if (data.code == 0) {
 							toast.success(data.message, "提示");
 						} else {
 							toast.error(data.message, "提示");
 						}
+						layer.close(index);
 					},
-					complete: function (xhr, textStatus) {
-						layer.closeAll();
+					complete: function (xhr, status) {
 					},
 					cancel: function () {
 					}

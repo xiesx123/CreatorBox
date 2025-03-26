@@ -24,8 +24,8 @@
 <table>
 <thead>
 <tr>
-<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔧</g-emoji> 本地素材导出草稿</th>
-<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">✂️</g-emoji> 剪映后期精细调整</th>
+<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔧</g-emoji> 配音调试</th>
+<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">✂️</g-emoji> 专业剪辑</th>
 </tr>
 </thead>
 <tbody>
@@ -85,7 +85,7 @@
 - [x] 灵活配置调试，支持 **`字幕`**，**`说话人`**，**`翻译`**，**`配音`** 配置调节
 - [x] 语言合成克隆，
    - [x] **语音合成**，支持 **多种语音** 调速合成，可 **实时试听** 效果
-   - [ ] **语音克隆**，满足个性化需求
+   - [x] **语音克隆**，支持 **`多角色`**、**`多语种`**、支持最多 **`内置`**  **`視頻`**  **`自定义`** 3种音色调节
 - [x] 生成模式切换，
    - [x] 支持 [**配音模式**](https://github.com/xiesx123/CreatorBox/discussions/2) ，支持 `视频`、`音频` 、`自适应` 3种配音模式
    - [x] 支持 [**翻译模式**](https://github.com/xiesx123/CreatorBox/discussions/1) ，将视频从原声语言翻译为另一种语言

@@ -20,7 +20,20 @@
   <script src="static/js/layui/layui.js"></script>
   <!-- creator -->
   <script src="static/js/creator/creator.js"></script>
-
+  <style>
+    /* 使得底部浮动 */
+    .floating-div {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: #2F4056;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      z-index: 9999;
+    }
+  </style>
 </head>
 
 <body class="collapse">
@@ -201,6 +214,15 @@
                   </div>
 
                   <div class="layui-form-item" pane>
+                    <label class="layui-form-label">模型</label>
+                    <div class="layui-input-block">
+                      <select name="speaker_module" lay-search disabled>
+                        <option value="">默认</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item" pane>
                     <label class="layui-form-label">使用数量</label>
                     <div class="layui-input-inline" style="width: auto;">
                       <input type="checkbox" name="speaker_use_num" lay-skin="switch">
@@ -237,13 +259,6 @@
                     <label class="layui-form-label">性别检测</label>
                     <div class="layui-input-block">
                       <input type="checkbox" name="speaker_enable_gender" lay-skin="switch">
-                    </div>
-                  </div>
-
-                  <div class="layui-form-item" pane>
-                    <label class="layui-form-label"></label>
-                    <div class="layui-input-block">
-
                     </div>
                   </div>
 
@@ -307,7 +322,7 @@
                   <div class="layui-form-item">
                     <label class="layui-form-label">地区</label>
                     <div class="layui-input-block">
-                      <select name="llm_locale" lay-verify="required" lay-filter="llm_locale_filter">
+                      <select id ="llm_locale" name="llm_locale" lay-verify="required" lay-filter="llm_locale_filter">
                         <option value="">选择或搜索</option>
                         {% for item in data.llm.locales %}
                         <option value="{{ item.Locale }}">{{ item.Name }} - {{ item.Locale }}</option>
@@ -350,6 +365,21 @@
                     </div>
                   </div>
 
+                  <div class="layui-form-item">
+                    <label class="layui-form-label" id="voice_speaker">模型</label>
+                    <div class="layui-input-block">
+                      <select id="tts_model" name="tts_model" lay-verify="required" lay-filter="tts_model_filter">
+                        {% for item in data.tts.models %}
+                        {% if item.enable %}
+                        <option value="{{ item.model}}">
+                          {{ item.desc }}
+                        </option>
+                        {% endif %}>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+
                   <div class="layui-form-item" pane>
                     <label class="layui-form-label">性别</label>
                     <div class="layui-input-block">
@@ -361,17 +391,8 @@
                   <div class="layui-form-item">
                     <label class="layui-form-label">语音</label>
                     <div class="layui-input-block">
-                      <select name="tts_voice" lay-verify="required" lay-filter="tts_voice_filter" lay-search>
+                      <select id="tts_voice" name="tts_voice" lay-verify="required" lay-filter="tts_voice_filter" lay-search>
                         <option value="">选择或搜索</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="layui-form-item">
-                    <label class="layui-form-label">克隆</label>
-                    <div class="layui-input-block">
-                      <select name="tts_clone" lay-filter="tts_clone_filter" lay-search>
-                        <option value="">选择或搜索（计划中）</option>
                       </select>
                     </div>
                   </div>
@@ -448,7 +469,7 @@
                     </div>
                   </div>
 
-                  <div class="layui-form-item" pane>
+                  <!-- <div class="layui-form-item" pane>
                     <label class="layui-form-label">导出方式</label>
                     <div class="layui-input-block">
                       {% for item in data.export.export_types %}
@@ -456,7 +477,7 @@
                         item.enable %}disabled{% endif %}>
                       {% endfor %}
                     </div>
-                  </div>
+                  </div> -->
 
                   <div class="layui-form-item" pane>
                     <label class="layui-form-label">剪映预览</label>
@@ -499,7 +520,7 @@
                 <div class="layui-card-header">草稿</div>
                 <div class="layui-card-body">
 
-                  <div class="layui-form-item" pane>
+                  <!-- <div class="layui-form-item" pane>
                     <label class="layui-form-label">强制刷新</label>
                     <div class="layui-input-inline" style="width: auto;">
                       <input type="checkbox" name="draft_refresh" lay-skin="switch">
@@ -509,7 +530,7 @@
                       <i class="layui-icon layui-icon-tips"
                         lay-tips="{content: '提示：<br>自动关闭当前剪映工程编辑窗口，返回剪映主页', margin: '0 0 0 -10px'}"></i>
                     </div>
-                  </div>
+                  </div> -->
 
                   <div class="layui-form-item">
                     <label class="layui-form-label">草稿路径</label>
@@ -611,9 +632,9 @@
             <!-- 提交 -->
             <div class="layui-col-md12">
               <div class="layui-form-item layui-col-space15">
-                <div class="layui-col-md12">
-                  <button type="submit" class="layui-btn layui-btn-fluid"
-                    lay-submit lay-filter="form_submit">执行</button>
+                <div id="floating-div" class="layui-col-md12">
+                  <button type="submit" class="layui-btn layui-btn-fluid" lay-submit
+                    lay-filter="form_submit">执行</button>
                 </div>
                 <div class="layui-col-md12 layui-hide">
                   <button type="button" class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-disabled"
@@ -731,15 +752,14 @@
         if (data.elem.value == 0) {
           return $('input[name="llm_model"]').val("");
         }
-        const findItemByProvider = (provider) => {
-          var llm_providers_json = JSON.parse('{{ data.llm.providers | tojson }}')
-          return llm_providers_json.find(item => item.provider.toLowerCase() === provider.toLowerCase());
+        const llm_find_by_provider = (provider) => {
+          var providers_json = JSON.parse('{{ data.llm.providers | tojson }}')
+          return providers_json.find(item => item.provider.toLowerCase() === provider.toLowerCase());
         };
-        item = findItemByProvider(data.elem.value);
+        item = llm_find_by_provider(data.elem.value);
         form_json.llm_provider = item.provider;
         form_json.llm_model = item.model;
         $('input[name="llm_model"]').val(form_json.llm_model);
-        form.render('text');
       });
 
       // 大模型-地区选择
@@ -751,7 +771,7 @@
           $('input[name="tts_gender"][value="1"]').prop('checked', true);
           form.render('radio');
           // 切换语音角色
-          tool.get("/tts/search", voice_search_params(form_json.llm_locale, form_json.tts_gender), voice_search_callback, false);
+          tool.post("/tts/search", voice_search_params(form_json.tts_model, form_json.llm_locale, form_json.tts_gender), voice_search_callback, false);
           // 切换试听文本
           tool.post("/trans/translator", JSON.stringify({
             "llm_provider": form_json.llm_provider,
@@ -765,50 +785,82 @@
         }
       });
 
+      // 配音-模型选择
+      form.on('select(tts_model_filter)', function (data) {
+        item = voice_find_by_model(data.elem.value);
+        form_json.tts_model = item.model;
+        $("#tts_model").val(item.model);
+        tool.post("/tts/search", voice_search_params(form_json.tts_model, form_json.llm_locale, form_json.tts_gender), voice_search_callback, true)
+      });
+
+      // 配音=============-初始化配置
+
+      util.on('id', {
+        "voice_speaker": function (othis) {
+          tts_model = $('#tts_model').val()
+          llm_locale = $('select[name="llm_locale"] option:selected').val()
+          tool.post("/tts/search", voice_search_params(tts_model, llm_locale, 0, true), voice_search_callback, true)
+        }
+      });
+
       // 配音-性别选择
       form.on('radio(tts_gender_filter)', function (data) {
         form_json.tts_gender = data.elem.value;
-        tool.get("/tts/search", voice_search_params(form_json.llm_locale, form_json.tts_gender), voice_search_callback, true)
+        tool.post("/tts/search", voice_search_params(form_json.tts_model, form_json.llm_locale, form_json.tts_gender), voice_search_callback, true)
       });
 
       // 配音-语音选择
       form.on('select(tts_voice_filter)', function (data) {
+        var selectedOption = data.elem.options[data.elem.selectedIndex]; // 获取选中的 option
+        var selectedOptgroup = selectedOption.closest('optgroup');  // 获取该选项所在的 optgroup
         form_json.tts_voice = data.elem.value;
+        form_json.tts_type = selectedOptgroup.id
         console.debug(form_json.tts_gender + "-" + form_json.tts_voice);
       });
 
       // 配音-试听点击
       util.on('id', {
         "tts_play": function (othis) {
+          form_json.tts_model = $('#tts_model').val()
+          form_json.llm_locale = $('select[name="llm_locale"] option:selected').val()
           form_json.tts_rate = $("#tts_rate").val();
           form_json.tts_text = $("#tts_text").val()
           var isvalid = form.validate('.tts_text');
           if (isvalid) {
-            const findItemByVoice = (voice) => {
-              return table_json.find(item => item.voice === voice);
-            };
-            var item = findItemByVoice(form_json.tts_voice)
+            const findItemByVoice = (provider, locale, voice, rate, text) =>
+              table_json.find(item =>
+                item.provider === provider && item.locale === locale && item.voice === voice && item.rate === rate && item.text === text
+              );
+            var item = findItemByVoice(form_json.llm_locale, form_json.tts_voice, form_json.tts_rate, form_json.tts_text)
             if (item != null) {
               return voice_play(item.url);
             }
+            output = form_json.llm_locale + "_" + form_json.tts_voice + "_" + form_json.tts_rate + "_" + form_json.tts_text.length
             tool.post("/tts/generate", JSON.stringify({
-              "text": form_json.tts_text,
+              "model": form_json.tts_model,
+              "locale": form_json.llm_locale,
               "voice": form_json.tts_voice,
-              "volume": "1.0",
+              "volume": localStorage.getItem('step') || 1,
               "rate": form_json.tts_rate,
               "pitch": "0",
-              "output": "tts_" + form_json.tts_voice
+              "text": form_json.tts_text,
+              "output": output
             }), function (response) {
+              toast.info(output, "语音试听")
               console.debug(response.data)
               var url = '/loader/local?url=' + response.data.path;
               var duration = response.data.duration + "s";
+              var type = response.data.duration + "s";
               voice_play(url);
-              table_json.push({
-                text: form_json.tts_text,
+              table_json.unshift({
+                provider: voice_find_by_model(form_json.tts_model).provider,
+                model: form_json.tts_model,
+                type: voice_type(form_json.tts_type),
+                locale: form_json.llm_locale,
                 gender: form_json.tts_gender,
                 voice: form_json.tts_voice,
-                clone: "",//form_json.tts_clone
                 rate: form_json.tts_rate,
+                text: form_json.tts_text,
                 duration: duration,
                 url: url
               })
@@ -821,20 +873,66 @@
       // 配音-搜索回调
       var voice_search_callback = function (response) {
         // 清空原有选项
-        $("select[name='tts_voice']").empty();
-        toast.success("已找到 " + response.data.length + " 条语音", "语音列表")
-        response.data.forEach(function (item) {
-          $("select[name='tts_voice']").append('<option value="' + item.ShortName + '">' + (item.Gender === "Male" ? "男" : "女") + " - " + item.ShortName + '</option>');
-        });
+        $("#tts_voice").empty();
+        if (response.data.length == 0) {
+          toast.warning("暂无可用语音", "语音列表")
+        } else {
+          toast.success("已找到 " + response.data.length + " 条语音", "语音列表")
+        }
+        // 转换显示对象
+        const wrappedData = response.data.reduce((acc, item) => {
+          let group = voice_type(item.type);
+          let existingGroup = acc.find(g => g.group === group);
+          if (existingGroup) {
+            existingGroup.item.push(item);
+          } else {
+            acc.push({
+              type: item.type, group: group, item: [item]
+            });
+          }
+          return acc;
+        }, []);
+        // 动态条件选项
+        const optionHtml = (list) => {
+          let html = '';
+          list.forEach(obj => {
+            html += `<optgroup id="${obj.type}" label="${obj.group}">\n`;
+            obj.item.forEach(i => {
+              html += `  <option value="${i.speaker}">` + (i.gender === "male" ? "男" : "女") + " - " + i.speaker + `</option>\n`;
+            });
+            html += `</optgroup>\n`;
+          });
+          return html;
+        };
+        $("#tts_voice").append(optionHtml(wrappedData))
         form.render('select');
         // 默认选择第一个
-        console.debug(form_json.tts_gender + "-" + form_json.tts_voice);
-        form_json.tts_voice = response.data[0].ShortName;
+        if (response.data.length > 0) {
+          form_json.tts_voice = response.data[0].speaker;
+          form_json.tts_type = response.data[0].type;
+          console.debug(form_json.tts_gender + "-" + form_json.tts_voice);
+        }
+      };
+
+      // 配音-选择模型
+      var voice_find_by_model = (model) => {
+        var models = JSON.parse('{{ data.tts.models | tojson }}')
+        return models.find(item => item.model.toLowerCase() === model.toLowerCase());
       };
 
       // 配音-公共参数
-      var voice_search_params = (locale, gender) => {
-        return { "locale": locale, "gender": gender };
+      var voice_search_params = (model, locale, gender, init = false) => {
+        return JSON.stringify({ "model": model, "locale": locale, "gender": gender, "isinit": init, "file": $("#url").val() });
+      };
+
+      // 配音-语音类型
+      var voice_type = function (type) {
+        types = {
+          2: "自定义",
+          1: "视频",
+          0: "内置"
+        }
+        return types[type] || "未知"
       };
 
       // 配音-音频播放
@@ -865,8 +963,8 @@
         });
       };
 
-      // 配音-语音初始化
-      tool.get("/tts/search", voice_search_params(form_json.llm_locale, form_json.tts_gender), voice_search_callback, true)
+      // 配音-默认初始化
+      tool.post("/tts/search", voice_search_params(form_json.tts_model, form_json.llm_locale, form_json.tts_gender), voice_search_callback, true)
 
       // 配音-说话人表格
       var inst = treeTable.render({
@@ -874,10 +972,12 @@
         data: table_json,
         page: false,
         cols: [[
-          { title: '序号', fixed: 'left', width: "80", align: "center", templet: d => '<div title="' + d.text + '">' + d.LAY_INDEX + '</div>' },
+          { title: '说话人', fixed: 'left', width: "80", align: "center", templet: d => '<div title="' + d.text + '">' + d.LAY_INDEX + '</div>' },
+          { title: '模型', fixed: 'left', width: "80", align: "center", field: 'provider', templet: d => '<div title="' + d.model + '">' + d.provider + '</div>' },
+          { title: '类型', fixed: 'left', width: "80", align: "center", field: 'type', templet: d => '<div title="' + d.text + '">' + d.type + '</div>' },
+          { title: '地区', fixed: 'left', width: "80", align: "center", field: 'locale', templet: d => '<div title="' + d.text + '">' + d.locale + '</div>' },
           { title: '性别', fixed: 'left', width: "80", align: "center", field: 'gender', templet: d => '<div title="' + d.text + '">' + (parseInt(d.gender) === 1 ? '男' : parseInt(d.gender) === 2 ? '女' : '未知') + '</div>' },
           { title: '语音', fixed: 'left', field: 'voice', templet: d => '<div title="' + d.text + '">' + d.voice + '</div>' },
-          // { title: '克隆', fixed: 'left',  field: 'clone', templet: d => '<div title="' + d.text + '">' + d.clone + '</div>' },
           { title: '语速', fixed: 'left', width: "80", field: 'rate', templet: d => '<div title="' + d.text + '">' + d.rate + '</div>' },
           { title: '时长', fixed: 'left', width: "80", field: 'duration', templet: d => '<div title="' + d.text + '">' + d.duration + '</div>' },
           { title: "操作", fixed: 'left', width: "200", align: "center", toolbar: "#TPL_tts_voices_table_tools" }
@@ -997,7 +1097,7 @@
           tool.post("/video/dubbing", data, function (response) {
             console.debug(response.data)
             var taskId = response.data.task_id
-            toast.success(taskId, "任务提交成功");
+            toast.info(taskId, "任务提交成功");
             // 任务存储
             if (!$('input[name="preview"]').is(':checked')) {
               task_ids.push(taskId);
@@ -1017,6 +1117,7 @@
         }
         else if (data.type == "video") {
           console.debug(data.message);
+          toast.success(task_ids.at(-1), "任务处理成功");
           // 开启预览
           $("button[lay-on='video_preview']").removeClass("layui-btn-disabled").prop("disabled", false);
         }
@@ -1059,6 +1160,7 @@
         bar1: false,
         bar2: false,
         bgcolor: '#393D52',
+        css: { bottom: 80 },
         on: {
           mouseenter: function (desc) {
             layer.tips(desc, this, {
@@ -1072,7 +1174,7 @@
         },
         click: function (type) {
           if (type == "log") {
-            util.openWin({url: "log"});
+            util.openWin({ url: "log" });
           } else if (type == "player") {
             tool.open("player?url=" + task_ids.slice(-1)[0] + "&autoplay=true", "1100px", "510px");
             // util.openWin({url: "player?url=" + task_ids.slice(-1)[0] + "&autoplay=true"});
@@ -1085,15 +1187,6 @@
 
   <script src="static/js/creator/theam.js"></script>
 
-  <script>
-    var _hmt = _hmt || [];
-    (function () {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?0f28a627b93e9c2e599680e1827e1314";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
 </body>
 
 </html>

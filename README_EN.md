@@ -21,8 +21,8 @@
   <table>  
     <thead>  
       <tr>  
-        <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔧</g-emoji> Export Draft of Local Material</th>  
-        <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">✂️</g-emoji> Fine-tuning in Post-Editing</th>  
+        <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔧</g-emoji> Voice Tuning</th>
+        <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">✂️</g-emoji> Pro Editing</th>
       </tr>  
     </thead>  
     <tbody>  
@@ -69,7 +69,7 @@
 - [x] Flexible configuration debugging, supporting adjustments for **`Subtitles`**, **`Speakers`**, **`Translation`**, **`Voice-over`**  
 - [x] Voice Cloning  
   - [x] **Speech Synthesis**, supports multiple voices, speed adjustments, and **real-time preview**  
-  - [ ] **Voice Cloning**, to meet personalized needs  
+  - [x] **Voice Cloning**, supports **`multiple roles`**, **`multiple languages`**, with up to **`builtin`**, **`video`**, and **`custom`** 3 types of tone adjustments.
 - [x] Generation Mode Switching  
   - [x] Supports [**Voice-over Mode**](https://github.com/xiesx123/CreatorBox/discussions/2), with three voice-over modes: `Video`, `Audio`, and `Adaptive`  
   - [x] Supports [**Translation Mode**](https://github.com/xiesx123/CreatorBox/discussions/1), translating video from its original language to another  
