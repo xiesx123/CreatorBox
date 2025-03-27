@@ -12,7 +12,7 @@
 [![Google Colab](https://img.shields.io/badge/Google_Colab-Running-yellow?logo=googlecolab&)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
 
   <h3><a href="README.md">简体中文</a> | English</h3>  
-  🚀🎬 Flexible, efficient, and scalable video editing voice-over pipeline for unleashing creative potential  
+  🚀🎬Flexible, efficient and scalable, the exclusive video editing and dubbing toolkit unleashes creative potential  
   <h4>Web Interface</h4>  
 
   ![](docs/main.jpg)  

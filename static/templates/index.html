@@ -87,7 +87,9 @@
                     <div class="layui-colla-content">
 
                       <div class="layui-form-item">
-                        <label class="layui-form-label" id="video_play">链接 </label>
+                        <label class="layui-form-label" id="video_play"
+                          lay-tips="{content: '点击后可以播放已上传的视频', margin: '0 0 0 -10px'}">链接 <span
+                            class="layui-badge-dot"></span></label>
                         <div class="layui-input-block">
                           <input id="url" type="text" name="url" lay-verify="path" placeholder="请输入视频本地路径、网络链接"
                             autocomplete="off" class="layui-input" lay-affix="clear">
@@ -322,7 +324,7 @@
                   <div class="layui-form-item">
                     <label class="layui-form-label">地区</label>
                     <div class="layui-input-block">
-                      <select id ="llm_locale" name="llm_locale" lay-verify="required" lay-filter="llm_locale_filter">
+                      <select id="llm_locale" name="llm_locale" lay-verify="required" lay-filter="llm_locale_filter">
                         <option value="">选择或搜索</option>
                         {% for item in data.llm.locales %}
                         <option value="{{ item.Locale }}">{{ item.Name }} - {{ item.Locale }}</option>
@@ -366,7 +368,9 @@
                   </div>
 
                   <div class="layui-form-item">
-                    <label class="layui-form-label" id="voice_speaker">模型</label>
+                    <label class="layui-form-label" id="voice_speaker"
+                      lay-tips="{content: '点击可生成该模型的说话人配置', margin: '0 0 0 -10px'}">模型 <span
+                        class="layui-badge-dot"></span></label>
                     <div class="layui-input-block">
                       <select id="tts_model" name="tts_model" lay-verify="required" lay-filter="tts_model_filter">
                         {% for item in data.tts.models %}
@@ -391,7 +395,8 @@
                   <div class="layui-form-item">
                     <label class="layui-form-label">语音</label>
                     <div class="layui-input-block">
-                      <select id="tts_voice" name="tts_voice" lay-verify="required" lay-filter="tts_voice_filter" lay-search>
+                      <select id="tts_voice" name="tts_voice" lay-verify="required" lay-filter="tts_voice_filter"
+                        lay-search>
                         <option value="">选择或搜索</option>
                       </select>
                     </div>
@@ -480,18 +485,6 @@
                   </div> -->
 
                   <div class="layui-form-item" pane>
-                    <label class="layui-form-label">剪映预览</label>
-                    <div class="layui-input-inline" style="width: auto;">
-                      <input type="checkbox" name="preview" lay-skin="switch">
-                    </div>
-
-                    <div class="layui-form-mid layui-text-em">
-                      <i class="layui-icon layui-icon-tips"
-                        lay-tips="{content: '提示：<br>1、开启后，可通过剪映快速预览/微调<br>2、文件格式：{文件名}_{标识}.mp4<br>3、草稿目录：{文件名}_{标识}', margin: '0 0 0 -10px'}"></i>
-                    </div>
-                  </div>
-
-                  <div class="layui-form-item" pane>
                     <label class="layui-form-label">重新构建</label>
                     <div class="layui-input-inline" style="width: auto;">
                       <input type="checkbox" name="rebuild" lay-skin="switch" lay-filter="switch_rebuild_filter">
@@ -531,6 +524,18 @@
                         lay-tips="{content: '提示：<br>自动关闭当前剪映工程编辑窗口，返回剪映主页', margin: '0 0 0 -10px'}"></i>
                     </div>
                   </div> -->
+
+                  <div class="layui-form-item" pane>
+                    <label class="layui-form-label">剪映预览</label>
+                    <div class="layui-input-inline" style="width: auto;">
+                      <input type="checkbox" name="draft_preview" lay-skin="switch">
+                    </div>
+
+                    <div class="layui-form-mid layui-text-em">
+                      <i class="layui-icon layui-icon-tips"
+                        lay-tips="{content: '提示：<br>1、开启后，可通过剪映快速预览/微调<br>2、文件格式：{文件名}_{标识}.mp4<br>3、草稿目录：{文件名}_{标识}<br>4、只能在Windows环境下使用', margin: '0 0 0 -10px'}"></i>
+                    </div>
+                  </div>
 
                   <div class="layui-form-item">
                     <label class="layui-form-label">草稿路径</label>
@@ -693,6 +698,9 @@
       // 表单渲染
       form.val('form_filter', form_json);
 
+      // 禁用操作
+      $('input[name="draft_preview"]').attr('disabled', layui.device("os")?.os !== "windows");
+
       // 表单验证 
       form.verify({
         path: function (value, elem) {
@@ -708,7 +716,7 @@
           }
         },
         jydraft: function (value, elem) {
-          if (!$('input[name="preview"]').is(':checked')) return;
+          if (!$('input[name="draft_preview"]').is(':checked')) return;
           if (value.length == 0) {
             return '请输入剪映草稿路径';
           }
@@ -797,9 +805,12 @@
 
       util.on('id', {
         "voice_speaker": function (othis) {
-          tts_model = $('#tts_model').val()
-          llm_locale = $('select[name="llm_locale"] option:selected').val()
-          tool.post("/tts/search", voice_search_params(tts_model, llm_locale, 0, true), voice_search_callback, true)
+          layer.confirm('确定生成说话人配置？', { title: '提示' }, function (index) {
+            layer.close(index);
+            tts_model = $('#tts_model').val()
+            llm_locale = $('select[name="llm_locale"] option:selected').val()
+            tool.post("/tts/search", voice_search_params(tts_model, llm_locale, 0, true), voice_search_callback, true)
+          });
         }
       });
 

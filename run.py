@@ -18,7 +18,7 @@ def cli():
 @click.option("--debug", is_flag=True, default=False, show_default=True, help="Enable debug mode")
 # ngrok options
 @click.option("--ngrok", is_flag=True, default=False, show_default=True, help="Enable ngrok tunnel")
-@click.option("--ngrok_host", "-nh", type=str, default=None, help="ngrok host (optional)")
+@click.option("--ngrok_host", "-nh", type=str, default="toucan-real-informally.ngrok-free.app", help="ngrok host (optional)")
 @click.option("--ngrok_port", "-np", type=int, default=None, help="ngrok port (defaults to --port)")
 def start(host, port, debug, ngrok, ngrok_host, ngrok_port):
     if ngrok:

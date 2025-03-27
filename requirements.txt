@@ -1,60 +1,60 @@
 # transcribe
-faster_whisper>=1.1.1
+faster_whisper==1.1.1
 
 # llm
-langchain>=0.3.19
-langchain_community>=0.3.18
-langchain_google_genai>=2.0.11
-langchain-deepseek>=0.1.2
-dashscope>=1.22.2
+langchain==0.3.19
+langchain_community==0.3.18
+langchain_google_genai==2.0.11
+langchain-deepseek==0.1.2
+dashscope==1.22.2
 
 # tts
-edge_tts>=7.0.0
-coqui-tts>=0.26.0
-f5-tts>=1.0.3
+edge_tts==7.0.0
+coqui-tts==0.26.0
+f5-tts==1.0.8
 
 # audio
-pydub>=0.25.1
-demucs>=4.0.1
+pydub==0.25.1
+demucs==4.0.1
 librosa==0.10.2
 playsound==1.2.2
-pyannote.audio>=3.3.2
+pyannote.audio==3.3.2
 
 # video
 moviepy==1.0.3
 
 # draft
-pymediainfo>=6.1.0
-uiautomation>=2.0.20
+pymediainfo==6.1.0
+uiautomation==2.0.20
 
 # lang
-pypinyin>=0.53.0
-langdetect>=1.0.9
-language-tags>=1.2.0
+pypinyin==0.53.0
+langdetect==1.0.9
+language-tags==1.2.0
 
 # cil
-asyncio>=3.4.3
+asyncio==3.4.3
 asyncclick==8.1.7.2
 
 # web
-jieba>=0.42.1
+jieba==0.42.1
 uvicorn==0.20.0
 fastapi==0.103.2
-websockets>14.2
-apscheduler>=3.11.0
-requests-cache>=1.2.1
-python-multipart>=0.0.20
+websockets==14.2
+apscheduler==3.11.0
+requests-cache==1.2.1
+python-multipart==0.0.20
 
 # other
-yt-dlp>=2025.1.26
-loguru>=0.7.3
-psutil>=6.1.1
-gputil>=1.4.0
+yt-dlp==2025.3.26
+loguru==0.7.3
+psutil==6.1.1
+gputil==1.4.0
 pyarmor==9.1.2
 pyarmor.cli==9.1.2
-pyngrok>=7.2.3
-tenacity>=9.0.0
-scenedetect>=0.6.5.2
-ffmpeg-python>=0.2.0
-opencv_python>=4.11.0
-email-validator>=2.2.0
+pyngrok==7.2.3
+tenacity==9.0.0
+scenedetect==0.6.5.2
+ffmpeg-python==0.2.0
+opencv_python==4.11.0.86
+email-validator==2.2.0
