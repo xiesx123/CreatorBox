@@ -19,7 +19,8 @@
   <link href="static/js/layui/css/layui-nav.css" rel="stylesheet">
   <script src="static/js/layui/layui.js"></script>
   <!-- creator -->
-  <script src="static/js/creator/creator.js"></script>
+  <script src="static/js/creator/theam.js"></script>
+  <script src="static/js/creator/app.js"></script>
   <style>
     /* 使得底部浮动 */
     .floating-div {
@@ -459,13 +460,13 @@
                     <label class="layui-form-label">处理模式</label>
                     <div class="layui-input-block">
                       {% for item in data.audio.mode_types %}
-                      <input type="radio" name="mode_type" value="{{ item.val }}" title="{{ item.desc }}" {% if not
-                        item.enable %}disabled{% endif %}>
+                      <input type="radio" name="mode_type" value="{{ item.val }}" lay-filter="mode_type_filter"
+                        title="{{ item.desc }}" {% if not item.enable %}disabled{% endif %}>
                       {% endfor %}
                     </div>
                   </div>
 
-                  <div class="layui-form-item" pane>
+                  <div id="assign_type_div" class="layui-form-item" pane>
                     <label class="layui-form-label">对齐方式</label>
                     <div class="layui-input-block">
                       {% for item in data.audio.assign_types %}
@@ -685,6 +686,7 @@
       let player;
 
       var app = JSON.parse('{{ data.app | tojson }}')
+      var os = layui.device("os").os
 
       var form_json_init = JSON.parse('{{ data.form | tojson }}') // 表单默认值
       var form_json = cache.hasOwnProperty('form') ? cache.form : {}     // 表单
@@ -694,12 +696,13 @@
       var task_ids = cache.hasOwnProperty('task') ? cache.task : []   // 任务
 
       console.log("%s %s %s", app.title, app.version, app.description);
+      console.debug("current os: %s", os);
 
       // 表单渲染
       form.val('form_filter', form_json);
 
       // 禁用操作
-      $('input[name="draft_preview"]').attr('disabled', layui.device("os")?.os !== "windows");
+      $('input[name="draft_preview"]').attr('disabled', os == "linux");
 
       // 表单验证 
       form.verify({
@@ -801,7 +804,7 @@
         tool.post("/tts/search", voice_search_params(form_json.tts_model, form_json.llm_locale, form_json.tts_gender), voice_search_callback, true)
       });
 
-      // 配音=============-初始化配置
+      // 配音=============
 
       util.on('id', {
         "voice_speaker": function (othis) {
@@ -1040,6 +1043,18 @@
         layui.data(CREATORBOX, { key: 'table', value: table_json });
       }
 
+
+      // 导出=============
+
+      // 导出-模式选择
+      form.on('radio(mode_type_filter)', function (data) {
+        if (data.elem.value == 1) {
+          $('#assign_type_div').removeClass('layui-hide');
+        } else {
+          $('#assign_type_div').addClass('layui-hide');
+        }
+      });
+
       // 是否重构开关事件
       form.on('switch(switch_rebuild_filter)', function (data) {
         if (this.checked) {
@@ -1141,24 +1156,6 @@
         }
       });
 
-      // 指示条
-      $(document).on("mouseenter", "*[lay-tips]", function () {
-        var e = $(this),
-          i = lay.options(this, {
-            attr: "lay-tips"
-          }),
-          t = layer.tips(i.content, this, {
-            tips: i.direction || 1,
-            time: -1,
-            success: function (e, t) {
-              e.css("margin", i.margin)
-            }
-          });
-        e.data("index", t)
-      }).on("mouseleave", "*[lay-tips]", function () {
-        layer.close($(this).data("index"))
-      });
-
       // 固定条
       util.fixbar({
         bars: [{
@@ -1187,16 +1184,17 @@
           if (type == "log") {
             util.openWin({ url: "log" });
           } else if (type == "player") {
-            tool.open("player?url=" + task_ids.slice(-1)[0] + "&autoplay=true", "1100px", "510px");
-            // util.openWin({url: "player?url=" + task_ids.slice(-1)[0] + "&autoplay=true"});
+            if (task_ids.length > 0) {
+              tool.open("player?url=" + task_ids.slice(-1)[0] + "&autoplay=true", "1100px", "510px");
+            } else {
+              util.openWin({ url: "player?url=&autoplay=true" });
+            }
           }
         }
       });
     });
 
   </script>
-
-  <script src="static/js/creator/theam.js"></script>
 
 </body>
 

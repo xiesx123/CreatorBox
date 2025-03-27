@@ -153,11 +153,18 @@
 - Local access: http://127.0.0.1:8000  
 - External access: http://172.18.0.1:8000 (depending on the actual setup)👇  
 
-    ```log  
-    INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)  
-    INFO:     Started reloader process [16760] using StatReload  
-    2025-03-31 12:00:00.000 | INFO 12588 main.py:78 - CreatorBox http://172.18.0.1:8000 Run Success  
-    ```  
+  ```log
+   _____                _            ______
+  /  __ \              | |           | ___ \
+  | /  \/_ __ ___  __ _| |_ ___  _ __| |_/ / _____  __
+  | |   | '__/ _ \/ _` | __/ _ \| '__| ___ \/ _ \ \/ /
+  | \__/\ | |  __/ (_| | || (_) | |  | |_/ / (_) >  < 
+   \____/_|  \___|\__,_|\__\___/|_|  \____/ \___/_/\_\   v1.0.5
+
+  2025-03-27 11:34:52.458 | INFO 1496 task.py:18 - Startup Scheduler 1 Job Completed.
+  2025-03-27 11:34:52.458 | INFO 1496 main.py:84 - Started CreatorBox Run Debug Success (6.16 seconds)
+  2025-03-27 11:34:52.459 | INFO 1496 main.py:85 - http://172.18.0.1:8000
+  ```
 
 ## FAQ 🤔  
 - ❓ **Model download failed** with the following error:  
