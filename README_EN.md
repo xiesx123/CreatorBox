@@ -7,7 +7,7 @@
   </a>
 </p> -->
 
-![Version](https://img.shields.io/badge/version-v1.0.5-blue)
+![Version](https://img.shields.io/badge/version-v1.0.6-blue)
 ![GitHub stars](https://img.shields.io/github/stars/xiesx123/CreatorBox)
 [![Google Colab](https://img.shields.io/badge/Google_Colab-Running-yellow?logo=googlecolab&)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
 
@@ -84,37 +84,38 @@
 - [ ] Automated publishing  
 
 ## Video Demonstration 📺  
-### Voice-Over Mode  
-<table>  
-  <thead>  
-    <tr>  
-      <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️</g-emoji> Single Person - Chinese Video</th>  
-      <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️</g-emoji> Single Person - English Video</th>  
-    </tr>  
-  </thead>  
-  <tbody>  
-    <tr>  
-      <td align="center"><video src="https://github.com/user-attachments/assets/27e466a9-1817-4276-ad04-42b8b9ffafe3"></video></td>  
-      <td align="center"><video src="https://github.com/user-attachments/assets/35f05c2d-7b55-41af-8c1c-31cf4d30216a"></video></td>  
-    </tr>  
-  </tbody>  
-</table>  
 
 ### Translation Mode  
-<table>  
-  <thead>  
-    <tr>  
-      <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️</g-emoji> Multiple Speakers - English Video</th>  
-      <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️</g-emoji> Multiple Speakers - Chinese-English Mix with Subtitles</th>  
-    </tr>  
-  </thead>  
-  <tbody>  
-    <tr>  
-      <td align="center"><video src="https://github.com/user-attachments/assets/7e6d0311-dc60-409b-bc5a-a71c93e6fdb3"></video></td>  
-      <td align="center"><video src="https://github.com/user-attachments/assets/c8d7ad13-eba5-4a9f-9df8-65aba260195c"></video></td>  
-    </tr>  
-  </tbody>  
-</table>  
+
+<table>
+<thead>
+<tr>
+<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Film - Original Chinese Audio</th>
+<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Film - Original English Audio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><video src="https://github.com/user-attachments/assets/5e6371f4-4b46-4e31-b5a3-01c1df844be3"></video></td>
+<td align="center"><video src="https://github.com/user-attachments/assets/99959737-b1a5-4758-b499-683c71bb3d61"></video></td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Interview - Original English Audio</th>
+<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Interview - Mixed English and Chinese Audio with Dual Subtitles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><video src="https://github.com/user-attachments/assets/7e6d0311-dc60-409b-bc5a-a71c93e6fdb3"></video></td>
+<td align="center"><video src="https://github.com/user-attachments/assets/c8d7ad13-eba5-4a9f-9df8-65aba260195c"></video></td>
+</tr>
+</tbody>
+</table>
 
 ## Quick Start 🚀  
 ### System Requirements 📦  
@@ -159,7 +160,7 @@
   | /  \/_ __ ___  __ _| |_ ___  _ __| |_/ / _____  __
   | |   | '__/ _ \/ _` | __/ _ \| '__| ___ \/ _ \ \/ /
   | \__/\ | |  __/ (_| | || (_) | |  | |_/ / (_) >  < 
-   \____/_|  \___|\__,_|\__\___/|_|  \____/ \___/_/\_\   v1.0.5
+   \____/_|  \___|\__,_|\__\___/|_|  \____/ \___/_/\_\   v1.0.6
 
   2025-03-27 11:34:52.458 | INFO 1496 task.py:18 - Startup Scheduler 1 Job Completed.
   2025-03-27 11:34:52.458 | INFO 1496 main.py:84 - Started CreatorBox Run Debug Success (6.16 seconds)

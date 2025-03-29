@@ -1,0 +1,40 @@
+[BUG]: 'gbk' codec can't decode byte 0x82 in position 7028: illegal multibyte sequence
+
+## Command Line
+D:\Projects\miniconda3\envs\creatorbox\Scripts\pyarmor gen -O D:\Projects\fast\fast-creator-box --exclude run.py --exclude src/support/draft_jianying/metadata --platform windows.x86_64 --platform linux.x86_64 --platform darwin.x86_64 -e 2025-04-05 23:59:59 -r -i src
+
+## Environments
+Python 3.11.11
+Pyarmor 9.1.2 (trial), 000000, non-profits
+Platform windows.x86_64
+Native windows.amd64
+Home C:\Users\xiesx\.pyarmor
+
+## Traceback
+Traceback (most recent call last):
+  File "D:\Projects\miniconda3\envs\creatorbox\Lib\site-packages\pyarmor\cli\__main__.py", line 793, in main
+    main_entry(sys.argv[1:])
+  File "D:\Projects\miniconda3\envs\creatorbox\Lib\site-packages\pyarmor\cli\__main__.py", line 786, in main_entry
+    return args.func(ctx, args)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\miniconda3\envs\creatorbox\Lib\site-packages\pyarmor\cli\__main__.py", line 248, in cmd_gen
+    builder.process(options)
+  File "D:\Projects\miniconda3\envs\creatorbox\Lib\site-packages\pyarmor\cli\generate.py", line 188, in process
+    self._obfuscate_scripts()
+  File "D:\Projects\miniconda3\envs\creatorbox\Lib\site-packages\pyarmor\cli\generate.py", line 144, in _obfuscate_scripts
+    code = Pytransform3.generate_obfuscated_script(self.ctx, r)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\miniconda3\envs\creatorbox\Lib\site-packages\pyarmor\cli\core\__init__.py", line 95, in generate_obfuscated_script
+    return m.generate_obfuscated_script(ctx, res)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<maker>", line 715, in generate_obfuscated_script
+  File "D:\Projects\miniconda3\envs\creatorbox\Lib\site-packages\pyarmor\cli\__init__.py", line 16, in process
+    return meth(self, res, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<maker>", line 512, in process
+  File "D:\Projects\miniconda3\envs\creatorbox\Lib\site-packages\pyarmor\cli\resource.py", line 136, in readlines
+    lines = f.readlines()
+            ^^^^^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x82 in position 7028: illegal multibyte sequence
+
+

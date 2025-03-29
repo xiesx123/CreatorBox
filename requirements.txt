@@ -1,23 +1,36 @@
+# base
+torch==2.6.0
+torchaudio==2.6.0
+numpy==1.26.4
+pynini==2.1.5
+transformers==4.50.0
+
 # transcribe
 faster_whisper==1.1.1
+
+# hub
+huggingface_hub==0.27.1
+dashscope==1.22.2
 
 # llm
 langchain==0.3.19
 langchain_community==0.3.18
 langchain_google_genai==2.0.11
-langchain-deepseek==0.1.2
-dashscope==1.22.2
 
 # tts
 edge_tts==7.0.0
-coqui-tts==0.26.0
-f5-tts==1.0.8
+pyworld==0.3.4
+WeTextProcessing==1.0.3
 
 # audio
 pydub==0.25.1
+funasr==1.2.6
 demucs==4.0.1
+pyworld==0.3.4
 librosa==0.10.2
+diffusers==0.32.2
 playsound==1.2.2
+deepspeed==0.16.5
 pyannote.audio==3.3.2
 
 # video
@@ -28,7 +41,6 @@ pymediainfo==6.1.0
 uiautomation==2.0.20
 
 # lang
-pypinyin==0.53.0
 langdetect==1.0.9
 language-tags==1.2.0
 

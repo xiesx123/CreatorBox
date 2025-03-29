@@ -5,8 +5,8 @@
   <meta charset="utf-8" />
   <title>{{ data.app.title }}</title>
   <meta name="renderer" content="webkit" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <!-- jquery -->
   <script src="static/js/jquery/jquery.min.js"></script>
   <script src="static/js/howler/howler.min.js"></script>
@@ -19,7 +19,6 @@
   <link href="static/js/layui/css/layui-nav.css" rel="stylesheet">
   <script src="static/js/layui/layui.js"></script>
   <!-- creator -->
-  <script src="static/js/creator/theam.js"></script>
   <script src="static/js/creator/app.js"></script>
   <style>
     /* 使得底部浮动 */
@@ -79,7 +78,7 @@
           <div class="layui-row layui-col-space15">
 
             <!-- 文件 -->
-            <div class="layui-col-md12">
+            <!-- <div class="layui-col-md12">
               <div class="layui-collapse">
                 <div class="layui-colla-item">
 
@@ -114,6 +113,31 @@
                 </div>
               </div>
 
+            </div> -->
+
+            <div class="layui-card layui-panel">
+              <div class="layui-card-header" id="video_play"
+                lay-tips="{content: '点击后可以播放已上传的视频', margin: '0 0 0 -10px'}">文件 <span class="layui-badge-dot"></span>
+              </div>
+              <div class="layui-card-body">
+
+                <div class="layui-form-item layui-col-space15" style="margin-bottom:0px">
+                  <div class="layui-col-md10">
+                    <div class="layui-input-wrap">
+                      <input id="url" type="text" name="url" lay-verify="path" placeholder="请输入视频本地路径、网络链接"
+                        autocomplete="off" class="layui-input" lay-affix="clear">
+                    </div>
+                  </div>
+
+                  <div class="layui-col-md2">
+                    <div class="layui-input-wrap">
+                      <button id="video_upload_drag" type="button"
+                        class="layui-btn layui-btn-primary layui-border-green layui-btn-fluid">上传</button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
             </div>
 
             <!-- 字幕 -->
@@ -259,11 +283,20 @@
                   </div>
 
                   <div class="layui-form-item" pane>
+                    <label class="layui-form-label">片段长度</label>
+                    <div class="layui-input-block">
+                      <input type="number" name="speaker_len" lay-verify="required|number" placeholder="长度值"
+                        autocomplete="off" class="layui-input" min="3" max="15" step="1" lay-affix="number">
+                    </div>
+                  </div>
+
+                  <!-- 
+                  <div class="layui-form-item" pane>
                     <label class="layui-form-label">性别检测</label>
                     <div class="layui-input-block">
                       <input type="checkbox" name="speaker_enable_gender" lay-skin="switch">
                     </div>
-                  </div>
+                  </div> -->
 
                 </div>
               </div>
@@ -313,11 +346,11 @@
                     <label class="layui-form-label">微调</label>
                     <div class="layui-input-inline" style="width: auto;">
                       <input type="number" name="llm_temperature" lay-verify="required" placeholder="随机性"
-                        autocomplete="off" class="layui-input" min="0.1" max="1" step="0.1" lay-affix="number">
+                        autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
                     </div>
                     <div class="layui-input-inline" style="width: auto;">
                       <input type="number" name="llm_top_p" lay-verify="required" placeholder="多样性" autocomplete="off"
-                        class="layui-input" min="0.1" max="1" step="0.1" lay-affix="number">
+                        class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
                     </div>
 
                   </div>
@@ -448,7 +481,7 @@
                     </div>
                     <div class="layui-input-inline">
                       <input type="number" lay-verify="required" name="silence_dynamic" placeholder="动态补偿"
-                        autocomplete="off" class="layui-input" min="0.1" max="1" step="0.1" lay-affix="number">
+                        autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
                     </div>
                     <div class="layui-form-mid layui-text-em">
                       <i class="layui-icon layui-icon-tips"
@@ -499,8 +532,8 @@
                   <div class="layui-form-item">
                     <label class="layui-form-label">文件标识</label>
                     <div class="layui-input-block">
-                      <input type="text" name="suffix" lay-verify="required" placeholder="请输入文件标识" autocomplete="off"
-                        class="layui-input" lay-affix="clear">
+                      <input id="suffix" type="text" name="suffix" lay-verify="required" placeholder="请输入文件标识"
+                        autocomplete="off" class="layui-input" lay-affix="clear">
                     </div>
                   </div>
 
@@ -704,6 +737,13 @@
       // 禁用操作
       $('input[name="draft_preview"]').attr('disabled', os == "linux");
 
+      // 隐藏显示
+      if (form_json.mode_type == 1) {
+        $('#assign_type_div').removeClass('layui-hide');
+      } else {
+        $('#assign_type_div').addClass('layui-hide');
+      }
+
       // 表单验证 
       form.verify({
         path: function (value, elem) {
@@ -712,7 +752,10 @@
           }
         },
         speaker_len: function (value, elem) {
-          // if ($('input[name="speaker_use_num"]').is(':checked')) {}
+          if ($('input[name="whisper_debug"]').is(':checked')) return;
+          if ($('input[name="speaker_debug"]').is(':checked')) return;
+          if ($('input[name="llm_debug"]').is(':checked')) return;
+          if ($('input[name="tts_debug"]').is(':checked')) return;
           speaker_num = $('input[name="speaker_num"]').val()
           if (table_json.length < speaker_num) {
             return "【配音人数】不能低于【目标数量】";
@@ -854,9 +897,9 @@
               "model": form_json.tts_model,
               "locale": form_json.llm_locale,
               "voice": form_json.tts_voice,
-              "volume": localStorage.getItem('step') || 1,
+              "volume": 1,
               "rate": form_json.tts_rate,
-              "pitch": "0",
+              "pitch": 0,
               "text": form_json.tts_text,
               "output": output
             }), function (response) {
@@ -1162,6 +1205,9 @@
           type: 'log',
           icon: 'layui-icon-log'
         }, {
+          type: 'code',
+          icon: 'layui-icon-fonts-code'
+        }, {
           type: 'player',
           icon: 'layui-icon-video'
         }],
@@ -1181,7 +1227,11 @@
           }
         },
         click: function (type) {
-          if (type == "log") {
+          if (type == "code") {
+            key = $("#url").val().split("\\").pop().split(".")[0];
+            suf = $("#suffix").val();
+            util.openWin({ url: `editor?remote=loader/local?url=webapp/temp/${key}/${key}_${suf}.json` });
+          } else if (type == "log") {
             util.openWin({ url: "log" });
           } else if (type == "player") {
             if (task_ids.length > 0) {
@@ -1195,6 +1245,7 @@
     });
 
   </script>
+  <script src="static/js/creator/theam.js"></script>
 
 </body>
 

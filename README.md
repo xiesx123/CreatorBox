@@ -7,7 +7,7 @@
   </a>
 </p> -->
 
-![Version](https://img.shields.io/badge/version-v1.0.5-blue)
+![Version](https://img.shields.io/badge/version-v1.0.6-blue)
 ![GitHub stars](https://img.shields.io/github/stars/xiesx123/CreatorBox)
 [![Google Colab](https://img.shields.io/badge/Google_Colab-Running-yellow?logo=googlecolab&)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
 
@@ -85,15 +85,15 @@
 - [x] 灵活配置调试，支持 **`字幕`**，**`说话人`**，**`翻译`**，**`配音`** 配置调节
 - [x] 语言合成克隆，
    - [x] **语音合成**，支持 **多种语音** 调速合成，可 **实时试听** 效果
-   - [x] **语音克隆**，支持 **`多角色`**、**`多语种`**、支持最多 **`内置`**  **`視頻`**  **`自定义`** 3种音色调节
+   - [x] **语音克隆**，支持 **`多角色`**、**`多语种`**、支持最多 **`内置`**  **`视频`**  **`自定义`** 3种音色调节
 - [x] 生成模式切换，
    - [x] 支持 [**配音模式**](https://github.com/xiesx123/CreatorBox/discussions/2) ，支持 `视频`、`音频` 、`自适应` 3种配音模式
    - [x] 支持 [**翻译模式**](https://github.com/xiesx123/CreatorBox/discussions/1) ，将视频从原声语言翻译为另一种语言
    - [ ] 支持 解说模式，个性化方式对视频进行配音
 - [x] 导出剪映草稿
    - [x] **轨道控制**，支持 **`画面`**、**`声音`** 、**`字幕`** 最高 **`6`** 个轨道等控制
-   - [x] **字幕生成**，支持 **`大小`**、**`位置`**、**`颜色`、**`描边`** 字体设置
-   - [x] **音量调节**，支持 **`原声`**、**`说话声`、**`背景音乐`** 音量调节
+   - [x] **字幕生成**，支持 **`大小`**、**`位置`**、**`颜色`**、**`描边`** 字体设置
+   - [x] **音量调节**，支持 **`原声`**、**`说话声`**、**`背景音乐`** 音量调节
    - [ ] **背景音乐**，随机或者指定音乐文件
    - [ ] **转场控制**，配合长视频使用
 - [ ] 长视频支持，分段处理，分段控制，以满足不同机器的处理性能
@@ -102,30 +102,28 @@
 
 ## 视频演示 📺
 
-### 配音模式
-
-<table>
-<thead>
-<tr>
-<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️</g-emoji> 单人-中文视频</th>
-<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️</g-emoji> 单人-英文视频</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><video src="https://github.com/user-attachments/assets/27e466a9-1817-4276-ad04-42b8b9ffafe3"></video></td>
-<td align="center"><video src="https://github.com/user-attachments/assets/35f05c2d-7b55-41af-8c1c-31cf4d30216a"></video></td>
-</tr>
-</tbody>
-</table>
-
 ### 翻译模式
 
 <table>
 <thead>
 <tr>
-<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 多人-英文视频</th>
-<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 多人-中英混音_双字幕</th>
+<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 影视-_中文原声</th>
+<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 影视-_英文原声</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><video src="https://github.com/user-attachments/assets/5e6371f4-4b46-4e31-b5a3-01c1df844be3"></video></td>
+<td align="center"><video src="https://github.com/user-attachments/assets/99959737-b1a5-4758-b499-683c71bb3d61"></video></td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 访谈_英文原声</th>
+<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 访谈_中英混音_双字幕</th>
 </tr>
 </thead>
 <tbody>
@@ -192,7 +190,7 @@
   | /  \/_ __ ___  __ _| |_ ___  _ __| |_/ / _____  __
   | |   | '__/ _ \/ _` | __/ _ \| '__| ___ \/ _ \ \/ /
   | \__/\ | |  __/ (_| | || (_) | |  | |_/ / (_) >  < 
-   \____/_|  \___|\__,_|\__\___/|_|  \____/ \___/_/\_\   v1.0.5
+   \____/_|  \___|\__,_|\__\___/|_|  \____/ \___/_/\_\   v1.0.6
 
   2025-03-27 11:34:52.458 | INFO 1496 task.py:18 - Startup Scheduler 1 Job Completed.
   2025-03-27 11:34:52.458 | INFO 1496 main.py:84 - Started CreatorBox Run Debug Success (6.16 seconds)
