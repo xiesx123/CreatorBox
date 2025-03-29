@@ -177,6 +177,12 @@
     ```  
     Solution: [Download model through domestic mirrors](https://hf-mirror.com)  
 
+- ❓What is this page?  
+
+  <image src="docs/editor.jpg" width="450" height="200" ></image>  
+
+  This is a data file generated during runtime, which can be **viewed** and **edited** for fine-tuning translation, voice, tone, speed, and more. If you are unsure about its usage, please avoid modifying it and directly adjust parameters on the page to run the application.
+
 ## Feedback 📢  
 - You can submit [discussions](https://github.com/xiesx123/CreatorBox/discussions) or [send an email](mailto:xiesx123@gmail.com?subject=CreatoxBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?)  
 

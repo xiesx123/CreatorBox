@@ -210,7 +210,13 @@
   ```
   解决方法：[通过国内镜像下载模型](https://hf-mirror.com)
 
+- ❓这个页面是什么？
 
+  <image src="docs/editor.jpg" width="450" height="200" ></image>
+
+  运行过程中的数据文件，可 **视图**，**编辑**，用于翻译，语音，音色，速度等等微调...；如果你不懂，请不要动它，直接页面调参数运行即可
+
+  
 ## 反馈建议 📢
 
 - 可以提交 [discussions](https://github.com/xiesx123/CreatorBox/discussions)
