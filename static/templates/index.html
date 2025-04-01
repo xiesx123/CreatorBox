@@ -285,8 +285,8 @@
                   <div class="layui-form-item" pane>
                     <label class="layui-form-label">片段长度</label>
                     <div class="layui-input-block">
-                      <input type="number" name="speaker_len" lay-verify="required|number" placeholder="长度值"
-                        autocomplete="off" class="layui-input" min="3" max="15" step="1" lay-affix="number">
+                      <input id="speaker_len" type="number" name="speaker_len" lay-verify="required|number" placeholder="长度值"
+                        autocomplete="off" class="layui-input" min="3" max="15" step="0.1" lay-affix="number">
                     </div>
                   </div>
 
@@ -316,7 +316,7 @@
 
                     <div class="layui-form-mid layui-text-em">
                       <i class="layui-icon layui-icon-tips"
-                        lay-tips="{content: '注意：开启调试会中断后续步骤', margin: '0 0 0 -10px'}"></i>
+                        lay-tips="{content: '提示：<br>开启调试会使用人工校对结果<br>', margin: '0 0 0 -10px'}"></i>
                     </div>
                   </div>
 
@@ -901,7 +901,9 @@
               "rate": form_json.tts_rate,
               "pitch": 0,
               "text": form_json.tts_text,
-              "output": output
+              "output": output, 
+              "file": $("#url").val() , 
+              "suffix": $("#suffix").val()
             }), function (response) {
               toast.info(output, "语音试听")
               console.debug(response.data)
@@ -979,7 +981,7 @@
 
       // 配音-公共参数
       var voice_search_params = (model, locale, gender, init = false) => {
-        return JSON.stringify({ "model": model, "locale": locale, "gender": gender, "isinit": init, "file": $("#url").val() });
+        return JSON.stringify({ "model": model, "locale": locale, "gender": gender, "isinit": init, "file": $("#url").val() , "suffix": $("#suffix").val(), "duration": $("#speaker_len").val()});
       };
 
       // 配音-语音类型

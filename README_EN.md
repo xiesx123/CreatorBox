@@ -18,20 +18,26 @@
   ![](docs/main.jpg)  
   
   <h4>Debugging and Customization</h4>  
-  <table>  
-    <thead>  
-      <tr>  
-        <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔧</g-emoji> Voice Tuning</th>
-        <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">✂️</g-emoji> Pro Editing</th>
-      </tr>  
-    </thead>  
-    <tbody>  
-      <tr>  
-        <td align="center"><image src="docs/debug.jpg"></image></td>
-        <td align="center"><image src="docs/jianying.jpg"></image></td> 
-      </tr>  
-    </tbody>  
-  </table>  
+  <table>
+      <thead>
+          <tr>
+              <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔧</g-emoji> 配音调试</th>
+              <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">✂️</g-emoji> 专业剪辑</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td align="center">
+                  <a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=57s">
+                      <img src="docs/refer.gif" alt="Watch the video" width="800">
+                  </a>
+              </td>
+              <td align="center">
+                  <image src="docs/jianying.jpg" width="800"></image>
+              </td>
+          </tr>
+      </tbody>
+  </table>
 </div>  
 
 ## Use Cases 🎨  
