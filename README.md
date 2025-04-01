@@ -108,13 +108,13 @@
 <thead>
 <tr>
 <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 影视-_中文原声</th>
-<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 影视-_英文原声</th>
+<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 影视-_中英混音_双字幕</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="center"><video src="https://github.com/user-attachments/assets/5e6371f4-4b46-4e31-b5a3-01c1df844be3"></video></td>
-<td align="center"><video src="https://github.com/user-attachments/assets/99959737-b1a5-4758-b499-683c71bb3d61"></video></td>
+<td align="center"><video src="https://github.com/user-attachments/assets/91608e30-6e73-4f7d-844b-f7504ee23da6"></video></td>
 </tr>
 </tbody>
 </table>

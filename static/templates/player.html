@@ -62,99 +62,100 @@
                 <div id="waveform"></div>
             </div>
         </div>
+    </div>
 
-        <script type="module">
+    <script type="module">
 
-            import WaveSurfer from '/static/js/wavesurfer/wavesurfer.esm.js'
+        import WaveSurfer from '/static/js/wavesurfer/wavesurfer.esm.js'
 
-            let player, wavesurfer;
+        let player, wavesurfer;
 
-            layui.use(['layer', 'util', 'tool'], function () {
+        layui.use(['layer', 'util', 'tool'], function () {
 
-                var layer = layui.layer;
-                var util = layui.util;
-                var tool = layui.tool;
-                var $ = layui.$;
+            var layer = layui.layer;
+            var util = layui.util;
+            var tool = layui.tool;
+            var $ = layui.$;
 
-                var show = layui.url().search.hasOwnProperty('show_waveform');
+            var show = layui.url().search.hasOwnProperty('show_waveform');
 
-                var autoplay = layui.url().search.autoplay;
+            var autoplay = layui.url().search.autoplay;
 
-                // 预览事件
-                $('#play').on('click', function () {
-                    const input_url = $("#url").val();
-                    if (input_url.length != 32) {
-                        return video_play(input_url, 1)
-                    }
-                    tool.get("/app/result/" + input_url, {}, function (response) {
-                        console.log(JSON.stringify(response, null, 2))
-                        video_play(input_url, show ? 0 : 1)
-                        if (show) {
-                            audio_play(response.data.result.voice);
-                        }
-                    }, true)
-                });
-
-                // 资源地址
-                var build_url = function (url) {
-                    if (!url.startsWith('http')) {
-                        url = `${window.location.protocol}//${window.location.host}/loader/local?url=${encodeURIComponent(url)}`;
-                    }
-                    return url
-                };
-
-                // 视频播放
-                var video_play = function (url, volume) {
-                    if (!url) {
-                        layer.msg('请输入任务ID/视频地址');
-                        return;
-                    }
-                    if (player) {
-                        player.destroy();
-                    }
-                    player = new Player({
-                        "id": "player-container",
-                        "url": build_url(url),
-                        "playsinline": true,
-                        "autoplay": true,
-                        // "download": true,
-                        "pip": true,
-                        "width": "100%",
-                        "volume": volume
-                    });
-                    player.on('play', function () {
-                        if (wavesurfer) { wavesurfer.play() }
-                    });
-                    player.on('pause', function () {
-                        if (wavesurfer) { wavesurfer.pause() }
-                    });
-                    player.on('ended', function () {
-                        if (wavesurfer) { wavesurfer.stop() }
-                    });
+            // 预览事件
+            $('#play').on('click', function () {
+                const input_url = $("#url").val();
+                if (input_url.length != 32) {
+                    return video_play(input_url, 1)
                 }
-
-                // 音频播放
-                var audio_play = function (url) {
-                    if (wavesurfer) {
-                        wavesurfer.destroy();
+                tool.get("/app/result/" + input_url, {}, function (response) {
+                    console.log(JSON.stringify(response, null, 2))
+                    video_play(input_url, show ? 0 : 1)
+                    if (show) {
+                        audio_play(response.data.result.voice);
                     }
-                    wavesurfer = WaveSurfer.create({
-                        container: '#waveform',
-                        url: build_url(url),
-                        progressColor: '#F11A2B',
-                        // height: 100
-                    })
-                    if (wavesurfer) { wavesurfer.play() }
-                };
-
-                $(document).ready(function () {
-                    if (autoplay) {
-                        $("#play").click();
-                    }
-                });
+                }, true)
             });
 
-        </script>
+            // 资源地址
+            var build_url = function (url) {
+                if (!url.startsWith('http')) {
+                    url = `${window.location.protocol}//${window.location.host}/loader/local?url=${encodeURIComponent(url)}`;
+                }
+                return url
+            };
+
+            // 视频播放
+            var video_play = function (url, volume) {
+                if (!url) {
+                    layer.msg('请输入任务ID/视频地址');
+                    return;
+                }
+                if (player) {
+                    player.destroy();
+                }
+                player = new Player({
+                    "id": "player-container",
+                    "url": build_url(url),
+                    "playsinline": true,
+                    "autoplay": true,
+                    // "download": true,
+                    "pip": true,
+                    "width": "100%",
+                    "volume": volume
+                });
+                player.on('play', function () {
+                    if (wavesurfer) { wavesurfer.play() }
+                });
+                player.on('pause', function () {
+                    if (wavesurfer) { wavesurfer.pause() }
+                });
+                player.on('ended', function () {
+                    if (wavesurfer) { wavesurfer.stop() }
+                });
+            }
+
+            // 音频播放
+            var audio_play = function (url) {
+                if (wavesurfer) {
+                    wavesurfer.destroy();
+                }
+                wavesurfer = WaveSurfer.create({
+                    container: '#waveform',
+                    url: build_url(url),
+                    progressColor: '#F11A2B',
+                    // height: 100
+                })
+                if (wavesurfer) { wavesurfer.play() }
+            };
+
+            $(document).ready(function () {
+                if (autoplay) {
+                    $("#play").click();
+                }
+            });
+        });
+
+    </script>
 </body>
 
 </html>

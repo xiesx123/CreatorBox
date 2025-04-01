@@ -701,10 +701,10 @@
 
   <script>
 
-    layui.use(['form', 'treeTable', 'layer', 'element', 'upload', 'util', 'colorpicker', 'notice', 'tool'], function () {
+    layui.use(['form', 'table', 'layer', 'element', 'upload', 'util', 'colorpicker', 'notice', 'tool'], function () {
 
       var form = layui.form;
-      var treeTable = layui.treeTable;
+      var table = layui.table;
       var layer = layui.layer;
       var element = layui.element;
       var upload = layui.upload;
@@ -1024,7 +1024,7 @@
       tool.post("/tts/search", voice_search_params(form_json.tts_model, form_json.llm_locale, form_json.tts_gender), voice_search_callback, true)
 
       // 配音-说话人表格
-      var inst = treeTable.render({
+      var inst = table.render({
         elem: '#tts_voices_table',
         data: table_json,
         page: false,
@@ -1042,7 +1042,7 @@
       });
 
       // 配音-说话人表格工具事件
-      treeTable.on('tool(' + inst.config.id + ')', function (obj) {
+      table.on('tool(' + inst.config.id + ')', function (obj) {
         var data = obj.data;
         var idx = table_json.findIndex(item => item.voice === data.voice);
         if (obj.event === "test") {

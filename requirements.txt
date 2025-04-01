@@ -9,7 +9,7 @@ transformers==4.50.0
 faster_whisper==1.1.1
 
 # hub
-huggingface_hub==0.27.1
+huggingface_hub==0.29.3
 dashscope==1.22.2
 
 # llm
@@ -51,11 +51,14 @@ asyncclick==8.1.7.2
 # web
 jieba==0.42.1
 uvicorn==0.20.0
-fastapi==0.103.2
+fastapi==0.115.12
 websockets==14.2
 apscheduler==3.11.0
 requests-cache==1.2.1
 python-multipart==0.0.20
+
+# db
+tinydb==4.8.2
 
 # other
 yt-dlp==2025.3.26
