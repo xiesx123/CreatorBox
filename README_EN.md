@@ -99,6 +99,21 @@
 <table>
 <thead>
 <tr>
+<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Game - Original Chinese Audio</th>
+<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Game - Mixed English and Chinese Audio with Dual Subtitles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><video src="https://github.com/user-attachments/assets/3a83aafe-4c32-4d71-8ac7-960e2572048d"></video></td>
+<td align="center"><video src="https://github.com/user-attachments/assets/9fdb272a-9cb8-4a6c-95df-8e6159bd874c"></video></td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
 <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Film - Original Chinese Audio</th>
 <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Film - Mixed English and Chinese Audio with Dual Subtitles （<a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">BiliBili</a>）</th>
 </tr>

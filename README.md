@@ -115,6 +115,21 @@
 <table>
 <thead>
 <tr>
+<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 游戏-_中文原声</th>
+<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 游戏-_中英混音_双字幕</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><video src="https://github.com/user-attachments/assets/3a83aafe-4c32-4d71-8ac7-960e2572048d"></video></td>
+<td align="center"><video src="https://github.com/user-attachments/assets/9fdb272a-9cb8-4a6c-95df-8e6159bd874c"></video></td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
 <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 影视-_中文原声</th>
 <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 影视-_中英混音_双字幕 （<a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">B站</a>）</th>
 </tr>

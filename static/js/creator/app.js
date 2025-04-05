@@ -65,6 +65,7 @@ $(window).load(function () {
 			}
 		}, 500);
 	});
+	floatingDiv.classList.add('floating-div');
 
 	// 百度统计
 	// var _hmt = _hmt || [];

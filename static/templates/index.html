@@ -151,7 +151,7 @@
             </div>
 
             <!-- 字幕 -->
-            <div class="layui-col-md4">
+            <div class="layui-col-md6">
               <div class="layui-collapse">
                 <div class="layui-colla-item">
 
@@ -320,7 +320,7 @@
             </div> -->
 
             <!-- 大模型 -->
-            <div class="layui-col-md4">
+            <div class="layui-col-md6">
               <div class="layui-collapse">
                 <div class="layui-colla-item">
 
@@ -418,9 +418,190 @@
               </div>
             </div>
 
+            <!-- 配音 -->
+            <div class="layui-col-md12">
+              <div class="layui-collapse">
+                <div class="layui-colla-item">
+                  <div class="layui-card layui-panel">
+                    <div class="layui-colla-title">配音
+                      <!-- <i class="layui-icon layui-icon-tips" lay-tips="要支持的噢"></i> -->
+                    </div>
+                    <div class="layui-colla-content layui-show">
+
+                      <div class="layui-form-item" pane>
+                        <label class="layui-form-label">调试</label>
+                        <div class="layui-input-inline" style="width: auto;">
+                          <input type="checkbox" name="tts_debug" lay-skin="switch" lay-filter="switch_debug_filter">
+                        </div>
+
+                        <div class="layui-form-mid layui-text-em">
+                          <i class="layui-icon layui-icon-tips"
+                            lay-tips="{content: '注意：开启调试会中断后续步骤', margin: '0 0 0 -10px'}"></i>
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label" id="voice_speaker"
+                          lay-tips="{content: '点击可生成该模型的说话人配置', margin: '0 0 0 -10px'}">模型 <span
+                            class="layui-badge-dot"></span></label>
+                        <div class="layui-input-block">
+                          <select id="tts_model" name="tts_model" lay-verify="required" lay-filter="tts_model_filter">
+                            {% for item in data.tts.models %}
+                            {% if item.enable %}
+                            <option value="{{ item.model}}">
+                              {{ item.desc }}
+                            </option>
+                            {% endif %}>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label"
+                          lay-tips="{content: '示例:                    <br>1、地区方言<br>1.1、用四川说这句话<br>1.2、用四川话说<br>1.3、四川话..                    <br>2、说话风格<br>2.1、用惊讶的语气说<br>2.2、我感到很惊讶<br>2.3、耐心地说话..                    <br>2、角色扮演<br>2.1、模仿机器人风格<br>2.2、我想听听你模仿小猪佩奇的语气<br>2.3、一个天真烂漫的小孩，总是充满幻想和无尽的好奇心..                    ', margin: '0 0 0 -10px'}">指示
+                          <span class="layui-badge-dot"></span></label>
+                        <div class="layui-input-block">
+                          <input id="tts_instruct" type="text" name="tts_instruct"
+                            placeholder="请输入自定义指示,(地区方言、说话风格、角色扮演)" autocomplete="off" class="layui-input"
+                            lay-affix="clear">
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item" pane>
+                        <label class="layui-form-label">性别</label>
+                        <div class="layui-input-block">
+                          <input type="radio" name="tts_gender" value="1" lay-filter="tts_gender_filter" title="男">
+                          <input type="radio" name="tts_gender" value="2" lay-filter="tts_gender_filter" title="女">
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">语音</label>
+                        <div class="layui-input-block">
+                          <select id="tts_voice" name="tts_voice" lay-verify="required" lay-filter="tts_voice_filter"
+                            lay-search>
+                            <option value="">选择或搜索</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">语速</label>
+                        <div class="layui-input-block">
+                          <div class="layui-input-inline">
+                            <input id="tts_rate" type="number" lay-verify="required" name="tts_rate"
+                              placeholder="目标值 [0,2]" autocomplete="off" class="layui-input" min="0" max="2" step="0.1"
+                              lay-affix="number">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label" id="tts_play">试听 <i
+                            class="layui-icon layui-icon-headset"></i></label>
+                        <div class="layui-input-block">
+                          <textarea id="tts_text" name="tts_text" placeholder="请输入试听文本" lay-verify="required"
+                            lay-reqtext="请输入试听文本" lay-affix="clear" class="layui-textarea tts_text"></textarea>
+                        </div>
+                      </div>
+
+                      <table id="tts_voices_table" class="layui-table">
+                      </table>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 导出 -->
+            <div class="layui-col-md12">
+              <div class="layui-collapse">
+                <div class="layui-colla-item">
+                  <div class="layui-card layui-panel">
+                    <div class="layui-colla-title">导出
+                      <!-- <i class="layui-icon layui-icon-tips" lay-tips="要支持的噢"></i> -->
+                    </div>
+                    <div class="layui-colla-content layui-show">
+
+                      <div class="layui-form-item layui-hide">
+                        <label class="layui-form-label">静音检测</label>
+                        <div class="layui-input-inline">
+                          <input type="number" lay-verify="required" name="silence_threshold" placeholder="检测阈值"
+                            autocomplete="off" class="layui-input" min="-100" max="0" step="10" lay-affix="number">
+                        </div>
+                        <div class="layui-input-inline">
+                          <input type="number" lay-verify="required" name="silence_min" placeholder="静音长度"
+                            autocomplete="off" class="layui-input" min="1" max="1000" step="10" lay-affix="number">
+                        </div>
+                        <div class="layui-input-inline">
+                          <input type="number" lay-verify="required" name="silence_dynamic" placeholder="动态补偿"
+                            autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
+                        </div>
+                        <div class="layui-form-mid layui-text-em">
+                          <i class="layui-icon layui-icon-tips"
+                            lay-tips="{content: '提示：<br>检测阈值：低于某个阈值则认为是静音<br>静音长度：最小长度<br>动态补偿：静音长度的补偿值', margin: '0 0 0 -10px'}"></i>
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item" pane>
+                        <label class="layui-form-label">处理模式</label>
+                        <div class="layui-input-block">
+                          {% for item in data.audio.mode_types %}
+                          <input type="radio" name="mode_type" value="{{ item.val }}" lay-filter="mode_type_filter"
+                            title="{{ item.desc }}" {% if not item.enable %}disabled{% endif %}>
+                          {% endfor %}
+                        </div>
+                      </div>
+
+                      <div id="assign_type_div" class="layui-form-item" pane>
+                        <label class="layui-form-label">对齐方式</label>
+                        <div class="layui-input-block">
+                          {% for item in data.audio.assign_types %}
+                          <input type="radio" name="assign_type" value="{{ item.val }}" title="{{ item.desc }}">
+                          {% endfor %}
+                        </div>
+                      </div>
+
+                      <!-- <div class="layui-form-item" pane>
+                    <label class="layui-form-label">导出方式</label>
+                    <div class="layui-input-block">
+                      {% for item in data.export.export_types %}
+                      <input type="radio" name="export_type" value="{{ item.val }}" title="{{ item.desc }}" {% if not
+                        item.enable %}disabled{% endif %}>
+                      {% endfor %}
+                    </div>
+                  </div> -->
+
+                      <div class="layui-form-item" pane>
+                        <label class="layui-form-label">重新构建</label>
+                        <div class="layui-input-inline" style="width: auto;">
+                          <input type="checkbox" name="rebuild" lay-skin="switch" lay-filter="switch_rebuild_filter">
+                        </div>
+                        <div class="layui-form-mid layui-text-em">
+                          <i class="layui-icon layui-icon-tips"
+                            lay-tips="{content: '注意：开启后，会清理所有缓存重新构建', margin: '0 0 0 -10px'}"></i>
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">文件标识</label>
+                        <div class="layui-input-block">
+                          <input id="suffix" type="text" name="suffix" lay-verify="required" placeholder="请输入文件标识"
+                            autocomplete="off" class="layui-input" lay-affix="clear">
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
 
             <!-- 草稿 -->
-            <div class="layui-col-md4">
+            <div class="layui-col-md12">
               <div class="layui-collapse">
                 <div class="layui-colla-item">
                   <div class="layui-card layui-panel">
@@ -536,177 +717,6 @@
 
                       </div>
 
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <!-- 配音 -->
-            <div class="layui-col-md12">
-              <div class="layui-card layui-panel">
-                <div class="layui-card-header">配音
-                  <!-- <i class="layui-icon layui-icon-tips" lay-tips="要支持的噢"></i> -->
-                </div>
-                <div class="layui-card-body">
-
-                  <div class="layui-form-item" pane>
-                    <label class="layui-form-label">调试</label>
-                    <div class="layui-input-inline" style="width: auto;">
-                      <input type="checkbox" name="tts_debug" lay-skin="switch" lay-filter="switch_debug_filter">
-                    </div>
-
-                    <div class="layui-form-mid layui-text-em">
-                      <i class="layui-icon layui-icon-tips"
-                        lay-tips="{content: '注意：开启调试会中断后续步骤', margin: '0 0 0 -10px'}"></i>
-                    </div>
-                  </div>
-
-                  <div class="layui-form-item">
-                    <label class="layui-form-label" id="voice_speaker"
-                      lay-tips="{content: '点击可生成该模型的说话人配置', margin: '0 0 0 -10px'}">模型 <span
-                        class="layui-badge-dot"></span></label>
-                    <div class="layui-input-block">
-                      <select id="tts_model" name="tts_model" lay-verify="required" lay-filter="tts_model_filter">
-                        {% for item in data.tts.models %}
-                        {% if item.enable %}
-                        <option value="{{ item.model}}">
-                          {{ item.desc }}
-                        </option>
-                        {% endif %}>
-                        {% endfor %}
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="layui-form-item">
-                    <label class="layui-form-label"
-                      lay-tips="{content: '示例:                    <br>1、地区方言<br>1.1、用四川说这句话<br>1.2、用四川话说<br>1.3、四川话..                    <br>2、说话风格<br>2.1、用惊讶的语气说<br>2.2、我感到很惊讶<br>2.3、耐心地说话..                    <br>2、角色扮演<br>2.1、模仿机器人风格<br>2.2、我想听听你模仿小猪佩奇的语气<br>2.3、一个天真烂漫的小孩，总是充满幻想和无尽的好奇心..                    ', margin: '0 0 0 -10px'}">指示
-                      <span class="layui-badge-dot"></span></label>
-                    <div class="layui-input-block">
-                      <input id="tts_instruct" type="text" name="tts_instruct" placeholder="请输入自定义指示,(地区方言、说话风格、角色扮演)"
-                        autocomplete="off" class="layui-input" lay-affix="clear">
-                    </div>
-                  </div>
-
-                  <div class="layui-form-item" pane>
-                    <label class="layui-form-label">性别</label>
-                    <div class="layui-input-block">
-                      <input type="radio" name="tts_gender" value="1" lay-filter="tts_gender_filter" title="男">
-                      <input type="radio" name="tts_gender" value="2" lay-filter="tts_gender_filter" title="女">
-                    </div>
-                  </div>
-
-                  <div class="layui-form-item">
-                    <label class="layui-form-label">语音</label>
-                    <div class="layui-input-block">
-                      <select id="tts_voice" name="tts_voice" lay-verify="required" lay-filter="tts_voice_filter"
-                        lay-search>
-                        <option value="">选择或搜索</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="layui-form-item">
-                    <label class="layui-form-label">语速</label>
-                    <div class="layui-input-block">
-                      <div class="layui-input-inline">
-                        <input id="tts_rate" type="number" lay-verify="required" name="tts_rate" placeholder="目标值 [0,2]"
-                          autocomplete="off" class="layui-input" min="0" max="2" step="0.1" lay-affix="number">
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label" id="tts_play">试听 <i
-                        class="layui-icon layui-icon-headset"></i></label>
-                    <div class="layui-input-block">
-                      <textarea id="tts_text" name="tts_text" placeholder="请输入试听文本" lay-verify="required"
-                        lay-reqtext="请输入试听文本" lay-affix="clear" class="layui-textarea tts_text"></textarea>
-                    </div>
-                  </div>
-
-                  <table id="tts_voices_table" class="layui-table">
-                  </table>
-
-                </div>
-              </div>
-            </div>
-
-            <!-- 导出 -->
-            <div class="layui-col-md12">
-              <div class="layui-card layui-panel">
-                <div class="layui-card-header">导出
-                  <!-- <i class="layui-icon layui-icon-tips" lay-tips="要支持的噢"></i> -->
-                </div>
-                <div class="layui-card-body">
-
-                  <div class="layui-form-item layui-hide">
-                    <label class="layui-form-label">静音检测</label>
-                    <div class="layui-input-inline">
-                      <input type="number" lay-verify="required" name="silence_threshold" placeholder="检测阈值"
-                        autocomplete="off" class="layui-input" min="-100" max="0" step="10" lay-affix="number">
-                    </div>
-                    <div class="layui-input-inline">
-                      <input type="number" lay-verify="required" name="silence_min" placeholder="静音长度"
-                        autocomplete="off" class="layui-input" min="1" max="1000" step="10" lay-affix="number">
-                    </div>
-                    <div class="layui-input-inline">
-                      <input type="number" lay-verify="required" name="silence_dynamic" placeholder="动态补偿"
-                        autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
-                    </div>
-                    <div class="layui-form-mid layui-text-em">
-                      <i class="layui-icon layui-icon-tips"
-                        lay-tips="{content: '提示：<br>检测阈值：低于某个阈值则认为是静音<br>静音长度：最小长度<br>动态补偿：静音长度的补偿值', margin: '0 0 0 -10px'}"></i>
-                    </div>
-                  </div>
-
-                  <div class="layui-form-item" pane>
-                    <label class="layui-form-label">处理模式</label>
-                    <div class="layui-input-block">
-                      {% for item in data.audio.mode_types %}
-                      <input type="radio" name="mode_type" value="{{ item.val }}" lay-filter="mode_type_filter"
-                        title="{{ item.desc }}" {% if not item.enable %}disabled{% endif %}>
-                      {% endfor %}
-                    </div>
-                  </div>
-
-                  <div id="assign_type_div" class="layui-form-item" pane>
-                    <label class="layui-form-label">对齐方式</label>
-                    <div class="layui-input-block">
-                      {% for item in data.audio.assign_types %}
-                      <input type="radio" name="assign_type" value="{{ item.val }}" title="{{ item.desc }}">
-                      {% endfor %}
-                    </div>
-                  </div>
-
-                  <!-- <div class="layui-form-item" pane>
-                    <label class="layui-form-label">导出方式</label>
-                    <div class="layui-input-block">
-                      {% for item in data.export.export_types %}
-                      <input type="radio" name="export_type" value="{{ item.val }}" title="{{ item.desc }}" {% if not
-                        item.enable %}disabled{% endif %}>
-                      {% endfor %}
-                    </div>
-                  </div> -->
-
-                  <div class="layui-form-item" pane>
-                    <label class="layui-form-label">重新构建</label>
-                    <div class="layui-input-inline" style="width: auto;">
-                      <input type="checkbox" name="rebuild" lay-skin="switch" lay-filter="switch_rebuild_filter">
-                    </div>
-                    <div class="layui-form-mid layui-text-em">
-                      <i class="layui-icon layui-icon-tips"
-                        lay-tips="{content: '注意：开启后，会清理所有缓存重新构建', margin: '0 0 0 -10px'}"></i>
-                    </div>
-                  </div>
-
-                  <div class="layui-form-item">
-                    <label class="layui-form-label">文件标识</label>
-                    <div class="layui-input-block">
-                      <input id="suffix" type="text" name="suffix" lay-verify="required" placeholder="请输入文件标识"
-                        autocomplete="off" class="layui-input" lay-affix="clear">
                     </div>
                   </div>
 
@@ -953,7 +963,7 @@
             if (item != null) {
               return voice_play(item.url);
             }
-            output = form_json.tts_model.replace("/","_") + "_" +form_json.llm_locale + "_"  + form_json.tts_voice + "_" + form_json.tts_rate + "_" + (form_json.tts_text.length + form_json.tts_instruct.length)
+            output = form_json.tts_model.replace("/", "_") + "_" + form_json.llm_locale + "_" + form_json.tts_voice + "_" + form_json.tts_rate + "_" + (form_json.tts_text.length + form_json.tts_instruct.length)
             tool.post("/tts/generate", JSON.stringify({
               "model": form_json.tts_model,
               "locale": form_json.llm_locale,
@@ -1094,7 +1104,7 @@
         data: table_json,
         page: false,
         cols: [[
-          { title: '说话人',  width: "75", align: "center", templet: d => '<div title="' + d.text + '">' + d.LAY_INDEX + '</div>' },
+          { title: '说话人', width: "75", align: "center", templet: d => '<div title="' + d.text + '">' + d.LAY_INDEX + '</div>' },
           { title: '模型', width: "70", align: "center", field: 'provider', templet: d => '<div title="' + d.model + '">' + d.provider + '</div>' },
           { title: '类型', width: "70", align: "center", field: 'type', templet: d => '<div title="' + d.text + '">' + d.type + '</div>' },
           { title: '地区', width: "70", align: "center", field: 'locale', templet: d => '<div title="' + d.text + '">' + d.locale + '</div>' },
