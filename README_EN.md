@@ -17,23 +17,26 @@
 
   ![](docs/main.jpg)  
   
-  <h4>Debugging and Customization</h4>  
+  <h4><a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">Debugging and Customization</a></h4>  
+
   <table>
       <thead>
           <tr>
-              <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔧</g-emoji> 配音调试</th>
-              <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">✂️</g-emoji> 专业剪辑</th>
+              <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔧</g-emoji> Voice Tuning</th>
+              <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">✂️</g-emoji> Pro Editing</th>
           </tr>
       </thead>
       <tbody>
           <tr>
               <td align="center">
-                  <a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=57s">
-                      <img src="docs/refer.gif" alt="Watch the video" width="800">
+                  <a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">
+                      <img src="docs/debug.jpg" alt="Watch the video">
                   </a>
               </td>
               <td align="center">
-                  <image src="docs/jianying.jpg" width="800"></image>
+                  <a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">
+                    <img src="docs/jianying.jpg" alt="Watch the video">
+                  </a>
               </td>
           </tr>
       </tbody>
@@ -97,7 +100,7 @@
 <thead>
 <tr>
 <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Film - Original Chinese Audio</th>
-<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Film - Mixed English and Chinese Audio with Dual Subtitles</th>
+<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Film - Mixed English and Chinese Audio with Dual Subtitles （<a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">BiliBili</a>）</th>
 </tr>
 </thead>
 <tbody>

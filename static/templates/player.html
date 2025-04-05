@@ -99,7 +99,7 @@
             // 资源地址
             var build_url = function (url) {
                 if (!url.startsWith('http')) {
-                    url = `${window.location.protocol}//${window.location.host}/loader/local?url=${encodeURIComponent(url)}`;
+                    url = `${window.location.protocol}//${window.location.host}/file/local?url=${encodeURIComponent(url)}`;
                 }
                 return url
             };

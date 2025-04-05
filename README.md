@@ -19,7 +19,7 @@
 
 ![](docs/main.jpg)
 
-<h4>调试定制</h4>
+<h4><a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">调试定制</a></h4>
 
   <table>
       <thead>
@@ -32,11 +32,13 @@
           <tr>
               <td align="center">
                   <a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">
-                      <img src="docs/refer.gif" alt="点击观看视频" width="800">
+                      <img src="docs/debug.jpg" alt="点击观看视频">
                   </a>
               </td>
               <td align="center">
-                  <image src="docs/jianying.jpg" width="800"></image>
+                  <a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">
+                    <img src="docs/jianying.jpg" alt="点击观看视频">
+                  </a>
               </td>
           </tr>
       </tbody>
@@ -114,7 +116,7 @@
 <thead>
 <tr>
 <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 影视-_中文原声</th>
-<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 影视-_中英混音_双字幕</th>
+<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 影视-_中英混音_双字幕 （<a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">B站</a>）</th>
 </tr>
 </thead>
 <tbody>

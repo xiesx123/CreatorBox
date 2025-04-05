@@ -10,27 +10,22 @@ faster_whisper==1.1.1
 
 # hub
 huggingface_hub==0.29.3
-dashscope==1.22.2
+modelscope==1.15.0
 
 # llm
 langchain==0.3.19
 langchain_community==0.3.18
 langchain_google_genai==2.0.11
+dashscope==1.23.0
 
 # tts
 edge_tts==7.0.0
-pyworld==0.3.4
-WeTextProcessing==1.0.3
 
 # audio
 pydub==0.25.1
-funasr==1.2.6
 demucs==4.0.1
-pyworld==0.3.4
 librosa==0.10.2
-diffusers==0.32.2
 playsound==1.2.2
-deepspeed==0.16.5
 pyannote.audio==3.3.2
 
 # video
@@ -56,11 +51,10 @@ websockets==14.2
 apscheduler==3.11.0
 requests-cache==1.2.1
 python-multipart==0.0.20
-
-# db
-tinydb==4.8.2
-
+ 
 # other
+tinydb==4.8.2
+gradio==5.23.1
 yt-dlp==2025.3.26
 loguru==0.7.3
 psutil==6.1.1

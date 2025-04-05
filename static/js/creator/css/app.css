@@ -1,0 +1,11 @@
+.layui-card-header {
+    position: relative;
+  }
+  
+.layui-card-header .layui-icon {
+    line-height: initial;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    margin-top: -7px
+  }
