@@ -26,10 +26,8 @@ pydub==0.25.1
 demucs==4.0.1
 librosa==0.10.2
 playsound==1.2.2
+noisereduce==3.0.3
 pyannote.audio==3.3.2
-
-# video
-moviepy==1.0.3
 
 # draft
 pymediainfo==6.1.0
@@ -59,6 +57,7 @@ yt-dlp==2025.3.26
 loguru==0.7.3
 psutil==6.1.1
 gputil==1.4.0
+moviepy==1.0.3
 pyarmor==9.1.2
 pyarmor.cli==9.1.2
 pyngrok==7.2.3
