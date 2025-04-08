@@ -345,7 +345,7 @@
                         <label class="layui-form-label">提供商</label>
                         <div class="layui-input-block">
                           <select name="llm_provider" lay-filter="llm_provider_filter">
-                            <option value=""></option>
+                            <option value="">忽略</option>
                             {% for item in data.llm.providers %}
                             <option value="{{ item.provider}}" {% if not item.enable %}disabled{% endif %}>
                               {{ item.provider }} - {{ '已配置' if item.valid else '未配置' }}

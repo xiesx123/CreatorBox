@@ -17,7 +17,7 @@
 
 <h4>Web界面</h4>
 
-![](docs/main.jpg)
+![](docs/images/main.jpg)
 
 <h4><a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">调试定制</a></h4>
 
@@ -32,12 +32,12 @@
           <tr>
               <td align="center">
                   <a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">
-                      <img src="docs/debug.jpg" alt="点击观看视频">
+                      <img src="docs/images/debug.jpg" alt="点击观看视频">
                   </a>
               </td>
               <td align="center">
                   <a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">
-                    <img src="docs/jianying.jpg" alt="点击观看视频">
+                    <img src="docs/images/jianying.jpg" alt="点击观看视频">
                   </a>
               </td>
           </tr>
@@ -235,7 +235,7 @@
 
 - ❓这个页面是什么？
 
-  <image src="docs/editor.jpg" width="450" height="200" ></image>
+  <image src="docs/images/editor.jpg" width="450" height="200" ></image>
 
   运行过程中的数据文件，可 **视图**，**编辑**，用于翻译，语音，音色，速度等等微调...；如果你不懂，请不要动它，直接页面调参数运行即可
 

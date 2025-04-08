@@ -13,8 +13,8 @@ huggingface_hub==0.29.3
 modelscope==1.15.0
 
 # llm
-langchain==0.3.19
-langchain_community==0.3.18
+langchain==0.3.20
+langchain_community==0.3.19
 langchain_google_genai==2.0.11
 dashscope==1.23.0
 
@@ -37,10 +37,6 @@ uiautomation==2.0.20
 langdetect==1.0.9
 language-tags==1.2.0
 
-# cil
-asyncio==3.4.3
-asyncclick==8.1.7.2
-
 # web
 jieba==0.42.1
 uvicorn==0.20.0
@@ -60,6 +56,8 @@ gputil==1.4.0
 moviepy==1.0.3
 pyarmor==9.1.2
 pyarmor.cli==9.1.2
+asyncio==3.4.3
+asyncclick==8.1.7.2
 pyngrok==7.2.3
 tenacity==9.0.0
 scenedetect==0.6.5.2

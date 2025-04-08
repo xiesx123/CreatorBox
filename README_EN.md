@@ -15,7 +15,7 @@
   🚀🎬Flexible, efficient and scalable, the exclusive video editing and dubbing toolkit unleashes creative potential  
   <h4>Web Interface</h4>  
 
-  ![](docs/main.jpg)  
+  ![](docs/images/main.jpg)  
   
   <h4><a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">Debugging and Customization</a></h4>  
 
@@ -30,12 +30,12 @@
           <tr>
               <td align="center">
                   <a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">
-                      <img src="docs/debug.jpg" alt="Watch the video">
+                      <img src="docs/images/debug.jpg" alt="Watch the video">
                   </a>
               </td>
               <td align="center">
                   <a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">
-                    <img src="docs/jianying.jpg" alt="Watch the video">
+                    <img src="docs/images/jianying.jpg" alt="Watch the video">
                   </a>
               </td>
           </tr>
@@ -203,7 +203,7 @@
 
 - ❓What is this page?  
 
-  <image src="docs/editor.jpg" width="450" height="200" ></image>  
+  <image src="docs/images/editor.jpg" width="450" height="200" ></image>  
 
   This is a data file generated during runtime, which can be **viewed** and **edited** for fine-tuning translation, voice, tone, speed, and more. If you are unsure about its usage, please avoid modifying it and directly adjust parameters on the page to run the application.
 
