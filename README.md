@@ -48,11 +48,11 @@
 
 ## 适用场景 🎨
 
-- 🎥 **自媒体创作**：优化配音、剪辑和翻译流程，提高效率
+- 🎥 **自媒体创作者**：优化视频配音、剪辑和翻译流程，提高效率
 
-- 🎤 **解说/教程制作**：提供专业配音与精准字幕
+- 🌍 **教育工作者**：多语言字幕、教程翻译与配音
 
-- 🌍 **多语言配音/翻译**：支持语言切换，突破语言障碍
+- 🎤 **海外运营**：本地化内容创作、跨语言发布
 
 - ⚙️ **灵活配置/本地运行**：本地部署，保障隐私，满足定制需求
 
@@ -63,11 +63,6 @@
 
   精准转录视频和音频中的人声，灵活调整配置适应不同设备和场景，确保高质量文本生成
   
-
-- **🗣️ 说话人识别**
-
-  自动识别视频中的多位说话人，根据性别分配个性化语音，灵活配置，满足多样化创作需求
-
 - **🌐 翻译功能**
 
   多种语言互译，允许切换翻译提供商并调整高级参数，优化翻译效果，轻松跨越语言障碍
@@ -76,7 +71,7 @@
 
   丰富的语音库与定制选项，提供个性化配音体验，满足创作需求，实时试听确保创作精准
 
-- **📤 导出功能**
+- **📤 场景切换**
 
   多种创作模式随时切换，支持视频配音、翻译、解说等多场景应用，满足不同用户需求
 
@@ -219,25 +214,6 @@
   2025-03-27 11:34:52.458 | INFO 1496 main.py:84 - Started CreatorBox Run Debug Success (6.16 seconds)
   2025-03-27 11:34:52.459 | INFO 1496 main.py:85 - http://172.18.0.1:8000
   ```
-
-
-## 常见问题 🤔
-
-- ❓模型下载失败，出现如下错误
-
-  ```log
-  An error occured while synchronizing the model Systran/faster-whisper-large-v3 from the Hugging Face Hub:
-  An error happened while trying to locate the files on the Hub and we cannot find the appropriate snapshot folder for the
-  specified revision on the local disk. Please check your internet connection and try again.
-  Trying to load the model directly from the local cache, if it exists.
-  ```
-  解决方法：[通过国内镜像下载模型](https://hf-mirror.com)
-
-- ❓这个页面是什么？
-
-  <image src="docs/images/editor.jpg" width="450" height="200" ></image>
-
-  运行过程中的数据文件，可 **视图**，**编辑**，用于翻译，语音，音色，速度等等微调...；如果你不懂，请不要动它，直接页面调参数运行即可
 
   
 ## 反馈建议 📢
