@@ -74,14 +74,15 @@
                     url = `${window.location.protocol}//${window.location.host}${data.path}`;
                     util.openWin({ url: url });
                 } else {
-                    tool.open(data.path, "1100px", "510px");
+                    util.openWin({ url: data.path });
+                    // tool.open(data.path, "1100px", "510px");
                 }
             });
 
             // 开关操作
             form.on('switch(switch_status_filter)', function (obj) {
                 data = JSON.stringify({ "path": this.value, "status": obj.elem.checked ? 1 : 0 });
-                tool.post("/app/mount", data, function (response) {
+                tool.post("/app/mounts", data, function (response) {
                     console.debug(response.data)
                     var status = response.data.status
                     toast.info(status == 0 ? "关闭成功" : "开启成功，重启后生效", "提示");
