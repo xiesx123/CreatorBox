@@ -6,203 +6,143 @@
     <img src="https://img.shields.io/badge/Stars-%E2%9D%A4-red?style=for-the-badge" alt="Stargazers">
   </a>
 </p> -->
-
+[![VitePress](https://img.shields.io/badge/Vitepress-doc-646CFF?logo=markdown&logoColor=white)](https://xiesx123.github.io/CreatorBox)
 ![Version](https://img.shields.io/badge/version-v1.0.6-blue)
 ![GitHub stars](https://img.shields.io/github/stars/xiesx123/CreatorBox)
 [![Google Colab](https://img.shields.io/badge/Google_Colab-Running-yellow?logo=googlecolab&)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
 
-  <h3><a href="README.md">简体中文</a> | English</h3>  
-  🚀🎬Flexible, efficient and scalable, the exclusive video editing and dubbing toolkit unleashes creative potential  
-  <h4>Web Interface</h4>  
+<h3>Simplified Chinese | <a href="README_EN.md">English</a></h3>
 
-  ![](docs/images/main.jpg)  
-  
-  <h4><a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">Debugging and Customization</a></h4>  
+🚀🎬 Flexible, efficient, and scalable toolbox for editing and dubbing, unleashing creative potential
 
-  <table>
-      <thead>
-          <tr>
-              <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔧</g-emoji> Voice Tuning</th>
-              <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">✂️</g-emoji> Pro Editing</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr>
-              <td align="center">
-                  <a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">
-                      <img src="docs/images/debug.jpg" alt="Watch the video">
-                  </a>
-              </td>
-              <td align="center">
-                  <a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">
-                    <img src="docs/images/jianying.jpg" alt="Watch the video">
-                  </a>
-              </td>
-          </tr>
-      </tbody>
-  </table>
-</div>  
+<h4>Web Interface</h4>
 
-## Use Cases 🎨  
-- 🎥 **Self-media Creation**: Optimizes voice-over, editing, and translation processes, improving efficiency  
+![](docs/images/main.jpg)
 
-- 🎤 **Narration/Tutorial Production**: Provides professional voice-over and accurate subtitles  
-
-- 🌍 **Multi-language Voice-Over/Translation**: Supports language switching to break language barriers  
-
-- ⚙️ **Flexible Configuration/Local Deployment**: Local deployment to ensure privacy and meet customization needs  
-
-## Features 🎯  
-- **🎤 Intelligent Transcription**  
-  Accurate transcription of voices in videos and audios, with flexible configuration to adapt to various devices and scenarios, ensuring high-quality text generation  
-
-- **🗣️ Speaker Identification**  
-  Automatically identifies multiple speakers in a video and assigns personalized voices based on gender, with flexible configuration to meet diverse creative needs  
-
-- **🌐 Translation Function**  
-  Supports translation between multiple languages, allows switching translation providers and adjusting advanced parameters for optimized translation results, easily crossing language barriers  
-
-- **🎧 Speech Synthesis**  
-  A rich voice library and customization options provide personalized voice-over experiences, with real-time previews to ensure accuracy 
-
-- **📤 Export Feature**  
-  Supports multiple creative modes, including video voice-over, translation, and narration, meeting diverse user needs  
-
-- **✂️ Editing Drafts**  
-  Supports exporting material to video editors with detailed control over screen, sound, and subtitles, aiding post-editing and customization  
-
-- **🔧 Preview and Debugging**  
-  Provides flexible and efficient configuration adjustments to ensure perfect presentation at each stage, improving creative efficiency and quality  
-
-### Future Plans 📅  
-- [x] Flexible configuration debugging, supporting adjustments for **`Subtitles`**, **`Speakers`**, **`Translation`**, **`Voice-over`**  
-- [x] Voice Cloning  
-  - [x] **Speech Synthesis**, supports multiple voices, speed adjustments, and **real-time preview**  
-  - [x] **Voice Cloning**, supports **`multiple roles`**, **`multiple languages`**, with up to **`builtin`**, **`video`**, and **`custom`** 3 types of tone adjustments.
-- [x] Generation Mode Switching  
-  - [x] Supports [**Voice-over Mode**](https://github.com/xiesx123/CreatorBox/discussions/2), with three voice-over modes: `Video`, `Audio`, and `Adaptive`  
-  - [x] Supports [**Translation Mode**](https://github.com/xiesx123/CreatorBox/discussions/1), translating video from its original language to another  
-  - [ ] Supports Narration Mode for personalized voice-overs for videos  
-- [x] Exporting Editing Drafts  
-  - [x] **Track Control**, supports controlling up to **6** tracks for **`Screen`**, **`Sound`**, and **`Subtitles`**  
-  - [x] **Subtitle Generation**, with customization options for **`Size`**, **`Position`**, **`Color`**, **`Outline`**  
-  - [x] **Volume Control**, for adjusting **`Original Sound`**, **`Speech`**, **`Background Music`**  
-  - [ ] **Background Music**, random or designated music files  
-  - [ ] **Transition Control**, for longer videos  
-- [ ] Support for long videos, with segment-based processing and control to fit different hardware capabilities  
-- [ ] Automated publishing  
-
-## Video Demonstration 📺  
-
-### Translation Mode  
+<h4>Debugging and Customization</h4>
 
 <table>
-<thead>
-<tr>
-<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Game - Original Chinese Audio</th>
-<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Game - Mixed English and Chinese Audio with Dual Subtitles</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><video src="https://github.com/user-attachments/assets/3a83aafe-4c32-4d71-8ac7-960e2572048d"></video></td>
-<td align="center"><video src="https://github.com/user-attachments/assets/9fdb272a-9cb8-4a6c-95df-8e6159bd874c"></video></td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔧</g-emoji> Dubbing Debugging</th>
+            <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">✂️</g-emoji> Professional Editing</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="center">
+                <a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">
+                    <img src="docs/images/debug.jpg" alt="Click to watch the video">
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">
+                  <img src="docs/images/jianying.jpg" alt="Click to watch the video">
+                </a>
+            </td>
+        </tr>
+    </tbody>
 </table>
+
+<h4>Video Demonstration</h4>
 
 <table>
-<thead>
-<tr>
-<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Film - Original Chinese Audio</th>
-<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Film - Mixed English and Chinese Audio with Dual Subtitles （<a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">BiliBili</a>）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><video src="https://github.com/user-attachments/assets/5e6371f4-4b46-4e31-b5a3-01c1df844be3"></video></td>
-<td align="center"><video src="https://github.com/user-attachments/assets/91608e30-6e73-4f7d-844b-f7504ee23da6"></video></td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Original Chinese Audio</th>
+            <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Mixed Chinese-English Audio</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="center"><video
+                    src="https://github.com/user-attachments/assets/5e6371f4-4b46-4e31-b5a3-01c1df844be3"></video></td>
+            <td align="center"><video
+                    src="https://github.com/user-attachments/assets/91608e30-6e73-4f7d-844b-f7504ee23da6"></video></td>
+        </tr>
+    </tbody>
 </table>
 
-<table>
-<thead>
-<tr>
-<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Interview - Original English Audio</th>
-<th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Interview - Mixed English and Chinese Audio with Dual Subtitles</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><video src="https://github.com/user-attachments/assets/7e6d0311-dc60-409b-bc5a-a71c93e6fdb3"></video></td>
-<td align="center"><video src="https://github.com/user-attachments/assets/c8d7ad13-eba5-4a9f-9df8-65aba260195c"></video></td>
-</tr>
-</tbody>
-</table>
+</div>
 
-## Quick Start 🚀  
-### System Requirements 📦  
-- Operating systems: `Windows10+` 、 `MacOS 11+` 、 `Debian12+` 系统
-- Supports architectures： `windows.x86_64` 、 `linux.x86_64` 、 `darwin_x86_64`
-- Recommended minimum CPU: `4 cores` or more, memory: `8GB` or more, GPU is optional, supports `CPU` or `CUDA`  
+## 📦 Quick Start
+
+👉 Refer to the usage guide: [Local Installation](https://xiesx123.github.io/CreatorBox/deploy-local) | [Remote Deployment](https://xiesx123.github.io/CreatorBox/deploy-colab)
 
 
-### Prerequisites 📦  
-- Avoid using **Chinese paths** to prevent unexpected issues  
-- Ensure **Network** is working properly, VPN should be set to `Global Traffic Mode`  
+## 🎨 Suitable Scenarios
 
-### Installation Steps 🐳  
-1. Clone and navigate to the directory  
-    ```shell  
-    git clone https://github.com/xiesx123/CreatorBox.git
-    ```  
-2. Create a virtual environment  
-    ```shell  
-    conda create --name creatorbox python=3.11.11  
-    ```  
-3. Activate the virtual environment  
-    ```shell  
-    conda activate creatorbox  
-    ```  
-4. Install dependencies  
-    ```shell  
-    pip install -r requirements.txt  
-    ```  
-5. Run the application  
-    ```shell  
-    python run.py  
-    ```  
+- 🎥 **Content Creators**: Optimize video dubbing, translation, and editing processes to enhance efficiency and unleash creative potential
 
-### Access the Interface 🌐  
-- Local access: http://127.0.0.1:8000  
-- External access: http://172.18.0.1:8000 (depending on the actual setup)👇  
+- 🌍 **Multilingual Translation/Dubbing**: Create localized content for overseas audiences and publish across languages
 
-  ```log
-   _____                _            ______
-  /  __ \              | |           | ___ \
-  | /  \/_ __ ___  __ _| |_ ___  _ __| |_/ / _____  __
-  | |   | '__/ _ \/ _` | __/ _ \| '__| ___ \/ _ \ \/ /
-  | \__/\ | |  __/ (_| | || (_) | |  | |_/ / (_) >  < 
-   \____/_|  \___|\__,_|\__\___/|_|  \____/ \___/_/\_\   v1.0.6
+- ⚙️ **Independent Deployment**: Deploy locally with flexible configurations to ensure privacy
 
-  2025-03-27 11:34:52.458 | INFO 1496 task.py:18 - Startup Scheduler 1 Job Completed.
-  2025-03-27 11:34:52.458 | INFO 1496 main.py:84 - Started CreatorBox Run Debug Success (6.16 seconds)
-  2025-03-27 11:34:52.459 | INFO 1496 main.py:85 - http://172.18.0.1:8000
-  ```
+## 🎯 Features
 
-## FAQ 🤔  
-- ❓ **Model download failed** with the following error:  
+- **🎤 Intelligent Recognition**
 
-    ```log  
-    An error occured while synchronizing the model Systran/faster-whisper-large-v3 from the Hugging Face Hub:  
-    An error happened while trying to locate the files on the Hub and we cannot find the appropriate snapshot folder for the specified revision on the local disk. Please check your internet connection and try again.  
-    Trying to load the model directly from the local cache, if it exists.  
-    ```  
-    Solution: [Download model through domestic mirrors](https://hf-mirror.com)  
+  Accurately transcribe voices from videos and audio, with flexible configuration to adapt to different devices and scenarios, ensuring high-quality text generation
 
-## Feedback 📢  
-- You can submit [discussions](https://github.com/xiesx123/CreatorBox/discussions) or [send an email](mailto:xiesx123@gmail.com?subject=CreatoxBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?)  
+- **🌐 Multilingual Translation**
 
-## Star History  
-[![Star History Chart](https://api.star-history.com/svg?repos=xiesx123/CreatorBox&type=Date)](https://star-history.com/#xiesx123/CreatorBox&Date)
+  Translate between multiple languages, switch translation providers, and adjust advanced parameters to optimize translation results and overcome language barriers
+
+- **🎧 Speech Synthesis**
+
+  A rich library of voices and customization options to provide a personalized dubbing experience, meeting creative needs with real-time preview for precision
+
+- **📤 Scene Export**
+
+  Switch between various creative modes, supporting video dubbing, translation, narration, and more to meet diverse user needs
+
+- **✂️ Draft Export**
+
+  Export materials to editing software with multi-dimensional control over visuals, audio, and subtitles, aiding post-production adjustments and customization
+
+- **🔧 Preview and Debugging**
+
+  Flexible and efficient configuration adjustments to ensure perfection in every step, enhancing creative efficiency and quality
+
+## 📅 Planned Features
+
+### Recognition
+
+- [x] Support for video `download`, `separation`, and `noise reduction`
+- [x] Support for `audio-video` transcription
+- [x] Support for `speaker` voice alignment
+
+### Speech
+
+- [x] Support for `multilingual speech` synthesis with adjustable speed and preview
+- [x] Support for `voice cloning` and `cross-language cloning`, with built-in `default`, `video`, and `custom` voice adjustments
+- [x] Support for `voice commands`, including `regional accents`, `speaking styles`, and `role-playing` instructions
+
+### Modes
+
+- [x] Support for `video`, `audio`, and `adaptive` [`dubbing modes`](https://github.com/xiesx123/CreatorBox/discussions/2)
+- [x] Support for [`translation mode`](https://github.com/xiesx123/CreatorBox/discussions/1): Translate videos from the original language to another
+- [ ] Support for Novel Mode (planned)
+- [ ] Support for Narration Mode (planned)
+
+### Draft
+
+- [x] `Track Control`: Support for `visuals`, `audio`, and `subtitles` with up to `6` tracks
+- [x] `Subtitle Generation`: Support for font `size`, `position`, `color`, and `outline` settings
+- [x] `Volume Adjustment`: Support for `original audio`, `speech`, and `background music` volume control
+- [ ] `Background Music`: Random or specified music files
+- [ ] `Transition Control`: For use with long videos
+
+### Debugging
+
+- [x] `Subtitles`, `Speaker`, `Translation`, and `Dubbing` configuration adjustments
+
+### Others
+
+- [ ] Support for long videos
+- [ ] Automated publishing and submissions
+
+## Feedback and Suggestions 📢
+
+- You can submit [discussions](https://github.com/xiesx123/CreatorBox/discussions)
+  or [send email](mailto:xiesx123@gmail.com?subject=CreatorBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?).
