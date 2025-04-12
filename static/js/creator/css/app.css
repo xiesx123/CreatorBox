@@ -8,4 +8,16 @@
     right: 15px;
     top: 50%;
     margin-top: -7px
-  }
+}
+
+.layui-colla-title {
+  position: relative;
+}
+
+.layui-colla-title .layui-icon {
+  line-height: initial;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  margin-top: -7px
+}
