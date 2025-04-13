@@ -144,8 +144,8 @@
 
 ## 反馈建议 📢
 
-- 可以提交 [discussions](https://github.com/xiesx123/CreatorBox/discussions)
-  或者 [send email](mailto:xiesx123@gmail.com?subject=CreatoxBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?)。
+- 可以提交 [Issues](https://github.com/xiesx123/CreatorBox/issues) [Discussions](https://github.com/xiesx123/CreatorBox/discussions)
+  或者 [Email](mailto:xiesx123@gmail.com?subject=CreatoxBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?)。
 
 ## Star History
 
