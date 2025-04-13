@@ -7,7 +7,7 @@
   </a>
 </p> -->
 [![VitePress](https://img.shields.io/badge/Vitepress-doc-646CFF?logo=markdown&logoColor=white)](https://xiesx123.github.io/CreatorBox)
-![Version](https://img.shields.io/badge/version-v1.0.6-blue)
+![Version](https://img.shields.io/github/tag/xiesx123/CreatorBox.svg?style=flat&label=Version)
 ![GitHub stars](https://img.shields.io/github/stars/xiesx123/CreatorBox)
 [![Google Colab](https://img.shields.io/badge/Google_Colab-Running-yellow?logo=googlecolab&)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
 
