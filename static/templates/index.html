@@ -288,12 +288,12 @@
 
                       <div class="layui-form-item">
                         <label class="layui-form-label">说话人范围</label>
-                        <div class="layui-input-inline" style="width: 120px;">
+                        <div class="layui-input-inline" style="width: 142px;">
                           <input type="number" lay-verify="required|number|speaker_len" name="speaker_min"
                             placeholder="最小值" autocomplete="off" class="layui-input" min="1" max="10" step="1"
                             lay-affix="number">
                         </div>
-                        <div class="layui-input-inline" style="width: 120px;">
+                        <div class="layui-input-inline" style="width: 142px;">
                           <input type="number" lay-verify="required|number|speaker_len" name="speaker_max"
                             placeholder="最大值" autocomplete="off" class="layui-input" min="1" max="10" step="1"
                             lay-affix="number">
@@ -364,20 +364,23 @@
                       </div>
 
                       <div class="layui-form-item">
-                        <label class="layui-form-label">随机性</label>
-                        <div class="layui-input-block">
-                          <input type="number" name="llm_temperature" lay-verify="required" placeholder="目标值 [0.0,1.0]"
+                        <label class="layui-form-label">参数</label>
+                        <div class="layui-input-inline" style="width: 142px;">
+                          <input type="number" name="llm_temperature" lay-verify="required" placeholder="随机性 [0.0,1.0]"
+                            autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
+                        </div>
+                        <div class="layui-input-inline" style="width: 142px;">
+                          <input type="number" name="llm_top_p" lay-verify="required" placeholder="多样性 [0.0,1.0]"
                             autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
                         </div>
                       </div>
 
                       <div class="layui-form-item">
-                        <label class="layui-form-label">多样性</label>
+                        <label class="layui-form-label">批处理</label>
                         <div class="layui-input-block">
-                          <input type="number" name="llm_top_p" lay-verify="required" placeholder="目标值 [0.0,1.0]"
-                            autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
+                          <input type="number" name="llm_batch_size" lay-verify="required" placeholder="目标值 [10,100]"
+                            autocomplete="off" class="layui-input" min="10" max="100" step="10" lay-affix="number">
                         </div>
-
                       </div>
 
                       <div class="layui-form-item" pane>
@@ -394,8 +397,8 @@
 
                       <div class="layui-form-item layui-form-text">
                         <div class="layui-input-block">
-                          <textarea name="llm_instruct" placeholder="请输入自定义指示，例如：【去掉结尾的标点】、【阿拉伯数字使用中文代替】等.."
-                          lay-affix="clear" class="layui-textarea" style="min-height: 90px"></textarea>
+                          <textarea name="llm_instruct" placeholder="附加指令，例如：【去掉结尾的标点】、【阿拉伯数字使用中文代替】等.."
+                            lay-affix="clear" class="layui-textarea" style="min-height: 90px"></textarea>
                         </div>
                       </div>
 
@@ -546,7 +549,7 @@
                       </div>
 
                       <div class="layui-form-item">
-                        <label class="layui-form-label">原生音量</label>
+                        <label class="layui-form-label">原声音量</label>
 
                         <div class="layui-input-block">
                           <input type="number" lay-verify="required" name="draft_volume_native"
@@ -1032,13 +1035,13 @@
         page: false,
         cols: [[
           { title: '说话人', width: "75", align: "center", templet: d => '<div title="' + d.text + '">' + d.LAY_INDEX + '</div>' },
-          { title: '模型', width: "70", align: "center", field: 'provider', templet: d => '<div title="' + d.model + '">' + d.provider + '</div>' },
-          { title: '类型', width: "70", align: "center", field: 'type', templet: d => '<div title="' + d.text + '">' + d.type + '</div>' },
-          { title: '地区', width: "70", align: "center", field: 'locale', templet: d => '<div title="' + d.text + '">' + d.locale + '</div>' },
-          { title: '性别', width: "70", align: "center", field: 'gender', templet: d => '<div title="' + d.text + '">' + (parseInt(d.gender) === 1 ? '男' : parseInt(d.gender) === 2 ? '女' : '未知') + '</div>' },
-          { title: '语音', width: "240", field: 'voice', templet: d => '<div title="' + d.text + '">' + d.voice + '</div>' },
+          { title: '模型', width: "65", align: "center", field: 'provider', templet: d => '<div title="' + d.model + '">' + d.provider + '</div>' },
+          { title: '类型', width: "65", align: "center", field: 'type', templet: d => '<div title="' + d.text + '">' + d.type + '</div>' },
+          //{ title: '地区', width: "70", align: "center", field: 'locale', templet: d => '<div title="' + d.text + '">' + d.locale + '</div>' },
+          { title: '性别', width: "65", align: "center", field: 'gender', templet: d => '<div title="' + d.text + '">' + (parseInt(d.gender) === 1 ? '男' : parseInt(d.gender) === 2 ? '女' : '未知') + '</div>' },
+          { title: '语音', width: "180", field: 'voice', templet: d => '<div title="' + d.text + '">' + d.voice + '</div>' },
           { title: '指示', field: 'instruct', templet: d => '<div title="' + d.instruct + '">' + d.instruct + '</div>' },
-          { title: '语速', width: "70", field: 'rate', templet: d => '<div title="' + d.text + '">' + d.rate + '</div>' },
+          { title: '语速', width: "65", field: 'rate', templet: d => '<div title="' + d.text + '">' + d.rate + '</div>' },
           { title: '时长', width: "70", field: 'duration', templet: d => '<div title="' + d.text + '">' + d.duration + '</div>' },
           { title: "操作", fixed: 'right', width: "200", align: "center", toolbar: "#TPL_tts_voices_table_tools" }
         ]],
@@ -1111,7 +1114,7 @@
         }
       });
 
-      // 字幕原生
+      // 字幕原声
       colorpicker.render({
         elem: '#draft_style_sntc_select',
         color: form_json.draft_style_sntc,
