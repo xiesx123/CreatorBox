@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html>
 
 <head>
   <meta charset="utf-8" />
@@ -87,7 +87,7 @@
 
             <!-- 基础 -->
             <div class="layui-col-md12">
-              <div class="layui-collapse">
+              <div class="layui-collapse" lay-filter="collapse_filter_base">
                 <div class="layui-colla-item">
                   <div class="layui-card layui-panel">
                     <div class="layui-colla-title">基础
@@ -113,7 +113,7 @@
                       </div>
 
                       <div class="layui-form-item">
-                        <label class="layui-form-label">输出语言</label>
+                        <label class="layui-form-label">语言</label>
                         <div class="layui-input-block">
                           <select id="locale" name="locale" lay-verify="required" lay-filter="locale_filter">
                             <option value="">选择或搜索</option>
@@ -145,7 +145,7 @@
                       </div>
 
                       <div class="layui-form-item" pane>
-                        <label class="layui-form-label">处理模式</label>
+                        <label class="layui-form-label">模式</label>
                         <div class="layui-input-block">
                           {% for item in data.audio.mode_types %}
                           <input type="radio" name="mode_type" value="{{ item.val }}" lay-filter="mode_type_filter"
@@ -155,7 +155,7 @@
                       </div>
 
                       <div id="assign_type_div" class="layui-form-item" pane>
-                        <label class="layui-form-label">对齐方式</label>
+                        <label class="layui-form-label">对齐</label>
                         <div class="layui-input-block">
                           {% for item in data.audio.assign_types %}
                           <input type="radio" name="assign_type" value="{{ item.val }}" title="{{ item.desc }}">
@@ -164,7 +164,7 @@
                       </div>
 
                       <div class="layui-form-item" pane>
-                        <label class="layui-form-label">重新构建</label>
+                        <label class="layui-form-label">重构</label>
                         <div class="layui-input-inline" style="width: auto;">
                           <input type="checkbox" name="rebuild" lay-skin="switch" lay-filter="switch_rebuild_filter">
                         </div>
@@ -175,7 +175,7 @@
                       </div>
 
                       <div class="layui-form-item">
-                        <label class="layui-form-label">标识</label>
+                        <label class="layui-form-label">标志</label>
                         <div class="layui-input-block">
                           <input id="suffix" type="text" name="suffix" lay-verify="required" placeholder="请输入文件标识"
                             autocomplete="off" class="layui-input" lay-affix="clear">
@@ -191,7 +191,7 @@
 
             <!-- 字幕 -->
             <div class="layui-col-md6">
-              <div class="layui-collapse">
+              <div class="layui-collapse" lay-filter="collapse_filter_whisper">
                 <div class="layui-colla-item">
 
                   <div class="layui-card layui-panel">
@@ -264,7 +264,6 @@
                         </div>
                       </div>
 
-
                       <div class="layui-form-item" pane>
                         <label class="layui-form-label">使用数量</label>
                         <div class="layui-input-inline" style="width: auto;">
@@ -298,19 +297,16 @@
                             placeholder="最大值" autocomplete="off" class="layui-input" min="1" max="10" step="1"
                             lay-affix="number">
                         </div>
-
                       </div>
-
-                      <!-- <div class="layui-form-item" pane>
-                    <label class="layui-form-label">过滤无声</label>
-                    <div class="layui-input-inline" style="width: auto;">
-                      <input type="checkbox" name="whisper_vad" lay-skin="switch">
-                    </div>
-                    <div class="layui-form-mid layui-text-em">
-                      <i class="layui-icon layui-icon-tips"
-                        lay-tips="{content: '提示：特定场景开启', margin: '0 0 0 -10px'}"></i>
-                    </div>
-                  </div> -->
+                      
+                      <div class="layui-form-item" pane>
+                        <label class="layui-form-label">说话声降噪</label>
+                        <div class="layui-input-block">
+                          <input type="number" name="speaker_noise_thresh" lay-verify="required|number"
+                            placeholder="目标值 [0,5]" autocomplete="off" class="layui-input" min="0" max="5" step="1"
+                            lay-affix="number">
+                        </div>
+                      </div>
 
                     </div>
                   </div>
@@ -321,7 +317,7 @@
 
             <!-- 翻译 -->
             <div class="layui-col-md6">
-              <div class="layui-collapse">
+              <div class="layui-collapse" lay-filter="collapse_filter_llm">
                 <div class="layui-colla-item">
 
                   <div class="layui-card layui-panel">
@@ -376,7 +372,7 @@
                       </div>
 
                       <div class="layui-form-item">
-                        <label class="layui-form-label">批处理</label>
+                        <label class="layui-form-label">批量</label>
                         <div class="layui-input-block">
                           <input type="number" name="llm_batch_size" lay-verify="required" placeholder="目标值 [10,100]"
                             autocomplete="off" class="layui-input" min="10" max="100" step="10" lay-affix="number">
@@ -396,9 +392,10 @@
                       </div>
 
                       <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label" id="tts_play">指令 </label>
                         <div class="layui-input-block">
-                          <textarea name="llm_instruct" placeholder="附加指令，例如：【去掉结尾的标点】、【阿拉伯数字使用中文代替】等.."
-                            lay-affix="clear" class="layui-textarea" style="min-height: 90px"></textarea>
+                          <textarea name="llm_instruct" placeholder="示例：【去掉结尾的标点】、【阿拉伯数字使用中文代替】等.."
+                            lay-affix="clear" class="layui-textarea" style="min-height: 108px"></textarea>
                         </div>
                       </div>
 
@@ -411,11 +408,11 @@
 
             <!-- 配音 -->
             <div class="layui-col-md12">
-              <div class="layui-collapse">
+              <div class="layui-collapse" lay-filter="collapse_filter_tts">
                 <div class="layui-colla-item">
                   <div class="layui-card layui-panel">
                     <div class="layui-colla-title">配音
-                      <i class="layui-icon layui-icon-tips" lay-tips="{content: '文档', margin: '0 0 0 -10px'}"></i>
+                      <!-- <i class="layui-icon layui-icon-tips" lay-tips="{content: '文档', margin: '0 0 0 -10px'}"></i> -->
                     </div>
                     <div class="layui-colla-content layui-show">
 
@@ -454,7 +451,7 @@
                           <span class="layui-badge-dot"></span></label>
                         <div class="layui-input-block">
                           <input id="tts_instruct" type="text" name="tts_instruct"
-                            placeholder="请输入自定义指示,(地区方言、说话风格、角色扮演)" autocomplete="off" class="layui-input"
+                            placeholder="示例：(地区方言、说话风格、角色扮演)" autocomplete="off" class="layui-input"
                             lay-affix="clear">
                         </div>
                       </div>
@@ -508,7 +505,7 @@
 
             <!-- 草稿 -->
             <div class="layui-col-md12">
-              <div class="layui-collapse">
+              <div class="layui-collapse" lay-filter="collapse_filter_draft">
                 <div class="layui-colla-item">
                   <div class="layui-card layui-panel">
                     <div class="layui-colla-title">草稿
@@ -536,7 +533,7 @@
 
                         <div class="layui-form-mid layui-text-em">
                           <i class="layui-icon layui-icon-tips"
-                            lay-tips="{content: '提示：<br>1、开启后，可通过剪映快速预览/微调<br>2、文件格式：{文件名}_{标识}.mp4<br>3、草稿目录：{文件名}_{标识}<br>4、只能在Windows环境下使用', margin: '0 0 0 -10px'}"></i>
+                            lay-tips="{content: '提示：<br>1、开启后，可通过剪映快速预览/微调<br>2、文件格式：{文件名}_{标志}.mp4<br>3、草稿目录：{文件名}_{标志}<br>4、只能在Windows环境下使用', margin: '0 0 0 -10px'}"></i>
                         </div>
                       </div>
 

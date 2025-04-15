@@ -11,46 +11,46 @@
 ![GitHub stars](https://img.shields.io/github/stars/xiesx123/CreatorBox)
 [![Google Colab](https://img.shields.io/badge/Google_Colab-Launch-yellow?logo=googlecolab&)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
 
-<h3>Simplified Chinese | <a href="README_EN.md">English</a></h3>
+<h3>中文 | <a href="README_EN.md">English</a></h3>
 
-🚀🎬 Flexible, efficient, and scalable toolbox for editing and dubbing, unleashing creative potential
+🚀🎬 灵活、高效、可扩展，专属剪辑配音工具箱，释放创作潜力
 
-<h4>Web Interface</h4>
+<h4>Web界面</h4>
 
 ![](docs/images/main.png)
 
-<h4>Debugging and Customization</h4>
+<h4>调试定制</h4>
 
 <table>
     <thead>
         <tr>
-            <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔧</g-emoji> Dubbing Debugging</th>
-            <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">✂️</g-emoji> Professional Editing</th>
+            <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔧</g-emoji> 配音调试</th>
+            <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">✂️</g-emoji> 专业剪辑</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td align="center">
                 <a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">
-                    <img src="docs/images/debug.jpg" alt="Click to watch the video">
+                    <img src="docs/images/debug.jpg" alt="点击观看视频">
                 </a>
             </td>
             <td align="center">
                 <a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">
-                  <img src="docs/images/jianying.jpg" alt="Click to watch the video">
+                  <img src="docs/images/jianying.jpg" alt="点击观看视频">
                 </a>
             </td>
         </tr>
     </tbody>
 </table>
 
-<h4>Video Demonstration</h4>
+<h4>视频演示</h4>
 
 <table>
     <thead>
         <tr>
-            <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Original Chinese Audio</th>
-            <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Mixed Chinese-English Audio</th>
+            <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 中文原声</th>
+            <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 中英混音</th>
         </tr>
     </thead>
     <tbody>
@@ -65,84 +65,88 @@
 
 </div>
 
-## 📦 Quick Start
+## 📦 快速开始
 
-👉 Refer to the usage guide: [Local Installation](https://xiesx123.github.io/CreatorBox/deploy-local) | [Remote Deployment](https://xiesx123.github.io/CreatorBox/deploy-colab)
+👉 参考使用指南：[本地安装](https://xiesx123.github.io/CreatorBox/deploy-local) | [远程部署](https://xiesx123.github.io/CreatorBox/deploy-colab)
 
 
-## 🎨 Suitable Scenarios
+## 🎨 适用场景
 
-- 🎥 **Content Creators**: Optimize video dubbing, translation, and editing processes to enhance efficiency and unleash creative potential
+- 🎥 **自媒体创作者**：优化视频配音、翻译、剪辑流程，提升创作效率，释放创作潜力
 
-- 🌍 **Multilingual Translation/Dubbing**: Create localized content for overseas audiences and publish across languages
+- 🌍 **多语言翻译/配音**：运营海外本地化内容创作、跨语言发布
 
-- ⚙️ **Independent Deployment**: Deploy locally with flexible configurations to ensure privacy
+- ⚙️ **独立部署**：本地部署，灵活配置，保障隐私
 
-## 🎯 Features
+## 🎯 功能特性
 
-- **🎤 Intelligent Recognition**
+- **🎤 智能识别**
 
-  Accurately transcribe voices from videos and audio, with flexible configuration to adapt to different devices and scenarios, ensuring high-quality text generation
+  精准转录视频和音频中的人声，灵活调整配置适应不同设备和场景，确保高质量文本生成
 
-- **🌐 Multilingual Translation**
+- **🌐 多语言翻译**
 
-  Translate between multiple languages, switch translation providers, and adjust advanced parameters to optimize translation results and overcome language barriers
+  多种语言互译，允许切换翻译提供商并调整高级参数，优化翻译效果，轻松跨越语言障碍
 
-- **🎧 Speech Synthesis**
+- **🎧 语音合成**
 
-  A rich library of voices and customization options to provide a personalized dubbing experience, meeting creative needs with real-time preview for precision
+  丰富的语音库与定制选项，提供个性化配音体验，满足创作需求，实时试听确保创作精准
 
-- **📤 Scene Export**
+- **📤 场景模式**
 
-  Switch between various creative modes, supporting video dubbing, translation, narration, and more to meet diverse user needs
+  多种创作模式随时切换，支持视频配音、翻译、解说等多场景应用，满足不同用户需求
 
-- **✂️ Draft Export**
+- **✂️ 剪映草稿**
 
-  Export materials to editing software with multi-dimensional control over visuals, audio, and subtitles, aiding post-production adjustments and customization
+  支持将素材导出至剪映，提供画面、声音、字幕等多维度精细控制，助力后期调整与定制
 
-- **🔧 Preview and Debugging**
+- **🔧 预览与调试**
 
-  Flexible and efficient configuration adjustments to ensure perfection in every step, enhancing creative efficiency and quality
+  提供灵活、高效的配置调整，确保每个环节的完美呈现，提升创作效率与质量
 
-## 📅 Planned Features
+## 📅 计划支持
 
-### Recognition
+### 识别
 
-- [x] Support for video `download`, `separation`, and `noise reduction`
-- [x] Support for `audio-video` transcription
-- [x] Support for `speaker` voice alignment
+- [x] 支持 视频 `下载`，`分离`，`降噪`
+- [x] 支持 `音视频` 文字转录
+- [x] 支持 `说话人` 声纹对齐
 
-### Speech
+### 语音
 
-- [x] Support for `multilingual speech` synthesis with adjustable speed and preview
-- [x] Support for `voice cloning` and `cross-language cloning`, with built-in `default`, `video`, and `custom` voice adjustments
-- [x] Support for `voice commands`, including `regional accents`, `speaking styles`, and `role-playing` instructions
+- [x] 支持 `多语言语音` 调速合成，可试听效果
+- [x] 支持 `音色克隆`、`跨语言克隆`，内置 `内置` `视频` `自定义` 3 种音色调节
+- [x] 支持 `音色指令`，内置 `地区方言` `说话风格` `角色扮演` 指令
 
-### Modes
+### 模式
 
-- [x] Support for `video`, `audio`, and `adaptive` [`dubbing modes`](https://github.com/xiesx123/CreatorBox/discussions/2)
-- [x] Support for [`translation mode`](https://github.com/xiesx123/CreatorBox/discussions/1): Translate videos from the original language to another
-- [ ] Support for Novel Mode (planned)
-- [ ] Support for Narration Mode (planned)
+- [x] 支持 `视频`、`音频` 、`自适应` 3 种[`配音模式`](https://github.com/xiesx123/CreatorBox/discussions/2)
+- [x] 支持 [`翻译模式`](https://github.com/xiesx123/CreatorBox/discussions/1) ：将视频从原声语言翻译为另一种语言
+- [ ] 支持 小说模式（计划中）
+- [ ] 支持 解说模式（计划中）
 
-### Draft
+### 草稿
 
-- [x] `Track Control`: Support for `visuals`, `audio`, and `subtitles` with up to `6` tracks
-- [x] `Subtitle Generation`: Support for font `size`, `position`, `color`, and `outline` settings
-- [x] `Volume Adjustment`: Support for `original audio`, `speech`, and `background music` volume control
-- [ ] `Background Music`: Random or specified music files
-- [ ] `Transition Control`: For use with long videos
+- [x] `轨道控制`：支持 `画面`、`声音` 、`字幕` 最高 `6` 个轨道等控制
+- [x] `字幕生成`：支持 `大小`、`位置`、`颜色`、`描边` 字体设置
+- [x] `音量调节`：支持 `原声`、`说话声`、`背景音乐` 音量调节
+- [ ] `背景音乐`：随机或者指定音乐文件
+- [ ] `转场控制`：配合长视频使用
 
-### Debugging
+### 调试
 
-- [x] `Subtitles`, `Speaker`, `Translation`, and `Dubbing` configuration adjustments
+- [x] `字幕`，`说话人`，`翻译`，`配音` 配置调节
 
-### Others
+### 其他
 
-- [ ] Support for long videos
-- [ ] Automated publishing and submissions
+- [ ] 长视频支持
+- [ ] 自动化发布投稿
 
-## Feedback and Suggestions 📢
+## 反馈建议 📢
 
-- You can submit [Issues](https://github.com/xiesx123/CreatorBox/issues) [Discussions](https://github.com/xiesx123/CreatorBox/discussions)
-  or [Email](mailto:xiesx123@gmail.com?subject=CreatorBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?).
+- 可以提交 [Issues](https://github.com/xiesx123/CreatorBox/issues) 、[Discussions](https://github.com/xiesx123/CreatorBox/discussions)
+  或者 [Email](mailto:xiesx123@gmail.com?subject=CreatoxBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?)。
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=xiesx123/CreatorBox&type=Date)](https://star-history.com/#xiesx123/CreatorBox&Date)

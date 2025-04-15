@@ -49,7 +49,7 @@ $(window).load(function () {
 		layer.close($(this).data("index"))
 	});
 
-	// 浮動按钮
+	// 浮动按钮
 	var floatingDiv = document.getElementById('floating-div');
 	var offset = 100;
 	window.addEventListener('scroll', function () {
@@ -67,13 +67,47 @@ $(window).load(function () {
 	});
 	floatingDiv.classList.add('floating-div');
 
-	// 百度统计
-	// var _hmt = _hmt || [];
-	// (function () {
-	//   var hm = document.createElement("script");
-	//   hm.src = "https://hm.baidu.com/hm.js?0f28a627b93e9c2e599680e1827e1314";
-	//   var s = document.getElementsByTagName("script")[0];
-	//   s.parentNode.insertBefore(hm, s);
-	// })();
+	// 折叠状态
+	layui.use(['element'], function () {
+		var element = layui.element;
+
+		// 恢复折叠状态
+		function restoreCollapseState() {
+			var collapseState = JSON.parse(localStorage.getItem('collapse')) || {};
+			Object.keys(collapseState).forEach(function (filter) {
+				var state = collapseState[filter];
+				var collapseContent = document.querySelector('[lay-filter="' + filter + '"] .layui-colla-content');
+				if (state) {
+					collapseContent.classList.add('layui-show'); // 展开
+				} else {
+					collapseContent.classList.remove('layui-show'); // 折叠
+				}
+			});
+		}
+
+		// 保存折叠状态
+		function saveCollapseState(filter, isShow) {
+			var collapseState = JSON.parse(localStorage.getItem('collapse')) || {};
+			collapseState[filter] = isShow;
+			localStorage.setItem('collapse', JSON.stringify(collapseState));
+		}
+
+		// 初始化所有折叠面板的点击事件
+		function initCollapseEvent() {
+			// 给每个折叠面板绑定事件
+			document.querySelectorAll('.layui-collapse').forEach(function (collapse) {
+				var filter = collapse.getAttribute('lay-filter');
+				element.on('collapse(' + filter + ')', function (data) {
+					// 记录每个面板的展开状态
+					saveCollapseState(filter, data.show);
+					// 显示状态，仅用于演示
+					console.debug(filter + ' collapse status:' + data.show);
+				});
+			});
+		}
+		// 恢复状态并绑定事件
+		restoreCollapseState();
+		initCollapseEvent();
+	});
 });
 
