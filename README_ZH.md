@@ -11,7 +11,7 @@
 ![GitHub stars](https://img.shields.io/github/stars/xiesx123/CreatorBox)
 [![Google Colab](https://img.shields.io/badge/Google_Colab-Launch-yellow?logo=googlecolab&)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
 
-<h3>中文 | <a href="README_EN.md">English</a></h3>
+<h3><a href="README.md">English</a> | 中文 </h3>
 
 🚀🎬 灵活、高效、可扩展，专属剪辑配音工具箱，释放创作潜力
 
