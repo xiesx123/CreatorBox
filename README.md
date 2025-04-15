@@ -17,7 +17,7 @@
 
 <h4>Web Interface</h4>
 
-![](docs/images/main.png)
+![](/docs/images/main.png)
 
 <h4>Debugging and Customization</h4>
 
