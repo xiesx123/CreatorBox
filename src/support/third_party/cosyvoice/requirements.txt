@@ -31,7 +31,7 @@ tensorrt-cu12-bindings==10.0.1; sys_platform == 'linux'
 tensorrt-cu12-libs==10.0.1; sys_platform == 'linux'
 torch==2.6.0
 torchaudio==2.6.0
-transformers==4.44.2
+transformers==4.51.3
 uvicorn==0.20.0
 wget==3.2
 fastapi==0.115.12

@@ -8,7 +8,7 @@ import os
 import tarfile
 import zipfile
 from pathlib import Path
-from typing import Any, List, Optional, Union
+from typing import List, Optional, Union
 
 _LG = logging.getLogger(__name__)
 
