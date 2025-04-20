@@ -497,6 +497,18 @@
                                 class="layui-input"></textarea>
                             </div>
                           </div>
+
+                          <div class="layui-form-item" pane>
+                            <label class="layui-form-label">转换</label>
+                            <div class="layui-input-inline" style="width: auto;">
+                              <input type="checkbox" name="tts_vc" lay-skin="switch" lay-filter="switch_debug_filter">
+                            </div>
+
+                            <div class="layui-form-mid layui-text-em">
+                              <i class="layui-icon layui-icon-tips"
+                                lay-tips="{content: '将来源声音转换为目标的声音', margin: '0 0 0 -10px'}"></i>
+                            </div>
+                          </div>
                         </div>
 
                         <div class="layui-col-md12 layui-hide" id="e2f5_div">
@@ -511,6 +523,14 @@
                             </div>
                           </div>
 
+                        </div>
+                        
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">描述</label>
+                          <div class="layui-input-block">
+                            <input name="tts_description" placeholder="随便写点什么" lay-affix="clear"
+                              class="layui-input"></textarea>
+                          </div>
                         </div>
 
                       </div>
@@ -958,33 +978,37 @@
           form_json.tts_model = $('input[name="tts_model"]').val()
           form_json.locale = $('select[name="locale"] option:selected').val()
           form_json.tts_rate = $('input[name="tts_rate"]').val();
+          form_json.tts_description = $('input[name="tts_description"]').val();
           form_json.tts_text = $("#tts_text").val()
           form_json.tts_step = $('input[name="tts_step"]').val()
           form_json.tts_instruct = $('input[name="tts_instruct"]').val()
+          form_json.tts_vc = $('input[name="tts_vc"]').is(':checked')
           var isvalid = form.validate('.tts_text');
           if (isvalid) {
-            const findItemByVoice = (provider, voice, rate, text) =>
+            const findItemByVoice = (data) =>
               table_json.find(item =>
-                item.provider === provider && item.voice === voice && item.rate === rate && item.text === text
+                item.provider == data.tts_provider && item.voice == data.tts_voice && item.rate == data.tts_rate && item.text == data.tts_text && item.description == data.tts_description
               );
-            var item = findItemByVoice(form_json.tts_provider, form_json.tts_voice, form_json.tts_rate, form_json.tts_text)
+            var item = findItemByVoice(form_json)
             if (item != null) {
               layer.msg('正在播放缓存音频', { icon: 1 });
               return voice_play(item.url);
             }
-            output = form_json.tts_provider + "_" + form_json.tts_voice + "_" + form_json.tts_rate + "_" + form_json.tts_text.length
+            output = `${form_json.tts_provider}_${form_json.tts_voice}_${form_json.tts_rate}_${form_json.tts_text.length}_${form_json.tts_description.length}`
             tool.post("/tts/generate", JSON.stringify({
               "provider": form_json.tts_provider,
               "model": form_json.tts_model,
               "locale": form_json.locale,
               "voice": form_json.tts_voice,
               "rate": form_json.tts_rate,
+              "description": form_json.tts_description,
               "text": form_json.tts_text,
               "output": output,
               "extra": {
                 "gender": parseInt(form_json.tts_gender),
                 "nfe_step": parseInt(form_json.tts_step),
                 "instruct_text": form_json.tts_instruct,
+                "use_vc": form_json.tts_vc,
                 "file": $("#video_url").val(),
                 "suffix": $("#suffix").val()
               }
@@ -1002,10 +1026,12 @@
                 locale: form_json.locale,
                 voice: form_json.tts_voice,
                 rate: form_json.tts_rate,
+                description: form_json.tts_description,
                 text: form_json.tts_text,
                 gender: form_json.tts_gender,//-
                 nfe_step: form_json.tts_step,
                 instruct_text: form_json.tts_instruct,
+                use_vc: form_json.tts_vc,
                 duration: duration,
                 url: url
               })
@@ -1125,13 +1151,13 @@
         data: table_json,
         page: false,
         cols: [[
-          { title: '说话人', width: "80", align: "center", templet: d => '<div title="' + d.text + (d.instruct) + '">' + d.LAY_INDEX + '</div>' },
+          { title: '说话人', width: "80", align: "center", templet: d => '<div title="' + d.text + ' ' + d.description + '">' + d.LAY_INDEX + '</div>' },
           { title: '模型', width: "80", align: "center", field: 'provider', templet: d => '<div title="' + d.model + '">' + d.provider + '</div>' },
-          { title: '类型', width: "80", align: "center", field: 'type', templet: d => '<div title="' + d.text + (d.instruct) + '">' + d.type + '</div>' },
-          { title: '性别', width: "80", align: "center", field: 'gender', templet: d => '<div title="' + d.text + (d.instruct) + '">' + (parseInt(d.gender) === 1 ? '男' : parseInt(d.gender) === 2 ? '女' : '未知') + '</div>' },
-          { title: '语音', field: 'voice', templet: d => '<div title="' + d.text + (d.instruct) + '">' + d.voice + '</div>' },
-          { title: '语速', width: "80", field: 'rate', templet: d => '<div title="' + d.text + (d.instruct) + '">' + d.rate + '</div>' },
-          { title: '时长', width: "80", field: 'duration', templet: d => '<div title="' + d.text + (d.instruct) + '">' + d.duration + '</div>' },
+          { title: '类型', width: "80", align: "center", field: 'type', templet: d => '<div title="' + d.text + ' ' + d.description + '">' + d.type + '</div>' },
+          { title: '性别', width: "80", align: "center", field: 'gender', templet: d => '<div title="' + d.text + ' ' + d.description + '">' + (parseInt(d.gender) === 1 ? '男' : parseInt(d.gender) === 2 ? '女' : '未知') + '</div>' },
+          { title: '语音', field: 'voice', templet: d => '<div title="' + d.text + ' ' + d.description + '">' + d.voice + '</div>' },
+          { title: '语速', width: "80", field: 'rate', templet: d => '<div title="' + d.text + ' ' + d.description + '">' + d.rate + '</div>' },
+          { title: '时长', width: "80", field: 'duration', templet: d => '<div title="' + d.text + ' ' + d.description + '">' + d.duration + '</div>' },
           { title: "操作", fixed: 'right', width: "200", align: "center", toolbar: "#TPL_tts_voices_table_tools" }
         ]],
       });
