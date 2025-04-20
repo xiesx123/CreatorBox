@@ -969,6 +969,7 @@
               );
             var item = findItemByVoice(form_json.tts_provider, form_json.tts_voice, form_json.tts_rate, form_json.tts_text)
             if (item != null) {
+              layer.msg('正在播放缓存音频', { icon: 1 });
               return voice_play(item.url);
             }
             output = form_json.tts_provider + "_" + form_json.tts_voice + "_" + form_json.tts_rate + "_" + form_json.tts_text.length
@@ -1308,11 +1309,11 @@
           if (type == "code") {
             filename = $("#video_url").val().split(/[/\\]/).pop().split(".")[0];
             if (filename == "") {
-              return layer.msg('请先选择文件');
+              return layer.msg('请先选择文件', { icon: 3 });
             }
             suf = $("#suffix").val();
             if (suf == "") {
-              return layer.msg('请先输出标识');
+              return layer.msg('请先输出标识', { icon: 3 });
             }
             title = `{{ data.app.title }} - ${filename}_${suf}`;
             util.openWin({ url: `editor?title=${title}&upload=file/upload&remote=file/local?url=webapp/temp/${filename}/${filename}_${suf}.json` });
