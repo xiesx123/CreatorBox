@@ -10,6 +10,7 @@
 ![Version](https://img.shields.io/github/tag/xiesx123/CreatorBox.svg?style=flat&label=Version)
 ![GitHub stars](https://img.shields.io/github/stars/xiesx123/CreatorBox)
 [![Google Colab](https://img.shields.io/badge/Google_Colab-Launch-yellow?logo=googlecolab&)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
+[![Kaggle](https://img.shields.io/badge/Kaggle-Launch-blue?logo=kaggle&)](https://www.kaggle.com/code/xiesx123/creatorbox)
 
 <h3>English | <a href="README_ZH.md">中文</a></h3>
 
