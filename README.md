@@ -6,7 +6,7 @@
     <img src="https://img.shields.io/badge/Stars-%E2%9D%A4-red?style=for-the-badge" alt="Stargazers">
   </a>
 </p> -->
-[![VitePress](https://img.shields.io/badge/Vitepress-doc-646CFF?logo=markdown&logoColor=white)](https://xiesx123.github.io/CreatorBox)
+[![VitePress](https://img.shields.io/badge/Vitepress-Doc-646CFF?logo=markdown&logoColor=white)](https://xiesx123.github.io/CreatorBox)
 ![Version](https://img.shields.io/github/tag/xiesx123/CreatorBox.svg?style=flat&label=Version)
 ![GitHub stars](https://img.shields.io/github/stars/xiesx123/CreatorBox)
 [![Google Colab](https://img.shields.io/badge/Google_Colab-Launch-yellow?logo=googlecolab&)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
@@ -121,8 +121,8 @@
 
 ### Modes
 
-- [x] Support for `video`, `audio`, and `adaptive` [`dubbing modes`](https://github.com/xiesx123/CreatorBox/discussions/2)
-- [x] Support for [`translation mode`](https://github.com/xiesx123/CreatorBox/discussions/1): Translate videos from the original language to another
+- [x] Support for `video`, `audio`, and `adaptive` dubbing modes
+- [x] Support for translation Mode：Translate videos from the original language to another
 - [ ] Support for Novel Mode (planned)
 - [ ] Support for Narration Mode (planned)
 
