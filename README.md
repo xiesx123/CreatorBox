@@ -115,16 +115,16 @@
 
 ### Speech
 
-- [x] Support for `multilingual speech` synthesis with adjustable speed and preview
-- [x] Support for `voice cloning` and `cross-language cloning`, with built-in `default`, `video`, and `custom` voice adjustments
-- [x] Support for `voice commands`, including `regional accents`, `speaking styles`, and `role-playing` instructions
+- [x] Support for `multilingual speech` synthesis with adjustable speed and real-time preview
+- [x] Support for `multi-tone management` with built-in, `video`, and `custom` tone adjustments
+- [x] Support for `voice cloning` including `speech cloning`, `voice commands`, `voice conversion`, and `cross-language cloning`
 
 ### Modes
 
-- [x] Support for `video`, `audio`, and `adaptive` dubbing modes
-- [x] Support for translation Mode：Translate videos from the original language to another
-- [ ] Support for Novel Mode (planned)
-- [ ] Support for Narration Mode (planned)
+- [x] Support for three dubbing modes: `video`, `audio`, and `adaptive`
+- [x] Support for translation mode: translating videos from the original language to another
+- [ ] Support for novel mode: planned...
+- [ ] Support for narration mode: planned...
 
 ### Draft
 
