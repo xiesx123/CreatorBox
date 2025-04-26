@@ -124,26 +124,6 @@
                         </div>
                       </div>
 
-                      <div class="layui-form-item layui-hide">
-                        <label class="layui-form-label">静音检测</label>
-                        <div class="layui-input-inline">
-                          <input type="number" lay-verify="required" name="silence_threshold" placeholder="检测阈值"
-                            autocomplete="off" class="layui-input" min="-100" max="0" step="10" lay-affix="number">
-                        </div>
-                        <div class="layui-input-inline">
-                          <input type="number" lay-verify="required" name="silence_min" placeholder="静音长度"
-                            autocomplete="off" class="layui-input" min="1" max="1000" step="10" lay-affix="number">
-                        </div>
-                        <div class="layui-input-inline">
-                          <input type="number" lay-verify="required" name="silence_dynamic" placeholder="动态补偿"
-                            autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
-                        </div>
-                        <div class="layui-form-mid layui-text-em">
-                          <i class="layui-icon layui-icon-tips"
-                            lay-tips="{content: '提示：<br>检测阈值：低于某个阈值则认为是静音<br>静音长度：最小长度<br>动态补偿：静音长度的补偿值', margin: '0 0 0 -10px'}"></i>
-                        </div>
-                      </div>
-
                       <div class="layui-form-item" pane>
                         <label class="layui-form-label">模式</label>
                         <div class="layui-input-block">
@@ -593,6 +573,7 @@
                             autocomplete="off" class="layui-input" lay-affix="clear">
                         </div>
                       </div>
+                      
 
                       <div class="layui-form-item">
                         <label class="layui-form-label">原声音量</label>
@@ -667,6 +648,22 @@
                           <div id="draft_style_sntbc_select"></div>
                         </div>
 
+                      </div>
+
+                      <div class="layui-form-item layui-show">
+                        <label class="layui-form-label">静音检测</label>
+                        <div class="layui-input-inline" style="width: 120px;">
+                          <input type="number" lay-verify="required" name="silence_threshold" placeholder="检测阈值"
+                            autocomplete="off" class="layui-input" min="-100" max="0" step="10" lay-affix="number">
+                        </div>
+                        <div class="layui-input-inline" style="width: 120px;">
+                          <input type="number" lay-verify="required" name="silence_min" placeholder="最小长度"
+                            autocomplete="off" class="layui-input" min="1" max="1000" step="1" lay-affix="number">
+                        </div>
+                        <div class="layui-input-inline" style="width: 120px;">
+                          <input type="number" lay-verify="required" name="silence_keep" placeholder="保留长度"
+                            autocomplete="off" class="layui-input" min="0" max="100" step="1" lay-affix="number">
+                        </div>
                       </div>
 
                     </div>
