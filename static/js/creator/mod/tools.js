@@ -69,6 +69,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 					}
 				},
 				success: function (data, status) {
+					console.debug(data)
 					if (data.code == 0) {
 						if (callback) {
 							callback(data);
@@ -98,6 +99,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 					}
 				},
 				success: function (data, status) {
+					console.debug(data)
 					if (data.code == 0) {
 						if (callback) {
 							callback(data);
@@ -129,6 +131,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 						index = layer.msg('请稍后', { icon: 16, time: timeout });
 					},
 					success: function (data, status) {
+						console.debug(data)
 						if (data.code == 0) {
 							if (callback) {
 								callback();

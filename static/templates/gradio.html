@@ -26,15 +26,15 @@
 
     <div class="layui-layout layui-layout-admin">
         <div style="padding: 15px">
-            <table id="boxs_table" class="layui-table" style="margin: 0px;">
+            <table id="gradio_table" class="layui-table" style="margin: 0px;">
             </table>
         </div>
     </div>
 
     {% raw %}
-    <script type="text/html" id="TPL_boxs_table_tools">
+    <script type="text/html" id="TPL_table_tools">
         <div class="layui-btn-container">
-            <input type="checkbox" name="status" value="{{= d.path }}" lay-skin="switch" lay-filter="switch_status_filter" {{= d.status == 1 || d.local == 0 ? "checked" : "" }}  {{= d.local == 0 ? "disabled" : "" }}>
+            <input type="checkbox" name="status" value="{{= d.path }}" lay-skin="primary" lay-filter="switch_status_filter" {{= d.status == 1 || d.local == 0 ? "checked" : "" }}  {{= d.local == 0 ? "disabled" : "" }}>
         </div>
     </script>
     {% endraw %}
@@ -54,21 +54,20 @@
             var table_json = JSON.parse('{{ data.gradios | tojson }}')
 
             // 应用表格
-            var inst = table.render({
-                elem: '#boxs_table',
+            table.render({
+                elem: '#gradio_table',
                 data: table_json,
                 page: false,
-                tree: { show: false },
                 cols: [[
                     { title: '编号', fixed: 'left', width: "80", align: "center", templet: d => '<div title="' + d.text + '">' + d.LAY_NUM + '</div>' },
                     { title: '名称', fixed: 'left', width: "180", align: "center", field: 'name', templet: d => '<div title="' + d.name + '"> ' + d.name + '</div>' },
                     { title: '描述', fixed: 'left', align: "left", field: 'description', templet: d => '<div title="' + d.description + '">' + d.description + '</div>' },
-                    { title: "操作", fixed: 'left', width: "160", align: "center", toolbar: "#TPL_boxs_table_tools" }
+                    { title: "状态", fixed: 'left', width: "80", align: "center", toolbar: "#TPL_table_tools" }
                 ]],
             });
 
             // 双击事件
-            table.on('rowDouble(boxs_table)', function (obj) {
+            table.on('rowDouble(gradio_table)', function (obj) {
                 var data = obj.data;
                 if (data.local == 1) {
                     url = `${window.location.protocol}//${window.location.host}${data.path}`;
@@ -82,10 +81,10 @@
             // 开关操作
             form.on('switch(switch_status_filter)', function (obj) {
                 data = JSON.stringify({ "path": this.value, "status": obj.elem.checked ? 1 : 0 });
-                tool.post("/app/mounts", data, function (response) {
+                tool.post("/gradio/mounts", data, function (response) {
                     console.debug(response.data)
                     var status = response.data.status
-                    toast.info(status == 0 ? "关闭成功" : "开启成功，重启后生效", "提示");
+                    toast.info(status == 0 ? "关闭成功，重启后生效" : "开启成功", "提示");
                 }, true)
             });
         });

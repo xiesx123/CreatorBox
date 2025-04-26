@@ -57,6 +57,9 @@ $(window).load(function () {
 			const scrollHeight = document.documentElement.scrollHeight; // 页面总高度
 			const scrollTop = window.scrollY; // 当前滚动高度
 			const windowHeight = window.innerHeight; // 当前视窗高度
+			if (!floatingDiv) {
+				return  // 忽略
+			}
 			// 判断是否接近底部 (距离底部 100px 以内)
 			if (scrollHeight - (scrollTop + windowHeight) <= offset) {
 				floatingDiv.classList.remove('floating-div');
@@ -65,7 +68,9 @@ $(window).load(function () {
 			}
 		}, 500);
 	});
-	floatingDiv.classList.add('floating-div');
+	if (floatingDiv) {
+		floatingDiv.classList.add('floating-div');
+	}
 
 	// 折叠状态
 	layui.use(['element'], function () {
@@ -77,6 +82,9 @@ $(window).load(function () {
 			Object.keys(collapseState).forEach(function (filter) {
 				var state = collapseState[filter];
 				var collapseContent = document.querySelector('[lay-filter="' + filter + '"] .layui-colla-content');
+				if (!collapseContent) {
+					return  // 忽略
+				}
 				if (state) {
 					collapseContent.classList.add('layui-show'); // 展开
 				} else {

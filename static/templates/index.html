@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 
 <head>
   <meta charset="utf-8" />
@@ -434,7 +434,7 @@
                           </div>
 
                           <div class="layui-form-item">
-                            <label class="layui-form-label" id="voice_speaker"
+                            <label class="layui-form-label" id="video_speaker"
                               lay-tips="{content: '点击可生成该模型的说话人配置', margin: '0 0 0 -10px'}">提供商</label>
                             <div class="layui-input-block">
                               <select id="tts_provider" name="tts_provider" lay-verify="required"
@@ -467,10 +467,11 @@
                           </div>
 
                           <div class="layui-form-item">
-                            <label class="layui-form-label">语音</label>
+                            <label class="layui-form-label" id="user_speaker"
+                              lay-tips="{content: '点击对音色进行管理', margin: '0 0 0 -10px'}">音色</label>
                             <div class="layui-input-block">
                               <select id="tts_voice" name="tts_voice" lay-verify="required"
-                                lay-filter="tts_voice_filter" lay-search>
+                                lay-filter="tts_voice_filter" lay-search="{caseSensitive:false, fuzzy: true}">
                                 <option value="">选择或搜索</option>
                               </select>
                             </div>
@@ -524,7 +525,7 @@
                           </div>
 
                         </div>
-                        
+
                         <div class="layui-form-item">
                           <label class="layui-form-label">描述</label>
                           <div class="layui-input-block">
@@ -723,7 +724,7 @@
       var tool = layui.tool;
       var $ = layui.$;
 
-      let CREATORBOX = "creatorbox"
+      let CREATORBOX = "dubbing"
       let cache = layui.data(CREATORBOX)
       let player;
 
@@ -770,7 +771,7 @@
       form.verify({
         path: function (value, elem) {
           if (value.length == 0) {
-            return '请输入视频本地路径、网络链接';
+            return '请输入本地路径、网络链接';
           }
         },
         speaker_len: function (value, elem) {
@@ -942,7 +943,7 @@
 
       // 配音-模型配置
       util.on('id', {
-        "voice_speaker": function (othis) {
+        "video_speaker": function (othis) {
           layer.prompt({ title: '确定生成说话人配置？', placeholder: '请输入片段长度(单位s)', value: form_json.speaker_len, maxlength: 5 }, function (value, index, elem) {
             if (value === '') return elem.focus();
             value = util.escape(value)
@@ -969,6 +970,13 @@
         form_json.tts_voice = data.elem.value;
         form_json.tts_type = selectedOptgroup.id
         console.debug(form_json.tts_gender + "-" + form_json.tts_voice);
+      });
+
+      // 配音-音色配置
+      util.on('id', {
+        "user_speaker": function (othis) {
+          util.openWin({ url: "speaker" });
+        }
       });
 
       // 配音-试听点击
@@ -1016,8 +1024,7 @@
               toast.info(output, "语音试听")
               console.debug(response.data)
               var url = '/file/local?url=' + response.data.path;
-              var duration = response.data.duration + "s";
-              var type = response.data.duration + "s";
+              var duration = response.data.duration;
               voice_play(url);
               table_json.unshift({
                 provider: voice_find_by_model(form_json.tts_provider).provider,
@@ -1091,7 +1098,7 @@
           list.forEach(obj => {
             html += `<optgroup id="${obj.type}" label="${obj.group}">\n`;
             obj.item.forEach(i => {
-              html += `  <option value="${i.speaker}">` + (i.gender === "male" ? "男" : "女") + " - " + (i.duration ? i.lang + " - " + i.speaker + " - " + i.duration + "s" : i.speaker) + `</option>\n`;
+              html += `  <option value="${i.speaker}">` + (parseInt(i.gender) === 1 ? '男' : parseInt(i.gender) === 2 ? '女' : '未知') + " - " + (i.duration ? i.locale + " - " + i.speaker + " - " + i.duration : i.speaker) + `</option>\n`;
             });
             html += `</optgroup>\n`;
           });
@@ -1126,22 +1133,7 @@
           src: [url],
           format: ['wav'],
           autoplay: true,
-          html5: true,
-          onload: function () {
-            console.debug('audio loaded');
-          },
-          onplay: function () {
-            console.debug('audio playing');
-          },
-          onpause: function () {
-            console.debug('audio paused');
-          },
-          onstop: function () {
-            console.debug('audio stopped');
-          },
-          onend: function () {
-            console.debug('audio ended');
-          },
+          html5: true
         });
       };
 
@@ -1151,13 +1143,13 @@
         data: table_json,
         page: false,
         cols: [[
-          { title: '说话人', width: "80", align: "center", templet: d => '<div title="' + d.text + ' ' + d.description + '">' + d.LAY_INDEX + '</div>' },
-          { title: '模型', width: "80", align: "center", field: 'provider', templet: d => '<div title="' + d.model + '">' + d.provider + '</div>' },
-          { title: '类型', width: "80", align: "center", field: 'type', templet: d => '<div title="' + d.text + ' ' + d.description + '">' + d.type + '</div>' },
-          { title: '性别', width: "80", align: "center", field: 'gender', templet: d => '<div title="' + d.text + ' ' + d.description + '">' + (parseInt(d.gender) === 1 ? '男' : parseInt(d.gender) === 2 ? '女' : '未知') + '</div>' },
+          { title: '说话人', width: 80, align: "center", templet: d => '<div title="' + d.text + ' ' + d.description + '">' + d.LAY_INDEX + '</div>' },
+          { title: '模型', width: 80, align: "center", field: 'provider', templet: d => '<div title="' + d.model + '">' + d.provider + '</div>' },
+          { title: '类型', width: 80, align: "center", field: 'type', templet: d => '<div title="' + d.text + ' ' + d.description + '">' + d.type + '</div>' },
+          { title: '性别', width: 80, align: "center", field: 'gender', templet: d => '<div title="' + d.text + ' ' + d.description + '">' + (d.gender == 1 ? '男' : d.gender == 2 ? '女' : '未知') + '</div>' },
           { title: '语音', field: 'voice', templet: d => '<div title="' + d.text + ' ' + d.description + '">' + d.voice + '</div>' },
-          { title: '语速', width: "80", field: 'rate', templet: d => '<div title="' + d.text + ' ' + d.description + '">' + d.rate + '</div>' },
-          { title: '时长', width: "80", field: 'duration', templet: d => '<div title="' + d.text + ' ' + d.description + '">' + d.duration + '</div>' },
+          { title: '语速', width: 80, align: "center", field: 'rate', templet: d => '<div title="' + d.text + ' ' + d.description + '">' + d.rate + '</div>' },
+          { title: '时长', width: 80, align: "center", field: 'duration', templet: d => '<div title="' + d.text + ' ' + d.description + '">' + d.duration + '</div>' },
           { title: "操作", fixed: 'right', width: "200", align: "center", toolbar: "#TPL_tts_voices_table_tools" }
         ]],
       });
