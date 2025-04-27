@@ -237,7 +237,7 @@
                           <select name="whisper_length" lay-verify="required" lay-search>
                             <option value="">选择或搜索</option>
                             {% for item in data.whisper.chunk_lengths %}
-                            <option value="{{ item.val }}">{{ item.desc }} {{ item.duration }} - {{ item.val }}s
+                            <option value="{{ item.val }}">{{ item.desc }} {{ item.duration }} - {{ item.val }}
                             </option>
                             {% endfor %}
                           </select>
@@ -283,7 +283,7 @@
                         <label class="layui-form-label">说话声降噪</label>
                         <div class="layui-input-block">
                           <input type="number" name="speaker_noise_thresh" lay-verify="required|number"
-                            placeholder="目标值 [0,5]" autocomplete="off" class="layui-input" min="0" max="5" step="1"
+                            placeholder="目标值 [0,5]" autocomplete="off" class="layui-input" min="0" max="5" step="0.1"
                             lay-affix="number">
                         </div>
                       </div>

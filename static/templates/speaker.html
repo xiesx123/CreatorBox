@@ -348,6 +348,7 @@
                     $('button[type="submit"]').text('编辑');
                     $('button[type="submit"]').addClass('layui-border-blue');
                     $('[lay-filter="query_filter"]').removeClass('layui-hide');
+                    $('[lay-filter="collapse_filter_speaker"] .layui-colla-content').addClass('layui-show');
                 } else if (obj.event === "test") {
                     voice_play(url);
                 } else if (obj.event === "download") {
