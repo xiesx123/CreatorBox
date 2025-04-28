@@ -3,3 +3,4 @@ logs/
 static/watermark.png
 webapp/
 *.log
+models/
