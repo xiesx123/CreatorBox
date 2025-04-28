@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>{{ data.app.title }} - Box</title>
+    <title>{{ data.app.title }} - Gradio</title>
     <meta name="renderer" content="webkit" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -79,12 +79,12 @@
             });
 
             // 开关操作
-            form.on('switch(switch_status_filter)', function (obj) {
+            form.on('checkbox(switch_status_filter)', function (obj) {
                 data = JSON.stringify({ "path": this.value, "status": obj.elem.checked ? 1 : 0 });
                 tool.post("/gradio/mounts", data, function (response) {
                     console.debug(response.data)
                     var status = response.data.status
-                    toast.info(status == 0 ? "关闭成功，重启后生效" : "开启成功", "提示");
+                    toast.info(status == 0 ? "关闭成功" : "开启成功，重启后生效", "提示");
                 }, true)
             });
         });
