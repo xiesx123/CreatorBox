@@ -18,8 +18,8 @@
     <link href="static/js/layui/css/layui-dark.css" rel="stylesheet">
     <script src="static/js/layui/layui.js"></script>
     <!-- creator -->
-    <script src="static/js/creator/theam.js"></script>
-    <script src="static/js/creator/app.js"></script>
+    <script src="static/js/creatorbox/theam.js"></script>
+    <script src="static/js/creatorbox/app.js"></script>
     <style>
         #player-container {
             width: 100%;
@@ -59,16 +59,13 @@
 
                 <div id="player-container"></div>
 
-                <div id="waveform"></div>
             </div>
         </div>
     </div>
 
-    <script type="module">
+    <script>
 
-        import WaveSurfer from '/static/js/wavesurfer/wavesurfer.esm.js'
-
-        let player, wavesurfer;
+        let player;
 
         layui.use(['layer', 'util', 'tool'], function () {
 
@@ -76,8 +73,6 @@
             var util = layui.util;
             var tool = layui.tool;
             var $ = layui.$;
-
-            var show = layui.url().search.hasOwnProperty('show_waveform');
 
             var autoplay = layui.url().search.autoplay;
 
@@ -89,10 +84,7 @@
                 }
                 tool.get("/app/result/" + input_url, {}, function (response) {
                     console.log(JSON.stringify(response, null, 2))
-                    video_play(input_url, show ? 0 : 1)
-                    if (show) {
-                        audio_play(response.data.result.voice);
-                    }
+                    video_play(input_url)
                 }, true)
             });
 
@@ -105,7 +97,7 @@
             };
 
             // 视频播放
-            var video_play = function (url, volume) {
+            var video_play = function (url) {
                 if (!url) {
                     layer.msg('请输入任务ID/视频地址');
                     return;
@@ -121,32 +113,9 @@
                     // "download": true,
                     "pip": true,
                     "width": "100%",
-                    "volume": volume
-                });
-                player.on('play', function () {
-                    if (wavesurfer) { wavesurfer.play() }
-                });
-                player.on('pause', function () {
-                    if (wavesurfer) { wavesurfer.pause() }
-                });
-                player.on('ended', function () {
-                    if (wavesurfer) { wavesurfer.stop() }
+                    "volume": 1
                 });
             }
-
-            // 音频播放
-            var audio_play = function (url) {
-                if (wavesurfer) {
-                    wavesurfer.destroy();
-                }
-                wavesurfer = WaveSurfer.create({
-                    container: '#waveform',
-                    url: build_url(url),
-                    progressColor: '#F11A2B',
-                    // height: 100
-                })
-                if (wavesurfer) { wavesurfer.play() }
-            };
 
             $(document).ready(function () {
                 if (autoplay) {

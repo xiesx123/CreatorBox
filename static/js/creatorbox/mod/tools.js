@@ -1,7 +1,9 @@
-layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports) {
+layui.define(['layer', 'table', 'form', 'element', 'upload', 'notice'], function (exports) {
 	var layer = layui.layer;
 	var table = layui.table;
 	var form = layui.form;
+	var element = layui.element;
+	var upload = layui.upload;
 	var toast = layui.notice;
 	var $ = layui.jquery;
 
@@ -9,11 +11,13 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 
 	const timeout = 30 * 1000;
 
-	var index = 0
+	const identifier = 'table'
+
+	var idx = 0
 
 	var mod = {
 
-		connect(callback) {
+		connect: function (callback) {
 			// 获取当前页面 URL
 			const currentUrl = window.location.href;
 			// 获取当前页面协议
@@ -65,7 +69,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 				dataType: 'json',
 				beforeSend: function (xhr, status) {
 					if (progress) {
-						index = layer.msg('请稍后', { icon: 16, time: timeout });
+						idx = layer.msg('请稍后', { icon: 16, time: timeout });
 					}
 				},
 				success: function (data, status) {
@@ -77,7 +81,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 					} else {
 						toast.error(data.message, "提示");
 					}
-					layer.close(index);
+					layer.close(idx);
 				},
 				complete: function (xhr, status) {
 				},
@@ -95,7 +99,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 				dataType: 'json',
 				beforeSend: function (xhr, status) {
 					if (progress) {
-						index = layer.msg('请稍后', { icon: 16, time: timeout });
+						idx = layer.msg('请稍后', { icon: 16, time: timeout });
 					}
 				},
 				success: function (data, status) {
@@ -107,7 +111,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 					} else {
 						toast.error(data.message, "提示");
 					}
-					layer.close(index);
+					layer.close(idx);
 				},
 				complete: function (xhr, status) {
 				},
@@ -118,7 +122,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 
 		form: function (url, parames, callback) {
 			layer.confirm('确定提交？', {
-				icon: 1,
+				icon: 3,
 				title: '提示',
 				btn: ['确定', '取消']
 			}, function () {
@@ -128,7 +132,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 					data: parames,
 					dataType: 'json',
 					beforeSend: function (xhr, status) {
-						index = layer.msg('请稍后', { icon: 16, time: timeout });
+						idx = layer.msg('请稍后', { icon: 16, time: timeout });
 					},
 					success: function (data, status) {
 						console.debug(data)
@@ -139,7 +143,7 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 						} else {
 							toast.error(data.message, "提示");
 						}
-						layer.close(index);
+						layer.close(idx);
 					},
 					complete: function (xhr, status) {
 					},
@@ -149,10 +153,11 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 			});
 		},
 
-		remove: function (url) {
+		delids: function (url, callback) {
 			var checkStatus = table.checkStatus(identifier);
 			var data = checkStatus.data;
-			if (data.length == 0) {
+			var ids = data.map(item => item.id).join(",");
+			if (ids.length == 0) {
 				layer.msg("请选择删除数据");
 				toast.error("请选择删除数据", "提示");
 				return;
@@ -161,36 +166,69 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 				icon: 3,
 				title: '提示',
 				btn: ['确定', '取消']
-			}, function () {
-				//
-				var deleteParames = '';
-				for (var i = 0; i < data.length; i++) {
-					deleteParames = deleteParames + 'ids=' + data[i].id + "&";
-				}
-				console.log(deleteParames); // 记得删
-				//
-				$.ajax({
-					type: 'POST',
-					url: url,
-					data: deleteParames,
-					dataType: 'json',
-					beforeSend: function (xhr, status) {
-						index = layer.load(2, { icon: 16 });
-					},
-					success: function (data, status) {
-						if (data.code == 0) {
-							toast.success(data.message, "提示");
-						} else {
-							toast.error(data.message, "提示");
-						}
-						layer.close(index);
-					},
-					complete: function (xhr, status) {
-					},
-					cancel: function () {
-					}
-				});
+			}, function (index) {
+				idx = index
+				mod.post(url, JSON.stringify({ "ids": ids }), callback)
 			});
+		},
+
+		download: function (url, parames, filename) {
+			idx = layer.msg('请稍后', { icon: 16, time: timeout });
+			fetch(url, {
+				method: "POST",
+				body: parames,
+				headers: { "Content-Type": "application/json" }
+			})
+				.then(response => response.blob())
+				.then(blob => {
+					const url = window.URL.createObjectURL(blob);
+					const a = document.createElement("a");
+					a.href = url;
+					a.download = filename || document.title;
+					document.body.appendChild(a);
+					a.click();
+					a.remove();
+					window.URL.revokeObjectURL(url);
+					layer.close(idx);
+				})
+				.catch(error => {
+					toast.error(error, "提示");
+				});
+		},
+
+		upload: function (elem_, url_, accept_, exts_, progress_, done_) {
+			data = {
+				elem: elem_,
+				url: url_ || 'file/upload',
+				accept: accept_ || 'file',
+				exts: exts_,
+				before: function (obj) {
+					element.progress('progress_filter', '0%');
+					layer.msg('上传中', { icon: 16, time: timeout });
+				},
+				progress: function (n, elem, e) {
+					element.progress('progress_filter', n + '%');
+					if (n == 100) {
+						layer.msg('上传完毕');
+					}
+					if (progress_) {
+						progress_(n, elem, e);
+					}
+				},
+				done: function (response) {
+					layer.msg('上传成功', { icon: 1 });
+					if (done_) {
+						done_(response);
+					}
+				},
+				error: function () {
+					toast.error('上传失败');
+				}
+			}
+			if (exts_ == null) {
+				delete data.exts;
+			}
+			upload.render(data);
 		},
 
 		dialog: function (url, h) {
@@ -236,8 +274,6 @@ layui.define(['layer', 'table', 'form', 'element', 'notice'], function (exports)
 		},
 
 		refresh: function () {
-			// 关闭所有
-			parent.layer.closeAll();
 			// 刷新当前页
 			setTimeout(function () {
 				document.location = document.location;

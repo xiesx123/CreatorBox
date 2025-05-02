@@ -1,5 +1,5 @@
 layui.config({
-	base: '../../static/js/creator/'
+	base: '../../static/js/creatorbox/'
 }).extend({
 	// 信息提示
 	notice: 'mod/toastr',

@@ -1,16 +1,3 @@
-wc-include{
-    padding: 15px;
-    display: block;
-  }
-
-  #app {
-    display: none;
-  }
-
-  .layui-layout-right .layui-nav-bar {
-    background-color: unset !important;
-  }
-
   .layui-layout-admin .layui-side {
     top: 0 !important;
     z-index: 1001;

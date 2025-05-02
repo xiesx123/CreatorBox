@@ -172,7 +172,6 @@
                     closeDuration: false,
                     closeEasing: false,
                     closeOnHover: true,
-
                     extendedTimeOut: 1000,
                     iconClasses: {
                         error: 'toast-error',
@@ -182,7 +181,7 @@
                     },
                     iconClass: 'toast-info',
                     positionClass: 'toast-top-right',
-                    timeOut: 5000, // Set timeOut and extendedTimeOut to 0 to make it sticky
+                    timeOut: 3000, // Set timeOut and extendedTimeOut to 0 to make it sticky
                     titleClass: 'toast-title',
                     messageClass: 'toast-message',
                     escapeHtml: false,
@@ -191,7 +190,7 @@
                     closeClass: 'toast-close-button',
                     newestOnTop: true,
                     preventDuplicates: false,
-                    progressBar: false,
+                    progressBar: true,
                     progressClass: 'toast-progress',
                     rtl: false
                 };

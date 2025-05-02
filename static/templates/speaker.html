@@ -18,8 +18,7 @@
     <link href="static/js/layui/css/layui-dark.css" rel="stylesheet">
     <script src="static/js/layui/layui.js"></script>
     <!-- creator -->
-    <link href="static/js/creator/css/app.css" rel="stylesheet">
-    <script src="static/js/creator/app.js"></script>
+    <script src="static/js/creatorbox/app.js"></script>
     <style>
         /* 使得底部浮动 */
         .floating-div {
@@ -117,7 +116,7 @@
         </form>
 
         <div style="padding: 15px">
-            <table id="speaker_table" class="layui-table" style="margin: 0px;">
+            <table id="table" class="layui-table" style="margin: 0px;">
             </table>
         </div>
     </div>
@@ -195,39 +194,21 @@
             // 表单=============
 
             // 表单-音频上传
-            upload.render({
-                elem: '#audio_upload',
-                url: 'spk/upload',
-                accept: 'audio',
-                before: function (obj) {
-                    element.progress('progress_filter', '0%');
-                    layer.msg('上传中', { icon: 16, time: 0 });
-                },
-                progress: function (n, elem, e) {
-                    element.progress('progress_filter', n + '%');
-                    if (n == 100) {
-                        layer.msg('上传完毕', { icon: 1 });
-                    }
-                    layer.msg('识别中', { icon: 16, time: 30 * 1000 });
-                },
-                done: function (response) {
-                    layer.close();
-                    layer.msg('识别成功');
-                    if (response.code == 0) {
-                        data = response.data
-                        form_json.id = null
-                        form_json.path = data.location
-                        form_json.text = data.text
-                        form_json.speaker = data.location.split(/[/\\]/).pop().split(".")[0]
-                        form_json.gender = data.gender
-                        form_json.locale = data.locale
-                        form.val('form_filter', form_json);
-                    }
-                },
-                error: function () {
-                    toast.error('识别失败');
+            tool.upload("#audio_upload", "spk/upload", 'audio', null, function (n, elem, e) {
+                layer.msg('识别中', { icon: 16, time: 30 * 1000 });
+            }, function (response) {
+                layer.msg('识别成功', { icon: 1 });
+                if (response.code == 0) {
+                    data = response.data
+                    form_json.id = null
+                    form_json.path = data.location
+                    form_json.text = data.text
+                    form_json.speaker = data.location.split(/[/\\]/).pop().split(".")[0]
+                    form_json.gender = data.gender
+                    form_json.locale = data.locale
+                    form.val('form_filter', form_json);
                 }
-            });
+            })
 
             // 表单-提交事件
             form.on('submit(form_submit)', function (data) {
@@ -240,7 +221,7 @@
                 console.debug(field)
                 // 不同行为
                 if (action == 'query') {
-                    table.reload('speaker_table', {
+                    table.reload('table', {
                         page: { curr: 1 },
                         where: {
                             speaker: field.speaker,
@@ -253,11 +234,11 @@
                     if (action == 'update') {
                         title = '修改'
                     }
-                    layer.confirm(`确定${title}吗？`, { title: '提示' }, function (index) {
+                    layer.confirm(`确定${title}吗？`, { title: '提示', icon: 3 }, function (index) {
                         tool.post("/spk/upsert", data, function (response) {
                             console.debug(response.data)
                             toast.success(`${field.speaker}`, `${title}成功`);
-                            table.reloadData('speaker_table', { scrollPos: 'fixed' });
+                            table.reloadData('table', { scrollPos: 'fixed' });
                         }, true)
                     });
                 }
@@ -268,7 +249,7 @@
 
             // 说话人-数据表格
             var inst = table.render({
-                elem: '#speaker_table',
+                elem: '#table',
                 url: '/spk/page',
                 method: 'post',
                 contentType: 'application/json',
@@ -322,17 +303,10 @@
                         $('[lay-filter="collapse_filter_speaker"] .layui-colla-content').addClass('layui-show');
                         break;
                     case 'delete':
-                        var data = checkStatus.data;
-                        const ids = data.map(item => item.id).join(",");
-                        if (ids.length == 0) {
-                            return layer.msg('请选择数据');
-                        }
-                        layer.confirm(`确定删除么?`, { title: '提示' }, function (index) {
-                            tool.post("/spk/delete", JSON.stringify({ "ids": ids }), function (response) {
-                                console.debug(response.data)
-                                table.reloadData(id, { scrollPos: 'fixed' });
-                            }, true)
-                        });
+                        tool.delids("/spk/delete", function (response) {
+                            console.debug(response.data)
+                            table.reloadData(id, { scrollPos: 'fixed' });
+                        }, true)
                         break;
                 };
             });
@@ -406,7 +380,7 @@
         });
 
     </script>
-    <script src="static/js/creator/theam.js"></script>
+    <script src="static/js/creatorbox/theam.js"></script>
 </body>
 
 </html>

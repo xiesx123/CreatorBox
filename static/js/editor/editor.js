@@ -2,7 +2,7 @@ const args = new URLSearchParams(location.search);
 
 const next = () => {
   const s = document.createElement('script');
-  s.src = '/static/js/creator/editor/inject.js';
+  s.src = '/static/js/editor/inject.js';
   document.documentElement.append(s);
 };
 

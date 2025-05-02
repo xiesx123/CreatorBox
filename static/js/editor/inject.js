@@ -161,7 +161,7 @@ async function render() {
   theme();
 
   try {
-    const { createJSONEditor } = await import('/static/js/creator/editor/standalone.js');
+    const { createJSONEditor } = await import('/static/js/editor/standalone.js');
 
     const props = {
       mode: prefs.mode,

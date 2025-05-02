@@ -18,19 +18,43 @@
     <link href="static/js/layui/css/layui-dark.css" rel="stylesheet">
     <script src="static/js/layui/layui.js"></script>
     <!-- creator -->
-    <script src="static/js/creator/theam.js"></script>
-    <script src="static/js/creator/app.js"></script>
+    <script src="static/js/creatorbox/app.js"></script>
 </head>
 
-<body>
+<body class="collapse" layadmin-themealias="default">
 
     <div class="layui-layout layui-layout-admin">
-        <div style="padding: 15px">
-            <table id="gradio_table" class="layui-table" style="margin: 0px;">
-            </table>
-        </div>
+
+        <form class="layui-form layui-form-pane" lay-filter="form_filter">
+
+            <!-- 应用 -->
+            <div class="layui-collapse" lay-filter="collapse_filter_gradio">
+                <div class="layui-colla-item">
+                    <div class="layui-card layui-panel">
+                        <div class="layui-colla-title">应用</div>
+
+                        <div class="layui-colla-content layui-show">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="padding: 15px">
+                <table id="gradio_table" class="layui-table" style="margin: 0px;">
+                </table>
+            </div>
+
+        </form>
     </div>
 
+    <!-- 表格工具栏 -->
+    <script type="text/html" id="TPL_table_toolbar">
+        <!-- <div class="layui-inline" lay-event="query"><i class="layui-icon layui-icon-search"></i></div>
+        <div class="layui-inline" lay-event="add"><i class="layui-icon layui-icon-add-circle"></i></div>
+        <div class="layui-inline" lay-event="delete"><i class="layui-icon layui-icon-delete"></i></div> -->
+    </script>
+
+    <!-- 启用禁用 -->
     {% raw %}
     <script type="text/html" id="TPL_table_tools">
         <div class="layui-btn-container">
@@ -57,12 +81,24 @@
             table.render({
                 elem: '#gradio_table',
                 data: table_json,
-                page: false,
+                page: {
+                    curr: 1, //当前页码
+                    groups: 5, //只显示 1 个连续页码
+                    first: true, //不显示首页
+                    last: true //不显示尾页
+                },
+                request: {
+                    pageName: 'page', limitName: 'size'
+                },
+                toolbar: '#TPL_table_toolbar',
+                defaultToolbar: ['filter', 'exports'],
+                height: 'full-78', // 最大高度减去其他容器已占有的高度差
                 cols: [[
-                    { title: '编号', fixed: 'left', width: "80", align: "center", templet: d => '<div title="' + d.text + '">' + d.LAY_NUM + '</div>' },
-                    { title: '名称', fixed: 'left', width: "180", align: "center", field: 'name', templet: d => '<div title="' + d.name + '"> ' + d.name + '</div>' },
-                    { title: '描述', fixed: 'left', align: "left", field: 'description', templet: d => '<div title="' + d.description + '">' + d.description + '</div>' },
-                    { title: "状态", fixed: 'left', width: "80", align: "center", toolbar: "#TPL_table_tools" }
+                    { type: 'checkbox' },
+                    { title: '编号', sort: true, width: "80", align: "center", templet: d => '<div title="' + d.text + '">' + d.LAY_NUM + '</div>' },
+                    { title: '名称', sort: true, width: "180", align: "center", field: 'name', templet: d => '<div title="' + d.name + '"> ' + d.name + '</div>' },
+                    { title: '描述', sort: false, align: "left", align: "left", field: 'description', templet: d => '<div title="' + d.description + '">' + d.description + '</div>' },
+                    { title: "状态", sort: false, width: "80", align: "center", fixed: 'right', toolbar: "#TPL_table_tools" }
                 ]],
             });
 
@@ -90,6 +126,7 @@
         });
 
     </script>
+    <script src="static/js/creatorbox/theam.js"></script>
 </body>
 
 </html>

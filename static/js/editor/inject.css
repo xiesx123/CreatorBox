@@ -9,7 +9,7 @@ html.jsb:not([data-loaded=true]) body::after {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.7) url(/static/js/creator/editor/loading.svg) center center no-repeat;
+  background: rgba(0, 0, 0, 0.7) url(/static/js/editor/loading.svg) center center no-repeat;
 }
 html.jsb[data-loaded="true"] body {
   margin: 0 !important;
