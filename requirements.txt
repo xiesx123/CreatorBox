@@ -28,7 +28,7 @@ pyannote.audio==3.3.2
 
 # draft
 pymediainfo==6.1.0
-uiautomation==2.0.20; platform_machine == 'arm64'
+uiautomation==2.0.20; platform_machine == 'AMD64'
 
 # lang
 langdetect==1.0.9
