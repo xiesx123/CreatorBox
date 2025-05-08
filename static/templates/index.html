@@ -500,6 +500,35 @@
 
                       </div>
 
+                      <div class="layui-col-md12 layui-hide" id="e2f5_div">
+
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">采样步数</label>
+                          <div class="layui-input-block">
+                            <div class="layui-input-inline">
+                              <input type="number" lay-verify="required" name="tts_step" placeholder="目标值 [4,64]"
+                                autocomplete="off" class="layui-input" min="4" max="64" step="1" lay-affix="number">
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                      
+                      <div class="layui-col-md12 layui-hide" id="xtts_div">
+
+                        <div class="layui-form-item" pane>
+                          <label class="layui-form-label">转换</label>
+                          <div class="layui-input-inline" style="width: auto;">
+                            <input type="checkbox" name="tts_vc" lay-skin="switch" lay-filter="switch_debug_filter">
+                          </div>
+
+                          <div class="layui-form-mid layui-text-em">
+                            <i class="layui-icon layui-icon-tips"
+                              lay-tips="{content: '将来源声音转换为目标的声音', margin: '0 0 0 -10px'}"></i>
+                          </div>
+                        </div>
+                      </div>
+                      
                       <div class="layui-col-md12 layui-hide" id="cosy_div">
 
                         <div class="layui-form-item">
@@ -521,20 +550,6 @@
                               lay-tips="{content: '将来源声音转换为目标的声音', margin: '0 0 0 -10px'}"></i>
                           </div>
                         </div>
-                      </div>
-
-                      <div class="layui-col-md12 layui-hide" id="e2f5_div">
-
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">采样步数</label>
-                          <div class="layui-input-block">
-                            <div class="layui-input-inline">
-                              <input type="number" lay-verify="required" name="tts_step" placeholder="目标值 [4,64]"
-                                autocomplete="off" class="layui-input" min="4" max="64" step="1" lay-affix="number">
-                            </div>
-                          </div>
-                        </div>
-
                       </div>
 
                       <div class="layui-form-item">
@@ -779,14 +794,21 @@
           $('#assign_type_div').addClass('layui-hide');
         }
         // 语音
-        if (form_json.tts_provider == "cosy") {
-          $('#cosy_div').removeClass('layui-hide');
-          $('#e2f5_div').addClass('layui-hide');
-        } else if (form_json.tts_provider == "e2f5") {
-          $('#cosy_div').addClass('layui-hide');
+        if (form_json.tts_provider == "e2f5") {
           $('#e2f5_div').removeClass('layui-hide');
+          $('#xtts_div').addClass('layui-hide');
+          $('#cosy_div').addClass('layui-hide');
+        } else if (form_json.tts_provider == "xtts") {
+          $('#e2f5_div').addClass('layui-hide');
+          $('#xtts_div').removeClass('layui-hide');
+          $('#cosy_div').addClass('layui-hide');
+        } else if (form_json.tts_provider == "cosy") {
+          $('#e2f5_div').addClass('layui-hide');
+          $('#xtts_div').addClass('layui-hide');
+          $('#cosy_div').removeClass('layui-hide');
         } else {
           $('#cosy_div').addClass('layui-hide');
+          $('#xtts_div').addClass('layui-hide');
           $('#e2f5_div').addClass('layui-hide');
         }
         $('input[name="tts_model"]').prop("disabled", (form_json.model == ""));
@@ -916,14 +938,21 @@
         form_json.tts_model = item.model;
         $('input[name="tts_model"]').val(form_json.tts_model);
         $('input[name="tts_model"]').prop("disabled", (item.model == ""));
-        if (item.provider == "cosy") {
-          $('#cosy_div').removeClass('layui-hide');
-          $('#e2f5_div').addClass('layui-hide');
-        } else if (item.provider == "e2f5") {
-          $('#cosy_div').addClass('layui-hide');
+        if (form_json.tts_provider == "e2f5") {
           $('#e2f5_div').removeClass('layui-hide');
+          $('#xtts_div').addClass('layui-hide');
+          $('#cosy_div').addClass('layui-hide');
+        } else if (form_json.tts_provider == "xtts") {
+          $('#e2f5_div').addClass('layui-hide');
+          $('#xtts_div').removeClass('layui-hide');
+          $('#cosy_div').addClass('layui-hide');
+        } else if (form_json.tts_provider == "cosy") {
+          $('#e2f5_div').addClass('layui-hide');
+          $('#xtts_div').addClass('layui-hide');
+          $('#cosy_div').removeClass('layui-hide');
         } else {
           $('#cosy_div').addClass('layui-hide');
+          $('#xtts_div').addClass('layui-hide');
           $('#e2f5_div').addClass('layui-hide');
         }
         tool.post("tts/search", voice_search_params(form_json.tts_model, form_json.locale, form_json.tts_gender), voice_search_callback, true)

@@ -17,6 +17,7 @@ dashscope==1.23.1
 
 # tts
 edge_tts==7.0.1
+coqui_tts==0.26.0
 
 # audio
 pydub==0.25.1
