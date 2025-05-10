@@ -117,11 +117,11 @@
           <div class="layui-col-md12">
             <div class="layui-collapse" lay-filter="collapse_filter_base">
               <div class="layui-colla-item">
+
                 <div class="layui-card layui-panel">
                   <div class="layui-colla-title">基础
                     <!-- <i class="layui-icon layui-icon-tips" lay-tips="要支持的噢"></i> -->
                   </div>
-
                   <div class="layui-colla-content layui-show">
 
                     <div class="layui-form-item">
@@ -130,14 +130,6 @@
                           class="layui-badge-dot layui-bg-green"></span></label>
                       <div class="layui-input-block">
                         <input id="video_url" type="text" name="video_url" lay-verify="path" placeholder="请输入视频路径、链接"
-                          autocomplete="off" class="layui-input" lay-affix="clear">
-                      </div>
-                    </div>
-
-                    <div class="layui-form-item">
-                      <label class="layui-form-label" id="subtitle_upload">字幕</label>
-                      <div class="layui-input-block">
-                        <input id="subtitle_url" type="text" name="subtitle_url" placeholder="请输入字幕路径（可选）"
                           autocomplete="off" class="layui-input" lay-affix="clear">
                       </div>
                     </div>
@@ -164,7 +156,7 @@
                       </div>
                     </div>
 
-                    <div id="assign_type_div" class="layui-form-item" pane>
+                    <div class="layui-form-item" pane id="assign_div">
                       <label class="layui-form-label">对齐</label>
                       <div class="layui-input-block">
                         {% for item in data.audio.assign_types %}
@@ -201,7 +193,7 @@
 
           <!-- 字幕 -->
           <div class="layui-col-md6">
-            <div class="layui-collapse" lay-filter="collapse_filter_whisper">
+            <div class="layui-collapse" lay-filter="collapse_filter_asr">
               <div class="layui-colla-item">
 
                 <div class="layui-card layui-panel">
@@ -215,7 +207,7 @@
                     <div class="layui-form-item" pane>
                       <label class="layui-form-label">调试</label>
                       <div class="layui-input-inline" style="width: auto;">
-                        <input type="checkbox" name="whisper_debug" lay-skin="switch" lay-filter="switch_debug_filter">
+                        <input type="checkbox" name="asr_debug" lay-skin="switch" lay-filter="switch_debug_filter">
                       </div>
 
                       <div class="layui-form-mid layui-text-em">
@@ -225,52 +217,79 @@
                     </div>
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label">模型</label>
+                      <label class="layui-form-label">提供商</label>
                       <div class="layui-input-block">
-                        <select name="whisper_module" lay-verify="required" lay-search>
-                          <option value="">选择或搜索</option>
-                          {% for item in data.whisper.models %}
-                          <option value="{{ item }}">{{ item }}</option>
-                          {% endfor %}
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="layui-form-item">
-                      <label class="layui-form-label">准确性</label>
-                      <div class="layui-input-block">
-                        <select name="whisper_size" lay-verify="required" lay-search>
-                          <option value="">选择或搜索</option>
-                          {% for item in data.whisper.beam_sizes %}
-                          <option value="{{ item.val }}">{{ item.desc }} - {{ item.val }}</option>
-                          {% endfor %}
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="layui-form-item">
-                      <label class="layui-form-label">随机性</label>
-                      <div class="layui-input-block">
-                        <select name="whisper_temperature" lay-verify="required" lay-search>
-                          <option value="">选择或搜索</option>
-                          {% for item in data.whisper.temperatures %}
-                          <option value="{{ item.val }}">{{ item.desc }} - {{ item.val }}</option>
-                          {% endfor %}
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="layui-form-item">
-                      <label class="layui-form-label">连贯性</label>
-                      <div class="layui-input-block">
-                        <select name="whisper_length" lay-verify="required" lay-search>
-                          <option value="">选择或搜索</option>
-                          {% for item in data.whisper.chunk_lengths %}
-                          <option value="{{ item.val }}">{{ item.desc }} {{ item.duration }} - {{ item.val }}
+                        <select name="asr_provider" lay-filter="asr_provider_filter">
+                          {% for item in data.asr.providers %}
+                          <option value="{{ item.provider}}" {% if not item.enable %}disabled{% endif %}>
+                            {{ item.desc }}
                           </option>
                           {% endfor %}
                         </select>
                       </div>
+                    </div>
+
+                    <div class="layui-col-md12 layui-hide" id="sutitle_div">
+                      <div class="layui-form-item">
+                        <label class="layui-form-label" id="subtitle_upload">字幕</label>
+                        <div class="layui-input-block">
+                          <input id="subtitle_url" type="text" name="subtitle_url" placeholder="请输入字幕文件路径（SRT）"
+                            autocomplete="off" class="layui-input" lay-affix="clear">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="layui-col-md12 layui-hide" id="whisper_div">
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">模型</label>
+                        <div class="layui-input-block">
+                          <select name="asr_model" lay-verify="required" lay-search>
+                            <option value="">选择或搜索</option>
+                            {% for item in data.asr.whispers %}
+                            <option value="{{ item }}">{{ item }}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">准确性</label>
+                        <div class="layui-input-block">
+                          <select name="whisper_size" lay-verify="required" lay-search>
+                            <option value="">选择或搜索</option>
+                            {% for item in data.asr.beam_sizes %}
+                            <option value="{{ item.val }}">{{ item.desc }} - {{ item.val }}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">随机性</label>
+                        <div class="layui-input-block">
+                          <select name="whisper_temperature" lay-verify="required" lay-search>
+                            <option value="">选择或搜索</option>
+                            {% for item in data.asr.temperatures %}
+                            <option value="{{ item.val }}">{{ item.desc }} - {{ item.val }}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">连贯性</label>
+                        <div class="layui-input-block">
+                          <select name="whisper_length" lay-verify="required" lay-search>
+                            <option value="">选择或搜索</option>
+                            {% for item in data.asr.chunk_lengths %}
+                            <option value="{{ item.val }}">{{ item.desc }} {{ item.duration }} - {{ item.val }}
+                            </option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+
                     </div>
 
                     <div class="layui-form-item" pane>
@@ -350,7 +369,7 @@
                       <label class="layui-form-label">提供商</label>
                       <div class="layui-input-block">
                         <select name="llm_provider" lay-filter="llm_provider_filter">
-                          <option value="">忽略</option>
+                          <option value="ignore">人工翻译</option>
                           {% for item in data.llm.providers %}
                           <option value="{{ item.provider}}" {% if not item.enable %}disabled{% endif %}>
                             {{ item.provider }} - {{ '已配置' if item.valid else '未配置' }}
@@ -360,24 +379,62 @@
                       </div>
                     </div>
 
-                    <div class="layui-form-item">
-                      <label class="layui-form-label">模型</label>
-                      <div class="layui-input-block">
-                        <input type="text" name="llm_model" placeholder="请输入模型名称" value="" autocomplete="off"
-                          class="layui-input" lay-affix="clear">
+                    <div class="layui-col-md12 layui-hide" id="deeplx_div">
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">地址</label>
+                        <div class="layui-input-block">
+                          <input type="text" name="deeplx_server" placeholder="请输入服务地址" autocomplete="off"
+                            class="layui-input" lay-affix="clear">
+                        </div>
                       </div>
                     </div>
 
-                    <div class="layui-form-item">
-                      <label class="layui-form-label">参数</label>
-                      <div class="layui-input-inline" style="width: 142px;">
-                        <input type="number" name="llm_temperature" lay-verify="required" placeholder="随机性 [0.0,1.0]"
-                          autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
+                    <div class="layui-col-md12 layui-hide" id="llm_div">
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">模型</label>
+                        <div class="layui-input-block">
+                          <input type="text" name="llm_model" placeholder="请输入模型名称" autocomplete="off"
+                            class="layui-input" lay-affix="clear">
+                        </div>
                       </div>
-                      <div class="layui-input-inline" style="width: 142px;">
-                        <input type="number" name="llm_top_p" lay-verify="required" placeholder="多样性 [0.0,1.0]"
-                          autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">随机性</label>
+                        <div class="layui-input-block">
+                          <input type="number" name="llm_temperature" lay-verify="required" placeholder="目标值 [0.0,1.0]"
+                            autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
+                        </div>
                       </div>
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">多样性</label>
+                        <div class="layui-input-block">
+                          <input type="number" name="llm_top_p" lay-verify="required" placeholder="目标值 [0.0,1.0]"
+                            autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item" pane>
+                        <label class="layui-form-label">缓存</label>
+                        <div class="layui-input-inline" style="width: auto;">
+                          <input type="checkbox" name="llm_use_cache" lay-skin="switch">
+                        </div>
+
+                        <div class="layui-form-mid layui-text-em">
+                          <i class="layui-icon layui-icon-tips"
+                            lay-tips="{content: '提示：<br>开启后避免消耗额外token<br>', margin: '0 0 0 -10px'}"></i>
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">指令 </label>
+                        <div class="layui-input-block">
+                          <textarea name="llm_instruct" placeholder="示例：【去掉结尾的标点】、【阿拉伯数字使用中文代替】等等" lay-affix="clear"
+                            class="layui-textarea" style="min-height: 108px"></textarea>
+                        </div>
+                      </div>
+
                     </div>
 
                     <div class="layui-form-item">
@@ -385,26 +442,6 @@
                       <div class="layui-input-block">
                         <input type="number" name="llm_batch_size" lay-verify="required" placeholder="目标值 [10,100]"
                           autocomplete="off" class="layui-input" min="10" max="100" step="10" lay-affix="number">
-                      </div>
-                    </div>
-
-                    <div class="layui-form-item" pane>
-                      <label class="layui-form-label">缓存</label>
-                      <div class="layui-input-inline" style="width: auto;">
-                        <input type="checkbox" name="llm_use_cache" lay-skin="switch">
-                      </div>
-
-                      <div class="layui-form-mid layui-text-em">
-                        <i class="layui-icon layui-icon-tips"
-                          lay-tips="{content: '提示：<br>开启后避免消耗额外token<br>', margin: '0 0 0 -10px'}"></i>
-                      </div>
-                    </div>
-
-                    <div class="layui-form-item layui-form-text">
-                      <label class="layui-form-label" id="tts_play">指令 </label>
-                      <div class="layui-input-block">
-                        <textarea name="llm_instruct" placeholder="示例：【去掉结尾的标点】、【阿拉伯数字使用中文代替】等.." lay-affix="clear"
-                          class="layui-textarea" style="min-height: 108px"></textarea>
                       </div>
                     </div>
 
@@ -419,147 +456,124 @@
           <div class="layui-col-md12">
             <div class="layui-collapse" lay-filter="collapse_filter_tts">
               <div class="layui-colla-item">
+
                 <div class="layui-card layui-panel">
                   <div class="layui-colla-title">配音
                     <!-- <i class="layui-icon layui-icon-tips" lay-tips="{content: '文档', margin: '0 0 0 -10px'}"></i> -->
                   </div>
                   <div class="layui-colla-content layui-show">
 
-                    <div class="layui-row">
-
-                      <div class="layui-col-md12">
-
-                        <!-- <div class="layui-form-item" pane>
-                            <label class="layui-form-label">调试</label>
-                            <div class="layui-input-inline" style="width: auto;">
-                              <input type="checkbox" name="tts_debug" lay-skin="switch"
-                                lay-filter="switch_debug_filter">
-                            </div>
-
-                            <div class="layui-form-mid layui-text-em">
-                              <i class="layui-icon layui-icon-tips"
-                                lay-tips="{content: '注意：开启调试会中断后续步骤', margin: '0 0 0 -10px'}"></i>
-                            </div>
-                          </div> -->
-
-                        <div class="layui-form-item">
-                          <label class="layui-form-label" id="video_speaker"
-                            lay-tips="{content: '点击生成视频说话人音色', margin: '0 0 0 -10px'}">提供商 <span
-                              class="layui-badge-dot layui-bg-green"></span></label>
-                          <div class="layui-input-block">
-                            <select id="tts_provider" name="tts_provider" lay-verify="required"
-                              lay-filter="tts_provider_filter">
-                              {% for item in data.tts.providers %}
-                              {% if item.enable %}
-                              <option value="{{ item.provider}}">
-                                {{ item.desc }}
-                              </option>
-                              {% endif %}>
-                              {% endfor %}
-                            </select>
-                          </div>
-                        </div>
-
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">模型</label>
-                          <div class="layui-input-block">
-                            <input type="text" name="tts_model" placeholder="请输入模型名称" value="" autocomplete="off"
-                              class="layui-input" lay-affix="clear" disabled>
-                          </div>
-                        </div>
-
-                        <div class="layui-form-item" pane>
-                          <label class="layui-form-label">性别</label>
-                          <div class="layui-input-block">
-                            <input type="radio" name="tts_gender" value="1" lay-filter="tts_gender_filter" title="男">
-                            <input type="radio" name="tts_gender" value="2" lay-filter="tts_gender_filter" title="女">
-                          </div>
-                        </div>
-
-                        <div class="layui-form-item">
-                          <label class="layui-form-label" id="user_speaker"
-                            lay-tips="{content: '点击管理音色库', margin: '0 0 0 -10px'}">音色 <span
-                              class="layui-badge-dot layui-bg-green"></span></label>
-                          <div class="layui-input-block">
-                            <select id="tts_voice" name="tts_voice" lay-verify="required" lay-filter="tts_voice_filter"
-                              lay-search="{caseSensitive:false, fuzzy: true}">
-                              <option value="">选择或搜索</option>
-                            </select>
-                          </div>
-                        </div>
-
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">语速</label>
-                          <div class="layui-input-block">
-                            <div class="layui-input-inline">
-                              <input type="number" lay-verify="required" name="tts_rate" placeholder="目标值 [0,2]"
-                                autocomplete="off" class="layui-input" min="0" max="2" step="0.1" lay-affix="number">
-                            </div>
-                          </div>
-                        </div>
-
+                    <div class="layui-form-item">
+                      <label class="layui-form-label" id="video_speaker"
+                        lay-tips="{content: '点击生成视频说话人音色', margin: '0 0 0 -10px'}">提供商 <span
+                          class="layui-badge-dot layui-bg-green"></span></label>
+                      <div class="layui-input-block">
+                        <select id="tts_provider" name="tts_provider" lay-verify="required"
+                          lay-filter="tts_provider_filter">
+                          {% for item in data.tts.providers %}
+                          {% if item.enable %}
+                          <option value="{{ item.provider}}">
+                            {{ item.desc }}
+                          </option>
+                          {% endif %}>
+                          {% endfor %}
+                        </select>
                       </div>
+                    </div>
 
-                      <div class="layui-col-md12 layui-hide" id="e2f5_div">
-
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">采样步数</label>
-                          <div class="layui-input-block">
-                            <div class="layui-input-inline">
-                              <input type="number" lay-verify="required" name="tts_step" placeholder="目标值 [4,64]"
-                                autocomplete="off" class="layui-input" min="4" max="64" step="1" lay-affix="number">
-                            </div>
-                          </div>
-                        </div>
-
+                    <div class="layui-form-item">
+                      <label class="layui-form-label">模型</label>
+                      <div class="layui-input-block">
+                        <input type="text" name="tts_model" placeholder="请输入模型名称" autocomplete="off" class="layui-input"
+                          lay-affix="clear" disabled>
                       </div>
-                      
-                      <div class="layui-col-md12 layui-hide" id="xtts_div">
+                    </div>
 
-                        <div class="layui-form-item" pane>
-                          <label class="layui-form-label">转换</label>
-                          <div class="layui-input-inline" style="width: auto;">
-                            <input type="checkbox" name="tts_vc" lay-skin="switch" lay-filter="switch_debug_filter">
-                          </div>
+                    <div class="layui-form-item" pane>
+                      <label class="layui-form-label">性别</label>
+                      <div class="layui-input-block">
+                        <input type="radio" name="tts_gender" value="1" lay-filter="tts_gender_filter" title="男">
+                        <input type="radio" name="tts_gender" value="2" lay-filter="tts_gender_filter" title="女">
+                      </div>
+                    </div>
 
-                          <div class="layui-form-mid layui-text-em">
-                            <i class="layui-icon layui-icon-tips"
-                              lay-tips="{content: '将来源声音转换为目标的声音', margin: '0 0 0 -10px'}"></i>
-                          </div>
+                    <div class="layui-form-item">
+                      <label class="layui-form-label">音色</label>
+                      <div class="layui-input-block">
+                        <select id="tts_voice" name="tts_voice" lay-verify="required" lay-filter="tts_voice_filter"
+                          lay-search="{caseSensitive:false, fuzzy: true}">
+                          <option value="">选择或搜索</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                      <label class="layui-form-label">语速</label>
+                      <div class="layui-input-block">
+                        <div class="layui-input-inline">
+                          <input type="number" lay-verify="required" name="tts_rate" placeholder="目标值 [0,2]"
+                            autocomplete="off" class="layui-input" min="0" max="2" step="0.1" lay-affix="number">
                         </div>
                       </div>
-                      
-                      <div class="layui-col-md12 layui-hide" id="cosy_div">
+                    </div>
 
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">指令</label>
-                          <div class="layui-input-block">
-                            <input name="tts_instruct" placeholder="示例：【地区方言】、【说话风格】、【角色扮演】" lay-affix="clear"
-                              class="layui-input"></textarea>
-                          </div>
-                        </div>
-
-                        <div class="layui-form-item" pane>
-                          <label class="layui-form-label">转换</label>
-                          <div class="layui-input-inline" style="width: auto;">
-                            <input type="checkbox" name="tts_vc" lay-skin="switch" lay-filter="switch_debug_filter">
-                          </div>
-
-                          <div class="layui-form-mid layui-text-em">
-                            <i class="layui-icon layui-icon-tips"
-                              lay-tips="{content: '将来源声音转换为目标的声音', margin: '0 0 0 -10px'}"></i>
-                          </div>
-                        </div>
-                      </div>
+                    <div class="layui-col-md12 layui-hide" id="e2f5_div">
 
                       <div class="layui-form-item">
-                        <label class="layui-form-label">描述</label>
+                        <label class="layui-form-label">采样步数</label>
                         <div class="layui-input-block">
-                          <input name="tts_description" placeholder="随便写点什么" lay-affix="clear"
+                          <div class="layui-input-inline">
+                            <input type="number" lay-verify="required" name="tts_step" placeholder="目标值 [4,64]"
+                              autocomplete="off" class="layui-input" min="4" max="64" step="1" lay-affix="number">
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="layui-col-md12 layui-hide" id="xtts_div">
+
+                      <div class="layui-form-item" pane>
+                        <label class="layui-form-label">转换</label>
+                        <div class="layui-input-inline" style="width: auto;">
+                          <input type="checkbox" name="tts_vc" lay-skin="switch" lay-filter="switch_debug_filter">
+                        </div>
+
+                        <div class="layui-form-mid layui-text-em">
+                          <i class="layui-icon layui-icon-tips"
+                            lay-tips="{content: '将来源声音转换为目标的声音', margin: '0 0 0 -10px'}"></i>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="layui-col-md12 layui-hide" id="cosy_div">
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">指令</label>
+                        <div class="layui-input-block">
+                          <input name="tts_instruct" placeholder="示例：【地区方言】、【说话风格】、【角色扮演】" lay-affix="clear"
                             class="layui-input"></textarea>
                         </div>
                       </div>
 
+                      <div class="layui-form-item" pane>
+                        <label class="layui-form-label">转换</label>
+                        <div class="layui-input-inline" style="width: auto;">
+                          <input type="checkbox" name="tts_vc" lay-skin="switch" lay-filter="switch_debug_filter">
+                        </div>
+
+                        <div class="layui-form-mid layui-text-em">
+                          <i class="layui-icon layui-icon-tips"
+                            lay-tips="{content: '将来源声音转换为目标的声音', margin: '0 0 0 -10px'}"></i>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                      <label class="layui-form-label">备注</label>
+                      <div class="layui-input-block">
+                        <input name="tts_remarks" placeholder="随便写点什么" lay-affix="clear" class="layui-input"></textarea>
+                      </div>
                     </div>
 
                     <div class="layui-form-item layui-form-text">
@@ -575,6 +589,7 @@
                     <table id="tts_voices_table" class="layui-table"></table>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
@@ -583,6 +598,7 @@
           <div class="layui-col-md12">
             <div class="layui-collapse" lay-filter="collapse_filter_draft">
               <div class="layui-colla-item">
+
                 <div class="layui-card layui-panel">
                   <div class="layui-colla-title">草稿
                     <!-- <i class="layui-icon layui-icon-tips" lay-tips="要支持的噢"></i> -->
@@ -656,20 +672,25 @@
                       <label class="layui-form-label">配音字幕</label>
 
                       <div class="layui-input-inline" style="width: 120px;">
-                        <input type="number" lay-verify="required|number" name="draft_style_sdts" placeholder="文字大小"
+                        <input type="number" lay-verify="required|number" name="draft_style_dts" placeholder="文字大小"
                           autocomplete="off" class="layui-input" min="0" max="100" step="1" lay-affix="number">
                       </div>
 
                       <div class="layui-input-inline" style="width: 120px;">
-                        <input type="number" lay-verify="required|number" name="draft_style_sdty" placeholder="文字高度"
+                        <input type="number" lay-verify="required|number" name="draft_style_dty" placeholder="文字高度"
                           autocomplete="off" class="layui-input" min="-9999" max="9999" step="1" lay-affix="number">
                       </div>
 
                       <div class="layui-input-inline" style="width: 120px;">
-                        <input type="hidden" name="draft_style_sdtc" placeholder="文字颜色" class="layui-input">
-                        <div id="draft_style_sdtc_select"></div>
-                        <input type="hidden" name="draft_style_sdtbc" placeholder="边框颜色" class="layui-input">
-                        <div id="draft_style_sdtbc_select"></div>
+                        <input type="number" lay-verify="required|number" name="draft_style_dtbw" placeholder="描边粗细"
+                          autocomplete="off" class="layui-input" min="-9999" max="9999" step="1" lay-affix="number">
+                      </div>
+
+                      <div class="layui-input-inline" style="width: 120px;">
+                        <input type="hidden" name="draft_style_dtc" placeholder="文字颜色" class="layui-input">
+                        <div id="draft_style_dtc_select"></div>
+                        <input type="hidden" name="draft_style_dtbc" placeholder="边框颜色" class="layui-input">
+                        <div id="draft_style_dtbc_select"></div>
                       </div>
 
                     </div>
@@ -678,20 +699,25 @@
                       <label class="layui-form-label">原始字幕</label>
 
                       <div class="layui-input-inline" style="width: 120px;">
-                        <input type="number" lay-verify="required|number" name="draft_style_snts" placeholder="文字大小"
+                        <input type="number" lay-verify="required|number" name="draft_style_nts" placeholder="文字大小"
                           autocomplete="off" class="layui-input" min="0" max="100" step="1" lay-affix="number">
                       </div>
 
                       <div class="layui-input-inline" style="width: 120px;">
-                        <input type="number" lay-verify="required|number" name="draft_style_snty" placeholder="文字高度"
-                        autocomplete="off" class="layui-input" min="-9999" max="9999" step="1" lay-affix="number">
+                        <input type="number" lay-verify="required|number" name="draft_style_nty" placeholder="文字高度"
+                          autocomplete="off" class="layui-input" min="-9999" max="9999" step="1" lay-affix="number">
+                      </div>
+
+                      <div class="layui-input-inline" style="width: 120px;">
+                        <input type="number" lay-verify="required|number" name="draft_style_ntbw" placeholder="描边粗细"
+                          autocomplete="off" class="layui-input" min="-9999" max="9999" step="1" lay-affix="number">
                       </div>
 
                       <div class="layui-input-inline" style="width: 100px;">
-                        <input type="hidden" name="draft_style_sntc" placeholder="文字颜色" class="layui-input">
-                        <div id="draft_style_sntc_select"></div>
-                        <input type="hidden" name="draft_style_sntbc" placeholder="边框颜色" class="layui-input">
-                        <div id="draft_style_sntbc_select"></div>
+                        <input type="hidden" name="draft_style_ntc" placeholder="文字颜色" class="layui-input">
+                        <div id="draft_style_ntc_select"></div>
+                        <input type="hidden" name="draft_style_ntbc" placeholder="边框颜色" class="layui-input">
+                        <div id="draft_style_ntbc_select"></div>
                       </div>
 
                     </div>
@@ -754,66 +780,53 @@
 
   <script>
 
-    layui.use(['form', 'table', 'layer', 'element', 'upload', 'util', 'colorpicker', 'notice', 'tool'], function () {
+    layui.use(['form', 'layer', 'element', 'util', 'notice', 'tool', 'asr', 'llm', 'tts', 'draft'], function () {
 
       var form = layui.form;
-      var table = layui.table;
       var layer = layui.layer;
       var element = layui.element;
-      var upload = layui.upload;
       var util = layui.util;
-      var colorpicker = layui.colorpicker;
       var toast = layui.notice;
       var tool = layui.tool;
       var $ = layui.$;
 
+      var app = JSON.parse('{{ data.app | tojson }}')
+      console.log("%s %s %s", app.title, app.version, app.description);
+
+      var os = layui.device("os").os
+      console.debug("%s", os);
+
       let CREATORBOX = "dubbing"
       let cache = layui.data(CREATORBOX)
-      let player;
 
-      var app = JSON.parse('{{ data.app | tojson }}')
-      var os = layui.device("os").os
+      var form_data = JSON.parse('{{ data.form | tojson }}')              // 表单默认值
+      var cache_form = cache.hasOwnProperty('form') ? cache.form : {}     // 表单缓存值
+      var cache_table = cache.hasOwnProperty('table') ? cache.table : []  // 配音缓存值
+      var form_json = Object.keys(cache_form).length === 0 ? Object.assign({}, form_data) : Object.assign({}, form_data, cache_form)
 
-      var form_json_init = JSON.parse('{{ data.form | tojson }}') // 表单默认值
-      var form_json = cache.hasOwnProperty('form') ? cache.form : {}     // 表单
-      Object.keys(form_json).length === 0 ? Object.assign(form_json, form_json_init) : Object.assign(form_json_init, form_json)
+      var asr = layui.asr;
+      asr.setData(form_json)
+      asr.setProviderData(JSON.parse('{{ data.asr.providers | tojson }}'))
 
-      var table_json = cache.hasOwnProperty('table') ? cache.table : []  // 配音                      
-      console.log("%s %s %s", app.title, app.version, app.description);
-      console.debug("%s", os);
+      var llm = layui.llm;
+      llm.setData(form_json)
+      llm.setProviderData(JSON.parse('{{ data.llm.providers | tojson }}'))
+
+      var tts = layui.tts;
+      tts.setData(form_json, cache_table)
+      tts.setProviderData(JSON.parse('{{ data.tts.providers | tojson }}'))
+
+      var draft = layui.draft;
+      draft.setData(form_json)
 
       // 表单渲染
       form.val('form_filter', form_json);
 
       // 表单初始
-      var formInit = () => {
-        // 基础
-        if (form_json.mode_type == 1) {
-          $('#assign_type_div').removeClass('layui-hide');
-        } else {
-          $('#assign_type_div').addClass('layui-hide');
-        }
-        // 语音
-        if (form_json.tts_provider == "e2f5") {
-          $('#e2f5_div').removeClass('layui-hide');
-          $('#xtts_div').addClass('layui-hide');
-          $('#cosy_div').addClass('layui-hide');
-        } else if (form_json.tts_provider == "xtts") {
-          $('#e2f5_div').addClass('layui-hide');
-          $('#xtts_div').removeClass('layui-hide');
-          $('#cosy_div').addClass('layui-hide');
-        } else if (form_json.tts_provider == "cosy") {
-          $('#e2f5_div').addClass('layui-hide');
-          $('#xtts_div').addClass('layui-hide');
-          $('#cosy_div').removeClass('layui-hide');
-        } else {
-          $('#cosy_div').addClass('layui-hide');
-          $('#xtts_div').addClass('layui-hide');
-          $('#e2f5_div').addClass('layui-hide');
-        }
-        $('input[name="tts_model"]').prop("disabled", (form_json.model == ""));
-        // 草稿
-        $('input[name="draft_preview"]').attr('disabled', os == "linux");
+      if (form_json.mode_type == 1) {
+        $('#assign_div').removeClass('layui-hide');
+      } else {
+        $('#assign_div').addClass('layui-hide');
       }
 
       // 表单验证 
@@ -824,12 +837,10 @@
           }
         },
         speaker_len: function (value, elem) {
-          if ($('input[name="whisper_debug"]').is(':checked')) return;
-          if ($('input[name="speaker_debug"]').is(':checked')) return;
+          if ($('input[name="asr_debug"]').is(':checked')) return;
           if ($('input[name="llm_debug"]').is(':checked')) return;
-          if ($('input[name="tts_debug"]').is(':checked')) return;
           speaker_num = $('input[name="speaker_num"]').val()
-          if (table_json.length < speaker_num) {
+          if (cache_table.length < speaker_num) {
             return "【配音人数】不能低于【目标数量】";
           }
         },
@@ -843,64 +854,12 @@
 
       // =======================================
 
-
-      // 基础=============
-
-      // 视频-预览
-
-      util.on('id', {
-        "video_play": function (othis) {
-          tool.open("player?video_url=" + $("#video_url").val() + "&autoplay=true", "1100px", "510px");
-        }
-      });
-
-      // 视频-上传
+      // 视频上传
       tool.upload("#video_upload", "file/upload", 'video', null, null, function (response) {
         $('[name="video_url"]').val(response.data.location)
       })
 
-      // 字幕-上传
-      tool.upload("#subtitle_upload", "file/upload", 'file', 'srt', null, function (response) {
-        $('[name="subtitle_url"]').val(response.data.location)
-      })
-
-      // 导出-模式选择
-      form.on('radio(mode_type_filter)', function (data) {
-        if (data.elem.value == 1) {
-          $('#assign_type_div').removeClass('layui-hide');
-        } else {
-          $('#assign_type_div').addClass('layui-hide');
-        }
-      });
-
-      // 是否重构开关事件
-      form.on('switch(switch_rebuild_filter)', function (data) {
-        if (this.checked) {
-          toast.warning("重新构建已开启", "提示");
-          layer.tips('注意：开启重构则会删除缓存重新执行', data.othis)
-        } else {
-          toast.info("重新构建已关闭", "提示");
-        }
-      });
-
-      // 翻译=============
-
-      // 翻译-提供商选择
-      form.on('select(llm_provider_filter)', function (data) {
-        if (data.elem.value == 0) {
-          return $('input[name="llm_model"]').val("");
-        }
-        const llm_find_by_provider = (provider) => {
-          var providers_json = JSON.parse('{{ data.llm.providers | tojson }}')
-          return providers_json.find(item => item.provider.toLowerCase() === provider.toLowerCase());
-        };
-        item = llm_find_by_provider(data.elem.value);
-        form_json.llm_provider = item.provider;
-        form_json.llm_model = item.model;
-        $('input[name="llm_model"]').val(form_json.llm_model);
-      });
-
-      // 翻译-地区选择
+      // 地区选择
       form.on('select(locale_filter)', function (data) {
         if (data.elem.value != "") {
           form_json.locale = data.elem.value;
@@ -909,7 +868,7 @@
           $('input[name="tts_gender"][value="1"]').prop('checked', true);
           form.render('radio');
           // 切换语音角色
-          tool.post("tts/search", voice_search_params(form_json.tts_model, form_json.locale, form_json.tts_gender), voice_search_callback, false);
+          tts.setData(form_json, cache_table)
           // 切换试听文本
           tool.post("trans/translator", JSON.stringify({
             "provider": form_json.llm_provider,
@@ -929,346 +888,38 @@
         }
       });
 
-      // 配音=============
-
-      // 配音-提供商选择
-      form.on('select(tts_provider_filter)', function (data) {
-        item = voice_find_by_model(data.elem.value);
-        form_json.tts_provider = item.provider;
-        form_json.tts_model = item.model;
-        $('input[name="tts_model"]').val(form_json.tts_model);
-        $('input[name="tts_model"]').prop("disabled", (item.model == ""));
-        if (form_json.tts_provider == "e2f5") {
-          $('#e2f5_div').removeClass('layui-hide');
-          $('#xtts_div').addClass('layui-hide');
-          $('#cosy_div').addClass('layui-hide');
-        } else if (form_json.tts_provider == "xtts") {
-          $('#e2f5_div').addClass('layui-hide');
-          $('#xtts_div').removeClass('layui-hide');
-          $('#cosy_div').addClass('layui-hide');
-        } else if (form_json.tts_provider == "cosy") {
-          $('#e2f5_div').addClass('layui-hide');
-          $('#xtts_div').addClass('layui-hide');
-          $('#cosy_div').removeClass('layui-hide');
+      // 处理模式
+      form.on('radio(mode_type_filter)', function (data) {
+        if (data.elem.value == 1) {
+          $('#assign_div').removeClass('layui-hide');
         } else {
-          $('#cosy_div').addClass('layui-hide');
-          $('#xtts_div').addClass('layui-hide');
-          $('#e2f5_div').addClass('layui-hide');
-        }
-        tool.post("tts/search", voice_search_params(form_json.tts_model, form_json.locale, form_json.tts_gender), voice_search_callback, true)
-      });
-
-      // 配音-模型配置
-      util.on('id', {
-        "video_speaker": function (othis) {
-          layer.prompt({ title: '确定生成说话人配置？', placeholder: '请输入片段长度(单位s)', value: form_json.speaker_len, maxlength: 5 }, function (value, index, elem) {
-            if (value === '') return elem.focus();
-            value = util.escape(value)
-            form_json.speaker_len = isNaN(value) ? value : Number(value)
-            tts_model = $('#tts_model').val()
-            locale = $('select[name="locale"] option:selected').val()
-            tool.post("tts/search", voice_search_params(tts_model, locale, 0, true), voice_search_callback, true)
-            // 关闭 prompt
-            layer.close(index);
-          });
+          $('#assign_div').addClass('layui-hide');
         }
       });
 
-      // 配音-性别选择
-      form.on('radio(tts_gender_filter)', function (data) {
-        form_json.tts_gender = data.elem.value;
-        tool.post("tts/search", voice_search_params(form_json.tts_model, form_json.locale, form_json.tts_gender), voice_search_callback, true)
-      });
-
-      // 配音-语音选择
-      form.on('select(tts_voice_filter)', function (data) {
-        var selectedOption = data.elem.options[data.elem.selectedIndex]; // 获取选中的 option
-        var selectedOptgroup = selectedOption.closest('optgroup');  // 获取该选项所在的 optgroup
-        form_json.tts_voice = data.elem.value;
-        form_json.tts_type = selectedOptgroup.id
-        console.debug(form_json.tts_gender + "-" + form_json.tts_voice);
-      });
-
-      // 配音-音色配置
-      util.on('id', {
-        "user_speaker": function (othis) {
-          util.openWin({ url: "speaker" });
-        }
-      });
-
-      // 配音-试听点击
-      util.on('id', {
-        "tts_play": function (othis) {
-          form_json.tts_provider = $('#tts_provider').val()
-          form_json.tts_model = $('input[name="tts_model"]').val()
-          form_json.locale = $('select[name="locale"] option:selected').val()
-          form_json.tts_rate = $('input[name="tts_rate"]').val();
-          form_json.tts_description = $('input[name="tts_description"]').val();
-          form_json.tts_text = $("#tts_text").val()
-          form_json.tts_step = $('input[name="tts_step"]').val()
-          form_json.tts_instruct = $('input[name="tts_instruct"]').val()
-          form_json.tts_vc = $('input[name="tts_vc"]').is(':checked')
-          var isvalid = form.validate('.tts_text');
-          if (isvalid) {
-            const findItemByVoice = (data) =>
-              table_json.find(item =>
-                item.provider == data.tts_provider && item.voice == data.tts_voice && item.rate == data.tts_rate && item.text == data.tts_text && item.description == data.tts_description
-              );
-            var item = findItemByVoice(form_json)
-            if (item != null) {
-              layer.msg('正在播放缓存音频', { icon: 1 });
-              return voice_play(item.url);
-            }
-            output = `${form_json.tts_provider}_${form_json.tts_voice}_${form_json.tts_rate}_${form_json.tts_text.length}_${form_json.tts_description.length}`
-            tool.post("tts/generate", JSON.stringify({
-              "provider": form_json.tts_provider,
-              "model": form_json.tts_model,
-              "locale": form_json.locale,
-              "voice": form_json.tts_voice,
-              "rate": form_json.tts_rate,
-              "description": form_json.tts_description,
-              "text": form_json.tts_text,
-              "output": output,
-              "extra": {
-                "gender": parseInt(form_json.tts_gender),
-                "nfe_step": parseInt(form_json.tts_step),
-                "instruct_text": form_json.tts_instruct,
-                "use_vc": form_json.tts_vc,
-                "file": $("#video_url").val(),
-                "suffix": $("#suffix").val()
-              }
-            }), function (response) {
-              toast.info(output, "语音试听")
-              console.debug(response.data)
-              var url = '/file/local?url=' + response.data.path;
-              var duration = response.data.duration;
-              voice_play(url);
-              table_json.unshift({
-                provider: voice_find_by_model(form_json.tts_provider).provider,
-                model: form_json.tts_model,
-                type: voice_type(form_json.tts_type),
-                locale: form_json.locale,
-                voice: form_json.tts_voice,
-                rate: form_json.tts_rate,
-                description: form_json.tts_description,
-                text: form_json.tts_text,
-                gender: form_json.tts_gender,//-
-                nfe_step: form_json.tts_step,
-                instruct_text: form_json.tts_instruct,
-                use_vc: form_json.tts_vc,
-                duration: duration,
-                url: url
-              })
-              swapData(0, 0)
-            }, true)
-          }
-        }
-      });
-
-      // 配音-查找模型
-      var voice_find_by_model = (provider) => {
-        var models = JSON.parse('{{ data.tts.providers | tojson }}')
-        return models.find(item => item.provider.toLowerCase() === provider.toLowerCase());
-      };
-
-      // 配音-请求参数
-      var voice_search_params = (model, locale, gender, init = false) => {
-        return JSON.stringify({
-          "provider": form_json.tts_provider,
-          "model": model,
-          "locale": locale,
-          "isinit": init,
-          "extra": {
-            "gender": parseInt(gender),
-            "file": $("#video_url").val(),
-            "suffix": $("#suffix").val(),
-            "duration": form_json.speaker_len
-          },
-        });
-      };
-
-      // 配音-请求回调
-      var voice_search_callback = function (response) {
-        // 清空原有选项
-        $("#tts_voice").empty();
-        if (response.data.length == 0) {
-          toast.warning("暂无可用语音", "语音列表")
+      // 是否重构
+      form.on('switch(switch_rebuild_filter)', function (data) {
+        if (this.checked) {
+          toast.warning("重新构建已开启", "提示");
+          layer.tips('注意：开启重构则会删除缓存重新执行', data.othis)
         } else {
-          toast.success("已找到 " + response.data.length + " 条语音", "语音列表")
-        }
-        // 转换显示对象
-        const wrappedData = response.data.reduce((acc, item) => {
-          let group = voice_type(item.type);
-          let existingGroup = acc.find(g => g.group === group);
-          if (existingGroup) {
-            existingGroup.item.push(item);
-          } else {
-            acc.push({
-              type: item.type, group: group, item: [item]
-            });
-          }
-          return acc;
-        }, []);
-        // 动态条件选项
-        const optionHtml = (list) => {
-          let html = '';
-          list.forEach(obj => {
-            html += `<optgroup id="${obj.type}" label="${obj.group}">\n`;
-            obj.item.forEach(i => {
-              html += `  <option value="${i.speaker}">` + (parseInt(i.gender) === 1 ? '男' : parseInt(i.gender) === 2 ? '女' : '未知') + " - " + (i.duration ? i.locale + " - " + i.speaker + " - " + i.duration : i.speaker) + `</option>\n`;
-            });
-            html += `</optgroup>\n`;
-          });
-          return html;
-        };
-        $("#tts_voice").append(optionHtml(wrappedData))
-        form.render('select');
-        // 默认选择第一个
-        if (response.data.length > 0) {
-          form_json.tts_voice = response.data[0].speaker;
-          form_json.tts_type = response.data[0].type;
-          console.debug(form_json.tts_gender + "-" + form_json.tts_voice);
-        }
-      };
-
-      // 配音-语音类型
-      var voice_type = function (type) {
-        types = {
-          1: "内置",
-          2: "视频",
-          3: "用戶"
-        }
-        return types[type] || "未知"
-      };
-
-      // 配音-音频播放
-      var voice_play = function (url) {
-        if (player) {
-          player.unload();
-        }
-        player = new Howl({
-          src: [url],
-          format: ['wav'],
-          autoplay: true,
-          html5: true
-        });
-      };
-
-      // 配音-说话人表格
-      var inst = table.render({
-        elem: '#tts_voices_table',
-        data: table_json,
-        page: false,
-        cols: [[
-          { title: '说话人', width: 80, align: "center", templet: d => '<div title="' + d.text + ' ' + d.description + '">' + d.LAY_INDEX + '</div>' },
-          { title: '模型', width: 80, align: "center", field: 'provider', templet: d => '<div title="' + d.model + '">' + d.provider + '</div>' },
-          { title: '类型', width: 80, align: "center", field: 'type', templet: d => '<div title="' + d.text + ' ' + d.description + '">' + d.type + '</div>' },
-          { title: '性别', width: 80, align: "center", field: 'gender', templet: d => '<div title="' + d.text + ' ' + d.description + '">' + (d.gender == 1 ? '男' : d.gender == 2 ? '女' : '未知') + '</div>' },
-          { title: '语音', field: 'voice', templet: d => '<div title="' + d.text + ' ' + d.description + '">' + d.voice + '</div>' },
-          { title: '语速', width: 80, align: "center", field: 'rate', templet: d => '<div title="' + d.text + ' ' + d.description + '">' + d.rate + '</div>' },
-          { title: '时长', width: 80, align: "center", field: 'duration', templet: d => '<div title="' + d.text + ' ' + d.description + '">' + d.duration + '</div>' },
-          { title: "操作", fixed: 'right', width: "200", align: "center", toolbar: "#TPL_tts_voices_table_tools" }
-        ]],
-      });
-
-      // 配音-说话人表格工具事件
-      table.on('tool(' + inst.config.id + ')', function (obj) {
-        var data = obj.data;
-        var idx = table_json.findIndex(item => item.voice === data.voice);
-        if (obj.event === "test") {
-          voice_play(data.url);
-        } else if (obj.event === "del") {
-          layer.confirm(`确定删除【${data.voice}】么?`, { title: '提示', icon: 3 }, function (index) {
-            obj.del();
-            layer.close(index);
-            if (idx < table_json.length) {
-              table_json.splice(idx, 1);
-            }
-            swapData(0, 0);
-          });
-        } else if (obj.event === 'up') {
-          if (idx === 0) {
-            layer.msg('已置顶');
-            return;
-          }
-          swapData(idx, idx - 1);
-        } else if (obj.event === 'down') {
-          if (idx === table_json.length - 1) {
-            layer.msg('已置底');
-            return;
-          }
-          swapData(idx, idx + 1);
+          toast.info("重新构建已关闭", "提示");
         }
       });
 
-      // 配音-说话人表格移动并重载
-      var swapData = function swapData(i, j) {
-        var temp = table_json[i];
-        if (temp) {
-          table_json[i] = table_json[j];
-          table_json[j] = temp;
-        }
-        // 重载表格数据
-        layui.table.reload('tts_voices_table', {
-          data: table_json
-        });
-        // 本地存储
-        layui.data(CREATORBOX, { key: 'table', value: table_json });
-      }
-
-      // 配音-默认初始化
-      tool.post("tts/search", voice_search_params(form_json.tts_model, form_json.locale, form_json.tts_gender), voice_search_callback, true);
-
-      // 草稿=============
-
-      // 字幕原声
-      colorpicker.render({
-        elem: '#draft_style_sntc_select',
-        color: form_json.draft_style_sntc,
-        done: function (color) {
-          $('[name="draft_style_sntc"]').val(color);
-        }
-      });
-      colorpicker.render({
-        elem: '#draft_style_sntbc_select',
-        color: form_json.draft_style_sntbc,
-        done: function (color) {
-          $('[name="draft_style_sntbc"]').val(color);
-        }
-      });
-
-      // 字幕配音
-      colorpicker.render({
-        elem: '#draft_style_sdtc_select',
-        color: form_json.draft_style_sdtc,
-        done: function (color) {
-          $('[name="draft_style_sdtc"]').val(color);
-        }
-      });
-      colorpicker.render({
-        elem: '#draft_style_sdtbc_select',
-        color: form_json.draft_style_sdtbc,
-        done: function (color) {
-          $('[name="draft_style_sdtbc"]').val(color);
-        }
-      });
-
-      // =======================================
-
-      // 提交事件
+      // 提交执行
       form.on('submit(form_submit)', function (data) {
         var field = data.field;
         var elem = data.elem;
         // 本地存储
         layui.data(CREATORBOX, { key: 'form', value: field });
         // 配音
-        field.tts_dubbing = JSON.stringify(table_json);
+        field.tts_dubbing = JSON.stringify(cache_table);
         // 样式
-        style_json = {
-          "srt_dub": { "text_size": field.draft_style_sdts, "text_color": field.draft_style_sdtc, "text_border_color": field.draft_style_sdtbc, "text_transform_y": field.draft_style_sdty },
-          "srt_nat": { "text_size": field.draft_style_snts, "text_color": field.draft_style_sntc, "text_border_color": field.draft_style_sntbc, "text_transform_y": field.draft_style_snty },
-        }
-        field.draft_style = JSON.stringify(style_json);
+        field.draft_style = JSON.stringify({
+          "srt_dub": { "text_size": field.draft_style_dts, "text_color": field.draft_style_dtc, "text_border_color": field.draft_style_dtbc, "text_border_width": field.draft_style_dtbw, "text_transform_y": field.draft_style_dty },// 配音
+          "srt_nat": { "text_size": field.draft_style_nts, "text_color": field.draft_style_ntc, "text_border_color": field.draft_style_ntbc, "text_border_width": field.draft_style_ntbw, "text_transform_y": field.draft_style_nty },// 原声
+        });
         // 请求数据
         data = JSON.stringify(field, null, 2);
         console.debug(field)
@@ -1390,8 +1041,6 @@
           }
         }
       });
-
-      formInit()
 
       // =======================================
 

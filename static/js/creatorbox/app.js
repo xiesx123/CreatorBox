@@ -5,6 +5,14 @@ layui.config({
 	notice: 'mod/toastr',
 	// 常用操作
 	tool: 'mod/tools',
+	// 字幕
+	asr: 'dubbing/asr',
+	// 翻译
+	llm: 'dubbing/llm',
+	// 配音
+	tts: 'dubbing/tts',
+	// 草稿
+	draft: 'dubbing/draft',
 });
 
 // 节流函数
