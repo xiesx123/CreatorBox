@@ -869,6 +869,9 @@
           form.render('radio');
           // 切换语音角色
           tts.setData(form_json, cache_table)
+          if(form_json.llm_provider=='ignore'){
+            return layer.msg('请选择翻译提供商', { icon: 3 });
+          }
           // 切换试听文本
           tool.post("trans/translator", JSON.stringify({
             "provider": form_json.llm_provider,
