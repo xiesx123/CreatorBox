@@ -125,5 +125,14 @@ $(window).load(function () {
 		restoreCollapseState();
 		initCollapseEvent();
 	});
+
+	// // 百度统计
+    // var _hmt = _hmt || [];
+    // (function () {
+    //   var hm = document.createElement("script");
+    //   hm.src = "https://hm.baidu.com/hm.js?0f28a627b93e9c2e599680e1827e1314";
+    //   var s = document.getElementsByTagName("script")[0];
+    //   s.parentNode.insertBefore(hm, s);
+    // })();	
 });
 
