@@ -32,14 +32,10 @@
     <tbody>
         <tr>
             <td align="center">
-                <a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">
-                    <img src="docs/images/debug.jpg" alt="点击观看视频">
-                </a>
+                <img src="docs/images/debug.jpg" alt="点击观看视频">
             </td>
             <td align="center">
-                <a href="https://www.bilibili.com/video/BV1gyfNYsEdk/?t=56s">
-                  <img src="docs/images/jianying.jpg" alt="点击观看视频">
-                </a>
+                <img src="docs/images/jianying.jpg" alt="点击观看视频">
             </td>
         </tr>
     </tbody>
@@ -50,19 +46,59 @@
 <table>
     <thead>
         <tr>
-            <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 中文原声</th>
-            <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 中英混音</th>
+            <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Original</th>
+            <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ Dubbing</th>
         </tr>
     </thead>
+    <!-- 大话西游 -->
     <tbody>
         <tr>
             <td align="center"><video
-                    src="https://github.com/user-attachments/assets/5e6371f4-4b46-4e31-b5a3-01c1df844be3"></video></td>
+                    src="https://github.com/user-attachments/assets/b6e30353-5b08-4c12-8407-8d759233d193"></video></td>
             <td align="center"><video
-                    src="https://github.com/user-attachments/assets/91608e30-6e73-4f7d-844b-f7504ee23da6"></video></td>
+                    src="https://github.com/user-attachments/assets/f57363c5-3110-4b1b-be3f-769c0e65fe9a"></video></td>
         </tr>
     </tbody>
+   <!--  硬核博主 -->
+   <tbody>
+        <tr>
+            <td align="center"><video
+                    src="https://github.com/user-attachments/assets/f3f5cda3-ad17-413e-aea5-0696bef39e8c"></video></td>
+            <td align="center"><video
+                    src="https://github.com/user-attachments/assets/2dc0e005-f31d-49cc-8967-182a0b652b37"></video></td>
+        </tr>
+    </tbody>
+
+   <!-- 求职面试 -->
+   <tbody>
+        <tr>
+            <td align="center"><video
+                    src="https://github.com/user-attachments/assets/327b819c-c811-4265-960b-83117e0da670"></video></td>
+            <td align="center"><video
+                    src="https://github.com/user-attachments/assets/ed6449df-dd04-45f0-9ab1-ce4a2a5b600c"></video></td>
+        </tr>
+    </tbody>
+    <!-- 黑神话-->
+   <tbody>
+        <tr>
+            <td align="center"><video
+                    src="https://github.com/user-attachments/assets/c68c376e-54ef-4a6b-a195-fbe926c0de37"></video></td>
+            <td align="center"><video
+                    src="https://github.com/user-attachments/assets/e9424df6-0986-4118-af82-b5f140398471"></video></td>
+        </tr>
+    </tbody>
+    <!-- 商品介绍-->
+   <tbody>
+        <tr>
+            <td align="center"><video
+                    src="https://github.com/user-attachments/assets/a1c9ea12-a3a0-4d0d-9d68-43659e6cc180"></video></td>
+            <td align="center"><video
+                    src="https://github.com/user-attachments/assets/6babdb77-90db-4ea7-b6eb-9614438fa0f1"></video></td>
+        </tr>
+    </tbody>
+
 </table>
+
 
 </div>
 
