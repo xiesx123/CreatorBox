@@ -293,28 +293,30 @@
                     </div>
 
                     <div class="layui-form-item" pane>
-                      <label class="layui-form-label">使用数量</label>
-                      <div class="layui-input-inline" style="width: auto;">
-                        <input type="checkbox" name="speaker_use_num" lay-skin="switch">
-                      </div>
-
-                      <div class="layui-form-mid layui-text-em">
-                        <i class="layui-icon layui-icon-tips"
-                          lay-tips="{content: '提示：<br>数量：当确定说话人数量时使用<br>范围：当不确定说话人数量时使用<br>', margin: '0 0 0 -10px'}"></i>
-                      </div>
-                    </div>
-
-                    <div class="layui-form-item">
-                      <label class="layui-form-label">说话人数量</label>
+                      <label class="layui-form-label">降噪</label>
                       <div class="layui-input-block">
-                        <input type="number" name="speaker_num" lay-verify="required|number|speaker_len"
-                          placeholder="目标值 [1,10]" autocomplete="off" class="layui-input" min="1" max="10" step="1"
+                        <input type="number" name="noise_thresh" lay-verify="required|number"
+                          placeholder="目标值 [0,5]" autocomplete="off" class="layui-input" min="0" max="5" step="0.1"
                           lay-affix="number">
                       </div>
                     </div>
 
+                    <div class="layui-form-item" pane>
+                      <label class="layui-form-label">对齐</label>
+                      <div class="layui-input-block">
+                        <input type="checkbox" name="align_enable" lay-skin="switch">
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item" pane>
+                      <label class="layui-form-label">说话人</label>
+                      <div class="layui-input-block">
+                        <input type="checkbox" name="speaker_use_num" lay-skin="switch">
+                      </div>
+                    </div>
+
                     <div class="layui-form-item">
-                      <label class="layui-form-label">说话人范围</label>
+                      <label class="layui-form-label">区间</label>
                       <div class="layui-input-inline" style="width: 142px;">
                         <input type="number" lay-verify="required|number|speaker_len" name="speaker_min"
                           placeholder="最小值" autocomplete="off" class="layui-input" min="1" max="10" step="1"
@@ -323,15 +325,6 @@
                       <div class="layui-input-inline" style="width: 142px;">
                         <input type="number" lay-verify="required|number|speaker_len" name="speaker_max"
                           placeholder="最大值" autocomplete="off" class="layui-input" min="1" max="10" step="1"
-                          lay-affix="number">
-                      </div>
-                    </div>
-
-                    <div class="layui-form-item" pane>
-                      <label class="layui-form-label">说话声降噪</label>
-                      <div class="layui-input-block">
-                        <input type="number" name="speaker_noise_thresh" lay-verify="required|number"
-                          placeholder="目标值 [0,5]" autocomplete="off" class="layui-input" min="0" max="5" step="0.1"
                           lay-affix="number">
                       </div>
                     </div>
