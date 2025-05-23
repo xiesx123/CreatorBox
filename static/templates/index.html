@@ -293,30 +293,30 @@
                     </div>
 
                     <div class="layui-form-item" pane>
-                      <label class="layui-form-label">降噪</label>
+                      <label class="layui-form-label">人声降噪</label>
                       <div class="layui-input-block">
-                        <input type="number" name="noise_thresh" lay-verify="required|number"
-                          placeholder="目标值 [0,5]" autocomplete="off" class="layui-input" min="0" max="5" step="0.1"
-                          lay-affix="number">
+                        <input type="number" name="noise_thresh" lay-verify="required|number" placeholder="目标值 [0,5]"
+                          autocomplete="off" class="layui-input" min="0" max="5" step="0.1" lay-affix="number">
                       </div>
                     </div>
 
                     <div class="layui-form-item" pane>
-                      <label class="layui-form-label">对齐</label>
+                      <label class="layui-form-label">声纹对齐</label>
                       <div class="layui-input-block">
                         <input type="checkbox" name="align_enable" lay-skin="switch">
                       </div>
                     </div>
 
                     <div class="layui-form-item" pane>
-                      <label class="layui-form-label">说话人</label>
+                      <label class="layui-form-label">说话人数量</label>
                       <div class="layui-input-block">
-                        <input type="checkbox" name="speaker_use_num" lay-skin="switch">
+                        <input type="checkbox" name="speaker_use_num" lay-skin="switch"
+                          lay-filter="switch_speaker_filter">
                       </div>
                     </div>
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label">区间</label>
+                      <label class="layui-form-label">说话人区间</label>
                       <div class="layui-input-inline" style="width: 142px;">
                         <input type="number" lay-verify="required|number|speaker_len" name="speaker_min"
                           placeholder="最小值" autocomplete="off" class="layui-input" min="1" max="10" step="1"
@@ -326,6 +326,10 @@
                         <input type="number" lay-verify="required|number|speaker_len" name="speaker_max"
                           placeholder="最大值" autocomplete="off" class="layui-input" min="1" max="10" step="1"
                           lay-affix="number">
+                      </div>
+                      <div class="layui-form-mid layui-text-em">
+                        <i class="layui-icon layui-icon-tips"
+                          lay-tips="{content: '注意：最小值需要大于 > 1下生效 <br> 启用数量时，会使用最小值指定数量；反之，不开启则会使用范围区间', margin: '0 0 0 -10px'}"></i>
                       </div>
                     </div>
 
@@ -416,7 +420,7 @@
 
                         <div class="layui-form-mid layui-text-em">
                           <i class="layui-icon layui-icon-tips"
-                            lay-tips="{content: '提示：<br>开启后避免消耗额外token<br>', margin: '0 0 0 -10px'}"></i>
+                            lay-tips="{content: '提示：<br>启用可避免重复请求，防止消耗额外Token<br>', margin: '0 0 0 -10px'}"></i>
                         </div>
                       </div>
 
@@ -526,17 +530,6 @@
 
                     <div class="layui-col-md12 layui-hide" id="xtts_div">
 
-                      <div class="layui-form-item" pane>
-                        <label class="layui-form-label">转换</label>
-                        <div class="layui-input-inline" style="width: auto;">
-                          <input type="checkbox" name="tts_vc" lay-skin="switch" lay-filter="switch_debug_filter">
-                        </div>
-
-                        <div class="layui-form-mid layui-text-em">
-                          <i class="layui-icon layui-icon-tips"
-                            lay-tips="{content: '将来源声音转换为目标的声音', margin: '0 0 0 -10px'}"></i>
-                        </div>
-                      </div>
                     </div>
 
                     <div class="layui-col-md12 layui-hide" id="cosy_div">
@@ -549,16 +542,17 @@
                         </div>
                       </div>
 
-                      <div class="layui-form-item" pane>
-                        <label class="layui-form-label">转换</label>
-                        <div class="layui-input-inline" style="width: auto;">
-                          <input type="checkbox" name="tts_vc" lay-skin="switch" lay-filter="switch_debug_filter">
-                        </div>
+                    </div>
 
-                        <div class="layui-form-mid layui-text-em">
-                          <i class="layui-icon layui-icon-tips"
-                            lay-tips="{content: '将来源声音转换为目标的声音', margin: '0 0 0 -10px'}"></i>
-                        </div>
+                    <div class="layui-form-item" pane id="opt_vc">
+                      <label class="layui-form-label">转换</label>
+                      <div class="layui-input-inline" style="width: auto;">
+                        <input type="checkbox" name="tts_vc" lay-skin="switch" lay-filter="switch_debug_filter">
+                      </div>
+
+                      <div class="layui-form-mid layui-text-em">
+                        <i class="layui-icon layui-icon-tips"
+                          lay-tips="{content: '将来源声音转换为目标的声音', margin: '0 0 0 -10px'}"></i>
                       </div>
                     </div>
 
@@ -862,7 +856,7 @@
           form.render('radio');
           // 切换语音角色
           tts.setData(form_json, cache_table)
-          if(form_json.llm_provider=='ignore'){
+          if (form_json.llm_provider == 'ignore') {
             return layer.msg('请选择翻译提供商', { icon: 3 });
           }
           // 切换试听文本

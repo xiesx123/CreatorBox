@@ -310,25 +310,26 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
             divXtts = $('#xtts_div')
             divE2f5 = $('#e2f5_div')
             divCosy = $('#cosy_div')
+            optVc = $('#opt_vc') //vc
 
-            if (provider == "xtts") {
-                divXtts.removeClass('layui-hide');
-                divE2f5.addClass('layui-hide');
-                divCosy.addClass('layui-hide');
-            }
-
-            else if (provider == "e2f5") {
-                divXtts.addClass('layui-hide');
+            if (provider == "e2f5") {
                 divE2f5.removeClass('layui-hide');
-                divCosy.addClass('layui-hide');
-            }
-
-            else if (provider == "cosy") {
                 divXtts.addClass('layui-hide');
+                divCosy.addClass('layui-hide');
+                optVc.addClass('layui-hide');// vc
+            } 
+            else if (provider == "xtts") {
                 divE2f5.addClass('layui-hide');
+                divXtts.removeClass('layui-hide');
+                divCosy.addClass('layui-hide');
+                optVc.removeClass('layui-hide');// vc
+            } 
+            else if (provider == "cosy") {
+                divE2f5.addClass('layui-hide');
+                divXtts.addClass('layui-hide');
                 divCosy.removeClass('layui-hide');
+                optVc.removeClass('layui-hide');// vc
             }
-
             else {
                 divXtts.addClass('layui-hide');
                 divE2f5.addClass('layui-hide');
