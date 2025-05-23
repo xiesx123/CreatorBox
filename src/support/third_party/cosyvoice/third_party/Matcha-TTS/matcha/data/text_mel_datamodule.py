@@ -1,8 +1,6 @@
 import random
-from pathlib import Path
 from typing import Any, Dict, Optional
 
-import numpy as np
 import torch
 import torchaudio as ta
 from lightning import LightningDataModule
@@ -41,7 +39,6 @@ class TextMelDataModule(LightningDataModule):
         f_max,
         data_statistics,
         seed,
-        load_durations,
     ):
         super().__init__()
 
@@ -71,7 +68,6 @@ class TextMelDataModule(LightningDataModule):
             self.hparams.f_max,
             self.hparams.data_statistics,
             self.hparams.seed,
-            self.hparams.load_durations,
         )
         self.validset = TextMelDataset(  # pylint: disable=attribute-defined-outside-init
             self.hparams.valid_filelist_path,
@@ -87,7 +83,6 @@ class TextMelDataModule(LightningDataModule):
             self.hparams.f_max,
             self.hparams.data_statistics,
             self.hparams.seed,
-            self.hparams.load_durations,
         )
 
     def train_dataloader(self):
@@ -114,7 +109,7 @@ class TextMelDataModule(LightningDataModule):
         """Clean up after fit or test."""
         pass  # pylint: disable=unnecessary-pass
 
-    def state_dict(self):
+    def state_dict(self):  # pylint: disable=no-self-use
         """Extra things to save to checkpoint."""
         return {}
 
@@ -139,7 +134,6 @@ class TextMelDataset(torch.utils.data.Dataset):
         f_max=8000,
         data_parameters=None,
         seed=None,
-        load_durations=False,
     ):
         self.filepaths_and_text = parse_filelist(filelist_path)
         self.n_spks = n_spks
@@ -152,8 +146,6 @@ class TextMelDataset(torch.utils.data.Dataset):
         self.win_length = win_length
         self.f_min = f_min
         self.f_max = f_max
-        self.load_durations = load_durations
-
         if data_parameters is not None:
             self.data_parameters = data_parameters
         else:
@@ -172,29 +164,10 @@ class TextMelDataset(torch.utils.data.Dataset):
             filepath, text = filepath_and_text[0], filepath_and_text[1]
             spk = None
 
-        text, cleaned_text = self.get_text(text, add_blank=self.add_blank)
+        text = self.get_text(text, add_blank=self.add_blank)
         mel = self.get_mel(filepath)
 
-        durations = self.get_durations(filepath, text) if self.load_durations else None
-
-        return {"x": text, "y": mel, "spk": spk, "filepath": filepath, "x_text": cleaned_text, "durations": durations}
-
-    def get_durations(self, filepath, text):
-        filepath = Path(filepath)
-        data_dir, name = filepath.parent.parent, filepath.stem
-
-        try:
-            dur_loc = data_dir / "durations" / f"{name}.npy"
-            durs = torch.from_numpy(np.load(dur_loc).astype(int))
-
-        except FileNotFoundError as e:
-            raise FileNotFoundError(
-                f"Tried loading the durations but durations didn't exist at {dur_loc}, make sure you've generate the durations first using: python matcha/utils/get_durations_from_trained_model.py \n"
-            ) from e
-
-        assert len(durs) == len(text), f"Length of durations {len(durs)} and text {len(text)} do not match"
-
-        return durs
+        return {"x": text, "y": mel, "spk": spk}
 
     def get_mel(self, filepath):
         audio, sr = ta.load(filepath)
@@ -214,11 +187,11 @@ class TextMelDataset(torch.utils.data.Dataset):
         return mel
 
     def get_text(self, text, add_blank=True):
-        text_norm, cleaned_text = text_to_sequence(text, self.cleaners)
+        text_norm = text_to_sequence(text, self.cleaners)
         if self.add_blank:
             text_norm = intersperse(text_norm, 0)
         text_norm = torch.IntTensor(text_norm)
-        return text_norm, cleaned_text
+        return text_norm
 
     def __getitem__(self, index):
         datapoint = self.get_datapoint(self.filepaths_and_text[index])
@@ -234,18 +207,15 @@ class TextMelBatchCollate:
 
     def __call__(self, batch):
         B = len(batch)
-        y_max_length = max([item["y"].shape[-1] for item in batch])  # pylint: disable=consider-using-generator
+        y_max_length = max([item["y"].shape[-1] for item in batch])
         y_max_length = fix_len_compatibility(y_max_length)
-        x_max_length = max([item["x"].shape[-1] for item in batch])  # pylint: disable=consider-using-generator
+        x_max_length = max([item["x"].shape[-1] for item in batch])
         n_feats = batch[0]["y"].shape[-2]
 
         y = torch.zeros((B, n_feats, y_max_length), dtype=torch.float32)
         x = torch.zeros((B, x_max_length), dtype=torch.long)
-        durations = torch.zeros((B, x_max_length), dtype=torch.long)
-
         y_lengths, x_lengths = [], []
         spks = []
-        filepaths, x_texts = [], []
         for i, item in enumerate(batch):
             y_, x_ = item["y"], item["x"]
             y_lengths.append(y_.shape[-1])
@@ -253,22 +223,9 @@ class TextMelBatchCollate:
             y[i, :, : y_.shape[-1]] = y_
             x[i, : x_.shape[-1]] = x_
             spks.append(item["spk"])
-            filepaths.append(item["filepath"])
-            x_texts.append(item["x_text"])
-            if item["durations"] is not None:
-                durations[i, : item["durations"].shape[-1]] = item["durations"]
 
         y_lengths = torch.tensor(y_lengths, dtype=torch.long)
         x_lengths = torch.tensor(x_lengths, dtype=torch.long)
         spks = torch.tensor(spks, dtype=torch.long) if self.n_spks > 1 else None
 
-        return {
-            "x": x,
-            "x_lengths": x_lengths,
-            "y": y,
-            "y_lengths": y_lengths,
-            "spks": spks,
-            "filepaths": filepaths,
-            "x_texts": x_texts,
-            "durations": durations if not torch.eq(durations, 0).all() else None,
-        }
+        return {"x": x, "x_lengths": x_lengths, "y": y, "y_lengths": y_lengths, "spks": spks}

@@ -4,10 +4,6 @@
 import torch
 
 
-class ModeException(Exception):
-    pass
-
-
 class Denoiser(torch.nn.Module):
     """Removes model bias from audio produced with waveglow"""
 
@@ -24,7 +20,7 @@ class Denoiser(torch.nn.Module):
         elif mode == "normal":
             mel_input = torch.randn((1, 80, 88), dtype=dtype, device=device)
         else:
-            raise ModeException(f"Mode {mode} if not supported")
+            raise Exception(f"Mode {mode} if not supported")
 
         def stft_fn(audio, n_fft, hop_length, win_length, window):
             spec = torch.stft(

@@ -4,7 +4,7 @@ import random
 
 import torch
 
-import matcha.utils.monotonic_align as monotonic_align  # pylint: disable=consider-using-from-import
+import matcha.utils.monotonic_align as monotonic_align
 from matcha import utils
 from matcha.models.baselightningmodule import BaseLightningClass
 from matcha.models.components.flow_matching import CFM
@@ -35,7 +35,6 @@ class MatchaTTS(BaseLightningClass):  # 🍵
         optimizer=None,
         scheduler=None,
         prior_loss=True,
-        use_precomputed_durations=False,
     ):
         super().__init__()
 
@@ -47,7 +46,6 @@ class MatchaTTS(BaseLightningClass):  # 🍵
         self.n_feats = n_feats
         self.out_size = out_size
         self.prior_loss = prior_loss
-        self.use_precomputed_durations = use_precomputed_durations
 
         if n_spks > 1:
             self.spk_emb = torch.nn.Embedding(n_spks, spk_emb_dim)
@@ -106,7 +104,6 @@ class MatchaTTS(BaseLightningClass):  # 🍵
                 # Lengths of mel spectrograms
                 "rtf": float,
                 # Real-time factor
-            }
         """
         # For RTF computation
         t = dt.datetime.now()
@@ -150,10 +147,10 @@ class MatchaTTS(BaseLightningClass):  # 🍵
             "rtf": rtf,
         }
 
-    def forward(self, x, x_lengths, y, y_lengths, spks=None, out_size=None, cond=None, durations=None):
+    def forward(self, x, x_lengths, y, y_lengths, spks=None, out_size=None, cond=None):
         """
         Computes 3 losses:
-            1. duration loss: loss between predicted token durations and those extracted by Monotonic Alignment Search (MAS).
+            1. duration loss: loss between predicted token durations and those extracted by Monotinic Alignment Search (MAS).
             2. prior loss: loss between mel-spectrogram and encoder outputs.
             3. flow matching loss: loss between mel-spectrogram and decoder outputs.
 
@@ -182,20 +179,17 @@ class MatchaTTS(BaseLightningClass):  # 🍵
         y_mask = sequence_mask(y_lengths, y_max_length).unsqueeze(1).to(x_mask)
         attn_mask = x_mask.unsqueeze(-1) * y_mask.unsqueeze(2)
 
-        if self.use_precomputed_durations:
-            attn = generate_path(durations.squeeze(1), attn_mask.squeeze(1))
-        else:
-            # Use MAS to find most likely alignment `attn` between text and mel-spectrogram
-            with torch.no_grad():
-                const = -0.5 * math.log(2 * math.pi) * self.n_feats
-                factor = -0.5 * torch.ones(mu_x.shape, dtype=mu_x.dtype, device=mu_x.device)
-                y_square = torch.matmul(factor.transpose(1, 2), y**2)
-                y_mu_double = torch.matmul(2.0 * (factor * mu_x).transpose(1, 2), y)
-                mu_square = torch.sum(factor * (mu_x**2), 1).unsqueeze(-1)
-                log_prior = y_square - y_mu_double + mu_square + const
+        # Use MAS to find most likely alignment `attn` between text and mel-spectrogram
+        with torch.no_grad():
+            const = -0.5 * math.log(2 * math.pi) * self.n_feats
+            factor = -0.5 * torch.ones(mu_x.shape, dtype=mu_x.dtype, device=mu_x.device)
+            y_square = torch.matmul(factor.transpose(1, 2), y**2)
+            y_mu_double = torch.matmul(2.0 * (factor * mu_x).transpose(1, 2), y)
+            mu_square = torch.sum(factor * (mu_x**2), 1).unsqueeze(-1)
+            log_prior = y_square - y_mu_double + mu_square + const
 
-                attn = monotonic_align.maximum_path(log_prior, attn_mask.squeeze(1))
-                attn = attn.detach()  # b, t_text, T_mel
+            attn = monotonic_align.maximum_path(log_prior, attn_mask.squeeze(1))
+            attn = attn.detach()
 
         # Compute loss between predicted log-scaled durations and those obtained from MAS
         # refered to as prior loss in the paper
@@ -242,4 +236,4 @@ class MatchaTTS(BaseLightningClass):  # 🍵
         else:
             prior_loss = 0
 
-        return dur_loss, prior_loss, diff_loss, attn
+        return dur_loss, prior_loss, diff_loss

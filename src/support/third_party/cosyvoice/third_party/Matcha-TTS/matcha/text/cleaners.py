@@ -15,6 +15,7 @@ import logging
 import re
 
 import phonemizer
+import piper_phonemize
 from unidecode import unidecode
 
 # To avoid excessive logging we set the log level of the phonemizer package to Critical
@@ -36,12 +37,9 @@ global_phonemizer = phonemizer.backend.EspeakBackend(
 # Regular expression matching whitespace:
 _whitespace_re = re.compile(r"\s+")
 
-# Remove brackets
-_brackets_re = re.compile(r"[\[\]\(\)\{\}]")
-
 # List of (regular expression, replacement) pairs for abbreviations:
 _abbreviations = [
-    (re.compile(f"\\b{x[0]}\\.", re.IGNORECASE), x[1])
+    (re.compile("\\b%s\\." % x[0], re.IGNORECASE), x[1])
     for x in [
         ("mrs", "misess"),
         ("mr", "mister"),
@@ -75,10 +73,6 @@ def lowercase(text):
     return text.lower()
 
 
-def remove_brackets(text):
-    return re.sub(_brackets_re, "", text)
-
-
 def collapse_whitespace(text):
     return re.sub(_whitespace_re, " ", text)
 
@@ -108,37 +102,15 @@ def english_cleaners2(text):
     text = lowercase(text)
     text = expand_abbreviations(text)
     phonemes = global_phonemizer.phonemize([text], strip=True, njobs=1)[0]
-    # Added in some cases espeak is not removing brackets
-    phonemes = remove_brackets(phonemes)
     phonemes = collapse_whitespace(phonemes)
     return phonemes
 
 
-def ipa_simplifier(text):
-    replacements = [
-        ("ɐ", "ə"),
-        ("ˈə", "ə"),
-        ("ʤ", "dʒ"),
-        ("ʧ", "tʃ"),
-        ("ᵻ", "ɪ"),
-    ]
-    for replacement in replacements:
-        text = text.replace(replacement[0], replacement[1])
-    phonemes = collapse_whitespace(text)
+def english_cleaners_piper(text):
+    """Pipeline for English text, including abbreviation expansion. + punctuation + stress"""
+    text = convert_to_ascii(text)
+    text = lowercase(text)
+    text = expand_abbreviations(text)
+    phonemes = "".join(piper_phonemize.phonemize_espeak(text=text, voice="en-US")[0])
+    phonemes = collapse_whitespace(phonemes)
     return phonemes
-
-
-# I am removing this due to incompatibility with several version of python
-# However, if you want to use it, you can uncomment it
-# and install piper-phonemize with the following command:
-# pip install piper-phonemize
-
-# import piper_phonemize
-# def english_cleaners_piper(text):
-#     """Pipeline for English text, including abbreviation expansion. + punctuation + stress"""
-#     text = convert_to_ascii(text)
-#     text = lowercase(text)
-#     text = expand_abbreviations(text)
-#     phonemes = "".join(piper_phonemize.phonemize_espeak(text=text, voice="en-US")[0])
-#     phonemes = collapse_whitespace(phonemes)
-#     return phonemes

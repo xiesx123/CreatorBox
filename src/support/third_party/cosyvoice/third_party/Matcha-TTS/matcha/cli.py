@@ -48,7 +48,7 @@ def plot_spectrogram_to_numpy(spectrogram, filename):
 def process_text(i: int, text: str, device: torch.device):
     print(f"[{i}] - Input text: {text}")
     x = torch.tensor(
-        intersperse(text_to_sequence(text, ["english_cleaners2"])[0], 0),
+        intersperse(text_to_sequence(text, ["english_cleaners2"]), 0),
         dtype=torch.long,
         device=device,
     )[None]
@@ -114,10 +114,10 @@ def load_matcha(model_name, checkpoint_path, device):
     return model
 
 
-def to_waveform(mel, vocoder, denoiser=None, denoiser_strength=0.00025):
+def to_waveform(mel, vocoder, denoiser=None):
     audio = vocoder(mel).clamp(-1, 1)
     if denoiser is not None:
-        audio = denoiser(audio.squeeze(), strength=denoiser_strength).cpu().squeeze()
+        audio = denoiser(audio.squeeze(), strength=0.00025).cpu().squeeze()
 
     return audio.cpu().squeeze()
 
@@ -326,17 +326,16 @@ def batched_synthesis(args, device, model, vocoder, denoiser, texts, spk):
     for i, batch in enumerate(dataloader):
         i = i + 1
         start_t = dt.datetime.now()
-        b = batch["x"].shape[0]
         output = model.synthesise(
             batch["x"].to(device),
             batch["x_lengths"].to(device),
             n_timesteps=args.steps,
             temperature=args.temperature,
-            spks=spk.expand(b) if spk is not None else spk,
+            spks=spk,
             length_scale=args.speaking_rate,
         )
 
-        output["waveform"] = to_waveform(output["mel"], vocoder, denoiser, args.denoiser_strength)
+        output["waveform"] = to_waveform(output["mel"], vocoder, denoiser)
         t = (dt.datetime.now() - start_t).total_seconds()
         rtf_w = t * 22050 / (output["waveform"].shape[-1])
         print(f"[🍵-Batch: {i}] Matcha-TTS RTF: {output['rtf']:.4f}")
@@ -377,7 +376,7 @@ def unbatched_synthesis(args, device, model, vocoder, denoiser, texts, spk):
             spks=spk,
             length_scale=args.speaking_rate,
         )
-        output["waveform"] = to_waveform(output["mel"], vocoder, denoiser, args.denoiser_strength)
+        output["waveform"] = to_waveform(output["mel"], vocoder, denoiser)
         # RTF with HiFiGAN
         t = (dt.datetime.now() - start_t).total_seconds()
         rtf_w = t * 22050 / (output["waveform"].shape[-1])
