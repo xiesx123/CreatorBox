@@ -58,20 +58,30 @@ layui.define(['form', 'tool'], function (exports) {
             provider = form_json.llm_provider
             divDeeplx = $('#deeplx_div')
             divLlm = $('#llm_div')
+            divOpt = $('#opt_div1')
 
-            if (provider == "Deeplx") {
+            if (provider == "ignore") {
+                divDeeplx.addClass('layui-hide');
+                divLlm.addClass('layui-hide');
+                divOpt.addClass('layui-hide');
+            }
+
+            else if (provider == "Deeplx") {
                 divDeeplx.removeClass('layui-hide');
                 divLlm.addClass('layui-hide');
+                divOpt.removeClass('layui-hide');
             }
 
             else if (provider == "Gemini" || provider == "DashScope") {
                 divDeeplx.addClass('layui-hide');
                 divLlm.removeClass('layui-hide');
+                divOpt.removeClass('layui-hide');
             }
 
             else {
                 divDeeplx.addClass('layui-hide');
                 divLlm.addClass('layui-hide');
+                divOpt.addClass('layui-hide');
             }
         },
     };

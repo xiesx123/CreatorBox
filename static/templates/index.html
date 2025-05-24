@@ -435,10 +435,13 @@
                     </div>
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label">批量</label>
-                      <div class="layui-input-block">
-                        <input type="number" name="llm_batch_size" lay-verify="required" placeholder="目标值 [10,100]"
-                          autocomplete="off" class="layui-input" min="10" max="100" step="10" lay-affix="number">
+
+                      <div class="layui-hide" id="opt_div">
+                        <label class="layui-form-label">批量</label>
+                        <div class="layui-input-block">
+                          <input type="number" name="llm_batch_size" lay-verify="required" placeholder="目标值 [10,100]"
+                            autocomplete="off" class="layui-input" min="10" max="100" step="10" lay-affix="number">
+                        </div>
                       </div>
                     </div>
 
