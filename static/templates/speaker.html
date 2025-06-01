@@ -247,7 +247,7 @@
 
             // 说话人=============
 
-            // 说话人-数据表格
+            // 数据表格
             var inst = table.render({
                 elem: '#table',
                 url: '/spk/page',
@@ -278,7 +278,7 @@
                 ]],
             });
 
-            // 说话人-工具栏事件
+            // 工具栏事件
             table.on('toolbar(' + inst.config.id + ')', function (obj) {
                 var id = obj.config.id;
                 var checkStatus = table.checkStatus(id);
@@ -311,7 +311,7 @@
                 };
             });
 
-            // 说话人-表格工具事件
+            // 表格工具事件
             table.on('tool(' + inst.config.id + ')', function (obj) {
                 var id = obj.config.id;
                 var data = obj.data;
@@ -336,7 +336,7 @@
                 }
             });
 
-            // 说话人-状态操作
+            // 状态操作
             form.on('checkbox(table_status_filter)', function (obj) {
                 id = obj.elem.attributes['mid'].nodeValue;
                 data = JSON.stringify({ "id": id, "status": obj.elem.checked ? 1 : 0 });
@@ -350,7 +350,7 @@
                 }, true)
             });
 
-            // 说话人-音频播放
+            // 音频播放
             var voice_play = function (url) {
                 if (player) {
                     player.unload();

@@ -1,6 +1,6 @@
 __pycache__
-logs/
-static/watermark.png
-webapp/
 *.log
+logs/
 models/
+static/watermark.png
+webapp
