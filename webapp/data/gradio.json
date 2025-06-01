@@ -1,31 +1,28 @@
 {
-    "gradio": {
-        "1": {
-            "icon": "lucide:mic-vocal",
-            "name": "spleeter",
-            "description": "Vocal Noise Separation",
-            "module": "src.support.spleeter_",
-            "attr": "init",
-            "path": "/spleeter",
-            "status": 0
-        },
-        "2": {
-            "icon": "icon-park-outline:file-removal",
-            "name": "vmr",
-            "description": "Video Mark Removal",
-            "module": "src.support.vmr_",
-            "attr": "init",
-            "path": "/vmr",
-            "status": 0
-        },
-        "3": {
-            "icon": "solar:subtitles-outline",
-            "name": "vse",
-            "description": "Video Subtitle Extractor",
-            "module": "src.support.vse_",
-            "attr": "init",
-            "path": "/vse",
-            "status": 0
-        }
+  "gradio": {
+    "1": {
+      "name": "spleeter",
+      "description": "Vocal Noise Separation",
+      "module": "src.support.spleeter_",
+      "attr": "init",
+      "path": "/spleeter",
+      "status": 0
+    },
+    "2": {
+      "name": "vmr",
+      "description": "Video Mark Removal",
+      "module": "src.support.vmr_",
+      "attr": "init",
+      "path": "/vmr",
+      "status": 0
+    },
+    "3": {
+      "name": "vse",
+      "description": "Video Subtitle Extractor",
+      "module": "src.support.vse_",
+      "attr": "init",
+      "path": "/vse",
+      "status": 0
     }
+  }
 }
