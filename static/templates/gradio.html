@@ -105,28 +105,12 @@
                 cols: [[
                     { type: 'checkbox' },
                     { title: '编号', sort: true, width: 80, align: "center", templet: d => '<div title="' + d.text + '">' + d.LAY_NUM + '</div>' },
-                    { title: '应用', sort: false, width: 80, align: "center", field: 'icon', templet: d => '<span class="iconify" data-icon="' + d.icon + '" style="font-size: 24px;"></span>' },
                     { title: '名称', sort: true, width: 220, align: "left", field: 'name', templet: d => '<div title="' + d.name + '"> ' + d.name + '</div>' },
                     { title: '描述', sort: true, align: "left", align: "left", field: 'description', templet: d => '<div title="' + d.description + '">' + d.description + '</div>' },
                     { title: "状态", sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_status" },
                     { title: "操作", sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_tools" }
                 ]],
             });
-
-            // 双击事件
-            table.on('rowDouble(gradio_table)', function (obj) {
-                var data = obj.data;
-                url = `${window.location.protocol}//${window.location.host}${data.path}`;
-                if (data.status == 0) {
-                    return toast.warning("服务未开启，无法访问", "提示");
-                }
-                if (data.local == 1) {
-                    util.openWin({ url: url });
-                } else {
-                    util.openWin({ url: data.path });
-                }
-            });
-
 
             // 表格工具事件
             table.on('tool(gradio_table)', function (obj) {
@@ -143,8 +127,23 @@
 
             // 开关操作
             form.on('checkbox(switch_status_filter)', function (obj) {
-                data = JSON.stringify({ "path": this.value, "status": obj.elem.checked ? 1 : 0 });
-                tool.post("/gradio/mounts", data, function (response) {
+                var path = this.value;
+                var status = obj.elem.checked ? 1 : 0;
+                // 更新状态
+                var cache = layui.table.cache['gradio_table'];
+                for (let i = 0; i < cache.length; i++) {
+                    if (cache[i].path === path) {
+                        cache[i].status = status;
+                        break;
+                    }
+                }
+                // 重载表格（不重置分页）
+                layui.table.reloadData('gradio_table', {
+                    data: cache,
+                    scrollPos: 'fixed'
+                });
+                // 发送请求
+                tool.post("/gradio/mounts", JSON.stringify({ "path": path, "status": status }), function (response) {
                     console.debug(response.data)
                     var status = response.data.status
                     if (status == 1) {
