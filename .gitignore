@@ -1,5 +1,6 @@
 __pycache__
 *.log
+.pyarmor/
 logs/
 models/
 webapp/
