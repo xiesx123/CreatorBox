@@ -58,7 +58,7 @@ layui.define(['form', 'tool'], function (exports) {
             provider = form_json.llm_provider
             divDeeplx = $('#deeplx_div')
             divLlm = $('#llm_div')
-            divOpt = $('#opt_div1')
+            divOpt = $('#opt_div')
 
             if (provider == "ignore") {
                 divDeeplx.addClass('layui-hide');
