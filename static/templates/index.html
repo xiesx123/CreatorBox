@@ -49,7 +49,7 @@
           <i class="layui-icon layui-icon-spread-left" style="font-size: 18px"></i>
         </li>
         <li class="layui-nav-item" lay-header-event="menuLeft">
-          <span style="padding: 15px; font-size: 16px; background-color: unset">{{ data.app.version }}</span>
+          <span style="padding: 15px; font-size: 16px; background-color: unset">{{ data.app.version }}.{{ data.app.build.hash }}</span>
         </li>
       </ul>
       <ul class="layui-nav layui-layout-right">
@@ -781,8 +781,8 @@
       var $ = layui.$;
 
       var app = JSON.parse('{{ data.app | tojson }}')
-      console.log("%s %s %s", app.title, app.version, app.description);
-
+      console.log("%s %s.%s build on %s at %s", app.title, app.version, app.build.hash, app.build.branch, app.build.date);
+      console.log("%s", app.description);
       var os = layui.device("os").os
       console.debug("%s", os);
 
