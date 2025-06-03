@@ -128,11 +128,13 @@
             // 开关操作
             form.on('checkbox(switch_status_filter)', function (obj) {
                 var path = this.value;
+                var attr = "gradio";
                 var status = obj.elem.checked ? 1 : 0;
                 // 更新状态
                 var cache = layui.table.cache['gradio_table'];
                 for (let i = 0; i < cache.length; i++) {
                     if (cache[i].path === path) {
+                        cache[i].attr = attr;
                         cache[i].status = status;
                         break;
                     }
@@ -143,7 +145,7 @@
                     scrollPos: 'fixed'
                 });
                 // 发送请求
-                tool.post("/gradio/mounts", JSON.stringify({ "path": path, "status": status }), function (response) {
+                tool.post("/app/mounts", JSON.stringify({ "path": path, "attr": attr, "status": status }), function (response) {
                     console.debug(response.data)
                     var status = response.data.status
                     if (status == 1) {
