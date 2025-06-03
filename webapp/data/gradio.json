@@ -1,18 +1,18 @@
 {
   "gradio": {
     "1": {
-      "name": "spleeter",
-      "description": "Vocal Noise Separation",
-      "module": "src.support.spleeter_",
-      "attr": "init",
-      "path": "/spleeter",
+      "name": "vns",
+      "description": "Voice Noise Separation",
+      "module": "src.support.vns_",
+      "attr": "gradio",
+      "path": "/vns",
       "status": 0
     },
     "2": {
       "name": "vmr",
       "description": "Video Mark Removal",
       "module": "src.support.vmr_",
-      "attr": "init",
+      "attr": "gradio",
       "path": "/vmr",
       "status": 0
     },
@@ -20,7 +20,7 @@
       "name": "vse",
       "description": "Video Subtitle Extractor",
       "module": "src.support.vse_",
-      "attr": "init",
+      "attr": "gradio",
       "path": "/vse",
       "status": 0
     }
