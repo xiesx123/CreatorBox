@@ -9,10 +9,6 @@ transformers==4.51.3
 # transcribe
 faster_whisper==1.1.1
 
-# ocr
-rapidocr==3.0.0
-paddlepaddle==3.0.0
-
 # llm
 langchain==0.3.24
 langchain_community==0.3.22
@@ -35,12 +31,16 @@ pyannote.audio==3.3.2
 pymediainfo==6.1.0
 uiautomation==2.0.20; platform_machine == 'AMD64'
 
+# ocr
+rapidocr==3.0.0
+paddlepaddle==3.0.0
+
 # lang
-langdetect==1.0.9
+babel==2.17.0
 language-tags==1.2.0
+fast_langdetect==0.3.2
 
 # web
-jieba==0.42.1
 uvicorn==0.20.0
 fastapi==0.115.12
 websockets==14.2
