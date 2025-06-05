@@ -6,11 +6,12 @@
     <img src="https://img.shields.io/badge/Stars-%E2%9D%A4-red?style=for-the-badge" alt="Stargazers">
   </a>
 </p> -->
-[![VitePress](https://img.shields.io/badge/Vitepress-Doc-646CFF?logo=markdown&logoColor=white)](https://xiesx123.github.io/CreatorBox)
-![Version](https://img.shields.io/github/tag/xiesx123/CreatorBox.svg?style=flat&label=Version)
+[![VitePress](https://img.shields.io/badge/Vitepress-Doc-3E63DD?logo=markdown)](https://xiesx123.github.io/CreatorBox)
+[![Discord](https://img.shields.io/badge/Discord-Online-44CC11?logo=discord&logoColor=white)](https://discord.gg/ZSeETM6bsS)
+![Version](https://img.shields.io/github/tag/xiesx123/CreatorBox.svg?style=flat&label=Release)
 ![GitHub stars](https://img.shields.io/github/stars/xiesx123/CreatorBox)
 [![Google Colab](https://img.shields.io/badge/Google_Colab-Launch-yellow?logo=googlecolab&)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
-[![Kaggle](https://img.shields.io/badge/Kaggle-Launch-blue?logo=kaggle&)](https://www.kaggle.com/code/xiesx123/creatorbox)
+[![Kaggle](https://img.shields.io/badge/Kaggle-Launch-blue?logo=kaggle)](https://www.kaggle.com/code/xiesx123/creatorbox)
 
 <h3>English | <a href="README_ZH.md">中文</a></h3>
 
@@ -185,6 +186,8 @@
 ## Feedback and Suggestions 📢
 
 - Submit via [Issues](https://github.com/xiesx123/CreatorBox/issues), [Discussions](https://github.com/xiesx123/CreatorBox/discussions), or [Email](mailto:xiesx123@gmail.com?subject=CreatoxBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?).
+
+- Welcome to join [Discord](https://discord.gg/ZSeETM6bsS) for discussions on usage or new features.
 
 ## Star History
 
