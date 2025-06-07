@@ -176,6 +176,7 @@
 - [x] Noise Reduction and Separation: Extract clean voices and background sounds
 - [x] Video Mark Removal: Remove subtitles, watermarks, and other visual elements with one click
 - [x] Video Subtitle Extraction: Quickly extract embedded (hardcoded) text from videos
+- [x] Audio Extraction from CapCut: Extract audio from all tracks in CapCut
 
 ### Others
 - [x] Dubbing Modes: Choose between `Video`, `Audio`, and `Adaptive` modes
