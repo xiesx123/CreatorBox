@@ -34,7 +34,6 @@ layui.define(['form', 'tool'], function (exports) {
         // 初始
         setData: function (data) {
             form_json = data
-            // 初始    
             mod.switch()
         },
 
