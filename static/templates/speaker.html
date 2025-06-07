@@ -121,6 +121,11 @@
         </div>
     </div>
 
+    <div>
+        <input type="hidden" id="import" />
+    </div>
+
+
     <!-- 表格工具栏 -->
     <script type="text/html" id="TPL_table_toolbar">
         <div class="layui-inline" lay-event="query"><i class="layui-icon layui-icon-search"></i></div>
@@ -210,6 +215,23 @@
                 }
             })
 
+            // 表单-音频上传
+            tool.upload("#audio_upload", "spk/upload", 'audio', null, function (n, elem, e) {
+                layer.msg('识别中', { icon: 16, time: 30 * 1000 });
+            }, function (response) {
+                layer.msg('识别成功', { icon: 1 });
+                if (response.code == 0) {
+                    data = response.data
+                    form_json.id = null
+                    form_json.path = data.location
+                    form_json.text = data.text
+                    form_json.speaker = data.location.split(/[/\\]/).pop().split(".")[0]
+                    form_json.gender = data.gender
+                    form_json.locale = data.locale
+                    form.val('form_filter', form_json);
+                }
+            })
+
             // 表单-提交事件
             form.on('submit(form_submit)', function (data) {
                 var field = data.field;
@@ -256,6 +278,7 @@
                 page: {
                     curr: 1, //当前页码
                     groups: 5, //只显示 1 个连续页码
+                    limit:15,
                     first: true, //不显示首页
                     last: true //不显示尾页
                 },
@@ -263,14 +286,29 @@
                     pageName: 'page', limitName: 'size'
                 },
                 toolbar: '#TPL_table_toolbar',
-                defaultToolbar: ['filter', 'exports'],
+                defaultToolbar: ['filter', {
+                    title: '导入',
+                    layEvent: 'LAYTABLE_TIPS',
+                    icon: 'layui-icon-export',
+                    onClick: function (obj) {
+                        // 上传文件
+                        tool.upload("#import", "spk/upsert_batch", 'file', 'json', null, function (response) {
+                            if (response.code == 0) {
+                                return toast.success("成功导入【" + response.data + "】条", "提示");
+                            }else{
+                                return toast.error(response.message, "提示");
+                            }
+                        })
+                        $("#import").click();
+                    }
+                }],
                 height: 'full-78', // 最大高度减去其他容器已占有的高度差
                 cols: [[
                     { type: 'checkbox' },
-                    { title: '编号', sort: true, width: 80, align: "center", field: 'id', },
+                    { title: '编号', sort: true, width: 200, align: "left", field: 'id', },
                     { title: '性别', sort: true, width: 80, align: "center", field: 'gender', templet: d => '<div title="' + d.gender + ' ' + d.gender + '">' + (d.gender == 1 ? '男' : d.gender == 2 ? '女' : '未知') + '</div>' },
                     { title: '语言', sort: true, width: 80, align: "center", field: 'locale', templet: d => '<div title="' + d.locale + '"> ' + d.locale + '</div>' },
-                    { title: '名称', sort: true, width: 180, align: "left", field: 'speaker', templet: d => '<div title="' + d.speaker + '"> ' + d.speaker + '</div>' },
+                    { title: '名称', sort: true, width: 250, align: "left", field: 'speaker', templet: d => '<div title="' + d.speaker + '"> ' + d.speaker + '</div>' },
                     { title: '文本', sort: false, field: 'text', templet: d => '<div title="' + d.text + '">' + d.text + '</div>' },
                     { title: '时长', sort: true, width: 80, align: "center", field: 'duration', templet: d => '<div title="' + d.duration + '"> ' + d.duration + '</div>' },
                     { title: "状态", sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_status" },

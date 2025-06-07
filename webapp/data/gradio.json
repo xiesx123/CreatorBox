@@ -1,1 +1,36 @@
-{"gradio": {"1": {"name": "vns", "description": "Voice Noise Separation", "module": "src.support.vns_", "attr": "gradio", "path": "/vns", "status": 1}, "2": {"name": "vmr", "description": "Video Mark Removal", "module": "src.support.vmr_", "attr": "gradio", "path": "/vmr", "status": 0}, "3": {"name": "vse", "description": "Video Subtitle Extractor", "module": "src.support.vse_", "attr": "gradio", "path": "/vse", "status": 1}}}
+{
+  "gradio": {
+    "1": {
+      "name": "vns",
+      "description": "Voice Noise Separation",
+      "module": "src.support.vns_",
+      "attr": "gradio",
+      "path": "/vns",
+      "status": 1
+    },
+    "2": {
+      "name": "vmr",
+      "description": "Video Mark Removal",
+      "module": "src.support.vmr_",
+      "attr": "gradio",
+      "path": "/vmr",
+      "status": 1
+    },
+    "3": {
+      "name": "vse",
+      "description": "Video Subtitle Extractor",
+      "module": "src.support.vse_",
+      "attr": "gradio",
+      "path": "/vse",
+      "status": 1
+    },
+    "4": {
+      "name": "jae",
+      "description": "Jianying Audio Extractor",
+      "module": "src.component.jae",
+      "attr": "gradio",
+      "path": "/jae",
+      "status": 1
+    }
+  }
+}
