@@ -14,3 +14,5 @@ python %SCRIPT_PATH% %SCRIPT_ARGS%
 
 REM Deactivate the conda environment
 CALL conda deactivate
+
+pause
