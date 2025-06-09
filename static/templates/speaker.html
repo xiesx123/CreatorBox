@@ -298,7 +298,8 @@
                 height: 'full-78', // 最大高度减去其他容器已占有的高度差
                 cols: [[
                     { type: 'checkbox' },
-                    { title: '编号', sort: true, width: 200, align: "left", field: 'id', },
+                    { title: '编号', sort: true, width: 280, align: "left", field: 'id', },
+                    { title: '类型', sort: true, width: 80, align: "center", field: 'type', templet: d => `<div title="${d.type} ${d.type == 1 ? '内置' : d.type == 2 ? '视频' : d.type == 3 ? '用户' : '未知'}">${d.type == 1 ? '内置' : d.type == 2 ? '视频' : d.type == 3 ? '用户' : '未知'}</div>` },
                     { title: '性别', sort: true, width: 80, align: "center", field: 'gender', templet: d => '<div title="' + d.gender + ' ' + d.gender + '">' + (d.gender == 1 ? '男' : d.gender == 2 ? '女' : '未知') + '</div>' },
                     { title: '语言', sort: true, width: 80, align: "center", field: 'locale', templet: d => '<div title="' + d.locale + '"> ' + d.locale + '</div>' },
                     { title: '名称', sort: true, width: 250, align: "left", field: 'speaker', templet: d => '<div title="' + d.speaker + '"> ' + d.speaker + '</div>' },
