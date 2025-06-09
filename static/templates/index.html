@@ -219,7 +219,7 @@
                     <div class="layui-form-item">
                       <label class="layui-form-label">提供商</label>
                       <div class="layui-input-block">
-                        <select name="asr_provider" lay-filter="asr_provider_filter">
+                        <select id="asr_provider" name="asr_provider" lay-filter="asr_provider_filter">
                           {% for item in data.asr.providers %}
                           <option value="{{ item.provider}}" {% if not item.enable %}disabled{% endif %}>
                             {{ item.desc }}
@@ -233,7 +233,7 @@
                       <div class="layui-form-item">
                         <label class="layui-form-label" id="subtitle_upload">字幕</label>
                         <div class="layui-input-block">
-                          <input id="subtitle_url" type="text" name="subtitle_url" placeholder="请输入字幕文件路径（SRT）"
+                          <input id="subtitle_url" type="srt" name="subtitle_url" lay-verify="subtitle_srt" placeholder="请输入字幕文件路径（SRT）"
                             autocomplete="off" class="layui-input" lay-affix="clear">
                         </div>
                       </div>
@@ -824,6 +824,13 @@
         path: function (value, elem) {
           if (value.length == 0) {
             return '请输入本地路径、网络链接';
+          }
+        },
+        subtitle_srt: function (value, elem) {
+          if ($('#asr_provider').val() != 'Subtitle') return;
+          subtitle_url = $('input[name="subtitle_url"]').val()
+          if (subtitle_url == '') {
+            return "请输出字幕文件";
           }
         },
         speaker_len: function (value, elem) {
