@@ -116,9 +116,9 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
                 if (value === '') return elem.focus();
                 value = util.escape(value)
                 form_json.speaker_len = isNaN(value) ? value : Number(value)
-                tts_model = $('#tts_model').val()
+                tts_model = $('input[name="tts_model"]').val()
                 locale = $('select[name="locale"] option:selected').val()
-                tool.post("tts/search", voice_search_params(form_json.tts_provider, tts_model, locale, 0, true), voice_search_callback, true)
+                tool.post("tts/search", voice_search_params({ provider: form_json.tts_provider, model: tts_model, locale: locale, gender: 0, init: true }), voice_search_callback, true)
                 // 关闭 prompt
                 layer.close(index);
             });
@@ -317,13 +317,13 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
                 divXtts.addClass('layui-hide');
                 divCosy.addClass('layui-hide');
                 optVc.addClass('layui-hide');// vc
-            } 
+            }
             else if (provider == "xtts") {
                 divE2f5.addClass('layui-hide');
                 divXtts.removeClass('layui-hide');
                 divCosy.addClass('layui-hide');
                 optVc.removeClass('layui-hide');// vc
-            } 
+            }
             else if (provider == "cosy") {
                 divE2f5.addClass('layui-hide');
                 divXtts.addClass('layui-hide');
