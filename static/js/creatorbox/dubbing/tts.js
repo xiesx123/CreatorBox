@@ -219,7 +219,7 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
             { title: '模型', width: 80, align: "center", field: 'provider', templet: d => '<div title="' + d.model + '">' + d.provider + '</div>' },
             { title: '类型', width: 80, align: "center", field: 'type', templet: d => '<div title="' + d.text + ' ' + d.remarks + '">' + d.type + '</div>' },
             { title: '性别', width: 80, align: "center", field: 'gender', templet: d => '<div title="' + d.text + ' ' + d.remarks + '">' + (d.gender == 1 ? '男' : d.gender == 2 ? '女' : '未知') + '</div>' },
-            { title: '语音', field: 'voice', templet: d => '<div title="' + d.text + ' ' + d.remarks + '">' + d.voice + '</div>' },
+            { title: '音色', field: 'voice', templet: d => '<div title="' + d.text + ' ' + d.remarks + '">' + d.voice + '</div>' },
             { title: '语速', width: 80, align: "center", field: 'rate', templet: d => '<div title="' + d.text + ' ' + d.remarks + '">' + d.rate + '</div>' },
             { title: '时长', width: 80, align: "center", field: 'duration', templet: d => '<div title="' + d.text + ' ' + d.remarks + '">' + d.duration + '</div>' },
             { title: "操作", fixed: 'right', width: "200", align: "center", toolbar: "#TPL_tts_voices_table_tools" }
@@ -229,7 +229,7 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
     // 说话人表格工具事件
     table.on('tool(' + inst.config.id + ')', function (obj) {
         var data = obj.data;
-        var idx = table_json.findIndex(item => item.voice === data.voice);
+        var idx = table_json.findIndex(item => { return item.voice == data.voice && item.duration == data.duration });
         if (obj.event === "test") {
             voice_play(data.url);
         } else if (obj.event === "del") {

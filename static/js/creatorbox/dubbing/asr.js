@@ -46,7 +46,7 @@ layui.define(['form', 'tool'], function (exports) {
         // 切换
         switch: function () {
             provider = form_json.asr_provider
-            divSubtitle = $('#sutitle_div')
+            divSubtitle = $('#subtitle_div')
             divWhisper = $('#whisper_div')
             if (provider == "Subtitle") {
                 divSubtitle.removeClass('layui-hide');

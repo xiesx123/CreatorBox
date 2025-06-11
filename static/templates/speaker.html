@@ -344,7 +344,7 @@
                         tool.upload("#import", "spk/upsert_batch", 'file', 'json', null, function (response) {
                             if (response.code == 0) {
                                 table.reloadData('table', { scrollPos: 'fixed' });
-                                return toast.success("成功导入【" + response.data + "】条", "提示");
+                                return toast.success("导入【" + response.data + "】条成功", "提示");
                             } else {
                                 return toast.error(response.message, "提示");
                             }
