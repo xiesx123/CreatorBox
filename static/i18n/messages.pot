@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-06-04 00:35+0800\n"
+"POT-Creation-Date: 2025-06-12 16:12+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,248 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: src/router/controller/api.py:29
-msgid "Hello World"
+#: src/router/controller/api.py:30
+msgid "CreatorBox"
 msgstr ""
 
-#: src/router/controller/api.py:30
-msgid "Creator Box"
+#: static/js/creatorbox/mod/tools.js:72 static/js/creatorbox/mod/tools.js:135
+#: static/js/creatorbox/mod/tools.js:176
+msgid "wait"
+msgstr ""
+
+#: static/js/creatorbox/mod/tools.js:195
+msgid "tips"
+msgstr ""
+
+#: static/templates/index.html:76
+msgid "group_feature"
+msgstr ""
+
+#: static/templates/index.html:79
+msgid "nav_speaker"
+msgstr ""
+
+#: static/templates/index.html:81
+msgid "nav_gradio"
+msgstr ""
+
+#: static/templates/index.html:85
+msgid "group_assist"
+msgstr ""
+
+#: static/templates/index.html:88
+msgid "nav_play"
+msgstr ""
+
+#: static/templates/index.html:90
+msgid "nav_editor"
+msgstr ""
+
+#: static/templates/index.html:93
+msgid "nav_log"
+msgstr ""
+
+#: static/templates/index.html:97
+msgid "group_doc"
+msgstr ""
+
+#: static/templates/index.html:100
+msgid "nav_swagger"
+msgstr ""
+
+#: static/templates/index.html:102
+msgid "nav_vitepress"
+msgstr ""
+
+#: static/templates/index.html:122
+msgid "dub.base"
+msgstr ""
+
+#: static/templates/index.html:129
+msgid "video_url"
+msgstr ""
+
+#: static/templates/index.html:133
+msgid "video_placeholder"
+msgstr ""
+
+#: static/templates/index.html:139
+msgid "locale"
+msgstr ""
+
+#: static/templates/index.html:142 static/templates/index.html:243
+#: static/templates/index.html:255 static/templates/index.html:267
+#: static/templates/index.html:279 static/templates/index.html:490
+msgid "select_or_search"
+msgstr ""
+
+#: static/templates/index.html:151
+msgid "mode_type"
+msgstr ""
+
+#: static/templates/index.html:161
+msgid "align_type"
+msgstr ""
+
+#: static/templates/index.html:170
+msgid "rebuild_tips"
+msgstr ""
+
+#: static/templates/index.html:171
+msgid "rebuild"
+msgstr ""
+
+#: static/templates/index.html:178
+msgid "suffix"
+msgstr ""
+
+#: static/templates/index.html:181
+msgid "suffix_placeholder"
+msgstr ""
+
+#: static/templates/index.html:199
+msgid "dub.subtitle"
+msgstr ""
+
+#: static/templates/index.html:207 static/templates/index.html:348
+msgid "debug"
+msgstr ""
+
+#: static/templates/index.html:214 static/templates/index.html:355
+#: static/templates/index.html:453
+msgid "provider"
+msgstr ""
+
+#: static/templates/index.html:240 static/templates/index.html:381
+#: static/templates/index.html:470
+msgid "model"
+msgstr ""
+
+#: static/templates/index.html:252
+msgid "whisper_size"
+msgstr ""
+
+#: static/templates/index.html:264
+msgid "whisper_temperature"
+msgstr ""
+
+#: static/templates/index.html:276
+msgid "whisper_length"
+msgstr ""
+
+#: static/templates/index.html:291
+msgid "noise_thresh"
+msgstr ""
+
+#: static/templates/index.html:299
+msgid "align_enable"
+msgstr ""
+
+#: static/templates/index.html:306
+msgid "speaker_use_num"
+msgstr ""
+
+#: static/templates/index.html:314
+msgid "speaker_range"
+msgstr ""
+
+#: static/templates/index.html:344
+msgid "dub.translation"
+msgstr ""
+
+#: static/templates/index.html:389
+msgid "llm_temperature"
+msgstr ""
+
+#: static/templates/index.html:397
+msgid "llm_top_p"
+msgstr ""
+
+#: static/templates/index.html:406
+msgid "llm_use_cache"
+msgstr ""
+
+#: static/templates/index.html:413
+msgid "llm_instruct"
+msgstr ""
+
+#: static/templates/index.html:425
+msgid "llm_batch_size"
+msgstr ""
+
+#: static/templates/index.html:446
+msgid "dub.dubbing"
+msgstr ""
+
+#: static/templates/index.html:478
+msgid "tts_gender"
+msgstr ""
+
+#: static/templates/index.html:486
+msgid "tts_voice"
+msgstr ""
+
+#: static/templates/index.html:496
+msgid "tts_rate"
+msgstr ""
+
+#: static/templates/index.html:508
+msgid "tts_step"
+msgstr ""
+
+#: static/templates/index.html:526
+msgid "tts_instruct"
+msgstr ""
+
+#: static/templates/index.html:537
+msgid "tts_vc"
+msgstr ""
+
+#: static/templates/index.html:544
+msgid "tts_remarks"
+msgstr ""
+
+#: static/templates/index.html:552
+msgid "tts_play"
+msgstr ""
+
+#: static/templates/index.html:574
+msgid "dub.draft"
+msgstr ""
+
+#: static/templates/index.html:592
+msgid "draft_preview"
+msgstr ""
+
+#: static/templates/index.html:604
+msgid "draft_jypath"
+msgstr ""
+
+#: static/templates/index.html:613
+msgid "draft_volume_native"
+msgstr ""
+
+#: static/templates/index.html:624
+msgid "draft_volume_voice"
+msgstr ""
+
+#: static/templates/index.html:633
+msgid "draft_volume_background"
+msgstr ""
+
+#: static/templates/index.html:643
+msgid "draft_style_dts"
+msgstr ""
+
+#: static/templates/index.html:670
+msgid "draft_style_nts"
+msgstr ""
+
+#: static/templates/index.html:697
+msgid "silence_threshold"
+msgstr ""
+
+#: static/templates/index.html:724
+msgid "submit"
 msgstr ""
 

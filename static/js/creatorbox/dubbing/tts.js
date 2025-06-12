@@ -334,6 +334,7 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
                 divXtts.addClass('layui-hide');
                 divE2f5.addClass('layui-hide');
                 divCosy.addClass('layui-hide');
+                optVc.addClass('layui-hide');// vc
             }
 
             $('input[name="tts_model"]').prop("disabled", (model == ""));
