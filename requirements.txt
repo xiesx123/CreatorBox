@@ -50,7 +50,7 @@ python-multipart==0.0.20
 # other
 psutil==7.0.0
 tinydb==4.8.2
-gradio==5.32.1
+gradio==5.33.2
 yt-dlp==2025.3.31
 loguru==0.7.3
 moviepy==1.0.3
