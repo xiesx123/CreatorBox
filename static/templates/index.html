@@ -120,7 +120,6 @@
 
                 <div class="layui-card layui-panel">
                   <div class="layui-colla-title">{{ _("dub.base") }}
-                    <!-- <i class="layui-icon layui-icon-tips" lay-tips="要支持的噢"></i> -->
                   </div>
                   <div class="layui-colla-content layui-show">
 
@@ -150,7 +149,7 @@
                     <div class="layui-form-item" pane>
                       <label class="layui-form-label">{{ _("mode_type") }}</label>
                       <div class="layui-input-block">
-                        {% for item in data.audio.mode_types %}
+                        {% for item in data.base.mode_types %}
                         <input type="radio" name="mode_type" value="{{ item.val }}" lay-filter="mode_type_filter"
                           title="{{ item.desc }}" {% if not item.enable %}disabled{% endif %}>
                         {% endfor %}
@@ -160,15 +159,16 @@
                     <div class="layui-form-item" pane id="align_type_div">
                       <label class="layui-form-label">{{ _("align_type") }}</label>
                       <div class="layui-input-block">
-                        {% for item in data.audio.align_types %}
+                        {% for item in data.base.align_types %}
                         <input type="radio" name="align_type" value="{{ item.val }}" title="{{ item.desc }}">
                         {% endfor %}
                       </div>
                     </div>
 
-                    <div class="layui-form-item" pane
-                      lay-tips="{content: '{{ _('rebuild_tips') }}', margin: '0 0 0 -10px'}">
-                      <label class="layui-form-label">{{ _("rebuild") }}</label>
+                    <div class="layui-form-item" pane>
+                      <label class="layui-form-label"
+                        lay-tips="{content: '{{ _('rebuild_tips') }}', margin: '0 0 0 -10px'}">{{ _("rebuild")
+                        }}</label>
                       <div class="layui-input-block">
                         <input type="checkbox" name="rebuild" lay-skin="switch" lay-filter="switch_rebuild_filter">
                       </div>
@@ -198,7 +198,7 @@
                 <div class="layui-card layui-panel">
                   <div class="layui-colla-title">{{ _("dub.subtitle") }}
                     <!-- <a href="https://xiesx123.github.io/CreatorBox" target="_blank">
-                      <i class="layui-icon layui-icon-tips" lay-tips="{content: '注意：开启调试会中断后续步骤', margin: '0 0 0 -10px'}"></i>
+                      <i class="layui-icon layui-icon-tips" style="font-size: 20px;margin-top:-10px"></i>
                     </a> -->
                   </div>
                   <div class="layui-colla-content layui-show">
@@ -225,7 +225,7 @@
 
                     <div class="layui-col-md12 layui-hide" id="subtitle_div">
                       <div class="layui-form-item">
-                        <label class="layui-form-label" id="subtitle_upload">字幕 <span
+                        <label class="layui-form-label" id="subtitle_upload">{{ _("subtitle_url") }} <span
                             class="layui-badge-dot layui-bg-green"></span></label>
                         <div class="layui-input-block">
                           <input id="subtitle_url" type="srt" name="subtitle_url" lay-verify="subtitle_srt"
@@ -321,10 +321,6 @@
                         <input type="number" lay-verify="required|number|speaker_len" name="speaker_max"
                           placeholder="最大值" autocomplete="off" class="layui-input" min="1" max="10" step="1"
                           lay-affix="number">
-                      </div>
-                      <div class="layui-form-mid layui-text-em">
-                        <i class="layui-icon layui-icon-tips"
-                          lay-tips="{content: '注意：最小值需要大于 > 1下生效 <br> 启用数量时，会使用最小值指定数量；反之，不开启则会使用范围区间', margin: '0 0 0 -10px'}"></i>
                       </div>
                     </div>
 
@@ -444,7 +440,6 @@
 
                 <div class="layui-card layui-panel">
                   <div class="layui-colla-title">{{ _("dub.dubbing") }}
-                    <!-- <i class="layui-icon layui-icon-tips" lay-tips="{content: '文档', margin: '0 0 0 -10px'}"></i> -->
                   </div>
                   <div class="layui-colla-content layui-show">
 
@@ -576,27 +571,12 @@
                   </div>
                   <div class="layui-colla-content layui-show">
 
-                    <!-- <div class="layui-form-item" pane>
-                    <label class="layui-form-label">强制刷新</label>
-                    <div class="layui-input-inline" style="width: auto;">
-                      <input type="checkbox" name="draft_refresh" lay-skin="switch">
-                    </div>
-
-                    <div class="layui-form-mid layui-text-em">
-                      <i class="layui-icon layui-icon-tips"
-                        lay-tips="{content: '提示：<br>自动关闭当前剪映工程编辑窗口，返回剪映主页', margin: '0 0 0 -10px'}"></i>
-                    </div>
-                  </div> -->
-
                     <div class="layui-form-item" pane>
-                      <label class="layui-form-label">{{ _("draft_preview") }}</label>
-                      <div class="layui-input-inline" style="width: auto;">
+                      <label class="layui-form-label"
+                        lay-tips="{content: '提示：<br>1、开启后，可通过剪映快速预览/微调<br>2、文件格式：{文件名}_{标志}.mp4<br>3、草稿目录：{文件名}_{标志}<br>4、只能在Windows环境下使用', margin: '0 0 0 -10px'}">{{
+                        _("draft_preview") }}</label>
+                      <div class="layui-input-block">
                         <input type="checkbox" name="draft_preview" lay-skin="switch">
-                      </div>
-
-                      <div class="layui-form-mid layui-text-em">
-                        <i class="layui-icon layui-icon-tips"
-                          lay-tips="{content: '提示：<br>1、开启后，可通过剪映快速预览/微调<br>2、文件格式：{文件名}_{标志}.mp4<br>3、草稿目录：{文件名}_{标志}<br>4、只能在Windows环境下使用', margin: '0 0 0 -10px'}"></i>
                       </div>
                     </div>
 
@@ -690,7 +670,6 @@
                         <input type="hidden" name="draft_style_ntbc" placeholder="边框颜色" class="layui-input">
                         <div id="draft_style_ntbc_select"></div>
                       </div>
-
                     </div>
 
                     <div class="layui-form-item layui-show">
@@ -723,12 +702,11 @@
                 <button type="submit" class="layui-btn layui-btn-fluid" lay-submit lay-filter="form_submit">{{
                   _("submit") }}</button>
               </div>
-              <div class="layui-col-md12">
-                <!-- <button type="button" class="layui-btn layui-btn-primary layui-btn-fluid layui-btn-disabled"
-                    lay-on="video_preview" disabled>预览</button> 
-                    <button type="reset" class="layui-btn layui-btn-primary layui-btn-fluid"
-                    >预览</button> -->
-              </div>
+              <!-- <div class="layui-col-md12">
+                <div class="layui-col-md2">
+                  <button type="reset" class="layui-btn layui-btn-primary layui-border layui-btn-fluid">重置</button>
+                </div>
+              </div> -->
             </div>
           </div>
 
@@ -743,10 +721,10 @@
 
   <script type="text/html" id="TPL_tts_voices_table_tools">
     <div class="layui-btn-container">
-      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="test">试听</a>
-      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="del">删除</a>
-      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="up">上移</a>
-      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="down">下移</a>
+      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="preview">{{ _("table_tools_preview") }}</a>
+      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="del">{{ _("table_tools_delete") }}</a>
+      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="up">{{ _("table_tools_move_up") }}</a>
+      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="down">{{ _("table_tools_move_down") }}</a>
     </div>
   </script>
 
@@ -834,7 +812,7 @@
       // =======================================
 
       // 视频上传
-      tool.upload("#video_upload", "file/upload", 'video', null, null, function (response) {
+      tool.upload("#video_upload", "file/upload", 'file', 'mp4|mkv|avi|mp3|wav|m4a', null, function (response) {
         $('[name="video_url"]').val(response.data.location)
       })
 

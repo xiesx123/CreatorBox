@@ -230,7 +230,7 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
     table.on('tool(' + inst.config.id + ')', function (obj) {
         var data = obj.data;
         var idx = table_json.findIndex(item => { return item.voice == data.voice && item.duration == data.duration });
-        if (obj.event === "test") {
+        if (obj.event === "preview") {
             voice_play(data.url);
         } else if (obj.event === "del") {
             layer.confirm(`确定删除【${data.voice}】么?`, { title: '提示', icon: 3 }, function (index) {
