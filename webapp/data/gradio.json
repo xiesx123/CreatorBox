@@ -25,11 +25,11 @@
       "status": 1
     },
     "4": {
-      "name": "jae",
-      "description": "Jianying Audio Extractor",
-      "module": "src.component.jae",
+      "name": "jme",
+      "description": "Jianying Material Extractor",
+      "module": "src.component.jme",
       "attr": "gradio",
-      "path": "/jae",
+      "path": "/jme",
       "status": 1
     }
   }
