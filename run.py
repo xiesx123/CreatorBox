@@ -7,7 +7,7 @@ from pyngrok import ngrok
 
 @click.group()
 def cli():
-    """CreatorBox Run CLI"""
+    """CreatorBox Client"""
 
 
 @cli.command()
