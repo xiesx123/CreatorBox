@@ -1,35 +1,43 @@
 {
   "gradio": {
     "1": {
-      "name": "vns",
-      "description": "Voice Noise Separation",
-      "module": "src.support.vns_",
+      "name": "jme",
+      "description": "Jianying Material Extractor",
+      "module": "src.component.jme_",
       "attr": "gradio",
-      "path": "/vns",
+      "path": "/jme",
       "status": 1
     },
     "2": {
       "name": "vmr",
       "description": "Video Mark Removal",
-      "module": "src.support.vmr_",
+      "module": "src.component.vmr_",
       "attr": "gradio",
       "path": "/vmr",
       "status": 1
     },
     "3": {
-      "name": "vse",
-      "description": "Video Subtitle Extractor",
-      "module": "src.support.vse_",
+      "name": "vns",
+      "description": "Voice Noise Separation",
+      "module": "src.component.vns_",
       "attr": "gradio",
-      "path": "/vse",
+      "path": "/vns",
       "status": 1
     },
     "4": {
-      "name": "jme",
-      "description": "Jianying Material Extractor",
-      "module": "src.component.jme",
+      "name": "vsd",
+      "description": "Video Scene Detect",
+      "module": "src.component.vsd_",
       "attr": "gradio",
-      "path": "/jme",
+      "path": "/vsd",
+      "status": 1
+    },
+    "5": {
+      "name": "vse",
+      "description": "Video Subtitle Extractor",
+      "module": "src.component.vse_",
+      "attr": "gradio",
+      "path": "/vse",
       "status": 1
     }
   }
