@@ -173,10 +173,11 @@
 
 ### Applications
 
-- [x] Noise Reduction and Separation: Extract clean voices and background sounds
-- [x] Video Mark Removal: Remove subtitles, watermarks, and other visual elements with one click
-- [x] Video Subtitle Extraction: Quickly extract embedded (hardcoded) text from videos
-- [x] Audio Extraction from CapCut: Extract audio from all tracks in CapCut
+- [x] Material Extraction: Extract draft materials such as videos, audio, and images.
+- [x] Visual Element Removal: Remove subtitles, watermarks, corner marks, and other visual elements.
+- [x] Noise Reduction and Separation: Enhance voice quality and separate vocals from background tracks.
+- [x] Scene Detection: Automatically detect scene transitions and export segmented clips.
+- [x] Subtitle Extraction: Use OCR to recognize embedded subtitles and generate editable text.
 
 ### Others
 - [x] Dubbing Modes: Choose between `Video`, `Audio`, and `Adaptive` modes
