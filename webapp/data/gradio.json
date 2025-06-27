@@ -6,7 +6,7 @@
       "module": "src.component.jme_",
       "attr": "gradio",
       "path": "/jme",
-      "status": 1
+      "status": 0
     },
     "2": {
       "name": "vmr",
@@ -14,7 +14,7 @@
       "module": "src.component.vmr_",
       "attr": "gradio",
       "path": "/vmr",
-      "status": 1
+      "status": 0
     },
     "3": {
       "name": "vns",
@@ -22,7 +22,7 @@
       "module": "src.component.vns_",
       "attr": "gradio",
       "path": "/vns",
-      "status": 1
+      "status": 0
     },
     "4": {
       "name": "vsd",
@@ -30,7 +30,7 @@
       "module": "src.component.vsd_",
       "attr": "gradio",
       "path": "/vsd",
-      "status": 1
+      "status": 0
     },
     "5": {
       "name": "vse",
@@ -38,7 +38,7 @@
       "module": "src.component.vse_",
       "attr": "gradio",
       "path": "/vse",
-      "status": 1
+      "status": 0
     }
   }
 }
