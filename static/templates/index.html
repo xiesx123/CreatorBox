@@ -741,7 +741,7 @@
       var $ = layui.$;
 
       var app = JSON.parse('{{ data.app | tojson }}')
-      console.log("%s %s.%s build on %s at %s", app.title, app.version, app.build.hash, app.build.branch, app.build.date);
+      console.log("%s %s.%s build on %s at %s (%s)", app.title, app.version, app.build.hash, app.build.branch, app.build.date, app.plan);
       console.log("%s", app.description);
       var os = layui.device("os").os
       console.debug("%s", os);

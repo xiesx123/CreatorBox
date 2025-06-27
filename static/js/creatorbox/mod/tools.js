@@ -38,7 +38,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'notice'], function
 
 			// 建立连接
 			socket.onopen = function () {
-				console.log("WebSocket connection established");
+				console.debug("WebSocket connection established");
 			};
 
 			// 接收消息并更新日志
@@ -48,7 +48,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'notice'], function
 
 			// 处理关闭事件
 			socket.onclose = function () {
-				console.log("WebSocket connection closed. Reconnecting in " + reconnectInterval / 1000 + " seconds...");
+				console.debug("WebSocket connection closed. Reconnecting in " + reconnectInterval / 1000 + " seconds...");
 				setTimeout(mod.connect(callback), reconnectInterval);
 			};
 

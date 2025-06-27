@@ -83,7 +83,7 @@
                     return video_play(input_url, 1)
                 }
                 tool.get("/app/result/" + input_url, {}, function (response) {
-                    console.log(JSON.stringify(response, null, 2))
+                    console.debug(JSON.stringify(response, null, 2))
                     video_play(input_url)
                 }, true)
             });

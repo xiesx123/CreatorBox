@@ -43,7 +43,7 @@
             tool.connect(function (data) {
                 data = JSON.parse(event.data)
                 if (data.type == "log") {
-                    console.log(data.message);
+                    console.debug(data.message);
                     logContainer.text(logContainer.text() + data.message);
                     logContainer.scrollTop(logContainer[0].scrollHeight);
                 }
