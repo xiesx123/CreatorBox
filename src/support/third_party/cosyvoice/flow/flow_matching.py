@@ -12,10 +12,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import threading
 import torch
 import torch.nn.functional as F
 from matcha.models.components.flow_matching import BASECFM
+from cosyvoice.utils.common import set_all_random_seed
 
 
 class ConditionalCFM(BASECFM):
@@ -32,7 +32,6 @@ class ConditionalCFM(BASECFM):
         in_channels = in_channels + (spk_emb_dim if n_spks > 0 else 0)
         # Just change the architecture of the estimator here
         self.estimator = estimator
-        self.lock = threading.Lock()
 
     @torch.inference_mode()
     def forward(self, mu, mask, n_timesteps, temperature=1.0, spks=None, cond=None, prompt_len=0, cache=torch.zeros(1, 80, 0, 2)):
@@ -69,7 +68,7 @@ class ConditionalCFM(BASECFM):
             t_span = 1 - torch.cos(t_span * 0.5 * torch.pi)
         return self.solve_euler(z, t_span=t_span, mu=mu, mask=mask, spks=spks, cond=cond), cache
 
-    def solve_euler(self, x, t_span, mu, mask, spks, cond):
+    def solve_euler(self, x, t_span, mu, mask, spks, cond, streaming=False):
         """
         Fixed euler solver for ODEs.
         Args:
@@ -110,7 +109,8 @@ class ConditionalCFM(BASECFM):
                 x_in, mask_in,
                 mu_in, t_in,
                 spks_in,
-                cond_in
+                cond_in,
+                streaming
             )
             dphi_dt, cfg_dphi_dt = torch.split(dphi_dt, [x.size(0), x.size(0)], dim=0)
             dphi_dt = ((1.0 + self.inference_cfg_rate) * dphi_dt - self.inference_cfg_rate * cfg_dphi_dt)
@@ -122,30 +122,33 @@ class ConditionalCFM(BASECFM):
 
         return sol[-1].float()
 
-    def forward_estimator(self, x, mask, mu, t, spks, cond):
+    def forward_estimator(self, x, mask, mu, t, spks, cond, streaming=False):
         if isinstance(self.estimator, torch.nn.Module):
-            return self.estimator(x, mask, mu, t, spks, cond)
+            return self.estimator(x, mask, mu, t, spks, cond, streaming=streaming)
         else:
-            estimator, trt_engine = self.estimator.acquire_estimator()
-            estimator.set_input_shape('x', (2, 80, x.size(2)))
-            estimator.set_input_shape('mask', (2, 1, x.size(2)))
-            estimator.set_input_shape('mu', (2, 80, x.size(2)))
-            estimator.set_input_shape('t', (2,))
-            estimator.set_input_shape('spks', (2, 80))
-            estimator.set_input_shape('cond', (2, 80, x.size(2)))
-            data_ptrs = [x.contiguous().data_ptr(),
-                         mask.contiguous().data_ptr(),
-                         mu.contiguous().data_ptr(),
-                         t.contiguous().data_ptr(),
-                         spks.contiguous().data_ptr(),
-                         cond.contiguous().data_ptr(),
-                         x.data_ptr()]
-            for i, j in enumerate(data_ptrs):
-                estimator.set_tensor_address(trt_engine.get_tensor_name(i), j)
-            # run trt engine
-            assert estimator.execute_async_v3(torch.cuda.current_stream().cuda_stream) is True
+            [estimator, stream], trt_engine = self.estimator.acquire_estimator()
+            # NOTE need to synchronize when switching stream
             torch.cuda.current_stream().synchronize()
-            self.estimator.release_estimator(estimator)
+            with stream:
+                estimator.set_input_shape('x', (2, 80, x.size(2)))
+                estimator.set_input_shape('mask', (2, 1, x.size(2)))
+                estimator.set_input_shape('mu', (2, 80, x.size(2)))
+                estimator.set_input_shape('t', (2,))
+                estimator.set_input_shape('spks', (2, 80))
+                estimator.set_input_shape('cond', (2, 80, x.size(2)))
+                data_ptrs = [x.contiguous().data_ptr(),
+                             mask.contiguous().data_ptr(),
+                             mu.contiguous().data_ptr(),
+                             t.contiguous().data_ptr(),
+                             spks.contiguous().data_ptr(),
+                             cond.contiguous().data_ptr(),
+                             x.data_ptr()]
+                for i, j in enumerate(data_ptrs):
+                    estimator.set_tensor_address(trt_engine.get_tensor_name(i), j)
+                # run trt engine
+                assert estimator.execute_async_v3(torch.cuda.current_stream().cuda_stream) is True
+                torch.cuda.current_stream().synchronize()
+            self.estimator.release_estimator(estimator, stream)
             return x
 
     def compute_loss(self, x1, mask, mu, spks=None, cond=None, streaming=False):
@@ -193,10 +196,11 @@ class ConditionalCFM(BASECFM):
 class CausalConditionalCFM(ConditionalCFM):
     def __init__(self, in_channels, cfm_params, n_spks=1, spk_emb_dim=64, estimator: torch.nn.Module = None):
         super().__init__(in_channels, cfm_params, n_spks, spk_emb_dim, estimator)
+        set_all_random_seed(0)
         self.rand_noise = torch.randn([1, 80, 50 * 300])
 
     @torch.inference_mode()
-    def forward(self, mu, mask, n_timesteps, temperature=1.0, spks=None, cond=None):
+    def forward(self, mu, mask, n_timesteps, temperature=1.0, spks=None, cond=None, streaming=False):
         """Forward diffusion
 
         Args:
@@ -220,4 +224,4 @@ class CausalConditionalCFM(ConditionalCFM):
         t_span = torch.linspace(0, 1, n_timesteps + 1, device=mu.device, dtype=mu.dtype)
         if self.t_scheduler == 'cosine':
             t_span = 1 - torch.cos(t_span * 0.5 * torch.pi)
-        return self.solve_euler(z, t_span=t_span, mu=mu, mask=mask, spks=spks, cond=cond), None
+        return self.solve_euler(z, t_span=t_span, mu=mu, mask=mask, spks=spks, cond=cond, streaming=streaming), None
