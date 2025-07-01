@@ -23,7 +23,6 @@ coqui_tts==0.26.0
 pydub==0.25.1
 demucs==4.0.1
 librosa==0.11.0
-playsound==1.3.0
 noisereduce==3.0.3
 pyannote.audio==3.3.2
 

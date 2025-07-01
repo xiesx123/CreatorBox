@@ -166,9 +166,15 @@
                     </div>
 
                     <div class="layui-form-item" pane>
+                      <label class="layui-form-label">{{ _("preview") }}</label>
+                      <div class="layui-input-block">
+                        <input type="checkbox" name="preview" lay-skin="switch">
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item" pane>
                       <label class="layui-form-label"
-                        lay-tips="{content: '{{ _('rebuild_tips') }}', margin: '0 0 0 -10px'}">{{ _("rebuild")
-                        }}</label>
+                        lay-tips="{content: '{{ _('rebuild_tips') }}', margin: '0 0 0 -10px'}">{{ _("rebuild")}}</label>
                       <div class="layui-input-block">
                         <input type="checkbox" name="rebuild" lay-skin="switch" lay-filter="switch_rebuild_filter">
                       </div>
@@ -571,17 +577,10 @@
                   </div>
                   <div class="layui-colla-content layui-show">
 
-                    <div class="layui-form-item" pane>
-                      <label class="layui-form-label"
-                        lay-tips="{content: '提示：<br>1、开启后，可通过剪映快速预览/微调<br>2、文件格式：{文件名}_{标志}.mp4<br>3、草稿目录：{文件名}_{标志}<br>4、只能在Windows环境下使用', margin: '0 0 0 -10px'}">{{
-                        _("draft_preview") }}</label>
-                      <div class="layui-input-block">
-                        <input type="checkbox" name="draft_preview" lay-skin="switch">
-                      </div>
-                    </div>
-
                     <div class="layui-form-item">
-                      <label class="layui-form-label">{{ _("draft_jypath") }}</label>
+                      <label class="layui-form-label"
+                        lay-tips="{content: '提示：<br>1、填写后，可通过剪映快速预览/微调<br>2、文件格式：{文件名}_{标志}.mp4<br>3、草稿目录：{文件名}_{标志}<br>4、只能在Windows环境下使用', margin: '0 0 0 -10px'}">{{
+                        _("draft_jypath") }}</label>
                       <div class="layui-input-block">
                         <input type="text" name="draft_jypath" lay-verify="jydraft" placeholder="请输入剪映草稿路径"
                           autocomplete="off" class="layui-input" lay-affix="clear">
@@ -894,9 +893,7 @@
             var taskId = response.data.task_id
             toast.info(taskId, "任务提交成功");
             // 任务存储
-            if (!$('input[name="preview"]').is(':checked')) {
-              localStorage.setItem('task', taskId)
-            }
+            localStorage.setItem('task', taskId)
           }, true)
         });
         return false;
