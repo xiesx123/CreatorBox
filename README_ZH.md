@@ -70,16 +70,7 @@
                       src="https://github.com/user-attachments/assets/ed6449df-dd04-45f0-9ab1-ce4a2a5b600c"></video></td>
           </tr>
       </tbody>
-    <!--  硬核博主 -->
-    <tbody>
-          <tr>
-              <td align="center"><video
-                      src="https://github.com/user-attachments/assets/f3f5cda3-ad17-413e-aea5-0696bef39e8c"></video></td>
-              <td align="center"><video
-                      src="https://github.com/user-attachments/assets/2dc0e005-f31d-49cc-8967-182a0b652b37"></video></td>
-          </tr>
-      </tbody>
-      <!-- 黑神话-->
+    <!-- 黑神话-->
     <tbody>
           <tr>
               <td align="center"><video
