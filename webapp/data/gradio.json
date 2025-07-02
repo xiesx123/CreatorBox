@@ -9,19 +9,19 @@
       "status": 0
     },
     "2": {
+      "name": "uvr",
+      "description": "Ultimate Vocal Remover (v5)",
+      "module": "src.component.uvr_",
+      "attr": "gradio",
+      "path": "/uvr",
+      "status": 0
+    },
+    "3": {
       "name": "vmr",
       "description": "Video Mark Removal",
       "module": "src.component.vmr_",
       "attr": "gradio",
       "path": "/vmr",
-      "status": 0
-    },
-    "3": {
-      "name": "vns",
-      "description": "Voice Noise Separation",
-      "module": "src.component.vns_",
-      "attr": "gradio",
-      "path": "/vns",
       "status": 0
     },
     "4": {
