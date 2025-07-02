@@ -165,8 +165,8 @@
 ### Applications
 
 - [x] Material Extraction: Extract draft materials such as videos, audio, and images.
+- [x] Ultimate Vocal Separation: Quickly extract vocals, accompaniment, drums, bass, and other multi-track audio.
 - [x] Visual Element Removal: Remove subtitles, watermarks, corner marks, and other visual elements.
-- [x] Noise Reduction and Separation: Enhance voice quality and separate vocals from background tracks.
 - [x] Scene Detection: Automatically detect scene transitions and export segmented clips.
 - [x] Subtitle Extraction: Use OCR to recognize embedded subtitles and generate editable text.
 
