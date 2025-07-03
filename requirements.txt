@@ -1,10 +1,31 @@
-# base
+# dependency
 torch==2.6.0
 torchaudio==2.6.0
 torchvision==0.21.0
 numpy==1.26.4
 pynini==2.1.5
 transformers==4.51.3
+
+# base
+loguru==0.7.3
+asyncio==3.4.3
+pyngrok==7.2.11
+pyarmor==9.1.2
+apscheduler==3.11.0
+ffmpeg_python==0.2.0
+opencv_python==4.11.0.86
+
+# video
+yt_dlp==2025.6.9
+moviepy==1.0.3
+scenedetect==0.6.6
+
+# audio
+pydub==0.25.1
+librosa==0.10.2
+pyannote.audio==3.3.2
+audio_separator[cpu]==0.30.2; sys_platform == 'win32'
+audio_separator[gpu]==0.30.2; sys_platform != 'win32'
 
 # asr
 faster_whisper==1.1.1
@@ -17,18 +38,11 @@ dashscope==1.23.5
 
 # tts
 edge_tts==7.0.1
-coqui_tts==0.26.0
-
-# audio
-pydub==0.25.1
-demucs==4.0.1
-librosa==0.11.0
-noisereduce==3.0.3
-pyannote.audio==3.3.2
+# coqui_tts==0.26.0
 
 # draft
 pymediainfo==6.1.0
-uiautomation==2.0.20; platform_machine == 'AMD64'
+uiautomation==2.0.20; sys_platform == 'win32'
 
 # ocr
 rapidocr==3.0.0
@@ -40,23 +54,13 @@ language_tags==1.2.0
 fast_langdetect==0.3.2
 
 # web
+gradio==5.34.0
 uvicorn==0.20.0
 fastapi==0.115.12
 websockets==15.0.1
-apscheduler==3.11.0
 python_multipart==0.0.20
  
 # other
 psutil==7.0.0
 tinydb==4.8.2
-gradio==5.34.0
-yt_dlp==2025.6.9
-loguru==0.7.3
-moviepy==1.0.3
-pyarmor==9.1.2
-asyncio==3.4.3
-pyngrok==7.2.11
 tenacity==9.1.2
-scenedetect==0.6.6
-ffmpeg_python==0.2.0
-opencv_python==4.11.0.86
