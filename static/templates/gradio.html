@@ -17,7 +17,7 @@
     <link href="static/js/layui/css/layui.css" rel="stylesheet">
     <link href="static/js/layui/css/layui-dark.css" rel="stylesheet">
     <script src="static/js/layui/layui.js"></script>
-    <!-- creator -->
+    <!-- iconify -->
     <script src="static/js/iconify/iconify.min.js"></script>
     <!-- creator -->
     <script src="static/js/creatorbox/app.js"></script>
@@ -34,14 +34,16 @@
                 <div class="layui-colla-item">
                     <div class="layui-card layui-panel">
                         <div class="layui-colla-title">应用</div>
-
                         <div class="layui-colla-content layui-show">
+                            <blockquote class="layui-elem-quote">
+                                欢迎加入 <a href="https://discord.gg/ZSeETM6bsS" target="_blank">Discord</a> 进行用法或新功能的讨论！
+                            </blockquote>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div style="padding: 15px">
+            <div style="padding: 10px">
                 <table id="gradio_table" class="layui-table" style="margin: 0px;">
                 </table>
             </div>
@@ -101,7 +103,7 @@
                 },
                 toolbar: '#TPL_table_toolbar',
                 defaultToolbar: ['filter'],
-                height: 'full-78', // 最大高度减去其他容器已占有的高度差
+                height: 'full-68', // 最大高度减去其他容器已占有的高度差
                 cols: [[
                     { type: 'checkbox' },
                     { title: '编号', sort: true, width: 80, align: "center", templet: d => '<div title="' + d.text + '">' + d.LAY_NUM + '</div>' },
@@ -128,13 +130,15 @@
             // 开关操作
             form.on('checkbox(switch_status_filter)', function (obj) {
                 var path = this.value;
-                var attr = "gradio";
+                var module = null;
+                var attr = null;
                 var status = obj.elem.checked ? 1 : 0;
                 // 更新状态
                 var cache = layui.table.cache['gradio_table'];
                 for (let i = 0; i < cache.length; i++) {
                     if (cache[i].path === path) {
-                        cache[i].attr = attr;
+                        module = cache[i].module
+                        attr = cache[i].attr
                         cache[i].status = status;
                         break;
                     }
@@ -145,7 +149,7 @@
                     scrollPos: 'fixed'
                 });
                 // 发送请求
-                tool.post("/app/mounts", JSON.stringify({ "path": path, "attr": attr, "status": status }), function (response) {
+                tool.post("/app/mounts", JSON.stringify({ "path": path, "module": module, "attr": attr, "status": status }), function (response) {
                     console.debug(response.data)
                     var status = response.data.status
                     if (status == 1) {

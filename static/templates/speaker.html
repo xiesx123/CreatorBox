@@ -92,7 +92,7 @@
                                     <select id="locale" name="locale" lay-verify="required" lay-filter="locale_filter">
                                         <option value="">选择或搜索</option>
                                         {% for item in data.locales %}
-                                        <option value="{{ item.Locale }}">{{ item.Name }} - {{ item.Locale }}</option>
+                                        <option value="{{ item.locale }}">{{ item.name }} - {{ item.locale }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -116,7 +116,7 @@
 
         </form>
 
-        <div style="padding: 15px">
+        <div style="padding: 10px">
             <table id="table" class="layui-table" style="margin: 0px;">
             </table>
         </div>

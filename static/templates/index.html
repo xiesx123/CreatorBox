@@ -22,7 +22,7 @@
   <link href="static/js/creatorbox/app.css" rel="stylesheet">
   <script src="static/js/creatorbox/app.js"></script>
   <style>
-    /* 使得底部浮动 */
+    /* 底部浮动 */
     .floating-div {
       position: fixed;
       left: 0;
@@ -91,6 +91,9 @@
               <dd><a data-path="/log" href="javascript:;"><i style="font-size: 18px"
                     class="layui-icon layui-icon-log"></i>
                   {{ _("nav_log") }}</a></dd>
+              <dd><a data-path="/settings" href="javascript:;"><i style="font-size: 16px"
+                class="layui-icon layui-icon-set"></i>
+              {{ _("nav_set") }}</a></dd>
             </dl>
           </li>
           <li class="layui-nav-item layui-nav-itemed">
@@ -108,7 +111,7 @@
     </div>
 
     <!-- 主体区域 -->
-    <div id="layui-body" class="layui-body" style="padding: 15px">
+    <div id="layui-body" class="layui-body" style="padding: 10px">
       <form class="layui-form layui-form-pane" lay-filter="form_filter">
 
         <div class="layui-row layui-col-space15">
@@ -140,7 +143,7 @@
                         <select id="locale" name="locale" lay-verify="required" lay-filter="locale_filter">
                           <option value="">{{ _("select_or_search") }}</option>
                           {% for item in data.llm.locales %}
-                          <option value="{{ item.Locale }}">{{ item.Name }} - {{ item.Locale }}</option>
+                          <option value="{{ item.locale }}">{{ item.name }} - {{ item.locale }}</option>
                           {% endfor %}
                         </select>
                       </div>
@@ -166,17 +169,10 @@
                     </div>
 
                     <div class="layui-form-item" pane>
-                      <label class="layui-form-label">{{ _("preview") }}</label>
+                      <label class="layui-form-label">{{ _("options") }}</label>
                       <div class="layui-input-block">
-                        <input type="checkbox" name="preview" lay-skin="switch">
-                      </div>
-                    </div>
-
-                    <div class="layui-form-item" pane>
-                      <label class="layui-form-label"
-                        lay-tips="{content: '{{ _('rebuild_tips') }}', margin: '0 0 0 -10px'}">{{ _("rebuild")}}</label>
-                      <div class="layui-input-block">
-                        <input type="checkbox" name="rebuild" lay-skin="switch" lay-filter="switch_rebuild_filter">
+                        <input type="checkbox" name="preview" lay-skin="tag" title="{{ _(" preview") }}">
+                        <input type="checkbox" name="rebuild" lay-skin="tag" title="{{ _(" rebuild") }}">
                       </div>
                     </div>
 
@@ -293,13 +289,17 @@
 
                     </div>
 
-                    <!-- <div class="layui-form-item" pane>
-                      <label class="layui-form-label">{{ _("noise_thresh") }}</label>
+                    <div class="layui-form-item" pane>
+                      <label class="layui-form-label">{{ _("uvr") }}</label>
                       <div class="layui-input-block">
-                        <input type="number" name="noise_thresh" lay-verify="required|number" placeholder="目标值 [0,5]"
-                          autocomplete="off" class="layui-input" min="0" max="5" step="0.1" lay-affix="number">
+                        <select name="uvr_model" lay-search>
+                          <option value="">{{ _("select_or_search") }}</option>
+                          {% for item in data.uvr.models %}
+                          <option value="{{ item }}">{{ item }}</option>
+                          {% endfor %}
+                        </select>
                       </div>
-                    </div> -->
+                    </div>
 
                     <div class="layui-form-item" pane>
                       <label class="layui-form-label">{{ _("align_enable") }}</label>
@@ -415,7 +415,7 @@
                         <label class="layui-form-label">{{ _("llm_instruct") }}</label>
                         <div class="layui-input-block">
                           <textarea name="llm_instruct" placeholder="示例：【去掉结尾的标点】、【阿拉伯数字使用中文代替】等等" lay-affix="clear"
-                            class="layui-textarea" style="min-height: 54px"></textarea>
+                            class="layui-textarea" style="min-height: 108px"></textarea>
                         </div>
                       </div>
 
@@ -494,6 +494,16 @@
                     </div>
 
                     <div class="layui-form-item">
+                      <label class="layui-form-label">{{ _("tts_volume") }}</label>
+                      <div class="layui-input-block">
+                        <div class="layui-input-inline">
+                          <input type="number" lay-verify="required" name="tts_volume" placeholder="目标值 [0.0,1.0]"
+                            autocomplete="off" class="layui-input" min="0" max="2" step="0.1" lay-affix="number">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item">
                       <label class="layui-form-label">{{ _("tts_rate") }}</label>
                       <div class="layui-input-block">
                         <div class="layui-input-inline">
@@ -550,8 +560,8 @@
 
                     <div class="layui-form-item layui-form-text">
                       <label class="layui-form-label" id="tts_play"
-                        lay-tips="{content: '点击试听', margin: '0 0 0 -10px'}">{{ _("tts_play") }} <i
-                          class="layui-icon layui-icon-headset"></i></label>
+                        lay-tips="{content: '点击试听', margin: '0 0 0 -10px'}">{{
+                        _("tts_play") }} <i class="layui-icon layui-icon-headset"></i></label>
                       <div class="layui-input-block">
                         <textarea id="tts_text" name="tts_text" placeholder="请输入试听文本" lay-verify="required"
                           lay-reqtext="请输入试听文本" lay-affix="clear" class="layui-textarea tts_text"></textarea>
@@ -567,7 +577,7 @@
           </div>
 
           <!-- 草稿 -->
-          <div class="layui-col-md12">
+          <div class="layui-col-md12"  id="draft_div">
             <div class="layui-collapse" lay-filter="collapse_filter_draft">
               <div class="layui-colla-item">
 
@@ -578,40 +588,15 @@
                   <div class="layui-colla-content layui-show">
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label"
-                        lay-tips="{content: '提示：<br>1、填写后，可通过剪映快速预览/微调<br>2、文件格式：{文件名}_{标志}.mp4<br>3、草稿目录：{文件名}_{标志}<br>4、只能在Windows环境下使用', margin: '0 0 0 -10px'}">{{
-                        _("draft_jypath") }}</label>
-                      <div class="layui-input-block">
-                        <input type="text" name="draft_jypath" lay-verify="jydraft" placeholder="请输入剪映草稿路径"
-                          autocomplete="off" class="layui-input" lay-affix="clear">
-                      </div>
-                    </div>
+                      <label class="layui-form-label">{{ _("draft_volume") }}</label>
 
-
-                    <div class="layui-form-item">
-                      <label class="layui-form-label">{{ _("draft_volume_native") }}</label>
-
-                      <div class="layui-input-block">
+                      <div class="layui-input-inline" style="width: 120px;">
                         <input type="number" lay-verify="required" name="draft_volume_native"
                           placeholder="目标值 [0.0,1.0]" autocomplete="off" class="layui-input" min="0" max="1" step="0.1"
                           lay-affix="number">
                       </div>
 
-                    </div>
-
-                    <div class="layui-form-item">
-                      <label class="layui-form-label">{{ _("draft_volume_voice") }}</label>
-
-                      <div class="layui-input-block">
-                        <input type="number" lay-verify="required" name="draft_volume_voice" placeholder="目标值 [0.0,1.0]"
-                          autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
-                      </div>
-                    </div>
-
-                    <div class="layui-form-item">
-                      <label class="layui-form-label">{{ _("draft_volume_background") }}</label>
-
-                      <div class="layui-input-block">
+                      <div class="layui-input-inline" style="width: 120px;">
                         <input type="number" lay-verify="required" name="draft_volume_background"
                           placeholder="目标值 [0.0,1.0]" autocomplete="off" class="layui-input" min="0" max="1" step="0.1"
                           lay-affix="number">
@@ -683,7 +668,7 @@
                       </div>
                       <div class="layui-input-inline" style="width: 120px;">
                         <input type="number" lay-verify="required" name="silence_keep" placeholder="保留长度"
-                          autocomplete="off" class="layui-input" min="0" max="100" step="1" lay-affix="number">
+                          autocomplete="off" class="layui-input" min="0" max="1000" step="1" lay-affix="number">
                       </div>
                     </div>
 
@@ -740,10 +725,9 @@
       var $ = layui.$;
 
       var app = JSON.parse('{{ data.app | tojson }}')
-      console.log("%s %s.%s build on %s at %s (%s)", app.title, app.version, app.build.hash, app.build.branch, app.build.date, app.plan);
+      var os = '{{ os }}'
+      console.log("%s %s.%s build on %s at %s (%s %s)", app.title, app.version, app.build.hash, app.build.branch, app.build.date, os, app.plan);
       console.log("%s", app.description);
-      var os = layui.device("os").os
-      console.debug("%s", os);
 
       let CREATORBOX = "dubbing"
       let cache = layui.data(CREATORBOX)
@@ -772,11 +756,8 @@
       form.val('form_filter', form_json);
 
       // 表单初始
-      if (form_json.mode_type == 1) {
-        $('#align_type_div').removeClass('layui-hide');
-      } else {
-        $('#align_type_div').addClass('layui-hide');
-      }
+      $('#align_type_div').toggleClass('layui-hide',form_json.mode_type != 1);
+      $('#draft_div').toggleClass('layui-hide', os !== 'windows');
 
       // 表单验证 
       form.verify({
@@ -856,16 +837,6 @@
         }
       });
 
-      // 是否重构
-      form.on('switch(switch_rebuild_filter)', function (data) {
-        if (this.checked) {
-          toast.warning("重新构建已开启", "提示");
-          layer.tips('注意：开启重构则会删除缓存重新执行', data.othis)
-        } else {
-          toast.info("重新构建已关闭", "提示");
-        }
-      });
-
       // 提交执行
       form.on('submit(form_submit)', function (data) {
         var field = data.field;
@@ -876,8 +847,8 @@
         field.tts_dubbing = JSON.stringify(cache_table);
         // 样式
         field.draft_style = JSON.stringify({
-          "srt_dub": { "text_size": field.draft_style_dts, "text_color": field.draft_style_dtc, "text_border_color": field.draft_style_dtbc, "text_border_width": field.draft_style_dtbw, "text_transform_y": field.draft_style_dty },// 配音
-          "srt_nat": { "text_size": field.draft_style_nts, "text_color": field.draft_style_ntc, "text_border_color": field.draft_style_ntbc, "text_border_width": field.draft_style_ntbw, "text_transform_y": field.draft_style_nty },// 原声
+          "subtitle": { "text_size": field.draft_style_nts, "text_color": field.draft_style_ntc, "text_border_color": field.draft_style_ntbc, "text_border_width": field.draft_style_ntbw, "text_transform_y": field.draft_style_nty },// 原声
+          "subtitle_dub": { "text_size": field.draft_style_dts, "text_color": field.draft_style_dtc, "text_border_color": field.draft_style_dtbc, "text_border_width": field.draft_style_dtbw, "text_transform_y": field.draft_style_dty },// 配音
         });
         // 请求数据
         data = JSON.stringify(field, null, 2);
@@ -925,13 +896,12 @@
 
       // 固定条
       var bars = [
-        { type: '日志', icon: 'layui-icon-log' },
         { type: '数据', icon: 'layui-icon-fonts-code' },
         { type: '播放', icon: 'layui-icon-video' },
         { type: '备份', icon: 'layui-icon-export' }
       ];
       util.fixbar({
-        bars: (os == "windows" ? bars.slice(1) : bars),
+        bars: bars,
         bar1: false,
         bar2: false,
         bgcolor: '#393D52',
