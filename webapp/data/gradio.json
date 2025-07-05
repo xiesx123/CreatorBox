@@ -1,5 +1,13 @@
 {
   "gradio": {
+    "0": {
+      "name": "settings",
+      "description": "Preference Settings",
+      "module": "src.app.settings",
+      "attr": "gradio",
+      "path": "/settings",
+      "status": 0
+    },
     "1": {
       "name": "jme",
       "description": "Jianying Material Extractor",
