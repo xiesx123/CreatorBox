@@ -771,7 +771,7 @@
 
       // 表单初始
       $('#align_type_div').toggleClass('layui-hide', form_json.mode_type != 1);
-      $('#draft_div').toggleClass('layui-hide', os !== 'windows');
+      $('#draft_div').toggleClass('layui-hide', '{{ data.draft.enable }}' !== 'True');
 
       // 表单验证 
       form.verify({
@@ -845,11 +845,7 @@
 
       // 处理模式
       form.on('radio(mode_type_filter)', function (data) {
-        if (data.elem.value == 1) {
-          $('#align_type_div').removeClass('layui-hide');
-        } else {
-          $('#align_type_div').addClass('layui-hide');
-        }
+        $('#align_type_div').toggleClass('layui-hide', data.elem.value != 1);
       });
 
       // 提交执行
@@ -990,8 +986,7 @@
         menuLeft() {
           $('body').toggleClass('collapse');
         },
-        menuRight() {
-        },
+        menuRight() { },
       });
 
       element.on('nav(nav-side)', function (elem) {

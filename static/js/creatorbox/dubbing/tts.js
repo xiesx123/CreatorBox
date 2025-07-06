@@ -106,7 +106,7 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
         form_json.tts_model = item.model;
         $('input[name="tts_model"]').val(form_json.tts_model);
         mod.switch()
-        tool.post("tts/search", voice_search_params(), voice_search_callback, true)
+        tool.post("tts/search", voice_search_params({ provider: form_json.tts_provider, model: form_json.tts_model, gender: form_json.tts_gender }), voice_search_callback, true)
     });
 
     // 生成配置
@@ -223,13 +223,13 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
         data: table_json,
         page: false,
         cols: [[
-            { title: '说话人', width: 80, align: "center", templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.LAY_INDEX + '</div>' },
-            { title: '模型', width: 80, align: "center", field: 'provider', templet: d => '<div title="' + d.model + '">' + d.provider + '</div>' },
-            { title: '类型', width: 80, align: "center", field: 'type', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.type + '</div>' },
-            { title: '性别', width: 80, align: "center", field: 'gender', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + (d.gender == 1 ? '男' : d.gender == 2 ? '女' : '未知') + '</div>' },
+            { title: 'spk', width: 80, align: "center", templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.LAY_INDEX + '</div>' },
+            { title: '模型', width: 60, align: "center", field: 'provider', templet: d => '<div title="' + d.model + '">' + d.provider + '</div>' },
+            { title: '类型', width: 60, align: "center", field: 'type', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.type + '</div>' },
+            { title: '性别', width: 60, align: "center", field: 'gender', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + (d.gender == 1 ? '男' : d.gender == 2 ? '女' : '未知') + '</div>' },
             { title: '音色', field: 'voice', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.voice + '</div>' },
-            { title: '音量', width: 80, align: "center", field: 'volume', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.volume + '</div>' },
-            { title: '语速', width: 80, align: "center", field: 'rate', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.rate + '</div>' },
+            { title: '音量', width: 60, align: "center", field: 'volume', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.volume + '</div>' },
+            { title: '语速', width: 60, align: "center", field: 'rate', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.rate + '</div>' },
             { title: '时长', width: 80, align: "center", field: 'duration', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.duration + '</div>' },
             { title: "操作", fixed: 'right', width: "200", align: "center", toolbar: "#TPL_tts_voices_table_tools" }
         ]],
