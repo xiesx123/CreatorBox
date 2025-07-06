@@ -92,8 +92,8 @@
                     class="layui-icon layui-icon-log"></i>
                   {{ _("nav_log") }}</a></dd>
               <dd><a data-path="/settings" href="javascript:;"><i style="font-size: 16px"
-                class="layui-icon layui-icon-set"></i>
-              {{ _("nav_set") }}</a></dd>
+                    class="layui-icon layui-icon-set"></i>
+                  {{ _("nav_set") }}</a></dd>
             </dl>
           </li>
           <li class="layui-nav-item layui-nav-itemed">
@@ -215,7 +215,7 @@
                     <div class="layui-form-item">
                       <label class="layui-form-label">{{ _("provider") }}</label>
                       <div class="layui-input-block">
-                        <select id="asr_provider" name="asr_provider" lay-filter="asr_provider_filter">
+                        <select name="asr_provider" lay-filter="asr_provider_filter">
                           {% for item in data.asr.providers %}
                           <option value="{{ item.provider}}" {% if not item.enable %}disabled{% endif %}>
                             {{ item.desc }}
@@ -232,6 +232,20 @@
                         <div class="layui-input-block">
                           <input id="subtitle_url" type="srt" name="subtitle_url" lay-verify="subtitle_srt"
                             placeholder="请输入字幕文件路径（SRT）" autocomplete="off" class="layui-input" lay-affix="clear">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="layui-col-md12 layui-hide" id="jydraft_div">
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">{{ _("draft_name") }}</label>
+                        <div class="layui-input-block">
+                          <select name="draft_name" lay-verify="draft_name" lay-search>
+                            <option value="">{{ _("select_or_search") }}</option>
+                            {% for item in data.asr.draftnames %}
+                            <option value="{{ item }}">{{ item }}</option>
+                            {% endfor %}
+                          </select>
                         </div>
                       </div>
                     </div>
@@ -294,7 +308,7 @@
                       <div class="layui-input-block">
                         <select name="uvr_model" lay-search>
                           <option value="">{{ _("select_or_search") }}</option>
-                          {% for item in data.uvr.models %}
+                          {% for item in data.asr.uvrmodels %}
                           <option value="{{ item }}">{{ item }}</option>
                           {% endfor %}
                         </select>
@@ -577,7 +591,7 @@
           </div>
 
           <!-- 草稿 -->
-          <div class="layui-col-md12"  id="draft_div">
+          <div class="layui-col-md12" id="draft_div">
             <div class="layui-collapse" lay-filter="collapse_filter_draft">
               <div class="layui-colla-item">
 
@@ -756,7 +770,7 @@
       form.val('form_filter', form_json);
 
       // 表单初始
-      $('#align_type_div').toggleClass('layui-hide',form_json.mode_type != 1);
+      $('#align_type_div').toggleClass('layui-hide', form_json.mode_type != 1);
       $('#draft_div').toggleClass('layui-hide', os !== 'windows');
 
       // 表单验证 
@@ -767,10 +781,17 @@
           }
         },
         subtitle_srt: function (value, elem) {
-          if ($('#asr_provider').val() != 'Subtitle') return;
+          if ($('select[name="asr_provider"]').val() != 'Subtitle') return;
           subtitle_url = $('input[name="subtitle_url"]').val()
-          if (subtitle_url == '') {
+          if (subtitle_url.length == 0) {
             return "请输出字幕文件";
+          }
+        },
+        draft_name: function (value, elem) {
+          if ($('select[name="asr_provider"]').val() != 'JyDraft') return;
+          draft_name = $('select[name="draft_name"]').val()
+          if (draft_name.length == 0) {
+            return "请选择剪映草稿";
           }
         },
         speaker_len: function (value, elem) {
@@ -779,12 +800,6 @@
           speaker_num = $('input[name="speaker_num"]').val()
           if (cache_table.length < speaker_num) {
             return "【配音人数】不能低于【目标数量】";
-          }
-        },
-        jydraft: function (value, elem) {
-          if (!$('input[name="draft_preview"]').is(':checked')) return;
-          if (value.length == 0) {
-            return '请输入剪映草稿路径';
           }
         },
       });

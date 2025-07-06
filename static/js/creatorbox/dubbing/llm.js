@@ -40,49 +40,24 @@ layui.define(['form', 'tool'], function (exports) {
 
     // 方法
     var mod = {
-
-        // 初始
         setData: function (data) {
-            form_json = data
-            // 初始    
-            mod.switch()
+            form_json = data;
+            mod.switch();
         },
-
-        // 提供商
         setProviderData: function (data) {
-            providers = data
+            providers = data;
         },
-
-        // 切换
         switch: function () {
-            provider = form_json.llm_provider
-            divDeeplx = $('#deeplx_div')
-            divLlm = $('#llm_div')
-            divOpt = $('#opt_div')
-
-            if (provider == "ignore") {
-                divDeeplx.addClass('layui-hide');
-                divLlm.addClass('layui-hide');
-                divOpt.addClass('layui-hide');
-            }
-
-            else if (provider == "Deeplx") {
-                divDeeplx.removeClass('layui-hide');
-                divLlm.addClass('layui-hide');
-                divOpt.removeClass('layui-hide');
-            }
-
-            else if (provider == "Gemini" || provider == "DashScope") {
-                divDeeplx.addClass('layui-hide');
-                divLlm.removeClass('layui-hide');
-                divOpt.removeClass('layui-hide');
-            }
-
-            else {
-                divDeeplx.addClass('layui-hide');
-                divLlm.addClass('layui-hide');
-                divOpt.addClass('layui-hide');
-            }
+            const provider = form_json.llm_provider;
+            const divs = {
+                Deeplx: ['#deeplx_div', '#opt_div'],
+                Gemini: ['#llm_div', '#opt_div'],
+                DashScope: ['#llm_div', '#opt_div'],
+                ignore: []
+            };
+            ['#deeplx_div', '#llm_div', '#opt_div'].forEach(selector => {
+                $(selector).toggleClass('layui-hide', !divs[provider]?.includes(selector));
+            });
         },
     };
 

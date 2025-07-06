@@ -33,35 +33,27 @@ layui.define(['form', 'tool'], function (exports) {
 
         // 初始
         setData: function (data) {
-            form_json = data
-            // 初始    
-            mod.switch()
+            form_json = data;
+            mod.switch();
         },
 
         // 提供商
         setProviderData: function (data) {
-            providers = data
+            providers = data;
         },
 
         // 切换
         switch: function () {
-            provider = form_json.asr_provider
-            divSubtitle = $('#subtitle_div')
-            divWhisper = $('#whisper_div')
-            if (provider == "Subtitle") {
-                divSubtitle.removeClass('layui-hide');
-                divWhisper.addClass('layui-hide');
-            }
+            const provider = form_json.asr_provider;
+            const sections = {
+                Subtitle: '#subtitle_div',
+                JyDraft: '#jydraft_div',
+                FasterWhisper: '#whisper_div'
+            };
 
-            else if (provider == "FasterWhisper") {
-                divSubtitle.addClass('layui-hide');
-                divWhisper.removeClass('layui-hide');
-            }
-
-            else {
-                divSubtitle.addClass('layui-hide');
-                divWhisper.addClass('layui-hide');
-            }
+            Object.keys(sections).forEach(key => {
+                $(sections[key]).toggleClass('layui-hide', key !== provider);
+            });
         },
     };
 

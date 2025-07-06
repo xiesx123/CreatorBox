@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-07-05 16:47+0800\n"
+"POT-Creation-Date: 2025-07-06 16:50+0800\n"
 "PO-Revision-Date: 2025-06-03 23:16+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh\n"
@@ -78,10 +78,10 @@ msgstr "请输入视频路径、链接"
 msgid "locale"
 msgstr "地区"
 
-#: static/templates/index.html:144 static/templates/index.html:245
-#: static/templates/index.html:257 static/templates/index.html:269
-#: static/templates/index.html:281 static/templates/index.html:296
-#: static/templates/index.html:491
+#: static/templates/index.html:144 static/templates/index.html:244
+#: static/templates/index.html:259 static/templates/index.html:271
+#: static/templates/index.html:283 static/templates/index.html:295
+#: static/templates/index.html:310 static/templates/index.html:505
 msgid "select_or_search"
 msgstr "选择或搜索"
 
@@ -117,12 +117,12 @@ msgstr "请输入文件后缀名称"
 msgid "dub.subtitle"
 msgstr "字幕"
 
-#: static/templates/index.html:209 static/templates/index.html:350
+#: static/templates/index.html:209 static/templates/index.html:364
 msgid "debug"
 msgstr "调试"
 
-#: static/templates/index.html:216 static/templates/index.html:357
-#: static/templates/index.html:454
+#: static/templates/index.html:216 static/templates/index.html:371
+#: static/templates/index.html:468
 msgid "provider"
 msgstr "提供商"
 
@@ -130,140 +130,144 @@ msgstr "提供商"
 msgid "subtitle_url"
 msgstr "字幕"
 
-#: static/templates/index.html:242 static/templates/index.html:383
-#: static/templates/index.html:471
+#: static/templates/index.html:241
+msgid "draft_name"
+msgstr "草稿"
+
+#: static/templates/index.html:256 static/templates/index.html:397
+#: static/templates/index.html:485
 msgid "model"
 msgstr "模型"
 
-#: static/templates/index.html:254
+#: static/templates/index.html:268
 msgid "whisper_size"
 msgstr "准确性"
 
-#: static/templates/index.html:266
+#: static/templates/index.html:280
 msgid "whisper_temperature"
 msgstr "随机性"
 
-#: static/templates/index.html:278
+#: static/templates/index.html:292
 msgid "whisper_length"
 msgstr "连贯性"
 
-#: static/templates/index.html:293
+#: static/templates/index.html:307
 msgid "uvr"
 msgstr "音轨分离"
 
-#: static/templates/index.html:305
+#: static/templates/index.html:319
 msgid "align_enable"
 msgstr "声纹对齐"
 
-#: static/templates/index.html:312
+#: static/templates/index.html:326
 msgid "speaker_use_num"
 msgstr "说话人数量"
 
-#: static/templates/index.html:320
+#: static/templates/index.html:334
 msgid "speaker_range"
 msgstr "说话人区间"
 
-#: static/templates/index.html:346
+#: static/templates/index.html:360
 msgid "dub.translation"
 msgstr "翻译"
 
-#: static/templates/index.html:391
+#: static/templates/index.html:405
 msgid "llm_temperature"
 msgstr "随机性"
 
-#: static/templates/index.html:399
+#: static/templates/index.html:413
 msgid "llm_top_p"
 msgstr "多样性"
 
-#: static/templates/index.html:408
+#: static/templates/index.html:422
 msgid "llm_use_cache"
 msgstr "缓存"
 
-#: static/templates/index.html:415
+#: static/templates/index.html:429
 msgid "llm_instruct"
 msgstr "指令"
 
-#: static/templates/index.html:427
+#: static/templates/index.html:441
 msgid "llm_batch_size"
 msgstr "批量"
 
-#: static/templates/index.html:448
+#: static/templates/index.html:462
 msgid "dub.dubbing"
 msgstr "配音"
 
-#: static/templates/index.html:479
+#: static/templates/index.html:493
 msgid "tts_gender"
 msgstr "性别"
 
-#: static/templates/index.html:487
+#: static/templates/index.html:501
 msgid "tts_voice"
 msgstr "音色"
 
-#: static/templates/index.html:497
+#: static/templates/index.html:511
 msgid "tts_volume"
 msgstr "音量"
 
-#: static/templates/index.html:507
+#: static/templates/index.html:521
 msgid "tts_rate"
 msgstr "语速"
 
-#: static/templates/index.html:519
+#: static/templates/index.html:533
 msgid "tts_step"
 msgstr "采样步数"
 
-#: static/templates/index.html:537
+#: static/templates/index.html:551
 msgid "tts_instruct"
 msgstr "指令"
 
-#: static/templates/index.html:548
+#: static/templates/index.html:562
 msgid "tts_vc"
 msgstr "转换"
 
-#: static/templates/index.html:555
+#: static/templates/index.html:569
 msgid "tts_remarks"
 msgstr "备注"
 
-#: static/templates/index.html:564
+#: static/templates/index.html:578
 msgid "tts_play"
 msgstr "试听"
 
-#: static/templates/index.html:585
+#: static/templates/index.html:599
 msgid "dub.draft"
 msgstr "草稿"
 
-#: static/templates/index.html:591
+#: static/templates/index.html:605
 msgid "draft_volume"
 msgstr "音量设置"
 
-#: static/templates/index.html:607
+#: static/templates/index.html:621
 msgid "draft_style_dts"
 msgstr "配音字幕"
 
-#: static/templates/index.html:634
+#: static/templates/index.html:648
 msgid "draft_style_nts"
 msgstr "原始字幕"
 
-#: static/templates/index.html:660
+#: static/templates/index.html:674
 msgid "silence_threshold"
 msgstr "静音检测"
 
-#: static/templates/index.html:687
+#: static/templates/index.html:701
 msgid "submit"
 msgstr "执行"
 
-#: static/templates/index.html:708
+#: static/templates/index.html:722
 msgid "table_tools_preview"
 msgstr "试听"
 
-#: static/templates/index.html:709
+#: static/templates/index.html:723
 msgid "table_tools_delete"
 msgstr "删除"
 
-#: static/templates/index.html:710
+#: static/templates/index.html:724
 msgid "table_tools_move_up"
 msgstr "上移"
 
-#: static/templates/index.html:711
+#: static/templates/index.html:725
 msgid "table_tools_move_down"
 msgstr "下移"
 

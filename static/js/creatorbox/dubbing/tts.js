@@ -225,8 +225,8 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
         cols: [[
             { title: '说话人', width: 80, align: "center", templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.LAY_INDEX + '</div>' },
             { title: '模型', width: 80, align: "center", field: 'provider', templet: d => '<div title="' + d.model + '">' + d.provider + '</div>' },
-            { title: '类型', width: 80, align: "center", field: 'type', templet: d => '<div title="' + d.text+ ' (' + d.remarks + ') ">' + d.type + '</div>' },
-            { title: '性别', width: 80, align: "center", field: 'gender', templet: d => '<div title="' + d.text+ ' (' + d.remarks + ') ">' + (d.gender == 1 ? '男' : d.gender == 2 ? '女' : '未知') + '</div>' },
+            { title: '类型', width: 80, align: "center", field: 'type', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.type + '</div>' },
+            { title: '性别', width: 80, align: "center", field: 'gender', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + (d.gender == 1 ? '男' : d.gender == 2 ? '女' : '未知') + '</div>' },
             { title: '音色', field: 'voice', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.voice + '</div>' },
             { title: '音量', width: 80, align: "center", field: 'volume', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.volume + '</div>' },
             { title: '语速', width: 80, align: "center", field: 'rate', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.rate + '</div>' },
@@ -295,59 +295,34 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
 
     // 方法
     var mod = {
-
-        // 初始
         setData: function (data, data2) {
-            form_json = data
-            table_json = data2
-            // 初始    
-            mod.switch()
-            // 重载
-            swapData(0, 0)
-            // 搜索
+            form_json = data;
+            table_json = data2;
+            mod.switch();
+            swapData(0, 0);
             tool.post("tts/search", voice_search_params(), voice_search_callback, true);
         },
-
-        // 提供商
         setProviderData: function (data) {
-            providers = data
+            providers = data;
         },
-
         switch: function () {
-            provider = form_json.tts_provider
-            model = form_json.tts_model
-            divXtts = $('#xtts_div')
-            divE2f5 = $('#e2f5_div')
-            divCosy = $('#cosy_div')
-            optVc = $('#opt_vc') //vc
+            const provider = form_json.tts_provider;
+            const model = form_json.tts_model;
+            const divs = {
+                xtts: $('#xtts_div'),
+                e2f5: $('#e2f5_div'),
+                cosy: $('#cosy_div'),
+                optVc: $('#opt_vc')
+            };
 
-            if (provider == "e2f5") {
-                divE2f5.removeClass('layui-hide');
-                divXtts.addClass('layui-hide');
-                divCosy.addClass('layui-hide');
-                optVc.addClass('layui-hide');// vc
-            }
-            else if (provider == "xtts") {
-                divE2f5.addClass('layui-hide');
-                divXtts.removeClass('layui-hide');
-                divCosy.addClass('layui-hide');
-                optVc.removeClass('layui-hide');// vc
-            }
-            else if (provider == "cosy") {
-                divE2f5.addClass('layui-hide');
-                divXtts.addClass('layui-hide');
-                divCosy.removeClass('layui-hide');
-                optVc.removeClass('layui-hide');// vc
-            }
-            else {
-                divXtts.addClass('layui-hide');
-                divE2f5.addClass('layui-hide');
-                divCosy.addClass('layui-hide');
-                optVc.addClass('layui-hide');// vc
+            Object.values(divs).forEach(div => div.addClass('layui-hide'));
+            if (provider in divs) {
+                divs[provider].removeClass('layui-hide');
+                divs.optVc.toggleClass('layui-hide', provider !== "xtts" && provider !== "cosy");
             }
 
-            $('input[name="tts_model"]').prop("disabled", (model == ""));
-        },
+            $('input[name="tts_model"]').prop("disabled", !model);
+        }
     };
     // 输出
     exports('tts', mod);
