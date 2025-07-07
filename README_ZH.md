@@ -184,5 +184,10 @@
 - 欢迎加入 [Discord](https://discord.gg/ZSeETM6bsS) 进行用法或新功能的讨论
 
 ## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=xiesx123/CreatorBox&type=Date)](https://star-history.com/#xiesx123/CreatorBox&Date)
+<a href="https://www.star-history.com/#xiesx123/CreatorBox&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=xiesx123/CreatorBox&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=xiesx123/CreatorBox&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=xiesx123/CreatorBox&type=Date" />
+ </picture>
+</a>

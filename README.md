@@ -183,6 +183,10 @@
 - Welcome to join [Discord](https://discord.gg/ZSeETM6bsS) for discussions on usage or new features.
 
 ## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=xiesx123/CreatorBox&type=Date)](https://star-history.com/#xiesx123/CreatorBox&Date)
-
+<a href="https://www.star-history.com/#xiesx123/CreatorBox&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=xiesx123/CreatorBox&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=xiesx123/CreatorBox&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=xiesx123/CreatorBox&type=Date" />
+ </picture>
+</a>
