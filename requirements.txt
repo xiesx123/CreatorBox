@@ -29,6 +29,7 @@ audio_separator[cpu]==0.30.2; sys_platform == 'win32'
 audio_separator[gpu]==0.30.2; sys_platform != 'win32'
 
 # asr
+funasr==1.2.6
 faster_whisper==1.1.1
 
 # llm

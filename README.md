@@ -135,7 +135,7 @@
 ## 📅 Planned Support
 
 ### Subtitles
-- [x] Multiple Providers: Support switching between `Srt Source Subtitles` and `FasterWhisper`
+- [x] Multiple Providers: Support switching between `Source Subtitles`、`Jianying Draft`、`FunAsr` and `FasterWhisper`
 - [x] Automatic Video Download
 - [x] Audio Noise Reduction and Separation
 - [x] Subtitle Transcription
@@ -151,7 +151,7 @@
 
 ### Speech
 
-- [x] Multiple Providers: Support switching between `EdgeTTS`, `F5TTS`, `CoquiTTS`, and `CosyVoice2`
+- [x] Multiple Providers: Support switching between `EdgeTTS`, `CosyVoice2`, `F5TTS`, and `CoquiTTS` 
 - [x] Real-Time Speech Synthesis and Preview
 - [x] Voice Library: Includes `Built-in`, `Video`, and `Custom` voice types
 - [x] Voice Cloning: Supports `Voice Cloning`, `Voice Commands`, `Voice Conversion`, and `Cross-Language Cloning`
