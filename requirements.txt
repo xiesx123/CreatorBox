@@ -40,7 +40,7 @@ dashscope==1.23.5
 
 # tts
 edge_tts==7.0.1
-# coqui_tts==0.26.0
+coqui_tts==0.26.0
 
 # draft
 pymediainfo==6.1.0
