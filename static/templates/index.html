@@ -344,6 +344,13 @@
                       </div>
                     </div>
 
+                    <div class="layui-form-item" pane>
+                      <label class="layui-form-label">{{ _("emotion_enable") }}</label>
+                      <div class="layui-input-block">
+                        <input type="checkbox" name="emotion_enable" lay-skin="switch">
+                      </div>
+                    </div>
+
                   </div>
                 </div>
 
@@ -799,7 +806,7 @@
           if ($('input[name="llm_debug"]').is(':checked')) return;
           speaker_num = $('input[name="speaker_num"]').val()
           if (cache_table.length < speaker_num) {
-            return "【配音人数】不能低于【目标数量】";
+            return "【配音人数】不能低于【说话人数量】";
           }
         },
       });
