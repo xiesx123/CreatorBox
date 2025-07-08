@@ -42,10 +42,6 @@ dashscope==1.23.5
 edge_tts==7.0.1
 coqui_tts==0.26.0
 
-# draft
-pymediainfo==6.1.0
-uiautomation==2.0.20; sys_platform == 'win32'
-
 # ocr
 rapidocr==3.0.0
 paddlepaddle==3.0.0
@@ -62,6 +58,10 @@ fastapi==0.115.12
 websockets==15.0.1
 python_multipart==0.0.20
  
+# draft
+pymediainfo==6.1.0
+uiautomation==2.0.20; sys_platform == 'win32'
+
 # other
 nltk==3.9.1
 psutil==7.0.0
