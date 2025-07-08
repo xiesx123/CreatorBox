@@ -321,6 +321,13 @@
                         <input type="checkbox" name="align_enable" lay-skin="switch">
                       </div>
                     </div>
+                    
+                    <div class="layui-form-item" pane>
+                      <label class="layui-form-label">{{ _("emotion_enable") }}</label>
+                      <div class="layui-input-block">
+                        <input type="checkbox" name="emotion_enable" lay-skin="switch">
+                      </div>
+                    </div>
 
                     <div class="layui-form-item" pane>
                       <label class="layui-form-label">{{ _("speaker_use_num") }}</label>
@@ -341,13 +348,6 @@
                         <input type="number" lay-verify="required|number|speaker_len" name="speaker_max"
                           placeholder="最大值" autocomplete="off" class="layui-input" min="1" max="10" step="1"
                           lay-affix="number">
-                      </div>
-                    </div>
-
-                    <div class="layui-form-item" pane>
-                      <label class="layui-form-label">{{ _("emotion_enable") }}</label>
-                      <div class="layui-input-block">
-                        <input type="checkbox" name="emotion_enable" lay-skin="switch">
                       </div>
                     </div>
 
@@ -436,7 +436,7 @@
                         <label class="layui-form-label">{{ _("llm_instruct") }}</label>
                         <div class="layui-input-block">
                           <textarea name="llm_instruct" placeholder="示例：【去掉结尾的标点】、【阿拉伯数字使用中文代替】等等" lay-affix="clear"
-                            class="layui-textarea" style="min-height: 108px"></textarea>
+                            class="layui-textarea" style="min-height: 161px"></textarea>
                         </div>
                       </div>
 
@@ -877,7 +877,7 @@
           // 禁用预览
           $("button[lay-on='video_preview']").addClass("layui-btn-disabled").prop("disabled", true);
           // 请求调用
-          tool.post("dubbing/pipeline", data, function (response) {
+          tool.post("dubb/pipeline", data, function (response) {
             console.debug(response.data)
             var taskId = response.data.task_id
             toast.info(taskId, "任务提交成功");
@@ -968,9 +968,9 @@
               } else if (!cache.hasOwnProperty('table')) {
                 return layer.msg('请先试听', { icon: 3 });
               }
-              tool.download("dubbing/export", JSON.stringify(cache), filename)
+              tool.download("dubb/export", JSON.stringify(cache), filename)
             }, function () {
-              tool.upload("#import", "dubbing/import", 'file', 'zip', null, function (response) {
+              tool.upload("#import", "dubb/import", 'file', 'zip', null, function (response) {
                 if (response.code != 0) {
                   return toast.error(response.message, "提示");
                 }
@@ -1002,7 +1002,7 @@
           // if ($(window).width() <= 768) {
           //   $('body').toggleClass('collapse');
           // }
-          util.openWin({ url: path });
+          util.openWin({ url: path, target: "creatorbox" });
         }
       });
     });
