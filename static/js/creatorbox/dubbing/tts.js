@@ -127,8 +127,9 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
 
     // 性别选择
     form.on('radio(tts_gender_filter)', function (data) {
+        form_json.tts_model = $('input[name="tts_model"]').val()
         form_json.tts_gender = data.elem.value;
-        tool.post("tts/search", voice_search_params({ gender: form_json.tts_gender }), voice_search_callback, true)
+        tool.post("tts/search", voice_search_params({ model: form_json.tts_model, gender: form_json.tts_gender }), voice_search_callback, true)
     });
 
     // 语音选择
