@@ -139,7 +139,7 @@
 - [x] Multiple providers: support switching between `Original Subtitles`, `CapCut Draft`, `FunAsr`, and `FasterWhisper`
 - [x] Automatic video download from `YouTube` and `TikTok`
 - [x] Convert video audio to text and extract subtitles
-- [x] Multi-track separation for `vocal`, `accompaniment`, `drums`, `bass`, etc.
+- [x] Multi-track separation for `vocal`, `accompaniment`, `drums`, `bass`, etc
 - [x] Speaker embedding extraction and alignment with subtitle text
 - [x] Multi-speaker recognition
 - [x] Emotion recognition: supports `Angry`, `Disgusted`, `Fearful`, `Happy`, `Neutral`, `Other`, `Sad`, and `Surprised`
