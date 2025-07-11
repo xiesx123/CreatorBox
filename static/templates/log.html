@@ -17,6 +17,8 @@
     <link href="static/js/layui/css/layui.css" rel="stylesheet">
     <link href="static/js/layui/css/layui-dark.css" rel="stylesheet">
     <script src="static/js/layui/layui.js"></script>
+    <!-- socket -->
+    <script src="static/js/socket/socket.io.min.js"></script>
     <!-- creator -->
     <script src="static/js/creatorbox/theam.js"></script>
     <script src="static/js/creatorbox/app.js"></script>
@@ -32,6 +34,15 @@
 <body>
     <pre id="log">{{ data.json }}</pre>
     <script>
+        const socket = io("http://172.18.0.1:8000", {
+            path: "ws/socket.io",
+            reconnection: true,
+            reconnectionDelay: 1000 * 60,
+        });
+        socket.on('connect', () => console.log('连接成功'));
+        socket.on('message', msg => console.log('收到消息:', msg));
+    </script>
+    <script>
 
         layui.use(['tool'], function () {
 
@@ -39,9 +50,8 @@
             var $ = layui.$;
 
             var logContainer = $('#log');
-
+            
             tool.connect(function (data) {
-                data = JSON.parse(event.data)
                 if (data.type == "log") {
                     console.debug(data.message);
                     logContainer.text(logContainer.text() + data.message);

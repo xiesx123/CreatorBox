@@ -13,6 +13,8 @@
   <!-- nprogress -->
   <link href="static/js/nprogress/nprogress.min.css" rel="stylesheet">
   <script src="static/js/nprogress/nprogress.min.js"></script>
+  <!-- socket -->
+  <script src="static/js/socket/socket.io.min.js"></script>
   <!-- layui -->
   <link href="static/js/layui/css/layui.css" rel="stylesheet">
   <link href="static/js/layui/css/layui-nav.css" rel="stylesheet">
@@ -75,6 +77,10 @@
           <li class="layui-nav-item layui-nav-itemed">
             <a href="javascript:;">{{ _("group_feature") }}</a>
             <dl class="layui-nav-child">
+              {% if data.nav.mask_url != '' %}
+              <dd><a data-path="{{ data.nav.mask_url }}" href="javascript:;"><i style="font-size: 18px"
+                    class="layui-icon layui-icon-picture"></i> {{ _("nav_mask") }}</a></dd>
+              {% endif %}
               <dd><a data-path="/speaker" href="javascript:;">
                   <i style="font-size: 18px" class="layui-icon layui-icon-headset"></i> {{ _("nav_speaker") }}</a></dd>
               <dd><a data-path="/gradio" href="javascript:;">
@@ -84,10 +90,10 @@
           <li class="layui-nav-item layui-nav-itemed">
             <a href="javascript:;">{{ _("group_assist") }}</a>
             <dl class="layui-nav-child">
-              <dd><a data-path="/player" href="javascript:;"><i style="font-size: 18px"
-                    class="layui-icon layui-icon-play"></i> {{ _("nav_play") }}</a></dd>
               <dd><a data-path="/editor" href="javascript:;"><i style="font-size: 18px"
                     class="layui-icon layui-icon-code-circle"></i> {{ _("nav_editor") }}</a></dd>
+              <dd><a data-path="/player" href="javascript:;"><i style="font-size: 18px"
+                    class="layui-icon layui-icon-play"></i> {{ _("nav_play") }}</a></dd>
               <dd><a data-path="/log" href="javascript:;"><i style="font-size: 18px"
                     class="layui-icon layui-icon-log"></i>
                   {{ _("nav_log") }}</a></dd>
@@ -321,7 +327,7 @@
                         <input type="checkbox" name="align_enable" lay-skin="switch">
                       </div>
                     </div>
-                    
+
                     <div class="layui-form-item" pane>
                       <label class="layui-form-label">{{ _("emotion_enable") }}</label>
                       <div class="layui-input-block">
@@ -890,11 +896,7 @@
 
       // 回调通知
       tool.connect(function (data) {
-        data = JSON.parse(event.data)
-        if (data.type == "whisper") {
-          console.debug(data.message);
-        }
-        else if (data.type == "video") {
+        if (data.type == "video") {
           console.debug(data.message);
           toast.success(localStorage.getItem('task'), "任务处理成功");
           // 开启预览

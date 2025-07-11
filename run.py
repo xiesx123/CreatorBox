@@ -41,7 +41,7 @@ def start_ngrok(token, hostname, port):
 
 def start_uvicorn(host, port, debug):
     click.echo(f"🚀 Starting service... http://{host}:{port}")
-    uvicorn.run("src.main:app", host=host, port=port, reload=debug)
+    uvicorn.run("src.main:asgi", host=host, port=port, reload=debug)
 
 
 if __name__ == "__main__":

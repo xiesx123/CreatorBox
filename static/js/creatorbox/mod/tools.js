@@ -18,46 +18,36 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'notice'], function
 	var mod = {
 
 		connect: function (callback) {
-			// 获取当前页面 URL
 			const currentUrl = window.location.href;
-			// 获取当前页面协议
 			const currentProtocol = window.location.protocol;
-			// 动态获取 WebSocket 地址
-			let websocketUrl;
-			// 判断是否为本地环境
-			if (currentUrl.includes('localhost') || currentUrl.includes('127.0.0.1')) {
-				// 本地环境使用 ws 协议
-				websocketUrl = `ws://127.0.0.1:8000/event`;
-			} else {
-				// 根据当前页面协议选择 ws 或 wss
-				const wsProtocol = currentProtocol === 'https:' ? 'wss:' : 'ws:';
-				const domain = window.location.host;
-				websocketUrl = `${wsProtocol}//${domain}/event`;
-			}
-			socket = new WebSocket(websocketUrl);
+			const isLocal = currentUrl.includes('localhost') || currentUrl.includes('127.0.0.1');
 
-			// 建立连接
-			socket.onopen = function () {
-				console.debug("WebSocket connection established");
-			};
+			const domain = window.location.hostname;
+			const port = window.location.port || (currentProtocol === 'https:' ? '443' : '80');
+			const fullHost = isLocal ? `http://${domain}:8000` : `${currentProtocol}//${domain}:${port}`;
 
-			// 接收消息并更新日志
-			socket.onmessage = function (event) {
-				callback(event)
-			};
+			const socket = io(fullHost, {
+				reconnection: true,
+				reconnectionDelay: 1000 * 60,
+			});
 
-			// 处理关闭事件
-			socket.onclose = function () {
-				console.debug("WebSocket connection closed. Reconnecting in " + reconnectInterval / 1000 + " seconds...");
-				setTimeout(mod.connect(callback), reconnectInterval);
-			};
+			socket.on('connect', function () {
+				console.debug('socket connected success');
+			});
 
-			// 处理错误事件
-			socket.onerror = function (error) {
-				// console.error("WebSocket error: ", error);
-				socket.close();
-			};
+			socket.on('disconnect', function () {
+				console.debug('socket disconnect');
+			});
 
+			socket.on('event_message', function (msg) {
+				data = JSON.parse(msg)
+				console.debug(data.message);
+				if (callback) callback(data);
+			});
+
+			socket.on('connect_error', function (err) {
+				console.error('socket connect error', err);
+			});
 			return socket
 		},
 
