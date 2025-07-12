@@ -1,10 +1,11 @@
 import os
 import subprocess
+import traceback
 
 import click
 import gradio as gr  # keep this
 import uvicorn
-from pyngrok import ngrok
+from pyngrok import ngrok as ng
 
 
 @click.group()
@@ -16,20 +17,19 @@ def cli():
 # run
 @click.option("--host", "-h", type=str, default="0.0.0.0", show_default=True, help="Local service host address")
 @click.option("--port", "-p", type=int, default=8000, show_default=True, help="Local service port")
-@click.option("--update", is_flag=True, default=False, show_default=True, help="Update to the latest version")
 @click.option("--debug", is_flag=True, default=False, show_default=True, help="Enable debug mode")
 # ngrok options
 @click.option("--ngrok", is_flag=True, default=False, show_default=True, help="Enable ngrok tunnel")
 @click.option("--ngrok_host", "-nh", type=str, default="toucan-real-informally.ngrok-free.app", help="ngrok host (optional)")
 @click.option("--ngrok_port", "-np", type=int, default=None, help="ngrok port (defaults to --port)")
-def start(host, port, update, debug, ngrok, ngrok_host, ngrok_port):
+def start(host, port, debug, ngrok, ngrok_host, ngrok_port):
 
     def start_ngrok(token, hostname, port):
-        ngrok.set_auth_token(token)
+        ng.set_auth_token(token)
         if hostname:
-            public_url = ngrok.connect(addr=port, hostname=hostname)
+            public_url = ng.connect(addr=port, hostname=hostname)
         else:
-            public_url = ngrok.connect(addr=port)
+            public_url = ng.connect(addr=port)
         click.echo(f"✅ ngrok tunnel started: {public_url}")
 
     def start_uvicorn(host, port, debug):
@@ -38,12 +38,7 @@ def start(host, port, update, debug, ngrok, ngrok_host, ngrok_port):
             uvicorn.run("src.main:asgi", host=host, port=port, reload=debug)
         except Exception as e:
             click.echo(f"❌ error: {str(e)}")
-
-    if update:
-        result = subprocess.run(["git", "pull"], capture_output=True, text=True)
-        output = result.stdout.strip()
-        click.echo(f"✅ ngrok tunnel started: {output}")
-        return
+            traceback.print_exc()
 
     if ngrok:
         ngrok_token = os.environ.get("NGROK_AUTH_TOKEN")
