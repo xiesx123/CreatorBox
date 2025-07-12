@@ -194,23 +194,27 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
                     console.debug(response.data)
                     var url = '/file/local?url=' + response.data.path;
                     var duration = response.data.duration;
+                    var seed = response.data.seed;
                     voice_play(url);
                     table_json.unshift({
                         provider: find_provider(form_json.tts_provider).provider,
                         model: form_json.tts_model,
                         type: voice_type(form_json.tts_type),
+                        gender: form_json.tts_gender,
                         locale: form_json.locale,
                         voice: form_json.tts_voice,
                         volume: form_json.tts_volume,
                         rate: form_json.tts_rate,
                         remarks: form_json.tts_remarks,
                         text: form_json.tts_text,
-                        gender: form_json.tts_gender,
+                        // 
+                        url: url,
+                        duration: duration,
+                        seed: seed,
+                        // 
                         nfe_step: form_json.tts_step,
                         instruct_text: form_json.tts_instruct,
                         use_vc: form_json.tts_vc,
-                        duration: duration,
-                        url: url
                     })
                     swapData(0, 0)
                 }, true)
