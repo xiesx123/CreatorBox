@@ -69,4 +69,3 @@ nltk==3.9.1
 psutil==7.0.0
 tinydb==4.8.2
 tenacity==9.1.2
-typer_config==1.4.0

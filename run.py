@@ -1,5 +1,7 @@
+import json
 import os
 import subprocess
+import sys
 import traceback
 
 import click
@@ -21,9 +23,12 @@ def cli():
 # ngrok options
 @click.option("--ngrok", is_flag=True, default=False, show_default=True, help="Enable ngrok tunnel")
 @click.option("--ngrok_host", "-nh", type=str, default="toucan-real-informally.ngrok-free.app", help="ngrok host (optional)")
-@click.option("--ngrok_port", "-np", type=int, default=None, help="ngrok port (defaults to --port)")
+@click.option("--ngrok_port", "-np", type=int, default=80, help="ngrok port (defaults to --port)")
 def start(host, port, debug, ngrok, ngrok_host, ngrok_port):
+    if "REBOOT_ARGS" not in os.environ:
+        os.environ["REBOOT_ARGS"] = json.dumps(sys.argv)
 
+    # start ngrok
     def start_ngrok(token, hostname, port):
         ng.set_auth_token(token)
         if hostname:
@@ -32,6 +37,7 @@ def start(host, port, debug, ngrok, ngrok_host, ngrok_port):
             public_url = ng.connect(addr=port)
         click.echo(f"✅ ngrok tunnel started: {public_url}")
 
+    # start uvicorn
     def start_uvicorn(host, port, debug):
         click.echo(f"🚀 Starting service... http://{host}:{port}")
         try:
