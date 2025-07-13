@@ -1,18 +1,22 @@
-import einops
 import torch
-from iopaint.model.anytext.ldm.modules.attention import default
+import einops
+
+import iopaint.model.anytext.ldm.modules.encoders.modules
+import iopaint.model.anytext.ldm.modules.attention
+
 from transformers import logging
+from iopaint.model.anytext.ldm.modules.attention import default
 
 
 def disable_verbosity():
     logging.set_verbosity_error()
-    print("logging improved.")
+    print('logging improved.')
     return
 
 
 def enable_sliced_attention():
     iopaint.model.anytext.ldm.modules.attention.CrossAttention.forward = _hacked_sliced_attentin_forward
-    print("Enabled sliced_attention.")
+    print('Enabled sliced_attention.')
     return
 
 
@@ -20,7 +24,7 @@ def hack_everything(clip_skip=0):
     disable_verbosity()
     iopaint.model.anytext.ldm.modules.encoders.modules.FrozenCLIPEmbedder.forward = _hacked_clip_forward
     iopaint.model.anytext.ldm.modules.encoders.modules.FrozenCLIPEmbedder.clip_skip = clip_skip
-    print("Enabled clip hacks.")
+    print('Enabled clip hacks.')
     return
 
 
@@ -41,7 +45,7 @@ def _hacked_clip_forward(self, text):
             return self.transformer(input_ids=t, output_hidden_states=False).last_hidden_state
 
     def split(x):
-        return x[75 * 0 : 75 * 1], x[75 * 1 : 75 * 2], x[75 * 2 : 75 * 3]
+        return x[75 * 0: 75 * 1], x[75 * 1: 75 * 2], x[75 * 2: 75 * 3]
 
     def pad(x, p, i):
         return x[:i] if len(x) >= i else x + [p] * (i - len(x))
@@ -57,9 +61,9 @@ def _hacked_clip_forward(self, text):
 
     tokens_list = torch.IntTensor(tokens_list).to(self.device)
 
-    feed = einops.rearrange(tokens_list, "b f i -> (b f) i")
+    feed = einops.rearrange(tokens_list, 'b f i -> (b f) i')
     y = transformer_encode(feed)
-    z = einops.rearrange(y, "(b f) i c -> b (f i) c", f=3)
+    z = einops.rearrange(y, '(b f) i c -> b (f i) c', f=3)
 
     return z
 
@@ -74,7 +78,7 @@ def _hacked_sliced_attentin_forward(self, x, context=None, mask=None):
     v = self.to_v(context)
     del context, x
 
-    q, k, v = map(lambda t: einops.rearrange(t, "b n (h d) -> (b h) n d", h=h), (q, k, v))
+    q, k, v = map(lambda t: einops.rearrange(t, 'b n (h d) -> (b h) n d', h=h), (q, k, v))
 
     limit = k.shape[0]
     att_step = 1
@@ -91,17 +95,17 @@ def _hacked_sliced_attentin_forward(self, x, context=None, mask=None):
         q_buffer = q_chunks.pop()
         k_buffer = k_chunks.pop()
         v_buffer = v_chunks.pop()
-        sim_buffer = torch.einsum("b i d, b j d -> b i j", q_buffer, k_buffer) * self.scale
+        sim_buffer = torch.einsum('b i d, b j d -> b i j', q_buffer, k_buffer) * self.scale
 
         del k_buffer, q_buffer
         # attention, what we cannot get enough of, by chunks
 
         sim_buffer = sim_buffer.softmax(dim=-1)
 
-        sim_buffer = torch.einsum("b i j, b j d -> b i d", sim_buffer, v_buffer)
+        sim_buffer = torch.einsum('b i j, b j d -> b i d', sim_buffer, v_buffer)
         del v_buffer
-        sim[i : i + att_step, :, :] = sim_buffer
+        sim[i:i + att_step, :, :] = sim_buffer
 
         del sim_buffer
-    sim = einops.rearrange(sim, "(b h) n d -> b n (h d)", h=h)
+    sim = einops.rearrange(sim, '(b h) n d -> b n (h d)', h=h)
     return self.to_out(sim)

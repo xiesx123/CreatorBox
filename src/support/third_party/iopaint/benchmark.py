@@ -8,8 +8,9 @@ import numpy as np
 import nvidia_smi
 import psutil
 import torch
+
 from iopaint.model_manager import ModelManager
-from iopaint.schema import HDStrategy, InpaintRequest, SDSampler
+from iopaint.schema import InpaintRequest, HDStrategy, SDSampler
 
 try:
     torch._C._jit_override_can_fuse_on_cpu(False)
@@ -74,7 +75,9 @@ def benchmark(model, times: int, empty_cache: bool):
             # cpu_metrics.append(process.cpu_percent())
             time_metrics.append((time.time() - start) * 1000)
             memory_metrics.append(process.memory_info().rss / 1024 / 1024)
-            gpu_memory_metrics.append(nvidia_smi.nvmlDeviceGetMemoryInfo(handle).used / 1024 / 1024)
+            gpu_memory_metrics.append(
+                nvidia_smi.nvmlDeviceGetMemoryInfo(handle).used / 1024 / 1024
+            )
 
         print(f"size: {size}".center(80, "-"))
         # print(f"cpu: {format(cpu_metrics)}")

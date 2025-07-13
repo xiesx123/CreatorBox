@@ -2,41 +2,45 @@ import os
 import random
 
 import cv2
-import numpy as np
 import torch
+import numpy as np
 import torch.fft as fft
-import torch.nn.functional as F
-from iopaint.helper import (
-    boxes_from_mask,
-    download_model,
-    get_cache_path_by_url,
-    load_model,
-    norm_img,
-    resize_max_size,
-)
-from iopaint.schema import InpaintRequest
-from torch import conv2d, nn
 
+from iopaint.schema import InpaintRequest
+
+from iopaint.helper import (
+    load_model,
+    get_cache_path_by_url,
+    norm_img,
+    boxes_from_mask,
+    resize_max_size,
+    download_model,
+)
 from .base import InpaintModel
+from torch import conv2d, nn
+import torch.nn.functional as F
+
 from .utils import (
+    setup_filter,
+    _parse_scaling,
+    _parse_padding,
     Conv2dLayer,
     FullyConnectedLayer,
     MinibatchStdLayer,
-    _parse_padding,
-    _parse_scaling,
     activation_funcs,
-    bias_act,
     conv2d_resample,
-    downsample2d,
-    normalize_2nd_moment,
-    setup_filter,
+    bias_act,
     upsample2d,
+    normalize_2nd_moment,
+    downsample2d,
 )
 
 
 def upfirdn2d(x, f, up=1, down=1, padding=0, flip_filter=False, gain=1, impl="cuda"):
     assert isinstance(x, torch.Tensor)
-    return _upfirdn2d_ref(x, f, up=up, down=down, padding=padding, flip_filter=flip_filter, gain=gain)
+    return _upfirdn2d_ref(
+        x, f, up=up, down=down, padding=padding, flip_filter=flip_filter, gain=gain
+    )
 
 
 def _upfirdn2d_ref(x, f, up=1, down=1, padding=0, flip_filter=False, gain=1):
@@ -58,7 +62,9 @@ def _upfirdn2d_ref(x, f, up=1, down=1, padding=0, flip_filter=False, gain=1):
     x = x.reshape([batch_size, num_channels, in_height * upy, in_width * upx])
 
     # Pad or crop.
-    x = torch.nn.functional.pad(x, [max(padx0, 0), max(padx1, 0), max(pady0, 0), max(pady1, 0)])
+    x = torch.nn.functional.pad(
+        x, [max(padx0, 0), max(padx1, 0), max(pady0, 0), max(pady1, 0)]
+    )
     x = x[
         :,
         :,
@@ -108,8 +114,16 @@ class EncoderEpilogue(torch.nn.Module):
         self.architecture = architecture
 
         if architecture == "skip":
-            self.fromrgb = Conv2dLayer(self.img_channels, in_channels, kernel_size=1, activation=activation)
-        self.mbstd = MinibatchStdLayer(group_size=mbstd_group_size, num_channels=mbstd_num_channels) if mbstd_num_channels > 0 else None
+            self.fromrgb = Conv2dLayer(
+                self.img_channels, in_channels, kernel_size=1, activation=activation
+            )
+        self.mbstd = (
+            MinibatchStdLayer(
+                group_size=mbstd_group_size, num_channels=mbstd_num_channels
+            )
+            if mbstd_num_channels > 0
+            else None
+        )
         self.conv = Conv2dLayer(
             in_channels + mbstd_num_channels,
             in_channels,
@@ -117,7 +131,9 @@ class EncoderEpilogue(torch.nn.Module):
             activation=activation,
             conv_clamp=conv_clamp,
         )
-        self.fc = FullyConnectedLayer(in_channels * (resolution**2), z_dim, activation=activation)
+        self.fc = FullyConnectedLayer(
+            in_channels * (resolution**2), z_dim, activation=activation
+        )
         self.dropout = torch.nn.Dropout(p=0.5)
 
     def forward(self, x, cmap, force_fp32=False):
@@ -236,7 +252,11 @@ class EncoderBlock(torch.nn.Module):
     def forward(self, x, img, force_fp32=False):
         # dtype = torch.float16 if self.use_fp16 and not force_fp32 else torch.float32
         dtype = torch.float32
-        memory_format = torch.channels_last if self.channels_last and not force_fp32 else torch.contiguous_format
+        memory_format = (
+            torch.channels_last
+            if self.channels_last and not force_fp32
+            else torch.contiguous_format
+        )
 
         # Input.
         if x is not None:
@@ -247,7 +267,11 @@ class EncoderBlock(torch.nn.Module):
             img = img.to(dtype=dtype, memory_format=memory_format)
             y = self.fromrgb(img)
             x = x + y if x is not None else y
-            img = downsample2d(img, self.resample_filter) if self.architecture == "skip" else None
+            img = (
+                downsample2d(img, self.resample_filter)
+                if self.architecture == "skip"
+                else None
+            )
 
         # Main layers.
         if self.architecture == "resnet":
@@ -288,8 +312,13 @@ class EncoderNetwork(torch.nn.Module):
         self.img_resolution = img_resolution
         self.img_resolution_log2 = int(np.log2(img_resolution))
         self.img_channels = img_channels
-        self.block_resolutions = [2**i for i in range(self.img_resolution_log2, 2, -1)]
-        channels_dict = {res: min(channel_base // res, channel_max) for res in self.block_resolutions + [4]}
+        self.block_resolutions = [
+            2**i for i in range(self.img_resolution_log2, 2, -1)
+        ]
+        channels_dict = {
+            res: min(channel_base // res, channel_max)
+            for res in self.block_resolutions + [4]
+        }
         fp16_resolution = max(2 ** (self.img_resolution_log2 + 1 - num_fp16_res), 8)
 
         if cmap_dim is None:
@@ -297,7 +326,9 @@ class EncoderNetwork(torch.nn.Module):
         if c_dim == 0:
             cmap_dim = 0
 
-        common_kwargs = dict(img_channels=img_channels, architecture=architecture, conv_clamp=conv_clamp)
+        common_kwargs = dict(
+            img_channels=img_channels, architecture=architecture, conv_clamp=conv_clamp
+        )
         cur_layer_idx = 0
         for res in self.block_resolutions:
             in_channels = channels_dict[res] if res < img_resolution else 0
@@ -350,7 +381,9 @@ class EncoderNetwork(torch.nn.Module):
         feats[4] = const_e
 
         B, _ = x.shape
-        z = torch.zeros((B, self.z_dim), requires_grad=False, dtype=x.dtype, device=x.device)  ## Noise for Co-Modulation
+        z = torch.zeros(
+            (B, self.z_dim), requires_grad=False, dtype=x.dtype, device=x.device
+        )  ## Noise for Co-Modulation
         return x, z, feats
 
 
@@ -389,7 +422,11 @@ class _FusedMultiplyAdd(torch.autograd.Function):  # a * b + c
 def _unbroadcast(x, shape):
     extra_dims = x.ndim - len(shape)
     assert extra_dims >= 0
-    dim = [i for i in range(x.ndim) if x.shape[i] > 1 and (i < extra_dims or shape[i - extra_dims] == 1)]
+    dim = [
+        i
+        for i in range(x.ndim)
+        if x.shape[i] > 1 and (i < extra_dims or shape[i - extra_dims] == 1)
+    ]
     if len(dim):
         x = x.sum(dim=dim, keepdim=True)
     if extra_dims:
@@ -417,7 +454,11 @@ def modulated_conv2d(
 
     # Pre-normalize inputs to avoid FP16 overflow.
     if x.dtype == torch.float16 and demodulate:
-        weight = weight * (1 / np.sqrt(in_channels * kh * kw) / weight.norm(float("inf"), dim=[1, 2, 3], keepdim=True))  # max_Ikk
+        weight = weight * (
+            1
+            / np.sqrt(in_channels * kh * kw)
+            / weight.norm(float("inf"), dim=[1, 2, 3], keepdim=True)
+        )  # max_Ikk
         styles = styles / styles.norm(float("inf"), dim=1, keepdim=True)  # max_I
 
     # Calculate per-sample weights and demodulation coefficients.
@@ -443,7 +484,9 @@ def modulated_conv2d(
             flip_weight=flip_weight,
         )
         if demodulate and noise is not None:
-            x = fma(x, dcoefs.to(x.dtype).reshape(batch_size, -1, 1, 1), noise.to(x.dtype))
+            x = fma(
+                x, dcoefs.to(x.dtype).reshape(batch_size, -1, 1, 1), noise.to(x.dtype)
+            )
         elif demodulate:
             x = x * dcoefs.to(x.dtype).reshape(batch_size, -1, 1, 1)
         elif noise is not None:
@@ -501,8 +544,14 @@ class SynthesisLayer(torch.nn.Module):
         self.act_gain = activation_funcs[activation].def_gain
 
         self.affine = FullyConnectedLayer(w_dim, in_channels, bias_init=1)
-        memory_format = torch.channels_last if channels_last else torch.contiguous_format
-        self.weight = torch.nn.Parameter(torch.randn([out_channels, in_channels, kernel_size, kernel_size]).to(memory_format=memory_format))
+        memory_format = (
+            torch.channels_last if channels_last else torch.contiguous_format
+        )
+        self.weight = torch.nn.Parameter(
+            torch.randn([out_channels, in_channels, kernel_size, kernel_size]).to(
+                memory_format=memory_format
+            )
+        )
         if use_noise:
             self.register_buffer("noise_const", torch.randn([resolution, resolution]))
             self.noise_strength = torch.nn.Parameter(torch.zeros([]))
@@ -515,7 +564,12 @@ class SynthesisLayer(torch.nn.Module):
 
         noise = None
         if self.use_noise and noise_mode == "random":
-            noise = torch.randn([x.shape[0], 1, self.resolution, self.resolution], device=x.device) * self.noise_strength
+            noise = (
+                torch.randn(
+                    [x.shape[0], 1, self.resolution, self.resolution], device=x.device
+                )
+                * self.noise_strength
+            )
         if self.use_noise and noise_mode == "const":
             noise = self.noise_const * self.noise_strength
 
@@ -555,8 +609,14 @@ class ToRGBLayer(torch.nn.Module):
         super().__init__()
         self.conv_clamp = conv_clamp
         self.affine = FullyConnectedLayer(w_dim, in_channels, bias_init=1)
-        memory_format = torch.channels_last if channels_last else torch.contiguous_format
-        self.weight = torch.nn.Parameter(torch.randn([out_channels, in_channels, kernel_size, kernel_size]).to(memory_format=memory_format))
+        memory_format = (
+            torch.channels_last if channels_last else torch.contiguous_format
+        )
+        self.weight = torch.nn.Parameter(
+            torch.randn([out_channels, in_channels, kernel_size, kernel_size]).to(
+                memory_format=memory_format
+            )
+        )
         self.bias = torch.nn.Parameter(torch.zeros([out_channels]))
         self.weight_gain = 1 / np.sqrt(in_channels * (kernel_size**2))
 
@@ -590,8 +650,12 @@ class SynthesisForeword(torch.nn.Module):
         self.img_channels = img_channels
         self.architecture = architecture
 
-        self.fc = FullyConnectedLayer(self.z_dim, (self.z_dim // 2) * 4 * 4, activation=activation)
-        self.conv = SynthesisLayer(self.in_channels, self.in_channels, w_dim=(z_dim // 2) * 3, resolution=4)
+        self.fc = FullyConnectedLayer(
+            self.z_dim, (self.z_dim // 2) * 4 * 4, activation=activation
+        )
+        self.conv = SynthesisLayer(
+            self.in_channels, self.in_channels, w_dim=(z_dim // 2) * 3, resolution=4
+        )
 
         if architecture == "skip":
             self.torgb = ToRGBLayer(
@@ -725,8 +789,16 @@ class FourierUnit(nn.Module):
 
         if self.spectral_pos_encoding:
             height, width = ffted.shape[-2:]
-            coords_vert = torch.linspace(0, 1, height)[None, None, :, None].expand(batch, 1, height, width).to(ffted)
-            coords_hor = torch.linspace(0, 1, width)[None, None, None, :].expand(batch, 1, height, width).to(ffted)
+            coords_vert = (
+                torch.linspace(0, 1, height)[None, None, :, None]
+                .expand(batch, 1, height, width)
+                .to(ffted)
+            )
+            coords_hor = (
+                torch.linspace(0, 1, width)[None, None, None, :]
+                .expand(batch, 1, height, width)
+                .to(ffted)
+            )
             ffted = torch.cat((coords_vert, coords_hor, ffted), dim=1)
 
         if self.use_se:
@@ -750,7 +822,9 @@ class FourierUnit(nn.Module):
         ffted = torch.complex(ffted[..., 0], ffted[..., 1])
 
         ifft_shape_slice = x.shape[-3:] if self.ffc3d else x.shape[-2:]
-        output = torch.fft.irfftn(ffted, s=ifft_shape_slice, dim=fft_dim, norm=self.fft_norm)
+        output = torch.fft.irfftn(
+            ffted, s=ifft_shape_slice, dim=fft_dim, norm=self.fft_norm
+        )
 
         if self.spatial_scale_factor is not None:
             output = F.interpolate(
@@ -783,14 +857,18 @@ class SpectralTransform(nn.Module):
 
         self.stride = stride
         self.conv1 = nn.Sequential(
-            nn.Conv2d(in_channels, out_channels // 2, kernel_size=1, groups=groups, bias=False),
+            nn.Conv2d(
+                in_channels, out_channels // 2, kernel_size=1, groups=groups, bias=False
+            ),
             # nn.BatchNorm2d(out_channels // 2),
             nn.ReLU(inplace=True),
         )
         self.fu = FourierUnit(out_channels // 2, out_channels // 2, groups, **fu_kwargs)
         if self.enable_lfu:
             self.lfu = FourierUnit(out_channels // 2, out_channels // 2, groups)
-        self.conv2 = torch.nn.Conv2d(out_channels // 2, out_channels, kernel_size=1, groups=groups, bias=False)
+        self.conv2 = torch.nn.Conv2d(
+            out_channels // 2, out_channels, kernel_size=1, groups=groups, bias=False
+        )
 
     def forward(self, x):
         x = self.downsample(x)
@@ -801,7 +879,9 @@ class SpectralTransform(nn.Module):
             n, c, h, w = x.shape
             split_no = 2
             split_s = h // split_no
-            xs = torch.cat(torch.split(x[:, : c // 4], split_s, dim=-2), dim=1).contiguous()
+            xs = torch.cat(
+                torch.split(x[:, : c // 4], split_s, dim=-2), dim=1
+            ).contiguous()
             xs = torch.cat(torch.split(xs, split_s, dim=-1), dim=1).contiguous()
             xs = self.lfu(xs)
             xs = xs.repeat(1, 1, split_no, split_no).contiguous()
@@ -894,7 +974,9 @@ class FFC(nn.Module):
         )
 
         self.gated = gated
-        module = nn.Identity if in_cg == 0 or out_cl == 0 or not self.gated else nn.Conv2d
+        module = (
+            nn.Identity if in_cg == 0 or out_cl == 0 or not self.gated else nn.Conv2d
+        )
         self.gate = module(in_channels, 2, 1)
 
     def forward(self, x, fname=None):
@@ -1161,7 +1243,9 @@ class SynthesisBlock(torch.nn.Module):
                 self.ffc_skip.append(FFCSkipLayer(dim=out_channels))
 
         if in_channels == 0:
-            self.const = torch.nn.Parameter(torch.randn([out_channels, resolution, resolution]))
+            self.const = torch.nn.Parameter(
+                torch.randn([out_channels, resolution, resolution])
+            )
 
         if in_channels != 0:
             self.conv0 = SynthesisLayer(
@@ -1223,19 +1307,29 @@ class SynthesisBlock(torch.nn.Module):
     ):
         dtype = torch.float16 if self.use_fp16 and not force_fp32 else torch.float32
         dtype = torch.float32
-        memory_format = torch.channels_last if self.channels_last and not force_fp32 else torch.contiguous_format
+        memory_format = (
+            torch.channels_last
+            if self.channels_last and not force_fp32
+            else torch.contiguous_format
+        )
         if fused_modconv is None:
-            fused_modconv = (not self.training) and (dtype == torch.float32 or int(x.shape[0]) == 1)
+            fused_modconv = (not self.training) and (
+                dtype == torch.float32 or int(x.shape[0]) == 1
+            )
 
         x = x.to(dtype=dtype, memory_format=memory_format)
-        x_skip = feats[self.resolution].clone().to(dtype=dtype, memory_format=memory_format)
+        x_skip = (
+            feats[self.resolution].clone().to(dtype=dtype, memory_format=memory_format)
+        )
 
         # Main layers.
         if self.in_channels == 0:
             x = self.conv1(x, ws[1], fused_modconv=fused_modconv, **layer_kwargs)
         elif self.architecture == "resnet":
             y = self.skip(x, gain=np.sqrt(0.5))
-            x = self.conv0(x, ws[0].clone(), fused_modconv=fused_modconv, **layer_kwargs)
+            x = self.conv0(
+                x, ws[0].clone(), fused_modconv=fused_modconv, **layer_kwargs
+            )
             if len(self.ffc_skip) > 0:
                 mask = F.interpolate(
                     mask,
@@ -1256,7 +1350,9 @@ class SynthesisBlock(torch.nn.Module):
             )
             x = y.add_(x)
         else:
-            x = self.conv0(x, ws[0].clone(), fused_modconv=fused_modconv, **layer_kwargs)
+            x = self.conv0(
+                x, ws[0].clone(), fused_modconv=fused_modconv, **layer_kwargs
+            )
             if len(self.ffc_skip) > 0:
                 mask = F.interpolate(
                     mask,
@@ -1268,7 +1364,9 @@ class SynthesisBlock(torch.nn.Module):
                 x = x + z
             else:
                 x = x + x_skip
-            x = self.conv1(x, ws[1].clone(), fused_modconv=fused_modconv, **layer_kwargs)
+            x = self.conv1(
+                x, ws[1].clone(), fused_modconv=fused_modconv, **layer_kwargs
+            )
         # ToRGB.
         if img is not None:
             img = upsample2d(img, self.resample_filter)
@@ -1301,8 +1399,12 @@ class SynthesisNetwork(torch.nn.Module):
         self.img_resolution = img_resolution
         self.img_resolution_log2 = int(np.log2(img_resolution))
         self.img_channels = img_channels
-        self.block_resolutions = [2**i for i in range(3, self.img_resolution_log2 + 1)]
-        channels_dict = {res: min(channel_base // res, channel_max) for res in self.block_resolutions}
+        self.block_resolutions = [
+            2**i for i in range(3, self.img_resolution_log2 + 1)
+        ]
+        channels_dict = {
+            res: min(channel_base // res, channel_max) for res in self.block_resolutions
+        }
         fp16_resolution = max(2 ** (self.img_resolution_log2 + 1 - num_fp16_res), 8)
 
         self.foreword = SynthesisForeword(
@@ -1395,7 +1497,9 @@ class MappingNetwork(torch.nn.Module):
             embed_features = 0
         if layer_features is None:
             layer_features = w_dim
-        features_list = [z_dim + embed_features] + [layer_features] * (num_layers - 1) + [w_dim]
+        features_list = (
+            [z_dim + embed_features] + [layer_features] * (num_layers - 1) + [w_dim]
+        )
 
         if c_dim > 0:
             self.embed = FullyConnectedLayer(c_dim, embed_features)
@@ -1413,7 +1517,9 @@ class MappingNetwork(torch.nn.Module):
         if num_ws is not None and w_avg_beta is not None:
             self.register_buffer("w_avg", torch.zeros([w_dim]))
 
-    def forward(self, z, c, truncation_psi=1, truncation_cutoff=None, skip_w_avg_update=False):
+    def forward(
+        self, z, c, truncation_psi=1, truncation_cutoff=None, skip_w_avg_update=False
+    ):
         # Embed, normalize, and concat inputs.
         x = None
         with torch.autograd.profiler.record_function("input"):
@@ -1431,7 +1537,9 @@ class MappingNetwork(torch.nn.Module):
         # Update moving average of W.
         if self.w_avg_beta is not None and self.training and not skip_w_avg_update:
             with torch.autograd.profiler.record_function("update_w_avg"):
-                self.w_avg.copy_(x.detach().mean(dim=0).lerp(self.w_avg, self.w_avg_beta))
+                self.w_avg.copy_(
+                    x.detach().mean(dim=0).lerp(self.w_avg, self.w_avg_beta)
+                )
 
         # Broadcast.
         if self.num_ws is not None:
@@ -1445,7 +1553,9 @@ class MappingNetwork(torch.nn.Module):
                 if self.num_ws is None or truncation_cutoff is None:
                     x = self.w_avg.lerp(x, truncation_psi)
                 else:
-                    x[:, :truncation_cutoff] = self.w_avg.lerp(x[:, :truncation_cutoff], truncation_psi)
+                    x[:, :truncation_cutoff] = self.w_avg.lerp(
+                        x[:, :truncation_cutoff], truncation_psi
+                    )
         return x
 
 
@@ -1482,7 +1592,9 @@ class Generator(torch.nn.Module):
             **synthesis_kwargs,
         )
         self.num_ws = self.synthesis.num_ws
-        self.mapping = MappingNetwork(z_dim=z_dim, c_dim=c_dim, w_dim=w_dim, num_ws=self.num_ws, **mapping_kwargs)
+        self.mapping = MappingNetwork(
+            z_dim=z_dim, c_dim=c_dim, w_dim=w_dim, num_ws=self.num_ws, **mapping_kwargs
+        )
 
     def forward(
         self,
@@ -1495,7 +1607,9 @@ class Generator(torch.nn.Module):
     ):
         mask = img[:, -1].unsqueeze(1)
         x_global, z, feats = self.encoder(img, c)
-        ws = self.mapping(z, c, truncation_psi=truncation_psi, truncation_cutoff=truncation_cutoff)
+        ws = self.mapping(
+            z, c, truncation_psi=truncation_psi, truncation_cutoff=truncation_cutoff
+        )
         img = self.synthesis(x_global, mask, feats, ws, fname=fname, **synthesis_kwargs)
         return img
 
@@ -1578,7 +1692,9 @@ class FcF(InpaintModel):
             )
 
             original_pixel_indices = crop_mask < 127
-            inpaint_result[original_pixel_indices] = crop_image[:, :, ::-1][original_pixel_indices]
+            inpaint_result[original_pixel_indices] = crop_image[:, :, ::-1][
+                original_pixel_indices
+            ]
 
             crop_result.append((inpaint_result, crop_box))
 
@@ -1607,8 +1723,15 @@ class FcF(InpaintModel):
         erased_img = image * (1 - mask)
         input_image = torch.cat([0.5 - mask, erased_img], dim=1)
 
-        output = self.model(input_image, self.label, truncation_psi=0.1, noise_mode="none")
-        output = (output.permute(0, 2, 3, 1) * 127.5 + 127.5).round().clamp(0, 255).to(torch.uint8)
+        output = self.model(
+            input_image, self.label, truncation_psi=0.1, noise_mode="none"
+        )
+        output = (
+            (output.permute(0, 2, 3, 1) * 127.5 + 127.5)
+            .round()
+            .clamp(0, 255)
+            .to(torch.uint8)
+        )
         output = output[0].cpu().numpy()
         cur_res = cv2.cvtColor(output, cv2.COLOR_RGB2BGR)
         return cur_res

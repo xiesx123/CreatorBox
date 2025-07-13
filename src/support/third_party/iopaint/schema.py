@@ -1,22 +1,22 @@
 import random
 from enum import Enum
 from pathlib import Path
-from typing import List, Literal, Optional
+from typing import Optional, Literal, List
 
 from loguru import logger
-from pydantic import BaseModel, Field, computed_field, model_validator
 
-from .const import (
-    ANYTEXT_NAME,
+from iopaint.const import (
     INSTRUCT_PIX2PIX_NAME,
     KANDINSKY22_NAME,
     POWERPAINT_NAME,
-    SD2_CONTROLNET_CHOICES,
-    SD_BRUSHNET_CHOICES,
-    SD_CONTROLNET_CHOICES,
-    SDXL_BRUSHNET_CHOICES,
+    ANYTEXT_NAME,
     SDXL_CONTROLNET_CHOICES,
+    SD2_CONTROLNET_CHOICES,
+    SD_CONTROLNET_CHOICES,
+    SD_BRUSHNET_CHOICES,
+    SDXL_BRUSHNET_CHOICES
 )
+from pydantic import BaseModel, Field, computed_field, model_validator
 
 
 class ModelType(str, Enum):
@@ -254,39 +254,30 @@ class ApiConfig(BaseModel):
     host: str
     port: int
     inbrowser: bool
-    #  model
     model: str
-    #  device
-    device: Device
-    quality: int
     no_half: bool
     low_mem: bool
     cpu_offload: bool
     disable_nsfw_checker: bool
     local_files_only: bool
     cpu_textencoder: bool
-    #  dir
-    input: Optional[Path | None]
-    mask_dir: Optional[Path | None]
-    output_dir: Optional[Path | None]
-    # interactive_seg
+    device: Device
+    input: Optional[Path]
+    mask_dir: Optional[Path]
+    output_dir: Optional[Path]
+    quality: int
     enable_interactive_seg: bool
     interactive_seg_model: InteractiveSegModel
     interactive_seg_device: Device
-    # remove_bg
     enable_remove_bg: bool
     remove_bg_device: Device
     remove_bg_model: str
-    # anime
     enable_anime_seg: bool
-    # realesrgan
     enable_realesrgan: bool
     realesrgan_device: Device
     realesrgan_model: RealESRGANModel
-    # gfpgan
     enable_gfpgan: bool
     gfpgan_device: Device
-    # restoreformer
     enable_restoreformer: bool
     restoreformer_device: Device
 
@@ -307,18 +298,28 @@ class InpaintRequest(BaseModel):
         800,
         description="Crop trigger size for hd_strategy=CROP, if the longer side of the image is larger than this value, use crop strategy",
     )
-    hd_strategy_crop_margin: int = Field(128, description="Crop margin for hd_strategy=CROP")
-    hd_strategy_resize_limit: int = Field(1280, description="Resize limit for hd_strategy=RESIZE")
+    hd_strategy_crop_margin: int = Field(
+        128, description="Crop margin for hd_strategy=CROP"
+    )
+    hd_strategy_resize_limit: int = Field(
+        1280, description="Resize limit for hd_strategy=RESIZE"
+    )
 
     prompt: str = Field("", description="Prompt for diffusion models.")
-    negative_prompt: str = Field("", description="Negative prompt for diffusion models.")
-    use_croper: bool = Field(False, description="Crop image before doing diffusion inpainting")
+    negative_prompt: str = Field(
+        "", description="Negative prompt for diffusion models."
+    )
+    use_croper: bool = Field(
+        False, description="Crop image before doing diffusion inpainting"
+    )
     croper_x: int = Field(0, description="Crop x for croper")
     croper_y: int = Field(0, description="Crop y for croper")
     croper_height: int = Field(512, description="Crop height for croper")
     croper_width: int = Field(512, description="Crop width for croper")
 
-    use_extender: bool = Field(False, description="Extend image before doing sd outpainting")
+    use_extender: bool = Field(
+        False, description="Extend image before doing sd outpainting"
+    )
     extender_x: int = Field(0, description="Extend x for extender")
     extender_y: int = Field(0, description="Extend y for extender")
     extender_height: int = Field(640, description="Extend height for extender")
@@ -347,7 +348,9 @@ class InpaintRequest(BaseModel):
         7.5,
         description="Higher guidance scale encourages to generate images that are closely linked to the text prompt, usually at the expense of lower image quality.",
     )
-    sd_sampler: str = Field(SDSampler.uni_pc, description="Sampler for diffusion model.")
+    sd_sampler: str = Field(
+        SDSampler.uni_pc, description="Sampler for diffusion model."
+    )
     sd_seed: int = Field(
         42,
         description="Seed for diffusion model. -1 mean random seed",
@@ -366,7 +369,9 @@ class InpaintRequest(BaseModel):
         description="Enable lcm-lora mode. https://huggingface.co/docs/diffusers/main/en/using-diffusers/inference_with_lcm#texttoimage",
     )
 
-    sd_keep_unmasked_area: bool = Field(True, description="Keep unmasked area unchanged")
+    sd_keep_unmasked_area: bool = Field(
+        True, description="Keep unmasked area unchanged"
+    )
 
     cv2_flag: CV2Flag = Field(
         CV2Flag.INPAINT_NS,
@@ -378,24 +383,34 @@ class InpaintRequest(BaseModel):
     )
 
     # Paint by Example
-    paint_by_example_example_image: Optional[str] = Field(None, description="Base64 encoded example image for paint by example model")
+    paint_by_example_example_image: Optional[str] = Field(
+        None, description="Base64 encoded example image for paint by example model"
+    )
 
     # InstructPix2Pix
     p2p_image_guidance_scale: float = Field(1.5, description="Image guidance scale")
 
     # ControlNet
     enable_controlnet: bool = Field(False, description="Enable controlnet")
-    controlnet_conditioning_scale: float = Field(0.4, description="Conditioning scale", ge=0.0, le=1.0)
-    controlnet_method: str = Field("lllyasviel/control_v11p_sd15_canny", description="Controlnet method")
+    controlnet_conditioning_scale: float = Field(
+        0.4, description="Conditioning scale", ge=0.0, le=1.0
+    )
+    controlnet_method: str = Field(
+        "lllyasviel/control_v11p_sd15_canny", description="Controlnet method"
+    )
 
     # BrushNet
     enable_brushnet: bool = Field(False, description="Enable brushnet")
     brushnet_method: str = Field(SD_BRUSHNET_CHOICES[0], description="Brushnet method")
-    brushnet_conditioning_scale: float = Field(1.0, description="brushnet conditioning scale", ge=0.0, le=1.0)
+    brushnet_conditioning_scale: float = Field(
+        1.0, description="brushnet conditioning scale", ge=0.0, le=1.0
+    )
 
     # PowerPaint
     enable_powerpaint_v2: bool = Field(False, description="Enable PowerPaint v2")
-    powerpaint_task: PowerPaintTask = Field(PowerPaintTask.text_guided, description="PowerPaint task")
+    powerpaint_task: PowerPaintTask = Field(
+        PowerPaintTask.text_guided, description="PowerPaint task"
+    )
     fitting_degree: float = Field(
         1.0,
         description="Control the fitting degree of the generated objects to the mask shape.",
@@ -436,7 +451,9 @@ class InpaintRequest(BaseModel):
 class RunPluginRequest(BaseModel):
     name: str
     image: str = Field(..., description="base64 encoded image")
-    clicks: List[List[int]] = Field([], description="Clicks for interactive seg, [[x,y,0/1], [x2,y2,0/1]]")
+    clicks: List[List[int]] = Field(
+        [], description="Clicks for interactive seg, [[x,y,0/1], [x2,y2,0/1]]"
+    )
     scale: float = Field(2.0, description="Scale for upscaling")
 
 
@@ -487,6 +504,8 @@ AdjustMaskOperate = Literal["expand", "shrink", "reverse"]
 
 
 class AdjustMaskRequest(BaseModel):
-    mask: str = Field(..., description="base64 encoded mask. 255 means area to do inpaint")
+    mask: str = Field(
+        ..., description="base64 encoded mask. 255 means area to do inpaint"
+    )
     operate: AdjustMaskOperate = Field(..., description="expand/shrink/reverse")
     kernel_size: int = Field(5, description="Kernel size for expanding mask")

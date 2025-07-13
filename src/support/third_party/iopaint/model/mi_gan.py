@@ -2,17 +2,17 @@ import os
 
 import cv2
 import torch
+
 from iopaint.helper import (
-    boxes_from_mask,
+    load_jit_model,
     download_model,
     get_cache_path_by_url,
-    load_jit_model,
-    norm_img,
+    boxes_from_mask,
     resize_max_size,
+    norm_img,
 )
-from iopaint.schema import InpaintRequest
-
 from .base import InpaintModel
+from iopaint.schema import InpaintRequest
 
 MIGAN_MODEL_URL = os.environ.get(
     "MIGAN_MODEL_URL",
@@ -67,7 +67,9 @@ class MIGAN(InpaintModel):
             )
 
             original_pixel_indices = crop_mask < 127
-            inpaint_result[original_pixel_indices] = crop_image[:, :, ::-1][original_pixel_indices]
+            inpaint_result[original_pixel_indices] = crop_image[:, :, ::-1][
+                original_pixel_indices
+            ]
 
             crop_result.append((inpaint_result, crop_box))
 
@@ -97,7 +99,12 @@ class MIGAN(InpaintModel):
         input_image = torch.cat([0.5 - mask, erased_img], dim=1)
 
         output = self.model(input_image)
-        output = (output.permute(0, 2, 3, 1) * 127.5 + 127.5).round().clamp(0, 255).to(torch.uint8)
+        output = (
+            (output.permute(0, 2, 3, 1) * 127.5 + 127.5)
+            .round()
+            .clamp(0, 255)
+            .to(torch.uint8)
+        )
         output = output[0].cpu().numpy()
         cur_res = cv2.cvtColor(output, cv2.COLOR_RGB2BGR)
         return cur_res

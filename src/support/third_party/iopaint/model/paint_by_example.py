@@ -1,13 +1,13 @@
-import cv2
 import PIL
 import PIL.Image
+import cv2
 import torch
-from iopaint.helper import decode_base64_to_image
-from iopaint.schema import InpaintRequest
 from loguru import logger
 
+from iopaint.helper import decode_base64_to_image
 from .base import DiffusionInpaintModel
-from .utils import enable_low_mem, get_torch_dtype, is_local_files_only
+from iopaint.schema import InpaintRequest
+from .utils import get_torch_dtype, enable_low_mem, is_local_files_only
 
 
 class PaintByExample(DiffusionInpaintModel):
@@ -25,9 +25,13 @@ class PaintByExample(DiffusionInpaintModel):
 
         if kwargs["disable_nsfw"] or kwargs.get("cpu_offload", False):
             logger.info("Disable Paint By Example Model NSFW checker")
-            model_kwargs.update(dict(safety_checker=None, requires_safety_checker=False))
+            model_kwargs.update(
+                dict(safety_checker=None, requires_safety_checker=False)
+            )
 
-        self.model = DiffusionPipeline.from_pretrained(self.name, torch_dtype=torch_dtype, **model_kwargs)
+        self.model = DiffusionPipeline.from_pretrained(
+            self.name, torch_dtype=torch_dtype, **model_kwargs
+        )
         enable_low_mem(self.model, kwargs.get("low_mem", False))
 
         # TODO: gpu_id
@@ -45,7 +49,9 @@ class PaintByExample(DiffusionInpaintModel):
         """
         if config.paint_by_example_example_image is None:
             raise ValueError("paint_by_example_example_image is required")
-        example_image, _, _, _ = decode_base64_to_image(config.paint_by_example_example_image)
+        example_image, _, _, _ = decode_base64_to_image(
+            config.paint_by_example_example_image
+        )
         output = self.model(
             image=PIL.Image.fromarray(image),
             mask_image=PIL.Image.fromarray(mask[:, :, -1], mode="L"),

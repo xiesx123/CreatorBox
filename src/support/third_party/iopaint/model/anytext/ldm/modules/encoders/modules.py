@@ -1,14 +1,16 @@
 import torch
 import torch.nn as nn
-from iopaint.model.anytext.ldm.util import count_params
+
 from transformers import (
-    AutoProcessor,
-    CLIPTextModel,
-    CLIPTokenizer,
-    CLIPVisionModelWithProjection,
-    T5EncoderModel,
     T5Tokenizer,
+    T5EncoderModel,
+    CLIPTokenizer,
+    CLIPTextModel,
+    AutoProcessor,
+    CLIPVisionModelWithProjection,
 )
+
+from iopaint.model.anytext.ldm.util import count_params
 
 
 def _expand_mask(mask, dtype, tgt_len=None):
@@ -22,7 +24,9 @@ def _expand_mask(mask, dtype, tgt_len=None):
 
     inverted_mask = 1.0 - expanded_mask
 
-    return inverted_mask.masked_fill(inverted_mask.to(torch.bool), torch.finfo(dtype).min)
+    return inverted_mask.masked_fill(
+        inverted_mask.to(torch.bool), torch.finfo(dtype).min
+    )
 
 
 def _build_causal_attention_mask(bsz, seq_len, dtype):
@@ -69,7 +73,9 @@ class ClassEmbedder(nn.Module):
         return c
 
     def get_unconditional_conditioning(self, bs, device="cuda"):
-        uc_class = self.n_classes - 1  # 1000 classes --> 0 ... 999, one extra class for ucg (class 1000)
+        uc_class = (
+            self.n_classes - 1
+        )  # 1000 classes --> 0 ... 999, one extra class for ucg (class 1000)
         uc = torch.ones((bs,), device=device) * uc_class
         uc = {self.key: uc}
         return uc
@@ -84,7 +90,9 @@ def disabled_train(self, mode=True):
 class FrozenT5Embedder(AbstractEncoder):
     """Uses the T5 transformer encoder for text"""
 
-    def __init__(self, version="google/t5-v1_1-large", device="cuda", max_length=77, freeze=True):  # others are google/t5-v1_1-xl and google/t5-v1_1-xxl
+    def __init__(
+        self, version="google/t5-v1_1-large", device="cuda", max_length=77, freeze=True
+    ):  # others are google/t5-v1_1-xl and google/t5-v1_1-xxl
         super().__init__()
         self.tokenizer = T5Tokenizer.from_pretrained(version)
         self.transformer = T5EncoderModel.from_pretrained(version)
@@ -164,7 +172,9 @@ class FrozenCLIPEmbedder(AbstractEncoder):
             return_tensors="pt",
         )
         tokens = batch_encoding["input_ids"].to(self.device)
-        outputs = self.transformer(input_ids=tokens, output_hidden_states=self.layer == "hidden")
+        outputs = self.transformer(
+            input_ids=tokens, output_hidden_states=self.layer == "hidden"
+        )
         if self.layer == "last":
             z = outputs.last_hidden_state
         elif self.layer == "pooled":
@@ -187,9 +197,14 @@ class FrozenCLIPT5Encoder(AbstractEncoder):
         t5_max_length=77,
     ):
         super().__init__()
-        self.clip_encoder = FrozenCLIPEmbedder(clip_version, device, max_length=clip_max_length)
+        self.clip_encoder = FrozenCLIPEmbedder(
+            clip_version, device, max_length=clip_max_length
+        )
         self.t5_encoder = FrozenT5Embedder(t5_version, device, max_length=t5_max_length)
-        print(f"{self.clip_encoder.__class__.__name__} has {count_params(self.clip_encoder)*1.e-6:.2f} M parameters, " f"{self.t5_encoder.__class__.__name__} comes with {count_params(self.t5_encoder)*1.e-6:.2f} M params.")
+        print(
+            f"{self.clip_encoder.__class__.__name__} has {count_params(self.clip_encoder)*1.e-6:.2f} M parameters, "
+            f"{self.t5_encoder.__class__.__name__} comes with {count_params(self.t5_encoder)*1.e-6:.2f} M params."
+        )
 
     def encode(self, text):
         return self(text)
@@ -229,7 +244,11 @@ class FrozenCLIPEmbedderT3(AbstractEncoder):
             inputs_embeds=None,
             embedding_manager=None,
         ):
-            seq_length = input_ids.shape[-1] if input_ids is not None else inputs_embeds.shape[-2]
+            seq_length = (
+                input_ids.shape[-1]
+                if input_ids is not None
+                else inputs_embeds.shape[-2]
+            )
             if position_ids is None:
                 position_ids = self.position_ids[:, :seq_length]
             if inputs_embeds is None:
@@ -240,7 +259,9 @@ class FrozenCLIPEmbedderT3(AbstractEncoder):
             embeddings = inputs_embeds + position_embeddings
             return embeddings
 
-        self.transformer.text_model.embeddings.forward = embedding_forward.__get__(self.transformer.text_model.embeddings)
+        self.transformer.text_model.embeddings.forward = embedding_forward.__get__(
+            self.transformer.text_model.embeddings
+        )
 
         def encoder_forward(
             self,
@@ -251,9 +272,19 @@ class FrozenCLIPEmbedderT3(AbstractEncoder):
             output_hidden_states=None,
             return_dict=None,
         ):
-            output_attentions = output_attentions if output_attentions is not None else self.config.output_attentions
-            output_hidden_states = output_hidden_states if output_hidden_states is not None else self.config.output_hidden_states
-            return_dict = return_dict if return_dict is not None else self.config.use_return_dict
+            output_attentions = (
+                output_attentions
+                if output_attentions is not None
+                else self.config.output_attentions
+            )
+            output_hidden_states = (
+                output_hidden_states
+                if output_hidden_states is not None
+                else self.config.output_hidden_states
+            )
+            return_dict = (
+                return_dict if return_dict is not None else self.config.use_return_dict
+            )
             encoder_states = () if output_hidden_states else None
             all_attentions = () if output_attentions else None
             hidden_states = inputs_embeds
@@ -273,7 +304,9 @@ class FrozenCLIPEmbedderT3(AbstractEncoder):
                 encoder_states = encoder_states + (hidden_states,)
             return hidden_states
 
-        self.transformer.text_model.encoder.forward = encoder_forward.__get__(self.transformer.text_model.encoder)
+        self.transformer.text_model.encoder.forward = encoder_forward.__get__(
+            self.transformer.text_model.encoder
+        )
 
         def text_encoder_forward(
             self,
@@ -285,9 +318,19 @@ class FrozenCLIPEmbedderT3(AbstractEncoder):
             return_dict=None,
             embedding_manager=None,
         ):
-            output_attentions = output_attentions if output_attentions is not None else self.config.output_attentions
-            output_hidden_states = output_hidden_states if output_hidden_states is not None else self.config.output_hidden_states
-            return_dict = return_dict if return_dict is not None else self.config.use_return_dict
+            output_attentions = (
+                output_attentions
+                if output_attentions is not None
+                else self.config.output_attentions
+            )
+            output_hidden_states = (
+                output_hidden_states
+                if output_hidden_states is not None
+                else self.config.output_hidden_states
+            )
+            return_dict = (
+                return_dict if return_dict is not None else self.config.use_return_dict
+            )
             if input_ids is None:
                 raise ValueError("You have to specify either input_ids")
             input_shape = input_ids.size()
@@ -300,7 +343,9 @@ class FrozenCLIPEmbedderT3(AbstractEncoder):
             bsz, seq_len = input_shape
             # CLIP's text model uses causal mask, prepare it here.
             # https://github.com/openai/CLIP/blob/cfcffb90e69f37bf2ff1e988237a0fbe41f33c04/clip/model.py#L324
-            causal_attention_mask = _build_causal_attention_mask(bsz, seq_len, hidden_states.dtype).to(hidden_states.device)
+            causal_attention_mask = _build_causal_attention_mask(
+                bsz, seq_len, hidden_states.dtype
+            ).to(hidden_states.device)
             # expand attention_mask
             if attention_mask is not None:
                 # [bsz, seq_len] -> [bsz, 1, tgt_seq_len, src_seq_len]
@@ -316,7 +361,9 @@ class FrozenCLIPEmbedderT3(AbstractEncoder):
             last_hidden_state = self.final_layer_norm(last_hidden_state)
             return last_hidden_state
 
-        self.transformer.text_model.forward = text_encoder_forward.__get__(self.transformer.text_model)
+        self.transformer.text_model.forward = text_encoder_forward.__get__(
+            self.transformer.text_model
+        )
 
         def transformer_forward(
             self,

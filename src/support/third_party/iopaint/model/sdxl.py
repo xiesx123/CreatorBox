@@ -1,19 +1,20 @@
 import os
 
-import cv2
 import PIL.Image
+import cv2
 import torch
 from diffusers import AutoencoderKL
-from iopaint.schema import InpaintRequest, ModelType
 from loguru import logger
+
+from iopaint.schema import InpaintRequest, ModelType
 
 from .base import DiffusionInpaintModel
 from .helper.cpu_text_encoder import CPUTextEncoderWrapper
 from .original_sd_configs import get_config_files
 from .utils import (
-    enable_low_mem,
-    get_torch_dtype,
     handle_from_pretrained_exceptions,
+    get_torch_dtype,
+    enable_low_mem,
     is_local_files_only,
 )
 
@@ -41,7 +42,7 @@ class SDXL(DiffusionInpaintModel):
                 torch_dtype=torch_dtype,
                 num_in_channels=num_in_channels,
                 load_safety_checker=False,
-                original_config_file=get_config_files()["xl"],
+                original_config_file=get_config_files()['xl'],
             )
         else:
             model_kwargs = {
@@ -49,9 +50,17 @@ class SDXL(DiffusionInpaintModel):
                 "local_files_only": is_local_files_only(**kwargs),
             }
             if "vae" not in model_kwargs:
-                vae = AutoencoderKL.from_pretrained("madebyollin/sdxl-vae-fp16-fix", torch_dtype=torch_dtype)
+                vae = AutoencoderKL.from_pretrained(
+                    "madebyollin/sdxl-vae-fp16-fix", torch_dtype=torch_dtype
+                )
                 model_kwargs["vae"] = vae
-            self.model = handle_from_pretrained_exceptions(StableDiffusionXLInpaintPipeline.from_pretrained, pretrained_model_name_or_path=self.model_id_or_path, torch_dtype=torch_dtype, variant="fp16", **model_kwargs)
+            self.model = handle_from_pretrained_exceptions(
+                StableDiffusionXLInpaintPipeline.from_pretrained,
+                pretrained_model_name_or_path=self.model_id_or_path,
+                torch_dtype=torch_dtype,
+                variant="fp16",
+                **model_kwargs
+            )
 
         enable_low_mem(self.model, kwargs.get("low_mem", False))
 
@@ -62,8 +71,12 @@ class SDXL(DiffusionInpaintModel):
             self.model = self.model.to(device)
             if kwargs["sd_cpu_textencoder"]:
                 logger.info("Run Stable Diffusion TextEncoder on CPU")
-                self.model.text_encoder = CPUTextEncoderWrapper(self.model.text_encoder, torch_dtype)
-                self.model.text_encoder_2 = CPUTextEncoderWrapper(self.model.text_encoder_2, torch_dtype)
+                self.model.text_encoder = CPUTextEncoderWrapper(
+                    self.model.text_encoder, torch_dtype
+                )
+                self.model.text_encoder_2 = CPUTextEncoderWrapper(
+                    self.model.text_encoder_2, torch_dtype
+                )
 
         self.callback = kwargs.pop("callback", None)
 

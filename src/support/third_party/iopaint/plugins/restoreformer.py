@@ -1,9 +1,10 @@
 import cv2
 import numpy as np
+from loguru import logger
+
 from iopaint.helper import download_model
 from iopaint.plugins.base_plugin import BasePlugin
 from iopaint.schema import RunPluginRequest
-from loguru import logger
 
 
 class RestoreFormerPlugin(BasePlugin):

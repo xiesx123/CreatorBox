@@ -1,27 +1,32 @@
 import os
 import random
-import time
 
 import cv2
 import numpy as np
 import torch
-from iopaint.helper import download_model, get_cache_path_by_url, load_jit_model
-from iopaint.schema import InpaintRequest
+import time
 from loguru import logger
 
+from iopaint.helper import get_cache_path_by_url, load_jit_model, download_model
 from .base import InpaintModel
+from iopaint.schema import InpaintRequest
+
 
 MANGA_INPAINTOR_MODEL_URL = os.environ.get(
     "MANGA_INPAINTOR_MODEL_URL",
     "https://github.com/Sanster/models/releases/download/manga/manga_inpaintor.jit",
 )
-MANGA_INPAINTOR_MODEL_MD5 = os.environ.get("MANGA_INPAINTOR_MODEL_MD5", "7d8b269c4613b6b3768af714610da86c")
+MANGA_INPAINTOR_MODEL_MD5 = os.environ.get(
+    "MANGA_INPAINTOR_MODEL_MD5", "7d8b269c4613b6b3768af714610da86c"
+)
 
 MANGA_LINE_MODEL_URL = os.environ.get(
     "MANGA_LINE_MODEL_URL",
     "https://github.com/Sanster/models/releases/download/manga/erika.jit",
 )
-MANGA_LINE_MODEL_MD5 = os.environ.get("MANGA_LINE_MODEL_MD5", "0c926d5a4af8450b0d00bc5b9a095644")
+MANGA_LINE_MODEL_MD5 = os.environ.get(
+    "MANGA_LINE_MODEL_MD5", "0c926d5a4af8450b0d00bc5b9a095644"
+)
 
 
 class Manga(InpaintModel):
@@ -30,8 +35,12 @@ class Manga(InpaintModel):
     is_erase_model = True
 
     def init_model(self, device, **kwargs):
-        self.inpaintor_model = load_jit_model(MANGA_INPAINTOR_MODEL_URL, device, MANGA_INPAINTOR_MODEL_MD5)
-        self.line_model = load_jit_model(MANGA_LINE_MODEL_URL, device, MANGA_LINE_MODEL_MD5)
+        self.inpaintor_model = load_jit_model(
+            MANGA_INPAINTOR_MODEL_URL, device, MANGA_INPAINTOR_MODEL_MD5
+        )
+        self.line_model = load_jit_model(
+            MANGA_LINE_MODEL_URL, device, MANGA_LINE_MODEL_MD5
+        )
         self.seed = 42
 
     @staticmethod
@@ -60,7 +69,9 @@ class Manga(InpaintModel):
         torch.cuda.manual_seed_all(seed)
 
         gray_img = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
-        gray_img = torch.from_numpy(gray_img[np.newaxis, np.newaxis, :, :].astype(np.float32)).to(self.device)
+        gray_img = torch.from_numpy(
+            gray_img[np.newaxis, np.newaxis, :, :].astype(np.float32)
+        ).to(self.device)
         start = time.time()
         lines = self.line_model(gray_img)
         torch.cuda.empty_cache()

@@ -1,4 +1,3 @@
-import copy
 import os
 from pathlib import Path
 
@@ -6,33 +5,23 @@ import einops
 import torch
 import torch as th
 import torch.nn as nn
+import copy
 from easydict import EasyDict as edict
-from einops import rearrange, repeat
-from iopaint.model.anytext.ldm.models.diffusion.ddim import DDIMSampler
-from iopaint.model.anytext.ldm.models.diffusion.ddpm import LatentDiffusion
-from iopaint.model.anytext.ldm.modules.attention import SpatialTransformer
-from iopaint.model.anytext.ldm.modules.diffusionmodules.openaimodel import (
-    AttentionBlock,
-    Downsample,
-    ResBlock,
-    TimestepEmbedSequential,
-    UNetModel,
-)
+
 from iopaint.model.anytext.ldm.modules.diffusionmodules.util import (
     conv_nd,
     linear,
-    timestep_embedding,
     zero_module,
-)
-from iopaint.model.anytext.ldm.modules.distributions.distributions import (
-    DiagonalGaussianDistribution,
-)
-from iopaint.model.anytext.ldm.util import (
-    exists,
-    instantiate_from_config,
-    log_txt_as_img,
+    timestep_embedding,
 )
 
+from einops import rearrange, repeat
+from iopaint.model.anytext.ldm.modules.attention import SpatialTransformer
+from iopaint.model.anytext.ldm.modules.diffusionmodules.openaimodel import UNetModel, TimestepEmbedSequential, ResBlock, Downsample, AttentionBlock
+from iopaint.model.anytext.ldm.models.diffusion.ddpm import LatentDiffusion
+from iopaint.model.anytext.ldm.util import log_txt_as_img, exists, instantiate_from_config
+from iopaint.model.anytext.ldm.models.diffusion.ddim import DDIMSampler
+from iopaint.model.anytext.ldm.modules.distributions.distributions import DiagonalGaussianDistribution
 from .recognizer import TextRecognizer, create_predictor
 
 CURRENT_DIR = Path(os.path.dirname(os.path.abspath(__file__)))
@@ -72,44 +61,43 @@ class ControlledUnetModel(UNetModel):
 
 class ControlNet(nn.Module):
     def __init__(
-        self,
-        image_size,
-        in_channels,
-        model_channels,
-        glyph_channels,
-        position_channels,
-        num_res_blocks,
-        attention_resolutions,
-        dropout=0,
-        channel_mult=(1, 2, 4, 8),
-        conv_resample=True,
-        dims=2,
-        use_checkpoint=False,
-        use_fp16=False,
-        num_heads=-1,
-        num_head_channels=-1,
-        num_heads_upsample=-1,
-        use_scale_shift_norm=False,
-        resblock_updown=False,
-        use_new_attention_order=False,
-        use_spatial_transformer=False,  # custom transformer support
-        transformer_depth=1,  # custom transformer support
-        context_dim=None,  # custom transformer support
-        n_embed=None,  # custom support for prediction of discrete ids into codebook of first stage vq model
-        legacy=True,
-        disable_self_attentions=None,
-        num_attention_blocks=None,
-        disable_middle_self_attn=False,
-        use_linear_in_transformer=False,
+            self,
+            image_size,
+            in_channels,
+            model_channels,
+            glyph_channels,
+            position_channels,
+            num_res_blocks,
+            attention_resolutions,
+            dropout=0,
+            channel_mult=(1, 2, 4, 8),
+            conv_resample=True,
+            dims=2,
+            use_checkpoint=False,
+            use_fp16=False,
+            num_heads=-1,
+            num_head_channels=-1,
+            num_heads_upsample=-1,
+            use_scale_shift_norm=False,
+            resblock_updown=False,
+            use_new_attention_order=False,
+            use_spatial_transformer=False,  # custom transformer support
+            transformer_depth=1,  # custom transformer support
+            context_dim=None,  # custom transformer support
+            n_embed=None,  # custom support for prediction of discrete ids into codebook of first stage vq model
+            legacy=True,
+            disable_self_attentions=None,
+            num_attention_blocks=None,
+            disable_middle_self_attn=False,
+            use_linear_in_transformer=False,
     ):
         super().__init__()
         if use_spatial_transformer:
-            assert context_dim is not None, "Fool!! You forgot to include the dimension of your cross-attention conditioning..."
+            assert context_dim is not None, 'Fool!! You forgot to include the dimension of your cross-attention conditioning...'
 
         if context_dim is not None:
-            assert use_spatial_transformer, "Fool!! You forgot to use the spatial transformer for your cross-attention conditioning..."
+            assert use_spatial_transformer, 'Fool!! You forgot to use the spatial transformer for your cross-attention conditioning...'
             from omegaconf.listconfig import ListConfig
-
             if type(context_dim) == ListConfig:
                 context_dim = list(context_dim)
 
@@ -117,10 +105,10 @@ class ControlNet(nn.Module):
             num_heads_upsample = num_heads
 
         if num_heads == -1:
-            assert num_head_channels != -1, "Either num_heads or num_head_channels has to be set"
+            assert num_head_channels != -1, 'Either num_heads or num_head_channels has to be set'
 
         if num_head_channels == -1:
-            assert num_heads != -1, "Either num_heads or num_head_channels has to be set"
+            assert num_heads != -1, 'Either num_heads or num_head_channels has to be set'
         self.dims = dims
         self.image_size = image_size
         self.in_channels = in_channels
@@ -129,7 +117,8 @@ class ControlNet(nn.Module):
             self.num_res_blocks = len(channel_mult) * [num_res_blocks]
         else:
             if len(num_res_blocks) != len(channel_mult):
-                raise ValueError("provide num_res_blocks either as an int (globally constant) or " "as a list/tuple (per-level) with the same length as channel_mult")
+                raise ValueError("provide num_res_blocks either as an int (globally constant) or "
+                                 "as a list/tuple (per-level) with the same length as channel_mult")
             self.num_res_blocks = num_res_blocks
         if disable_self_attentions is not None:
             # should be a list of booleans, indicating whether to disable self-attention in TransformerBlocks or not
@@ -137,7 +126,10 @@ class ControlNet(nn.Module):
         if num_attention_blocks is not None:
             assert len(num_attention_blocks) == len(self.num_res_blocks)
             assert all(map(lambda i: self.num_res_blocks[i] >= num_attention_blocks[i], range(len(num_attention_blocks))))
-            print(f"Constructor of UNetModel received num_attention_blocks={num_attention_blocks}. " f"This option has LESS priority than attention_resolutions {attention_resolutions}, " f"i.e., in cases where num_attention_blocks[i] > 0 but 2**i not in attention_resolutions, " f"attention will still not be set.")
+            print(f"Constructor of UNetModel received num_attention_blocks={num_attention_blocks}. "
+                  f"This option has LESS priority than attention_resolutions {attention_resolutions}, "
+                  f"i.e., in cases where num_attention_blocks[i] > 0 but 2**i not in attention_resolutions, "
+                  f"attention will still not be set.")
         self.attention_resolutions = attention_resolutions
         self.dropout = dropout
         self.channel_mult = channel_mult
@@ -157,7 +149,13 @@ class ControlNet(nn.Module):
             linear(time_embed_dim, time_embed_dim),
         )
 
-        self.input_blocks = nn.ModuleList([TimestepEmbedSequential(conv_nd(dims, in_channels, model_channels, 3, padding=1))])
+        self.input_blocks = nn.ModuleList(
+            [
+                TimestepEmbedSequential(
+                    conv_nd(dims, in_channels, model_channels, 3, padding=1)
+                )
+            ]
+        )
         self.zero_convs = nn.ModuleList([self.make_zero_conv(model_channels)])
 
         self.glyph_block = TimestepEmbedSequential(
@@ -198,7 +196,7 @@ class ControlNet(nn.Module):
             nn.SiLU(),
         )
 
-        self.fuse_block = zero_module(conv_nd(dims, 256 + 64 + 4, model_channels, 3, padding=1))
+        self.fuse_block = zero_module(conv_nd(dims, 256+64+4, model_channels, 3, padding=1))
 
         self._feature_size = model_channels
         input_block_chans = [model_channels]
@@ -240,9 +238,11 @@ class ControlNet(nn.Module):
                                 num_heads=num_heads,
                                 num_head_channels=dim_head,
                                 use_new_attention_order=use_new_attention_order,
+                            ) if not use_spatial_transformer else SpatialTransformer(
+                                ch, num_heads, dim_head, depth=transformer_depth, context_dim=context_dim,
+                                disable_self_attn=disabled_sa, use_linear=use_linear_in_transformer,
+                                use_checkpoint=use_checkpoint
                             )
-                            if not use_spatial_transformer
-                            else SpatialTransformer(ch, num_heads, dim_head, depth=transformer_depth, context_dim=context_dim, disable_self_attn=disabled_sa, use_linear=use_linear_in_transformer, use_checkpoint=use_checkpoint)
                         )
                 self.input_blocks.append(TimestepEmbedSequential(*layers))
                 self.zero_convs.append(self.make_zero_conv(ch))
@@ -263,7 +263,9 @@ class ControlNet(nn.Module):
                             down=True,
                         )
                         if resblock_updown
-                        else Downsample(ch, conv_resample, dims=dims, out_channels=out_ch)
+                        else Downsample(
+                            ch, conv_resample, dims=dims, out_channels=out_ch
+                        )
                     )
                 )
                 ch = out_ch
@@ -289,16 +291,16 @@ class ControlNet(nn.Module):
                 use_checkpoint=use_checkpoint,
                 use_scale_shift_norm=use_scale_shift_norm,
             ),
-            (
-                AttentionBlock(
-                    ch,
-                    use_checkpoint=use_checkpoint,
-                    num_heads=num_heads,
-                    num_head_channels=dim_head,
-                    use_new_attention_order=use_new_attention_order,
-                )
-                if not use_spatial_transformer
-                else SpatialTransformer(ch, num_heads, dim_head, depth=transformer_depth, context_dim=context_dim, disable_self_attn=disable_middle_self_attn, use_linear=use_linear_in_transformer, use_checkpoint=use_checkpoint)  # always uses a self-attn
+            AttentionBlock(
+                ch,
+                use_checkpoint=use_checkpoint,
+                num_heads=num_heads,
+                num_head_channels=dim_head,
+                use_new_attention_order=use_new_attention_order,
+            ) if not use_spatial_transformer else SpatialTransformer(  # always uses a self-attn
+                ch, num_heads, dim_head, depth=transformer_depth, context_dim=context_dim,
+                disable_self_attn=disable_middle_self_attn, use_linear=use_linear_in_transformer,
+                use_checkpoint=use_checkpoint
             ),
             ResBlock(
                 ch,
@@ -323,11 +325,11 @@ class ControlNet(nn.Module):
 
         # guided_hint from text_info
         B, C, H, W = x.shape
-        glyphs = torch.cat(text_info["glyphs"], dim=1).sum(dim=1, keepdim=True)
-        positions = torch.cat(text_info["positions"], dim=1).sum(dim=1, keepdim=True)
+        glyphs = torch.cat(text_info['glyphs'], dim=1).sum(dim=1, keepdim=True)
+        positions = torch.cat(text_info['positions'], dim=1).sum(dim=1, keepdim=True)
         enc_glyph = self.glyph_block(glyphs, emb, context)
         enc_pos = self.position_block(positions, emb, context)
-        guided_hint = self.fuse_block(torch.cat([enc_glyph, enc_pos, text_info["masked_x"]], dim=1))
+        guided_hint = self.fuse_block(torch.cat([enc_glyph, enc_pos, text_info['masked_x']], dim=1))
 
         outs = []
 
@@ -350,7 +352,7 @@ class ControlNet(nn.Module):
 class ControlLDM(LatentDiffusion):
 
     def __init__(self, control_stage_config, control_key, glyph_key, position_key, only_mid_control, loss_alpha=0, loss_beta=0, with_step_weight=False, use_vae_upsample=False, latin_weight=1.0, embedding_manager_config=None, *args, **kwargs):
-        self.use_fp16 = kwargs.pop("use_fp16", False)
+        self.use_fp16 = kwargs.pop('use_fp16', False)
         super().__init__(*args, **kwargs)
         self.control_model = instantiate_from_config(control_stage_config)
         self.control_key = control_key
@@ -371,7 +373,7 @@ class ControlLDM(LatentDiffusion):
         else:
             self.embedding_manager = None
         if self.loss_alpha > 0 or self.loss_beta > 0 or self.embedding_manager:
-            if embedding_manager_config.params.emb_type == "ocr":
+            if embedding_manager_config.params.emb_type == 'ocr':
                 self.text_predictor = create_predictor().eval()
                 args = edict()
                 args.rec_image_shape = "3, 48, 320"
@@ -388,27 +390,27 @@ class ControlLDM(LatentDiffusion):
     def get_input(self, batch, k, bs=None, *args, **kwargs):
         if self.embedding_manager is None:  # fill in full caption
             self.fill_caption(batch)
-        x, c, mx = super().get_input(batch, self.first_stage_key, mask_k="masked_img", *args, **kwargs)
+        x, c, mx = super().get_input(batch, self.first_stage_key, mask_k='masked_img', *args, **kwargs)
         control = batch[self.control_key]  # for log_images and loss_alpha, not real control
         if bs is not None:
             control = control[:bs]
         control = control.to(self.device)
-        control = einops.rearrange(control, "b h w c -> b c h w")
+        control = einops.rearrange(control, 'b h w c -> b c h w')
         control = control.to(memory_format=torch.contiguous_format).float()
 
-        inv_mask = batch["inv_mask"]
+        inv_mask = batch['inv_mask']
         if bs is not None:
             inv_mask = inv_mask[:bs]
         inv_mask = inv_mask.to(self.device)
-        inv_mask = einops.rearrange(inv_mask, "b h w c -> b c h w")
+        inv_mask = einops.rearrange(inv_mask, 'b h w c -> b c h w')
         inv_mask = inv_mask.to(memory_format=torch.contiguous_format).float()
 
         glyphs = batch[self.glyph_key]
-        gly_line = batch["gly_line"]
+        gly_line = batch['gly_line']
         positions = batch[self.position_key]
-        n_lines = batch["n_lines"]
-        language = batch["language"]
-        texts = batch["texts"]
+        n_lines = batch['n_lines']
+        language = batch['language']
+        texts = batch['texts']
         assert len(glyphs) == len(positions)
         for i in range(len(glyphs)):
             if bs is not None:
@@ -419,32 +421,32 @@ class ControlLDM(LatentDiffusion):
             glyphs[i] = glyphs[i].to(self.device)
             gly_line[i] = gly_line[i].to(self.device)
             positions[i] = positions[i].to(self.device)
-            glyphs[i] = einops.rearrange(glyphs[i], "b h w c -> b c h w")
-            gly_line[i] = einops.rearrange(gly_line[i], "b h w c -> b c h w")
-            positions[i] = einops.rearrange(positions[i], "b h w c -> b c h w")
+            glyphs[i] = einops.rearrange(glyphs[i], 'b h w c -> b c h w')
+            gly_line[i] = einops.rearrange(gly_line[i], 'b h w c -> b c h w')
+            positions[i] = einops.rearrange(positions[i], 'b h w c -> b c h w')
             glyphs[i] = glyphs[i].to(memory_format=torch.contiguous_format).float()
             gly_line[i] = gly_line[i].to(memory_format=torch.contiguous_format).float()
             positions[i] = positions[i].to(memory_format=torch.contiguous_format).float()
         info = {}
-        info["glyphs"] = glyphs
-        info["positions"] = positions
-        info["n_lines"] = n_lines
-        info["language"] = language
-        info["texts"] = texts
-        info["img"] = batch["img"]  # nhwc, (-1,1)
-        info["masked_x"] = mx
-        info["gly_line"] = gly_line
-        info["inv_mask"] = inv_mask
+        info['glyphs'] = glyphs
+        info['positions'] = positions
+        info['n_lines'] = n_lines
+        info['language'] = language
+        info['texts'] = texts
+        info['img'] = batch['img']  # nhwc, (-1,1)
+        info['masked_x'] = mx
+        info['gly_line'] = gly_line
+        info['inv_mask'] = inv_mask
         return x, dict(c_crossattn=[c], c_concat=[control], text_info=info)
 
     def apply_model(self, x_noisy, t, cond, *args, **kwargs):
         assert isinstance(cond, dict)
         diffusion_model = self.model.diffusion_model
-        _cond = torch.cat(cond["c_crossattn"], 1)
-        _hint = torch.cat(cond["c_concat"], 1)
+        _cond = torch.cat(cond['c_crossattn'], 1)
+        _hint = torch.cat(cond['c_concat'], 1)
         if self.use_fp16:
             x_noisy = x_noisy.half()
-        control = self.control_model(x=x_noisy, timesteps=t, context=_cond, hint=_hint, text_info=cond["text_info"])
+        control = self.control_model(x=x_noisy, timesteps=t, context=_cond, hint=_hint, text_info=cond['text_info'])
         control = [c * scale for c, scale in zip(control, self.control_scales)]
         eps = diffusion_model(x=x_noisy, timesteps=t, context=_cond, control=control, only_mid_control=self.only_mid_control)
 
@@ -460,11 +462,11 @@ class ControlLDM(LatentDiffusion):
 
     def get_learned_conditioning(self, c):
         if self.cond_stage_forward is None:
-            if hasattr(self.cond_stage_model, "encode") and callable(self.cond_stage_model.encode):
-                if self.embedding_manager is not None and c["text_info"] is not None:
-                    self.embedding_manager.encode_text(c["text_info"])
+            if hasattr(self.cond_stage_model, 'encode') and callable(self.cond_stage_model.encode):
+                if self.embedding_manager is not None and c['text_info'] is not None:
+                    self.embedding_manager.encode_text(c['text_info'])
                 if isinstance(c, dict):
-                    cond_txt = c["c_crossattn"][0]
+                    cond_txt = c['c_crossattn'][0]
                 else:
                     cond_txt = c
                 if self.embedding_manager is not None:
@@ -472,7 +474,7 @@ class ControlLDM(LatentDiffusion):
                 else:
                     cond_txt = self.cond_stage_model.encode(cond_txt)
                 if isinstance(c, dict):
-                    c["c_crossattn"][0] = cond_txt
+                    c['c_crossattn'][0] = cond_txt
                 else:
                     c = cond_txt
                 if isinstance(c, DiagonalGaussianDistribution):
@@ -484,22 +486,26 @@ class ControlLDM(LatentDiffusion):
             c = getattr(self.cond_stage_model, self.cond_stage_forward)(c)
         return c
 
-    def fill_caption(self, batch, place_holder="*"):
-        bs = len(batch["n_lines"])
+    def fill_caption(self, batch, place_holder='*'):
+        bs = len(batch['n_lines'])
         cond_list = copy.deepcopy(batch[self.cond_stage_key])
         for i in range(bs):
-            n_lines = batch["n_lines"][i]
+            n_lines = batch['n_lines'][i]
             if n_lines == 0:
                 continue
             cur_cap = cond_list[i]
             for j in range(n_lines):
-                r_txt = batch["texts"][j][i]
+                r_txt = batch['texts'][j][i]
                 cur_cap = cur_cap.replace(place_holder, f'"{r_txt}"', 1)
             cond_list[i] = cur_cap
         batch[self.cond_stage_key] = cond_list
 
     @torch.no_grad()
-    def log_images(self, batch, N=4, n_row=2, sample=False, ddim_steps=50, ddim_eta=0.0, return_keys=None, quantize_denoised=True, inpaint=True, plot_denoise_rows=False, plot_progressive_rows=True, plot_diffusion_rows=False, unconditional_guidance_scale=9.0, unconditional_guidance_label=None, use_ema_scope=True, **kwargs):
+    def log_images(self, batch, N=4, n_row=2, sample=False, ddim_steps=50, ddim_eta=0.0, return_keys=None,
+                   quantize_denoised=True, inpaint=True, plot_denoise_rows=False, plot_progressive_rows=True,
+                   plot_diffusion_rows=False, unconditional_guidance_scale=9.0, unconditional_guidance_label=None,
+                   use_ema_scope=True,
+                   **kwargs):
         use_ddim = ddim_steps is not None
 
         log = dict()
@@ -510,28 +516,23 @@ class ControlLDM(LatentDiffusion):
         c_crossattn = c["c_crossattn"][0][:N]
         c_cat = c["c_concat"][0][:N]
         text_info = c["text_info"]
-        text_info["glyphs"] = [i[:N] for i in text_info["glyphs"]]
-        text_info["gly_line"] = [i[:N] for i in text_info["gly_line"]]
-        text_info["positions"] = [i[:N] for i in text_info["positions"]]
-        text_info["n_lines"] = text_info["n_lines"][:N]
-        text_info["masked_x"] = text_info["masked_x"][:N]
-        text_info["img"] = text_info["img"][:N]
+        text_info['glyphs'] = [i[:N] for i in text_info['glyphs']]
+        text_info['gly_line'] = [i[:N] for i in text_info['gly_line']]
+        text_info['positions'] = [i[:N] for i in text_info['positions']]
+        text_info['n_lines'] = text_info['n_lines'][:N]
+        text_info['masked_x'] = text_info['masked_x'][:N]
+        text_info['img'] = text_info['img'][:N]
 
         N = min(z.shape[0], N)
         n_row = min(z.shape[0], n_row)
         log["reconstruction"] = self.decode_first_stage(z)
-        log["masked_image"] = self.decode_first_stage(text_info["masked_x"])
+        log["masked_image"] = self.decode_first_stage(text_info['masked_x'])
         log["control"] = c_cat * 2.0 - 1.0
-        log["img"] = text_info["img"].permute(0, 3, 1, 2)  # log source image if needed
+        log["img"] = text_info['img'].permute(0, 3, 1, 2)  # log source image if needed
         # get glyph
-        glyph_bs = torch.stack(text_info["glyphs"])
+        glyph_bs = torch.stack(text_info['glyphs'])
         glyph_bs = torch.sum(glyph_bs, dim=0) * 2.0 - 1.0
-        log["glyph"] = torch.nn.functional.interpolate(
-            glyph_bs,
-            size=(512, 512),
-            mode="bilinear",
-            align_corners=True,
-        )
+        log["glyph"] = torch.nn.functional.interpolate(glyph_bs, size=(512, 512), mode='bilinear', align_corners=True,)
         # fill caption
         if not self.embedding_manager:
             self.fill_caption(batch)
@@ -544,21 +545,23 @@ class ControlLDM(LatentDiffusion):
             z_start = z[:n_row]
             for t in range(self.num_timesteps):
                 if t % self.log_every_t == 0 or t == self.num_timesteps - 1:
-                    t = repeat(torch.tensor([t]), "1 -> b", b=n_row)
+                    t = repeat(torch.tensor([t]), '1 -> b', b=n_row)
                     t = t.to(self.device).long()
                     noise = torch.randn_like(z_start)
                     z_noisy = self.q_sample(x_start=z_start, t=t, noise=noise)
                     diffusion_row.append(self.decode_first_stage(z_noisy))
 
             diffusion_row = torch.stack(diffusion_row)  # n_log_step, n_row, C, H, W
-            diffusion_grid = rearrange(diffusion_row, "n b c h w -> b n c h w")
-            diffusion_grid = rearrange(diffusion_grid, "b n c h w -> (b n) c h w")
+            diffusion_grid = rearrange(diffusion_row, 'n b c h w -> b n c h w')
+            diffusion_grid = rearrange(diffusion_grid, 'b n c h w -> (b n) c h w')
             diffusion_grid = make_grid(diffusion_grid, nrow=diffusion_row.shape[0])
             log["diffusion_row"] = diffusion_grid
 
         if sample:
             # get denoise row
-            samples, z_denoise_row = self.sample_log(cond={"c_concat": [c_cat], "c_crossattn": [c], "text_info": text_info}, batch_size=N, ddim=use_ddim, ddim_steps=ddim_steps, eta=ddim_eta)
+            samples, z_denoise_row = self.sample_log(cond={"c_concat": [c_cat], "c_crossattn": [c], "text_info": text_info},
+                                                     batch_size=N, ddim=use_ddim,
+                                                     ddim_steps=ddim_steps, eta=ddim_eta)
             x_samples = self.decode_first_stage(samples)
             log["samples"] = x_samples
             if plot_denoise_rows:
@@ -568,22 +571,19 @@ class ControlLDM(LatentDiffusion):
         if unconditional_guidance_scale > 1.0:
             uc_cross = self.get_unconditional_conditioning(N)
             uc_cat = c_cat  # torch.zeros_like(c_cat)
-            uc_full = {"c_concat": [uc_cat], "c_crossattn": [uc_cross["c_crossattn"][0]], "text_info": text_info}
-            samples_cfg, tmps = self.sample_log(
-                cond={"c_concat": [c_cat], "c_crossattn": [c_crossattn], "text_info": text_info},
-                batch_size=N,
-                ddim=use_ddim,
-                ddim_steps=ddim_steps,
-                eta=ddim_eta,
-                unconditional_guidance_scale=unconditional_guidance_scale,
-                unconditional_conditioning=uc_full,
-            )
+            uc_full = {"c_concat": [uc_cat], "c_crossattn": [uc_cross['c_crossattn'][0]], "text_info": text_info}
+            samples_cfg, tmps = self.sample_log(cond={"c_concat": [c_cat], "c_crossattn": [c_crossattn], "text_info": text_info},
+                                                batch_size=N, ddim=use_ddim,
+                                                ddim_steps=ddim_steps, eta=ddim_eta,
+                                                unconditional_guidance_scale=unconditional_guidance_scale,
+                                                unconditional_conditioning=uc_full,
+                                                )
             x_samples_cfg = self.decode_first_stage(samples_cfg)
             log[f"samples_cfg_scale_{unconditional_guidance_scale:.2f}"] = x_samples_cfg
             pred_x0 = False  # wether log pred_x0
             if pred_x0:
-                for idx in range(len(tmps["pred_x0"])):
-                    pred_x0 = self.decode_first_stage(tmps["pred_x0"][idx])
+                for idx in range(len(tmps['pred_x0'])):
+                    pred_x0 = self.decode_first_stage(tmps['pred_x0'][idx])
                     log[f"pred_x0_{tmps['index'][idx]}"] = pred_x0
 
         return log
@@ -609,10 +609,10 @@ class ControlLDM(LatentDiffusion):
         if self.unlockKV:
             nCount = 0
             for name, param in self.model.diffusion_model.named_parameters():
-                if "attn2.to_k" in name or "attn2.to_v" in name:
+                if 'attn2.to_k' in name or 'attn2.to_v' in name:
                     params += [param]
                     nCount += 1
-            print(f"Cross attention is unlocked, and {nCount} Wk or Wv are added to potimizers!!!")
+            print(f'Cross attention is unlocked, and {nCount} Wk or Wv are added to potimizers!!!')
 
         opt = torch.optim.AdamW(params, lr=lr)
         return opt

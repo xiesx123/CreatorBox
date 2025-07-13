@@ -1,9 +1,10 @@
-import cv2
-import numpy as np
-import PIL
 import torch
-from iopaint.helper import pad_img_to_modulo
+import PIL
+import cv2
 from PIL import Image
+import numpy as np
+
+from iopaint.helper import pad_img_to_modulo
 
 
 def make_canny_control_image(image: np.ndarray) -> Image:

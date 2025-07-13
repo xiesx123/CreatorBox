@@ -1,12 +1,12 @@
+import PIL.Image
 import cv2
 import numpy as np
-import PIL.Image
 import torch
-from iopaint.const import KANDINSKY22_NAME
-from iopaint.schema import InpaintRequest
 
+from iopaint.const import KANDINSKY22_NAME
 from .base import DiffusionInpaintModel
-from .utils import enable_low_mem, get_torch_dtype, is_local_files_only
+from iopaint.schema import InpaintRequest
+from .utils import get_torch_dtype, enable_low_mem, is_local_files_only
 
 
 class Kandinsky(DiffusionInpaintModel):
@@ -22,7 +22,9 @@ class Kandinsky(DiffusionInpaintModel):
             "torch_dtype": torch_dtype,
             "local_files_only": is_local_files_only(**kwargs),
         }
-        self.model = AutoPipelineForInpainting.from_pretrained(self.name, **model_kwargs).to(device)
+        self.model = AutoPipelineForInpainting.from_pretrained(
+            self.name, **model_kwargs
+        ).to(device)
         enable_low_mem(self.model, kwargs.get("low_mem", False))
 
         self.callback = kwargs.pop("callback", None)

@@ -7,16 +7,15 @@
 from functools import partial
 
 import torch
-from iopaint.plugins.segment_anything.modeling.image_encoder import ImageEncoderViT
-from iopaint.plugins.segment_anything.modeling.mask_decoder import MaskDecoder
-from iopaint.plugins.segment_anything.modeling.prompt_encoder import PromptEncoder
-from iopaint.plugins.segment_anything.modeling.sam import Sam
 from iopaint.plugins.segment_anything.modeling.tiny_vit_sam import TinyViT
-from iopaint.plugins.segment_anything.modeling.transformer import TwoWayTransformer
 
+from .modeling.image_encoder import ImageEncoderViT
 from .modeling.image_encoder_hq import ImageEncoderViTHQ
-from .modeling.mask_decoder import MaskDecoderHQ
+from .modeling.mask_decoder import MaskDecoder, MaskDecoderHQ
+from .modeling.prompt_encoder import PromptEncoder
+from .modeling.sam import Sam
 from .modeling.sam_hq import SamHQ
+from .modeling.transformer import TwoWayTransformer
 
 
 def build_sam_vit_h(checkpoint=None):

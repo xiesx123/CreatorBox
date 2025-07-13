@@ -1,9 +1,10 @@
 import cv2
 import numpy as np
+from loguru import logger
+
 from iopaint.helper import download_model
 from iopaint.plugins.base_plugin import BasePlugin
 from iopaint.schema import RunPluginRequest
-from loguru import logger
 
 
 class GFPGANPlugin(BasePlugin):
@@ -29,7 +30,9 @@ class GFPGANPlugin(BasePlugin):
             bg_upsampler=upscaler.model if upscaler is not None else None,
         )
         self.face_enhancer.face_helper.face_det.mean_tensor.to(device)
-        self.face_enhancer.face_helper.face_det = self.face_enhancer.face_helper.face_det.to(device)
+        self.face_enhancer.face_helper.face_det = (
+            self.face_enhancer.face_helper.face_det.to(device)
+        )
 
     def gen_image(self, rgb_np_img, req: RunPluginRequest) -> np.ndarray:
         weight = 0.5

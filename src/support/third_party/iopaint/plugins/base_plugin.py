@@ -1,6 +1,7 @@
-import numpy as np
-from iopaint.schema import RunPluginRequest
 from loguru import logger
+import numpy as np
+
+from iopaint.schema import RunPluginRequest
 
 
 class BasePlugin:
@@ -22,6 +23,8 @@ class BasePlugin:
         # return GRAY or BGR np image, 255 means foreground, 0 means background
         ...
 
-    def check_dep(self): ...
+    def check_dep(self):
+        ...
 
-    def switch_model(self, new_model_name: str): ...
+    def switch_model(self, new_model_name: str):
+        ...

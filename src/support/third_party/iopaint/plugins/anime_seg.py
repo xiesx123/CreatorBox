@@ -1,19 +1,22 @@
 import cv2
-import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import numpy as np
+from PIL import Image
+
 from iopaint.helper import load_model
 from iopaint.plugins.base_plugin import BasePlugin
 from iopaint.schema import RunPluginRequest
-from PIL import Image
 
 
 class REBNCONV(nn.Module):
     def __init__(self, in_ch=3, out_ch=3, dirate=1, stride=1):
         super(REBNCONV, self).__init__()
 
-        self.conv_s1 = nn.Conv2d(in_ch, out_ch, 3, padding=1 * dirate, dilation=1 * dirate, stride=stride)
+        self.conv_s1 = nn.Conv2d(
+            in_ch, out_ch, 3, padding=1 * dirate, dilation=1 * dirate, stride=stride
+        )
         self.bn_s1 = nn.BatchNorm2d(out_ch)
         self.relu_s1 = nn.ReLU(inplace=True)
 
@@ -448,7 +451,9 @@ class AnimeSeg(BasePlugin):
             h, w = int(s * h / w), s
         ph, pw = s - h, s - w
         tmpImg = np.zeros([s, s, 3], dtype=np.float32)
-        tmpImg[ph // 2 : ph // 2 + h, pw // 2 : pw // 2 + w] = cv2.resize(rgb_np_img, (w, h)) / 255
+        tmpImg[ph // 2 : ph // 2 + h, pw // 2 : pw // 2 + w] = (
+            cv2.resize(rgb_np_img, (w, h)) / 255
+        )
         tmpImg = tmpImg.transpose((2, 0, 1))
         tmpImg = torch.from_numpy(tmpImg).unsqueeze(0).type(torch.FloatTensor)
         mask = self.model(tmpImg)

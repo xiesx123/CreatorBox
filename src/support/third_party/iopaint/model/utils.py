@@ -1,38 +1,49 @@
-import collections
 import gc
 import math
 import random
 import traceback
-from itertools import repeat
 from typing import Any
 
-import numpy as np
 import torch
+import numpy as np
+import collections
+from itertools import repeat
+
 from diffusers import (
     DDIMScheduler,
-    DPMSolverMultistepScheduler,
-    DPMSolverSinglestepScheduler,
-    EulerAncestralDiscreteScheduler,
-    EulerDiscreteScheduler,
-    HeunDiscreteScheduler,
-    KDPM2AncestralDiscreteScheduler,
-    KDPM2DiscreteScheduler,
-    LCMScheduler,
-    LMSDiscreteScheduler,
     PNDMScheduler,
+    LMSDiscreteScheduler,
+    EulerDiscreteScheduler,
+    EulerAncestralDiscreteScheduler,
+    DPMSolverMultistepScheduler,
     UniPCMultistepScheduler,
+    LCMScheduler,
+    DPMSolverSinglestepScheduler,
+    KDPM2DiscreteScheduler,
+    KDPM2AncestralDiscreteScheduler,
+    HeunDiscreteScheduler,
 )
-from iopaint.schema import SDSampler
 from loguru import logger
+
+from iopaint.schema import SDSampler
 from torch import conv2d, conv_transpose2d
 
 
-def make_beta_schedule(device, schedule, n_timestep, linear_start=1e-4, linear_end=2e-2, cosine_s=8e-3):
+def make_beta_schedule(
+    device, schedule, n_timestep, linear_start=1e-4, linear_end=2e-2, cosine_s=8e-3
+):
     if schedule == "linear":
-        betas = torch.linspace(linear_start**0.5, linear_end**0.5, n_timestep, dtype=torch.float64) ** 2
+        betas = (
+            torch.linspace(
+                linear_start**0.5, linear_end**0.5, n_timestep, dtype=torch.float64
+            )
+            ** 2
+        )
 
     elif schedule == "cosine":
-        timesteps = (torch.arange(n_timestep + 1, dtype=torch.float64) / n_timestep + cosine_s).to(device)
+        timesteps = (
+            torch.arange(n_timestep + 1, dtype=torch.float64) / n_timestep + cosine_s
+        ).to(device)
         alphas = timesteps / (1 + cosine_s) * np.pi / 2
         alphas = torch.cos(alphas).pow(2).to(device)
         alphas = alphas / alphas[0]
@@ -40,9 +51,14 @@ def make_beta_schedule(device, schedule, n_timestep, linear_start=1e-4, linear_e
         betas = np.clip(betas, a_min=0, a_max=0.999)
 
     elif schedule == "sqrt_linear":
-        betas = torch.linspace(linear_start, linear_end, n_timestep, dtype=torch.float64)
+        betas = torch.linspace(
+            linear_start, linear_end, n_timestep, dtype=torch.float64
+        )
     elif schedule == "sqrt":
-        betas = torch.linspace(linear_start, linear_end, n_timestep, dtype=torch.float64) ** 0.5
+        betas = (
+            torch.linspace(linear_start, linear_end, n_timestep, dtype=torch.float64)
+            ** 0.5
+        )
     else:
         raise ValueError(f"schedule '{schedule}' unknown.")
     return betas.numpy()
@@ -54,21 +70,34 @@ def make_ddim_sampling_parameters(alphacums, ddim_timesteps, eta, verbose=True):
     alphas_prev = np.asarray([alphacums[0]] + alphacums[ddim_timesteps[:-1]].tolist())
 
     # according the the formula provided in https://arxiv.org/abs/2010.02502
-    sigmas = eta * np.sqrt((1 - alphas_prev) / (1 - alphas) * (1 - alphas / alphas_prev))
+    sigmas = eta * np.sqrt(
+        (1 - alphas_prev) / (1 - alphas) * (1 - alphas / alphas_prev)
+    )
     if verbose:
-        print(f"Selected alphas for ddim sampler: a_t: {alphas}; a_(t-1): {alphas_prev}")
-        print(f"For the chosen value of eta, which is {eta}, " f"this results in the following sigma_t schedule for ddim sampler {sigmas}")
+        print(
+            f"Selected alphas for ddim sampler: a_t: {alphas}; a_(t-1): {alphas_prev}"
+        )
+        print(
+            f"For the chosen value of eta, which is {eta}, "
+            f"this results in the following sigma_t schedule for ddim sampler {sigmas}"
+        )
     return sigmas, alphas, alphas_prev
 
 
-def make_ddim_timesteps(ddim_discr_method, num_ddim_timesteps, num_ddpm_timesteps, verbose=True):
+def make_ddim_timesteps(
+    ddim_discr_method, num_ddim_timesteps, num_ddpm_timesteps, verbose=True
+):
     if ddim_discr_method == "uniform":
         c = num_ddpm_timesteps // num_ddim_timesteps
         ddim_timesteps = np.asarray(list(range(0, num_ddpm_timesteps, c)))
     elif ddim_discr_method == "quad":
-        ddim_timesteps = ((np.linspace(0, np.sqrt(num_ddpm_timesteps * 0.8), num_ddim_timesteps)) ** 2).astype(int)
+        ddim_timesteps = (
+            (np.linspace(0, np.sqrt(num_ddpm_timesteps * 0.8), num_ddim_timesteps)) ** 2
+        ).astype(int)
     else:
-        raise NotImplementedError(f'There is no ddim discretization method called "{ddim_discr_method}"')
+        raise NotImplementedError(
+            f'There is no ddim discretization method called "{ddim_discr_method}"'
+        )
 
     # assert ddim_timesteps.shape[0] == num_ddim_timesteps
     # add one to get the final alpha values right (the ones from first scale to data during sampling)
@@ -79,7 +108,9 @@ def make_ddim_timesteps(ddim_discr_method, num_ddim_timesteps, num_ddpm_timestep
 
 
 def noise_like(shape, device, repeat=False):
-    repeat_noise = lambda: torch.randn((1, *shape[1:]), device=device).repeat(shape[0], *((1,) * (len(shape) - 1)))
+    repeat_noise = lambda: torch.randn((1, *shape[1:]), device=device).repeat(
+        shape[0], *((1,) * (len(shape) - 1))
+    )
     noise = lambda: torch.randn(shape, device=device)
     return repeat_noise() if repeat else noise()
 
@@ -94,7 +125,11 @@ def timestep_embedding(device, timesteps, dim, max_period=10000, repeat_only=Fal
     :return: an [N x dim] Tensor of positional embeddings.
     """
     half = dim // 2
-    freqs = torch.exp(-math.log(max_period) * torch.arange(start=0, end=half, dtype=torch.float32) / half).to(device=device)
+    freqs = torch.exp(
+        -math.log(max_period)
+        * torch.arange(start=0, end=half, dtype=torch.float32)
+        / half
+    ).to(device=device)
 
     args = timesteps[:, None].float() * freqs[None]
 
@@ -108,7 +143,9 @@ def timestep_embedding(device, timesteps, dim, max_period=10000, repeat_only=Fal
 
 
 def normalize_2nd_moment(x, dim=1):
-    return x * (x.square().mean(dim=dim, keepdim=True) + torch.finfo(x.dtype).eps).rsqrt()
+    return (
+        x * (x.square().mean(dim=dim, keepdim=True) + torch.finfo(x.dtype).eps).rsqrt()
+    )
 
 
 class EasyDict(dict):
@@ -158,7 +195,9 @@ def _bias_act_ref(x, b=None, dim=1, act="linear", alpha=None, gain=None, clamp=N
     return x
 
 
-def bias_act(x, b=None, dim=1, act="linear", alpha=None, gain=None, clamp=None, impl="ref"):
+def bias_act(
+    x, b=None, dim=1, act="linear", alpha=None, gain=None, clamp=None, impl="ref"
+):
     r"""Fused bias and activation function.
 
     Adds bias `b` to activation tensor `x`, evaluates activation function `act`,
@@ -190,7 +229,9 @@ def bias_act(x, b=None, dim=1, act="linear", alpha=None, gain=None, clamp=None, 
     """
     assert isinstance(x, torch.Tensor)
     assert impl in ["ref", "cuda"]
-    return _bias_act_ref(x=x, b=b, dim=dim, act=act, alpha=alpha, gain=gain, clamp=clamp)
+    return _bias_act_ref(
+        x=x, b=b, dim=dim, act=act, alpha=alpha, gain=gain, clamp=clamp
+    )
 
 
 def _get_filter_size(f):
@@ -417,7 +458,9 @@ def upfirdn2d(x, f, up=1, down=1, padding=0, flip_filter=False, gain=1, impl="cu
     """
     # assert isinstance(x, torch.Tensor)
     # assert impl in ['ref', 'cuda']
-    return _upfirdn2d_ref(x, f, up=up, down=down, padding=padding, flip_filter=flip_filter, gain=gain)
+    return _upfirdn2d_ref(
+        x, f, up=up, down=down, padding=padding, flip_filter=flip_filter, gain=gain
+    )
 
 
 def _upfirdn2d_ref(x, f, up=1, down=1, padding=0, flip_filter=False, gain=1):
@@ -444,7 +487,9 @@ def _upfirdn2d_ref(x, f, up=1, down=1, padding=0, flip_filter=False, gain=1):
     x = x.reshape([batch_size, num_channels, in_height * upy, in_width * upx])
 
     # Pad or crop.
-    x = torch.nn.functional.pad(x, [max(padx0, 0), max(padx1, 0), max(pady0, 0), max(pady1, 0)])
+    x = torch.nn.functional.pad(
+        x, [max(padx0, 0), max(padx1, 0), max(pady0, 0), max(pady1, 0)]
+    )
     x = x[
         :,
         :,
@@ -508,7 +553,9 @@ def downsample2d(x, f, down=2, padding=0, flip_filter=False, gain=1, impl="cuda"
         pady0 + (fh - downy + 1) // 2,
         pady1 + (fh - downy) // 2,
     ]
-    return upfirdn2d(x, f, down=down, padding=p, flip_filter=flip_filter, gain=gain, impl=impl)
+    return upfirdn2d(
+        x, f, down=down, padding=p, flip_filter=flip_filter, gain=gain, impl=impl
+    )
 
 
 def upsample2d(x, f, up=2, padding=0, flip_filter=False, gain=1, impl="cuda"):
@@ -567,11 +614,17 @@ class MinibatchStdLayer(torch.nn.Module):
 
     def forward(self, x):
         N, C, H, W = x.shape
-        G = torch.min(torch.as_tensor(self.group_size), torch.as_tensor(N)) if self.group_size is not None else N
+        G = (
+            torch.min(torch.as_tensor(self.group_size), torch.as_tensor(N))
+            if self.group_size is not None
+            else N
+        )
         F = self.num_channels
         c = C // F
 
-        y = x.reshape(G, -1, F, c, H, W)  # [GnFcHW] Split minibatch N into n groups of size G, and channels C into F groups of size c.
+        y = x.reshape(
+            G, -1, F, c, H, W
+        )  # [GnFcHW] Split minibatch N into n groups of size G, and channels C into F groups of size c.
         y = y - y.mean(dim=0)  # [GnFcHW] Subtract mean over group.
         y = y.square().mean(dim=0)  # [nFcHW]  Calc variance over group.
         y = (y + 1e-8).sqrt()  # [nFcHW]  Calc stddev over group.
@@ -593,8 +646,14 @@ class FullyConnectedLayer(torch.nn.Module):
         bias_init=0,  # Initial value for the additive bias.
     ):
         super().__init__()
-        self.weight = torch.nn.Parameter(torch.randn([out_features, in_features]) / lr_multiplier)
-        self.bias = torch.nn.Parameter(torch.full([out_features], np.float32(bias_init))) if bias else None
+        self.weight = torch.nn.Parameter(
+            torch.randn([out_features, in_features]) / lr_multiplier
+        )
+        self.bias = (
+            torch.nn.Parameter(torch.full([out_features], np.float32(bias_init)))
+            if bias
+            else None
+        )
         self.activation = activation
 
         self.weight_gain = lr_multiplier / np.sqrt(in_features)
@@ -616,21 +675,33 @@ class FullyConnectedLayer(torch.nn.Module):
         return out
 
 
-def _conv2d_wrapper(x, w, stride=1, padding=0, groups=1, transpose=False, flip_weight=True):
+def _conv2d_wrapper(
+    x, w, stride=1, padding=0, groups=1, transpose=False, flip_weight=True
+):
     """Wrapper for the underlying `conv2d()` and `conv_transpose2d()` implementations."""
     out_channels, in_channels_per_group, kh, kw = _get_weight_shape(w)
 
     # Flip weight if requested.
-    if not flip_weight:  # conv2d() actually performs correlation (flip_weight=True) not convolution (flip_weight=False).
+    if (
+        not flip_weight
+    ):  # conv2d() actually performs correlation (flip_weight=True) not convolution (flip_weight=False).
         w = w.flip([2, 3])
 
     # Workaround performance pitfall in cuDNN 8.0.5, triggered when using
     # 1x1 kernel + memory_format=channels_last + less than 64 channels.
-    if kw == 1 and kh == 1 and stride == 1 and padding in [0, [0, 0], (0, 0)] and not transpose:
+    if (
+        kw == 1
+        and kh == 1
+        and stride == 1
+        and padding in [0, [0, 0], (0, 0)]
+        and not transpose
+    ):
         if x.stride()[1] == 1 and min(out_channels, in_channels_per_group) < 64:
             if out_channels <= 4 and groups == 1:
                 in_shape = x.shape
-                x = w.squeeze(3).squeeze(2) @ x.reshape([in_shape[0], in_channels_per_group, -1])
+                x = w.squeeze(3).squeeze(2) @ x.reshape(
+                    [in_shape[0], in_channels_per_group, -1]
+                )
                 x = x.reshape([in_shape[0], out_channels, in_shape[2], in_shape[3]])
             else:
                 x = x.to(memory_format=torch.contiguous_format)
@@ -643,7 +714,9 @@ def _conv2d_wrapper(x, w, stride=1, padding=0, groups=1, transpose=False, flip_w
     return op(x, w, stride=stride, padding=padding, groups=groups)
 
 
-def conv2d_resample(x, w, f=None, up=1, down=1, padding=0, groups=1, flip_weight=True, flip_filter=False):
+def conv2d_resample(
+    x, w, f=None, up=1, down=1, padding=0, groups=1, flip_weight=True, flip_filter=False
+):
     r"""2D convolution with optional up/downsampling.
 
     Padding is performed only once at the beginning, not between the operations.
@@ -693,7 +766,9 @@ def conv2d_resample(x, w, f=None, up=1, down=1, padding=0, groups=1, flip_weight
 
     # Fast path: 1x1 convolution with downsampling only => downsample first, then convolve.
     if kw == 1 and kh == 1 and (down > 1 and up == 1):
-        x = upfirdn2d(x=x, f=f, down=down, padding=[px0, px1, py0, py1], flip_filter=flip_filter)
+        x = upfirdn2d(
+            x=x, f=f, down=down, padding=[px0, px1, py0, py1], flip_filter=flip_filter
+        )
         x = _conv2d_wrapper(x=x, w=w, groups=groups, flip_weight=flip_weight)
         return x
 
@@ -713,7 +788,9 @@ def conv2d_resample(x, w, f=None, up=1, down=1, padding=0, groups=1, flip_weight
     # Fast path: downsampling only => use strided convolution.
     if down > 1 and up == 1:
         x = upfirdn2d(x=x, f=f, padding=[px0, px1, py0, py1], flip_filter=flip_filter)
-        x = _conv2d_wrapper(x=x, w=w, stride=down, groups=groups, flip_weight=flip_weight)
+        x = _conv2d_wrapper(
+            x=x, w=w, stride=down, groups=groups, flip_weight=flip_weight
+        )
         return x
 
     # Fast path: upsampling with optional downsampling => use transpose strided convolution.
@@ -723,7 +800,9 @@ def conv2d_resample(x, w, f=None, up=1, down=1, padding=0, groups=1, flip_weight
         else:
             w = w.reshape(groups, out_channels // groups, in_channels_per_group, kh, kw)
             w = w.transpose(1, 2)
-            w = w.reshape(groups * in_channels_per_group, out_channels // groups, kh, kw)
+            w = w.reshape(
+                groups * in_channels_per_group, out_channels // groups, kh, kw
+            )
         px0 -= kw - 1
         px1 -= kw - up
         py0 -= kh - 1
@@ -753,7 +832,9 @@ def conv2d_resample(x, w, f=None, up=1, down=1, padding=0, groups=1, flip_weight
     # Fast path: no up/downsampling, padding supported by the underlying implementation => use plain conv2d.
     if up == 1 and down == 1:
         if px0 == px1 and py0 == py1 and px0 >= 0 and py0 >= 0:
-            return _conv2d_wrapper(x=x, w=w, padding=[py0, px0], groups=groups, flip_weight=flip_weight)
+            return _conv2d_wrapper(
+                x=x, w=w, padding=[py0, px0], groups=groups, flip_weight=flip_weight
+            )
 
     # Fallback: Generic reference implementation.
     x = upfirdn2d(
@@ -800,8 +881,12 @@ class Conv2dLayer(torch.nn.Module):
         self.weight_gain = 1 / np.sqrt(in_channels * (kernel_size**2))
         self.act_gain = activation_funcs[activation].def_gain
 
-        memory_format = torch.channels_last if channels_last else torch.contiguous_format
-        weight = torch.randn([out_channels, in_channels, kernel_size, kernel_size]).to(memory_format=memory_format)
+        memory_format = (
+            torch.channels_last if channels_last else torch.contiguous_format
+        )
+        weight = torch.randn([out_channels, in_channels, kernel_size, kernel_size]).to(
+            memory_format=memory_format
+        )
         bias = torch.zeros([out_channels]) if bias else None
         if trainable:
             self.weight = torch.nn.Parameter(weight)
@@ -826,7 +911,9 @@ class Conv2dLayer(torch.nn.Module):
 
         act_gain = self.act_gain * gain
         act_clamp = self.conv_clamp * gain if self.conv_clamp is not None else None
-        out = bias_act(x, self.bias, act=self.activation, gain=act_gain, clamp=act_clamp)
+        out = bias_act(
+            x, self.bias, act=self.activation, gain=act_gain, clamp=act_clamp
+        )
         return out
 
 
@@ -908,7 +995,11 @@ def handle_from_pretrained_exceptions(func, **kwargs):
             logger.info("revision=fp16 not found, try revision=main")
             return func(**{**kwargs, "variant": None, "revision": "main"})
         elif "Max retries exceeded" in previous_traceback:
-            logger.exception("Fetching model from HuggingFace failed. " "If this is your first time downloading the model, you may need to set up proxy in terminal." "If the model has already been downloaded, you can add --local-files-only when starting.")
+            logger.exception(
+                "Fetching model from HuggingFace failed. "
+                "If this is your first time downloading the model, you may need to set up proxy in terminal."
+                "If the model has already been downloaded, you can add --local-files-only when starting."
+            )
             exit(-1)
         raise e
     except Exception as e:

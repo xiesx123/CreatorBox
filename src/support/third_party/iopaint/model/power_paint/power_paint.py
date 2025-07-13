@@ -1,19 +1,19 @@
-import cv2
 import PIL.Image
+import cv2
 import torch
-from iopaint.schema import InpaintRequest
 from loguru import logger
 
-from ...const import POWERPAINT_NAME
 from ..base import DiffusionInpaintModel
 from ..helper.cpu_text_encoder import CPUTextEncoderWrapper
 from ..utils import (
-    enable_low_mem,
-    get_torch_dtype,
     handle_from_pretrained_exceptions,
+    get_torch_dtype,
+    enable_low_mem,
     is_local_files_only,
 )
+from iopaint.schema import InpaintRequest
 from .powerpaint_tokenizer import add_task_to_prompt
+from ...const import POWERPAINT_NAME
 
 
 class PowerPaint(DiffusionInpaintModel):
@@ -56,7 +56,9 @@ class PowerPaint(DiffusionInpaintModel):
             self.model = self.model.to(device)
             if kwargs["sd_cpu_textencoder"]:
                 logger.info("Run Stable Diffusion TextEncoder on CPU")
-                self.model.text_encoder = CPUTextEncoderWrapper(self.model.text_encoder, torch_dtype)
+                self.model.text_encoder = CPUTextEncoderWrapper(
+                    self.model.text_encoder, torch_dtype
+                )
 
         self.callback = kwargs.pop("callback", None)
 
@@ -69,7 +71,9 @@ class PowerPaint(DiffusionInpaintModel):
         self.set_scheduler(config)
 
         img_h, img_w = image.shape[:2]
-        promptA, promptB, negative_promptA, negative_promptB = add_task_to_prompt(config.prompt, config.negative_prompt, config.powerpaint_task)
+        promptA, promptB, negative_promptA, negative_promptB = add_task_to_prompt(
+            config.prompt, config.negative_prompt, config.powerpaint_task
+        )
 
         output = self.model(
             image=PIL.Image.fromarray(image),

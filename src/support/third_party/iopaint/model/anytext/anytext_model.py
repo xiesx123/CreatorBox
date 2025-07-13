@@ -1,5 +1,6 @@
 import torch
 from huggingface_hub import hf_hub_download
+
 from iopaint.const import ANYTEXT_NAME
 from iopaint.model.anytext.anytext_pipeline import AnyTextPipeline
 from iopaint.model.base import DiffusionInpaintModel
@@ -54,6 +55,19 @@ class AnyText(DiffusionInpaintModel):
         masked_image = image * (1 - mask)
 
         # list of rgb ndarray
-        results, rtn_code, rtn_warning = self.model(image=image, masked_image=masked_image, prompt=config.prompt, negative_prompt=config.negative_prompt, num_inference_steps=config.sd_steps, strength=config.sd_strength, guidance_scale=config.sd_guidance_scale, height=height, width=width, seed=config.sd_seed, sort_priority="y", callback=self.callback)
+        results, rtn_code, rtn_warning = self.model(
+            image=image,
+            masked_image=masked_image,
+            prompt=config.prompt,
+            negative_prompt=config.negative_prompt,
+            num_inference_steps=config.sd_steps,
+            strength=config.sd_strength,
+            guidance_scale=config.sd_guidance_scale,
+            height=height,
+            width=width,
+            seed=config.sd_seed,
+            sort_priority="y",
+            callback=self.callback
+        )
         inpainted_rgb_image = results[0][..., ::-1]
         return inpainted_rgb_image

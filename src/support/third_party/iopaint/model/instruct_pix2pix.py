@@ -1,12 +1,12 @@
-import cv2
 import PIL.Image
+import cv2
 import torch
-from iopaint.const import INSTRUCT_PIX2PIX_NAME
-from iopaint.schema import InpaintRequest
 from loguru import logger
 
+from iopaint.const import INSTRUCT_PIX2PIX_NAME
 from .base import DiffusionInpaintModel
-from .utils import enable_low_mem, get_torch_dtype, is_local_files_only
+from iopaint.schema import InpaintRequest
+from .utils import get_torch_dtype, enable_low_mem, is_local_files_only
 
 
 class InstructPix2Pix(DiffusionInpaintModel):
@@ -30,7 +30,9 @@ class InstructPix2Pix(DiffusionInpaintModel):
                 )
             )
 
-        self.model = StableDiffusionInstructPix2PixPipeline.from_pretrained(self.name, variant="fp16", torch_dtype=torch_dtype, **model_kwargs)
+        self.model = StableDiffusionInstructPix2PixPipeline.from_pretrained(
+            self.name, variant="fp16", torch_dtype=torch_dtype, **model_kwargs
+        )
         enable_low_mem(self.model, kwargs.get("low_mem", False))
 
         if kwargs.get("cpu_offload", False) and use_gpu:

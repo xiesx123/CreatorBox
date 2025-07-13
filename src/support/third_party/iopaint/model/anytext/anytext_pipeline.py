@@ -4,7 +4,6 @@ Paper: https://arxiv.org/abs/2311.03054
 Code: https://github.com/tyxsspa/AnyText
 Copyright (c) Alibaba, Inc. and its affiliates.
 """
-
 import os
 from pathlib import Path
 
@@ -12,22 +11,28 @@ from iopaint.model.utils import set_seed
 from safetensors.torch import load_file
 
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+import torch
 import re
-
+import numpy as np
 import cv2
 import einops
-import numpy as np
-import torch
-from iopaint.model.anytext.cldm.ddim_hacked import DDIMSampler
-from iopaint.model.anytext.cldm.model import create_model, load_state_dict
-from iopaint.model.anytext.utils import check_channels, draw_glyph, draw_glyph2
 from PIL import ImageFont
+from iopaint.model.anytext.cldm.model import create_model, load_state_dict
+from iopaint.model.anytext.cldm.ddim_hacked import DDIMSampler
+from iopaint.model.anytext.utils import (
+    check_channels,
+    draw_glyph,
+    draw_glyph2,
+)
+
 
 BBOX_MAX_NUM = 8
 PLACE_HOLDER = "*"
 max_chars = 20
 
-ANYTEXT_CFG = os.path.join(os.path.dirname(os.path.abspath(__file__)), "anytext_sd15.yaml")
+ANYTEXT_CFG = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "anytext_sd15.yaml"
+)
 
 
 def check_limits(tensor):
@@ -138,7 +143,9 @@ class AnyTextPipeline:
             elif isinstance(image, torch.Tensor):
                 image = image.cpu().numpy()
             else:
-                assert isinstance(image, np.ndarray), f"Unknown format of ori_image: {type(image)}"
+                assert isinstance(
+                    image, np.ndarray
+                ), f"Unknown format of ori_image: {type(image)}"
             edit_image = image.clip(1, 255)  # for mask reason
             edit_image = check_channels(edit_image)
             # edit_image = resize_image(
@@ -150,12 +157,16 @@ class AnyTextPipeline:
             pos_imgs = np.zeros((w, h, 1))
         if isinstance(masked_image, str):
             masked_image = cv2.imread(masked_image)[..., ::-1]
-            assert masked_image is not None, f"Can't read draw_pos image from{masked_image}!"
+            assert (
+                masked_image is not None
+            ), f"Can't read draw_pos image from{masked_image}!"
             pos_imgs = 255 - masked_image
         elif isinstance(masked_image, torch.Tensor):
             pos_imgs = masked_image.cpu().numpy()
         else:
-            assert isinstance(masked_image, np.ndarray), f"Unknown format of draw_pos: {type(masked_image)}"
+            assert isinstance(
+                masked_image, np.ndarray
+            ), f"Unknown format of draw_pos: {type(masked_image)}"
             pos_imgs = 255 - masked_image
         pos_imgs = pos_imgs[..., 0:1]
         pos_imgs = cv2.convertScaleAbs(pos_imgs)
@@ -168,7 +179,9 @@ class AnyTextPipeline:
             if n_lines == 1 and texts[0] == " ":
                 pass  # text-to-image without text
             else:
-                raise RuntimeError(f"{n_lines} text line to draw from prompt, not enough mask area({len(pos_imgs)}) on images")
+                raise RuntimeError(
+                    f"{n_lines} text line to draw from prompt, not enough mask area({len(pos_imgs)}) on images"
+                )
         elif len(pos_imgs) > n_lines:
             str_warning = f"Warning: found {len(pos_imgs)} positions that > needed {n_lines} from prompt."
         # get pre_pos, poly_list, hint that needed for anytext
@@ -176,7 +189,11 @@ class AnyTextPipeline:
         poly_list = []
         for input_pos in pos_imgs:
             if input_pos.mean() != 0:
-                input_pos = input_pos[..., np.newaxis] if len(input_pos.shape) == 2 else input_pos
+                input_pos = (
+                    input_pos[..., np.newaxis]
+                    if len(input_pos.shape) == 2
+                    else input_pos
+                )
                 poly, pos_img = self.find_polygon(input_pos)
                 pre_pos += [pos_img / 255.0]
                 poly_list += [poly]
@@ -194,7 +211,9 @@ class AnyTextPipeline:
         for i in range(len(texts)):
             text = texts[i]
             if len(text) > max_chars:
-                str_warning = f'"{text}" length > max_chars: {max_chars}, will be cut off...'
+                str_warning = (
+                    f'"{text}" length > max_chars: {max_chars}, will be cut off...'
+                )
                 text = text[:max_chars]
             gly_scale = 2
             if pre_pos[i].mean() != 0:
@@ -208,9 +227,13 @@ class AnyTextPipeline:
                     height=h,
                     add_space=False,
                 )
-                gly_pos_img = cv2.drawContours(glyphs * 255, [poly_list[i] * gly_scale], 0, (255, 255, 255), 1)
+                gly_pos_img = cv2.drawContours(
+                    glyphs * 255, [poly_list[i] * gly_scale], 0, (255, 255, 255), 1
+                )
                 if revise_pos:
-                    resize_gly = cv2.resize(glyphs, (pre_pos[i].shape[1], pre_pos[i].shape[0]))
+                    resize_gly = cv2.resize(
+                        glyphs, (pre_pos[i].shape[1], pre_pos[i].shape[0])
+                    )
                     new_pos = cv2.morphologyEx(
                         (resize_gly * 255).astype(np.uint8),
                         cv2.MORPH_CLOSE,
@@ -220,20 +243,30 @@ class AnyTextPipeline:
                         ),
                         iterations=1,
                     )
-                    new_pos = new_pos[..., np.newaxis] if len(new_pos.shape) == 2 else new_pos
-                    contours, _ = cv2.findContours(new_pos, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+                    new_pos = (
+                        new_pos[..., np.newaxis] if len(new_pos.shape) == 2 else new_pos
+                    )
+                    contours, _ = cv2.findContours(
+                        new_pos, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE
+                    )
                     if len(contours) != 1:
                         str_warning = f"Fail to revise position {i} to bounding rect, remain position unchanged..."
                     else:
                         rect = cv2.minAreaRect(contours[0])
                         poly = np.int0(cv2.boxPoints(rect))
-                        pre_pos[i] = cv2.drawContours(new_pos, [poly], -1, 255, -1) / 255.0
-                        gly_pos_img = cv2.drawContours(glyphs * 255, [poly * gly_scale], 0, (255, 255, 255), 1)
+                        pre_pos[i] = (
+                            cv2.drawContours(new_pos, [poly], -1, 255, -1) / 255.0
+                        )
+                        gly_pos_img = cv2.drawContours(
+                            glyphs * 255, [poly * gly_scale], 0, (255, 255, 255), 1
+                        )
                 gly_pos_imgs += [gly_pos_img]  # for show
             else:
                 glyphs = np.zeros((h * gly_scale, w * gly_scale, 1))
                 gly_line = np.zeros((80, 512, 1))
-                gly_pos_imgs += [np.zeros((h * gly_scale, w * gly_scale, 1))]  # for show
+                gly_pos_imgs += [
+                    np.zeros((h * gly_scale, w * gly_scale, 1))
+                ]  # for show
             pos = pre_pos[i]
             info["glyphs"] += [self.arr2tensor(glyphs, img_count)]
             info["gly_line"] += [self.arr2tensor(gly_line, img_count)]
@@ -267,11 +300,27 @@ class AnyTextPipeline:
         )
         shape = (4, h // 8, w // 8)
         self.model.control_scales = [strength] * 13
-        samples, intermediates = self.ddim_sampler.sample(ddim_steps, img_count, shape, cond, verbose=False, eta=eta, unconditional_guidance_scale=cfg_scale, unconditional_conditioning=un_cond, callback=callback)
+        samples, intermediates = self.ddim_sampler.sample(
+            ddim_steps,
+            img_count,
+            shape,
+            cond,
+            verbose=False,
+            eta=eta,
+            unconditional_guidance_scale=cfg_scale,
+            unconditional_conditioning=un_cond,
+            callback=callback
+        )
         if self.use_fp16:
             samples = samples.half()
         x_samples = self.model.decode_first_stage(samples)
-        x_samples = (einops.rearrange(x_samples, "b c h w -> b h w c") * 127.5 + 127.5).cpu().numpy().clip(0, 255).astype(np.uint8)
+        x_samples = (
+            (einops.rearrange(x_samples, "b c h w -> b h w c") * 127.5 + 127.5)
+            .cpu()
+            .numpy()
+            .clip(0, 255)
+            .astype(np.uint8)
+        )
         results = [x_samples[i] for i in range(img_count)]
         # if (
         #     mode == "edit" and False
@@ -328,7 +377,9 @@ class AnyTextPipeline:
         return sorted_components
 
     def find_polygon(self, image, min_rect=False):
-        contours, hierarchy = cv2.findContours(image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+        contours, hierarchy = cv2.findContours(
+            image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE
+        )
         max_contour = max(contours, key=cv2.contourArea)  # get contour with max area
         if min_rect:
             # get minimum enclosing rectangle

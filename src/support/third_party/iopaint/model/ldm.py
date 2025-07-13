@@ -2,41 +2,49 @@ import os
 
 import numpy as np
 import torch
-from iopaint.schema import InpaintRequest, LDMSampler
 
 from .base import InpaintModel
 from .ddim_sampler import DDIMSampler
 from .plms_sampler import PLMSSampler
+from iopaint.schema import InpaintRequest, LDMSampler
 
 torch.manual_seed(42)
 import torch.nn as nn
 from iopaint.helper import (
     download_model,
+    norm_img,
     get_cache_path_by_url,
     load_jit_model,
-    norm_img,
 )
-
-from .utils import make_beta_schedule, timestep_embedding
+from .utils import (
+    make_beta_schedule,
+    timestep_embedding,
+)
 
 LDM_ENCODE_MODEL_URL = os.environ.get(
     "LDM_ENCODE_MODEL_URL",
     "https://github.com/Sanster/models/releases/download/add_ldm/cond_stage_model_encode.pt",
 )
-LDM_ENCODE_MODEL_MD5 = os.environ.get("LDM_ENCODE_MODEL_MD5", "23239fc9081956a3e70de56472b3f296")
+LDM_ENCODE_MODEL_MD5 = os.environ.get(
+    "LDM_ENCODE_MODEL_MD5", "23239fc9081956a3e70de56472b3f296"
+)
 
 LDM_DECODE_MODEL_URL = os.environ.get(
     "LDM_DECODE_MODEL_URL",
     "https://github.com/Sanster/models/releases/download/add_ldm/cond_stage_model_decode.pt",
 )
-LDM_DECODE_MODEL_MD5 = os.environ.get("LDM_DECODE_MODEL_MD5", "fe419cd15a750d37a4733589d0d3585c")
+LDM_DECODE_MODEL_MD5 = os.environ.get(
+    "LDM_DECODE_MODEL_MD5", "fe419cd15a750d37a4733589d0d3585c"
+)
 
 LDM_DIFFUSION_MODEL_URL = os.environ.get(
     "LDM_DIFFUSION_MODEL_URL",
     "https://github.com/Sanster/models/releases/download/add_ldm/diffusion.pt",
 )
 
-LDM_DIFFUSION_MODEL_MD5 = os.environ.get("LDM_DIFFUSION_MODEL_MD5", "b0afda12bf790c03aba2a7431f11d22d")
+LDM_DIFFUSION_MODEL_MD5 = os.environ.get(
+    "LDM_DIFFUSION_MODEL_MD5", "b0afda12bf790c03aba2a7431f11d22d"
+)
 
 
 class DDPM(nn.Module):
@@ -97,7 +105,9 @@ class DDPM(nn.Module):
         self.num_timesteps = int(timesteps)
         self.linear_start = linear_start
         self.linear_end = linear_end
-        assert alphas_cumprod.shape[0] == self.num_timesteps, "alphas have to be defined for each timestep"
+        assert (
+            alphas_cumprod.shape[0] == self.num_timesteps
+        ), "alphas have to be defined for each timestep"
 
         to_torch = lambda x: torch.tensor(x, dtype=torch.float32).to(self.device)
 
@@ -107,13 +117,23 @@ class DDPM(nn.Module):
 
         # calculations for diffusion q(x_t | x_{t-1}) and others
         self.register_buffer("sqrt_alphas_cumprod", to_torch(np.sqrt(alphas_cumprod)))
-        self.register_buffer("sqrt_one_minus_alphas_cumprod", to_torch(np.sqrt(1.0 - alphas_cumprod)))
-        self.register_buffer("log_one_minus_alphas_cumprod", to_torch(np.log(1.0 - alphas_cumprod)))
-        self.register_buffer("sqrt_recip_alphas_cumprod", to_torch(np.sqrt(1.0 / alphas_cumprod)))
-        self.register_buffer("sqrt_recipm1_alphas_cumprod", to_torch(np.sqrt(1.0 / alphas_cumprod - 1)))
+        self.register_buffer(
+            "sqrt_one_minus_alphas_cumprod", to_torch(np.sqrt(1.0 - alphas_cumprod))
+        )
+        self.register_buffer(
+            "log_one_minus_alphas_cumprod", to_torch(np.log(1.0 - alphas_cumprod))
+        )
+        self.register_buffer(
+            "sqrt_recip_alphas_cumprod", to_torch(np.sqrt(1.0 / alphas_cumprod))
+        )
+        self.register_buffer(
+            "sqrt_recipm1_alphas_cumprod", to_torch(np.sqrt(1.0 / alphas_cumprod - 1))
+        )
 
         # calculations for posterior q(x_{t-1} | x_t, x_0)
-        posterior_variance = (1 - self.v_posterior) * betas * (1.0 - alphas_cumprod_prev) / (1.0 - alphas_cumprod) + self.v_posterior * betas
+        posterior_variance = (1 - self.v_posterior) * betas * (
+            1.0 - alphas_cumprod_prev
+        ) / (1.0 - alphas_cumprod) + self.v_posterior * betas
         # above: equal to 1. / (1. / (1. - alpha_cumprod_tm1) + alpha_t / beta_t)
         self.register_buffer("posterior_variance", to_torch(posterior_variance))
         # below: log calculation clipped because the posterior variance is 0 at the beginning of the diffusion chain
@@ -127,13 +147,24 @@ class DDPM(nn.Module):
         )
         self.register_buffer(
             "posterior_mean_coef2",
-            to_torch((1.0 - alphas_cumprod_prev) * np.sqrt(alphas) / (1.0 - alphas_cumprod)),
+            to_torch(
+                (1.0 - alphas_cumprod_prev) * np.sqrt(alphas) / (1.0 - alphas_cumprod)
+            ),
         )
 
         if self.parameterization == "eps":
-            lvlb_weights = self.betas**2 / (2 * self.posterior_variance * to_torch(alphas) * (1 - self.alphas_cumprod))
+            lvlb_weights = self.betas**2 / (
+                2
+                * self.posterior_variance
+                * to_torch(alphas)
+                * (1 - self.alphas_cumprod)
+            )
         elif self.parameterization == "x0":
-            lvlb_weights = 0.5 * np.sqrt(torch.Tensor(alphas_cumprod)) / (2.0 * 1 - torch.Tensor(alphas_cumprod))
+            lvlb_weights = (
+                0.5
+                * np.sqrt(torch.Tensor(alphas_cumprod))
+                / (2.0 * 1 - torch.Tensor(alphas_cumprod))
+            )
         else:
             raise NotImplementedError("mu not supported")
         # TODO how to choose this term
@@ -173,7 +204,9 @@ class LatentDiffusion(DDPM):
             fill_value=self.num_timesteps - 1,
             dtype=torch.long,
         )
-        ids = torch.round(torch.linspace(0, self.num_timesteps - 1, self.num_timesteps_cond)).long()
+        ids = torch.round(
+            torch.linspace(0, self.num_timesteps - 1, self.num_timesteps_cond)
+        ).long()
         self.cond_ids[: self.num_timesteps_cond] = ids
 
     def register_schedule(
@@ -185,7 +218,9 @@ class LatentDiffusion(DDPM):
         linear_end=2e-2,
         cosine_s=8e-3,
     ):
-        super().register_schedule(given_betas, beta_schedule, timesteps, linear_start, linear_end, cosine_s)
+        super().register_schedule(
+            given_betas, beta_schedule, timesteps, linear_start, linear_end, cosine_s
+        )
 
         self.shorten_cond_schedule = self.num_timesteps_cond > 1
         if self.shorten_cond_schedule:
@@ -209,9 +244,15 @@ class LDM(InpaintModel):
         self.device = device
 
     def init_model(self, device, **kwargs):
-        self.diffusion_model = load_jit_model(LDM_DIFFUSION_MODEL_URL, device, LDM_DIFFUSION_MODEL_MD5)
-        self.cond_stage_model_decode = load_jit_model(LDM_DECODE_MODEL_URL, device, LDM_DECODE_MODEL_MD5)
-        self.cond_stage_model_encode = load_jit_model(LDM_ENCODE_MODEL_URL, device, LDM_ENCODE_MODEL_MD5)
+        self.diffusion_model = load_jit_model(
+            LDM_DIFFUSION_MODEL_URL, device, LDM_DIFFUSION_MODEL_MD5
+        )
+        self.cond_stage_model_decode = load_jit_model(
+            LDM_DECODE_MODEL_URL, device, LDM_DECODE_MODEL_MD5
+        )
+        self.cond_stage_model_encode = load_jit_model(
+            LDM_ENCODE_MODEL_URL, device, LDM_ENCODE_MODEL_MD5
+        )
         if self.fp16 and "cuda" in str(device):
             self.diffusion_model = self.diffusion_model.half()
             self.cond_stage_model_decode = self.cond_stage_model_decode.half()
@@ -234,7 +275,7 @@ class LDM(InpaintModel):
         ]
         return all([os.path.exists(it) for it in model_paths])
 
-    @torch.amp.autocast("cuda")
+    @torch.cuda.amp.autocast()
     def forward(self, image, mask, config: InpaintRequest):
         """
         image: [H, W, C] RGB
@@ -272,9 +313,13 @@ class LDM(InpaintModel):
         c = torch.cat((c, cc), dim=1)  # 1,4,128,128
 
         shape = (c.shape[1] - 1,) + c.shape[2:]
-        samples_ddim = sampler.sample(steps=steps, conditioning=c, batch_size=c.shape[0], shape=shape)
+        samples_ddim = sampler.sample(
+            steps=steps, conditioning=c, batch_size=c.shape[0], shape=shape
+        )
         torch.cuda.empty_cache()
-        x_samples_ddim = self.cond_stage_model_decode(samples_ddim)  # samples_ddim: 1, 3, 128, 128 float32
+        x_samples_ddim = self.cond_stage_model_decode(
+            samples_ddim
+        )  # samples_ddim: 1, 3, 128, 128 float32
         torch.cuda.empty_cache()
 
         # image = torch.clamp((image + 1.0) / 2.0, min=0.0, max=1.0)

@@ -1,12 +1,12 @@
 import os
-
 import cv2
 import numpy as np
-import torch
-from iopaint.plugins.base_plugin import BasePlugin
-from iopaint.schema import Device, RemoveBGModel, RunPluginRequest
 from loguru import logger
+import torch
 from torch.hub import get_dir
+
+from iopaint.plugins.base_plugin import BasePlugin
+from iopaint.schema import Device, RunPluginRequest, RemoveBGModel
 
 
 def _rmbg_remove(device, *args, **kwargs):
@@ -29,7 +29,9 @@ class RemoveBG(BasePlugin):
             import rembg
 
             if rembg.__version__ < "2.0.59":
-                raise ValueError("To use birefnet models, please upgrade rembg to >= 2.0.59. pip install -U rembg")
+                raise ValueError(
+                    "To use birefnet models, please upgrade rembg to >= 2.0.59. pip install -U rembg"
+                )
 
         hub_dir = get_dir()
         model_dir = os.path.join(hub_dir, "checkpoints")
@@ -42,16 +44,16 @@ class RemoveBG(BasePlugin):
 
         if model_name == RemoveBGModel.briaai_rmbg_1_4:
             from iopaint.plugins.briarmbg import (
-                briarmbg_process,
                 create_briarmbg_session,
+                briarmbg_process,
             )
 
             self.session = create_briarmbg_session().to(self.device)
             self.remove = briarmbg_process
         elif model_name == RemoveBGModel.briaai_rmbg_2_0:
             from iopaint.plugins.briarmbg2 import (
-                briarmbg2_process,
                 create_briarmbg2_session,
+                briarmbg2_process,
             )
 
             self.session = create_briarmbg2_session().to(self.device)
@@ -66,7 +68,9 @@ class RemoveBG(BasePlugin):
         if self.model_name == new_model_name:
             return
 
-        logger.info(f"Switching removebg model from {self.model_name} to {new_model_name}")
+        logger.info(
+            f"Switching removebg model from {self.model_name} to {new_model_name}"
+        )
         self._init_session(new_model_name)
         self.model_name = new_model_name
 
@@ -83,7 +87,9 @@ class RemoveBG(BasePlugin):
         bgr_np_img = cv2.cvtColor(rgb_np_img, cv2.COLOR_RGB2BGR)
 
         # return BGR image, 255 means foreground, 0 means background
-        output = self.remove(self.device, bgr_np_img, session=self.session, only_mask=True)
+        output = self.remove(
+            self.device, bgr_np_img, session=self.session, only_mask=True
+        )
         return output
 
     def check_dep(self):
@@ -100,4 +106,6 @@ class RemoveBG(BasePlugin):
             RemoveBGModel.briaai_rmbg_1_4,
             RemoveBGModel.briaai_rmbg_2_0,
         ]:
-            logger.warning(f"remove_bg_device=cuda only supports briaai models({RemoveBGModel.briaai_rmbg_1_4.value}/{RemoveBGModel.briaai_rmbg_2_0.value})")
+            logger.warning(
+                f"remove_bg_device=cuda only supports briaai models({RemoveBGModel.briaai_rmbg_1_4.value}/{RemoveBGModel.briaai_rmbg_2_0.value})"
+            )

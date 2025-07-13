@@ -1,24 +1,24 @@
-import cv2
 import PIL.Image
+import cv2
 import torch
 from diffusers import ControlNetModel
-from iopaint.schema import InpaintRequest, ModelType
 from loguru import logger
+from iopaint.schema import InpaintRequest, ModelType
 
 from .base import DiffusionInpaintModel
 from .helper.controlnet_preprocess import (
     make_canny_control_image,
+    make_openpose_control_image,
     make_depth_control_image,
     make_inpaint_control_image,
-    make_openpose_control_image,
 )
 from .helper.cpu_text_encoder import CPUTextEncoderWrapper
 from .original_sd_configs import get_config_files
 from .utils import (
-    enable_low_mem,
     get_scheduler,
-    get_torch_dtype,
     handle_from_pretrained_exceptions,
+    get_torch_dtype,
+    enable_low_mem,
     is_local_files_only,
 )
 
@@ -55,7 +55,9 @@ class ControlNet(DiffusionInpaintModel):
         }
         self.local_files_only = model_kwargs["local_files_only"]
 
-        disable_nsfw_checker = kwargs["disable_nsfw"] or kwargs.get("cpu_offload", False)
+        disable_nsfw_checker = kwargs["disable_nsfw"] or kwargs.get(
+            "cpu_offload", False
+        )
         if disable_nsfw_checker:
             logger.info("Disable Stable Diffusion Model NSFW checker")
             model_kwargs.update(
@@ -74,7 +76,9 @@ class ControlNet(DiffusionInpaintModel):
             ModelType.DIFFUSERS_SD,
             ModelType.DIFFUSERS_SD_INPAINT,
         ]:
-            from diffusers import StableDiffusionControlNetInpaintPipeline as PipeClass
+            from diffusers import (
+                StableDiffusionControlNetInpaintPipeline as PipeClass,
+            )
 
             original_config_file_name = "v1"
 
@@ -126,7 +130,9 @@ class ControlNet(DiffusionInpaintModel):
             self.model = self.model.to(device)
             if kwargs["sd_cpu_textencoder"]:
                 logger.info("Run Stable Diffusion TextEncoder on CPU")
-                self.model.text_encoder = CPUTextEncoderWrapper(self.model.text_encoder, torch_dtype)
+                self.model.text_encoder = CPUTextEncoderWrapper(
+                    self.model.text_encoder, torch_dtype
+                )
 
         self.callback = kwargs.pop("callback", None)
 

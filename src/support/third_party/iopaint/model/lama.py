@@ -3,14 +3,14 @@ import os
 import cv2
 import numpy as np
 import torch
+
 from iopaint.helper import (
-    download_model,
+    norm_img,
     get_cache_path_by_url,
     load_jit_model,
-    norm_img,
+    download_model,
 )
 from iopaint.schema import InpaintRequest
-
 from .base import InpaintModel
 
 LAMA_MODEL_URL = os.environ.get(
@@ -23,7 +23,9 @@ ANIME_LAMA_MODEL_URL = os.environ.get(
     "ANIME_LAMA_MODEL_URL",
     "https://github.com/Sanster/models/releases/download/AnimeMangaInpainting/anime-manga-big-lama.pt",
 )
-ANIME_LAMA_MODEL_MD5 = os.environ.get("ANIME_LAMA_MODEL_MD5", "29f284f36a0a510bcacf39ecf4c4d54f")
+ANIME_LAMA_MODEL_MD5 = os.environ.get(
+    "ANIME_LAMA_MODEL_MD5", "29f284f36a0a510bcacf39ecf4c4d54f"
+)
 
 
 class LaMa(InpaintModel):
@@ -71,7 +73,9 @@ class AnimeLaMa(LaMa):
         download_model(ANIME_LAMA_MODEL_URL, ANIME_LAMA_MODEL_MD5)
 
     def init_model(self, device, **kwargs):
-        self.model = load_jit_model(ANIME_LAMA_MODEL_URL, device, ANIME_LAMA_MODEL_MD5).eval()
+        self.model = load_jit_model(
+            ANIME_LAMA_MODEL_URL, device, ANIME_LAMA_MODEL_MD5
+        ).eval()
 
     @staticmethod
     def is_downloaded() -> bool:

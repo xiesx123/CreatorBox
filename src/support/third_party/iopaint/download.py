@@ -2,20 +2,21 @@ import glob
 import json
 import os
 from functools import lru_cache
-from pathlib import Path
 from typing import List, Optional
 
+from iopaint.schema import ModelType, ModelInfo
+from loguru import logger
+from pathlib import Path
+
 from iopaint.const import (
-    ANYTEXT_NAME,
     DEFAULT_MODEL_DIR,
     DIFFUSERS_SD_CLASS_NAME,
     DIFFUSERS_SD_INPAINT_CLASS_NAME,
     DIFFUSERS_SDXL_CLASS_NAME,
     DIFFUSERS_SDXL_INPAINT_CLASS_NAME,
+    ANYTEXT_NAME,
 )
 from iopaint.model.original_sd_configs import get_config_files
-from iopaint.schema import ModelInfo, ModelType
-from loguru import logger
 
 
 def cli_download_model(model: str):
@@ -34,7 +35,9 @@ def cli_download_model(model: str):
         logger.info(f"Downloading model from Huggingface: {model}")
         from diffusers import DiffusionPipeline
 
-        downloaded_path = handle_from_pretrained_exceptions(DiffusionPipeline.download, pretrained_model_name=model, variant="fp16")
+        downloaded_path = handle_from_pretrained_exceptions(
+            DiffusionPipeline.download, pretrained_model_name=model, variant="fp16"
+        )
         logger.info(f"Done. Downloaded to {downloaded_path}")
 
 
@@ -201,7 +204,9 @@ def scan_diffusers_models() -> List[ModelInfo]:
     cache_dir = Path(HF_HUB_CACHE)
     # logger.info(f"Scanning diffusers models in {cache_dir}")
     diffusers_model_names = []
-    model_index_files = glob.glob(os.path.join(cache_dir, "**/*", "model_index.json"), recursive=True)
+    model_index_files = glob.glob(
+        os.path.join(cache_dir, "**/*", "model_index.json"), recursive=True
+    )
     for it in model_index_files:
         it = Path(it)
         try:
@@ -249,14 +254,18 @@ def _scan_converted_diffusers_models(cache_dir) -> List[ModelInfo]:
     cache_dir = Path(cache_dir)
     available_models = []
     diffusers_model_names = []
-    model_index_files = glob.glob(os.path.join(cache_dir, "**/*", "model_index.json"), recursive=True)
+    model_index_files = glob.glob(
+        os.path.join(cache_dir, "**/*", "model_index.json"), recursive=True
+    )
     for it in model_index_files:
         it = Path(it)
         with open(it, "r", encoding="utf-8") as f:
             try:
                 data = json.load(f)
             except:
-                logger.error(f"Failed to load {it}, please try revert from original model or fix model_index.json by hand.")
+                logger.error(
+                    f"Failed to load {it}, please try revert from original model or fix model_index.json by hand."
+                )
                 continue
 
             _class_name = data["_class_name"]

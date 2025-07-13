@@ -1,31 +1,31 @@
 from itertools import chain
 
-import cv2
-import numpy as np
 import PIL.Image
+import cv2
 import torch
 from iopaint.model.original_sd_configs import get_config_files
-from iopaint.schema import InpaintRequest, ModelType
 from loguru import logger
 from transformers import CLIPTextModel, CLIPTokenizer
+import numpy as np
 
 from ..base import DiffusionInpaintModel
 from ..helper.cpu_text_encoder import CPUTextEncoderWrapper
 from ..utils import (
-    enable_low_mem,
     get_torch_dtype,
-    handle_from_pretrained_exceptions,
+    enable_low_mem,
     is_local_files_only,
+    handle_from_pretrained_exceptions,
 )
 from .powerpaint_tokenizer import task_to_prompt
+from iopaint.schema import InpaintRequest, ModelType
 from .v2.BrushNet_CA import BrushNetModel
+from .v2.unet_2d_condition import UNet2DConditionModel_forward
 from .v2.unet_2d_blocks import (
     CrossAttnDownBlock2D_forward,
-    CrossAttnUpBlock2D_forward,
     DownBlock2D_forward,
+    CrossAttnUpBlock2D_forward,
     UpBlock2D_forward,
 )
-from .v2.unet_2d_condition import UNet2DConditionModel_forward
 
 
 class PowerPaintV2(DiffusionInpaintModel):
@@ -35,10 +35,10 @@ class PowerPaintV2(DiffusionInpaintModel):
     hf_model_id = "Sanster/PowerPaint_v2"
 
     def init_model(self, device: torch.device, **kwargs):
-        from .powerpaint_tokenizer import PowerPaintTokenizer
         from .v2.pipeline_PowerPaint_Brushnet_CA import (
             StableDiffusionPowerPaintBrushNetPipeline,
         )
+        from .powerpaint_tokenizer import PowerPaintTokenizer
 
         use_gpu, torch_dtype = get_torch_dtype(device, kwargs.get("no_half", False))
         model_kwargs = {"local_files_only": is_local_files_only(**kwargs)}
@@ -93,7 +93,9 @@ class PowerPaintV2(DiffusionInpaintModel):
                 variant="fp16",
                 **model_kwargs,
             )
-        pipe.tokenizer = PowerPaintTokenizer(CLIPTokenizer.from_pretrained(self.hf_model_id, subfolder="tokenizer"))
+        pipe.tokenizer = PowerPaintTokenizer(
+            CLIPTokenizer.from_pretrained(self.hf_model_id, subfolder="tokenizer")
+        )
         self.model = pipe
 
         enable_low_mem(self.model, kwargs.get("low_mem", False))
@@ -105,25 +107,39 @@ class PowerPaintV2(DiffusionInpaintModel):
             self.model = self.model.to(device)
             if kwargs["sd_cpu_textencoder"]:
                 logger.info("Run Stable Diffusion TextEncoder on CPU")
-                self.model.text_encoder = CPUTextEncoderWrapper(self.model.text_encoder, torch_dtype)
+                self.model.text_encoder = CPUTextEncoderWrapper(
+                    self.model.text_encoder, torch_dtype
+                )
 
         self.callback = kwargs.pop("callback", None)
 
         # Monkey patch the forward method of the UNet to use the brushnet_unet_forward method
-        self.model.unet.forward = UNet2DConditionModel_forward.__get__(self.model.unet, self.model.unet.__class__)
+        self.model.unet.forward = UNet2DConditionModel_forward.__get__(
+            self.model.unet, self.model.unet.__class__
+        )
 
         # Monkey patch unet down_blocks to use CrossAttnDownBlock2D_forward
-        for down_block in chain(self.model.unet.down_blocks, self.model.brushnet.down_blocks):
+        for down_block in chain(
+            self.model.unet.down_blocks, self.model.brushnet.down_blocks
+        ):
             if down_block.__class__.__name__ == "CrossAttnDownBlock2D":
-                down_block.forward = CrossAttnDownBlock2D_forward.__get__(down_block, down_block.__class__)
+                down_block.forward = CrossAttnDownBlock2D_forward.__get__(
+                    down_block, down_block.__class__
+                )
             else:
-                down_block.forward = DownBlock2D_forward.__get__(down_block, down_block.__class__)
+                down_block.forward = DownBlock2D_forward.__get__(
+                    down_block, down_block.__class__
+                )
 
         for up_block in chain(self.model.unet.up_blocks, self.model.brushnet.up_blocks):
             if up_block.__class__.__name__ == "CrossAttnUpBlock2D":
-                up_block.forward = CrossAttnUpBlock2D_forward.__get__(up_block, up_block.__class__)
+                up_block.forward = CrossAttnUpBlock2D_forward.__get__(
+                    up_block, up_block.__class__
+                )
             else:
-                up_block.forward = UpBlock2D_forward.__get__(up_block, up_block.__class__)
+                up_block.forward = UpBlock2D_forward.__get__(
+                    up_block, up_block.__class__
+                )
 
     def forward(self, image, mask, config: InpaintRequest):
         """Input image and output image have same size
@@ -139,7 +155,9 @@ class PowerPaintV2(DiffusionInpaintModel):
         image = PIL.Image.fromarray(image.astype(np.uint8))
         mask = PIL.Image.fromarray(mask[:, :, -1], mode="L").convert("RGB")
 
-        promptA, promptB, negative_promptA, negative_promptB = task_to_prompt(config.powerpaint_task)
+        promptA, promptB, negative_promptA, negative_promptB = task_to_prompt(
+            config.powerpaint_task
+        )
 
         output = self.model(
             image=image,

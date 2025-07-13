@@ -1,3 +1,6 @@
+import warnings
+
+warnings.filterwarnings("ignore")
 import asyncio
 import os
 import threading
@@ -138,7 +141,7 @@ def diffuser_callback(pipe, step: int, timestep: int, callback_kwargs: Dict = {}
 
 
 class Api:
-    def __init__(self, app: FastAPI, config: ApiConfig, webapp: str = os.path.abspath("static/js/mask")):
+    def __init__(self, app: FastAPI, config: ApiConfig, webapp: str):
         self.app = app
         self.config = config
         self.router = APIRouter()

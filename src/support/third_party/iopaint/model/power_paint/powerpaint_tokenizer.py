@@ -1,9 +1,9 @@
 import copy
 import random
 from typing import Any, List, Union
+from transformers import CLIPTokenizer
 
 from iopaint.schema import PowerPaintTask
-from transformers import CLIPTokenizer
 
 
 def add_task_to_prompt(prompt, negative_prompt, task: PowerPaintTask):
@@ -37,7 +37,9 @@ def add_task_to_prompt(prompt, negative_prompt, task: PowerPaintTask):
 
 
 def task_to_prompt(task: PowerPaintTask):
-    promptA, promptB, negative_promptA, negative_promptB = add_task_to_prompt("", "", task)
+    promptA, promptB, negative_promptA, negative_promptB = add_task_to_prompt(
+        "", "", task
+    )
     return (
         promptA.strip(),
         promptB.strip(),
@@ -69,7 +71,11 @@ class PowerPaintTokenizer:
             try:
                 return super().__getattr__(name)
             except AttributeError:
-                raise AttributeError("'name' cannot be found in both " f"'{self.__class__.__name__}' and " f"'{self.__class__.__name__}.tokenizer'.")
+                raise AttributeError(
+                    "'name' cannot be found in both "
+                    f"'{self.__class__.__name__}' and "
+                    f"'{self.__class__.__name__}.tokenizer'."
+                )
 
     def try_adding_tokens(self, tokens: Union[str, List[str]], *args, **kwargs):
         """Attempt to add tokens to the tokenizer.
@@ -78,7 +84,11 @@ class PowerPaintTokenizer:
             tokens (Union[str, List[str]]): The tokens to be added.
         """
         num_added_tokens = self.wrapped.add_tokens(tokens, *args, **kwargs)
-        assert num_added_tokens != 0, f"The tokenizer already contains the token {tokens}. Please pass " "a different `placeholder_token` that is not already in the " "tokenizer."
+        assert num_added_tokens != 0, (
+            f"The tokenizer already contains the token {tokens}. Please pass "
+            "a different `placeholder_token` that is not already in the "
+            "tokenizer."
+        )
 
     def get_token_info(self, token: str) -> dict:
         """Get the information of a token, including its start and end index in
@@ -95,7 +105,9 @@ class PowerPaintTokenizer:
         start, end = token_ids[1], token_ids[-2] + 1
         return {"name": token, "start": start, "end": end}
 
-    def add_placeholder_token(self, placeholder_token: str, *args, num_vec_per_token: int = 1, **kwargs):
+    def add_placeholder_token(
+        self, placeholder_token: str, *args, num_vec_per_token: int = 1, **kwargs
+    ):
         """Add placeholder tokens to the tokenizer.
 
         Args:
@@ -117,7 +129,11 @@ class PowerPaintTokenizer:
 
         for token in self.token_map:
             if token in placeholder_token:
-                raise ValueError(f"The tokenizer already has placeholder token {token} " f"that can get confused with {placeholder_token} " "keep placeholder tokens independent")
+                raise ValueError(
+                    f"The tokenizer already has placeholder token {token} "
+                    f"that can get confused with {placeholder_token} "
+                    "keep placeholder tokens independent"
+                )
         self.token_map[placeholder_token] = output
 
     def replace_placeholder_tokens_in_text(
@@ -142,7 +158,11 @@ class PowerPaintTokenizer:
         if isinstance(text, list):
             output = []
             for i in range(len(text)):
-                output.append(self.replace_placeholder_tokens_in_text(text[i], vector_shuffle=vector_shuffle))
+                output.append(
+                    self.replace_placeholder_tokens_in_text(
+                        text[i], vector_shuffle=vector_shuffle
+                    )
+                )
             return output
 
         for placeholder_token in self.token_map:
@@ -155,7 +175,9 @@ class PowerPaintTokenizer:
                 text = text.replace(placeholder_token, " ".join(tokens))
         return text
 
-    def replace_text_with_placeholder_tokens(self, text: Union[str, List[str]]) -> Union[str, List[str]]:
+    def replace_text_with_placeholder_tokens(
+        self, text: Union[str, List[str]]
+    ) -> Union[str, List[str]]:
         """Replace the placeholder tokens in text with the original keywords.
         This function will be called in `self.decode`.
 
@@ -195,7 +217,9 @@ class PowerPaintTokenizer:
                 be loaded. If 1.0, all tokens will be loaded. Defaults to 1.0
             *args, **kwargs: The arguments for `self.wrapped.__call__`.
         """
-        replaced_text = self.replace_placeholder_tokens_in_text(text, vector_shuffle=vector_shuffle, prop_tokens_to_load=prop_tokens_to_load)
+        replaced_text = self.replace_placeholder_tokens_in_text(
+            text, vector_shuffle=vector_shuffle, prop_tokens_to_load=prop_tokens_to_load
+        )
 
         return self.wrapped.__call__(replaced_text, *args, **kwargs)
 
@@ -209,7 +233,9 @@ class PowerPaintTokenizer:
         replaced_text = self.replace_placeholder_tokens_in_text(text)
         return self.wrapped(replaced_text, *args, **kwargs)
 
-    def decode(self, token_ids, return_raw: bool = False, *args, **kwargs) -> Union[str, List[str]]:
+    def decode(
+        self, token_ids, return_raw: bool = False, *args, **kwargs
+    ) -> Union[str, List[str]]:
         """Decode the token index to text.
 
         Args:

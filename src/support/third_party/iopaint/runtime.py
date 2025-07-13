@@ -8,7 +8,6 @@ from typing import Any, Dict
 import packaging.version
 from iopaint.schema import Device
 from loguru import logger
-from rich import print
 
 _PY_VERSION: str = sys.version.split()[0].rstrip("+")
 
@@ -49,7 +48,7 @@ def dump_environment_info() -> Dict[str, str]:
         "Python version": platform.python_version(),
     }
     info.update(_package_versions)
-    print("\n".join([f"- {prop}: {val}" for prop, val in info.items()]) + "\n")
+    logger.debug("\n".join([f"- {prop}: {val}" for prop, val in info.items()]) + "\n")
     return info
 
 

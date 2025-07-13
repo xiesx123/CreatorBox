@@ -1,10 +1,10 @@
 import math
 import random
-
 import torch
-from iopaint.plugins.basicsr.arch_util import default_init_weights
 from torch import nn
 from torch.nn import functional as F
+
+from iopaint.plugins.basicsr.arch_util import default_init_weights
 
 
 class NormStyleCode(nn.Module):
@@ -65,7 +65,10 @@ class ModulatedConv2d(nn.Module):
             nonlinearity="linear",
         )
 
-        self.weight = nn.Parameter(torch.randn(1, out_channels, in_channels, kernel_size, kernel_size) / math.sqrt(in_channels * kernel_size**2))
+        self.weight = nn.Parameter(
+            torch.randn(1, out_channels, in_channels, kernel_size, kernel_size)
+            / math.sqrt(in_channels * kernel_size**2)
+        )
         self.padding = kernel_size // 2
 
     def forward(self, x, style):
@@ -88,7 +91,9 @@ class ModulatedConv2d(nn.Module):
             demod = torch.rsqrt(weight.pow(2).sum([2, 3, 4]) + self.eps)
             weight = weight * demod.view(b, self.out_channels, 1, 1, 1)
 
-        weight = weight.view(b * self.out_channels, c, self.kernel_size, self.kernel_size)
+        weight = weight.view(
+            b * self.out_channels, c, self.kernel_size, self.kernel_size
+        )
 
         # upsample or downsample if necessary
         if self.sample_mode == "upsample":
@@ -105,7 +110,10 @@ class ModulatedConv2d(nn.Module):
         return out
 
     def __repr__(self):
-        return f"{self.__class__.__name__}(in_channels={self.in_channels}, out_channels={self.out_channels}, " f"kernel_size={self.kernel_size}, demodulate={self.demodulate}, sample_mode={self.sample_mode})"
+        return (
+            f"{self.__class__.__name__}(in_channels={self.in_channels}, out_channels={self.out_channels}, "
+            f"kernel_size={self.kernel_size}, demodulate={self.demodulate}, sample_mode={self.sample_mode})"
+        )
 
 
 class StyleConv(nn.Module):
@@ -194,7 +202,9 @@ class ToRGB(nn.Module):
         out = out + self.bias
         if skip is not None:
             if self.upsample:
-                skip = F.interpolate(skip, scale_factor=2, mode="bilinear", align_corners=False)
+                skip = F.interpolate(
+                    skip, scale_factor=2, mode="bilinear", align_corners=False
+                )
             out = out + skip
         return out
 
@@ -227,7 +237,9 @@ class StyleGAN2GeneratorClean(nn.Module):
         narrow (float): Narrow ratio for channels. Default: 1.0.
     """
 
-    def __init__(self, out_size, num_style_feat=512, num_mlp=8, channel_multiplier=2, narrow=1):
+    def __init__(
+        self, out_size, num_style_feat=512, num_mlp=8, channel_multiplier=2, narrow=1
+    ):
         super(StyleGAN2GeneratorClean, self).__init__()
         # Style MLP layers
         self.num_style_feat = num_style_feat
@@ -330,7 +342,9 @@ class StyleGAN2GeneratorClean(nn.Module):
         return self.style_mlp(x)
 
     def mean_latent(self, num_latent):
-        latent_in = torch.randn(num_latent, self.num_style_feat, device=self.constant_input.weight.device)
+        latent_in = torch.randn(
+            num_latent, self.num_style_feat, device=self.constant_input.weight.device
+        )
         latent = self.style_mlp(latent_in).mean(0, keepdim=True)
         return latent
 
@@ -365,12 +379,16 @@ class StyleGAN2GeneratorClean(nn.Module):
             if randomize_noise:
                 noise = [None] * self.num_layers  # for each style conv layer
             else:  # use the stored noise
-                noise = [getattr(self.noises, f"noise{i}") for i in range(self.num_layers)]
+                noise = [
+                    getattr(self.noises, f"noise{i}") for i in range(self.num_layers)
+                ]
         # style truncation
         if truncation < 1:
             style_truncation = []
             for style in styles:
-                style_truncation.append(truncation_latent + truncation * (style - truncation_latent))
+                style_truncation.append(
+                    truncation_latent + truncation * (style - truncation_latent)
+                )
             styles = style_truncation
         # get style latents with injection
         if len(styles) == 1:
@@ -385,7 +403,9 @@ class StyleGAN2GeneratorClean(nn.Module):
             if inject_index is None:
                 inject_index = random.randint(1, self.num_latent - 1)
             latent1 = styles[0].unsqueeze(1).repeat(1, inject_index, 1)
-            latent2 = styles[1].unsqueeze(1).repeat(1, self.num_latent - inject_index, 1)
+            latent2 = (
+                styles[1].unsqueeze(1).repeat(1, self.num_latent - inject_index, 1)
+            )
             latent = torch.cat([latent1, latent2], 1)
 
         # main generation

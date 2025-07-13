@@ -1,22 +1,22 @@
 """
 Copyright (c) Alibaba, Inc. and its affiliates.
 """
-
-import math
 import os
-import time
-import traceback
-
 import cv2
 import numpy as np
-import torch
+import math
+import traceback
 from easydict import EasyDict as edict
+import time
 from iopaint.model.anytext.ocr_recog.RecModel import RecModel
+import torch
 
 
 def min_bounding_rect(img):
     ret, thresh = cv2.threshold(img, 127, 255, 0)
-    contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    contours, hierarchy = cv2.findContours(
+        thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
+    )
     if len(contours) == 0:
         print("Bad contours, using fake bbox...")
         return np.array([[0, 0], [100, 0], [100, 100], [0, 100]])
@@ -47,7 +47,9 @@ def create_predictor(model_dir=None, model_lang="ch", is_onnx=False):
     if is_onnx:
         import onnxruntime as ort
 
-        sess = ort.InferenceSession(model_file_path, providers=["CPUExecutionProvider"])  # 'TensorrtExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider'
+        sess = ort.InferenceSession(
+            model_file_path, providers=["CPUExecutionProvider"]
+        )  # 'TensorrtExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider'
         return sess
     else:
         if model_lang == "ch":
@@ -189,7 +191,9 @@ class TextRecognizer(object):
                     cv2.imwrite(file_name + ".jpg", _img)
             if self.is_onnx:
                 input_dict = {}
-                input_dict[self.predictor.get_inputs()[0].name] = norm_img_batch.detach().cpu().numpy()
+                input_dict[self.predictor.get_inputs()[0].name] = (
+                    norm_img_batch.detach().cpu().numpy()
+                )
                 outputs = self.predictor.run(None, input_dict)
                 preds = {}
                 preds["ctc"] = torch.from_numpy(outputs[0])
@@ -238,7 +242,9 @@ class TextRecognizer(object):
             target_lengths += [len(t)]
         targets = torch.tensor(targets).to(preds.device)
         target_lengths = torch.tensor(target_lengths).to(preds.device)
-        input_lengths = torch.tensor([log_probs.shape[0]] * (log_probs.shape[1])).to(preds.device)
+        input_lengths = torch.tensor([log_probs.shape[0]] * (log_probs.shape[1])).to(
+            preds.device
+        )
         loss = ctc_loss(log_probs, targets, input_lengths, target_lengths)
         loss = loss / input_lengths * weight
         return loss
@@ -282,7 +288,9 @@ def main():
             pred = preds_all[i]
             order, idx = text_recognizer.decode(pred)
             text = text_recognizer.get_text(order)
-            print(f'{valid_image_file_list[i]}: pred/gt="{text}"/"{gt_text[i]}", loss={loss[i]:.2f}')
+            print(
+                f'{valid_image_file_list[i]}: pred/gt="{text}"/"{gt_text[i]}", loss={loss[i]:.2f}'
+            )
     except Exception as E:
         print(traceback.format_exc(), E)
 

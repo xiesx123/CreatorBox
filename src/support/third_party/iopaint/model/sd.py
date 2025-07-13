@@ -1,18 +1,18 @@
-import cv2
 import PIL.Image
+import cv2
 import torch
-from iopaint.schema import InpaintRequest, ModelType
 from loguru import logger
 
 from .base import DiffusionInpaintModel
 from .helper.cpu_text_encoder import CPUTextEncoderWrapper
 from .original_sd_configs import get_config_files
 from .utils import (
-    enable_low_mem,
-    get_torch_dtype,
     handle_from_pretrained_exceptions,
+    get_torch_dtype,
+    enable_low_mem,
     is_local_files_only,
 )
+from iopaint.schema import InpaintRequest, ModelType
 
 
 class SD(DiffusionInpaintModel):
@@ -29,7 +29,9 @@ class SD(DiffusionInpaintModel):
             **kwargs.get("pipe_components", {}),
             "local_files_only": is_local_files_only(**kwargs),
         }
-        disable_nsfw_checker = kwargs.get("disable_nsfw", False) or kwargs.get("cpu_offload", False)
+        disable_nsfw_checker = kwargs.get("disable_nsfw", False) or kwargs.get(
+            "cpu_offload", False
+        )
         if disable_nsfw_checker:
             logger.info("Disable Stable Diffusion Model NSFW checker")
             model_kwargs.update(
@@ -50,7 +52,7 @@ class SD(DiffusionInpaintModel):
                 self.model_id_or_path,
                 torch_dtype=torch_dtype,
                 load_safety_checker=not disable_nsfw_checker,
-                original_config_file=get_config_files()["v1"],
+                original_config_file=get_config_files()['v1'],
                 **model_kwargs,
             )
         else:
@@ -71,7 +73,9 @@ class SD(DiffusionInpaintModel):
             self.model = self.model.to(device)
             if kwargs.get("sd_cpu_textencoder", False):
                 logger.info("Run Stable Diffusion TextEncoder on CPU")
-                self.model.text_encoder = CPUTextEncoderWrapper(self.model.text_encoder, torch_dtype)
+                self.model.text_encoder = CPUTextEncoderWrapper(
+                    self.model.text_encoder, torch_dtype
+                )
 
         self.callback = kwargs.pop("callback", None)
 
