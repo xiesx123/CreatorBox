@@ -19,20 +19,6 @@
     <script src="static/js/layui/layui.js"></script>
     <!-- creator -->
     <script src="static/js/creatorbox/app.js"></script>
-    <style>
-        /* 使得底部浮动 */
-        .floating-div {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: #2F4056;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            z-index: 9999;
-        }
-    </style>
 </head>
 
 <body class="collapse" layadmin-themealias="default">
@@ -147,7 +133,6 @@
     {% raw %}
     <script type="text/html" id="TPL_table_status">
         <input type="checkbox" name="status" value={{d.status}} lay-skin="primary" mid={{d.id}}  lay-filter="table_status_filter" {{ d.status == '1' ? 'checked' : '' }}>
-    
     </script>
     {% endraw %}
 
