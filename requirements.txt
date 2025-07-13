@@ -12,7 +12,7 @@ asyncio==3.4.3
 pyngrok==7.2.11
 pyarmor==9.1.2
 apscheduler==3.11.0
-requests-cache==1.2.1
+requests_cache==1.2.1
 ffmpeg_python==0.2.0
 opencv_python==4.11.0.86
 

@@ -40,33 +40,42 @@ def start(host, port, debug, ngrok, ngrok_host, ngrok_port):
     # start uvicorn
     def start_uvicorn(host, port, debug):
         click.echo(f"🚀 Starting service... http://{host}:{port}")
-        try:
-            uvicorn.run("src.main:asgi", host=host, port=port, reload=debug)
-        except Exception as e:
-            click.echo(f"❌ error: {str(e)}")
-            traceback.print_exc()
+        uvicorn.run("src.main:asgi", host=host, port=port, reload=debug)
 
-    if ngrok:
-        ngrok_token = os.environ.get("NGROK_AUTH_TOKEN")
-        if not ngrok_token:
-            click.echo("❌ ngrok mode requires --ngrok_token parameter!")
-            return
-        start_ngrok(ngrok_token, ngrok_host, ngrok_port or port)
+    try:
+        if ngrok:
+            ngrok_token = os.environ.get("NGROK_AUTH_TOKEN")
+            if not ngrok_token:
+                click.echo("❌ ngrok mode requires setting the environment variable NGROK_AUTH_TOKEN")
+                return
+            start_ngrok(ngrok_token, ngrok_host, ngrok_port or port)
 
-    start_uvicorn(host, port, debug)
+        start_uvicorn(host, port, debug)
+    except Exception as e:
+        click.echo(f"❌ error: {str(e)}", err=True)
+        traceback.print_exc()
 
 
 @cli.command()
-@click.option("--hash", "-h", default=None, help="Specify the Git commit hash to checkout. Defaults to pulling the latest version.")
-def update(hash):
-    if hash:
+@click.option("--hash", "-h", "commit_hash", default=None, help="Specify the Git commit hash to checkout. Defaults to pulling the latest version.")
+@click.option("--force", is_flag=True, default=False, help="Force sync with remote (discard local changes).")
+def update(commit_hash, force):
+    try:
         subprocess.run(["git", "fetch"], check=True)
-        result = subprocess.run(["git", "checkout", hash], capture_output=True, text=True)
+        if force:
+            click.echo("⚠️ Force resetting to origin/master...")
+            result = subprocess.run(["git", "reset", "--hard", "origin/master"], capture_output=True, text=True, check=True)
+        elif commit_hash:
+            click.echo(f"📦 Checking out to commit: {commit_hash}")
+            result = subprocess.run(["git", "checkout", hash], capture_output=True, text=True, check=True)
+        else:
+            click.echo("📥 Pulling latest changes from remote...")
+            result = subprocess.run(["git", "pull"], capture_output=True, text=True, check=True)
         output = result.stdout.strip() + "\n" + result.stderr.strip()
-    else:
-        result = subprocess.run(["git", "pull"], capture_output=True, text=True)
-        output = result.stdout.strip() + "\n" + result.stderr.strip()
-    click.echo(output)
+        click.echo(output)
+    except Exception as e:
+        click.echo(f"❌ error: {str(e)}", err=True)
+        traceback.print_exc()
 
 
 if __name__ == "__main__":
