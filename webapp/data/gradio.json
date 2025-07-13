@@ -1,6 +1,14 @@
 {
   "gradio": {
     "1": {
+      "name": "imr",
+      "description": "Image Mask Removal",
+      "module": "src.component.imr_",
+      "attr": "gradio",
+      "path": "/imr",
+      "status": 0
+    },
+    "2": {
       "name": "jme",
       "description": "Jianying Material Extractor",
       "module": "src.component.jme_",
@@ -8,7 +16,7 @@
       "path": "/jme",
       "status": 0
     },
-    "2": {
+    "3": {
       "name": "uvr",
       "description": "Ultimate Vocal Remover (v5)",
       "module": "src.component.uvr_",
@@ -16,15 +24,15 @@
       "path": "/uvr",
       "status": 0
     },
-    "3": {
+    "4": {
       "name": "vmr",
-      "description": "Video Mark Removal",
+      "description": "Video Mask Removal",
       "module": "src.component.vmr_",
       "attr": "gradio",
       "path": "/vmr",
       "status": 0
     },
-    "4": {
+    "5": {
       "name": "vsd",
       "description": "Video Scene Detect",
       "module": "src.component.vsd_",
@@ -32,7 +40,7 @@
       "path": "/vsd",
       "status": 0
     },
-    "5": {
+    "6": {
       "name": "vse",
       "description": "Video Subtitle Extractor",
       "module": "src.component.vse_",
