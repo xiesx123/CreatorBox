@@ -4,23 +4,22 @@ from typing import Dict, Optional
 
 import cv2
 import numpy as np
-from PIL import Image
-from loguru import logger
-from rich.console import Console
-from rich.progress import (
-    Progress,
-    SpinnerColumn,
-    TimeElapsedColumn,
-    MofNCompleteColumn,
-    TextColumn,
-    BarColumn,
-    TaskProgressColumn,
-)
-
 from iopaint.helper import pil_to_bytes
 from iopaint.model.utils import torch_gc
 from iopaint.model_manager import ModelManager
 from iopaint.schema import InpaintRequest
+from loguru import logger
+from PIL import Image
+from rich.console import Console
+from rich.progress import (
+    BarColumn,
+    MofNCompleteColumn,
+    Progress,
+    SpinnerColumn,
+    TaskProgressColumn,
+    TextColumn,
+    TimeElapsedColumn,
+)
 
 
 def glob_images(path: Path) -> Dict[str, Path]:
@@ -45,9 +44,7 @@ def batch_inpaint(
     concat: bool = False,
 ):
     if image.is_dir() and output.is_file():
-        logger.error(
-            "invalid --output: when image is a directory, output should be a directory"
-        )
+        logger.error("invalid --output: when image is a directory, output should be a directory")
         exit(-1)
     output.mkdir(parents=True, exist_ok=True)
 
@@ -83,7 +80,7 @@ def batch_inpaint(
         console=console,
         transient=False,
     ) as progress:
-        task = progress.add_task("Batch processing...", total=len(image_paths))
+        task = progress.add_task("Processing...", total=len(image_paths))
         for stem, image_p in image_paths.items():
             if stem not in mask_paths and mask.is_dir():
                 progress.log(f"mask for {image_p} not found")
@@ -97,9 +94,7 @@ def batch_inpaint(
             mask_img = np.array(Image.open(mask_p).convert("L"))
 
             if mask_img.shape[:2] != img.shape[:2]:
-                progress.log(
-                    f"resize mask {mask_p.name} to image {image_p.name} size: {img.shape[:2]}"
-                )
+                progress.log(f"resize mask {mask_p.name} to image {image_p.name} size: {img.shape[:2]}")
                 mask_img = cv2.resize(
                     mask_img,
                     (img.shape[1], img.shape[0]),

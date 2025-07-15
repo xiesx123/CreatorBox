@@ -171,7 +171,7 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
                     return voice_play(item.url);
                 }
                 output = `${form_json.tts_provider}_${form_json.tts_voice}_${form_json.tts_volume}_${form_json.tts_rate}_${form_json.tts_text.length}_${form_json.tts_remarks.length}`
-                tool.post("tts/generate", JSON.stringify({
+                tool.post("tts/gen", JSON.stringify({
                     "provider": form_json.tts_provider,
                     "model": form_json.tts_model,
                     "locale": form_json.locale,

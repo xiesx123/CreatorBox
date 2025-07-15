@@ -2,17 +2,17 @@ import abc
 from typing import Optional
 
 import cv2
-import torch
 import numpy as np
-from loguru import logger
-
+import torch
 from iopaint.helper import (
     boxes_from_mask,
-    resize_max_size,
     pad_img_to_modulo,
+    resize_max_size,
     switch_mps_device,
 )
-from iopaint.schema import InpaintRequest, HDStrategy, SDSampler
+from iopaint.schema import HDStrategy, InpaintRequest, SDSampler
+from loguru import logger
+
 from .helper.g_diffuser_bot import expand_image
 from .utils import get_scheduler
 
@@ -56,12 +56,8 @@ class InpaintModel:
 
     def _pad_forward(self, image, mask, config: InpaintRequest):
         origin_height, origin_width = image.shape[:2]
-        pad_image = pad_img_to_modulo(
-            image, mod=self.pad_mod, square=self.pad_to_square, min_size=self.min_size
-        )
-        pad_mask = pad_img_to_modulo(
-            mask, mod=self.pad_mod, square=self.pad_to_square, min_size=self.min_size
-        )
+        pad_image = pad_img_to_modulo(image, mod=self.pad_mod, square=self.pad_to_square, min_size=self.min_size)
+        pad_mask = pad_img_to_modulo(mask, mod=self.pad_mod, square=self.pad_to_square, min_size=self.min_size)
 
         # logger.info(f"final forward pad size: {pad_image.shape}")
 
@@ -94,7 +90,7 @@ class InpaintModel:
         # logger.info(f"hd_strategy: {config.hd_strategy}")
         if config.hd_strategy == HDStrategy.CROP:
             if max(image.shape) > config.hd_strategy_crop_trigger_size:
-                logger.info("Run crop strategy")
+                logger.debug("Run crop strategy")
                 boxes = boxes_from_mask(mask)
                 crop_result = []
                 for box in boxes:
@@ -109,19 +105,11 @@ class InpaintModel:
         elif config.hd_strategy == HDStrategy.RESIZE:
             if max(image.shape) > config.hd_strategy_resize_limit:
                 origin_size = image.shape[:2]
-                downsize_image = resize_max_size(
-                    image, size_limit=config.hd_strategy_resize_limit
-                )
-                downsize_mask = resize_max_size(
-                    mask, size_limit=config.hd_strategy_resize_limit
-                )
+                downsize_image = resize_max_size(image, size_limit=config.hd_strategy_resize_limit)
+                downsize_mask = resize_max_size(mask, size_limit=config.hd_strategy_resize_limit)
 
-                logger.info(
-                    f"Run resize strategy, origin size: {image.shape} forward size: {downsize_image.shape}"
-                )
-                inpaint_result = self._pad_forward(
-                    downsize_image, downsize_mask, config
-                )
+                logger.info(f"Run resize strategy, origin size: {image.shape} forward size: {downsize_image.shape}")
+                inpaint_result = self._pad_forward(downsize_image, downsize_mask, config)
 
                 # only paste masked area result
                 inpaint_result = cv2.resize(
@@ -130,9 +118,7 @@ class InpaintModel:
                     interpolation=cv2.INTER_CUBIC,
                 )
                 original_pixel_indices = mask < 127
-                inpaint_result[original_pixel_indices] = image[:, :, ::-1][
-                    original_pixel_indices
-                ]
+                inpaint_result[original_pixel_indices] = image[:, :, ::-1][original_pixel_indices]
 
         if inpaint_result is None:
             inpaint_result = self._pad_forward(image, mask, config)
@@ -218,9 +204,7 @@ class InpaintModel:
 
             # only calculate histograms for non-masked parts
             source_histogram, _ = np.histogram(source_channel[mask == 0], 256, [0, 256])
-            reference_histogram, _ = np.histogram(
-                reference_channel[mask == 0], 256, [0, 256]
-            )
+            reference_histogram, _ = np.histogram(reference_channel[mask == 0], 256, [0, 256])
 
             source_cdf = self._calculate_cdf(source_histogram)
             reference_cdf = self._calculate_cdf(reference_histogram)
@@ -315,9 +299,7 @@ class DiffusionInpaintModel(InpaintModel):
         r = min(cropper_r, image_r)
         b = min(cropper_b, image_b)
 
-        assert (
-            0 <= l < r and 0 <= t < b
-        ), f"cropper and image not overlap, {l},{t},{r},{b}"
+        assert 0 <= l < r and 0 <= t < b, f"cropper and image not overlap, {l},{t},{r},{b}"
 
         cropped_image = image[t:b, l:r, :]
         padding_l = max(0, image_l - cropper_l)
@@ -334,9 +316,7 @@ class DiffusionInpaintModel(InpaintModel):
         )
 
         # 最终扩大了的 image, BGR
-        expanded_cropped_result_image = self._scaled_pad_forward(
-            expanded_image, mask_image, config
-        )
+        expanded_cropped_result_image = self._scaled_pad_forward(expanded_image, mask_image, config)
 
         # RGB -> BGR
         outpainting_image = cv2.copyMakeBorder(
@@ -366,9 +346,7 @@ class DiffusionInpaintModel(InpaintModel):
         downsize_image = resize_max_size(image, size_limit=longer_side_length)
         downsize_mask = resize_max_size(mask, size_limit=longer_side_length)
         if config.sd_scale != 1:
-            logger.info(
-                f"Resize image to do sd inpainting: {image.shape} -> {downsize_image.shape}"
-            )
+            logger.info(f"Resize image to do sd inpainting: {image.shape} -> {downsize_image.shape}")
         inpaint_result = self._pad_forward(downsize_image, downsize_mask, config)
         # only paste masked area result
         inpaint_result = cv2.resize(

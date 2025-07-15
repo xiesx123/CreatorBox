@@ -153,9 +153,10 @@
                     console.debug(response.data)
                     var status = response.data.status
                     if (status == 1) {
-                        toast.info("重启后生效", "提示");
+                        toast.info("开启成功,重启后生效", "提示");
+                    }else{
+                        toast.success(status == 0 ? "关闭成功" : "开启成功", "提示");
                     }
-                    toast.success(status == 0 ? "关闭成功" : "开启成功", "提示");
                 }, true)
             });
         });
