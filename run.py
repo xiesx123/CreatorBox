@@ -1,4 +1,5 @@
 import json
+import multiprocessing as mp
 import os
 import subprocess
 import sys
@@ -25,6 +26,7 @@ def cli():
 @click.option("--ngrok_host", "-nh", type=str, default="toucan-real-informally.ngrok-free.app", help="ngrok host (optional)")
 @click.option("--ngrok_port", "-np", type=int, default=80, help="ngrok port (defaults to --port)")
 def start(host, port, debug, ngrok, ngrok_host, ngrok_port):
+    mp.set_start_method("spawn", force=True)
     if "REBOOT_ARGS" not in os.environ:
         os.environ["REBOOT_ARGS"] = json.dumps(sys.argv)
 
