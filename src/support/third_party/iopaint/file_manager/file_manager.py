@@ -3,8 +3,8 @@ from io import BytesIO
 from pathlib import Path
 from typing import List
 
-from PIL import Image, ImageOps, PngImagePlugin
 from fastapi import FastAPI, HTTPException
+from PIL import Image, ImageOps, PngImagePlugin
 from starlette.responses import FileResponse
 
 from ..schema import MediasResponse, MediaTab
@@ -28,9 +28,9 @@ class FileManager:
             self.thumbnail_directory.mkdir(parents=True)
 
         # fmt: off
-        self.app.add_api_route("/api/v1/medias", self.api_medias, methods=["GET"], response_model=List[MediasResponse])
-        self.app.add_api_route("/api/v1/media_file", self.api_media_file, methods=["GET"])
-        self.app.add_api_route("/api/v1/media_thumbnail_file", self.api_media_thumbnail_file, methods=["GET"])
+        self.app.add_api_route("/api/v1/medias", self.api_medias, include_in_schema=False, methods=["GET"], response_model=List[MediasResponse])
+        self.app.add_api_route("/api/v1/media_file", self.api_media_file, include_in_schema=False, methods=["GET"])
+        self.app.add_api_route("/api/v1/media_thumbnail_file", self.api_media_thumbnail_file, include_in_schema=False, methods=["GET"])
         # fmt: on
 
     def api_medias(self, tab: MediaTab) -> List[MediasResponse]:
@@ -42,13 +42,9 @@ class FileManager:
         return FileResponse(file_path, media_type="image/png")
 
     # tab=${tab}?filename=${filename.name}?width=${width}&height=${height}
-    def api_media_thumbnail_file(
-        self, tab: MediaTab, filename: str, width: int, height: int
-    ) -> FileResponse:
+    def api_media_thumbnail_file(self, tab: MediaTab, filename: str, width: int, height: int) -> FileResponse:
         img_dir = self._get_dir(tab)
-        thumb_filename, (width, height) = self.get_thumbnail(
-            img_dir, filename, width=width, height=height
-        )
+        thumb_filename, (width, height) = self.get_thumbnail(img_dir, filename, width=width, height=height)
         thumbnail_filepath = self.thumbnail_directory / thumb_filename
         return FileResponse(
             thumbnail_filepath,
@@ -99,9 +95,7 @@ class FileManager:
             )
         return res
 
-    def get_thumbnail(
-        self, directory: Path, original_filename: str, width, height, **options
-    ):
+    def get_thumbnail(self, directory: Path, original_filename: str, width, height, **options):
         directory = Path(directory)
         storage = FilesystemStorageBackend(self.app)
         crop = options.get("crop", "fit")
@@ -132,9 +126,7 @@ class FileManager:
             quality,
         )
 
-        thumbnail_filepath = os.path.join(
-            self.thumbnail_directory, original_path, thumbnail_filename
-        )
+        thumbnail_filepath = os.path.join(self.thumbnail_directory, original_path, thumbnail_filename)
 
         if storage.exists(thumbnail_filepath):
             return thumbnail_filepath, (width, height)
@@ -148,9 +140,7 @@ class FileManager:
         # get original image format
         options["format"] = options.get("format", image.format)
 
-        image = self._create_thumbnail(
-            image, thumbnail_size, crop, background=background
-        )
+        image = self._create_thumbnail(image, thumbnail_size, crop, background=background)
 
         raw_data = self.get_raw_data(image, **options)
         storage.save(thumbnail_filepath, raw_data)

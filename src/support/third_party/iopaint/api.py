@@ -13,6 +13,7 @@ import cv2
 import numpy as np
 import socketio
 import torch
+from fastapi.staticfiles import StaticFiles
 
 try:
     torch._C._jit_override_can_fuse_on_cpu(False)
@@ -29,7 +30,6 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse, Response
-from fastapi.staticfiles import StaticFiles
 from iopaint.file_manager.file_manager import FileManager
 from iopaint.helper import (
     adjust_mask,
@@ -141,7 +141,8 @@ def diffuser_callback(pipe, step: int, timestep: int, callback_kwargs: Dict = {}
 
 
 class Api:
-    def __init__(self, app: FastAPI, config: ApiConfig, webapp: str):
+
+    def __init__(self, app: FastAPI, sio: socketio.AsyncServer, asgi: socketio.ASGIApp, config: ApiConfig, path: str, webapp: str):
         self.app = app
         self.config = config
         self.router = APIRouter()
@@ -153,25 +154,29 @@ class Api:
         self.model_manager = self._build_model_manager()
 
         # fmt: off
-        self.add_api_route("/api/v1/gen-info", self.api_geninfo, methods=["POST"], response_model=GenInfoResponse)
-        self.add_api_route("/api/v1/server-config", self.api_server_config, methods=["GET"],
-                           response_model=ServerConfigResponse)
-        self.add_api_route("/api/v1/model", self.api_current_model, methods=["GET"], response_model=ModelInfo)
-        self.add_api_route("/api/v1/model", self.api_switch_model, methods=["POST"], response_model=ModelInfo)
-        self.add_api_route("/api/v1/inputimage", self.api_input_image, methods=["GET"])
-        self.add_api_route("/api/v1/inpaint", self.api_inpaint, methods=["POST"])
-        self.add_api_route("/api/v1/switch_plugin_model", self.api_switch_plugin_model, methods=["POST"])
-        self.add_api_route("/api/v1/run_plugin_gen_mask", self.api_run_plugin_gen_mask, methods=["POST"])
-        self.add_api_route("/api/v1/run_plugin_gen_image", self.api_run_plugin_gen_image, methods=["POST"])
-        self.add_api_route("/api/v1/samplers", self.api_samplers, methods=["GET"])
-        self.add_api_route("/api/v1/adjust_mask", self.api_adjust_mask, methods=["POST"])
-        self.add_api_route("/api/v1/save_image", self.api_save_image, methods=["POST"])
-        self.app.mount("/", StaticFiles(directory=webapp, html=True), name="assets")
+        self.add_api_route("/api/v1/gen-info", self.api_geninfo, include_in_schema=False, methods=["POST"], response_model=GenInfoResponse)
+        self.add_api_route("/api/v1/server-config", self.api_server_config, include_in_schema=False, methods=["GET"],response_model=ServerConfigResponse)
+        self.add_api_route("/api/v1/model", self.api_current_model, methods=["GET"], include_in_schema=False, response_model=ModelInfo)
+        self.add_api_route("/api/v1/model", self.api_switch_model, methods=["POST"], include_in_schema=False, response_model=ModelInfo)
+        self.add_api_route("/api/v1/inputimage", self.api_input_image, include_in_schema=False, methods=["GET"])
+        self.add_api_route("/api/v1/inpaint", self.api_inpaint, include_in_schema=False, methods=["POST"])
+        self.add_api_route("/api/v1/switch_plugin_model", self.api_switch_plugin_model, include_in_schema=False, methods=["POST"])
+        self.add_api_route("/api/v1/run_plugin_gen_mask", self.api_run_plugin_gen_mask, include_in_schema=False, methods=["POST"])
+        self.add_api_route("/api/v1/run_plugin_gen_image", self.api_run_plugin_gen_image, include_in_schema=False, methods=["POST"])
+        self.add_api_route("/api/v1/samplers", self.api_samplers, include_in_schema=False, methods=["GET"])
+        self.add_api_route("/api/v1/adjust_mask", self.api_adjust_mask, include_in_schema=False, methods=["POST"])
+        self.add_api_route("/api/v1/save_image", self.api_save_image, include_in_schema=False, methods=["POST"])
+        self.app.mount(path, StaticFiles(directory=webapp, html=True), name="assets")
         # fmt: on
-
         global global_sio
-        self.sio = socketio.AsyncServer(async_mode="asgi", cors_allowed_origins="*")
-        self.combined_asgi_app = socketio.ASGIApp(self.sio, self.app)
+        if asgi == None:
+            self.sio = socketio.AsyncServer(async_mode="asgi", cors_allowed_origins="*")
+        else:
+            self.sio = sio
+        if asgi == None:
+            self.combined_asgi_app = socketio.ASGIApp(self.sio, self.app)
+        else:
+            self.combined_asgi_app = asgi
         self.app.mount("/ws", self.combined_asgi_app)
         global_sio = self.sio
 
