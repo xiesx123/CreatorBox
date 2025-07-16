@@ -77,8 +77,8 @@
           <li class="layui-nav-item layui-nav-itemed">
             <a href="javascript:;">{{ _("group_feature") }}</a>
             <dl class="layui-nav-child">
-              {% if data.nav.mask_url and data.nav.mask_url|length > 0 %}
-              <dd><a data-path="{{ data.nav.mask_url }}" href="javascript:;"><i style="font-size: 18px"
+              {% if data.nav.mask_enable %}
+              <dd><a data-path="/mask" href="javascript:;"><i style="font-size: 18px"
                     class="layui-icon layui-icon-picture"></i> {{ _("nav_mask") }}</a></dd>
               {% endif %}
               <dd><a data-path="/speaker" href="javascript:;">
