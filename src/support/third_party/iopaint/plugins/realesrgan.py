@@ -3,13 +3,12 @@ import math
 import cv2
 import numpy as np
 import torch
-from torch import nn
 import torch.nn.functional as F
-from loguru import logger
-
 from iopaint.helper import download_model
 from iopaint.plugins.base_plugin import BasePlugin
-from iopaint.schema import RunPluginRequest, RealESRGANModel
+from iopaint.schema import RealESRGANModel, RunPluginRequest
+from loguru import logger
+from torch import nn
 
 
 class RealESRGANer:
@@ -49,23 +48,13 @@ class RealESRGANer:
 
         # initialize model
         if gpu_id:
-            self.device = (
-                torch.device(f"cuda:{gpu_id}" if torch.cuda.is_available() else "cpu")
-                if device is None
-                else device
-            )
+            self.device = torch.device(f"cuda:{gpu_id}" if torch.cuda.is_available() else "cpu") if device is None else device
         else:
-            self.device = (
-                torch.device("cuda" if torch.cuda.is_available() else "cpu")
-                if device is None
-                else device
-            )
+            self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu") if device is None else device
 
         if isinstance(model_path, list):
             # dni
-            assert len(model_path) == len(
-                dni_weight
-            ), "model_path and dni_weight should have the save length."
+            assert len(model_path) == len(dni_weight), "model_path and dni_weight should have the save length."
             loadnet = self.dni(model_path[0], model_path[1], dni_weight)
         else:
             # if the model_path starts with https, it will first download models to the folder: weights
@@ -116,9 +105,7 @@ class RealESRGANer:
                 self.mod_pad_h = self.mod_scale - h % self.mod_scale
             if w % self.mod_scale != 0:
                 self.mod_pad_w = self.mod_scale - w % self.mod_scale
-            self.img = F.pad(
-                self.img, (0, self.mod_pad_w, 0, self.mod_pad_h), "reflect"
-            )
+            self.img = F.pad(self.img, (0, self.mod_pad_w, 0, self.mod_pad_h), "reflect")
 
     def process(self):
         # model inference
@@ -190,9 +177,7 @@ class RealESRGANer:
                 output_end_y_tile = output_start_y_tile + input_tile_height * self.scale
 
                 # put tile into output image
-                self.output[
-                    :, :, output_start_y:output_end_y, output_start_x:output_end_x
-                ] = output_tile[
+                self.output[:, :, output_start_y:output_end_y, output_start_x:output_end_x] = output_tile[
                     :,
                     :,
                     output_start_y_tile:output_end_y_tile,
@@ -266,9 +251,7 @@ class RealESRGANer:
                 else:
                     self.process()
                 output_alpha = self.post_process()
-                output_alpha = (
-                    output_alpha.data.squeeze().float().cpu().clamp_(0, 1).numpy()
-                )
+                output_alpha = output_alpha.data.squeeze().float().cpu().clamp_(0, 1).numpy()
                 output_alpha = np.transpose(output_alpha[[2, 1, 0], :, :], (1, 2, 0))
                 output_alpha = cv2.cvtColor(output_alpha, cv2.COLOR_BGR2GRAY)
             else:  # use the cv2 resize for alpha channel
@@ -387,7 +370,7 @@ class RealESRGANUpscaler(BasePlugin):
         self._init_model(name)
 
     def _init_model(self, name):
-        from .basicsr import RRDBNet
+        from .basicsr.rrdbnet_arch import RRDBNet
 
         REAL_ESRGAN_MODELS = {
             RealESRGANModel.realesr_general_x4v3: {

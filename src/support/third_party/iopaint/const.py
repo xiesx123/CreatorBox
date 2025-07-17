@@ -86,17 +86,13 @@ SDXL_CONTROLNET_CHOICES = [
     "diffusers/controlnet-depth-sdxl-1.0-small",
 ]
 
-SDXL_BRUSHNET_CHOICES = [
-    "Regulus0725/random_mask_brushnet_ckpt_sdxl_regulus_v1"
-]
+SDXL_BRUSHNET_CHOICES = ["Regulus0725/random_mask_brushnet_ckpt_sdxl_regulus_v1"]
 
 LOCAL_FILES_ONLY_HELP = """
 When loading diffusion models, using local files only, not connect to HuggingFace server.
 """
 
-DEFAULT_MODEL_DIR = os.path.abspath(
-    os.getenv("XDG_CACHE_HOME", os.path.join(os.path.expanduser("~"), ".cache"))
-)
+DEFAULT_MODEL_DIR = os.path.abspath(os.getenv("XDG_CACHE_HOME", os.path.join(os.path.expanduser("~"), ".cache")))
 
 MODEL_DIR_HELP = f"""
 Model download directory (by setting XDG_CACHE_HOME environment variable), by default model download to {DEFAULT_MODEL_DIR}
@@ -126,7 +122,7 @@ Quality of image encoding, 0-100. Default is 95, higher quality will generate la
 INTERACTIVE_SEG_HELP = "Enable interactive segmentation using Segment Anything."
 INTERACTIVE_SEG_MODEL_HELP = "Model size: mobile_sam < vit_b < vit_l < vit_h. Bigger model size means better segmentation but slower speed."
 REMOVE_BG_HELP = "Enable remove background plugin."
-REMOVE_BG_DEVICE_HELP = "Device for remove background plugin. 'cuda' only supports briaai models(briaai/RMBG-1.4 and briaai/RMBG-2.0)"
+REMOVE_BG_DEVICE_HELP = "'cuda' only supports briaai models(briaai/RMBG-1.4 and briaai/RMBG-2.0)"
 ANIMESEG_HELP = "Enable anime segmentation plugin. Always run on CPU"
 REALESRGAN_HELP = "Enable realesrgan super resolution"
 GFPGAN_HELP = "Enable GFPGAN face restore. To also enhance background, use with --enable-realesrgan"
