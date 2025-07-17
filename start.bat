@@ -3,7 +3,7 @@ REM Set the conda environment name
 set CONDA_ENV_NAME=creatorbox
 
 REM Set the path of the Python script to run
-set SCRIPT_PATH=run.py 
+set SCRIPT_PATH=cli.py 
 set SCRIPT_ARGS=start -h 0.0.0.0 -p 8000
 
 REM Initialize conda (for Anaconda/Miniconda)

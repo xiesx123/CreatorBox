@@ -1,14 +1,12 @@
 import json
 import multiprocessing as mp
 import os
-import subprocess
 import sys
 import traceback
 
 import click
 import gradio as gr  # keep this
 import uvicorn
-from pyngrok import ngrok as ng
 
 
 @click.group()
@@ -26,12 +24,17 @@ def cli():
 @click.option("--ngrok_host", "-nh", type=str, default="toucan-real-informally.ngrok-free.app", help="ngrok host (optional)")
 @click.option("--ngrok_port", "-np", type=int, default=80, help="ngrok port (defaults to --port)")
 def start(host, port, debug, ngrok, ngrok_host, ngrok_port):
+    # spawn
     mp.set_start_method("spawn", force=True)
+
+    # args
     if "REBOOT_ARGS" not in os.environ:
         os.environ["REBOOT_ARGS"] = json.dumps(sys.argv)
 
     # start ngrok
     def start_ngrok(token, hostname, port):
+        from pyngrok import ngrok as ng
+
         ng.set_auth_token(token)
         if hostname:
             public_url = ng.connect(addr=port, hostname=hostname)
@@ -52,6 +55,12 @@ def start(host, port, debug, ngrok, ngrok_host, ngrok_port):
                 return
             start_ngrok(ngrok_token, ngrok_host, ngrok_port or port)
 
+        if debug:
+            from src.utils import cbruntime, cbutils
+
+            _package = cbruntime.get_environment_package()
+            click.echo("Environment Info:\n" + "\n".join([f"-  {cbutils.pad_string(k, length=25,align='left')}: {v}" for k, v in _package.items()]))
+
         start_uvicorn(host, port, debug)
     except Exception as e:
         click.echo(f"❌ error: {str(e)}", err=True)
@@ -63,6 +72,8 @@ def start(host, port, debug, ngrok, ngrok_host, ngrok_port):
 @click.option("--force", is_flag=True, default=False, help="Force sync with remote (discard local changes).")
 def update(commit_hash, force):
     try:
+        import subprocess
+
         subprocess.run(["git", "fetch"], check=True)
         if force:
             click.echo("⚠️ Force resetting to origin/master...")
@@ -77,6 +88,39 @@ def update(commit_hash, force):
         click.echo(output)
     except Exception as e:
         click.echo(f"❌ error: {str(e)}", err=True)
+        traceback.print_exc()
+
+
+@cli.command()
+@click.option("--files", "-f", multiple=True, help="Path(s) to requirements.txt file(s). Can specify multiple.")
+def install(files):
+    try:
+        import subprocess
+        from pathlib import Path
+
+        from src.utils import cbruntime, cbutils
+
+        if not files:
+            default_file = Path("requirements.txt")
+            if not default_file.exists():
+                click.echo("❌ No requirements.txt found in current directory.", err=True)
+                return
+            files = (str(default_file),)
+
+        for file in files:
+            if not Path(file).exists():
+                click.echo(f"⚠️ File not found: {file}", err=True)
+                continue
+            click.echo(f"📦 Installing from {file}...")
+            subprocess.run(["pip", "install", "-r", file], check=True)
+            click.echo("✅ Installation complete.")
+            _package = cbruntime.get_environment_package(file)
+            click.echo("Environment Info:\n" + "\n".join([f"-  {cbutils.pad_string(k, length=25,align='left')}: {v}" for k, v in _package.items()]))
+
+    except subprocess.CalledProcessError as e:
+        click.echo("❌ Installation failed.", err=True)
+    except Exception as e:
+        click.echo(f"❌ Unexpected error: {str(e)}", err=True)
         traceback.print_exc()
 
 
