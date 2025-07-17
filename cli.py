@@ -55,12 +55,6 @@ def start(host, port, debug, ngrok, ngrok_host, ngrok_port):
                 return
             start_ngrok(ngrok_token, ngrok_host, ngrok_port or port)
 
-        if debug:
-            from src.utils import cbruntime, cbutils
-
-            _package = cbruntime.get_environment_package()
-            click.echo("Environment Info:\n" + "\n".join([f"-  {cbutils.pad_string(k, length=25,align='left')}: {v}" for k, v in _package.items()]))
-
         start_uvicorn(host, port, debug)
     except Exception as e:
         click.echo(f"❌ error: {str(e)}", err=True)
@@ -98,7 +92,7 @@ def install(files):
         import subprocess
         from pathlib import Path
 
-        from src.utils import cbruntime, cbutils
+        from src.utils import cbruntime
 
         if not files:
             default_file = Path("requirements.txt")
@@ -115,7 +109,7 @@ def install(files):
             subprocess.run(["pip", "install", "-r", file], check=True)
             click.echo("✅ Installation complete.")
             _package = cbruntime.get_environment_package(file)
-            click.echo("Environment Info:\n" + "\n".join([f"-  {cbutils.pad_string(k, length=25,align='left')}: {v}" for k, v in _package.items()]))
+            click.echo("Environment Info:\n" + "\n".join([f"-  {cbruntime.pad_string(k, length=25,align='left')}: {v}" for k, v in _package.items()]))
 
     except subprocess.CalledProcessError as e:
         click.echo("❌ Installation failed.", err=True)
