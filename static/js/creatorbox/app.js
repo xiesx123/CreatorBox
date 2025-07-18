@@ -5,6 +5,8 @@ layui.config({
 	notice: 'mod/toastr',
 	// 常用操作
 	tool: 'mod/tools',
+	// 网页翻译
+	translate: 'mod/translate',
 	// 字幕
 	asr: 'dubbing/asr',
 	// 翻译

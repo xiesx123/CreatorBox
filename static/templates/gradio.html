@@ -25,6 +25,12 @@
 
 <body class="collapse" layadmin-themealias="default">
 
+    <ul class="layui-hide ignore">
+        <li><a href="javascript:translate.changeLanguage('english');">English</a></li>|
+        <li><a href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a></li>|
+        <li><a href="javascript:translate.changeLanguage('chinese_traditional');">繁體中文</a></li>
+    </ul>
+
     <div class="layui-layout layui-layout-admin">
 
         <form class="layui-form layui-form-pane" lay-filter="form_filter">
@@ -84,12 +90,13 @@
             var util = layui.util;
             var toast = layui.notice;
             var tool = layui.tool;
+            // var trans = layui.translate;
             var $ = layui.$;
 
             var table_json = JSON.parse('{{ data.gradios | tojson }}')
 
             // 应用表格
-            table.render({
+            var inst = table.render({
                 elem: '#gradio_table',
                 data: table_json,
                 page: {
@@ -102,7 +109,14 @@
                     pageName: 'page', limitName: 'size'
                 },
                 toolbar: '#TPL_table_toolbar',
-                defaultToolbar: ['filter'],
+                defaultToolbar: [{
+                    title: '重启',
+                    layEvent: 'reboot',
+                    icon: 'layui-icon-logout',
+                    onClick: function (obj) {
+                        console.debug("toolbar reboot click")
+                    }
+                }],
                 height: 'full-68', // 最大高度减去其他容器已占有的高度差
                 cols: [[
                     { type: 'checkbox' },
@@ -114,8 +128,29 @@
                 ]],
             });
 
+            // 工具栏事件
+            table.on('toolbar(' + inst.config.id + ')', function (obj) {
+                var id = obj.config.id;
+                var checkStatus = table.checkStatus(id);
+                var othis = lay(this);
+                action = obj.event
+                switch (obj.event) {
+                    case 'reboot':
+                        // 确认执行
+                        layer.confirm('确定重启吗？', { title: '提示', icon: 3 }, function (index) {
+                            layer.close(index);
+                            // 请求调用
+                            tool.get("app/reboot")
+                            setTimeout(function () {
+                                tool.refresh()
+                            }, 10 * 1000)
+                        });
+                        break;
+                };
+            });
+
             // 表格工具事件
-            table.on('tool(gradio_table)', function (obj) {
+            table.on('tool(' + inst.config.id + ')', function (obj) {
                 var id = obj.config.id;
                 var data = obj.data;
                 url = `${window.location.protocol}//${window.location.host}${data.path}`;
@@ -154,11 +189,19 @@
                     var status = response.data.status
                     if (status == 1) {
                         toast.info("开启成功,重启后生效", "提示");
-                    }else{
+                    } else {
                         toast.success(status == 0 ? "关闭成功" : "开启成功", "提示");
                     }
                 }, true)
             });
+
+            //// 设置本地语种
+            // trans.language.setLocal('chinese_simplified');
+            ////设置翻译通道
+            // trans.service.use('client.edge');
+            // window.onload = function () {
+            //     trans.execute();
+            // };  
         });
 
     </script>
