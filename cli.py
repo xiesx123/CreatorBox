@@ -1,12 +1,15 @@
 import json
 import multiprocessing as mp
 import os
+import subprocess
 import sys
 import traceback
 
-import click
-import gradio as gr  # keep this
-import uvicorn
+try:
+    import click
+except:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "click"])
+    import click
 
 
 @click.group()
@@ -44,6 +47,9 @@ def start(host, port, debug, ngrok, ngrok_host, ngrok_port):
 
     # start uvicorn
     def start_uvicorn(host, port, debug):
+        import gradio as gr  # keep this
+        import uvicorn
+
         click.echo(f"🚀 Starting service... http://{host}:{port}")
         uvicorn.run("src.main:asgi", host=host, port=port, reload=debug)
 
@@ -66,8 +72,6 @@ def start(host, port, debug, ngrok, ngrok_host, ngrok_port):
 @click.option("--force", is_flag=True, default=False, help="Force sync with remote (discard local changes).")
 def update(commit_hash, force):
     try:
-        import subprocess
-
         subprocess.run(["git", "fetch"], check=True)
         if force:
             click.echo("⚠️ Force resetting to origin/master...")
@@ -89,7 +93,6 @@ def update(commit_hash, force):
 @click.option("--files", "-f", multiple=True, help="Path(s) to requirements.txt file(s). Can specify multiple.")
 def install(files):
     try:
-        import subprocess
         from pathlib import Path
 
         from src.utils import cbruntime
