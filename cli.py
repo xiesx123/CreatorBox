@@ -43,7 +43,7 @@ def start(host, port, debug, ngrok, ngrok_host, ngrok_port):
             public_url = ng.connect(addr=port, hostname=hostname)
         else:
             public_url = ng.connect(addr=port)
-        click.echo(f"✅ ngrok tunnel started: {public_url}")
+        click.echo(f"✅ ngrok tunnel started1: {public_url}")
 
     # start uvicorn
     def start_uvicorn(host, port, debug):

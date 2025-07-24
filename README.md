@@ -153,7 +153,7 @@
 
 ### Speech
 
-- [x] Multiple Providers: Support switching between `EdgeTTS`, `CosyVoice2`, `F5TTS`, and `CoquiTTS` 
+- [x] Multiple Providers: Support switching between `EdgeTTS`, `ElevenLabs`, `CosyVoice2`, `F5TTS`, and `CoquiTTS` 
 - [x] Real-Time Speech Synthesis and Preview
 - [x] Voice Library: Includes `Built-in`, `Video`, and `Custom` voice types
 - [x] Voice Cloning: Supports `Voice Cloning`, `Voice Commands`, `Voice Conversion`, and `Cross-Language Cloning`

@@ -154,7 +154,7 @@
 
 ### 语音
 
-- [x] 多提供商: 支持 `EdgeTTS`、`CosyVoice2`、`F5TTS`、`CoquiTTS`切换
+- [x] 多提供商: 支持 `EdgeTTS`、 `ElevenLabs`、`CosyVoice2`、`F5TTS`、`CoquiTTS`切换
 - [x] 语音试听：实时语音合成及试听
 - [x] 音色库：内置 `内置`、`视频`、`自定义` 3种音色类型
 - [x] 音色克隆：支持 `语音克隆`、`语音指令`、`语音转换`、`跨语言克隆` 指令

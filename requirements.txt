@@ -35,6 +35,7 @@ faster_whisper==1.1.1
 # llm
 langchain==0.3.25
 langchain_community==0.3.25
+langchain_openai==0.3.25
 langchain_google_genai==2.1.5
 dashscope==1.23.5
 
@@ -54,8 +55,8 @@ fast_langdetect==0.3.2
 gradio==5.34.0
 uvicorn==0.20.0
 fastapi==0.115.12
-python_engineio==4.3.4
-python_socketio==5.7.2
+python_engineio==4.12.2
+python_socketio==5.13.0
 python_multipart==0.0.20
  
 # draft

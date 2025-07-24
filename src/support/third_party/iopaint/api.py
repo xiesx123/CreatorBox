@@ -169,14 +169,8 @@ class Api:
         self.app.mount(path, StaticFiles(directory=webapp, html=True), name="assets")
         # fmt: on
         global global_sio
-        if asgi == None:
-            self.sio = socketio.AsyncServer(async_mode="asgi", cors_allowed_origins="*")
-        else:
-            self.sio = sio
-        if asgi == None:
-            self.combined_asgi_app = socketio.ASGIApp(self.sio, self.app)
-        else:
-            self.combined_asgi_app = asgi
+        self.sio = sio if sio is not None else socketio.AsyncServer(async_mode="asgi", cors_allowed_origins="*")
+        self.combined_asgi_app = asgi if asgi is not None else socketio.ASGIApp(self.sio, self.app)
         self.app.mount("/ws", self.combined_asgi_app)
         global_sio = self.sio
 
