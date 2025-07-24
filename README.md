@@ -146,7 +146,7 @@
 
 ### Translation
 
-- [x] Multiple Providers: Support switching between `Gemini` and `DashScope`
+- [x] Multiple Providers: Support switching between `OpenAi`, `Gemini` and `DashScope`
 - [x] Custom Models and Prompt Commands
 - [x] Batch Processing for Long Texts
 

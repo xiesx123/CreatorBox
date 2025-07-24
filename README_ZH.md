@@ -147,7 +147,7 @@
 
 ### 翻译
 
-- [x] 多提供商: 支持 `Gemini`、`DashScope` 切换
+- [x] 多提供商: 支持 `OpenAi`、`Gemini`、`DashScope` 切换
 - [x] 自定义模型，指令提示词
 - [x] 超长文本批次处理
 
