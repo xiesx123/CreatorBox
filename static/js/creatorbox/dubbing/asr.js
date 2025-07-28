@@ -30,19 +30,13 @@ layui.define(['form', 'tool'], function (exports) {
 
     // 方法
     var mod = {
-
-        // 初始
         setData: function (data) {
             form_json = data;
             mod.switch();
         },
-
-        // 提供商
         setProviderData: function (data) {
             providers = data;
         },
-
-        // 切换
         switch: function () {
             const provider = form_json.asr_provider;
             const sections = {

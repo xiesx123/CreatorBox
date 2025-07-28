@@ -26,6 +26,15 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
         return types[type] || "未知"
     };
 
+    // 性别
+    var gender_type = function (type) {
+        types = {
+            1: "男",
+            2: "女",
+        }
+        return types[type] || "未知"
+    };
+
     // 请求参数
     var voice_search_params = ({ provider, model, locale, gender, init = false } = {}) => {
         const tts_provider = provider || form_json?.tts_provider;
@@ -78,7 +87,11 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
             list.forEach(obj => {
                 html += `<optgroup id="${obj.type}" label="${obj.group}">\n`;
                 obj.item.forEach(i => {
-                    html += `  <option value="${i.speaker}">` + (parseInt(i.gender) === 1 ? '男' : parseInt(i.gender) === 2 ? '女' : '未知') + " - " + (i.duration ? i.locale + " - " + i.speaker + " - " + i.duration : i.speaker) + `</option>\n`;
+                    if (i.speaker.indexOf(i.locale) > -1) {
+                        html += `  <option value="${i.speaker}">` + gender_type(i.gender) + " - " + i.locale + i.speaker.replace(i.locale, "") + `</option>\n`;
+                    } else {
+                        html += `  <option value="${i.speaker}">` + gender_type(i.gender) + " - " + i.locale + " - " + i.speaker.replace(i.locale, "") + `</option>\n`;
+                    }
                 });
                 html += `</optgroup>\n`;
             });
@@ -119,7 +132,6 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
                 tts_model = $('input[name="tts_model"]').val()
                 locale = $('select[name="locale"] option:selected').val()
                 tool.post("tts/search", voice_search_params({ provider: form_json.tts_provider, model: tts_model, locale: locale, gender: 0, init: true }), voice_search_callback, true)
-                // 关闭 prompt
                 layer.close(index);
             });
         }
@@ -156,6 +168,7 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
             form_json.tts_vc = $('input[name="tts_vc"]').is(':checked')
             var isvalid = form.validate('.tts_text');
             if (isvalid) {
+                // 查找缓存
                 const findItemByVoice = (data) =>
                     table_json.find(item =>
                         item.provider == data.tts_provider &&
@@ -170,6 +183,7 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
                     layer.msg('正在播放缓存音频', { icon: 1 });
                     return voice_play(item.url);
                 }
+                // 生成试听
                 output = `${form_json.tts_provider}_${form_json.tts_voice}_${form_json.tts_volume}_${form_json.tts_rate}_${form_json.tts_text.length}_${form_json.tts_remarks.length}`
                 tool.post("tts/gen", JSON.stringify({
                     "provider": form_json.tts_provider,

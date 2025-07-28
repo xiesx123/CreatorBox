@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-07-10 11:15+0800\n"
+"POT-Creation-Date: 2025-07-28 17:42+0800\n"
 "PO-Revision-Date: 2025-06-03 23:16+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -18,41 +18,37 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: static/templates/index.html:76
+#: static/templates/index.html:78
 msgid "group_feature"
 msgstr "Feature"
 
-#: static/templates/index.html:79
+#: static/templates/index.html:81
 msgid "nav_speaker"
 msgstr "Speaker Management"
 
-#: static/templates/index.html:81
+#: static/templates/index.html:83
 msgid "nav_gradio"
 msgstr "Component App"
 
 #: static/templates/index.html:85
+msgid "nav_set"
+msgstr "Preferences"
+
+#: static/templates/index.html:89
 msgid "group_assist"
 msgstr "Assist"
 
-#: static/templates/index.html:88
+#: static/templates/index.html:93
+msgid "nav_mask"
+msgstr "Mask Painter"
+
+#: static/templates/index.html:96
 msgid "nav_editor"
 msgstr "Data Editor"
 
-#: static/templates/index.html:90
+#: static/templates/index.html:98
 msgid "nav_play"
 msgstr "Video Playback"
-
-#: static/templates/index.html:92
-msgid "nav_mask"
-msgstr "WaterMaskRemove"
-
-#: static/templates/index.html:95
-msgid "nav_log"
-msgstr "Live Log"
-
-#: static/templates/index.html:98
-msgid "nav_set"
-msgstr "Preferences"
 
 #: static/templates/index.html:102
 msgid "group_doc"
@@ -247,35 +243,35 @@ msgstr "Draft"
 msgid "draft_volume"
 msgstr "Draft Volume"
 
-#: static/templates/index.html:630
+#: static/templates/index.html:628
 msgid "draft_style_dts"
 msgstr "Dubbing Subtitles"
 
-#: static/templates/index.html:657
+#: static/templates/index.html:655
 msgid "draft_style_nts"
 msgstr "Original Subtitles"
 
-#: static/templates/index.html:683
+#: static/templates/index.html:681
 msgid "silence_threshold"
 msgstr "Silence Detection"
 
-#: static/templates/index.html:710
+#: static/templates/index.html:708
 msgid "submit"
 msgstr "Execute"
 
-#: static/templates/index.html:731
+#: static/templates/index.html:729
 msgid "table_tools_preview"
 msgstr "Preview"
 
-#: static/templates/index.html:732
+#: static/templates/index.html:730
 msgid "table_tools_delete"
 msgstr "Del"
 
-#: static/templates/index.html:733
+#: static/templates/index.html:731
 msgid "table_tools_move_up"
 msgstr "Up"
 
-#: static/templates/index.html:734
+#: static/templates/index.html:732
 msgid "table_tools_move_down"
 msgstr "Down"
 

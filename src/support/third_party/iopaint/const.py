@@ -120,9 +120,9 @@ Quality of image encoding, 0-100. Default is 95, higher quality will generate la
 """
 
 INTERACTIVE_SEG_HELP = "Enable interactive segmentation using Segment Anything."
-INTERACTIVE_SEG_MODEL_HELP = "Model size: mobile_sam < vit_b < vit_l < vit_h. Bigger model size means better segmentation but slower speed."
+INTERACTIVE_SEG_MODEL_HELP = "模型 sam < vit_b < vit_l < vit_h. Bigger model size means better segmentation but slower speed."
 REMOVE_BG_HELP = "Enable remove background plugin."
-REMOVE_BG_DEVICE_HELP = "'cuda' only supports briaai models(briaai/RMBG-1.4 and briaai/RMBG-2.0)"
+REMOVE_BG_DEVICE_HELP = "设备 'cuda' only supports briaai models(briaai/RMBG-1.4 and briaai/RMBG-2.0)"
 ANIMESEG_HELP = "Enable anime segmentation plugin. Always run on CPU"
 REALESRGAN_HELP = "Enable realesrgan super resolution"
 GFPGAN_HELP = "Enable GFPGAN face restore. To also enhance background, use with --enable-realesrgan"

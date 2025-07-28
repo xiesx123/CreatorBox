@@ -77,26 +77,25 @@
           <li class="layui-nav-item layui-nav-itemed">
             <a href="javascript:;">{{ _("group_feature") }}</a>
             <dl class="layui-nav-child">
-              {% if data.nav.mask_enable %}
-              <dd><a data-path="/mask" href="javascript:;"><i style="font-size: 18px"
-                    class="layui-icon layui-icon-picture"></i> {{ _("nav_mask") }}</a></dd>
-              {% endif %}
               <dd><a data-path="/speaker" href="javascript:;">
                   <i style="font-size: 18px" class="layui-icon layui-icon-headset"></i> {{ _("nav_speaker") }}</a></dd>
               <dd><a data-path="/gradio" href="javascript:;">
                   <i style="font-size: 18px" class="layui-icon layui-icon-component"></i> {{ _("nav_gradio") }}</a></dd>
+              <dd><a data-path="/settings" href="javascript:;"><i style="font-size: 16px"
+                    class="layui-icon layui-icon-set"></i> {{ _("nav_set") }}</a></dd>
             </dl>
           </li>
           <li class="layui-nav-item layui-nav-itemed">
             <a href="javascript:;">{{ _("group_assist") }}</a>
             <dl class="layui-nav-child">
+              {% if data.nav.mask_enable %}
+              <dd><a data-path="/mask" href="javascript:;"><i style="font-size: 18px"
+                    class="layui-icon layui-icon-picture"></i> {{ _("nav_mask") }}</a></dd>
+              {% endif %}
               <dd><a data-path="/editor" href="javascript:;"><i style="font-size: 18px"
                     class="layui-icon layui-icon-code-circle"></i> {{ _("nav_editor") }}</a></dd>
               <dd><a data-path="/player" href="javascript:;"><i style="font-size: 18px"
                     class="layui-icon layui-icon-play"></i> {{ _("nav_play") }}</a></dd>
-              <dd><a data-path="/settings" href="javascript:;"><i style="font-size: 16px"
-                    class="layui-icon layui-icon-set"></i>
-                  {{ _("nav_set") }}</a></dd>
             </dl>
           </li>
           <li class="layui-nav-item layui-nav-itemed">
@@ -685,12 +684,12 @@
                           autocomplete="off" class="layui-input" min="-100" max="0" step="10" lay-affix="number">
                       </div>
                       <div class="layui-input-inline" style="width: 120px;">
-                        <input type="number" lay-verify="required" name="silence_min" placeholder="最小长度"
+                        <input type="number" lay-verify="required" name="silence_min_len" placeholder="最小长度"
                           autocomplete="off" class="layui-input" min="1" max="1000" step="1" lay-affix="number">
                       </div>
                       <div class="layui-input-inline" style="width: 120px;">
                         <input type="number" lay-verify="required" name="silence_keep" placeholder="保留长度"
-                          autocomplete="off" class="layui-input" min="0" max="1000" step="1" lay-affix="number">
+                          autocomplete="off" class="layui-input" min="1" max="1000" step="1" lay-affix="number">
                       </div>
                     </div>
 

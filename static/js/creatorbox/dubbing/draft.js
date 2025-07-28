@@ -8,7 +8,6 @@ layui.define(['colorpicker'], function (exports) {
 
     // 方法
     var mod = {
-        // 初始
         setData: function (data) {
             form_json = data
             // 配音字幕
