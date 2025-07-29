@@ -51,6 +51,7 @@ layui.define(['form', 'tool'], function (exports) {
             const provider = form_json.llm_provider;
             const divs = {
                 Deeplx: ['#deeplx_div', '#opt_div'],
+                OpenAi: ['#llm_div', '#opt_div'],
                 Gemini: ['#llm_div', '#opt_div'],
                 DashScope: ['#llm_div', '#opt_div'],
                 ignore: []
