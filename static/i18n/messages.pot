@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-07-28 17:42+0800\n"
+"POT-Creation-Date: 2025-07-31 13:19+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,239 +38,243 @@ msgid "group_assist"
 msgstr ""
 
 #: static/templates/index.html:93
-msgid "nav_mask"
+msgid "nav_masker_remove"
 msgstr ""
 
 #: static/templates/index.html:96
-msgid "nav_editor"
+msgid "nav_masker_painter"
 msgstr ""
 
 #: static/templates/index.html:98
+msgid "nav_editor"
+msgstr ""
+
+#: static/templates/index.html:100
 msgid "nav_play"
 msgstr ""
 
-#: static/templates/index.html:102
+#: static/templates/index.html:104
 msgid "group_doc"
 msgstr ""
 
-#: static/templates/index.html:105
+#: static/templates/index.html:107
 msgid "nav_swagger"
 msgstr ""
 
-#: static/templates/index.html:107
+#: static/templates/index.html:109
 msgid "nav_vitepress"
 msgstr ""
 
-#: static/templates/index.html:127
+#: static/templates/index.html:129
 msgid "dub.base"
 msgstr ""
 
-#: static/templates/index.html:133
+#: static/templates/index.html:135
 msgid "video_url"
 msgstr ""
 
-#: static/templates/index.html:137
+#: static/templates/index.html:139
 msgid "video_placeholder"
 msgstr ""
 
-#: static/templates/index.html:143
+#: static/templates/index.html:145
 msgid "locale"
 msgstr ""
 
-#: static/templates/index.html:146 static/templates/index.html:246
-#: static/templates/index.html:261 static/templates/index.html:273
-#: static/templates/index.html:285 static/templates/index.html:297
-#: static/templates/index.html:312 static/templates/index.html:514
+#: static/templates/index.html:148 static/templates/index.html:248
+#: static/templates/index.html:263 static/templates/index.html:275
+#: static/templates/index.html:287 static/templates/index.html:299
+#: static/templates/index.html:314 static/templates/index.html:516
 msgid "select_or_search"
 msgstr ""
 
-#: static/templates/index.html:155
+#: static/templates/index.html:157
 msgid "mode_type"
 msgstr ""
 
-#: static/templates/index.html:165
+#: static/templates/index.html:167
 msgid "align_type"
 msgstr ""
 
-#: static/templates/index.html:174
+#: static/templates/index.html:176
 msgid "options"
 msgstr ""
 
-#: static/templates/index.html:176
+#: static/templates/index.html:178
 msgid " preview"
 msgstr ""
 
-#: static/templates/index.html:177
+#: static/templates/index.html:179
 msgid " rebuild"
 msgstr ""
 
-#: static/templates/index.html:182
+#: static/templates/index.html:184
 msgid "suffix"
 msgstr ""
 
-#: static/templates/index.html:185
+#: static/templates/index.html:187
 msgid "suffix_placeholder"
 msgstr ""
 
-#: static/templates/index.html:203
+#: static/templates/index.html:205
 msgid "dub.subtitle"
 msgstr ""
 
-#: static/templates/index.html:211 static/templates/index.html:373
+#: static/templates/index.html:213 static/templates/index.html:375
 msgid "debug"
 msgstr ""
 
-#: static/templates/index.html:218 static/templates/index.html:380
-#: static/templates/index.html:477
+#: static/templates/index.html:220 static/templates/index.html:382
+#: static/templates/index.html:479
 msgid "provider"
 msgstr ""
 
-#: static/templates/index.html:232
+#: static/templates/index.html:234
 msgid "subtitle_url"
 msgstr ""
 
-#: static/templates/index.html:243
+#: static/templates/index.html:245
 msgid "draft_name"
 msgstr ""
 
-#: static/templates/index.html:258 static/templates/index.html:406
-#: static/templates/index.html:494
+#: static/templates/index.html:260 static/templates/index.html:408
+#: static/templates/index.html:496
 msgid "model"
 msgstr ""
 
-#: static/templates/index.html:270
+#: static/templates/index.html:272
 msgid "whisper_size"
 msgstr ""
 
-#: static/templates/index.html:282
+#: static/templates/index.html:284
 msgid "whisper_temperature"
 msgstr ""
 
-#: static/templates/index.html:294
+#: static/templates/index.html:296
 msgid "whisper_length"
 msgstr ""
 
-#: static/templates/index.html:309
+#: static/templates/index.html:311
 msgid "uvr"
 msgstr ""
 
-#: static/templates/index.html:321
+#: static/templates/index.html:323
 msgid "align_enable"
 msgstr ""
 
-#: static/templates/index.html:328
+#: static/templates/index.html:330
 msgid "emotion_enable"
 msgstr ""
 
-#: static/templates/index.html:335
+#: static/templates/index.html:337
 msgid "speaker_use_num"
 msgstr ""
 
-#: static/templates/index.html:343
+#: static/templates/index.html:345
 msgid "speaker_range"
 msgstr ""
 
-#: static/templates/index.html:369
+#: static/templates/index.html:371
 msgid "dub.translation"
 msgstr ""
 
-#: static/templates/index.html:414
+#: static/templates/index.html:416
 msgid "llm_temperature"
 msgstr ""
 
-#: static/templates/index.html:422
+#: static/templates/index.html:424
 msgid "llm_top_p"
 msgstr ""
 
-#: static/templates/index.html:431
+#: static/templates/index.html:433
 msgid "llm_use_cache"
 msgstr ""
 
-#: static/templates/index.html:438
+#: static/templates/index.html:440
 msgid "llm_instruct"
 msgstr ""
 
-#: static/templates/index.html:450
+#: static/templates/index.html:452
 msgid "llm_batch_size"
 msgstr ""
 
-#: static/templates/index.html:471
+#: static/templates/index.html:473
 msgid "dub.dubbing"
 msgstr ""
 
-#: static/templates/index.html:502
+#: static/templates/index.html:504
 msgid "tts_gender"
 msgstr ""
 
-#: static/templates/index.html:510
+#: static/templates/index.html:512
 msgid "tts_voice"
 msgstr ""
 
-#: static/templates/index.html:520
+#: static/templates/index.html:522
 msgid "tts_volume"
 msgstr ""
 
-#: static/templates/index.html:530
+#: static/templates/index.html:532
 msgid "tts_rate"
 msgstr ""
 
-#: static/templates/index.html:542
+#: static/templates/index.html:544
 msgid "tts_step"
 msgstr ""
 
-#: static/templates/index.html:560
+#: static/templates/index.html:562
 msgid "tts_instruct"
 msgstr ""
 
-#: static/templates/index.html:571
+#: static/templates/index.html:573
 msgid "tts_vc"
 msgstr ""
 
-#: static/templates/index.html:578
+#: static/templates/index.html:580
 msgid "tts_remarks"
 msgstr ""
 
-#: static/templates/index.html:587
+#: static/templates/index.html:589
 msgid "tts_play"
 msgstr ""
 
-#: static/templates/index.html:608
+#: static/templates/index.html:610
 msgid "dub.draft"
 msgstr ""
 
-#: static/templates/index.html:614
+#: static/templates/index.html:616
 msgid "draft_volume"
 msgstr ""
 
-#: static/templates/index.html:628
+#: static/templates/index.html:630
 msgid "draft_style_dts"
 msgstr ""
 
-#: static/templates/index.html:655
+#: static/templates/index.html:657
 msgid "draft_style_nts"
 msgstr ""
 
-#: static/templates/index.html:681
+#: static/templates/index.html:683
 msgid "silence_threshold"
 msgstr ""
 
-#: static/templates/index.html:708
+#: static/templates/index.html:710
 msgid "submit"
 msgstr ""
 
-#: static/templates/index.html:729
+#: static/templates/index.html:731
 msgid "table_tools_preview"
 msgstr ""
 
-#: static/templates/index.html:730
+#: static/templates/index.html:732
 msgid "table_tools_delete"
 msgstr ""
 
-#: static/templates/index.html:731
+#: static/templates/index.html:733
 msgid "table_tools_move_up"
 msgstr ""
 
-#: static/templates/index.html:732
+#: static/templates/index.html:734
 msgid "table_tools_move_down"
 msgstr ""
 

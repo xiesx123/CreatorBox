@@ -64,12 +64,10 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'notice'], function
 				},
 				success: function (data, status) {
 					console.debug(data)
-					if (data.code == 0) {
-						if (callback) {
-							callback(data);
-						}
+					if (data?.code === 0) {
+						callback?.(data);
 					} else {
-						toast.error(data.message, "提示");
+						toast.error(data?.message || "", "提示");
 					}
 					layer.close(idx);
 				},
@@ -94,12 +92,10 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'notice'], function
 				},
 				success: function (data, status) {
 					console.debug(data)
-					if (data.code == 0) {
-						if (callback) {
-							callback(data);
-						}
+					if (data?.code === 0) {
+						callback?.(data);
 					} else {
-						toast.error(data.message, "提示");
+						toast.error(data?.message || "", "提示");
 					}
 					layer.close(idx);
 				},
@@ -126,12 +122,10 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'notice'], function
 					},
 					success: function (data, status) {
 						console.debug(data)
-						if (data.code == 0) {
-							if (callback) {
-								callback();
-							}
+						if (data?.code === 0) {
+							callback?.(data);
 						} else {
-							toast.error(data.message, "提示");
+							toast.error(data?.message || "", "提示");
 						}
 						layer.close(idx);
 					},

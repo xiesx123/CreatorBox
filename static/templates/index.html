@@ -81,6 +81,10 @@
                   <i style="font-size: 18px" class="layui-icon layui-icon-headset"></i> {{ _("nav_speaker") }}</a></dd>
               <dd><a data-path="/gradio" href="javascript:;">
                   <i style="font-size: 18px" class="layui-icon layui-icon-component"></i> {{ _("nav_gradio") }}</a></dd>
+              {% if data.nav.mask_enable %}
+              <dd><a data-path="/masker" href="javascript:;"><i style="font-size: 18px"
+                    class="layui-icon layui-icon-theme"></i> {{ _("nav_masker_remove") }}</a></dd>
+              {% endif %}
               <dd><a data-path="/settings" href="javascript:;"><i style="font-size: 16px"
                     class="layui-icon layui-icon-set"></i> {{ _("nav_set") }}</a></dd>
             </dl>
@@ -88,10 +92,8 @@
           <li class="layui-nav-item layui-nav-itemed">
             <a href="javascript:;">{{ _("group_assist") }}</a>
             <dl class="layui-nav-child">
-              {% if data.nav.mask_enable %}
-              <dd><a data-path="/mask" href="javascript:;"><i style="font-size: 18px"
-                    class="layui-icon layui-icon-picture"></i> {{ _("nav_mask") }}</a></dd>
-              {% endif %}
+              <dd><a data-path="/app/masker" href="javascript:;"><i style="font-size: 18px"
+                    class="layui-icon layui-icon-template"></i> {{ _("nav_masker_painter") }}</a></dd>
               <dd><a data-path="/editor" href="javascript:;"><i style="font-size: 18px"
                     class="layui-icon layui-icon-code-circle"></i> {{ _("nav_editor") }}</a></dd>
               <dd><a data-path="/player" href="javascript:;"><i style="font-size: 18px"
@@ -896,6 +898,9 @@
           // 开启预览
           $("button[lay-on='video_preview']").removeClass("layui-btn-disabled").prop("disabled", false);
         }
+        else if (data.type == "masker") {
+          toast.info(data.message);
+        }
         else if (data.type == "error") {
           toast.error(data.message, "任务处理异常");
         }
@@ -998,7 +1003,11 @@
           // if ($(window).width() <= 768) {
           //   $('body').toggleClass('collapse');
           // }
-          util.openWin({ url: path, target: "creatorbox" });
+          if (path == "/app/masker") {
+            tool.get(path, {}, null, true)
+          } else {
+            util.openWin({ url: path, target: "creatorbox" });
+          }
         }
       });
     });

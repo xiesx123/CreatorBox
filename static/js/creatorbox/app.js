@@ -8,13 +8,13 @@ layui.config({
 	// 网页翻译（暂时屏蔽）
 	// translate: 'mod/translate',
 	// 字幕
-	asr: 'dubbing/asr',
+	asr: 'dubb/asr',
 	// 翻译
-	llm: 'dubbing/llm',
+	llm: 'dubb/llm',
 	// 配音
-	tts: 'dubbing/tts',
+	tts: 'dubb/tts',
 	// 草稿
-	draft: 'dubbing/draft',
+	draft: 'dubb/draft',
 });
 
 // 节流函数
