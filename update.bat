@@ -1,4 +1,6 @@
 @echo off
+chcp 65001 > nul
+
 REM Set the conda environment name
 set CONDA_ENV_NAME=creatorbox
 
