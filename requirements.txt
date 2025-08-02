@@ -4,6 +4,7 @@ torchaudio==2.6.0
 torchvision==0.21.0
 numpy==1.26.4
 pynini==2.1.5
+diffusers==0.29.2
 transformers==4.51.3
 
 # base
@@ -25,8 +26,7 @@ scenedetect==0.6.6
 pydub==0.25.1
 librosa==0.10.2
 pyannote.audio==3.3.2
-audio_separator[cpu]==0.30.2; sys_platform == 'win32'
-audio_separator[gpu]==0.30.2; sys_platform != 'win32'
+audio_separator[cpu]==0.30.2
 
 # asr
 funasr==1.2.6
@@ -68,4 +68,3 @@ nltk==3.9.1
 psutil==7.0.0
 tinydb==4.8.2
 tenacity==9.1.2
-diffusers==0.29.2
