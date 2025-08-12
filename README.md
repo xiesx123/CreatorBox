@@ -1,15 +1,14 @@
 <div align="center">
 <h1 align="center">CreatorBox 💸</h1>
 
-<!-- <p align="center">
-  <a href="https://github.com/xiesx123/CreatorBox/stargazers">
-    <img src="https://img.shields.io/badge/Stars-%E2%9D%A4-red?style=for-the-badge" alt="Stargazers">
-  </a>
-</p> -->
+<!-- 
+[![Discord](https://img.shields.io/discord/1380024079871905883?logo=discord&logoColor=white&color=%44CC11&label=Discord)](https://discord.gg/ZSeETM6bsS)
+-->
+
 [![VitePress](https://img.shields.io/badge/Vitepress-Doc-3E63DD?logo=markdown)](https://xiesx123.github.io/CreatorBox)
-[![Discord](https://img.shields.io/badge/Discord-Online-44CC11?logo=discord&logoColor=white)](https://discord.gg/ZSeETM6bsS)
+[![Discord](https://img.shields.io/badge/Discord-Online-44CC11?logo=discord&logoColor=white)](https://discord.gg/ZSeETM6bsS) 
 ![Version](https://img.shields.io/github/tag/xiesx123/CreatorBox.svg?style=flat&label=Release)
-![GitHub stars](https://img.shields.io/github/stars/xiesx123/CreatorBox)
+[![GitHub stars](https://img.shields.io/github/stars/xiesx123/CreatorBox)](https://github.com/xiesx123/CreatorBox/stargazers)
 [![Google Colab](https://img.shields.io/badge/Google_Colab-Launch-yellow?logo=googlecolab&)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
 [![Kaggle](https://img.shields.io/badge/Kaggle-Launch-blue?logo=kaggle)](https://www.kaggle.com/code/xiesx123/creatorbox)
 

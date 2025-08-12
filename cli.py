@@ -115,7 +115,7 @@ def install(files):
             click.echo("Environment Info:\n" + "\n".join([f"-  {cbruntime.pad_string(k, length=25,align='left')}: {v}" for k, v in _package.items()]))
 
     except subprocess.CalledProcessError as e:
-        click.echo("❌ Installation failed.", err=True)
+        click.echo("❌ Installation failed", err=True)
     except Exception as e:
         click.echo(f"❌ Unexpected error: {str(e)}", err=True)
         traceback.print_exc()

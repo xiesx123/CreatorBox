@@ -37,6 +37,7 @@ setuptools.setup(
         ],
         "dev": [
             "autoflake",
+            "babel",
         ],
     },
     classifiers=[
