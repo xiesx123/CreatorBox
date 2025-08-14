@@ -13,7 +13,7 @@ def load_requirements():
 
 setuptools.setup(
     name="creatorbox",
-    version="1.0.16",
+    version="1.0.17",
     author="xiesx123",
     author_email="xiesx123@gmail.com",
     description="🚀🎬 Flexible, efficient, and scalable toolbox for editing and dubbing, unleashing creative potential",
