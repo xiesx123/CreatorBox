@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-08-12 15:10+0800\n"
+"POT-Creation-Date: 2025-08-15 12:41+0800\n"
 "PO-Revision-Date: 2025-06-03 23:16+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh\n"
@@ -68,7 +68,7 @@ msgstr "使用教程"
 
 #: static/templates/index.html:112
 msgid "nav_discord"
-msgstr "社区交流"
+msgstr "加入社区"
 
 #: static/templates/index.html:132
 msgid "dub.base"
