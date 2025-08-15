@@ -75,17 +75,24 @@ def start(host, port, debug, ngrok, ngrok_host, ngrok_port):
 
 
 @cli.command(help="检查更新 (Check for updates)")
-@option("--hash", "-h", "commit_hash", default=None, help="Specify the Git commit hash to checkout. Defaults to pulling the latest version.")
+@option("--commit", "-c", default=None, help="Specify the Git commit hash to checkout.")
+@option("--tag", "-t", default=None, help="Specify the Git tag to checkout.")
 @option("--force", is_flag=True, default=False, show_default=True, help="Force sync with remote (discard local changes).")
-def update(commit_hash, force):
+def update(commit, tag, force):
     try:
-        subprocess.run(["git", "fetch"], check=True)
-        if force:
-            click.echo("⚠️  Force resetting to origin/master...")
+        if commit and tag:
+            click.echo("❌ Cannot use --hash and --tag together.", err=True)
+            return
+        subprocess.run(["git", "fetch", "--all"], check=True)
+        if commit:
+            click.echo(f"📦 Checking out to commit: {commit}")
+            result = subprocess.run(["git", "checkout", commit], capture_output=True, text=True, encoding="utf-8", check=True)
+        elif tag:
+            click.echo(f"📦 Checking out to tag: {tag}")
+            result = subprocess.run(["git", "checkout", "tags/" + tag], capture_output=True, text=True, encoding="utf-8", check=True)
+        elif force:
+            click.echo(f"📦 Force resetting to origin/master...")
             result = subprocess.run(["git", "reset", "--hard", "origin/master"], capture_output=True, text=True, encoding="utf-8", check=True)
-        elif commit_hash:
-            click.echo(f"📦 Checking out to commit: {commit_hash}")
-            result = subprocess.run(["git", "checkout", hash], capture_output=True, text=True, encoding="utf-8",  check=True)
         else:
             click.echo("📥 Pulling latest changes from remote...")
             result = subprocess.run(["git", "pull"], capture_output=True, text=True, encoding="utf-8", check=True)
@@ -93,7 +100,6 @@ def update(commit_hash, force):
         click.echo(output)
     except Exception as e:
         click.echo(f"❌ error: {str(e)}", err=True)
-        traceback.print_exc()
 
 
 @cli.command(help="依赖安装 (Dependency installation)")
@@ -125,7 +131,6 @@ def install(files):
         click.echo("❌ Installation failed", err=True)
     except Exception as e:
         click.echo(f"❌ Unexpected error: {str(e)}", err=True)
-        traceback.print_exc()
 
 
 @cli.command(help="网络代理 (Proxy settings)")
