@@ -155,7 +155,7 @@ def proxy(host, port, username, password, site, timeout):
 
 
 @cli.command(help="认证鉴权 (Authentication)")
-@click.option("--action", "-a", type=click.Choice(["register", "login", "restPassword"]), default="login", show_default=True, required=True, help="choose action")
+@click.option("--action", "-a", type=click.Choice(["register", "login", "resetpwd", "user"]), default="login", show_default=True, required=True, help="choose action")
 @click.option("--email", "-e", type=str, required=True, help="email")
 @click.option("--password", "-p", type=str, help="password")
 @click.option("--proxy", is_flag=True, default=False, show_default=True, help="enable proxy")
@@ -166,10 +166,13 @@ def auth(action, email, password, proxy):
         click.echo(f"😊 Starting {action} -> {email}")
         if action == "register":
             result = auth.register_with_email_and_password(email, password, proxy)
-            msg = f"password -> {result.password}"
-        elif action == "restPassword":
+            msg = f"please check your email to verify."
+        elif action == "resetpwd":
             result = auth.send_email_password_reset(email)
             msg = f"please check your email and click to reset your password."
+        elif action == "user":
+            result = auth.get_account_info()
+            msg =  f"uuid -> {result.uuid} ({result.subscriber.name})"
         else:
             result = auth.sign_in_with_email_and_password(email, password, proxy)
             msg = f"token -> {result.token}"
