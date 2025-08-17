@@ -5,14 +5,11 @@ import traceback
 
 try:
     import click
-    from click import group, option
 except:
     subprocess.check_call([sys.executable, "-m", "pip", "install", "click"])
     import click
-    from click import group, option
 
-
-@group()
+@click.group()
 def cli():
     """
     CreatorBox CLI
@@ -25,12 +22,12 @@ def cli():
 
 
 @cli.command(help="启动服务 (Start service)")
-@option("--host", "-h", type=str, default="0.0.0.0", show_default=True, required=True, help="host")
-@option("--port", "-p", type=int, default=8000, show_default=True, required=True, help="port")
-@option("--debug", is_flag=True, default=False, show_default=True, help="enable debug mode")
-@option("--ngrok", is_flag=True, default=False, show_default=True, help="enable ngrok tunnel")
-@option("--ngrok_host", "-nh", type=str, default="toucan-real-informally.ngrok-free.app", show_default=True, help="ngrok host")
-@option("--ngrok_port", "-np", type=int, default=80, show_default=True, help="ngrok port")
+@click.option("--host", "-h", type=str, default="0.0.0.0", show_default=True, required=True, help="host")
+@click.option("--port", "-p", type=int, default=8000, show_default=True, required=True, help="port")
+@click.option("--debug", is_flag=True, default=False, show_default=True, help="enable debug mode")
+@click.option("--ngrok", is_flag=True, default=False, show_default=True, help="enable ngrok tunnel")
+@click.option("--ngrok_host", "-nh", type=str, default="toucan-real-informally.ngrok-free.app", show_default=True, help="ngrok host")
+@click.option("--ngrok_port", "-np", type=int, default=80, show_default=True, help="ngrok port")
 def start(host, port, debug, ngrok, ngrok_host, ngrok_port):
     # spawn
     import multiprocessing as mp
@@ -75,9 +72,9 @@ def start(host, port, debug, ngrok, ngrok_host, ngrok_port):
 
 
 @cli.command(help="检查更新 (Check for updates)")
-@option("--commit", "-c", default=None, help="Specify the Git commit hash to checkout.")
-@option("--tag", "-t", default=None, help="Specify the Git tag to checkout.")
-@option("--force", is_flag=True, default=False, show_default=True, help="Force sync with remote (discard local changes).")
+@click.option("--commit", "-c", default=None, help="Specify the Git commit hash to checkout.")
+@click.option("--tag", "-t", default=None, help="Specify the Git tag to checkout.")
+@click.option("--force", is_flag=True, default=False, show_default=True, help="Force sync with remote (discard local changes).")
 def update(commit, tag, force):
     try:
         if commit and tag:
@@ -103,7 +100,7 @@ def update(commit, tag, force):
 
 
 @cli.command(help="依赖安装 (Dependency installation)")
-@option("--files", "-f", multiple=True, help="Path(s) to requirements.txt file(s). Can specify multiple.")
+@click.option("--files", "-f", multiple=True, help="Path(s) to requirements.txt file(s). Can specify multiple.")
 def install(files):
     try:
         from pathlib import Path
@@ -134,12 +131,12 @@ def install(files):
 
 
 @cli.command(help="网络代理 (Proxy settings)")
-@option("--host", "-h", type=str, default="127.0.0.1", show_default=True, required=True, help="host")
-@option("--port", "-p", type=int, default=10808, show_default=True, required=True, help="port")
-@option("--username", "-u", type=str, default=None, help="username")
-@option("--password", "-pwd", type=str, default=None, help="password")
-@option("--site", "-s", type=str, default="https://www.google.com", show_default=True, help="website")
-@option("--timeout", "-t", type=int, default=5, show_default=True, help="timeout")
+@click.option("--host", "-h", type=str, default="127.0.0.1", show_default=True, required=True, help="host")
+@click.option("--port", "-p", type=int, default=10808, show_default=True, required=True, help="port")
+@click.option("--username", "-u", type=str, default=None, help="username")
+@click.option("--password", "-pwd", type=str, default=None, help="password")
+@click.option("--site", "-s", type=str, default="https://www.google.com", show_default=True, help="website")
+@click.option("--timeout", "-t", type=int, default=5, show_default=True, help="timeout")
 def proxy(host, port, username, password, site, timeout):
     try:
         from src.app.proxy import ProxyHelper
@@ -171,7 +168,7 @@ def auth(action, email, password, proxy):
             result = auth.send_email_password_reset(email)
             msg = f"please check your email and click to reset your password."
         elif action == "user":
-            result = auth.get_account_info()
+            result = auth.get_account_info(email)
             msg =  f"uuid -> {result.uuid} ({result.subscriber.name})"
         else:
             result = auth.sign_in_with_email_and_password(email, password, proxy)

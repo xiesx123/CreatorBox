@@ -1,7 +1,32 @@
-__pycache__
-*.log
+### VS Code ###
+.vscode/
 .pyarmor/
-logs/
+*.log
+*.exe
+*.msi
+*.mp4
+edge/
+jre/
+*.pyc
+**/temp/
+
+### Node ###
+**/node_modules/
+**/dist/
+**/cache/
+**/docs/package-lock.json
+
+### CreatorBox ###
+*.egg-info/
+.gradio/
+build/
 models/
 webapp/
-static/watermark.png
+
+### 排除 ###
+!r3.exe
+!**/matcha/models/
+!webapp/data/gradio.json
+
+
+
