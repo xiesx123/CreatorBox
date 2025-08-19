@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap:https://xiesx123.github.io/CreatorBox/sitemap.xml
