@@ -1,35 +1,33 @@
+import datetime
+import json
+import math
 import re
+import socket
+import threading
 import time
 import warnings
-import six
+from collections import OrderedDict
+from random import randrange
+from urllib.parse import quote, urlencode
+from uuid import uuid4
 
+import python_jwt as jwt
 import requests
+import six
+from Crypto.PublicKey import RSA
+from oauth2client.service_account import ServiceAccountCredentials
 from requests import Session
 from requests.adapters import HTTPAdapter
 from requests.exceptions import HTTPError
 
-from urllib.parse import urlencode, quote
-import json
-import math
-from random import randrange
-import time
-from collections import OrderedDict
-import threading
-import socket
-from oauth2client.service_account import ServiceAccountCredentials
-from gcloud import storage
-from uuid import uuid4
-
-import python_jwt as jwt
-from Crypto.PublicKey import RSA
-import datetime
 
 def initialize_app(config):
     return Firebase(config)
 
 
 class Firebase:
-    """ Firebase Interface """
+    """Firebase Interface"""
+
     def __init__(self, config):
         self.api_key = config["apiKey"]
         self.auth_domain = config["authDomain"]
@@ -38,11 +36,7 @@ class Firebase:
         self.credentials = None
         self.requests = requests.Session()
         if config.get("serviceAccount"):
-            scopes = [
-                'https://www.googleapis.com/auth/firebase.database',
-                'https://www.googleapis.com/auth/userinfo.email',
-                "https://www.googleapis.com/auth/cloud-platform"
-            ]
+            scopes = ["https://www.googleapis.com/auth/firebase.database", "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/cloud-platform"]
             service_account_type = type(config["serviceAccount"])
             if service_account_type is str:
                 self.credentials = ServiceAccountCredentials.from_json_keyfile_name(config["serviceAccount"], scopes)
@@ -54,10 +48,10 @@ class Firebase:
         #     # ProtocolError('Connection aborted.', error(13, 'Permission denied'))
         #     adapter = appengine.AppEngineAdapter(max_retries=3)
         # else:
-            # adapter = HTTPAdapter()
+        # adapter = HTTPAdapter()
         adapter = HTTPAdapter()
 
-        for scheme in ('http://', 'https://'):
+        for scheme in ("http://", "https://"):
             self.requests.mount(scheme, adapter)
 
     def auth(self):
@@ -71,7 +65,8 @@ class Firebase:
 
 
 class Auth:
-    """ Authentication Service """
+    """Authentication Service"""
+
     def __init__(self, api_key, requests, credentials):
         self.api_key = api_key
         self.current_user = None
@@ -89,7 +84,7 @@ class Auth:
 
     def sign_in_anonymous(self):
         request_ref = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key={0}".format(self.api_key)
-        headers = {"content-type": "application/json; charset=UTF-8" }
+        headers = {"content-type": "application/json; charset=UTF-8"}
         data = json.dumps({"returnSecureToken": True})
         request_object = requests.post(request_ref, headers=headers, data=data)
         raise_detailed_error(request_object)
@@ -99,12 +94,7 @@ class Auth:
     def create_custom_token(self, uid, additional_claims=None, expiry_minutes=60):
         service_account_email = self.credentials.service_account_email
         private_key = RSA.importKey(self.credentials._private_key_pkcs8_pem)
-        payload = {
-            "iss": service_account_email,
-            "sub": service_account_email,
-            "aud": "https://identitytoolkit.googleapis.com/google.identity.identitytoolkit.v1.IdentityToolkit",
-            "uid": uid
-        }
+        payload = {"iss": service_account_email, "sub": service_account_email, "aud": "https://identitytoolkit.googleapis.com/google.identity.identitytoolkit.v1.IdentityToolkit", "uid": uid}
         if additional_claims:
             payload["claims"] = additional_claims
         exp = datetime.timedelta(minutes=expiry_minutes)
@@ -126,11 +116,7 @@ class Auth:
         raise_detailed_error(request_object)
         request_object_json = request_object.json()
         # handle weirdly formatted response
-        user = {
-            "userId": request_object_json["user_id"],
-            "idToken": request_object_json["id_token"],
-            "refreshToken": request_object_json["refresh_token"]
-        }
+        user = {"userId": request_object_json["user_id"], "idToken": request_object_json["id_token"], "refreshToken": request_object_json["refresh_token"]}
         return user
 
     def get_account_info(self, id_token):
@@ -167,7 +153,7 @@ class Auth:
 
     def create_user_with_email_and_password(self, email, password):
         request_ref = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key={0}".format(self.api_key)
-        headers = {"content-type": "application/json; charset=UTF-8" }
+        headers = {"content-type": "application/json; charset=UTF-8"}
         data = json.dumps({"email": email, "password": password, "returnSecureToken": True})
         request_object = requests.post(request_ref, headers=headers, data=data)
         raise_detailed_error(request_object)
@@ -180,8 +166,8 @@ class Auth:
         request_object = requests.post(request_ref, headers=headers, data=data)
         raise_detailed_error(request_object)
         return request_object.json()
-    
-    def update_profile(self, id_token, display_name = None, photo_url = None, delete_attribute = None):
+
+    def update_profile(self, id_token, display_name=None, photo_url=None, delete_attribute=None):
         """
         https://firebase.google.com/docs/reference/rest/auth#section-update-profile
         """
@@ -194,11 +180,12 @@ class Auth:
 
 
 class Database:
-    """ Database Service """
+    """Database Service"""
+
     def __init__(self, credentials, api_key, database_url, requests):
 
-        if not database_url.endswith('/'):
-            url = ''.join([database_url, '/'])
+        if not database_url.endswith("/"):
+            url = "".join([database_url, "/"])
         else:
             url = database_url
 
@@ -261,7 +248,7 @@ class Database:
     def build_request_url(self, token):
         parameters = {}
         if token:
-            parameters['auth'] = token
+            parameters["auth"] = token
         for param in list(self.build_query):
             if type(self.build_query[param]) is str:
                 parameters[param] = '"' + self.build_query[param] + '"'
@@ -270,7 +257,7 @@ class Database:
             else:
                 parameters[param] = self.build_query[param]
         # reset path and build_query for next query
-        request_ref = '{0}{1}.json?{2}'.format(self.database_url, self.path, urlencode(parameters))
+        request_ref = "{0}{1}.json?{2}".format(self.database_url, self.path, urlencode(parameters))
         self.path = ""
         self.build_query = {}
         return request_ref
@@ -279,7 +266,7 @@ class Database:
         headers = {"content-type": "application/json; charset=UTF-8"}
         if not token and self.credentials:
             access_token = self.credentials.get_access_token().access_token
-            headers['Authorization'] = 'Bearer ' + access_token
+            headers["Authorization"] = "Bearer " + access_token
         return headers
 
     def get(self, token=None, json_kwargs=None):
@@ -356,12 +343,12 @@ class Database:
 
     def check_token(self, database_url, path, token):
         if token:
-            return '{0}{1}.json?auth={2}'.format(database_url, path, token)
+            return "{0}{1}.json?auth={2}".format(database_url, path, token)
         else:
-            return '{0}{1}.json'.format(database_url, path)
+            return "{0}{1}.json".format(database_url, path)
 
     def generate_key(self):
-        push_chars = '-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz'
+        push_chars = "-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz"
         now = int(time.time() * 1000)
         duplicate_time = now == self.last_push_time
         self.last_push_time = now
@@ -396,28 +383,22 @@ class Database:
         request_ref = self.build_request_url(token)
         headers = self.build_headers(token)
         # extra header to get ETag
-        headers['X-Firebase-ETag'] = 'true'
+        headers["X-Firebase-ETag"] = "true"
         request_object = self.requests.get(request_ref, headers=headers)
         raise_detailed_error(request_object)
-        return {
-           'ETag': request_object.headers['ETag'],
-           'value': request_object.json()
-        }
+        return {"ETag": request_object.headers["ETag"], "value": request_object.json()}
 
     def conditional_set(self, data, etag, token=None, json_kwargs=None):
         json_kwargs = json_kwargs or {}
         request_ref = self.check_token(self.database_url, self.path, token)
         self.path = ""
         headers = self.build_headers(token)
-        headers['if-match'] = etag
+        headers["if-match"] = etag
         request_object = self.requests.put(request_ref, headers=headers, data=json.dumps(data, **json_kwargs).encode("utf-8"))
 
         # ETag didn't match, so we should return the correct one for the user to try again
         if request_object.status_code == 412:
-            return {
-               'ETag': request_object.headers['ETag'],
-               'value': request_object.json()
-            }
+            return {"ETag": request_object.headers["ETag"], "value": request_object.json()}
 
         raise_detailed_error(request_object)
         return request_object.json()
@@ -426,22 +407,22 @@ class Database:
         request_ref = self.check_token(self.database_url, self.path, token)
         self.path = ""
         headers = self.build_headers(token)
-        headers['if-match'] = etag
+        headers["if-match"] = etag
         request_object = self.requests.delete(request_ref, headers=headers)
 
         # ETag didn't match, so we should return the correct one for the user to try again
         if request_object.status_code == 412:
-            return {
-               'ETag': request_object.headers['ETag'],
-               'value': request_object.json()
-            }
+            return {"ETag": request_object.headers["ETag"], "value": request_object.json()}
 
         raise_detailed_error(request_object)
         return request_object.json()
 
 
 class Storage:
+    from gcloud import storage
+
     """ Storage Service """
+
     def __init__(self, credentials, storage_bucket, requests):
         self.storage_bucket = "https://firebasestorage.googleapis.com/v0/b/" + storage_bucket
         self.credentials = credentials
@@ -466,7 +447,7 @@ class Storage:
         path = self.path
         self.path = None
         if isinstance(file, str):
-            file_object = open(file, 'rb')
+            file_object = open(file, "rb")
         else:
             file_object = file
         request_ref = self.storage_bucket + "/o?name={0}".format(path)
@@ -508,34 +489,34 @@ class Storage:
     def download(self, path, filename, token=None):
         # remove leading backlash
         url = self.get_url(token)
-        if path.startswith('/'):
-            path = path.lstrip('/')
+        if path.startswith("/"):
+            path = path.lstrip("/")
         if self.credentials:
             blob = self.bucket.get_blob(path)
             if not blob is None:
                 blob.download_to_filename(filename)
         elif token:
-             headers = {"Authorization": "Firebase " + token}
-             r = requests.get(url, stream=True, headers=headers)
-             if r.status_code == 200:
-                 with open(filename, 'wb') as f:
+            headers = {"Authorization": "Firebase " + token}
+            r = requests.get(url, stream=True, headers=headers)
+            if r.status_code == 200:
+                with open(filename, "wb") as f:
                     for chunk in r:
-                         f.write(chunk)
+                        f.write(chunk)
         else:
             r = requests.get(url, stream=True)
             if r.status_code == 200:
-                with open(filename, 'wb') as f:
+                with open(filename, "wb") as f:
                     for chunk in r:
                         f.write(chunk)
 
     def get_url(self, token):
-        path = self.path if self.path else ''
+        path = self.path if self.path else ""
         self.path = None
-        if path.startswith('/'):
-            path = path.lstrip('/')
+        if path.startswith("/"):
+            path = path.lstrip("/")
         if token:
-            return "{0}/o/{1}?alt=media&token={2}".format(self.storage_bucket, quote(path, safe=''), token)
-        return "{0}/o/{1}?alt=media".format(self.storage_bucket, quote(path, safe=''))
+            return "{0}/o/{1}?alt=media&token={2}".format(self.storage_bucket, quote(path, safe=""), token)
+        return "{0}/o/{1}?alt=media".format(self.storage_bucket, quote(path, safe=""))
 
     def list_files(self):
         return self.bucket.list_blobs()
@@ -565,10 +546,10 @@ def convert_list_to_pyre(items):
 
 
 class SSEClient(object):
-    
+
     # Technically, we should support streams that mix line endings.  This regex,
     # however, assumes that a system will provide consistent line endings.
-    end_of_field = re.compile(r'\r\n\r\n|\r\r|\n\n')
+    end_of_field = re.compile(r"\r\n\r\n|\r\r|\n\n")
 
     def __init__(self, url, session, build_headers, last_id=None, retry=3000, **kwargs):
         self.url = url
@@ -584,23 +565,23 @@ class SSEClient(object):
         self.requests_kwargs = kwargs
 
         # The SSE spec requires making requests with Cache-Control: nocache
-        if 'headers' not in self.requests_kwargs:
-            self.requests_kwargs['headers'] = {}
-        self.requests_kwargs['headers']['Cache-Control'] = 'no-cache'
+        if "headers" not in self.requests_kwargs:
+            self.requests_kwargs["headers"] = {}
+        self.requests_kwargs["headers"]["Cache-Control"] = "no-cache"
 
         # The 'Accept' header is not required, but explicit > implicit
-        self.requests_kwargs['headers']['Accept'] = 'text/event-stream'
+        self.requests_kwargs["headers"]["Accept"] = "text/event-stream"
 
         # Keep data here as it streams in
-        self.buf = u''
+        self.buf = ""
 
         self._connect()
 
     def _connect(self):
         if self.last_id:
-            self.requests_kwargs['headers']['Last-Event-ID'] = self.last_id
+            self.requests_kwargs["headers"]["Last-Event-ID"] = self.last_id
         headers = self.build_headers()
-        self.requests_kwargs['headers'].update(headers)
+        self.requests_kwargs["headers"].update(headers)
         # Use session if set.  Otherwise fall back to requests module.
         self.requester = self.session or requests
         self.resp = self.requester.get(self.url, stream=True, **self.requests_kwargs)
@@ -628,7 +609,7 @@ class SSEClient(object):
 
                 # The SSE spec only supports resuming from a whole message, so
                 # if we have half a message we should throw it out.
-                head, sep, tail = self.buf.rpartition('\n')
+                head, sep, tail = self.buf.rpartition("\n")
                 self.buf = head + sep
                 continue
 
@@ -643,7 +624,7 @@ class SSEClient(object):
             self._connect()
             return None
 
-        if msg.data == 'null':
+        if msg.data == "null":
             return None
 
         # If the server requests a specific retry delay, we need to honor it.
@@ -666,8 +647,8 @@ class PyreResponse:
         self.pyres = pyres
         self.query_key = query_key
 
-    def __getitem__(self,index):
-       return self.pyres[index]
+    def __getitem__(self, index):
+        return self.pyres[index]
 
     def val(self):
         if isinstance(self.pyres, list) and self.pyres:
@@ -693,6 +674,7 @@ class PyreResponse:
         if isinstance(self.pyres, list):
             return self.pyres
 
+
 class Pyre:
     def __init__(self, item):
         self.item = item
@@ -703,6 +685,7 @@ class Pyre:
     def key(self):
         return self.item[0]
 
+
 class KeepAuthSession(Session):
     """
     A session that doesn't drop Authentication on redirects between domains.
@@ -710,6 +693,7 @@ class KeepAuthSession(Session):
 
     def rebuild_auth(self, prepared_request, response):
         pass
+
 
 class ClosableSSEClient(SSEClient):
     def __init__(self, *args, **kwargs):
@@ -727,6 +711,7 @@ class ClosableSSEClient(SSEClient):
         self.retry = 0
         self.resp.raw._fp.fp.raw._sock.shutdown(socket.SHUT_RDWR)
         self.resp.raw._fp.fp.raw._sock.close()
+
 
 class Stream:
     def __init__(self, url, stream_handler, build_headers, stream_id, is_async):
@@ -765,18 +750,19 @@ class Stream:
                 self.stream_handler(msg_data)
 
     def close(self):
-        while not self.sse and not hasattr(self.sse, 'resp'):
+        while not self.sse and not hasattr(self.sse, "resp"):
             time.sleep(0.001)
         self.sse.running = False
         self.sse.close()
         self.thread.join()
         return self
 
+
 class Event(object):
 
-    sse_line_pattern = re.compile('(?P<name>[^:]*):?( ?(?P<value>.*))?')
+    sse_line_pattern = re.compile("(?P<name>[^:]*):?( ?(?P<value>.*))?")
 
-    def __init__(self, data='', event='message', id=None, retry=None):
+    def __init__(self, data="", event="message", id=None, retry=None):
         self.data = data
         self.event = event
         self.id = id
@@ -785,17 +771,17 @@ class Event(object):
     def dump(self):
         lines = []
         if self.id:
-            lines.append('id: %s' % self.id)
+            lines.append("id: %s" % self.id)
 
         # Only include an event line if it's not the default already.
-        if self.event != 'message':
-            lines.append('event: %s' % self.event)
+        if self.event != "message":
+            lines.append("event: %s" % self.event)
 
         if self.retry:
-            lines.append('retry: %s' % self.retry)
+            lines.append("retry: %s" % self.retry)
 
-        lines.extend('data: %s' % d for d in self.data.split('\n'))
-        return '\n'.join(lines) + '\n\n'
+        lines.extend("data: %s" % d for d in self.data.split("\n"))
+        return "\n".join(lines) + "\n\n"
 
     @classmethod
     def parse(cls, raw):
@@ -804,31 +790,31 @@ class Event(object):
         and return a Event object.
         """
         msg = cls()
-        for line in raw.split('\n'):
+        for line in raw.split("\n"):
             m = cls.sse_line_pattern.match(line)
             if m is None:
                 # Malformed line.  Discard but warn.
                 warnings.warn('Invalid SSE line: "%s"' % line, SyntaxWarning)
                 continue
 
-            name = m.groupdict()['name']
-            value = m.groupdict()['value']
-            if name == '':
+            name = m.groupdict()["name"]
+            value = m.groupdict()["value"]
+            if name == "":
                 # line began with a ":", so is a comment.  Ignore
                 continue
 
-            if name == 'data':
+            if name == "data":
                 # If we already have some data, then join to it with a newline.
                 # Else this is it.
                 if msg.data:
-                    msg.data = '%s\n%s' % (msg.data, value)
+                    msg.data = "%s\n%s" % (msg.data, value)
                 else:
                     msg.data = value
-            elif name == 'event':
+            elif name == "event":
                 msg.event = value
-            elif name == 'id':
+            elif name == "id":
                 msg.id = value
-            elif name == 'retry':
+            elif name == "retry":
                 msg.retry = int(value)
 
         return msg

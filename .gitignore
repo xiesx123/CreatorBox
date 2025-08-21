@@ -1,12 +1,9 @@
 ### VS Code ###
-.vscode/
 .pyarmor/
 *.log
 *.exe
 *.msi
 *.mp4
-edge/
-jre/
 *.pyc
 **/temp/
 
