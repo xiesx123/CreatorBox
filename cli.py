@@ -9,6 +9,7 @@ except:
     subprocess.check_call([sys.executable, "-m", "pip", "install", "click"])
     import click
 
+
 @click.group()
 def cli():
     """
@@ -31,11 +32,13 @@ def cli():
 def start(host, port, debug, ngrok, ngrok_host, ngrok_port):
     # spawn
     import multiprocessing as mp
+
     mp.set_start_method("spawn", force=True)
 
     # args
     if "REBOOT_ARGS" not in os.environ:
         import json
+
         os.environ["REBOOT_ARGS"] = json.dumps(sys.argv)
 
     # start ngrok
@@ -51,12 +54,11 @@ def start(host, port, debug, ngrok, ngrok_host, ngrok_port):
 
     # start uvicorn
     def start_uvicorn(host, port, debug):
-        import gradio as gr  # keep this
         import uvicorn
 
         click.echo(f"🚀 Starting service... http://{host}:{port}")
         uvicorn.run("src.main:asgi", host=host, port=port, reload=debug)
- 
+
     try:
         if ngrok:
             ngrok_token = os.environ.get("NGROK_AUTH_TOKEN")
@@ -105,8 +107,6 @@ def install(files):
     try:
         from pathlib import Path
 
-        from src.utils import cbruntime
-
         if not files:
             default_file = Path("requirements.txt")
             if not default_file.exists():
@@ -121,6 +121,8 @@ def install(files):
             click.echo(f"📦 Installing from {file}...")
             subprocess.run(["pip", "install", "-r", file], check=True)
             click.echo("✅ Installation complete.")
+            from src.utils import cbruntime
+
             _package = cbruntime.get_environment_package(file)
             click.echo("Environment Info:\n" + "\n".join([f"-  {cbruntime.pad_string(k, length=25,align='left')}: {v}" for k, v in _package.items()]))
 
@@ -140,6 +142,7 @@ def install(files):
 def proxy(host, port, username, password, site, timeout):
     try:
         from src.app.proxy import ProxyHelper
+
         proxy = ProxyHelper(ip=host, port=port, username=username, password=password)
         click.echo(f"🌐 Starting proxy verify. -> {site}")
         if proxy.verify(url=site, timeout=timeout):
@@ -159,6 +162,7 @@ def proxy(host, port, username, password, site, timeout):
 def auth(action, email, password, proxy):
     try:
         from src.repository.repo import Authentication
+
         auth = Authentication()
         click.echo(f"😊 Starting {action} -> {email}")
         if action == "register":
@@ -169,13 +173,14 @@ def auth(action, email, password, proxy):
             msg = f"please check your email and click to reset your password."
         elif action == "user":
             result = auth.get_account_info(email)
-            msg =  f"uuid -> {result.uuid} ({result.subscriber.name})"
+            msg = f"uuid -> {result.uuid} ({result.subscriber.name})"
         else:
             result = auth.sign_in_with_email_and_password(email, password, proxy)
             msg = f"token -> {result.token}"
         click.echo(f"✅ {action.capitalize()} successfully. {msg}")
     except Exception as e:
         click.echo(f"❌ error: {str(e)}", err=True)
+
 
 if __name__ == "__main__":
     cli()
