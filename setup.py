@@ -38,6 +38,7 @@ setuptools.setup(
         "dev": [
             "autoflake",
             "babel",
+            "pipdeptree",
         ],
     },
     classifiers=[
