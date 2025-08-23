@@ -20,6 +20,8 @@ from requests import Session
 from requests.adapters import HTTPAdapter
 from requests.exceptions import HTTPError
 
+from src.app.prefs import INSTANCES as prefs
+
 
 def initialize_app(config):
     return Firebase(config)
@@ -35,6 +37,7 @@ class Firebase:
         self.storage_bucket = config["storageBucket"]
         self.credentials = None
         self.requests = requests.Session()
+        self.requests_timeout = prefs.get().base.network.timeout
         if config.get("serviceAccount"):
             scopes = ["https://www.googleapis.com/auth/firebase.database", "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/cloud-platform"]
             service_account_type = type(config["serviceAccount"])
@@ -55,7 +58,7 @@ class Firebase:
             self.requests.mount(scheme, adapter)
 
     def auth(self):
-        return Auth(self.api_key, self.requests, self.credentials)
+        return Auth(self.api_key, self.requests, self.requests_timeout, self.credentials)
 
     def database(self):
         return Database(self.credentials, self.api_key, self.database_url, self.requests)
@@ -67,17 +70,18 @@ class Firebase:
 class Auth:
     """Authentication Service"""
 
-    def __init__(self, api_key, requests, credentials):
+    def __init__(self, api_key, requests, requests_timeout, credentials):
         self.api_key = api_key
         self.current_user = None
         self.requests = requests
+        self.requests_timeout = requests_timeout
         self.credentials = credentials
 
     def sign_in_with_email_and_password(self, email, password):
         request_ref = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key={0}".format(self.api_key)
         headers = {"content-type": "application/json; charset=UTF-8"}
         data = json.dumps({"email": email, "password": password, "returnSecureToken": True})
-        request_object = requests.post(request_ref, headers=headers, data=data)
+        request_object = requests.post(request_ref, headers=headers, data=data, timeout=self.requests_timeout)
         raise_detailed_error(request_object)
         self.current_user = request_object.json()
         return request_object.json()
@@ -86,7 +90,7 @@ class Auth:
         request_ref = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key={0}".format(self.api_key)
         headers = {"content-type": "application/json; charset=UTF-8"}
         data = json.dumps({"returnSecureToken": True})
-        request_object = requests.post(request_ref, headers=headers, data=data)
+        request_object = requests.post(request_ref, headers=headers, data=data, timeout=self.requests_timeout)
         raise_detailed_error(request_object)
         self.current_user = request_object.json()
         return request_object.json()
@@ -104,7 +108,7 @@ class Auth:
         request_ref = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyCustomToken?key={0}".format(self.api_key)
         headers = {"content-type": "application/json; charset=UTF-8"}
         data = json.dumps({"returnSecureToken": True, "token": token})
-        request_object = requests.post(request_ref, headers=headers, data=data)
+        request_object = requests.post(request_ref, headers=headers, data=data, timeout=self.requests_timeout)
         raise_detailed_error(request_object)
         return request_object.json()
 
@@ -112,7 +116,7 @@ class Auth:
         request_ref = "https://securetoken.googleapis.com/v1/token?key={0}".format(self.api_key)
         headers = {"content-type": "application/json; charset=UTF-8"}
         data = json.dumps({"grantType": "refresh_token", "refreshToken": refresh_token})
-        request_object = requests.post(request_ref, headers=headers, data=data)
+        request_object = requests.post(request_ref, headers=headers, data=data, timeout=self.requests_timeout)
         raise_detailed_error(request_object)
         request_object_json = request_object.json()
         # handle weirdly formatted response
@@ -123,7 +127,7 @@ class Auth:
         request_ref = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key={0}".format(self.api_key)
         headers = {"content-type": "application/json; charset=UTF-8"}
         data = json.dumps({"idToken": id_token})
-        request_object = requests.post(request_ref, headers=headers, data=data)
+        request_object = requests.post(request_ref, headers=headers, data=data, timeout=self.requests_timeout)
         raise_detailed_error(request_object)
         return request_object.json()
 
@@ -131,7 +135,7 @@ class Auth:
         request_ref = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/getOobConfirmationCode?key={0}".format(self.api_key)
         headers = {"content-type": "application/json; charset=UTF-8"}
         data = json.dumps({"requestType": "VERIFY_EMAIL", "idToken": id_token})
-        request_object = requests.post(request_ref, headers=headers, data=data)
+        request_object = requests.post(request_ref, headers=headers, data=data, timeout=self.requests_timeout)
         raise_detailed_error(request_object)
         return request_object.json()
 
@@ -139,7 +143,7 @@ class Auth:
         request_ref = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/getOobConfirmationCode?key={0}".format(self.api_key)
         headers = {"content-type": "application/json; charset=UTF-8"}
         data = json.dumps({"requestType": "PASSWORD_RESET", "email": email})
-        request_object = requests.post(request_ref, headers=headers, data=data)
+        request_object = requests.post(request_ref, headers=headers, data=data, timeout=self.requests_timeout)
         raise_detailed_error(request_object)
         return request_object.json()
 
@@ -147,7 +151,7 @@ class Auth:
         request_ref = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/resetPassword?key={0}".format(self.api_key)
         headers = {"content-type": "application/json; charset=UTF-8"}
         data = json.dumps({"oobCode": reset_code, "newPassword": new_password})
-        request_object = requests.post(request_ref, headers=headers, data=data)
+        request_object = requests.post(request_ref, headers=headers, data=data, timeout=self.requests_timeout)
         raise_detailed_error(request_object)
         return request_object.json()
 
@@ -155,7 +159,7 @@ class Auth:
         request_ref = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key={0}".format(self.api_key)
         headers = {"content-type": "application/json; charset=UTF-8"}
         data = json.dumps({"email": email, "password": password, "returnSecureToken": True})
-        request_object = requests.post(request_ref, headers=headers, data=data)
+        request_object = requests.post(request_ref, headers=headers, data=data, timeout=self.requests_timeout)
         raise_detailed_error(request_object)
         return request_object.json()
 
@@ -163,7 +167,7 @@ class Auth:
         request_ref = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/deleteAccount?key={0}".format(self.api_key)
         headers = {"content-type": "application/json; charset=UTF-8"}
         data = json.dumps({"idToken": id_token})
-        request_object = requests.post(request_ref, headers=headers, data=data)
+        request_object = requests.post(request_ref, headers=headers, data=data, timeout=self.requests_timeout)
         raise_detailed_error(request_object)
         return request_object.json()
 
@@ -174,7 +178,7 @@ class Auth:
         request_ref = "https://identitytoolkit.googleapis.com/v1/accounts:update?key={0}".format(self.api_key)
         headers = {"content-type": "application/json; charset=UTF-8"}
         data = json.dumps({"idToken": id_token, "displayName": display_name, "photoURL": photo_url, "deleteAttribute": delete_attribute, "returnSecureToken": True})
-        request_object = requests.post(request_ref, headers=headers, data=data)
+        request_object = requests.post(request_ref, headers=headers, data=data, timeout=self.requests_timeout)
         raise_detailed_error(request_object)
         return request_object.json()
 

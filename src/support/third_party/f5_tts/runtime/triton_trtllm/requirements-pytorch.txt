@@ -1,6 +1,6 @@
 accelerate>=0.33.0
 bitsandbytes>0.37.0
-cached_path
+cached_path==1.7.3
 click
 datasets
 ema_pytorch>=0.5.2
