@@ -751,8 +751,10 @@
       var $ = layui.$;
 
       var app = JSON.parse('{{ data.app | tojson }}')
+      var user = JSON.parse('{{ data.user | tojson }}')
       var os = '{{ os }}'
-      console.log("%s %s.%s build on %s at %s (%s %s)", app.title, app.version, app.build.hash, app.build.branch, app.build.date, os, app.plan);
+      console.log("%s %s.%s build on %s at %s (%s %s)", app.title, app.version, app.build.hash, app.build.branch, app.build.date, os, app.serial);
+      console.log("%s %s %s", user.name ?? 'guest', user.subscriber, util.toDateString(user.subexpired));
       console.log("%s", app.description);
 
       let CREATORBOX = "dubbing"
