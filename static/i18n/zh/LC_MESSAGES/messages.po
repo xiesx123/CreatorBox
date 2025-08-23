@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-08-15 12:41+0800\n"
+"POT-Creation-Date: 2025-08-21 16:20+0800\n"
 "PO-Revision-Date: 2025-06-03 23:16+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh\n"
@@ -64,7 +64,7 @@ msgstr "接口文档"
 
 #: static/templates/index.html:109
 msgid "nav_vitepress"
-msgstr "使用教程"
+msgstr "使用文档"
 
 #: static/templates/index.html:112
 msgid "nav_discord"
