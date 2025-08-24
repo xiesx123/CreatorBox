@@ -37,7 +37,7 @@ class Firebase:
         self.storage_bucket = config["storageBucket"]
         self.credentials = None
         self.requests = requests.Session()
-        self.requests_timeout = prefs.get().base.network.timeout
+        self.requests_timeout = prefs.get().network.timeout
         if config.get("serviceAccount"):
             scopes = ["https://www.googleapis.com/auth/firebase.database", "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/cloud-platform"]
             service_account_type = type(config["serviceAccount"])
