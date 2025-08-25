@@ -39,6 +39,8 @@ setuptools.setup(
             "autoflake",
             "babel",
             "pipdeptree",
+            "pip-review",
+            "pip-tools",
         ],
     },
     classifiers=[
