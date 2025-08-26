@@ -1,285 +1,264 @@
-# English translations for PROJECT.
-# Copyright (C) 2025 ORGANIZATION
-# This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-#
-msgid ""
-msgstr ""
-"Project-Id-Version: PROJECT VERSION\n"
-"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-08-21 16:20+0800\n"
-"PO-Revision-Date: 2025-06-03 23:16+0800\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: en\n"
-"Language-Team: en <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.17.0\n"
-
-#: static/templates/index.html:78
-msgid "group_feature"
-msgstr "Feature"
-
-#: static/templates/index.html:81
-msgid "nav_speaker"
-msgstr "Speaker"
-
-#: static/templates/index.html:83
-msgid "nav_gradio"
-msgstr "Component"
-
-#: static/templates/index.html:86
-msgid "nav_masker_remove"
-msgstr "Masker"
-
-#: static/templates/index.html:89
-msgid "nav_set"
-msgstr "Preferences"
-
-#: static/templates/index.html:93
-msgid "group_assist"
-msgstr "Assist"
-
-#: static/templates/index.html:96
-msgid "nav_masker_painter"
-msgstr "Painter Editor"
-
-#: static/templates/index.html:98
-msgid "nav_editor"
-msgstr "Data Editor"
-
-#: static/templates/index.html:100
-msgid "nav_play"
-msgstr "Video Playback"
-
-#: static/templates/index.html:104
-msgid "group_doc"
-msgstr "Docs"
-
-#: static/templates/index.html:107
-msgid "nav_swagger"
-msgstr "Swagger"
-
-#: static/templates/index.html:109
-msgid "nav_vitepress"
-msgstr "Tutorial"
-
-#: static/templates/index.html:112
-msgid "nav_discord"
-msgstr "Discord"
-
-#: static/templates/index.html:132
-msgid "dub.base"
-msgstr "Base"
-
-#: static/templates/index.html:138
-msgid "video_url"
-msgstr "Video"
-
-#: static/templates/index.html:142
-msgid "video_placeholder"
-msgstr "Enter video path or link"
-
-#: static/templates/index.html:148
-msgid "locale"
-msgstr "Locale"
-
-#: static/templates/index.html:151 static/templates/index.html:251
-#: static/templates/index.html:266 static/templates/index.html:278
-#: static/templates/index.html:290 static/templates/index.html:302
-#: static/templates/index.html:317 static/templates/index.html:519
-msgid "select_or_search"
-msgstr "Select or Search"
-
-#: static/templates/index.html:160
-msgid "mode_type"
-msgstr "Mode"
-
-#: static/templates/index.html:170
-msgid "align_type"
+#: src/app/i18n.py:12
+msgid "asr_align_enable"
 msgstr "Alignment"
 
-#: static/templates/index.html:179
-msgid "options"
-msgstr "Options"
+#: src/app/i18n.py:13
+msgid "asr_emotion_enable"
+msgstr "Emotion"
 
-#: static/templates/index.html:181
-msgid " preview"
-msgstr "Preview"
+#: src/app/i18n.py:14
+msgid "asr_speaker_range"
+msgstr "Spk Range"
 
-#: static/templates/index.html:182
-msgid " rebuild"
-msgstr "Rebuild"
+#: src/app/i18n.py:15
+msgid "asr_speaker_use_num"
+msgstr "Spk Count"
 
-#: static/templates/index.html:187
-msgid "suffix"
-msgstr "Suffix"
-
-#: static/templates/index.html:190
-msgid "suffix_placeholder"
-msgstr "Enter file suffix name"
-
-#: static/templates/index.html:208
-msgid "dub.subtitle"
+#: src/app/i18n.py:16
+msgid "asr_subtitle_url"
 msgstr "Subtitle"
 
-#: static/templates/index.html:216 static/templates/index.html:378
+#: src/app/i18n.py:17
+msgid "asr_uvr"
+msgstr "Separation"
+
+#: src/app/i18n.py:18
+msgid "asr_whisper_length"
+msgstr "Coherence"
+
+#: src/app/i18n.py:19
+msgid "asr_whisper_size"
+msgstr "Accuracy"
+
+#: src/app/i18n.py:20
+msgid "asr_whisper_temperature"
+msgstr "Randomness"
+
+#: src/app/i18n.py:22
+msgid "common_locale"
+msgstr "Locale"
+
+#: src/app/i18n.py:23
+msgid "common_options"
+msgstr "Options"
+
+#: src/app/i18n.py:24
+msgid "common_preview"
+msgstr "Preview"
+
+#: src/app/i18n.py:25
+msgid "common_provider"
+msgstr "Provider"
+
+#: src/app/i18n.py:26
+msgid "common_rebuild"
+msgstr "Rebuild"
+
+#: src/app/i18n.py:27
+msgid "common_select_or_search"
+msgstr "Select or Search"
+
+#: src/app/i18n.py:28
+msgid "common_submit"
+msgstr "Execute"
+
+#: src/app/i18n.py:29
+msgid "common_upload"
+msgstr "Upload"
+
+#: src/app/i18n.py:31
 msgid "debug"
 msgstr "Debug"
 
-#: static/templates/index.html:223 static/templates/index.html:385
-#: static/templates/index.html:482
-msgid "provider"
-msgstr "Provider"
-
-#: static/templates/index.html:237
-msgid "subtitle_url"
-msgstr "Subtitle"
-
-#: static/templates/index.html:248
+#: src/app/i18n.py:33
 msgid "draft_name"
 msgstr "Draft Name"
 
-#: static/templates/index.html:263 static/templates/index.html:411
-#: static/templates/index.html:499
-msgid "model"
-msgstr "Model"
-
-#: static/templates/index.html:275
-msgid "whisper_size"
-msgstr "Accuracy"
-
-#: static/templates/index.html:287
-msgid "whisper_temperature"
-msgstr "Randomness"
-
-#: static/templates/index.html:299
-msgid "whisper_length"
-msgstr "Coherence"
-
-#: static/templates/index.html:314
-msgid "uvr"
-msgstr "uvr"
-
-#: static/templates/index.html:326
-msgid "align_enable"
-msgstr "Voice Alignment"
-
-#: static/templates/index.html:333
-msgid "emotion_enable"
-msgstr "Emotion Detection"
-
-#: static/templates/index.html:340
-msgid "speaker_use_num"
-msgstr "Speaker Count"
-
-#: static/templates/index.html:348
-msgid "speaker_range"
-msgstr "Speaker Range"
-
-#: static/templates/index.html:374
-msgid "dub.translation"
-msgstr "Translation"
-
-#: static/templates/index.html:419
-msgid "llm_temperature"
-msgstr "Randomness"
-
-#: static/templates/index.html:427
-msgid "llm_top_p"
-msgstr "Diversity"
-
-#: static/templates/index.html:436
-msgid "llm_use_cache"
-msgstr "Cache"
-
-#: static/templates/index.html:443
-msgid "llm_instruct"
-msgstr "Instruction"
-
-#: static/templates/index.html:455
-msgid "llm_batch_size"
-msgstr "Batch Size"
-
-#: static/templates/index.html:476
-msgid "dub.dubbing"
-msgstr "Dubbing"
-
-#: static/templates/index.html:507
-msgid "tts_gender"
-msgstr "Gender"
-
-#: static/templates/index.html:515
-msgid "tts_voice"
-msgstr "Voice"
-
-#: static/templates/index.html:525
-msgid "tts_volume"
-msgstr "Volume"
-
-#: static/templates/index.html:535
-msgid "tts_rate"
-msgstr "Rate"
-
-#: static/templates/index.html:547
-msgid "tts_step"
-msgstr "Sampling Steps"
-
-#: static/templates/index.html:565
-msgid "tts_instruct"
-msgstr "Instruction"
-
-#: static/templates/index.html:576
-msgid "tts_vc"
-msgstr "Conversion"
-
-#: static/templates/index.html:583
-msgid "tts_remarks"
-msgstr "Remarks"
-
-#: static/templates/index.html:592
-msgid "tts_play"
-msgstr "Preview"
-
-#: static/templates/index.html:613
-msgid "dub.draft"
-msgstr "Draft"
-
-#: static/templates/index.html:619
-msgid "draft_volume"
-msgstr "Draft Volume"
-
-#: static/templates/index.html:633
+#: src/app/i18n.py:34
 msgid "draft_style_dts"
 msgstr "Dubbing Subtitles"
 
-#: static/templates/index.html:660
+#: src/app/i18n.py:35
 msgid "draft_style_nts"
 msgstr "Original Subtitles"
 
-#: static/templates/index.html:686
+#: src/app/i18n.py:36
+msgid "draft_volume"
+msgstr "Draft Volume"
+
+#: src/app/i18n.py:38
+msgid "dub_draft"
+msgstr "Draft"
+
+#: src/app/i18n.py:39
+msgid "dub_dubbing"
+msgstr "Dubbing"
+
+#: src/app/i18n.py:40
+msgid "dub_scene"
+msgstr "Base"
+
+#: src/app/i18n.py:41
+msgid "dub_subtitle"
+msgstr "Subtitle"
+
+#: src/app/i18n.py:42
+msgid "dub_translation"
+msgstr "Translation"
+
+#: src/app/i18n.py:44
+msgid "llm_batch_size"
+msgstr "Batch Size"
+
+#: src/app/i18n.py:45
+msgid "llm_instruct"
+msgstr "Instruction"
+
+#: src/app/i18n.py:46
+msgid "llm_temperature"
+msgstr "Randomness"
+
+#: src/app/i18n.py:47
+msgid "llm_top_p"
+msgstr "Diversity"
+
+#: src/app/i18n.py:48
+msgid "llm_use_cache"
+msgstr "Cache"
+
+#: src/app/i18n.py:50
+msgid "model"
+msgstr "Model"
+
+#: src/app/i18n.py:52
+msgid "nav_discord"
+msgstr "Discord"
+
+#: src/app/i18n.py:53
+msgid "nav_editor"
+msgstr "Data Editor"
+
+#: src/app/i18n.py:55
+msgid "nav_group_assist"
+msgstr "Assist"
+
+#: src/app/i18n.py:56
+msgid "nav_group_doc"
+msgstr "Docs"
+
+#: src/app/i18n.py:57
+msgid "nav_group_feature"
+msgstr "Feature"
+
+#: src/app/i18n.py:58
+msgid "nav_masker_painter"
+msgstr "Painter Editor"
+
+#: src/app/i18n.py:59
+msgid "nav_masker_remove"
+msgstr "Masker"
+
+#: src/app/i18n.py:60
+msgid "nav_play"
+msgstr "Video Playback"
+
+#: src/app/i18n.py:54
+msgid "nav_plugins"
+msgstr "Plugins"
+
+#: src/app/i18n.py:61
+msgid "nav_set"
+msgstr "Preferences"
+
+#: src/app/i18n.py:62
+msgid "nav_speaker"
+msgstr "Speaker"
+
+#: src/app/i18n.py:63
+msgid "nav_swagger"
+msgstr "Swagger"
+
+#: src/app/i18n.py:64
+msgid "nav_vitepress"
+msgstr "Tutorial"
+
+#: src/app/i18n.py:66
+msgid "scene_align_type"
+msgstr "Alignment"
+
+#: src/app/i18n.py:67
+msgid "scene_mode_type"
+msgstr "Mode"
+
+#: src/app/i18n.py:68
+msgid "scene_suffix"
+msgstr "Suffix"
+
+#: src/app/i18n.py:69
+msgid "scene_suffix_placeholder"
+msgstr "Enter suffix"
+
+#: src/app/i18n.py:70
+msgid "scene_video_url"
+msgstr "Video"
+
+#: src/app/i18n.py:71
+msgid "scene_video_url_placeholder"
+msgstr "Enter video path or link"
+
+#: src/app/i18n.py:73
 msgid "silence_threshold"
 msgstr "Silence Detection"
 
-#: static/templates/index.html:713
-msgid "submit"
-msgstr "Execute"
-
-#: static/templates/index.html:734
-msgid "table_tools_preview"
-msgstr "Preview"
-
-#: static/templates/index.html:735
+#: src/app/i18n.py:75
 msgid "table_tools_delete"
 msgstr "Del"
 
-#: static/templates/index.html:736
+#: src/app/i18n.py:76
+msgid "table_tools_move_down"
+msgstr "Down"
+
+#: src/app/i18n.py:77
 msgid "table_tools_move_up"
 msgstr "Up"
 
-#: static/templates/index.html:737
-msgid "table_tools_move_down"
-msgstr "Down"
+#: src/app/i18n.py:78
+msgid "table_tools_preview"
+msgstr "Preview"
+
+#: src/app/i18n.py:80
+msgid "tts_gender"
+msgstr "Gender"
+
+#: src/app/i18n.py:81
+msgid "tts_instruct"
+msgstr "Instruction"
+
+#: src/app/i18n.py:82
+msgid "tts_play"
+msgstr "Preview"
+
+#: src/app/i18n.py:83
+msgid "tts_rate"
+msgstr "Rate"
+
+#: src/app/i18n.py:84
+msgid "tts_remarks"
+msgstr "Remarks"
+
+#: src/app/i18n.py:85
+msgid "tts_step"
+msgstr "Sampling Steps"
+
+#: src/app/i18n.py:86
+msgid "tts_vc"
+msgstr "Conversion"
+
+#: src/app/i18n.py:87
+msgid "tts_voice"
+msgstr "Voice"
+
+#: src/app/i18n.py:88
+msgid "tts_volume"
+msgstr "Volume"
 

@@ -75,41 +75,41 @@
         <div class="layui-logo ">{{ data.app.title }}</div>
         <ul class="layui-nav layui-nav-tree layui-bg-gray" lay-unselect lay-filter="nav-side" id="ws-nav-side">
           <li class="layui-nav-item layui-nav-itemed">
-            <a href="javascript:;">{{ _("group_feature") }}</a>
+            <a href="javascript:;">{{ __.nav_group_feature }}</a>
             <dl class="layui-nav-child">
               <dd><a data-path="/speaker" href="javascript:;">
-                  <i style="font-size: 18px" class="layui-icon layui-icon-headset"></i> {{ _("nav_speaker") }}</a></dd>
+                  <i style="font-size: 18px" class="layui-icon layui-icon-headset"></i> {{ __.nav_speaker }}</a></dd>
               <dd><a data-path="/plugins" href="javascript:;">
-                  <i style="font-size: 18px" class="layui-icon layui-icon-component"></i> {{ _("nav_gradio") }}</a></dd>
+                  <i style="font-size: 18px" class="layui-icon layui-icon-component"></i> {{ __.nav_plugins }}</a></dd>
               {% if data.nav.mask_enable %}
               <dd><a data-path="/masker" href="javascript:;"><i style="font-size: 18px"
-                    class="layui-icon layui-icon-theme"></i> {{ _("nav_masker_remove") }}</a></dd>
+                    class="layui-icon layui-icon-theme"></i> {{ __.nav_masker_remove }}</a></dd>
               {% endif %}
               <dd><a data-path="/settings" href="javascript:;"><i style="font-size: 16px"
-                    class="layui-icon layui-icon-set"></i> {{ _("nav_set") }}</a></dd>
+                    class="layui-icon layui-icon-set"></i> {{ __.nav_set }}</a></dd>
             </dl>
           </li>
           <li class="layui-nav-item layui-nav-itemed">
-            <a href="javascript:;">{{ _("group_assist") }}</a>
+            <a href="javascript:;">{{ __.nav_group_assist }}</a>
             <dl class="layui-nav-child">
               <dd><a data-path="/app/masker" href="javascript:;"><i style="font-size: 18px"
-                    class="layui-icon layui-icon-template"></i> {{ _("nav_masker_painter") }}</a></dd>
+                    class="layui-icon layui-icon-template"></i> {{ __.nav_masker_painter }}</a></dd>
               <dd><a data-path="/editor" href="javascript:;"><i style="font-size: 18px"
-                    class="layui-icon layui-icon-code-circle"></i> {{ _("nav_editor") }}</a></dd>
+                    class="layui-icon layui-icon-code-circle"></i> {{ __.nav_editor }}</a></dd>
               <dd><a data-path="/player" href="javascript:;"><i style="font-size: 18px"
-                    class="layui-icon layui-icon-play"></i> {{ _("nav_play") }}</a></dd>
+                    class="layui-icon layui-icon-play"></i> {{ __.nav_play }}</a></dd>
             </dl>
           </li>
           <li class="layui-nav-item layui-nav-itemed">
-            <a href="javascript:;">{{ _("group_doc") }}</a>
+            <a href="javascript:;">{{ __.nav_group_doc }}</a>
             <dl class="layui-nav-child">
               <dd><a data-path="/docs" href="javascript:;"><i style="font-size: 18px"
-                    class="layui-icon layui-icon-release"></i> {{ _("nav_swagger") }}</a></dd>
+                    class="layui-icon layui-icon-release"></i> {{ __.nav_swagger }}</a></dd>
               <dd><a data-path="https://xiesx123.github.io/CreatorBox" href="javascript:;">
-                  <i style="font-size: 18px" class="layui-icon layui-icon-read"></i> {{ _("nav_vitepress") }}</a>
+                  <i style="font-size: 18px" class="layui-icon layui-icon-read"></i> {{ __.nav_vitepress }}</a>
               </dd>
               <dd><a data-path="https://discord.gg/ZSeETM6bsS" href="javascript:;">
-                  <i style="font-size: 18px" class="layui-icon layui-icon-chat"></i> {{ _("nav_discord") }}</a>
+                  <i style="font-size: 18px" class="layui-icon layui-icon-chat"></i> {{ __.nav_discord }}</a>
               </dd>
             </dl>
           </li>
@@ -129,65 +129,65 @@
               <div class="layui-colla-item">
 
                 <div class="layui-card layui-panel">
-                  <div class="layui-colla-title">{{ _("dub.base") }}
+                  <div class="layui-colla-title">{{ __.dub_scene }}
                   </div>
                   <div class="layui-colla-content layui-show">
 
                     <div class="layui-form-item">
                       <label class="layui-form-label" id="video_upload"
-                        lay-tips="{content: '点击选择文件', margin: '0 0 0 -10px'}">{{ _("video_url") }} <span
+                        lay-tips="{content: '{{ __.common_upload }}', margin: '0 0 0 -10px'}">{{ __.scene_video_url }} <span
                           class="layui-badge-dot layui-bg-green"></span></label>
                       <div class="layui-input-block">
                         <input id="video_url" type="text" name="video_url" lay-verify="path"
-                          placeholder="{{ _('video_placeholder') }}" autocomplete="off" class="layui-input"
+                          placeholder="{{ _('scene_video_url_placeholder') }}" autocomplete="off" class="layui-input"
                           lay-affix="clear">
                       </div>
                     </div>
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label">{{ _("locale") }}</label>
+                      <label class="layui-form-label">{{ __.common_locale }}</label>
                       <div class="layui-input-block">
                         <select id="locale" name="locale" lay-verify="required" lay-filter="locale_filter">
-                          <option value="">{{ _("select_or_search") }}</option>
+                          <option value="">{{ __.common_select_or_search }}</option>
                           {% for item in data.llm.locales %}
-                          <option value="{{ item.locale }}">{{ item.name }} - {{ item.locale }}</option>
+                          <option value="{{ item.locale }}">{{ item.locale }} - {{ item.name if request.state.lang == 'zh' else item.country }}</option>
                           {% endfor %}
                         </select>
                       </div>
                     </div>
 
                     <div class="layui-form-item" pane>
-                      <label class="layui-form-label">{{ _("mode_type") }}</label>
+                      <label class="layui-form-label">{{ __.scene_mode_type }}</label>
                       <div class="layui-input-block">
                         {% for item in data.base.mode_types %}
                         <input type="radio" name="mode_type" value="{{ item.val }}" lay-filter="mode_type_filter"
-                          title="{{ item.desc }}" {% if not item.enable %}disabled{% endif %}>
+                          title="{{ item.desc_zh if request.state.lang == 'zh' else item.desc_en }}" {% if not item.enable %}disabled{% endif %}>
                         {% endfor %}
                       </div>
                     </div>
 
                     <div class="layui-form-item" pane id="align_type_div">
-                      <label class="layui-form-label">{{ _("align_type") }}</label>
+                      <label class="layui-form-label">{{ __.scene_align_type }}</label>
                       <div class="layui-input-block">
                         {% for item in data.base.align_types %}
-                        <input type="radio" name="align_type" value="{{ item.val }}" title="{{ item.desc }}">
+                        <input type="radio" name="align_type" value="{{ item.val }}" title="{{ item.desc_zh if request.state.lang == 'zh' else item.desc_en }}">
                         {% endfor %}
                       </div>
                     </div>
 
                     <div class="layui-form-item" pane>
-                      <label class="layui-form-label">{{ _("options") }}</label>
+                      <label class="layui-form-label">{{ __.common_options }}</label>
                       <div class="layui-input-block">
-                        <input type="checkbox" name="preview" lay-skin="tag" title="{{ _(" preview") }}">
-                        <input type="checkbox" name="rebuild" lay-skin="tag" title="{{ _(" rebuild") }}">
+                        <input type="checkbox" name="preview" title="{{ __.common_preview }}">
+                        <input type="checkbox" name="rebuild" title="{{ __.common_rebuild }}">
                       </div>
                     </div>
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label">{{ _("suffix") }}</label>
+                      <label class="layui-form-label">{{ __.scene_suffix }}</label>
                       <div class="layui-input-block">
                         <input id="suffix" type="text" name="suffix" lay-verify="required"
-                          placeholder="{{ _('suffix_placeholder') }}" autocomplete="off" class="layui-input"
+                          placeholder="{{ __.scene_suffix_placeholder }}" autocomplete="off" class="layui-input"
                           lay-affix="clear">
                       </div>
                     </div>
@@ -205,7 +205,7 @@
               <div class="layui-colla-item">
 
                 <div class="layui-card layui-panel">
-                  <div class="layui-colla-title">{{ _("dub.subtitle") }}
+                  <div class="layui-colla-title">{{ __.dub_subtitle }}
                     <!-- <a href="https://xiesx123.github.io/CreatorBox" target="_blank">
                       <i class="layui-icon layui-icon-tips" style="font-size: 20px;margin-top:-10px"></i>
                     </a> -->
@@ -213,14 +213,14 @@
                   <div class="layui-colla-content layui-show">
 
                     <div class="layui-form-item" pane lay-tips="{content: '注意：开启调试会中断后续步骤', margin: '0 0 0 -10px'}">
-                      <label class="layui-form-label">{{ _("debug") }}</label>
+                      <label class="layui-form-label">{{ __.debug }}</label>
                       <div class="layui-input-block">
                         <input type="checkbox" name="asr_debug" lay-skin="switch" lay-filter="switch_debug_filter">
                       </div>
                     </div>
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label">{{ _("provider") }}</label>
+                      <label class="layui-form-label">{{ __.common_provider }}</label>
                       <div class="layui-input-block">
                         <select name="asr_provider" lay-filter="asr_provider_filter">
                           {% for item in data.asr.providers %}
@@ -234,7 +234,7 @@
 
                     <div class="layui-col-md12 layui-hide" id="subtitle_div">
                       <div class="layui-form-item">
-                        <label class="layui-form-label" id="subtitle_upload">{{ _("subtitle_url") }} <span
+                        <label class="layui-form-label" id="subtitle_upload">{{ __.asr_subtitle_url }} <span
                             class="layui-badge-dot layui-bg-green"></span></label>
                         <div class="layui-input-block">
                           <input id="subtitle_url" type="srt" name="subtitle_url" lay-verify="subtitle_srt"
@@ -245,10 +245,10 @@
 
                     <div class="layui-col-md12 layui-hide" id="jydraft_div">
                       <div class="layui-form-item">
-                        <label class="layui-form-label">{{ _("draft_name") }}</label>
+                        <label class="layui-form-label">{{ __.draft_name }}</label>
                         <div class="layui-input-block">
                           <select name="draft_name" lay-verify="draft_name" lay-search>
-                            <option value="">{{ _("select_or_search") }}</option>
+                            <option value="">{{ __.common_select_or_search }}</option>
                             {% for item in data.asr.draftnames %}
                             <option value="{{ item }}">{{ item }}</option>
                             {% endfor %}
@@ -260,10 +260,10 @@
                     <div class="layui-col-md12 layui-hide" id="whisper_div">
 
                       <div class="layui-form-item">
-                        <label class="layui-form-label">{{ _("model") }}</label>
+                        <label class="layui-form-label">{{ __.model }}</label>
                         <div class="layui-input-block">
                           <select name="asr_model" lay-verify="required" lay-search>
-                            <option value="">{{ _("select_or_search") }}</option>
+                            <option value="">{{ __.common_select_or_search }}</option>
                             {% for item in data.asr.whispers %}
                             <option value="{{ item }}">{{ item }}</option>
                             {% endfor %}
@@ -272,36 +272,36 @@
                       </div>
 
                       <div class="layui-form-item">
-                        <label class="layui-form-label">{{ _("whisper_size") }}</label>
+                        <label class="layui-form-label">{{ __.asr_whisper_size }}</label>
                         <div class="layui-input-block">
                           <select name="whisper_size" lay-verify="required" lay-search>
-                            <option value="">{{ _("select_or_search") }}</option>
+                            <option value="">{{ __.common_select_or_search }}</option>
                             {% for item in data.asr.beam_sizes %}
-                            <option value="{{ item.val }}">{{ item.desc }} - {{ item.val }}</option>
+                            <option value="{{ item.val }}">{{ item.val }} - {{ item.desc_zh if request.state.lang == 'zh' else item.desc_en }}</option>
                             {% endfor %}
                           </select>
                         </div>
                       </div>
 
                       <div class="layui-form-item">
-                        <label class="layui-form-label">{{ _("whisper_temperature") }}</label>
+                        <label class="layui-form-label">{{ __.asr_whisper_temperature }}</label>
                         <div class="layui-input-block">
                           <select name="whisper_temperature" lay-verify="required" lay-search>
-                            <option value="">{{ _("select_or_search") }}</option>
+                            <option value="">{{ __.common_select_or_search }}</option>
                             {% for item in data.asr.temperatures %}
-                            <option value="{{ item.val }}">{{ item.desc }} - {{ item.val }}</option>
+                            <option value="{{ item.val }}">{{ item.val }} - {{ item.desc_zh if request.state.lang == 'zh' else item.desc_en }}</option>
                             {% endfor %}
                           </select>
                         </div>
                       </div>
 
                       <div class="layui-form-item">
-                        <label class="layui-form-label">{{ _("whisper_length") }}</label>
+                        <label class="layui-form-label">{{ __.asr_whisper_length }}</label>
                         <div class="layui-input-block">
                           <select name="whisper_length" lay-verify="required" lay-search>
-                            <option value="">{{ _("select_or_search") }}</option>
+                            <option value="">{{ __.common_select_or_search }}</option>
                             {% for item in data.asr.chunk_lengths %}
-                            <option value="{{ item.val }}">{{ item.desc }} {{ item.duration }} - {{ item.val }}
+                            <option value="{{ item.val }}">{{ item.val }} - {{ item.desc_zh if request.state.lang == 'zh' else item.desc_en }}</option>
                             </option>
                             {% endfor %}
                           </select>
@@ -311,10 +311,10 @@
                     </div>
 
                     <div class="layui-form-item" pane>
-                      <label class="layui-form-label">{{ _("uvr") }}</label>
+                      <label class="layui-form-label">{{ __.asr_uvr }}</label>
                       <div class="layui-input-block">
                         <select name="uvr_model" lay-search>
-                          <option value="">{{ _("select_or_search") }}</option>
+                          <option value="">{{ __.common_select_or_search }}</option>
                           {% for item in data.asr.uvrmodels %}
                           <option value="{{ item }}">{{ item }}</option>
                           {% endfor %}
@@ -323,21 +323,21 @@
                     </div>
 
                     <div class="layui-form-item" pane>
-                      <label class="layui-form-label">{{ _("align_enable") }}</label>
+                      <label class="layui-form-label">{{ __.asr_align_enable }}</label>
                       <div class="layui-input-block">
                         <input type="checkbox" name="align_enable" lay-skin="switch">
                       </div>
                     </div>
 
                     <div class="layui-form-item" pane>
-                      <label class="layui-form-label">{{ _("emotion_enable") }}</label>
+                      <label class="layui-form-label">{{ __.asr_emotion_enable }}</label>
                       <div class="layui-input-block">
                         <input type="checkbox" name="emotion_enable" lay-skin="switch">
                       </div>
                     </div>
 
                     <div class="layui-form-item" pane>
-                      <label class="layui-form-label">{{ _("speaker_use_num") }}</label>
+                      <label class="layui-form-label">{{ __.asr_speaker_use_num }}</label>
                       <div class="layui-input-block">
                         <input type="checkbox" name="speaker_use_num" lay-skin="switch"
                           lay-filter="switch_speaker_filter">
@@ -345,7 +345,7 @@
                     </div>
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label">{{ _("speaker_range") }}</label>
+                      <label class="layui-form-label">{{ __.asr_speaker_range }}</label>
                       <div class="layui-input-inline" style="width: 142px;">
                         <input type="number" lay-verify="required|number|speaker_len" name="speaker_min"
                           placeholder="最小值" autocomplete="off" class="layui-input" min="1" max="10" step="1"
@@ -371,18 +371,18 @@
               <div class="layui-colla-item">
 
                 <div class="layui-card layui-panel">
-                  <div class="layui-colla-title">{{ _("dub.translation") }}</div>
+                  <div class="layui-colla-title">{{ __.dub_translation }}</div>
                   <div class="layui-colla-content layui-show">
 
                     <div class="layui-form-item" pane lay-tips="{content: '注意：开启调试会中断后续步骤', margin: '0 0 0 -10px'}">
-                      <label class="layui-form-label">{{ _("debug") }}</label>
+                      <label class="layui-form-label">{{ __.debug }}</label>
                       <div class="layui-input-block">
                         <input type="checkbox" name="llm_debug" lay-skin="switch" lay-filter="switch_debug_filter">
                       </div>
                     </div>
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label">{{ _("provider") }}</label>
+                      <label class="layui-form-label">{{ __.common_provider }}</label>
                       <div class="layui-input-block">
                         <select name="llm_provider" lay-filter="llm_provider_filter">
                           <option value="ignore">忽略翻译</option>
@@ -408,7 +408,7 @@
                     <div class="layui-col-md12 layui-hide" id="llm_div">
 
                       <div class="layui-form-item">
-                        <label class="layui-form-label">{{ _("model") }}</label>
+                        <label class="layui-form-label">{{ __.model }}</label>
                         <div class="layui-input-block">
                           <input type="text" name="llm_model" placeholder="请输入模型名称" autocomplete="off"
                             class="layui-input" lay-affix="clear">
@@ -416,7 +416,7 @@
                       </div>
 
                       <div class="layui-form-item">
-                        <label class="layui-form-label">{{ _("llm_temperature") }}</label>
+                        <label class="layui-form-label">{{ __.llm_temperature }}</label>
                         <div class="layui-input-block">
                           <input type="number" name="llm_temperature" lay-verify="required" placeholder="目标值 [0.0,1.0]"
                             autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
@@ -424,7 +424,7 @@
                       </div>
 
                       <div class="layui-form-item">
-                        <label class="layui-form-label">{{ _("llm_top_p") }}</label>
+                        <label class="layui-form-label">{{ __.llm_top_p }}</label>
                         <div class="layui-input-block">
                           <input type="number" name="llm_top_p" lay-verify="required" placeholder="目标值 [0.0,1.0]"
                             autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
@@ -433,14 +433,14 @@
 
                       <div class="layui-form-item" pane
                         lay-tips="{content: '提示：<br>启用可避免重复请求，防止消耗额外Token<br>', margin: '0 0 0 -10px'}">
-                        <label class="layui-form-label">{{ _("llm_use_cache") }}</label>
+                        <label class="layui-form-label">{{ __.llm_use_cache }}</label>
                         <div class="layui-input-block">
                           <input type="checkbox" name="llm_use_cache" lay-skin="switch">
                         </div>
                       </div>
 
                       <div class="layui-form-item layui-form-text">
-                        <label class="layui-form-label">{{ _("llm_instruct") }}</label>
+                        <label class="layui-form-label">{{ __.llm_instruct }}</label>
                         <div class="layui-input-block">
                           <textarea name="llm_instruct" placeholder="示例：【去掉结尾的标点】、【阿拉伯数字使用中文代替】等等" lay-affix="clear"
                             class="layui-textarea" style="min-height: 161px"></textarea>
@@ -452,7 +452,7 @@
                     <div class="layui-form-item">
 
                       <div class="layui-hide" id="opt_div">
-                        <label class="layui-form-label">{{ _("llm_batch_size") }}</label>
+                        <label class="layui-form-label">{{ __.llm_batch_size }}</label>
                         <div class="layui-input-block">
                           <input type="number" name="llm_batch_size" lay-verify="required" placeholder="目标值 [10,100]"
                             autocomplete="off" class="layui-input" min="10" max="100" step="10" lay-affix="number">
@@ -473,13 +473,13 @@
               <div class="layui-colla-item">
 
                 <div class="layui-card layui-panel">
-                  <div class="layui-colla-title">{{ _("dub.dubbing") }}
+                  <div class="layui-colla-title">{{ __.dub_dubbing }}
                   </div>
                   <div class="layui-colla-content layui-show">
 
                     <div class="layui-form-item">
                       <label class="layui-form-label" id="video_speaker"
-                        lay-tips="{content: '点击生成视频说话人音色', margin: '0 0 0 -10px'}">{{ _("provider") }} <span
+                        lay-tips="{content: '点击生成视频说话人音色', margin: '0 0 0 -10px'}">{{ __.common_provider }} <span
                           class="layui-badge-dot layui-bg-green"></span></label>
                       <div class="layui-input-block">
                         <select id="tts_provider" name="tts_provider" lay-verify="required"
@@ -496,7 +496,7 @@
                     </div>
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label">{{ _("model") }}</label>
+                      <label class="layui-form-label">{{ __.model }}</label>
                       <div class="layui-input-block">
                         <input type="text" name="tts_model" placeholder="请输入模型名称" autocomplete="off" class="layui-input"
                           lay-affix="clear" disabled>
@@ -504,7 +504,7 @@
                     </div>
 
                     <div class="layui-form-item" pane>
-                      <label class="layui-form-label">{{ _("tts_gender") }}</label>
+                      <label class="layui-form-label">{{ __.tts_gender }}</label>
                       <div class="layui-input-block">
                         <input type="radio" name="tts_gender" value="1" lay-filter="tts_gender_filter" title="男">
                         <input type="radio" name="tts_gender" value="2" lay-filter="tts_gender_filter" title="女">
@@ -512,17 +512,17 @@
                     </div>
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label">{{ _("tts_voice") }}</label>
+                      <label class="layui-form-label">{{ __.tts_voice }}</label>
                       <div class="layui-input-block">
                         <select id="tts_voice" name="tts_voice" lay-verify="required" lay-filter="tts_voice_filter"
                           lay-search="{caseSensitive:false, fuzzy: true}">
-                          <option value="">{{ _("select_or_search") }}</option>
+                          <option value="">{{ __.common_select_or_search }}</option>
                         </select>
                       </div>
                     </div>
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label">{{ _("tts_volume") }}</label>
+                      <label class="layui-form-label">{{ __.tts_volume }}</label>
                       <div class="layui-input-block">
                         <div class="layui-input-inline">
                           <input type="number" lay-verify="required" name="tts_volume" placeholder="目标值 [0.0,1.0]"
@@ -532,7 +532,7 @@
                     </div>
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label">{{ _("tts_rate") }}</label>
+                      <label class="layui-form-label">{{ __.tts_rate }}</label>
                       <div class="layui-input-block">
                         <div class="layui-input-inline">
                           <input type="number" lay-verify="required" name="tts_rate" placeholder="目标值 [0,2]"
@@ -544,7 +544,7 @@
                     <div class="layui-col-md12 layui-hide" id="e2f5_div">
 
                       <div class="layui-form-item">
-                        <label class="layui-form-label">{{ _("tts_step") }}</label>
+                        <label class="layui-form-label">{{ __.tts_step }}</label>
                         <div class="layui-input-block">
                           <div class="layui-input-inline">
                             <input type="number" lay-verify="required" name="tts_step" placeholder="目标值 [4,64]"
@@ -562,7 +562,7 @@
                     <div class="layui-col-md12 layui-hide" id="cosy_div">
 
                       <div class="layui-form-item">
-                        <label class="layui-form-label">{{ _("tts_instruct") }}</label>
+                        <label class="layui-form-label">{{ __.tts_instruct }}</label>
                         <div class="layui-input-block">
                           <input name="tts_instruct" placeholder="示例：【地区方言】、【说话风格】、【角色扮演】" lay-affix="clear"
                             class="layui-input"></textarea>
@@ -573,14 +573,14 @@
 
                     <div class="layui-form-item layui-hide" pane id="opt_vc"
                       lay-tips="{content: '将来源声音转换为目标的声音', margin: '0 0 0 -10px'}">
-                      <label class="layui-form-label">{{ _("tts_vc") }}</label>
+                      <label class="layui-form-label">{{ __.tts_vc }}</label>
                       <div class="layui-input-block">
                         <input type="checkbox" name="tts_vc" lay-skin="switch" lay-filter="switch_debug_filter">
                       </div>
                     </div>
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label">{{ _("tts_remarks") }}</label>
+                      <label class="layui-form-label">{{ __.tts_remarks }}</label>
                       <div class="layui-input-block">
                         <input name="tts_remarks" placeholder="随便写点什么" lay-affix="clear" class="layui-input"></textarea>
                       </div>
@@ -589,7 +589,7 @@
                     <div class="layui-form-item layui-form-text">
                       <label class="layui-form-label" id="tts_play"
                         lay-tips="{content: '点击试听', margin: '0 0 0 -10px'}">{{
-                        _("tts_play") }} <i class="layui-icon layui-icon-headset"></i></label>
+                        __.tts_play }} <i class="layui-icon layui-icon-headset"></i></label>
                       <div class="layui-input-block">
                         <textarea id="tts_text" name="tts_text" placeholder="请输入试听文本" lay-verify="required"
                           lay-reqtext="请输入试听文本" lay-affix="clear" class="layui-textarea tts_text"></textarea>
@@ -610,13 +610,13 @@
               <div class="layui-colla-item">
 
                 <div class="layui-card layui-panel">
-                  <div class="layui-colla-title">{{ _("dub.draft") }}
+                  <div class="layui-colla-title">{{ __.dub_draft }}
                     <!-- <i class="layui-icon layui-icon-tips" lay-tips="要支持的噢"></i> -->
                   </div>
                   <div class="layui-colla-content layui-show">
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label">{{ _("draft_volume") }}</label>
+                      <label class="layui-form-label">{{ __.draft_volume }}</label>
 
                       <div class="layui-input-inline" style="width: 120px;">
                         <input type="number" lay-verify="required" name="draft_volume_native" placeholder="原声 [0,1]"
@@ -630,7 +630,7 @@
                     </div>
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label">{{ _("draft_style_dts") }}</label>
+                      <label class="layui-form-label">{{ __.draft_style_dts }}</label>
 
                       <div class="layui-input-inline" style="width: 120px;">
                         <input type="number" lay-verify="required|number" name="draft_style_dts" placeholder="文字大小"
@@ -657,7 +657,7 @@
                     </div>
 
                     <div class="layui-form-item" panel>
-                      <label class="layui-form-label">{{ _("draft_style_nts") }}</label>
+                      <label class="layui-form-label">{{ __.draft_style_nts }}</label>
 
                       <div class="layui-input-inline" style="width: 120px;">
                         <input type="number" lay-verify="required|number" name="draft_style_nts" placeholder="文字大小"
@@ -683,7 +683,7 @@
                     </div>
 
                     <div class="layui-form-item layui-show">
-                      <label class="layui-form-label">{{ _("silence_threshold") }}</label>
+                      <label class="layui-form-label">{{ __.silence_threshold }}</label>
                       <div class="layui-input-inline" style="width: 120px;">
                         <input type="number" lay-verify="required" name="silence_threshold" placeholder="检测阈值"
                           autocomplete="off" class="layui-input" min="-100" max="0" step="10" lay-affix="number">
@@ -709,8 +709,7 @@
           <div class="layui-col-md12">
             <div class="layui-form-item layui-col-space15">
               <div id="floating-div" class="layui-col-md12">
-                <button type="submit" class="layui-btn layui-btn-fluid" lay-submit lay-filter="form_submit">{{
-                  _("submit") }}</button>
+                <button type="submit" class="layui-btn layui-btn-fluid" lay-submit lay-filter="form_submit">{{ __.common_submit }}</button>
               </div>
               <!-- <div class="layui-col-md12">
                 <div class="layui-col-md2">
@@ -731,10 +730,10 @@
 
   <script type="text/html" id="TPL_tts_voices_table_tools">
     <div class="layui-btn-container">
-      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="preview">{{ _("table_tools_preview") }}</a>
-      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="del">{{ _("table_tools_delete") }}</a>
-      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="up">{{ _("table_tools_move_up") }}</a>
-      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="down">{{ _("table_tools_move_down") }}</a>
+      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="preview">{{ __.table_tools_preview }}</a>
+      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="del">{{ __.table_tools_delete }}</a>
+      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="up">{{ __.table_tools_move_up }}</a>
+      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="down">{{ __.table_tools_move_down }}</a>
     </div>
   </script>
 

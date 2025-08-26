@@ -23,14 +23,22 @@
 }
 
 .layui-form-pane .layui-form-label {
-    width: 140px;
-    padding-top: 8px;
-    /* padding-right: 0px; */
-    padding-bottom: 8px;
-    padding-left: 15px;
+    width: 116px;
+    padding: 8px 15px;
+    height: 38px;
+    line-height: 20px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px 0 0 2px;
+    text-align: left;
+    background-color: #fafafa;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    box-sizing: border-box
 }
 
 .layui-form-pane .layui-input-block {
-  margin-left: 140px;
+  margin-left: 116px;
   left: -1px;
 }
