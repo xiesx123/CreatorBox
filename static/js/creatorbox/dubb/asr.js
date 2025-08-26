@@ -25,7 +25,7 @@ layui.define(['form', 'tool'], function (exports) {
 
     // 上传
     tool.upload("#subtitle_upload", "file/upload", 'file', 'srt', null, function (response) {
-        $('[name="subtitle_url"]').val(response.data.location)
+        $('[name="subtitle_file"]').val(response.data.location)
     })
 
     // 方法

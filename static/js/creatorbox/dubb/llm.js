@@ -33,11 +33,6 @@ layui.define(['form', 'tool'], function (exports) {
         mod.switch()
     });
 
-    // 上传
-    tool.upload("#subtitle_upload", "file/upload", 'file', 'srt', null, function (response) {
-        $('[name="subtitle_url"]').val(response.data.location)
-    })
-
     // 方法
     var mod = {
         setData: function (data) {

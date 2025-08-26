@@ -19,20 +19,20 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
     // 类型
     var voice_type = function (type) {
         types = {
-            1: "内置",
-            2: "视频",
-            3: "用戶"
+            1: "Built-in",
+            2: "Video",
+            3: "User"
         }
-        return types[type] || "未知"
+        return types[type] || "-"
     };
 
     // 性别
     var gender_type = function (type) {
         types = {
-            1: "男",
-            2: "女",
+            1: "male",
+            2: "female",
         }
-        return types[type] || "未知"
+        return types[type] || "-"
     };
 
     // 请求参数
