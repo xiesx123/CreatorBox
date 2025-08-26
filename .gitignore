@@ -20,6 +20,8 @@ build/
 models/
 webapp/
 mapper.txt
+static/i18n/babel.*
+static/i18n/messages.pot
 
 ### 排除 ###
 !r3.exe
