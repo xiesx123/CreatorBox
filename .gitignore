@@ -19,11 +19,9 @@
 build/
 models/
 webapp/
+mapper.txt
 
 ### 排除 ###
 !r3.exe
 !**/matcha/models/
 !webapp/data/gradio.json
-
-
-

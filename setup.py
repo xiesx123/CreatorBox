@@ -41,6 +41,7 @@ setuptools.setup(
             "pipdeptree",
             "pip-review",
             "pip-tools",
+            "uvicorn==0.21.1",
         ],
     },
     classifiers=[
