@@ -18,7 +18,7 @@
 
   <h4>Web界面</h4>
 
-  ![](/docs/images/main.png)
+  ![](/docs/images/main_zh.png)
 
   <h4>配音/剪辑</h4>
 

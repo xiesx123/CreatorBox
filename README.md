@@ -18,7 +18,7 @@
 
 <h4>Web Interface</h4>
 
-![](/docs/images/main.png)
+![](/docs/images/main_en.png)
 
 <h4>Dubbing/Editing</h4>
 
