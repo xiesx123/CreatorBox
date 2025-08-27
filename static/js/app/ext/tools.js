@@ -1,13 +1,12 @@
-layui.define(['layer', 'table', 'form', 'element', 'upload', 'notice'], function (exports) {
+layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', 'notice'], function (exports) {
 	var layer = layui.layer;
 	var table = layui.table;
 	var form = layui.form;
 	var element = layui.element;
 	var upload = layui.upload;
 	var toast = layui.notice;
+	var i18n = layui.i18n;
 	var $ = layui.jquery;
-
-	const reconnectInterval = 5000;
 
 	const timeout = 30 * 1000;
 
@@ -59,7 +58,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'notice'], function
 				dataType: 'json',
 				beforeSend: function (xhr, status) {
 					if (progress) {
-						idx = layer.msg('请稍后', { icon: 16, time: timeout });
+						idx = layer.msg(i18n.trans('loading'), { icon: 16, time: timeout });
 					}
 				},
 				success: function (data, status) {
@@ -67,7 +66,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'notice'], function
 					if (data?.code === 0) {
 						callback?.(data);
 					} else {
-						toast.error(data?.message || "", "提示");
+						toast.error(data?.message || "", i18n.trans('confirm_title'));
 					}
 					layer.close(idx);
 				},
@@ -87,7 +86,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'notice'], function
 				dataType: 'json',
 				beforeSend: function (xhr, status) {
 					if (progress) {
-						idx = layer.msg('请稍后', { icon: 16, time: timeout });
+						idx = layer.msg(i18n.trans('loading'), { icon: 16, time: timeout });
 					}
 				},
 				success: function (data, status) {
@@ -95,7 +94,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'notice'], function
 					if (data?.code === 0) {
 						callback?.(data);
 					} else {
-						toast.error(data?.message || "", "提示");
+						toast.error(data?.message || "", i18n.trans('confirm_title'));
 					}
 					layer.close(idx);
 				},
@@ -107,10 +106,10 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'notice'], function
 		},
 
 		form: function (url, parames, callback) {
-			layer.confirm('确定提交？', {
+			layer.confirm(i18n.trans('confirm_submit'), {
 				icon: 3,
-				title: '提示',
-				btn: ['确定', '取消']
+				title: i18n.trans('confirm_title'),
+				btn: [i18n.trans('confirm_ok'), i18n.trans('confirm_cancel')]
 			}, function () {
 				$.ajax({
 					type: 'POST',
@@ -118,14 +117,14 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'notice'], function
 					data: parames,
 					dataType: 'json',
 					beforeSend: function (xhr, status) {
-						idx = layer.msg('请稍后', { icon: 16, time: timeout });
+						idx = layer.msg(i18n.trans('loading'), { icon: 16, time: timeout });
 					},
 					success: function (data, status) {
 						console.debug(data)
 						if (data?.code === 0) {
 							callback?.(data);
 						} else {
-							toast.error(data?.message || "", "提示");
+							toast.error(data?.message || "", i18n.trans('confirm_title'));
 						}
 						layer.close(idx);
 					},
@@ -142,14 +141,14 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'notice'], function
 			var data = checkStatus.data;
 			var ids = data.map(item => item.id).join(",");
 			if (ids.length == 0) {
-				layer.msg("请选择删除数据");
-				toast.error("请选择删除数据", "提示");
+				layer.msg(i18n.trans('confirm_delete_select'));
+				toast.error(i18n.trans('confirm_delete_select'), i18n.trans('confirm_title'));
 				return;
 			}
-			layer.confirm('确认删除？', {
+			layer.confirm(i18n.trans('confirm_delete'), {
 				icon: 3,
-				title: '提示',
-				btn: ['确定', '取消']
+				title: i18n.trans('confirm_title'),
+				btn: [i18n.trans('confirm_ok'), i18n.trans('confirm_cancel')]
 			}, function (index) {
 				idx = index
 				mod.post(url, JSON.stringify({ "ids": ids }), callback)
@@ -157,7 +156,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'notice'], function
 		},
 
 		download: function (url, parames, filename) {
-			idx = layer.msg('请稍后', { icon: 16, time: timeout });
+			idx = layer.msg(i18n.trans('loading'), { icon: 16, time: timeout });
 			fetch(url, {
 				method: "POST",
 				body: parames,
@@ -176,7 +175,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'notice'], function
 					layer.close(idx);
 				})
 				.catch(error => {
-					toast.error(error, "提示");
+					toast.error(error, i18n.trans('confirm_title'));
 				});
 		},
 
@@ -188,25 +187,25 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'notice'], function
 				exts: exts_,
 				before: function (obj) {
 					element.progress('progress_filter', '0%');
-					layer.msg('上传中', { icon: 16, time: timeout });
+					layer.msg(i18n.trans('upload_uploading'), { icon: 16, time: timeout });
 				},
 				progress: function (n, elem, e) {
 					element.progress('progress_filter', n + '%');
 					if (n == 100) {
-						layer.msg('上传完毕');
+						layer.msg(i18n.trans('upload_complete'));
 					}
 					if (progress_) {
 						progress_(n, elem, e);
 					}
 				},
 				done: function (response) {
-					layer.msg('上传成功', { icon: 1 });
+					layer.msg(i18n.trans('upload_success'), { icon: 1 });
 					if (done_) {
 						done_(response);
 					}
 				},
 				error: function () {
-					toast.error('上传失败');
+					toast.error(i18n.trans('upload_failed'));
 				}
 			}
 			if (exts_ == null) {
@@ -228,7 +227,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'notice'], function
 				isOutAnim: false,
 				scrollbar: false,
 				btnAlign: 'r',
-				btn: ['提交', '返回'],
+				btn: [i18n.trans('confirm_ok'), i18n.trans('confirm_cancel')],
 				yes: function (index, layero) {
 					// 得到iframe页的窗口对象
 					// var iframeWin = window[layero.find('iframe')[0]['name']];

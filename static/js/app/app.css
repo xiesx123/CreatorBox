@@ -42,3 +42,16 @@
   margin-left: 116px;
   left: -1px;
 }
+
+/* 底部浮动 */
+.floating-div {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #393D52;
+  color: white;
+  text-align: center;
+  padding: 0px 0;
+  z-index: 9999;
+}

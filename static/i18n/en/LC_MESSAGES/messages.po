@@ -1,324 +1,329 @@
-#: src/app/i18n.py:11
-msgid "app_description"
-msgstr ""
-"🚀🎬 Flexible, efficient, and scalable toolbox for editing and dubbing, "
-"unleashing creative potential"
-
-#: src/app/i18n.py:14
+#: src/app/i18n.py:12
 msgid "asr_align_enable"
 msgstr "Alignment"
 
-#: src/app/i18n.py:15
+#: src/app/i18n.py:13
 msgid "asr_emotion_enable"
 msgstr "Emotion"
 
-#: src/app/i18n.py:16
+#: src/app/i18n.py:14
 msgid "asr_speaker_range"
 msgstr "Spk Range"
 
-#: src/app/i18n.py:17
+#: src/app/i18n.py:15
 msgid "asr_speaker_use_num"
 msgstr "Spk Count"
 
-#: src/app/i18n.py:18
+#: src/app/i18n.py:16
 msgid "asr_subtitle_file"
 msgstr "Subtitle"
 
-#: src/app/i18n.py:19
+#: src/app/i18n.py:17
 msgid "asr_subtitle_placeholder"
 msgstr "Enter subtitle file path (SRT)"
 
-#: src/app/i18n.py:20
+#: src/app/i18n.py:18
 msgid "asr_uvr"
 msgstr "Separation"
 
-#: src/app/i18n.py:21
+#: src/app/i18n.py:19
 msgid "asr_whisper_length"
 msgstr "Coherence"
 
-#: src/app/i18n.py:22
+#: src/app/i18n.py:20
 msgid "asr_whisper_size"
 msgstr "Accuracy"
 
-#: src/app/i18n.py:23
+#: src/app/i18n.py:21
 msgid "asr_whisper_temperature"
 msgstr "Randomness"
 
-#: src/app/i18n.py:26
+#: src/app/i18n.py:23
 msgid "common_gender_female"
 msgstr "Female"
 
-#: src/app/i18n.py:25
+#: src/app/i18n.py:24
 msgid "common_gender_male"
 msgstr "Male"
 
-#: src/app/i18n.py:27
+#: src/app/i18n.py:25
 msgid "common_locale"
 msgstr "Locale"
 
-#: src/app/i18n.py:28
+#: src/app/i18n.py:26
 msgid "common_options"
 msgstr "Options"
 
-#: src/app/i18n.py:29
+#: src/app/i18n.py:27
 msgid "common_preview"
 msgstr "Preview"
 
-#: src/app/i18n.py:30
+#: src/app/i18n.py:28
 msgid "common_provider"
 msgstr "Provider"
 
-#: src/app/i18n.py:31
+#: src/app/i18n.py:29
 msgid "common_rebuild"
 msgstr "Rebuild"
 
-#: src/app/i18n.py:32
+#: src/app/i18n.py:30
 msgid "common_select_or_search"
 msgstr "Select or Search"
 
-#: src/app/i18n.py:33
+#: src/app/i18n.py:31
 msgid "common_submit"
 msgstr "Execute"
 
-#: src/app/i18n.py:34
+#: src/app/i18n.py:32
 msgid "common_upload"
 msgstr "Upload"
 
-#: src/app/i18n.py:36
+#: src/app/i18n.py:34
 msgid "debug"
 msgstr "Debug"
 
-#: src/app/i18n.py:37
+#: src/app/i18n.py:35
 msgid "debug_interrupt_alert"
 msgstr "Enabling will interrupt subsequent steps"
 
-#: src/app/i18n.py:39
+#: src/app/i18n.py:37
 msgid "draft_name"
 msgstr "Draft Name"
 
-#: src/app/i18n.py:40
+#: src/app/i18n.py:38
 msgid "draft_name_placeholder"
 msgstr "Please select a CapCut draft"
 
-#: src/app/i18n.py:86
+#: src/app/i18n.py:39
 msgid "draft_silence_threshold"
 msgstr "Silence Detection"
 
-#: src/app/i18n.py:41
+#: src/app/i18n.py:40
 msgid "draft_style_dts"
 msgstr "Dubbing Sub "
 
-#: src/app/i18n.py:42
+#: src/app/i18n.py:41
 msgid "draft_style_nts"
 msgstr "Original Sub"
 
-#: src/app/i18n.py:43
+#: src/app/i18n.py:42
 msgid "draft_volume"
 msgstr "Volume"
 
-#: src/app/i18n.py:45
+#: src/app/i18n.py:44
 msgid "dub_draft"
 msgstr "Draft"
 
-#: src/app/i18n.py:46
+#: src/app/i18n.py:45
 msgid "dub_dubbing"
 msgstr "Dubbing"
 
-#: src/app/i18n.py:47
+#: src/app/i18n.py:46
 msgid "dub_scene"
 msgstr "Base"
 
-#: src/app/i18n.py:48
+#: src/app/i18n.py:47
 msgid "dub_subtitle"
 msgstr "Subtitle"
 
-#: src/app/i18n.py:49
+#: src/app/i18n.py:48
 msgid "dub_translation"
 msgstr "Translation"
 
-#: src/app/i18n.py:51
+#: src/app/i18n.py:50
 msgid "llm_batch_size"
 msgstr "Batch Size"
 
-#: src/app/i18n.py:58
+#: src/app/i18n.py:51
 msgid "llm_configured"
 msgstr "configured"
 
-#: src/app/i18n.py:57
+#: src/app/i18n.py:52
 msgid "llm_ignore"
 msgstr "Ignore"
 
-#: src/app/i18n.py:52
+#: src/app/i18n.py:53
 msgid "llm_instruct"
 msgstr "Instruction"
 
-#: src/app/i18n.py:59
+#: src/app/i18n.py:54
 msgid "llm_instruction_placeholder"
-msgstr "[Remove ending punctuation], [Replace Arabic numerals with Chinese], etc."
+msgstr "[Remove ending punctuation], [Replace Arabic numerals with Chinese] etc."
 
-#: src/app/i18n.py:53
+#: src/app/i18n.py:55
 msgid "llm_temperature"
 msgstr "Randomness"
 
-#: src/app/i18n.py:54
+#: src/app/i18n.py:56
 msgid "llm_top_p"
 msgstr "Diversity"
 
-#: src/app/i18n.py:55
+#: src/app/i18n.py:57
 msgid "llm_use_cache"
 msgstr "Cache"
 
-#: src/app/i18n.py:56
+#: src/app/i18n.py:58
 msgid "llm_use_cache_tip"
 msgstr "Enabling can avoid duplicate requests and prevent extra token consumption"
 
-#: src/app/i18n.py:62
+#: src/app/i18n.py:60
 msgid "model"
 msgstr "Model"
 
-#: src/app/i18n.py:63
+#: src/app/i18n.py:61
 msgid "model_placeholder"
 msgstr "Enter model name"
 
-#: src/app/i18n.py:65
+#: src/app/i18n.py:63
 msgid "nav_discord"
 msgstr "Discord"
 
-#: src/app/i18n.py:66
+#: src/app/i18n.py:64
 msgid "nav_editor"
 msgstr "Data Editor"
 
-#: src/app/i18n.py:68
+#: src/app/i18n.py:65
 msgid "nav_group_assist"
 msgstr "Assist"
 
-#: src/app/i18n.py:69
+#: src/app/i18n.py:66
 msgid "nav_group_doc"
 msgstr "Docs"
 
-#: src/app/i18n.py:70
+#: src/app/i18n.py:67
 msgid "nav_group_feature"
 msgstr "Feature"
 
-#: src/app/i18n.py:71
+#: src/app/i18n.py:68
 msgid "nav_masker_painter"
 msgstr "Painter Editor"
 
-#: src/app/i18n.py:72
+#: src/app/i18n.py:69
 msgid "nav_masker_remove"
 msgstr "Masker"
 
-#: src/app/i18n.py:73
+#: src/app/i18n.py:70
 msgid "nav_play"
 msgstr "Video Playback"
 
-#: src/app/i18n.py:67
+#: src/app/i18n.py:71
 msgid "nav_plugins"
 msgstr "Plugins"
 
-#: src/app/i18n.py:74
+#: src/app/i18n.py:72
 msgid "nav_set"
 msgstr "Preferences"
 
-#: src/app/i18n.py:75
+#: src/app/i18n.py:73
 msgid "nav_speaker"
 msgstr "Speaker"
 
-#: src/app/i18n.py:76
+#: src/app/i18n.py:74
 msgid "nav_swagger"
 msgstr "Swagger"
 
-#: src/app/i18n.py:77
+#: src/app/i18n.py:75
 msgid "nav_vitepress"
 msgstr "Tutorial"
 
-#: src/app/i18n.py:79
+#: src/app/i18n.py:77
 msgid "scene_align_type"
 msgstr "Alignment"
 
-#: src/app/i18n.py:80
+#: src/app/i18n.py:78
 msgid "scene_mode_type"
 msgstr "Mode"
 
-#: src/app/i18n.py:81
+#: src/app/i18n.py:79
 msgid "scene_suffix"
 msgstr "Suffix"
 
-#: src/app/i18n.py:82
+#: src/app/i18n.py:80
 msgid "scene_suffix_placeholder"
-msgstr "Enter suffix"
+msgstr "Enter an identifier suffix"
 
-#: src/app/i18n.py:83
+#: src/app/i18n.py:81
 msgid "scene_video_url"
 msgstr "Video"
 
-#: src/app/i18n.py:84
+#: src/app/i18n.py:82
 msgid "scene_video_url_placeholder"
 msgstr "Enter video path or link"
 
-#: src/app/i18n.py:88
+#: src/app/i18n.py:84
 msgid "table_tools_delete"
 msgstr "Del"
 
-#: src/app/i18n.py:89
+#: src/app/i18n.py:85
 msgid "table_tools_move_down"
 msgstr "Down"
 
-#: src/app/i18n.py:90
+#: src/app/i18n.py:86
 msgid "table_tools_move_up"
 msgstr "Up"
 
-#: src/app/i18n.py:91
+#: src/app/i18n.py:87
 msgid "table_tools_preview"
 msgstr "Preview"
 
-#: src/app/i18n.py:93 src/app/i18n.py:94
+#: src/app/i18n.py:90
 msgid "tts_gender"
 msgstr "Gender"
 
-#: src/app/i18n.py:95
+#: src/app/i18n.py:91
 msgid "tts_instruct"
 msgstr "Instruction"
 
-#: src/app/i18n.py:97
+#: src/app/i18n.py:92
+msgid "tts_instruct_placeholder"
+msgstr "[Regional Dialect], [Speaking Style], [Role Play] etc."
+
+#: src/app/i18n.py:93
 msgid "tts_play"
 msgstr "Preview"
 
-#: src/app/i18n.py:98
+#: src/app/i18n.py:94
+msgid "tts_play_tip"
+msgstr "Click to preview"
+
+#: src/app/i18n.py:95
 msgid "tts_rate"
 msgstr "Rate"
 
-#: src/app/i18n.py:99
+#: src/app/i18n.py:96
 msgid "tts_remarks"
 msgstr "Remarks"
 
-#: src/app/i18n.py:100
+#: src/app/i18n.py:97
 msgid "tts_remarks_placeholder"
 msgstr "Write something"
 
-#: src/app/i18n.py:101
+#: src/app/i18n.py:89
+#, fuzzy
+msgid "tts_spk_generate"
+msgstr "Click to generate video speaker voice"
+
+#: src/app/i18n.py:98
 msgid "tts_step"
 msgstr "Sampling Steps"
 
-#: src/app/i18n.py:96
+#: src/app/i18n.py:99
 msgid "tts_text_placeholder"
 msgstr "Enter preview text"
 
-#: src/app/i18n.py:102
+#: src/app/i18n.py:100
 msgid "tts_vc"
 msgstr "Conversion"
 
-#: src/app/i18n.py:103
+#: src/app/i18n.py:101
+msgid "tts_vc_tip"
+msgstr "Convert source voice to target voice"
+
+#: src/app/i18n.py:102
 msgid "tts_voice"
 msgstr "Voice"
 
-#: src/app/i18n.py:104
+#: src/app/i18n.py:103
 msgid "tts_volume"
 msgstr "Volume"
-
-#~ msgid "llm_configured_not"
-#~ msgstr ""
-
-#~ msgid "llm_instruction_tip"
-#~ msgstr "Instruction"
 

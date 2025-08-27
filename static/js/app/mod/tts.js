@@ -1,10 +1,11 @@
-layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exports) {
+layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], function (exports) {
     var layer = layui.layer;
     var table = layui.table;
     var form = layui.form;
     var util = layui.util;
     var tool = layui.tool;
     var toast = layui.notice;
+    var i18n = layui.i18n;
     var $ = layui.jquery;
 
     let CREATORBOX = "dubbing"
@@ -19,20 +20,20 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
     // 类型
     var voice_type = function (type) {
         types = {
-            1: "Built-in",
-            2: "Video",
-            3: "User"
+            1: i18n.trans('type_builtin'),
+            2: i18n.trans('type_video'),
+            3: i18n.trans('type_user')
         }
-        return types[type] || "-"
+        return types[type] || i18n.trans('type_unknown')
     };
 
     // 性别
     var gender_type = function (type) {
         types = {
-            1: "male",
-            2: "female",
+            1: i18n.trans('gender_male'),
+            2: i18n.trans('gender_female'),
         }
-        return types[type] || "-"
+        return types[type] || i18n.trans('gender_unknown')
     };
 
     // 请求参数
@@ -64,9 +65,10 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
         // 清空原有选项
         $("#tts_voice").empty();
         if (response.data.length == 0) {
-            toast.warning("暂无可用语音", "语音列表")
+            toast.warning(i18n.trans('tts_voice_no_data'), i18n.trans('tts_voice_list_title'));
         } else {
-            toast.success("已找到 " + response.data.length + " 条语音", "语音列表")
+            toast.success(i18n.transFmt('tts_voice_found', response.data.length), i18n.trans('tts_voice_list_title')
+            );
         }
         // 转换显示对象
         const wrappedData = response.data.reduce((acc, item) => {
@@ -125,7 +127,12 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
     // 生成配置
     util.on('id', {
         "video_speaker": function (othis) {
-            layer.prompt({ title: '确定生成说话人配置？', placeholder: '请输入片段长度(单位s)', value: form_json.speaker_len, maxlength: 5 }, function (value, index, elem) {
+            layer.prompt({
+                title: i18n.trans('tts_spk_config_prompt_title'),
+                placeholder: i18n.trans('tts_spk_config_prompt_placeholder'),
+                value: form_json.speaker_len,
+                maxlength: 5
+            }, function (value, index, elem) {
                 if (value === '') return elem.focus();
                 value = util.escape(value)
                 form_json.speaker_len = isNaN(value) ? value : Number(value)
@@ -180,7 +187,7 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
                     );
                 var item = findItemByVoice(form_json)
                 if (item != null) {
-                    layer.msg('正在播放缓存音频', { icon: 1 });
+                    layer.msg(i18n.trans('tts_playing_cached_audio'), { icon: 1 });
                     return voice_play(item.url);
                 }
                 // 生成试听
@@ -204,7 +211,7 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
                         "suffix": $("#suffix").val()
                     }
                 }), function (response) {
-                    toast.info(output, "语音试听")
+                    toast.info(output, i18n.trans('tts_playing_preview'))
                     console.debug(response.data)
                     var url = '/file/local?url=' + response.data.path;
                     var duration = response.data.duration;
@@ -237,31 +244,36 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
     });
 
     // 说话人表格
-    var inst = table.render({
-        elem: '#tts_voices_table',
-        data: table_json,
-        page: false,
-        cols: [[
-            { title: 'spk', width: 80, align: "center", templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.LAY_INDEX + '</div>' },
-            { title: '模型', width: 60, align: "center", field: 'provider', templet: d => '<div title="' + d.model + '">' + d.provider + '</div>' },
-            { title: '类型', width: 60, align: "center", field: 'type', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.type + '</div>' },
-            { title: '性别', width: 60, align: "center", field: 'gender', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + (d.gender == 1 ? '男' : d.gender == 2 ? '女' : '未知') + '</div>' },
-            { title: '音色', field: 'voice', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.voice + '</div>' },
-            { title: '音量', width: 60, align: "center", field: 'volume', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.volume + '</div>' },
-            { title: '语速', width: 60, align: "center", field: 'rate', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.rate + '</div>' },
-            { title: '时长', width: 80, align: "center", field: 'duration', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.duration + '</div>' },
-            { title: "操作", fixed: 'right', width: "200", align: "center", toolbar: "#TPL_tts_voices_table_tools" }
-        ]],
-    });
+    var tableInit = function (){
+        table.render({
+            elem: '#tts_voices_table',
+            data: table_json,
+            page: false,
+            text: {
+                none: i18n.trans('tts_table_empyt')
+            },
+            cols: [[
+                { title: i18n.trans('tts_table_col_spk'), width: 80, align: "center", templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.LAY_INDEX + '</div>' },
+                { title: i18n.trans('tts_table_col_model'), width: 80, align: "center", field: 'provider', templet: d => '<div title="' + d.model + '">' + d.provider + '</div>' },
+                { title: i18n.trans('tts_table_col_type'), width: 80, align: "center", field: 'type', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.type + '</div>' },
+                { title: i18n.trans('tts_table_col_gender'), width: 80, align: "center", field: 'gender', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + (d.gender == 1 ? i18n.trans('gender_male') : d.gender == 2 ? i18n.trans('gender_female') : i18n.trans('gender_unknown')) + '</div>' },
+                { title: i18n.trans('tts_table_col_voice'), field: 'voice', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.voice + '</div>' },
+                { title: i18n.trans('tts_table_col_volume'), width: 80, align: "center", field: 'volume', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.volume + '</div>' },
+                { title: i18n.trans('tts_table_col_rate'), width: 80, align: "center", field: 'rate', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.rate + '</div>' },
+                { title: i18n.trans('tts_table_col_duration'), width: 100, align: "center", field: 'duration', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.duration + '</div>' },
+                { title: i18n.trans('tts_table_col_action'), fixed: 'right', width: "220", align: "center", toolbar: "#TPL_tts_voices_table_tools" }
+            ]],
+        });
+    }
 
     // 说话人表格工具事件
-    table.on('tool(' + inst.config.id + ')', function (obj) {
+    table.on('tool(tts_voices_table)', function (obj) {
         var data = obj.data;
         var idx = table_json.findIndex(item => { return item.voice == data.voice && item.duration == data.duration });
         if (obj.event === "preview") {
             voice_play(data.url);
         } else if (obj.event === "del") {
-            layer.confirm(`确定删除【${data.voice}】么?`, { title: '提示', icon: 3 }, function (index) {
+            layer.confirm(i18n.transFmt('confirm_delete_select_fmt', data.voice), { title: i18n.trans('confirm_title'), icon: 3 }, function (index) {
                 obj.del();
                 layer.close(index);
                 if (idx < table_json.length) {
@@ -271,19 +283,19 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
             });
         } else if (obj.event === 'up') {
             if (idx === 0) {
-                layer.msg('已置顶');
+                layer.msg(i18n.trans('tts_table_pinned_top'));
                 return;
             }
             swapData(idx, idx - 1);
         } else if (obj.event === 'down') {
             if (idx === table_json.length - 1) {
-                layer.msg('已置底');
+                layer.msg(i18n.trans('tts_table_pinned_bottom'));
                 return;
             }
             swapData(idx, idx + 1);
         }
     });
-
+    
     // 说话人表格移动并重载
     var swapData = function swapData(i, j) {
         var temp = table_json[i];
@@ -318,6 +330,7 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'notice'], function (exp
             form_json = data;
             table_json = data2;
             mod.switch();
+            tableInit()
             swapData(0, 0);
             tool.post("tts/search", voice_search_params(), voice_search_callback, true);
         },

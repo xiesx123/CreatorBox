@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="{{request.state.lang}}">
 
 <head>
     <meta charset="utf-8" />
@@ -19,17 +19,11 @@
     <script src="static/js/layui/layui.js"></script>
     <!-- iconify -->
     <script src="static/js/iconify/iconify.min.js"></script>
-    <!-- creator -->
-    <script src="static/js/creatorbox/app.js"></script>
+    <!-- app -->
+    <script src="static/js/app/app.js"></script>
 </head>
 
 <body class="collapse" layadmin-themealias="default">
-
-    <ul class="layui-hide ignore">
-        <li><a href="javascript:translate.changeLanguage('english');">English</a></li>|
-        <li><a href="javascript:translate.changeLanguage('chinese_simplified');">简体中文</a></li>|
-        <li><a href="javascript:translate.changeLanguage('chinese_traditional');">繁體中文</a></li>
-    </ul>
 
     <div class="layui-layout layui-layout-admin">
 
@@ -41,9 +35,6 @@
                     <div class="layui-card layui-panel">
                         <div class="layui-colla-title">应用</div>
                         <div class="layui-colla-content layui-show">
-                            <blockquote class="layui-elem-quote">
-                                欢迎加入 <a href="https://discord.gg/ZSeETM6bsS" target="_blank">Discord</a> 进行用法或新功能的讨论！
-                            </blockquote>
                         </div>
                     </div>
                 </div>
@@ -205,7 +196,7 @@
         });
 
     </script>
-    <script src="static/js/creatorbox/theam.js"></script>
+    <script src="static/js/app/theam.js"></script>
 </body>
 
 </html>

@@ -20,23 +20,9 @@
   <link href="static/js/layui/css/layui-nav.css" rel="stylesheet">
   <link href="static/js/layui/css/layui-dark.css" rel="stylesheet">
   <script src="static/js/layui/layui.js"></script>
-  <!-- creator -->
-  <link href="static/js/creatorbox/app.css" rel="stylesheet">
-  <script src="static/js/creatorbox/app.js"></script>
-  <style>
-    /* 底部浮动 */
-    .floating-div {
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      background-color: #393D52;
-      color: white;
-      text-align: center;
-      padding: 0px 0;
-      z-index: 9999;
-    }
-  </style>
+  <!-- app -->
+  <link href="static/js/app/app.css" rel="stylesheet">
+  <script src="static/js/app/app.js"></script>
 </head>
 
 <body class="collapse" layadmin-themealias="default">
@@ -105,7 +91,8 @@
             <dl class="layui-nav-child">
               <dd><a data-path="/docs" href="javascript:;"><i style="font-size: 18px"
                     class="layui-icon layui-icon-release"></i> {{ __.nav_swagger }}</a></dd>
-              <dd><a data-path="https://xiesx123.github.io/CreatorBox/{{ 'zh' if request.state.lang == 'zh' else ''}}" href="javascript:;">
+              <dd><a data-path="https://xiesx123.github.io/CreatorBox/{{ 'zh' if request.state.lang == 'zh' else ''}}"
+                  href="javascript:;">
                   <i style="font-size: 18px" class="layui-icon layui-icon-read"></i> {{ __.nav_vitepress }}</a>
               </dd>
               <dd><a data-path="https://discord.gg/ZSeETM6bsS" href="javascript:;">
@@ -129,14 +116,13 @@
               <div class="layui-colla-item">
 
                 <div class="layui-card layui-panel">
-                  <div class="layui-colla-title">{{ __.dub_scene }}
-                  </div>
+                  <div class="layui-colla-title">{{ __.dub_scene }}</div>
                   <div class="layui-colla-content layui-show">
 
                     <div class="layui-form-item">
                       <label class="layui-form-label" id="video_upload"
-                        lay-tips="{content: '{{ __.common_upload }}', margin: '0 0 0 -10px'}">{{ __.scene_video_url }} <span
-                          class="layui-badge-dot layui-bg-green"></span></label>
+                        lay-tips="{content: '{{ __.common_upload }}', margin: '0 0 0 -10px'}">{{ __.scene_video_url }}
+                        <span class="layui-badge-dot layui-bg-green"></span></label>
                       <div class="layui-input-block">
                         <input id="video_url" type="text" name="video_url" lay-verify="path"
                           placeholder="{{ _('scene_video_url_placeholder') }}" autocomplete="off" class="layui-input"
@@ -150,7 +136,8 @@
                         <select id="locale" name="locale" lay-verify="required" lay-filter="locale_filter">
                           <option value="">{{ __.common_select_or_search }}</option>
                           {% for item in data.llm.locales %}
-                          <option value="{{ item.locale }}">{{ item.locale }} - {{ item.name if request.state.lang == 'zh' else item.country }}</option>
+                          <option value="{{ item.locale }}">{{ item.locale }} - {{ item.name if request.state.lang ==
+                            'zh' else item.country }}</option>
                           {% endfor %}
                         </select>
                       </div>
@@ -161,7 +148,8 @@
                       <div class="layui-input-block">
                         {% for item in data.base.mode_types %}
                         <input type="radio" name="mode_type" value="{{ item.val }}" lay-filter="mode_type_filter"
-                          title="{{ item.desc_zh if request.state.lang == 'zh' else item.desc_en }}" {% if not item.enable %}disabled{% endif %}>
+                          title="{{ item.desc_zh if request.state.lang == 'zh' else item.desc_en }}" {% if not
+                          item.enable %}disabled{% endif %}>
                         {% endfor %}
                       </div>
                     </div>
@@ -170,7 +158,8 @@
                       <label class="layui-form-label">{{ __.scene_align_type }}</label>
                       <div class="layui-input-block">
                         {% for item in data.base.align_types %}
-                        <input type="radio" name="align_type" value="{{ item.val }}" title="{{ item.desc_zh if request.state.lang == 'zh' else item.desc_en }}">
+                        <input type="radio" name="align_type" value="{{ item.val }}"
+                          title="{{ item.desc_zh if request.state.lang == 'zh' else item.desc_en }}">
                         {% endfor %}
                       </div>
                     </div>
@@ -212,7 +201,8 @@
                   </div>
                   <div class="layui-colla-content layui-show">
 
-                    <div class="layui-form-item" pane lay-tips="{content: '{{__.debug_interrupt_alert}}', margin: '0 0 0 -10px'}">
+                    <div class="layui-form-item" pane
+                      lay-tips="{content: '{{__.debug_interrupt_alert}}', margin: '0 0 0 -10px'}">
                       <label class="layui-form-label">{{ __.debug }}</label>
                       <div class="layui-input-block">
                         <input type="checkbox" name="asr_debug" lay-skin="switch" lay-filter="switch_debug_filter">
@@ -234,11 +224,12 @@
 
                     <div class="layui-col-md12 layui-hide" id="subtitle_div">
                       <div class="layui-form-item">
-                        <label class="layui-form-label" id="subtitle_upload">{{ __.asr_subtitle_file }} <span
+                        <label class="layui-form-label" id="subtitle_upload" lay-tips="{content: '{{ __.common_upload }}', margin: '0 0 0 -10px'}">{{ __.asr_subtitle_file }} <span
                             class="layui-badge-dot layui-bg-green"></span></label>
                         <div class="layui-input-block">
                           <input id="subtitle_file" type="text" name="subtitle_file" lay-verify="subtitle_srt"
-                            placeholder="{{__.asr_subtitle_placeholder}}" autocomplete="off" class="layui-input" lay-affix="clear">
+                            placeholder="{{__.asr_subtitle_placeholder}}" autocomplete="off" class="layui-input"
+                            lay-affix="clear">
                         </div>
                       </div>
                     </div>
@@ -277,7 +268,8 @@
                           <select name="whisper_size" lay-verify="required" lay-search>
                             <option value="">{{ __.common_select_or_search }}</option>
                             {% for item in data.asr.beam_sizes %}
-                            <option value="{{ item.val }}">{{ item.val }} - {{ item.desc_zh if request.state.lang == 'zh' else item.desc_en }}</option>
+                            <option value="{{ item.val }}">{{ item.val }} - {{ item.desc_zh if request.state.lang ==
+                              'zh' else item.desc_en }}</option>
                             {% endfor %}
                           </select>
                         </div>
@@ -289,7 +281,8 @@
                           <select name="whisper_temperature" lay-verify="required" lay-search>
                             <option value="">{{ __.common_select_or_search }}</option>
                             {% for item in data.asr.temperatures %}
-                            <option value="{{ item.val }}">{{ item.val }} - {{ item.desc_zh if request.state.lang == 'zh' else item.desc_en }}</option>
+                            <option value="{{ item.val }}">{{ item.val }} - {{ item.desc_zh if request.state.lang ==
+                              'zh' else item.desc_en }}</option>
                             {% endfor %}
                           </select>
                         </div>
@@ -301,7 +294,8 @@
                           <select name="whisper_length" lay-verify="required" lay-search>
                             <option value="">{{ __.common_select_or_search }}</option>
                             {% for item in data.asr.chunk_lengths %}
-                            <option value="{{ item.val }}">{{ item.val }} - {{ item.desc_zh if request.state.lang == 'zh' else item.desc_en }}</option>
+                            <option value="{{ item.val }}">{{ item.val }} - {{ item.desc_zh if request.state.lang ==
+                              'zh' else item.desc_en }}</option>
                             </option>
                             {% endfor %}
                           </select>
@@ -374,7 +368,8 @@
                   <div class="layui-colla-title">{{ __.dub_translation }}</div>
                   <div class="layui-colla-content layui-show">
 
-                    <div class="layui-form-item" pane lay-tips="{content: '{{__.debug_interrupt_alert}}', margin: '0 0 0 -10px'}">
+                    <div class="layui-form-item" pane
+                      lay-tips="{content: '{{__.debug_interrupt_alert}}', margin: '0 0 0 -10px'}">
                       <label class="layui-form-label">{{ __.debug }}</label>
                       <div class="layui-input-block">
                         <input type="checkbox" name="llm_debug" lay-skin="switch" lay-filter="switch_debug_filter">
@@ -442,8 +437,8 @@
                       <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">{{ __.llm_instruct }}</label>
                         <div class="layui-input-block">
-                          <textarea name="llm_instruct" placeholder="{{__.llm_instruction_placeholder}}" lay-affix="clear"
-                            class="layui-textarea" style="min-height: 161px"></textarea>
+                          <textarea name="llm_instruct" placeholder="{{__.llm_instruction_placeholder}}"
+                            lay-affix="clear" class="layui-textarea" style="min-height: 161px"></textarea>
                         </div>
                       </div>
 
@@ -479,17 +474,15 @@
 
                     <div class="layui-form-item">
                       <label class="layui-form-label" id="video_speaker"
-                        lay-tips="{content: '点击生成视频说话人音色', margin: '0 0 0 -10px'}">{{ __.common_provider }} <span
+                        lay-tips="{content: '{{ __.tts_spk_generate }}', margin: '0 0 0 -10px'}">{{ __.common_provider }} <span
                           class="layui-badge-dot layui-bg-green"></span></label>
                       <div class="layui-input-block">
                         <select id="tts_provider" name="tts_provider" lay-verify="required"
                           lay-filter="tts_provider_filter">
                           {% for item in data.tts.providers %}
-                          {% if item.enable %}
-                          <option value="{{ item.provider}}">
-                            {{ item.desc }}
-                          </option>
-                          {% endif %}>
+                            {% if item.enable %}
+                              <option value="{{ item.provider}}">{{ item.desc }}</option>
+                            {% endif %}>
                           {% endfor %}
                         </select>
                       </div>
@@ -498,16 +491,18 @@
                     <div class="layui-form-item">
                       <label class="layui-form-label">{{ __.model }}</label>
                       <div class="layui-input-block">
-                        <input type="text" name="tts_model" placeholder="{{ __.model_placeholder}}" autocomplete="off" class="layui-input"
-                          lay-affix="clear" disabled>
+                        <input type="text" name="tts_model" placeholder="{{ __.model_placeholder}}" autocomplete="off"
+                          class="layui-input" lay-affix="clear" disabled>
                       </div>
                     </div>
 
                     <div class="layui-form-item" pane>
                       <label class="layui-form-label">{{ __.tts_gender }}</label>
                       <div class="layui-input-block">
-                        <input type="radio" name="tts_gender" value="1" lay-filter="tts_gender_filter" title="{{__.common_gender_male}}">
-                        <input type="radio" name="tts_gender" value="2" lay-filter="tts_gender_filter" title="{{__.common_gender_female}}">
+                        <input type="radio" name="tts_gender" value="1" lay-filter="tts_gender_filter"
+                          title="{{__.common_gender_male}}">
+                        <input type="radio" name="tts_gender" value="2" lay-filter="tts_gender_filter"
+                          title="{{__.common_gender_female}}">
                       </div>
                     </div>
 
@@ -564,7 +559,7 @@
                       <div class="layui-form-item">
                         <label class="layui-form-label">{{ __.tts_instruct }}</label>
                         <div class="layui-input-block">
-                          <input name="tts_instruct" placeholder="示例：【地区方言】、【说话风格】、【角色扮演】" lay-affix="clear"
+                          <input name="tts_instruct" placeholder="{{__.tts_instruct_placeholder}}" lay-affix="clear"
                             class="layui-input"></textarea>
                         </div>
                       </div>
@@ -572,7 +567,7 @@
                     </div>
 
                     <div class="layui-form-item layui-hide" pane id="opt_vc"
-                      lay-tips="{content: '将来源声音转换为目标的声音', margin: '0 0 0 -10px'}">
+                      lay-tips="{content: '{{__.tts_vc_tip}}', margin: '0 0 0 -10px'}">
                       <label class="layui-form-label">{{ __.tts_vc }}</label>
                       <div class="layui-input-block">
                         <input type="checkbox" name="tts_vc" lay-skin="switch" lay-filter="switch_debug_filter">
@@ -582,17 +577,19 @@
                     <div class="layui-form-item">
                       <label class="layui-form-label">{{ __.tts_remarks }}</label>
                       <div class="layui-input-block">
-                        <input name="tts_remarks" placeholder="{{__.tts_remarks_placeholder}}" lay-affix="clear" class="layui-input"></textarea>
+                        <input name="tts_remarks" placeholder="{{__.tts_remarks_placeholder}}" lay-affix="clear"
+                          class="layui-input"></textarea>
                       </div>
                     </div>
 
                     <div class="layui-form-item layui-form-text">
                       <label class="layui-form-label" id="tts_play"
-                        lay-tips="{content: '点击试听', margin: '0 0 0 -10px'}">{{
+                        lay-tips="{content: '{{__.tts_play_tip}}', margin: '0 0 0 -10px'}">{{
                         __.tts_play }} <i class="layui-icon layui-icon-headset"></i></label>
                       <div class="layui-input-block">
-                        <textarea id="tts_text" name="tts_text" placeholder="{{__.tts_text_placeholder}}" lay-verify="required"
-                          lay-reqtext="{{__.tts_text_placeholder}}" lay-affix="clear" class="layui-textarea tts_text"></textarea>
+                        <textarea id="tts_text" name="tts_text" placeholder="{{__.tts_text_placeholder}}"
+                          lay-verify="tts_text" lay-reqtext="{{__.tts_text_placeholder}}" lay-affix="clear"
+                          class="layui-textarea tts_text"></textarea>
                       </div>
                     </div>
 
@@ -709,7 +706,8 @@
           <div class="layui-col-md12">
             <div class="layui-form-item layui-col-space15">
               <div id="floating-div" class="layui-col-md12">
-                <button type="submit" class="layui-btn layui-btn-fluid" lay-submit lay-filter="form_submit">{{ __.common_submit }}</button>
+                <button type="submit" class="layui-btn layui-btn-fluid" lay-submit lay-filter="form_submit">{{
+                  __.common_submit }}</button>
               </div>
               <!-- <div class="layui-col-md12">
                 <div class="layui-col-md2">
@@ -739,7 +737,7 @@
 
   <script>
 
-    layui.use(['form', 'layer', 'element', 'util', 'notice', 'tool', 'asr', 'llm', 'tts', 'draft'], function () {
+    layui.use(['form', 'layer', 'element', 'util', 'notice', 'tool', 'i18n', 'asr', 'llm', 'tts', 'draft'], function () {
 
       var form = layui.form;
       var layer = layui.layer;
@@ -747,14 +745,17 @@
       var util = layui.util;
       var toast = layui.notice;
       var tool = layui.tool;
+      var i18n = layui.i18n;
       var $ = layui.$;
+      
+      i18n.init('{{request.state.lang}}');
 
       var app = JSON.parse('{{ data.app | tojson }}')
       var user = JSON.parse('{{ data.user | tojson }}')
       var os = '{{ os }}'
       console.log("%s %s.%s build on %s at %s (%s %s)", app.title, app.version, app.build.hash, app.build.branch, app.build.date, os, app.serial);
       console.log("%s %s %s", user.name ?? 'guest', user.subscriber, util.toDateString(user.subexpired));
-      console.log("%s", "{{request.state.__.app_description}}");
+      console.log(i18n.trans('creatorbox'));
 
       let CREATORBOX = "dubbing"
       let cache = layui.data(CREATORBOX)
@@ -784,8 +785,9 @@
 
       // 表单初始
       $('#align_type_div').toggleClass('layui-hide', form_json.mode_type != 1);
+      $("#tts_text").val() || $("#tts_text").val(i18n.trans('creatorbox'));
       $('#draft_div').toggleClass('layui-hide', '{{ data.draft.enable }}' !== 'True');
-
+      
       // 表单验证 
       form.verify({
         path: function (value, elem) {
@@ -800,19 +802,25 @@
             return '{{__.asr_subtitle_placeholder}}';
           }
         },
+        speaker_len: function (value, elem) {
+          if ($('input[name="asr_debug"]').is(':checked')) return;
+          if ($('input[name="llm_debug"]').is(':checked')) return;
+          speaker_min = $('input[name="speaker_min"]').val()
+          if (cache_table.length < speaker_min) {
+            return i18n.trans('please_check_voice_count_cannot_less_than_speaker_count');
+          }
+        },
+        tts_text: function (value, elem) {
+          tts_text = $("#tts_text").val()
+          if (tts_text.length == 0) {
+            return '{{__.tts_text_placeholder}}';
+          }
+        },
         draft_name: function (value, elem) {
           if ($('select[name="asr_provider"]').val() != 'JyDraft') return;
           draft_name = $('select[name="draft_name"]').val()
           if (draft_name.length == 0) {
             return '{{__.draft_name_placeholder}}';
-          }
-        },
-        speaker_len: function (value, elem) {
-          if ($('input[name="asr_debug"]').is(':checked')) return;
-          if ($('input[name="llm_debug"]').is(':checked')) return;
-          speaker_num = $('input[name="speaker_num"]').val()
-          if (cache_table.length < speaker_num) {
-            return "【配音人数】不能低于【说话人数量】";
           }
         },
       });
@@ -835,7 +843,7 @@
           // 切换语音角色
           tts.setData(form_json, cache_table)
           if (form_json.llm_provider == 'ignore') {
-            return layer.msg('请选择翻译提供商', { icon: 3 });
+            return layer.msg(i18n.trans('please_select_translation_provider'), { icon: 3 });
           }
           // 切换试听文本
           tool.post("trans/translator", JSON.stringify({
@@ -878,7 +886,7 @@
         data = JSON.stringify(field, null, 2);
         console.debug(field)
         // 确认执行
-        layer.confirm('确定执行吗？', { title: '提示', icon: 3 }, function (index) {
+        layer.confirm(i18n.trans('confirm_submit'), { title: i18n.trans('confirm_title'), icon: 3 }, function (index) {
           layer.close(index);
           // 禁用预览
           $("button[lay-on='video_preview']").addClass("layui-btn-disabled").prop("disabled", true);
@@ -886,7 +894,7 @@
           tool.post("dubb/pipeline", data, function (response) {
             console.debug(response.data)
             var taskId = response.data.task_id
-            toast.info(taskId, "任务提交成功");
+            toast.info(taskId, i18n.trans('task_submit_success'));
             // 任务存储
             localStorage.setItem('task', taskId)
           }, true)
@@ -898,7 +906,7 @@
       tool.connect(function (data) {
         if (data.type == "video") {
           console.debug(data.message);
-          toast.success(localStorage.getItem('task'), "任务处理成功");
+          toast.success(localStorage.getItem('task'), i18n.trans('task_process_success'));
           // 开启预览
           $("button[lay-on='video_preview']").removeClass("layui-btn-disabled").prop("disabled", false);
         }
@@ -906,7 +914,7 @@
           toast.info(data.message);
         }
         else if (data.type == "error") {
-          toast.error(data.message, "任务处理异常");
+          toast.error(data.message, i18n.trans('task_process_error'));
         }
       })
 
@@ -919,9 +927,10 @@
 
       // 固定条
       var bars = [
-        { type: '数据', icon: 'layui-icon-fonts-code' },
-        { type: '播放', icon: 'layui-icon-video' },
-        { type: '备份', icon: 'layui-icon-export' }
+        // { type: i18n.trans('fixbar_log'), icon: 'layui-icon-export' }
+        { type: i18n.trans('fixbar_data'), icon: 'layui-icon-fonts-code' },
+        { type: i18n.trans('fixbar_preview'), icon: 'layui-icon-video' },
+        // { type: i18n.trans('fixbar_backup'), icon: 'layui-icon-export' }
       ];
       util.fixbar({
         bars: bars,
@@ -941,29 +950,29 @@
           }
         },
         click: function (type) {
-          if (type == "日志") {
+          if (type == i18n.trans('fixbar_log')) {
             util.openWin({ url: "log" });
           }
-          else if (type == "数据") {
+          else if (type == i18n.trans('fixbar_data')) {
             filename = $("#video_url").val().split(/[/\\]/).pop().split(".")[0];
             if (filename == "") {
-              return layer.msg('请先选择文件', { icon: 3 });
+              return layer.msg('{{ __.scene_video_url_placeholder }}', { icon: 3 });
             }
             suf = $("#suffix").val();
             if (suf == "") {
-              return layer.msg('请先输出标识', { icon: 3 });
+              return layer.msg('{{ __.scene_suffix_placeholder }}', { icon: 3 });
             }
             title = `{{ data.app.title }} - ${filename}_${suf}`;
             util.openWin({ url: `editor?title=${title}&upload=file/upload&remote=file/local?url=webapp/temp/${filename}/${filename}_${suf}.json` });
           }
-          else if (type == "播放") {
-            if (localStorage.getItem('task', '').length > 0) {
+          else if (type == i18n.trans('fixbar_preview')) {
+            if (localStorage.getItem('task')) {
               tool.open("player?url=" + localStorage.getItem('task') + "&autoplay=true", "1100px", "510px");
             } else {
               util.openWin({ url: "player?url=&autoplay=true" });
             }
           }
-          else if (type == "备份") {
+          else if (type == i18n.trans('fixbar_backup')) {
             layer.confirm('请选择？', { title: '提示', icon: 3, btn: ['备份', '导入', '取消'] }, function (index) {
               filename = $("#video_url").val().split(/[/\\]/).pop().split(".")[0];
               cache = layui.data(CREATORBOX)
@@ -1017,7 +1026,7 @@
     });
 
   </script>
-  <script src="static/js/creatorbox/theam.js"></script>
+  <script src="static/js/app/theam.js"></script>
 
 </body>
 

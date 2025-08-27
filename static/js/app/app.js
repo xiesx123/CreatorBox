@@ -1,20 +1,20 @@
 layui.config({
-	base: '../../static/js/creatorbox/'
+	base: '../../static/js/app/'
 }).extend({
-	// 信息提示
-	notice: 'mod/toastr',
 	// 常用操作
-	tool: 'mod/tools',
-	// 网页翻译（暂时屏蔽）
-	// translate: 'mod/translate',
+	tool: 'ext/tools',
+	// 信息提示
+	notice: 'ext/toastr',
+	// 国际化
+	i18n: 'i18n/i18n',
 	// 字幕
-	asr: 'dubb/asr',
+	asr: 'mod/asr',
 	// 翻译
-	llm: 'dubb/llm',
+	llm: 'mod/llm',
 	// 配音
-	tts: 'dubb/tts',
+	tts: 'mod/tts',
 	// 草稿
-	draft: 'dubb/draft',
+	draft: 'mod/draft',
 });
 
 // 节流函数
@@ -127,14 +127,5 @@ $(window).load(function () {
 		restoreCollapseState();
 		initCollapseEvent();
 	});
-
-	// // 百度统计
-    // var _hmt = _hmt || [];
-    // (function () {
-    //   var hm = document.createElement("script");
-    //   hm.src = "https://hm.baidu.com/hm.js?0f28a627b93e9c2e599680e1827e1314";
-    //   var s = document.getElementsByTagName("script")[0];
-    //   s.parentNode.insertBefore(hm, s);
-    // })();	
 });
 
