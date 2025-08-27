@@ -59,7 +59,7 @@ language_tags==1.2.0
 fast_langdetect==0.3.2
 
 # gradio
-gradio==5.43.1
+gradio==5.34.0
 gradio_bottombar==0.0.2
 gradio_videoslider==0.0.2
 
