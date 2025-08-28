@@ -13,8 +13,6 @@ layui.config({
 	llm: 'mod/llm',
 	// 配音
 	tts: 'mod/tts',
-	// 草稿
-	draft: 'mod/draft',
 });
 
 // 节流函数

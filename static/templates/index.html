@@ -601,97 +601,51 @@
             </div>
           </div>
 
-          <!-- 草稿 -->
-          <div class="layui-col-md12" id="draft_div">
+          <!-- 其他 -->
+          <div class="layui-col-md12" id="settings_div">
             <div class="layui-collapse" lay-filter="collapse_filter_draft">
               <div class="layui-colla-item">
 
                 <div class="layui-card layui-panel">
-                  <div class="layui-colla-title">{{ __.dub_draft }}
+                  <div class="layui-colla-title">{{ __.dub_setting }}
                     <!-- <i class="layui-icon layui-icon-tips" lay-tips="要支持的噢"></i> -->
                   </div>
                   <div class="layui-colla-content layui-show">
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label">{{ __.draft_volume }}</label>
+                      <label class="layui-form-label"lay-tips="{content: '{{ __.setting_volume_native }}', margin: '0 0 0 -10px'}">{{ __.setting_volume_native }}</label>
 
-                      <div class="layui-input-inline" style="width: 120px;">
-                        <input type="number" lay-verify="required" name="draft_volume_native" placeholder="原声 [0,1]"
-                          autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
-                      </div>
-
-                      <div class="layui-input-inline" style="width: 120px;">
-                        <input type="number" lay-verify="required" name="draft_volume_background" placeholder="背景 [0,1]"
+                      <div class="layui-input-block">
+                        <input type="number" lay-verify="required" name="volume_native" placeholder="[0,1]"
                           autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
                       </div>
                     </div>
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label">{{ __.draft_style_dts }}</label>
-
-                      <div class="layui-input-inline" style="width: 120px;">
-                        <input type="number" lay-verify="required|number" name="draft_style_dts" placeholder="文字大小"
-                          autocomplete="off" class="layui-input" min="0" max="100" step="1" lay-affix="number">
-                      </div>
-
-                      <div class="layui-input-inline" style="width: 120px;">
-                        <input type="number" lay-verify="required|number" name="draft_style_dty" placeholder="文字高度"
-                          autocomplete="off" class="layui-input" min="-9999" max="9999" step="1" lay-affix="number">
-                      </div>
-
-                      <div class="layui-input-inline" style="width: 120px;">
-                        <input type="number" lay-verify="required|number" name="draft_style_dtbw" placeholder="描边粗细"
-                          autocomplete="off" class="layui-input" min="-9999" max="9999" step="1" lay-affix="number">
-                      </div>
-
-                      <div class="layui-input-inline" style="width: 120px;">
-                        <input type="hidden" name="draft_style_dtc" placeholder="文字颜色" class="layui-input">
-                        <div id="draft_style_dtc_select"></div>
-                        <input type="hidden" name="draft_style_dtbc" placeholder="边框颜色" class="layui-input">
-                        <div id="draft_style_dtbc_select"></div>
-                      </div>
-
-                    </div>
-
-                    <div class="layui-form-item" panel>
-                      <label class="layui-form-label">{{ __.draft_style_nts }}</label>
-
-                      <div class="layui-input-inline" style="width: 120px;">
-                        <input type="number" lay-verify="required|number" name="draft_style_nts" placeholder="文字大小"
-                          autocomplete="off" class="layui-input" min="0" max="100" step="1" lay-affix="number">
-                      </div>
-
-                      <div class="layui-input-inline" style="width: 120px;">
-                        <input type="number" lay-verify="required|number" name="draft_style_nty" placeholder="文字高度"
-                          autocomplete="off" class="layui-input" min="-9999" max="9999" step="1" lay-affix="number">
-                      </div>
-
-                      <div class="layui-input-inline" style="width: 120px;">
-                        <input type="number" lay-verify="required|number" name="draft_style_ntbw" placeholder="描边粗细"
-                          autocomplete="off" class="layui-input" min="-9999" max="9999" step="1" lay-affix="number">
-                      </div>
-
-                      <div class="layui-input-inline" style="width: 100px;">
-                        <input type="hidden" name="draft_style_ntc" placeholder="文字颜色" class="layui-input">
-                        <div id="draft_style_ntc_select"></div>
-                        <input type="hidden" name="draft_style_ntbc" placeholder="边框颜色" class="layui-input">
-                        <div id="draft_style_ntbc_select"></div>
+                      <label class="layui-form-label"lay-tips="{content: '{{ __.setting_volume_background }}', margin: '0 0 0 -10px'}">{{ __.setting_volume_background }}</label>
+                      <div class="layui-input-block">
+                        <input type="number" lay-verify="required" name="volume_background" placeholder="[0,1]"
+                          autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
                       </div>
                     </div>
 
                     <div class="layui-form-item layui-show">
-                      <label class="layui-form-label">{{ __.draft_silence_threshold }}</label>
-                      <div class="layui-input-inline" style="width: 120px;">
-                        <input type="number" lay-verify="required" name="silence_threshold" placeholder="检测阈值"
+                      <label class="layui-form-label"lay-tips="{content: '{{ __.setting_silence }}', margin: '0 0 0 -20px'}">{{ __.setting_silence }}</label>
+                      <div class="layui-input-inline"  style="width: 142px;">
+                        <input type="number" lay-verify="required" name="silence_threshold" placeholder="[-100,0]"
                           autocomplete="off" class="layui-input" min="-100" max="0" step="10" lay-affix="number">
                       </div>
-                      <div class="layui-input-inline" style="width: 120px;">
-                        <input type="number" lay-verify="required" name="silence_min_len" placeholder="最小长度"
+                      <div class="layui-input-inline"  style="width: 142px;">
+                        <input type="number" lay-verify="required" name="silence_min_len" placeholder="[1,1000]"
                           autocomplete="off" class="layui-input" min="1" max="1000" step="1" lay-affix="number">
                       </div>
-                      <div class="layui-input-inline" style="width: 120px;">
-                        <input type="number" lay-verify="required" name="silence_keep" placeholder="保留长度"
+                      <div class="layui-input-inline"  style="width: 142px;">
+                        <input type="number" lay-verify="required" name="silence_keep" placeholder="[1,1000]"
                           autocomplete="off" class="layui-input" min="1" max="1000" step="1" lay-affix="number">
+                      </div>
+                      <div class="layui-form-mid layui-text-em">
+                        <i class="layui-icon layui-icon-tips"
+                          lay-tips="{content: '{{ __.setting_silence_tips }}', margin: '0 0 0 -10px'}"></i>
                       </div>
                     </div>
 
@@ -737,7 +691,7 @@
 
   <script>
 
-    layui.use(['form', 'layer', 'element', 'util', 'notice', 'tool', 'i18n', 'asr', 'llm', 'tts', 'draft'], function () {
+    layui.use(['form', 'layer', 'element', 'util', 'notice', 'tool', 'i18n', 'asr', 'llm', 'tts'], function () {
 
       var form = layui.form;
       var layer = layui.layer;
@@ -777,16 +731,12 @@
       tts.setData(form_json, cache_table)
       tts.setProviderData(JSON.parse('{{ data.tts.providers | tojson }}'))
 
-      var draft = layui.draft;
-      draft.setData(form_json)
-
       // 表单渲染
       form.val('form_filter', form_json);
 
       // 表单初始
       $('#align_type_div').toggleClass('layui-hide', form_json.mode_type != 1);
       $("#tts_text").val() || $("#tts_text").val(i18n.trans('creatorbox'));
-      $('#draft_div').toggleClass('layui-hide', '{{ data.draft.enable }}' !== 'True');
       
       // 表单验证 
       form.verify({
@@ -879,7 +829,7 @@
         field.tts_dubbing = JSON.stringify(cache_table);
         // 样式
         field.draft_style = JSON.stringify({
-          "subtitle": { "text_size": field.draft_style_nts, "text_color": field.draft_style_ntc, "text_border_color": field.draft_style_ntbc, "text_border_width": field.draft_style_ntbw, "text_transform_y": field.draft_style_nty },// 原声
+          "subtitle_ori": { "text_size": field.draft_style_nts, "text_color": field.draft_style_ntc, "text_border_color": field.draft_style_ntbc, "text_border_width": field.draft_style_ntbw, "text_transform_y": field.draft_style_nty },// 原声
           "subtitle_dub": { "text_size": field.draft_style_dts, "text_color": field.draft_style_dtc, "text_border_color": field.draft_style_dtbc, "text_border_width": field.draft_style_dtbw, "text_transform_y": field.draft_style_dty },// 配音
         });
         // 请求数据

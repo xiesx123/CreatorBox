@@ -67,262 +67,271 @@ msgid "common_rebuild"
 msgstr "重构"
 
 #: src/app/i18n.py:30
+msgid "common_run_running"
+msgstr "运行中"
+
+#: src/app/i18n.py:31
+msgid "common_run_starting"
+msgstr "启动中"
+
+#: src/app/i18n.py:32
+msgid "common_run_stopped"
+msgstr "未运行"
+
+#: src/app/i18n.py:33
+msgid "common_run_stopping"
+msgstr "停止运行"
+
+#: src/app/i18n.py:34
 msgid "common_select_or_search"
 msgstr "选择或搜索"
 
-#: src/app/i18n.py:31
+#: src/app/i18n.py:35
 msgid "common_submit"
 msgstr "执行"
 
-#: src/app/i18n.py:32
+#: src/app/i18n.py:36
+#, fuzzy
 msgid "common_upload"
-msgstr "上传"
+msgstr "地区"
 
-#: src/app/i18n.py:34
+#: src/app/i18n.py:38
 msgid "debug"
 msgstr "调试"
 
-#: src/app/i18n.py:35
+#: src/app/i18n.py:39
 msgid "debug_interrupt_alert"
 msgstr "开启调试会中断后续步骤"
 
-#: src/app/i18n.py:37
-msgid "draft_name"
-msgstr "草稿"
-
-#: src/app/i18n.py:38
-msgid "draft_name_placeholder"
-msgstr "请选择剪映草稿"
-
-#: src/app/i18n.py:39
-msgid "draft_silence_threshold"
-msgstr "静音检测"
-
-#: src/app/i18n.py:40
-msgid "draft_style_dts"
-msgstr "配音字幕"
-
 #: src/app/i18n.py:41
-msgid "draft_style_nts"
-msgstr "原始字幕"
-
-#: src/app/i18n.py:42
-msgid "draft_volume"
-msgstr "音量"
-
-#: src/app/i18n.py:44
-msgid "dub_draft"
-msgstr "草稿"
-
-#: src/app/i18n.py:45
 msgid "dub_dubbing"
 msgstr "配音"
 
-#: src/app/i18n.py:46
+#: src/app/i18n.py:42
 msgid "dub_scene"
 msgstr "基础"
 
-#: src/app/i18n.py:47
+#: src/app/i18n.py:43
+msgid "dub_setting"
+msgstr "其他"
+
+#: src/app/i18n.py:44
 msgid "dub_subtitle"
 msgstr "字幕"
 
-#: src/app/i18n.py:48
+#: src/app/i18n.py:45
 msgid "dub_translation"
 msgstr "翻译"
 
-#: src/app/i18n.py:50
+#: src/app/i18n.py:47
 msgid "llm_batch_size"
 msgstr "批量"
 
-#: src/app/i18n.py:51
+#: src/app/i18n.py:48
 msgid "llm_configured"
 msgstr "已配置"
 
-#: src/app/i18n.py:52
+#: src/app/i18n.py:49
 msgid "llm_ignore"
 msgstr "忽略"
 
-#: src/app/i18n.py:53
+#: src/app/i18n.py:50
 msgid "llm_instruct"
 msgstr "指令"
 
-#: src/app/i18n.py:54
+#: src/app/i18n.py:51
 msgid "llm_instruction_placeholder"
 msgstr "【去掉结尾的标点】、【阿拉伯数字使用中文代替】等等"
 
-#: src/app/i18n.py:55
+#: src/app/i18n.py:52
 msgid "llm_temperature"
 msgstr "随机性"
 
-#: src/app/i18n.py:56
+#: src/app/i18n.py:53
 msgid "llm_top_p"
 msgstr "多样性"
 
-#: src/app/i18n.py:57
+#: src/app/i18n.py:54
 msgid "llm_use_cache"
 msgstr "缓存"
 
-#: src/app/i18n.py:58
+#: src/app/i18n.py:55
 msgid "llm_use_cache_tip"
 msgstr "启用可避免重复请求，防止消耗额外Token"
 
-#: src/app/i18n.py:60
+#: src/app/i18n.py:57
 msgid "model"
 msgstr "模型"
 
-#: src/app/i18n.py:61
+#: src/app/i18n.py:58
 msgid "model_placeholder"
 msgstr "请输入模型名称"
 
-#: src/app/i18n.py:63
+#: src/app/i18n.py:60
 msgid "nav_discord"
 msgstr "加入社区"
 
-#: src/app/i18n.py:64
+#: src/app/i18n.py:61
 msgid "nav_editor"
 msgstr "数据编辑"
 
-#: src/app/i18n.py:65
+#: src/app/i18n.py:62
 msgid "nav_group_assist"
 msgstr "辅助"
 
-#: src/app/i18n.py:66
+#: src/app/i18n.py:63
 msgid "nav_group_doc"
 msgstr "文档"
 
-#: src/app/i18n.py:67
+#: src/app/i18n.py:64
 msgid "nav_group_feature"
 msgstr "功能"
 
-#: src/app/i18n.py:68
+#: src/app/i18n.py:65
 msgid "nav_masker_painter"
 msgstr "遮罩绘制"
 
-#: src/app/i18n.py:69
+#: src/app/i18n.py:66
 msgid "nav_masker_remove"
 msgstr "遮罩去除"
 
-#: src/app/i18n.py:70
+#: src/app/i18n.py:67
 msgid "nav_play"
 msgstr "视频播放"
 
-#: src/app/i18n.py:71
+#: src/app/i18n.py:68
 msgid "nav_plugins"
 msgstr "组件应用"
 
-#: src/app/i18n.py:72
+#: src/app/i18n.py:69
 msgid "nav_set"
 msgstr "偏好设置"
 
-#: src/app/i18n.py:73
+#: src/app/i18n.py:70
 msgid "nav_speaker"
 msgstr "音色管理"
 
-#: src/app/i18n.py:74
+#: src/app/i18n.py:71
 msgid "nav_swagger"
 msgstr "接口文档"
 
-#: src/app/i18n.py:75
+#: src/app/i18n.py:72
 msgid "nav_vitepress"
 msgstr "使用文档"
 
-#: src/app/i18n.py:77
+#: src/app/i18n.py:74
 msgid "scene_align_type"
 msgstr "对齐"
 
-#: src/app/i18n.py:78
+#: src/app/i18n.py:75
 msgid "scene_mode_type"
 msgstr "模式"
 
-#: src/app/i18n.py:79
+#: src/app/i18n.py:76
 msgid "scene_suffix"
 msgstr "后缀"
 
-#: src/app/i18n.py:80
+#: src/app/i18n.py:77
 msgid "scene_suffix_placeholder"
 msgstr "请输入后缀"
 
-#: src/app/i18n.py:81
+#: src/app/i18n.py:78
 msgid "scene_video_url"
 msgstr "视频"
 
-#: src/app/i18n.py:82
+#: src/app/i18n.py:79 static/templates/index.html:128
 msgid "scene_video_url_placeholder"
 msgstr "请输入视频路径或链接"
 
+#: src/app/i18n.py:81
+msgid "setting_silence"
+msgstr "静音检测"
+
+#: src/app/i18n.py:82
+msgid "setting_silence_tips"
+msgstr "检测阈值、最小长度、保留长度"
+
+#: src/app/i18n.py:83
+msgid "setting_volume_background"
+msgstr "背景音量"
+
 #: src/app/i18n.py:84
+msgid "setting_volume_native"
+msgstr "原始音量"
+
+#: src/app/i18n.py:86
 msgid "table_tools_delete"
 msgstr "删除"
 
-#: src/app/i18n.py:85
+#: src/app/i18n.py:87
 msgid "table_tools_move_down"
 msgstr "下移"
 
-#: src/app/i18n.py:86
+#: src/app/i18n.py:88
 msgid "table_tools_move_up"
 msgstr "上移"
 
-#: src/app/i18n.py:87
+#: src/app/i18n.py:89
 msgid "table_tools_preview"
 msgstr "试听"
 
-#: src/app/i18n.py:90
+#: src/app/i18n.py:91
 msgid "tts_gender"
 msgstr "性别"
 
-#: src/app/i18n.py:91
+#: src/app/i18n.py:92
 msgid "tts_instruct"
 msgstr "指令"
 
-#: src/app/i18n.py:92
+#: src/app/i18n.py:93
 msgid "tts_instruct_placeholder"
 msgstr "【地区方言】、【说话风格】、【角色扮演】等等"
 
-#: src/app/i18n.py:93
+#: src/app/i18n.py:94
 msgid "tts_play"
 msgstr "试听"
 
-#: src/app/i18n.py:94
+#: src/app/i18n.py:95
 msgid "tts_play_tip"
 msgstr "点击试听"
 
-#: src/app/i18n.py:95
+#: src/app/i18n.py:96
 msgid "tts_rate"
 msgstr "语速"
 
-#: src/app/i18n.py:96
+#: src/app/i18n.py:97
 msgid "tts_remarks"
 msgstr "备注"
 
-#: src/app/i18n.py:97
+#: src/app/i18n.py:98
 msgid "tts_remarks_placeholder"
 msgstr "随便写点什么"
 
-#: src/app/i18n.py:89
+#: src/app/i18n.py:99
 msgid "tts_spk_generate"
 msgstr "点击生成视频说话人音色"
 
-#: src/app/i18n.py:98
+#: src/app/i18n.py:100
 msgid "tts_step"
 msgstr "采样步数"
 
-#: src/app/i18n.py:99
+#: src/app/i18n.py:101
 msgid "tts_text_placeholder"
 msgstr "请输入试听文本"
 
-#: src/app/i18n.py:100
+#: src/app/i18n.py:102
 msgid "tts_vc"
 msgstr "转换"
 
-#: src/app/i18n.py:101
+#: src/app/i18n.py:103
 msgid "tts_vc_tip"
 msgstr "将来源声音转换为目标的声音"
 
-#: src/app/i18n.py:102
+#: src/app/i18n.py:104
 msgid "tts_voice"
 msgstr "音色"
 
-#: src/app/i18n.py:103
+#: src/app/i18n.py:105
 msgid "tts_volume"
 msgstr "音量"
 
