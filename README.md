@@ -1,12 +1,12 @@
 <div align="center">
 <h1 align="center">CreatorBox 💸</h1>
 
-<!-- 
+<!--
 [![Discord](https://img.shields.io/discord/1380024079871905883?logo=discord&logoColor=white&color=%44CC11&label=Discord)](https://discord.gg/ZSeETM6bsS)
 -->
 
 [![VitePress](https://img.shields.io/badge/Vitepress-Doc-3E63DD?logo=markdown)](https://xiesx123.github.io/CreatorBox)
-[![Discord](https://img.shields.io/badge/Discord-Online-44CC11?logo=discord&logoColor=white)](https://discord.gg/ZSeETM6bsS) 
+[![Discord](https://img.shields.io/badge/Discord-Online-44CC11?logo=discord&logoColor=white)](https://discord.gg/ZSeETM6bsS)
 ![Version](https://img.shields.io/github/tag/xiesx123/CreatorBox.svg?style=flat&label=Release)
 [![GitHub stars](https://img.shields.io/github/stars/xiesx123/CreatorBox)](https://github.com/xiesx123/CreatorBox/stargazers)
 [![Google Colab](https://img.shields.io/badge/Google_Colab-Launch-yellow?logo=googlecolab&)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
@@ -89,13 +89,11 @@
 
 </table>
 
-
 </div>
 
 ## 📦 Quick Start
 
 👉 Refer to the usage guide: [Local Installation](https://xiesx123.github.io/CreatorBox/deploy-local) | [Remote Deployment](https://xiesx123.github.io/CreatorBox/deploy-colab)
-
 
 ## 🎨 Applicable Scenarios
 
@@ -149,10 +147,9 @@
 - [x] Custom Models and Prompt Commands
 - [x] Batch Processing for Long Texts
 
-
 ### Speech
 
-- [x] Multiple Providers: Support switching between `EdgeTTS`, `ElevenLabs`, `CosyVoice2`, `F5TTS`, and `CoquiTTS` 
+- [x] Multiple Providers: Support switching between `EdgeTTS`, `ElevenLabs`, `CosyVoice2`, `F5TTS`, and `CoquiTTS`
 - [x] Real-Time Speech Synthesis and Preview
 - [x] Voice Library: Includes `Built-in`, `Video`, and `Custom` voice types
 - [x] Voice Cloning: Supports `Voice Cloning`, `Voice Commands`, `Voice Conversion`, and `Cross-Language Cloning`
@@ -172,6 +169,7 @@
 - [x] Subtitle Extraction: Use OCR to recognize embedded subtitles and generate editable text.
 
 ### Others
+
 - [x] Dubbing Modes: Choose between `Video`, `Audio`, and `Adaptive` modes
 - [x] Translation Modes: Translate videos from the original language to another
 - [ ] Narration Mode: Planned...
@@ -179,11 +177,16 @@
 
 ## Feedback and Suggestions 📢
 
-- Submit via [Issues](https://github.com/xiesx123/CreatorBox/issues), [Discussions](https://github.com/xiesx123/CreatorBox/discussions), or [Email](mailto:xiesx123@gmail.com?subject=CreatoxBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?).
+- Submit via [Issues](https://github.com/xiesx123/CreatorBox/issues) or [Email](mailto:xiesx123@gmail.com?subject=CreatoxBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?).
 
 - Welcome to join [Discord](https://discord.gg/ZSeETM6bsS) for discussions on usage or new features.
 
+## Project Status
+
+![Status](https://repobeats.axiom.co/api/embed/afc79d9210faea79913ee2e2c7e776886295e052.svg)
+
 ## Star History
+
 <a href="https://www.star-history.com/#xiesx123/CreatorBox&Date">
  <picture>
    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=xiesx123/CreatorBox&type=Date&theme=dark" />
@@ -191,3 +194,5 @@
    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=xiesx123/CreatorBox&type=Date" />
  </picture>
 </a>
+
+

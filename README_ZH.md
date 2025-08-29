@@ -1,12 +1,12 @@
 <div align="center">
 <h1 align="center">CreatorBox 💸</h1>
 
-<!-- 
+<!--
 [![Discord](https://img.shields.io/discord/1380024079871905883?logo=discord&logoColor=white&color=%44CC11&label=Discord)](https://discord.gg/ZSeETM6bsS)
 -->
 
 [![VitePress](https://img.shields.io/badge/Vitepress-Doc-3E63DD?logo=markdown)](https://xiesx123.github.io/CreatorBox)
-[![Discord](https://img.shields.io/badge/Discord-Online-44CC11?logo=discord&logoColor=white)](https://discord.gg/ZSeETM6bsS) 
+[![Discord](https://img.shields.io/badge/Discord-Online-44CC11?logo=discord&logoColor=white)](https://discord.gg/ZSeETM6bsS)
 ![Version](https://img.shields.io/github/tag/xiesx123/CreatorBox.svg?style=flat&label=Release)
 [![GitHub stars](https://img.shields.io/github/stars/xiesx123/CreatorBox)](https://github.com/xiesx123/CreatorBox/stargazers)
 [![Google Colab](https://img.shields.io/badge/Google_Colab-Launch-yellow?logo=googlecolab&)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
@@ -14,11 +14,11 @@
 
   <h3><a href="README.md">English</a> | 中文 </h3>
 
-  🚀🎬 灵活、高效、可扩展，专属剪辑配音工具箱，释放创作潜力
+🚀🎬 灵活、高效、可扩展，专属剪辑配音工具箱，释放创作潜力
 
   <h4>Web界面</h4>
 
-  ![](/docs/images/main_zh.png)
+![](/docs/images/main_zh.png)
 
   <h4>配音/剪辑</h4>
 
@@ -95,7 +95,6 @@
 
 👉 参考使用指南：[本地安装](https://xiesx123.github.io/CreatorBox/deploy-local) | [远程部署](https://xiesx123.github.io/CreatorBox/deploy-colab)
 
-
 ## 🎨 适用场景
 
 - 🎥 **自媒体创作者**：优化视频配音、翻译、剪辑流程，提升创作效率，释放创作潜力
@@ -140,8 +139,7 @@
 - [x] `人声`、`伴奏`、`鼓`、`贝斯`等多音轨分离
 - [x] 声纹提取识别与字幕文字进行对齐
 - [x] 多说话人识别
-- [x] 情感识别：支持 `生气`、`厌恶`、`恐惧`、`开心`、`中立`、`其他`、`难过`、`吃惊` 
-
+- [x] 情感识别：支持 `生气`、`厌恶`、`恐惧`、`开心`、`中立`、`其他`、`难过`、`吃惊`
 
 ### 翻译
 
@@ -149,12 +147,11 @@
 - [x] 自定义模型，指令提示词
 - [x] 超长文本批次处理
 
-
 ### 语音
 
 - [x] 多提供商: 支持 `EdgeTTS`、 `ElevenLabs`、`CosyVoice2`、`F5TTS`、`CoquiTTS`切换
 - [x] 语音试听：实时语音合成及试听
-- [x] 音色库：内置 `内置`、`视频`、`自定义` 3种音色类型
+- [x] 音色库：内置 `内置`、`视频`、`自定义` 3 种音色类型
 - [x] 音色克隆：支持 `语音克隆`、`语音指令`、`语音转换`、`跨语言克隆` 指令
 
 ### 草稿
@@ -169,22 +166,28 @@
 - [x] 终极人声分离：快速提取人声、伴奏、鼓、贝斯等多轨音频
 - [x] 视频标记去除：去除字幕、水印、角标等视觉元素
 - [x] 视频场景检测：自动识别镜头切换，分段导出片段
-- [x] 视频字幕提取：OCR识别嵌入字幕，生成可编辑文本
+- [x] 视频字幕提取：OCR 识别嵌入字幕，生成可编辑文本
 
 ### 其他
-- [x] 配音模式：`视频`、`音频` 、`自适应` 3种模式选择
+
+- [x] 配音模式：`视频`、`音频` 、`自适应` 3 种模式选择
 - [x] 翻译模式：将视频从原声语言翻译为另一种语言
 - [ ] 解说模式：计划中...
 - [ ] 自动化投稿
 
 ## 反馈建议 📢
 
-- 可以提交 [Issues](https://github.com/xiesx123/CreatorBox/issues)、[Discussions](https://github.com/xiesx123/CreatorBox/discussions)
-  或者 [Email](mailto:xiesx123@gmail.com?subject=CreatoxBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?)。
+- 可以提交 [Issues](https://github.com/xiesx123/CreatorBox/issues) 
+  或 [Email](mailto:xiesx123@gmail.com?subject=CreatoxBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?)
 
 - 欢迎加入 [Discord](https://discord.gg/ZSeETM6bsS) 进行用法或新功能的讨论
 
+## Project Status
+
+![Status](https://repobeats.axiom.co/api/embed/afc79d9210faea79913ee2e2c7e776886295e052.svg)
+
 ## Star History
+
 <a href="https://www.star-history.com/#xiesx123/CreatorBox&Date">
  <picture>
    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=xiesx123/CreatorBox&type=Date&theme=dark" />
