@@ -76,6 +76,7 @@ pymediainfo==7.0.1
 uiautomation==2.0.20; sys_platform == 'win32'
 
 # other
+srt==3.5.3
 nltk==3.9.1
 gputil==1.4.0
 psutil==7.0.0
