@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="{{request.state.lang}}">
+
+<head>
+    <meta charset="utf-8" />
+    <title>{{ data.app.title }} - Player</title>
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!-- jquery -->
+    <script src="static/js/jquery/jquery.min.js"></script>
+    <script src="static/js/xgplayer/xgplayer.js"></script>
+    <!-- nprogress -->
+    <link href="static/js/nprogress/nprogress.min.css" rel="stylesheet">
+    <script src="static/js/nprogress/nprogress.min.js"></script>
+    <!-- layui -->
+    <link href="static/js/layui/css/layui.css" rel="stylesheet">
+    <link href="static/js/layui/css/layui-dark.css" rel="stylesheet">
+    <script src="static/js/layui/layui.js"></script>
+    <!-- creator -->
+    <script src="static/js/app/theam.js"></script>
+    <script src="static/js/app/app.js"></script>
+    <style>
+        #player-container {
+            width: 100%;
+            margin: 0px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layui-layout layui-layout-admin">
+
+        <div style="padding: 10px">
+            <div class="layui-card layui-panel">
+                <div class="layui-card-header">视频播放</div>
+                <div class="layui-card-body">
+
+                    <div class="layui-form-item layui-col-space15" style="margin-bottom:0px">
+                        <div class="layui-col-md10">
+                            <div class="layui-input-wrap">
+                                <input id="url" value="{{ data.url }}" type="text" placeholder="请输入任务ID、视频地址"
+                                    class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-col-md2">
+                            <div class="layui-input-wrap">
+                                <button id="play" type="button"
+                                    class="layui-btn layui-btn-primary layui-border-blue layui-btn-fluid">播放</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="layui-card layui-panel" style="padding-top: 15dp; background-color: black;">
+
+                <div id="player-container"></div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        let player;
+
+        layui.use(['layer', 'util', 'tool'], function () {
+
+            var layer = layui.layer;
+            var util = layui.util;
+            var tool = layui.tool;
+            var $ = layui.$;
+
+            var autoplay = layui.url().search.autoplay;
+
+            // 预览事件
+            $('#play').on('click', function () {
+                const input_url = $("#url").val();
+                if (input_url.length != 32) {
+                    return video_play(input_url, 1)
+                }
+                tool.get("/app/result/" + input_url, {}, function (response) {
+                    console.debug(JSON.stringify(response, null, 2))
+                    if (response.code == 0) {
+                        video_play(response.data.result.video_dub)
+                    }
+                }, true)
+            });
+
+            // 资源地址
+            var build_url = function (url) {
+                if (!url.startsWith('http')) {
+                    url = `${window.location.protocol}//${window.location.host}/file/local?url=${encodeURIComponent(url)}`;
+                }
+                return url
+            };
+
+            // 视频播放
+            var video_play = function (url) {
+                if (!url) {
+                    layer.msg('请输入任务ID/视频地址');
+                    return;
+                }
+                if (player) {
+                    player.destroy();
+                }
+                player = new Player({
+                    "id": "player-container",
+                    "url": build_url(url),
+                    "playsinline": true,
+                    "autoplay": true,
+                    // "download": true,
+                    "pip": true,
+                    "width": "100%",
+                    "volume": 1
+                });
+            }
+
+            $(document).ready(function () {
+                if (autoplay) {
+                    $("#play").click();
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>

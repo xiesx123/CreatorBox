@@ -1,0 +1,348 @@
+#: src/router/i18n.py:12
+msgid "asr_align_enable"
+msgstr "Alignment"
+
+#: src/router/i18n.py:18
+msgid "asr_draft_name"
+msgstr "Draft"
+
+#: src/router/i18n.py:13
+msgid "asr_emotion_enable"
+msgstr "Emotion"
+
+#: src/router/i18n.py:14
+msgid "asr_speaker_range"
+msgstr "Spk Range"
+
+#: src/router/i18n.py:15
+msgid "asr_speaker_use_num"
+msgstr "Spk Count"
+
+#: src/router/i18n.py:16
+msgid "asr_subtitle_file"
+msgstr "Subtitle"
+
+#: src/router/i18n.py:17
+msgid "asr_subtitle_placeholder"
+msgstr "Enter subtitle file path (SRT)"
+
+#: src/router/i18n.py:19
+msgid "asr_uvr"
+msgstr "Separation"
+
+#: src/router/i18n.py:20
+msgid "asr_whisper_length"
+msgstr "Coherence"
+
+#: src/router/i18n.py:21
+msgid "asr_whisper_size"
+msgstr "Accuracy"
+
+#: src/router/i18n.py:22
+msgid "asr_whisper_temperature"
+msgstr "Randomness"
+
+#: src/router/i18n.py:24
+msgid "common_gender_female"
+msgstr "Female"
+
+#: src/router/i18n.py:25
+msgid "common_gender_male"
+msgstr "Male"
+
+#: src/router/i18n.py:26
+msgid "common_locale"
+msgstr "Locale"
+
+#: src/router/i18n.py:27
+msgid "common_options"
+msgstr "Options"
+
+#: src/router/i18n.py:28
+msgid "common_preview"
+msgstr "Preview"
+
+#: src/router/i18n.py:29
+msgid "common_provider"
+msgstr "Provider"
+
+#: src/router/i18n.py:30
+msgid "common_rebuild"
+msgstr "Rebuild"
+
+#: src/router/i18n.py:31
+msgid "common_run_running"
+msgstr "Running"
+
+#: src/router/i18n.py:32
+msgid "common_run_starting"
+msgstr "Starting"
+
+#: src/router/i18n.py:33
+msgid "common_run_stopped"
+msgstr "Stopped"
+
+#: src/router/i18n.py:34
+msgid "common_run_stopping"
+msgstr "Stopping"
+
+#: src/router/i18n.py:35
+msgid "common_select_or_search"
+msgstr "Select or Search"
+
+#: src/router/i18n.py:36
+msgid "common_submit"
+msgstr "Execute"
+
+#: src/router/i18n.py:37
+msgid "common_upload"
+msgstr "Upload"
+
+#: src/router/i18n.py:39
+msgid "debug"
+msgstr "Debug"
+
+#: src/router/i18n.py:40
+msgid "debug_interrupt_alert"
+msgstr "Enabling will interrupt subsequent steps"
+
+#: src/router/i18n.py:42
+msgid "dub_dubbing"
+msgstr "Dubbing"
+
+#: src/router/i18n.py:43
+msgid "dub_scene"
+msgstr "Base"
+
+#: src/router/i18n.py:44
+msgid "dub_setting"
+msgstr "其他"
+
+#: src/router/i18n.py:45
+msgid "dub_subtitle"
+msgstr "Subtitle"
+
+#: src/router/i18n.py:46
+msgid "dub_translation"
+msgstr "Translation"
+
+#: src/router/i18n.py:49
+msgid "llm_batch_size"
+msgstr "Batch Size"
+
+#: src/router/i18n.py:50
+msgid "llm_configured"
+msgstr "configured"
+
+#: src/router/i18n.py:51
+msgid "llm_ignore"
+msgstr "Ignore"
+
+#: src/router/i18n.py:52
+msgid "llm_instruct"
+msgstr "Instruction"
+
+#: src/router/i18n.py:53
+msgid "llm_instruction_placeholder"
+msgstr "[Remove ending punctuation], [Replace Arabic numerals with Chinese] etc."
+
+#: src/router/i18n.py:54
+msgid "llm_temperature"
+msgstr "Randomness"
+
+#: src/router/i18n.py:55
+msgid "llm_top_p"
+msgstr "Diversity"
+
+#: src/router/i18n.py:56
+msgid "llm_use_cache"
+msgstr "Cache"
+
+#: src/router/i18n.py:57
+msgid "llm_use_cache_tip"
+msgstr "Enabling can avoid duplicate requests and prevent extra token consumption"
+
+#: src/router/i18n.py:48
+msgid "llm_use_oritxt"
+msgstr "Use Original Text"
+
+#: src/router/i18n.py:59
+msgid "model"
+msgstr "Model"
+
+#: src/router/i18n.py:60
+msgid "model_placeholder"
+msgstr "Enter model name"
+
+#: src/router/i18n.py:62
+msgid "nav_discord"
+msgstr "Discord"
+
+#: src/router/i18n.py:63
+msgid "nav_editor"
+msgstr "Data Editor"
+
+#: src/router/i18n.py:64
+msgid "nav_group_assist"
+msgstr "Assist"
+
+#: src/router/i18n.py:65
+msgid "nav_group_doc"
+msgstr "Docs"
+
+#: src/router/i18n.py:66
+msgid "nav_group_feature"
+msgstr "Feature"
+
+#: src/router/i18n.py:67
+msgid "nav_masker_painter"
+msgstr "Painter Editor"
+
+#: src/router/i18n.py:68
+msgid "nav_masker_remove"
+msgstr "Masker"
+
+#: src/router/i18n.py:69
+msgid "nav_play"
+msgstr "Video Playback"
+
+#: src/router/i18n.py:70
+msgid "nav_plugins"
+msgstr "Plugins"
+
+#: src/router/i18n.py:71
+msgid "nav_set"
+msgstr "Preferences"
+
+#: src/router/i18n.py:72
+msgid "nav_speaker"
+msgstr "Speaker"
+
+#: src/router/i18n.py:73
+msgid "nav_swagger"
+msgstr "Swagger"
+
+#: src/router/i18n.py:74
+msgid "nav_vitepress"
+msgstr "Tutorial"
+
+#: src/router/i18n.py:76
+msgid "scene_align_type"
+msgstr "Alignment"
+
+#: src/router/i18n.py:77
+msgid "scene_mode_type"
+msgstr "Mode"
+
+#: src/router/i18n.py:78
+msgid "scene_suffix"
+msgstr "Suffix"
+
+#: src/router/i18n.py:79
+msgid "scene_suffix_placeholder"
+msgstr "Enter an identifier suffix"
+
+#: src/router/i18n.py:80
+msgid "scene_video_url"
+msgstr "Video"
+
+#: src/router/i18n.py:81 static/templates/index.html:128
+msgid "scene_video_url_placeholder"
+msgstr "Enter audio/video path or link"
+
+#: src/router/i18n.py:83
+msgid "setting_silence"
+msgstr "Silence Detection"
+
+#: src/router/i18n.py:84
+msgid "setting_silence_tips"
+msgstr "Threshold、MinLength、KeepLength"
+
+#: src/router/i18n.py:85
+msgid "setting_volume_background"
+msgstr "Background Volume"
+
+#: src/router/i18n.py:86
+msgid "setting_volume_native"
+msgstr "Native Volume"
+
+#: src/router/i18n.py:88
+msgid "table_tools_delete"
+msgstr "Del"
+
+#: src/router/i18n.py:89
+msgid "table_tools_move_down"
+msgstr "Down"
+
+#: src/router/i18n.py:90
+msgid "table_tools_move_up"
+msgstr "Up"
+
+#: src/router/i18n.py:91
+msgid "table_tools_preview"
+msgstr "Preview"
+
+#: src/router/i18n.py:93
+msgid "tts_gender"
+msgstr "Gender"
+
+#: src/router/i18n.py:94
+msgid "tts_instruct"
+msgstr "Instruction"
+
+#: src/router/i18n.py:95
+msgid "tts_instruct_placeholder"
+msgstr "[Regional Dialect], [Speaking Style], [Role Play] etc."
+
+#: src/router/i18n.py:99
+msgid "tts_pitch"
+msgstr "Pitch"
+
+#: src/router/i18n.py:96
+msgid "tts_play"
+msgstr "Preview"
+
+#: src/router/i18n.py:97
+msgid "tts_play_tip"
+msgstr "Click to preview"
+
+#: src/router/i18n.py:98
+msgid "tts_rate"
+msgstr "Rate"
+
+#: src/router/i18n.py:100
+msgid "tts_remarks"
+msgstr "Remarks"
+
+#: src/router/i18n.py:101
+msgid "tts_remarks_placeholder"
+msgstr "Write something"
+
+#: src/router/i18n.py:102
+msgid "tts_spk_generate"
+msgstr "Click to generate video speaker voice"
+
+#: src/router/i18n.py:103
+msgid "tts_step"
+msgstr "Sampling Steps"
+
+#: src/router/i18n.py:104
+msgid "tts_text_placeholder"
+msgstr "Enter preview text"
+
+#: src/router/i18n.py:105
+msgid "tts_vc"
+msgstr "Conversion"
+
+#: src/router/i18n.py:106
+msgid "tts_vc_tip"
+msgstr "Convert source voice to target voice"
+
+#: src/router/i18n.py:107
+msgid "tts_voice"
+msgstr "Voice"
+
+#: src/router/i18n.py:108
+msgid "tts_volume"
+msgstr "Volume"
+

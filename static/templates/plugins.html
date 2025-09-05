@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="{{request.state.lang}}">
+
+<head>
+    <meta charset="utf-8" />
+    <title>{{ data.app.title }} - Plugins</title>
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!-- jquery -->
+    <script src="static/js/jquery/jquery.min.js"></script>
+    <script src="static/js/xgplayer/xgplayer.js"></script>
+    <!-- nprogress -->
+    <link href="static/js/nprogress/nprogress.min.css" rel="stylesheet">
+    <script src="static/js/nprogress/nprogress.min.js"></script>
+    <!-- layui -->
+    <link href="static/js/layui/css/layui.css" rel="stylesheet">
+    <link href="static/js/layui/css/layui-dark.css" rel="stylesheet">
+    <script src="static/js/layui/layui.js"></script>
+    <!-- iconify -->
+    <script src="static/js/iconify/iconify.min.js"></script>
+    <!-- app -->
+    <script src="static/js/app/app.js"></script>
+</head>
+
+<body class="collapse" layadmin-themealias="default">
+
+    <div class="layui-layout layui-layout-admin">
+
+        <form class="layui-form layui-form-pane" lay-filter="form_filter">
+
+            <!-- 应用 -->
+            <div class="layui-collapse" lay-filter="collapse_filter_gradio">
+                <div class="layui-colla-item">
+                    <div class="layui-card layui-panel">
+                        <div class="layui-colla-title">应用</div>
+                        <div class="layui-colla-content layui-show">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="padding: 10px">
+                <table id="gradio_table" class="layui-table" style="margin: 0px;">
+                </table>
+            </div>
+
+        </form>
+    </div>
+
+    <!-- 表格工具栏 -->
+    <script type="text/html" id="TPL_table_toolbar">
+        <!-- <div class="layui-inline" lay-event="query"><i class="layui-icon layui-icon-search"></i></div>
+        <div class="layui-inline" lay-event="add"><i class="layui-icon layui-icon-add-circle"></i></div>
+        <div class="layui-inline" lay-event="delete"><i class="layui-icon layui-icon-delete"></i></div> -->
+    </script>
+
+    <!-- 表格行工具 -->
+    <script type="text/html" id="TPL_table_tools">
+        <div class="layui-btn-container">
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="open">打开</a>
+        </div>
+    </script>
+
+    <!-- 启用禁用 -->
+    {% raw %}
+    <script type="text/html" id="TPL_table_status">
+        <div class="layui-btn-container">
+            <input type="checkbox" name="status" value="{{= d.path }}" lay-skin="primary" lay-filter="switch_status_filter" {{= d.status == 1 || d.local == 0 ? "checked" : "" }}  {{= d.local == 0 ? "disabled" : "" }}>
+        </div>
+    </script>
+    {% endraw %}
+
+    <script>
+
+        layui.use(['form', 'layer', 'table', 'util', 'notice', 'tool'], function () {
+
+            var form = layui.form;
+            var layer = layui.layer;
+            var table = layui.table;
+            var util = layui.util;
+            var toast = layui.notice;
+            var tool = layui.tool;
+            // var trans = layui.translate;
+            var $ = layui.$;
+
+            var table_json = JSON.parse('{{ data.gradios | tojson }}')
+
+            // 应用表格
+            var inst = table.render({
+                elem: '#gradio_table',
+                data: table_json,
+                page: {
+                    curr: 1, //当前页码
+                    groups: 5, //只显示 1 个连续页码
+                    first: true, //不显示首页
+                    last: true //不显示尾页
+                },
+                request: {
+                    pageName: 'page', limitName: 'size'
+                },
+                toolbar: '#TPL_table_toolbar',
+                defaultToolbar: [{
+                    title: '重启',
+                    layEvent: 'reboot',
+                    icon: 'layui-icon-logout',
+                    onClick: function (obj) {
+                        console.debug("toolbar reboot click")
+                    }
+                }],
+                height: 'full-68', // 最大高度减去其他容器已占有的高度差
+                cols: [[
+                    { type: 'checkbox' },
+                    { title: '编号', sort: true, width: 80, align: "center", templet: d => '<div title="' + d.text + '">' + d.LAY_NUM + '</div>' },
+                    { title: '名称', sort: true, width: 220, align: "left", field: 'name', templet: d => '<div title="' + d.name + '"> ' + d.name + '</div>' },
+                    { title: '描述', sort: true, align: "left", align: "left", field: 'description', templet: d => '<div title="' + d.description + '">' + d.description + '</div>' },
+                    { title: "状态", sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_status" },
+                    { title: "操作", sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_tools" }
+                ]],
+            });
+
+            // 工具栏事件
+            table.on('toolbar(' + inst.config.id + ')', function (obj) {
+                var id = obj.config.id;
+                var checkStatus = table.checkStatus(id);
+                var othis = lay(this);
+                action = obj.event
+                switch (obj.event) {
+                    case 'reboot':
+                        // 确认执行
+                        layer.confirm('确定重启吗？', { title: '提示', icon: 3 }, function (index) {
+                            layer.close(index);
+                            // 请求调用
+                            tool.get("app/reboot")
+                            setTimeout(function () {
+                                tool.refresh()
+                            }, 10 * 1000)
+                        });
+                        break;
+                };
+            });
+
+            // 表格工具事件
+            table.on('tool(' + inst.config.id + ')', function (obj) {
+                var id = obj.config.id;
+                var data = obj.data;
+                url = `${window.location.protocol}//${window.location.host}${data.path}`;
+                if (data.status == 0) {
+                    return toast.warning("服务未开启，无法访问", "提示");
+                }
+                if (obj.event === "open") {
+                    util.openWin({ url: url });
+                }
+            });
+
+            // 开关操作
+            form.on('checkbox(switch_status_filter)', function (obj) {
+                var path = this.value;
+                var module = null;
+                var attr = null;
+                var status = obj.elem.checked ? 1 : 0;
+                // 更新状态
+                var cache = layui.table.cache['gradio_table'];
+                for (let i = 0; i < cache.length; i++) {
+                    if (cache[i].path === path) {
+                        module = cache[i].module
+                        attr = cache[i].attr
+                        cache[i].status = status;
+                        break;
+                    }
+                }
+                // 重载表格（不重置分页）
+                layui.table.reloadData('gradio_table', {
+                    data: cache,
+                    scrollPos: 'fixed'
+                });
+                // 发送请求
+                tool.post("/gr/mounts", JSON.stringify({ "path": path, "module": module, "attr": attr, "status": status }), function (response) {
+                    console.debug(response.data)
+                    var status = response.data.status
+                    if (status == 1) {
+                        toast.info("开启成功,重启后生效", "提示");
+                    } else {
+                        toast.success(status == 0 ? "关闭成功" : "开启成功", "提示");
+                    }
+                }, true)
+            });
+
+            //// 设置本地语种
+            // trans.language.setLocal('chinese_simplified');
+            ////设置翻译通道
+            // trans.service.use('client.edge');
+            // window.onload = function () {
+            //     trans.execute();
+            // };  
+        });
+
+    </script>
+    <script src="static/js/app/theam.js"></script>
+</body>
+
+</html>

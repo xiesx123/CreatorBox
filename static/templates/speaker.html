@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="{{request.state.lang}}">
+
+<head>
+    <meta charset="utf-8" />
+    <title>{{ data.app.title }} - Speaker</title>
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!-- jquery -->
+    <script src="static/js/jquery/jquery.min.js"></script>
+    <script src="static/js/howler/howler.min.js"></script>
+    <!-- nprogress -->
+    <link href="static/js/nprogress/nprogress.min.css" rel="stylesheet">
+    <script src="static/js/nprogress/nprogress.min.js"></script>
+    <!-- layui -->
+    <link href="static/js/layui/css/layui.css" rel="stylesheet">
+    <link href="static/js/layui/css/layui-dark.css" rel="stylesheet">
+    <script src="static/js/layui/layui.js"></script>
+    <!-- app -->
+    <script src="static/js/app/app.js"></script>
+</head>
+
+<body class="collapse" layadmin-themealias="default">
+
+    <div class="layui-layout layui-layout-admin">
+
+        <form class="layui-form layui-form-pane" lay-filter="form_filter">
+
+            <!-- 说话人 -->
+            <div class="layui-collapse" lay-filter="collapse_filter_speaker">
+                <div class="layui-colla-item">
+                    <div class="layui-card layui-panel">
+                        <div class="layui-colla-title">说话人
+                            <!-- <i class="layui-icon layui-icon-tips" lay-tips="要支持的噢"></i> -->
+                        </div>
+
+                        <div class="layui-colla-content layui-show">
+
+                            <input type="hidden" name="id">
+
+                            <div lay-filter="query_filter" class="layui-form-item layui-hide">
+                                <label class="layui-form-label" id="audio_upload">音频 <span
+                                    class="layui-badge-dot layui-bg-green"></span></label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="path" lay-verify="path" placeholder="请输入音频路径、链接"
+                                        autocomplete="off" class="layui-input" lay-affix="clear">
+                                </div>
+                            </div>
+
+                            <div lay-filter="query_filter" class="layui-form-item layui-hide">
+                                <label class="layui-form-label">文本</label>
+                                <div class="layui-input-block">
+                                    <input id="suffix" type="text" name="text" placeholder="请输入音频文本" autocomplete="off"
+                                        class="layui-input" lay-affix="clear">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">名称</label>
+                                <div class="layui-input-block">
+                                    <input id="suffix" type="text" name="speaker" placeholder="请输入名称"
+                                        lay-verify="required" autocomplete="off" class="layui-input" lay-affix="clear">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item" pane>
+                                <label class="layui-form-label">性别</label>
+                                <div class="layui-input-block">
+                                    <input type="radio" name="gender" value="1" lay-filter="gender_filter" title="男">
+                                    <input type="radio" name="gender" value="2" lay-filter="gender_filter" title="女">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">语言</label>
+                                <div class="layui-input-block">
+                                    <select id="locale" name="locale" lay-verify="required" lay-filter="locale_filter">
+                                        <option value="">选择或搜索</option>
+                                        {% for item in data.locales %}
+                                        <option value="{{ item.locale }}">{{ item.name }} - {{ item.locale }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item layui-col-space15" style="margin-bottom: 0px;">
+                                <div class="layui-col-md10">
+                                    <button type="submit" class="layui-btn layui-btn-primary layui-btn-fluid" lay-submit
+                                        lay-filter="form_submit">查询</button>
+                                </div>
+                                <div class="layui-col-md2">
+                                    <button type="reset"
+                                        class="layui-btn layui-btn-primary layui-border layui-btn-fluid">重置</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+        <div style="padding: 10px">
+            <table id="table" class="layui-table" style="margin: 0px;">
+            </table>
+        </div>
+    </div>
+
+    <div>
+        <input type="hidden" id="import" />
+    </div>
+
+
+    <!-- 表格工具栏 -->
+    <script type="text/html" id="TPL_table_toolbar">
+        <div class="layui-inline" lay-event="query"><i class="layui-icon layui-icon-search"></i></div>
+        <div class="layui-inline" lay-event="add"><i class="layui-icon layui-icon-add-circle"></i></div>
+        <div class="layui-inline" lay-event="delete"><i class="layui-icon layui-icon-delete"></i></div>
+    </script>
+
+    <!-- 表格行工具 -->
+    <script type="text/html" id="TPL_table_tools">
+        <div class="layui-btn-container">
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="update">编辑</a>
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="test">试听</a>
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="download">下载</a>
+        </div>
+    </script>
+
+    <!-- 启用禁用 -->
+    {% raw %}
+    <script type="text/html" id="TPL_table_status">
+        <input type="checkbox" name="status" value={{d.status}} lay-skin="primary" mid={{d.id}}  lay-filter="table_status_filter" {{ d.status == '1' ? 'checked' : '' }}>
+    </script>
+    {% endraw %}
+
+    <script>
+
+        layui.use(['form', 'table', 'layer', 'element', 'upload', 'util', 'notice', 'tool'], function () {
+
+            var form = layui.form;
+            var table = layui.table;
+            var layer = layui.layer;
+            var element = layui.element;
+            var upload = layui.upload;
+            var util = layui.util;
+            var toast = layui.notice;
+            var tool = layui.tool;
+            var $ = layui.$;
+
+            let CREATORBOX = "speaker"
+            let cache = layui.data(CREATORBOX)
+            let player;
+            let action = "query";
+
+            var form_json_init = JSON.parse('{{ data.form | tojson }}') // 表单默认值
+            var form_json = cache.hasOwnProperty('form') ? cache.form : {}     // 表单
+            Object.keys(form_json).length === 0 ? Object.assign(form_json, form_json_init) : Object.assign(form_json_init, form_json)
+
+            // 表单渲染
+            form.val('form_filter', form_json);
+
+            // 表单验证 
+            form.verify({
+                required: function (value, elem) {
+                    if (value.length == 0 && action != "query") {
+                        if (elem.nodeName == 'INPUT') {
+                            return elem.placeholder;
+                        } else if (elem.nodeName == 'SELECT') {
+                            return elem.options[0].text
+                        } else {
+                            return '不能为空'
+                        }
+                    }
+                },
+                path: function (value, elem) {
+                    if (value.length == 0 && !["query", "import"].includes(action)) {
+                        return '请输入本地路径、网络链接';
+                    }
+                }
+            });
+
+            // 表单=============
+
+            // 表单-音频上传
+            tool.upload("#audio_upload", "spk/upload", 'audio', null, function (n, elem, e) {
+                layer.msg('识别中', { icon: 16, time: 30 * 1000 });
+            }, function (response) {
+                layer.msg('识别成功', { icon: 1 });
+                if (response.code == 0) {
+                    data = response.data
+                    form_json.id = null
+                    form_json.path = data.location
+                    form_json.text = data.text
+                    form_json.speaker = data.location.split(/[/\\]/).pop().split(".")[0]
+                    form_json.gender = data.gender
+                    form_json.locale = data.locale
+                    form.val('form_filter', form_json);
+                }
+            })
+
+            // 表单-音频上传
+            tool.upload("#audio_upload", "spk/upload", 'audio', null, function (n, elem, e) {
+                layer.msg('识别中', { icon: 16, time: 30 * 1000 });
+            }, function (response) {
+                layer.msg('识别成功', { icon: 1 });
+                if (response.code == 0) {
+                    data = response.data
+                    form_json.id = null
+                    form_json.path = data.location
+                    form_json.text = data.text
+                    form_json.speaker = data.location.split(/[/\\]/).pop().split(".")[0]
+                    form_json.gender = data.gender
+                    form_json.locale = data.locale
+                    form.val('form_filter', form_json);
+                }
+            })
+
+            // 表单-提交事件
+            form.on('submit(form_submit)', function (data) {
+                var field = data.field;
+                var elem = data.elem;
+                // 本地存储
+                layui.data(CREATORBOX, { key: 'form', value: field });
+                // 请求数据
+                data = JSON.stringify(field, null, 2);
+                console.debug(field)
+                // 不同行为
+                if (action == 'query') {
+                    table.reload('table', {
+                        page: { curr: 1 },
+                        where: {
+                            speaker: field.speaker,
+                            gender: parseInt(field.gender) || 0,
+                            locale: field.locale,
+                        }
+                    });
+                } else if (action == 'add' || action == 'update') {
+                    title = '保存'
+                    if (action == 'update') {
+                        title = '修改'
+                    }
+                    layer.confirm(`确定${title}吗？`, { title: '提示', icon: 3 }, function (index) {
+                        tool.post("/spk/upsert", data, function (response) {
+                            console.debug(response.data)
+                            toast.success(`${field.speaker}`, `${title}成功`);
+                            table.reloadData('table', { scrollPos: 'fixed' });
+                        }, true)
+                    });
+                }
+                return false;
+            });
+
+            // 说话人=============
+
+            // 数据表格
+            var inst = table.render({
+                elem: '#table',
+                url: '/spk/page',
+                method: 'post',
+                contentType: 'application/json',
+                page: {
+                    curr: 1, //当前页码
+                    groups: 5, //只显示 1 个连续页码
+                    limit: 15,
+                    first: true, //不显示首页
+                    last: true //不显示尾页
+                },
+                request: {
+                    pageName: 'page', limitName: 'size'
+                },
+                toolbar: '#TPL_table_toolbar',
+                defaultToolbar: [{
+                    title: '导入',
+                    layEvent: 'import',
+                    icon: 'layui-icon-export',
+                    onClick: function (obj) {
+                        console.debug("toolbar import click")
+                    }
+                }],
+                height: 'full-78', // 最大高度减去其他容器已占有的高度差
+                cols: [[
+                    { type: 'checkbox' },
+                    { title: '编号', sort: true, width: 280, align: "left", field: 'id', },
+                    { title: '类型', sort: true, width: 80, align: "center", field: 'type', templet: d => `<div title="${d.type} ${d.type == 1 ? '内置' : d.type == 2 ? '视频' : d.type == 3 ? '用户' : '未知'}">${d.type == 1 ? '内置' : d.type == 2 ? '视频' : d.type == 3 ? '用户' : '未知'}</div>` },
+                    { title: '性别', sort: true, width: 80, align: "center", field: 'gender', templet: d => `<div title="${d.gender} ${d.gender == 1 ? '男' : d.gender == 2 ? '女' : '未知'}">${d.gender == 1 ? '男' : d.gender == 2 ? '女' : '未知'}</div>` },
+                    { title: '语言', sort: true, width: 80, align: "center", field: 'locale', templet: d => '<div title="' + d.locale + '"> ' + d.locale + '</div>' },
+                    { title: '名称', sort: true, width: 250, align: "left", field: 'speaker', templet: d => '<div title="' + d.speaker + '"> ' + d.speaker + '</div>' },
+                    { title: '文本', sort: false, field: 'text', templet: d => '<div title="' + d.text + '">' + d.text + '</div>' },
+                    { title: '时长', sort: true, width: 80, align: "center", field: 'duration', templet: d => '<div title="' + d.duration + '"> ' + d.duration + '</div>' },
+                    { title: "状态", sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_status" },
+                    { title: "操作", sort: false, width: 160, align: "center", fixed: 'right', toolbar: "#TPL_table_tools" }
+                ]],
+            });
+
+            // 工具栏事件
+            table.on('toolbar(' + inst.config.id + ')', function (obj) {
+                var id = obj.config.id;
+                var checkStatus = table.checkStatus(id);
+                var othis = lay(this);
+                action = obj.event
+                switch (obj.event) {
+                    case 'query':
+                        action = "query";
+                        $('button[type="submit"]').text('查询');
+                        $('button[type="submit"]').removeClass('layui-border-blue');
+                        $('button[type="reset"]').click();
+                        $('[lay-filter="query_filter"]').addClass('layui-hide');
+                        $('[lay-filter="collapse_filter_speaker"] .layui-colla-content').addClass('layui-show');
+                        break;
+                    case 'add':
+                        action = "add";
+                        $('input[name="id"]').val(null);
+                        $('button[type="submit"]').text('保存');
+                        $('button[type="submit"]').addClass('layui-border-blue');
+                        $('button[type="reset"]').click();
+                        $('[lay-filter="query_filter"]').removeClass('layui-hide');
+                        $('[lay-filter="collapse_filter_speaker"] .layui-colla-content').addClass('layui-show');
+                        break;
+                    case 'delete':
+                        tool.delids("/spk/delete", function (response) {
+                            console.debug(response.data)
+                            table.reloadData(id, { scrollPos: 'fixed' });
+                        }, true)
+                        break;
+                    case 'import':
+                        tool.upload("#import", "spk/upsert_batch", 'file', 'json', null, function (response) {
+                            if (response.code == 0) {
+                                table.reloadData('table', { scrollPos: 'fixed' });
+                                return toast.success("导入【" + response.data + "】条成功", "提示");
+                            } else {
+                                return toast.error(response.message, "提示");
+                            }
+                        })
+                        $("#import").click();
+                        break;
+                };
+            });
+
+            // 表格工具事件
+            table.on('tool(' + inst.config.id + ')', function (obj) {
+                var id = obj.config.id;
+                var data = obj.data;
+                var url = '/file/local?url=' + data.path;
+                if (obj.event === "update") {
+                    action = "update";
+                    form.val('form_filter', data);
+                    $('button[type="submit"]').text('编辑');
+                    $('button[type="submit"]').addClass('layui-border-blue');
+                    $('[lay-filter="query_filter"]').removeClass('layui-hide');
+                    $('[lay-filter="collapse_filter_speaker"] .layui-colla-content').addClass('layui-show');
+                } else if (obj.event === "test") {
+                    voice_play(url);
+                } else if (obj.event === "download") {
+                    var link = document.createElement('a');
+                    link.href = url;
+                    link.download = data.path.split(/[/\\]/).pop().split(".")[0];
+                    link.style.display = 'none';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
+            });
+
+            // 状态操作
+            form.on('checkbox(table_status_filter)', function (obj) {
+                id = obj.elem.attributes['mid'].nodeValue;
+                data = JSON.stringify({ "id": id, "status": obj.elem.checked ? 1 : 0 });
+                tool.post("/spk/status", data, function (response) {
+                    console.debug(response.data)
+                    if (obj.elem.checked) {
+                        toast.success("已开启", "提示");
+                    } else {
+                        toast.info("已关闭", "提示");
+                    }
+                }, true)
+            });
+
+            // 音频播放
+            var voice_play = function (url) {
+                if (player) {
+                    player.unload();
+                }
+                player = new Howl({
+                    src: [url],
+                    format: ['wav'],
+                    autoplay: true,
+                    html5: true,
+                    onload: function () {
+                        console.debug('audio loaded');
+                    },
+                    onplay: function () {
+                        console.debug('audio playing');
+                    },
+                    onpause: function () {
+                        console.debug('audio paused');
+                    },
+                    onstop: function () {
+                        console.debug('audio stopped');
+                    },
+                    onend: function () {
+                        console.debug('audio ended');
+                    },
+                });
+            };
+        });
+
+    </script>
+    <script src="static/js/app/theam.js"></script>
+</body>
+
+</html>

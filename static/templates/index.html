@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="{{request.state.lang}}">
+
+<head>
+  <meta charset="utf-8" />
+  <title>{{ data.app.title }}</title>
+  <meta name="renderer" content="webkit" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!-- jquery -->
+  <script src="static/js/jquery/jquery.min.js"></script>
+  <script src="static/js/howler/howler.min.js"></script>
+  <!-- nprogress -->
+  <link href="static/js/nprogress/nprogress.min.css" rel="stylesheet">
+  <script src="static/js/nprogress/nprogress.min.js"></script>
+  <!-- socket -->
+  <script src="static/js/socket/socket.io.min.js"></script>
+  <!-- layui -->
+  <link href="static/js/layui/css/layui.css" rel="stylesheet">
+  <link href="static/js/layui/css/layui-nav.css" rel="stylesheet">
+  <link href="static/js/layui/css/layui-dark.css" rel="stylesheet">
+  <script src="static/js/layui/layui.js"></script>
+  <!-- app -->
+  <link href="static/js/app/app.css" rel="stylesheet">
+  <script src="static/js/app/app.js"></script>
+</head>
+
+<body class="collapse" layadmin-themealias="default">
+
+  <div class="layui-layout layui-layout-admin">
+
+    <!-- 顶部区域 -->
+    <div class="layui-header">
+      <!-- 头部区域（可配合layui 已有的水平导航） -->
+      <ul class="layui-nav layui-layout-left">
+        <li class="layui-nav-item" lay-header-event="menuLeft">
+          <i class="layui-icon layui-icon-spread-left" style="font-size: 18px"></i>
+        </li>
+        <li class="layui-nav-item" lay-header-event="menuLeft">
+          <span style="padding: 15px; font-size: 16px; background-color: unset">{{ data.app.version }} </span>
+        </li>
+      </ul>
+      <ul class="layui-nav layui-layout-right">
+        <li class="layui-nav-item">
+          <a id="change-theme" style="padding-left: 8px;padding-right: 8px;">
+            <i class="layui-icon layui-icon-moon" style="font-size: 18px"></i>
+          </a>
+        </li>
+        <li class="layui-nav-item">
+          <a href="https://github.com/xiesx123/CreatorBox" target="_blank"
+            style="padding-left: 8px;padding-right: 8px;">
+            <i class="layui-icon layui-icon-github" style="font-size: 18px"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 导航区域 -->
+    <div class="layui-side">
+      <div class="layui-side-scroll">
+        <div class="layui-logo ">{{ data.app.title }}</div>
+        <ul class="layui-nav layui-nav-tree layui-bg-gray" lay-unselect lay-filter="nav-side" id="ws-nav-side">
+          <li class="layui-nav-item layui-nav-itemed">
+            <a href="javascript:;">{{ __.nav_group_feature }}</a>
+            <dl class="layui-nav-child">
+              <dd><a data-path="/speaker" href="javascript:;">
+                  <i style="font-size: 18px" class="layui-icon layui-icon-headset"></i> {{ __.nav_speaker }}</a></dd>
+              <dd><a data-path="/plugins" href="javascript:;">
+                  <i style="font-size: 18px" class="layui-icon layui-icon-component"></i> {{ __.nav_plugins }}</a></dd>
+              {% if data.nav.mask_enable %}
+              <dd><a data-path="/masker" href="javascript:;"><i style="font-size: 18px"
+                    class="layui-icon layui-icon-theme"></i> {{ __.nav_masker_remove }}</a></dd>
+              {% endif %}
+              <dd><a data-path="/settings" href="javascript:;"><i style="font-size: 16px"
+                    class="layui-icon layui-icon-set"></i> {{ __.nav_set }}</a></dd>
+            </dl>
+          </li>
+          <li class="layui-nav-item layui-nav-itemed">
+            <a href="javascript:;">{{ __.nav_group_assist }}</a>
+            <dl class="layui-nav-child">
+              <dd><a data-path="/app/masker" href="javascript:;"><i style="font-size: 18px"
+                    class="layui-icon layui-icon-template"></i> {{ __.nav_masker_painter }}</a></dd>
+              <dd><a data-path="/editor" href="javascript:;"><i style="font-size: 18px"
+                    class="layui-icon layui-icon-code-circle"></i> {{ __.nav_editor }}</a></dd>
+              <dd><a data-path="/player" href="javascript:;"><i style="font-size: 18px"
+                    class="layui-icon layui-icon-play"></i> {{ __.nav_play }}</a></dd>
+            </dl>
+          </li>
+          <li class="layui-nav-item layui-nav-itemed">
+            <a href="javascript:;">{{ __.nav_group_doc }}</a>
+            <dl class="layui-nav-child">
+              <dd><a data-path="/docs" href="javascript:;"><i style="font-size: 18px"
+                    class="layui-icon layui-icon-release"></i> {{ __.nav_swagger }}</a></dd>
+              <dd><a data-path="https://xiesx123.github.io/CreatorBox/{{ 'zh' if request.state.lang == 'zh' else ''}}"
+                  href="javascript:;">
+                  <i style="font-size: 18px" class="layui-icon layui-icon-read"></i> {{ __.nav_vitepress }}</a>
+              </dd>
+              <dd><a data-path="https://discord.gg/skQVh5WU48" href="javascript:;">
+                  <i style="font-size: 18px" class="layui-icon layui-icon-chat"></i> {{ __.nav_discord }}</a>
+              </dd>
+            </dl>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 主体区域 -->
+    <div id="layui-body" class="layui-body" style="padding: 10px">
+      <form class="layui-form layui-form-pane" lay-filter="form_filter">
+
+        <div class="layui-row layui-col-space15">
+
+          <!-- 基础 -->
+          <div class="layui-col-md12">
+            <div class="layui-collapse" lay-filter="collapse_filter_base">
+              <div class="layui-colla-item">
+
+                <div class="layui-card layui-panel">
+                  <div class="layui-colla-title">{{ __.dub_scene }}</div>
+                  <div class="layui-colla-content layui-show">
+
+                    <div class="layui-form-item">
+                      <label class="layui-form-label" id="video_upload"
+                        lay-tips="{content: '{{ __.common_upload }}', margin: '0 0 0 -10px'}">{{ __.scene_video_url }}
+                        <span class="layui-badge-dot layui-bg-green"></span></label>
+                      <div class="layui-input-block">
+                        <input id="video_url" type="text" name="video_url" lay-verify="path"
+                          placeholder="{{ _('scene_video_url_placeholder') }}" autocomplete="off" class="layui-input"
+                          lay-affix="clear">
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                      <label class="layui-form-label">{{ __.common_locale }}</label>
+                      <div class="layui-input-block">
+                        <select id="locale" name="locale" lay-verify="required" lay-filter="locale_filter">
+                          <option value="">{{ __.common_select_or_search }}</option>
+                          {% for item in data.llm.locales %}
+                          <option value="{{ item.locale }}">{{ item.locale }} - {{ item.name if request.state.lang ==
+                            'zh' else item.country }}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item" pane>
+                      <label class="layui-form-label">{{ __.scene_mode_type }}</label>
+                      <div class="layui-input-block">
+                        {% for item in data.base.mode_types %}
+                        <input type="radio" name="mode_type" value="{{ item.val }}" lay-filter="mode_type_filter"
+                          title="{{ item.desc_zh if request.state.lang == 'zh' else item.desc_en }}" {% if not
+                          item.enable %}disabled{% endif %}>
+                        {% endfor %}
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item" pane id="align_type_div">
+                      <label class="layui-form-label">{{ __.scene_align_type }}</label>
+                      <div class="layui-input-block">
+                        {% for item in data.base.align_types %}
+                        <input type="radio" name="align_type" value="{{ item.val }}"
+                          title="{{ item.desc_zh if request.state.lang == 'zh' else item.desc_en }}">
+                        {% endfor %}
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item" pane>
+                      <label class="layui-form-label">{{ __.common_options }}</label>
+                      <div class="layui-input-block">
+                        <input type="checkbox" name="preview" title="{{ __.common_preview }}">
+                        <input type="checkbox" name="rebuild" title="{{ __.common_rebuild }}">
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                      <label class="layui-form-label">{{ __.scene_suffix }}</label>
+                      <div class="layui-input-block">
+                        <input id="suffix" type="text" name="suffix" lay-verify="required"
+                          placeholder="{{ __.scene_suffix_placeholder }}" autocomplete="off" class="layui-input"
+                          lay-affix="clear">
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- 字幕 -->
+          <div class="layui-col-md6">
+            <div class="layui-collapse" lay-filter="collapse_filter_asr">
+              <div class="layui-colla-item">
+
+                <div class="layui-card layui-panel">
+                  <div class="layui-colla-title">{{ __.dub_subtitle }}
+                    <!-- <a href="https://xiesx123.github.io/CreatorBox" target="_blank">
+                      <i class="layui-icon layui-icon-tips" style="font-size: 20px;margin-top:-10px"></i>
+                    </a> -->
+                  </div>
+                  <div class="layui-colla-content layui-show">
+
+                    <div class="layui-form-item" pane
+                      lay-tips="{content: '{{__.debug_interrupt_alert}}', margin: '0 0 0 -10px'}">
+                      <label class="layui-form-label">{{ __.debug }}</label>
+                      <div class="layui-input-block">
+                        <input type="checkbox" name="asr_debug" lay-skin="switch" lay-filter="switch_debug_filter">
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                      <label class="layui-form-label">{{ __.common_provider }}</label>
+                      <div class="layui-input-block">
+                        <select name="asr_provider" lay-filter="asr_provider_filter">
+                          {% for item in data.asr.providers %}
+                          <option value="{{ item.provider}}" {% if not item.enable %}disabled{% endif %}>
+                            {{ item.desc }}
+                          </option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="layui-col-md12 layui-hide" id="subtitle_div">
+                      <div class="layui-form-item">
+                        <label class="layui-form-label" id="subtitle_upload" lay-tips="{content: '{{ __.common_upload }}', margin: '0 0 0 -10px'}">{{ __.asr_subtitle_file }} <span
+                            class="layui-badge-dot layui-bg-green"></span></label>
+                        <div class="layui-input-block">
+                          <input id="subtitle_file" type="text" name="subtitle_file" lay-verify="subtitle_srt"
+                            placeholder="{{__.asr_subtitle_placeholder}}" autocomplete="off" class="layui-input"
+                            lay-affix="clear">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="layui-col-md12 layui-hide" id="jydraft_div">
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">{{ __.asr_draft_name }}</label>
+                        <div class="layui-input-block">
+                          <select name="draft_name" lay-verify="draft_name" lay-search>
+                            <option value="">{{ __.common_select_or_search }}</option>
+                            {% for item in data.asr.draftnames %}
+                            <option value="{{ item }}">{{ item }}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="layui-col-md12 layui-hide" id="whisper_div">
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">{{ __.model }}</label>
+                        <div class="layui-input-block">
+                          <select name="asr_model" lay-verify="required" lay-search>
+                            <option value="">{{ __.common_select_or_search }}</option>
+                            {% for item in data.asr.whispers %}
+                            <option value="{{ item }}">{{ item }}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">{{ __.asr_whisper_size }}</label>
+                        <div class="layui-input-block">
+                          <select name="whisper_size" lay-verify="required" lay-search>
+                            <option value="">{{ __.common_select_or_search }}</option>
+                            {% for item in data.asr.beam_sizes %}
+                            <option value="{{ item.val }}">{{ item.val }} - {{ item.desc_zh if request.state.lang ==
+                              'zh' else item.desc_en }}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">{{ __.asr_whisper_temperature }}</label>
+                        <div class="layui-input-block">
+                          <select name="whisper_temperature" lay-verify="required" lay-search>
+                            <option value="">{{ __.common_select_or_search }}</option>
+                            {% for item in data.asr.temperatures %}
+                            <option value="{{ item.val }}">{{ item.val }} - {{ item.desc_zh if request.state.lang ==
+                              'zh' else item.desc_en }}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">{{ __.asr_whisper_length }}</label>
+                        <div class="layui-input-block">
+                          <select name="whisper_length" lay-verify="required" lay-search>
+                            <option value="">{{ __.common_select_or_search }}</option>
+                            {% for item in data.asr.chunk_lengths %}
+                            <option value="{{ item.val }}">{{ item.val }} - {{ item.desc_zh if request.state.lang ==
+                              'zh' else item.desc_en }}</option>
+                            </option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="layui-form-item" pane>
+                      <label class="layui-form-label">{{ __.asr_uvr }}</label>
+                      <div class="layui-input-block">
+                        <select name="uvr_model" lay-search>
+                          <option value="">{{ __.common_select_or_search }}</option>
+                          {% for item in data.asr.uvrmodels %}
+                          <option value="{{ item }}">{{ item }}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item" pane>
+                      <label class="layui-form-label">{{ __.asr_align_enable }}</label>
+                      <div class="layui-input-block">
+                        <input type="checkbox" name="align_enable" lay-skin="switch">
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item" pane>
+                      <label class="layui-form-label">{{ __.asr_emotion_enable }}</label>
+                      <div class="layui-input-block">
+                        <input type="checkbox" name="emotion_enable" lay-skin="switch">
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item" pane>
+                      <label class="layui-form-label">{{ __.asr_speaker_use_num }}</label>
+                      <div class="layui-input-block">
+                        <input type="checkbox" name="speaker_use_num" lay-skin="switch"
+                          lay-filter="switch_speaker_filter">
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                      <label class="layui-form-label">{{ __.asr_speaker_range }}</label>
+                      <div class="layui-input-inline" style="width: 142px;">
+                        <input type="number" lay-verify="required|number|speaker_len" name="speaker_min"
+                          placeholder="最小值" autocomplete="off" class="layui-input" min="1" max="10" step="1"
+                          lay-affix="number">
+                      </div>
+                      <div class="layui-input-inline" style="width: 142px;">
+                        <input type="number" lay-verify="required|number|speaker_len" name="speaker_max"
+                          placeholder="最大值" autocomplete="off" class="layui-input" min="1" max="10" step="1"
+                          lay-affix="number">
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- 翻译 -->
+          <div class="layui-col-md6">
+            <div class="layui-collapse" lay-filter="collapse_filter_llm">
+              <div class="layui-colla-item">
+
+                <div class="layui-card layui-panel">
+                  <div class="layui-colla-title">{{ __.dub_translation }}</div>
+                  <div class="layui-colla-content layui-show">
+
+                    <div class="layui-form-item" pane
+                      lay-tips="{content: '{{__.debug_interrupt_alert}}', margin: '0 0 0 -10px'}">
+                      <label class="layui-form-label">{{ __.debug }}</label>
+                      <div class="layui-input-block">
+                        <input type="checkbox" name="llm_debug" lay-skin="switch" lay-filter="switch_debug_filter">
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                      <label class="layui-form-label">{{ __.common_provider }}</label>
+                      <div class="layui-input-block">
+                        <select name="llm_provider" lay-filter="llm_provider_filter">
+                          <option value="ignore">{{ __.llm_ignore }}</option>
+                          {% for item in data.llm.providers %}
+                          <option value="{{ item.provider}}" {% if not item.enable %}disabled{% endif %}>
+                            {{ item.provider }} {{ '- ' + __.llm_configured if item.valid else '' }}
+                          </option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="layui-col-md12 layui-hide" id="ignore_div">
+                      <div class="layui-form-item" pane>
+                        <label class="layui-form-label">{{ __.llm_use_oritxt }}</label>
+                        <div class="layui-input-block">
+                          <input type="checkbox" name="llm_use_original_text" lay-skin="switch">
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- <div class="layui-col-md12 layui-hide" id="deeplx_div">
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">地址</label>
+                        <div class="layui-input-block">
+                          <input type="text" name="deeplx_server" placeholder="请输入服务地址" autocomplete="off"
+                            class="layui-input" lay-affix="clear">
+                        </div>
+                      </div>
+                    </div> -->
+
+                    <div class="layui-col-md12 layui-hide" id="llm_div">
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">{{ __.model }}</label>
+                        <div class="layui-input-block">
+                          <input type="text" name="llm_model" placeholder="{{ __.model_placeholder}}" autocomplete="off"
+                            class="layui-input" lay-affix="clear">
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">{{ __.llm_temperature }}</label>
+                        <div class="layui-input-block">
+                          <input type="number" name="llm_temperature" lay-verify="required" placeholder="[0,1]"
+                            autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">{{ __.llm_top_p }}</label>
+                        <div class="layui-input-block">
+                          <input type="number" name="llm_top_p" lay-verify="required" placeholder="[0,1]"
+                            autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item" pane
+                        lay-tips="{content: '{{__.llm_use_cache_tip}}', margin: '0 0 0 -10px'}">
+                        <label class="layui-form-label">{{ __.llm_use_cache }}</label>
+                        <div class="layui-input-block">
+                          <input type="checkbox" name="llm_use_cache" lay-skin="switch">
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">{{ __.llm_instruct }}</label>
+                        <div class="layui-input-block">
+                          <textarea name="llm_instruct" placeholder="{{__.llm_instruction_placeholder}}"
+                            lay-affix="clear" class="layui-textarea" style="min-height: 161px"></textarea>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="layui-form-item">
+
+                      <div class="layui-hide" id="opt_div">
+                        <label class="layui-form-label">{{ __.llm_batch_size }}</label>
+                        <div class="layui-input-block">
+                          <input type="number" name="llm_batch_size" lay-verify="required" placeholder="[10,100]"
+                            autocomplete="off" class="layui-input" min="10" max="100" step="10" lay-affix="number">
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- 配音 -->
+          <div class="layui-col-md12">
+            <div class="layui-collapse" lay-filter="collapse_filter_tts">
+              <div class="layui-colla-item">
+
+                <div class="layui-card layui-panel">
+                  <div class="layui-colla-title">{{ __.dub_dubbing }}
+                  </div>
+                  <div class="layui-colla-content layui-show">
+
+                    <div class="layui-form-item">
+                      <label class="layui-form-label" id="video_speaker"
+                        lay-tips="{content: '{{ __.tts_spk_generate }}', margin: '0 0 0 -10px'}">{{ __.common_provider }} <span
+                          class="layui-badge-dot layui-bg-green"></span></label>
+                      <div class="layui-input-block">
+                        <select id="tts_provider" name="tts_provider" lay-verify="required"
+                          lay-filter="tts_provider_filter">
+                          {% for item in data.tts.providers %}
+                            {% if item.enable %}
+                              <option value="{{ item.provider}}">{{ item.desc }}</option>
+                            {% endif %}>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                      <label class="layui-form-label">{{ __.model }}</label>
+                      <div class="layui-input-block">
+                        <input type="text" name="tts_model" placeholder="{{ __.model_placeholder}}" autocomplete="off"
+                          class="layui-input" lay-affix="clear" disabled>
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item" pane>
+                      <label class="layui-form-label">{{ __.tts_gender }}</label>
+                      <div class="layui-input-block">
+                        <input type="radio" name="tts_gender" value="1" lay-filter="tts_gender_filter"
+                          title="{{__.common_gender_male}}">
+                        <input type="radio" name="tts_gender" value="2" lay-filter="tts_gender_filter"
+                          title="{{__.common_gender_female}}">
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                      <label class="layui-form-label">{{ __.tts_voice }}</label>
+                      <div class="layui-input-block">
+                        <select id="tts_voice" name="tts_voice" lay-verify="required" lay-filter="tts_voice_filter"
+                          lay-search="{caseSensitive:false, fuzzy: true}">
+                          <option value="">{{ __.common_select_or_search }}</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                      <label class="layui-form-label">{{ __.tts_volume }}</label>
+                      <div class="layui-input-block">
+                          <input type="number" lay-verify="required" name="tts_volume" placeholder="[0,1]"
+                            autocomplete="off" class="layui-input" min="0" max="2" step="0.01" lay-affix="number">
+                      </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                      <label class="layui-form-label">{{ __.tts_rate }}</label>
+                      <div class="layui-input-block">
+                          <input type="number" lay-verify="required" name="tts_rate" placeholder="[0,2]"
+                            autocomplete="off" class="layui-input" min="0" max="2" step="0.01" lay-affix="number">
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                      <label class="layui-form-label">{{ __.tts_pitch }}</label>
+                      <div class="layui-input-block">
+                          <input type="number" lay-verify="required" name="tts_pitch" placeholder="[0,2]"
+                            autocomplete="off" class="layui-input" min="0" max="2" step="0.01" lay-affix="number">
+                      </div>
+                    </div>
+
+                    <div class="layui-col-md12 layui-hide" id="e2f5_div">
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">{{ __.tts_step }}</label>
+                        <div class="layui-input-block">
+                          <div class="layui-input-inline">
+                            <input type="number" lay-verify="required" name="tts_step" placeholder="[4,64]"
+                              autocomplete="off" class="layui-input" min="4" max="64" step="1" lay-affix="number">
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="layui-col-md12 layui-hide" id="xtts_div">
+
+                    </div>
+
+                    <div class="layui-col-md12 layui-hide" id="cosy_div">
+
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">{{ __.tts_instruct }}</label>
+                        <div class="layui-input-block">
+                          <input name="tts_instruct" placeholder="{{__.tts_instruct_placeholder}}" lay-affix="clear"
+                            class="layui-input"></textarea>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="layui-form-item layui-hide" pane id="opt_vc"
+                      lay-tips="{content: '{{__.tts_vc_tip}}', margin: '0 0 0 -10px'}">
+                      <label class="layui-form-label">{{ __.tts_vc }}</label>
+                      <div class="layui-input-block">
+                        <input type="checkbox" name="tts_vc" lay-skin="switch" lay-filter="switch_debug_filter">
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                      <label class="layui-form-label">{{ __.tts_remarks }}</label>
+                      <div class="layui-input-block">
+                        <input name="tts_remarks" placeholder="{{__.tts_remarks_placeholder}}" lay-affix="clear"
+                          class="layui-input"></textarea>
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item layui-form-text">
+                      <label class="layui-form-label" id="tts_play"
+                        lay-tips="{content: '{{__.tts_play_tip}}', margin: '0 0 0 -10px'}">{{
+                        __.tts_play }} <i class="layui-icon layui-icon-headset"></i></label>
+                      <div class="layui-input-block">
+                        <textarea id="tts_text" name="tts_text" placeholder="{{__.tts_text_placeholder}}"
+                          lay-verify="tts_text" lay-reqtext="{{__.tts_text_placeholder}}" lay-affix="clear"
+                          class="layui-textarea tts_text"></textarea>
+                      </div>
+                    </div>
+
+                    <table id="tts_voices_table" class="layui-table"></table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- 其他 -->
+          <div class="layui-col-md12" id="settings_div">
+            <div class="layui-collapse" lay-filter="collapse_filter_settings">
+              <div class="layui-colla-item">
+
+                <div class="layui-card layui-panel">
+                  <div class="layui-colla-title">{{ __.dub_setting }}
+                    <!-- <i class="layui-icon layui-icon-tips" lay-tips="要支持的噢"></i> -->
+                  </div>
+                  <div class="layui-colla-content layui-show">
+
+                    <div class="layui-form-item">
+                      <label class="layui-form-label"lay-tips="{content: '{{ __.setting_volume_native }}', margin: '0 0 0 -10px'}">{{ __.setting_volume_native }}</label>
+
+                      <div class="layui-input-block">
+                        <input type="number" lay-verify="required" name="volume_native" placeholder="[0,1]"
+                          autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                      <label class="layui-form-label"lay-tips="{content: '{{ __.setting_volume_background }}', margin: '0 0 0 -10px'}">{{ __.setting_volume_background }}</label>
+                      <div class="layui-input-block">
+                        <input type="number" lay-verify="required" name="volume_background" placeholder="[0,1]"
+                          autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item layui-show">
+                      <label class="layui-form-label"lay-tips="{content: '{{ __.setting_silence }}', margin: '0 0 0 -20px'}">{{ __.setting_silence }}</label>
+                      <div class="layui-input-inline"  style="width: 142px;">
+                        <input type="number" lay-verify="required" name="silence_threshold" placeholder="[-100,0]"
+                          autocomplete="off" class="layui-input" min="-100" max="0" step="10" lay-affix="number">
+                      </div>
+                      <div class="layui-input-inline"  style="width: 142px;">
+                        <input type="number" lay-verify="required" name="silence_min_len" placeholder="[1,1000]"
+                          autocomplete="off" class="layui-input" min="1" max="1000" step="1" lay-affix="number">
+                      </div>
+                      <div class="layui-input-inline"  style="width: 142px;">
+                        <input type="number" lay-verify="required" name="silence_keep" placeholder="[1,1000]"
+                          autocomplete="off" class="layui-input" min="1" max="1000" step="1" lay-affix="number">
+                      </div>
+                      <div class="layui-form-mid layui-text-em">
+                        <i class="layui-icon layui-icon-tips"
+                          lay-tips="{content: '{{ __.setting_silence_tips }}', margin: '0 0 0 -10px'}"></i>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- 提交 -->
+          <div class="layui-col-md12">
+            <div class="layui-form-item layui-col-space15">
+              <div id="floating-div" class="layui-col-md12">
+                <button type="submit" class="layui-btn layui-btn-fluid" lay-submit lay-filter="form_submit">{{
+                  __.common_submit }}</button>
+              </div>
+              <!-- <div class="layui-col-md12">
+                <div class="layui-col-md2">
+                  <button type="reset" class="layui-btn layui-btn-primary layui-border layui-btn-fluid">重置</button>
+                </div>
+              </div> -->
+            </div>
+          </div>
+
+      </form>
+    </div>
+
+    <div>
+      <input type="hidden" id="import" />
+    </div>
+
+  </div>
+
+  <script type="text/html" id="TPL_tts_voices_table_tools">
+    <div class="layui-btn-container">
+      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="preview">{{ __.table_tools_preview }}</a>
+      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="del">{{ __.table_tools_delete }}</a>
+      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="up">{{ __.table_tools_move_up }}</a>
+      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="down">{{ __.table_tools_move_down }}</a>
+    </div>
+  </script>
+
+  <script>
+
+    layui.use(['form', 'layer', 'element', 'util', 'notice', 'tool', 'i18n', 'asr', 'llm', 'tts'], function () {
+
+      var form = layui.form;
+      var layer = layui.layer;
+      var element = layui.element;
+      var util = layui.util;
+      var toast = layui.notice;
+      var tool = layui.tool;
+      var i18n = layui.i18n;
+      var $ = layui.$;
+      
+      i18n.init('{{request.state.lang}}');
+
+      var app = JSON.parse('{{ data.app | tojson }}')
+      var user = JSON.parse('{{ data.user | tojson }}')
+      var os = '{{ os }}'
+      console.log("%s %s.%s build on %s at %s (%s %s)", app.title, app.version, app.build.hash, app.build.branch, app.build.date, os, app.serial);
+      console.log("%s %s %s", user.name ?? 'guest', user.subscriber, util.toDateString(user.subexpired));
+      console.log(i18n.trans('creatorbox'));
+
+      let CREATORBOX = "dubbing"
+      let cache = layui.data(CREATORBOX)
+
+      var form_data = JSON.parse('{{ data.form | tojson }}')              // 表单默认值
+      var cache_form = cache.hasOwnProperty('form') ? cache.form : {}     // 表单缓存值
+      var cache_table = cache.hasOwnProperty('table') ? cache.table : []  // 配音缓存值
+      var form_json = Object.keys(cache_form).length === 0 ? Object.assign({}, form_data) : Object.assign({}, form_data, cache_form)
+
+      var asr = layui.asr;
+      asr.setData(form_json)
+      asr.setProviderData(JSON.parse('{{ data.asr.providers | tojson }}'))
+
+      var llm = layui.llm;
+      llm.setData(form_json)
+      llm.setProviderData(JSON.parse('{{ data.llm.providers | tojson }}'))
+
+      var tts = layui.tts;
+      tts.setData(form_json, cache_table)
+      tts.setProviderData(JSON.parse('{{ data.tts.providers | tojson }}'))
+
+      // 表单渲染
+      form.val('form_filter', form_json);
+
+      // 表单初始
+      $('#align_type_div').toggleClass('layui-hide', form_json.mode_type != 1);
+      $("#tts_text").val() || $("#tts_text").val(i18n.trans('creatorbox'));
+      
+      // 表单验证 
+      form.verify({
+        path: function (value, elem) {
+          if (value.length == 0) {
+            return '{{__.scene_video_url_placeholder}}';
+          }
+        },
+        subtitle_srt: function (value, elem) {
+          if ($('select[name="asr_provider"]').val() != 'Subtitle') return;
+          subtitle_file = $('input[name="subtitle_file"]').val()
+          if (subtitle_file.length == 0) {
+            return '{{__.asr_subtitle_placeholder}}';
+          }
+        },
+        speaker_len: function (value, elem) {
+          if ($('input[name="asr_debug"]').is(':checked')) return;
+          if ($('input[name="llm_debug"]').is(':checked')) return;
+          speaker_min = $('input[name="speaker_min"]').val()
+          if (cache_table.length < speaker_min) {
+            return i18n.trans('please_check_voice_count_cannot_less_than_speaker_count');
+          }
+        },
+        tts_text: function (value, elem) {
+          tts_text = $("#tts_text").val()
+          if (tts_text.length == 0) {
+            return '{{__.tts_text_placeholder}}';
+          }
+        },
+        draft_name: function (value, elem) {
+          if ($('select[name="asr_provider"]').val() != 'JyDraft') return;
+          draft_name = $('select[name="draft_name"]').val()
+          if (draft_name.length == 0) {
+            return '{{__.draft_name_placeholder}}';
+          }
+        },
+      });
+
+      // =======================================
+
+      // 视频上传
+      tool.upload("#video_upload", "file/upload", 'file', 'mp4|mkv|avi|mp3|wav|m4a', null, function (response) {
+        $('[name="video_url"]').val(response.data.location)
+      })
+
+      // 地区选择
+      form.on('select(locale_filter)', function (data) {
+        if (data.elem.value != "") {
+          form_json.locale = data.elem.value;
+          form_json.tts_gender = 1;
+          // 恢复默认选择
+          $('input[name="tts_gender"][value="1"]').prop('checked', true);
+          form.render('radio');
+          // 切换语音角色
+          tts.setData(form_json, cache_table)
+          if (form_json.llm_provider == 'ignore') {
+            return layer.msg(i18n.trans('please_select_translation_provider'), { icon: 3 });
+          }
+          // 切换试听文本
+          tool.post("trans/translator", JSON.stringify({
+            "provider": form_json.llm_provider,
+            "model": $('input[name="llm_model"]').val(),
+            "language": form_json.locale,
+            "text": $("#tts_text").val(),
+            "extra": {
+              "temperature": $('input[name="llm_temperature"]').val(),
+              "top_p": $('input[name="llm_top_p"]').val(),
+              "debug": $('input[name="llm_debug"]').is(':checked'),
+              "cache": $('input[name="llm_use_cache"]').is(':checked')
+            },
+          }), function (response) {
+            form_json.tts_text = response.data;
+            $("#tts_text").val(form_json.tts_text)
+          }, true);
+        }
+      });
+
+      // 处理模式
+      form.on('radio(mode_type_filter)', function (data) {
+        $('#align_type_div').toggleClass('layui-hide', data.elem.value != 1);
+      });
+
+      // 提交执行
+      form.on('submit(form_submit)', function (data) {
+        var field = data.field;
+        var elem = data.elem;
+        // 本地存储
+        layui.data(CREATORBOX, { key: 'form', value: field });
+        // 配音
+        field.tts_dubbing = JSON.stringify(cache_table);
+        // 请求数据
+        data = JSON.stringify(field, null, 2);
+        console.debug(field)
+        // 确认执行
+        layer.confirm(i18n.trans('confirm_submit'), { title: i18n.trans('confirm_title'), icon: 3 }, function (index) {
+          layer.close(index);
+          // 禁用预览
+          $("button[lay-on='video_preview']").addClass("layui-btn-disabled").prop("disabled", true);
+          // 请求调用
+          tool.post("dubb/pipeline", data, function (response) {
+            var taskId = response.data.task_id
+            toast.info(taskId, i18n.trans('task_submit_success'));
+            // 任务存储
+            localStorage.setItem('task', taskId)
+          }, true)
+        });
+        return false;
+      });
+
+      // 回调通知
+      tool.connect(function (data) {
+        if (data.type == "video") {
+          toast.success(localStorage.getItem('task'), i18n.trans('task_process_success'));
+          $("button[lay-on='video_preview']").removeClass("layui-btn-disabled").prop("disabled", false);
+        }
+        else if (data.type == "masker") {
+          toast.info(data.message);
+        }
+        else if (data.type == "error") {
+          toast.error(data.message, i18n.trans('task_process_error'));
+        }
+      })
+
+      // 预览事件
+      util.on('lay-on', {
+        "video_preview": function (othis) {
+          tool.open("player?url=" + localStorage.getItem('task') + "&autoplay=true", "1100px", "510px");
+        }
+      });
+
+      // 固定条
+      var bars = [
+        // { type: i18n.trans('fixbar_log'), icon: 'layui-icon-export' }
+        { type: i18n.trans('fixbar_data'), icon: 'layui-icon-fonts-code' },
+        { type: i18n.trans('fixbar_preview'), icon: 'layui-icon-video' },
+        // { type: i18n.trans('fixbar_backup'), icon: 'layui-icon-export' }
+      ];
+      util.fixbar({
+        bars: bars,
+        bar1: false,
+        bar2: false,
+        bgcolor: '#393D52',
+        css: { bottom: 80 },
+        on: {
+          mouseenter: function (desc) {
+            layer.tips(desc, this, {
+              tips: 4,
+              fixed: true
+            });
+          },
+          mouseleave: function (type) {
+            layer.closeAll('tips');
+          }
+        },
+        click: function (type) {
+          if (type == i18n.trans('fixbar_log')) {
+            util.openWin({ url: "log" });
+          }
+          else if (type == i18n.trans('fixbar_data')) {
+            filename = $("#video_url").val().split(/[/\\]/).pop().split(".")[0];
+            if (filename == "") {
+              return layer.msg('{{ __.scene_video_url_placeholder }}', { icon: 3 });
+            }
+            suf = $("#suffix").val();
+            if (suf == "") {
+              return layer.msg('{{ __.scene_suffix_placeholder }}', { icon: 3 });
+            }
+            title = `{{ data.app.title }} - ${filename}_${suf}`;
+            util.openWin({ url: `editor?title=${title}&upload=file/upload&remote=file/local?url=webapp/temp/${filename}/${filename}_${suf}.json` });
+          }
+          else if (type == i18n.trans('fixbar_preview')) {
+            if (localStorage.getItem('task')) {
+              tool.open("player?url=" + localStorage.getItem('task') + "&autoplay=true", "1100px", "510px");
+            } else {
+              util.openWin({ url: "player?url=&autoplay=true" });
+            }
+          }
+          else if (type == i18n.trans('fixbar_backup')) {
+            layer.confirm('请选择？', { title: '提示', icon: 3, btn: ['备份', '导入', '取消'] }, function (index) {
+              filename = $("#video_url").val().split(/[/\\]/).pop().split(".")[0];
+              cache = layui.data(CREATORBOX)
+              cache.version = '{{ data.app.version }}'
+              if (!cache.hasOwnProperty('form')) {
+                return layer.msg('请先执行', { icon: 3 });
+              } else if (!cache.hasOwnProperty('table')) {
+                return layer.msg('请先试听', { icon: 3 });
+              }
+              tool.download("dubb/export", JSON.stringify(cache), filename)
+            }, function () {
+              tool.upload("#import", "dubb/import", 'file', 'zip', null, function (response) {
+                if (response.code != 0) {
+                  return toast.error(response.message, "提示");
+                }
+                layer.msg('即将刷新此页面', { icon: 1 });
+                layui.data(CREATORBOX, { key: 'form', value: response.data.form })
+                layui.data(CREATORBOX, { key: 'table', value: response.data.table })
+                setTimeout(function () {
+                  tool.refresh()
+                }, 2 * 1000)
+              })
+              $("#import").click();
+            }, function () { });
+          }
+        }
+      });
+
+      // =======================================
+
+      util.event('lay-header-event', {
+        menuLeft() {
+          $('body').toggleClass('collapse');
+        },
+        menuRight() { },
+      });
+
+      element.on('nav(nav-side)', function (elem) {
+        var path = elem.data('path');
+        if (path) {
+          // if ($(window).width() <= 768) {
+          //   $('body').toggleClass('collapse');
+          // }
+          if (path == "/app/masker") {
+            tool.get(path, {}, null, true)
+          } else {
+            util.openWin({ url: path, target: "creatorbox" });
+          }
+        }
+      });
+    });
+
+  </script>
+  <script src="static/js/app/theam.js"></script>
+
+</body>
+
+</html>
