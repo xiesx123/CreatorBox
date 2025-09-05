@@ -1,0 +1,27 @@
+### VSCode ###
+.pyarmor/
+*.log
+*.exe
+*.msi
+*.mp4
+*.pyc
+**/temp/
+
+### Node ###
+**/node_modules/
+**/dist/
+**/cache/
+**/docs/package-lock.json
+
+### CreatorBox ###
+*.egg-info/
+.gradio/
+build/
+models/
+webapp/*
+mapper.txt
+
+### Exclude ###
+!r3.exe
+!**/matcha/models/
+!webapp/data/gradio.json
