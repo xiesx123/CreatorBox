@@ -1,0 +1,1 @@
+const o="/CreatorBox/images/translation.png",r="/CreatorBox/images/translation_code.png",a="/CreatorBox/images/translation_provider.png",t="/CreatorBox/images/translation_provider_openai.png",s="/CreatorBox/images/translation_provider_google.png",n="/CreatorBox/images/translation_provider_qwen.png";export{r as _,o as a,a as b,t as c,s as d,n as e};
