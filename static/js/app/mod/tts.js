@@ -13,10 +13,11 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
     // 数据
     var form_json = {}
     var table_json = []
+    var voice_json = {}
 
     var providers = [];
     var player;
-
+ 
     // 类型
     var voice_type = function (type) {
         types = {
@@ -28,12 +29,33 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
     };
 
     // 性别
-    var gender_type = function (type) {
-        types = {
+    const gender_type = function (type) {
+        const types = {
+            0: i18n.trans('gender_unknown'),
             1: i18n.trans('gender_male'),
-            2: i18n.trans('gender_female'),
-        }
-        return types[type] || i18n.trans('gender_unknown')
+            2: i18n.trans('gender_female')
+        };
+        const reverseTypes = {
+            [i18n.trans('gender_unknown')]: 0,
+            [i18n.trans('gender_male')]: 1,
+            [i18n.trans('gender_female')]: 2
+        };
+        // 如果是数字key，返回i18n文本
+        if (types[type] !== undefined) return types[type];
+        // 如果是i18n文本 key，返回数字
+        if (reverseTypes[type] !== undefined) return reverseTypes[type];
+        return null;
+    };
+
+    // 示例
+    const play_sample = function (key, val) {
+        voice = voice_json[form_json.tts_voice]
+        const k = key;
+        const v = val;
+        const array = voice.samples[k] || [];
+        const value = array.find(item => item.k === v)?.v;
+        url = `https://ai.azure.com/speechassetscache/ttsvoice/Masterpieces/${value}.wav`
+        voice_play(url)
     };
 
     // 请求参数
@@ -41,7 +63,7 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
         const tts_provider = provider || form_json?.tts_provider;
         const tts_model = model || form_json?.tts_model;
         const tts_locale = locale || form_json?.locale;
-        const tts_gender = gender !== undefined ? parseInt(gender) : parseInt(form_json?.gender) || 1;
+        const tts_gender = gender !== undefined ? parseInt(gender) : parseInt(form_json?.tts_gender) || 1;
         const video_url = $("#video_url").val();
         const suffix = $("#suffix").val();
         const duration = form_json?.speaker_len || 5;
@@ -67,9 +89,12 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
         if (response.data.length == 0) {
             toast.warning(i18n.trans('tts_voice_no_data'), i18n.trans('tts_voice_list_title'));
         } else {
-            toast.success(i18n.transFmt('tts_voice_found', response.data.length), i18n.trans('tts_voice_list_title')
-            );
+            toast.success(i18n.transFmt('tts_voice_found', response.data.length), i18n.trans('tts_voice_list_title'));
         }
+        // 记录音色数据
+        response.data.forEach(obj => {
+            voice_json[obj.id] = obj
+        });
         // 转换显示对象
         const wrappedData = response.data.reduce((acc, item) => {
             let group = voice_type(item.type);
@@ -85,28 +110,26 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
         }, []);
         // 动态条件选项
         const optionHtml = (list) => {
+            selected_locale = $('select[name="locale"] option:selected').val()
             let html = '';
+            let idx = 1;
             list.forEach(obj => {
-                html += `<optgroup id="${obj.type}" label="${obj.group}">\n`;
+                html += `<optgroup id="${obj.type}" label="${obj.group} (${obj.item.length})">\n`;
                 obj.item.forEach(i => {
-                    if (i.speaker.indexOf(i.locale) > -1) {
-                        html += `  <option value="${i.speaker}">` + gender_type(i.gender) + " - " + i.locale + i.speaker.replace(i.locale, "") + `</option>\n`;
-                    } else {
-                        html += `  <option value="${i.speaker}">` + gender_type(i.gender) + " - " + i.locale + " - " + i.speaker.replace(i.locale, "") + `</option>\n`;
-                    }
+                    locale = i.locale || selected_locale || i18n.trans('type_unknown')
+                    html += `  <option value="${i.id}">` + (idx++) + "." + gender_type(i.gender) + " - " + locale + " - " + i.speaker + `</option>\n`;
                 });
                 html += `</optgroup>\n`;
             });
             return html;
         };
         $("#tts_voice").append(optionHtml(wrappedData))
+        // 渲染页面
         form.render('select');
-        // 默认选择第一个
-        if (response.data.length > 0) {
-            form_json.tts_voice = response.data[0].speaker;
-            form_json.tts_type = response.data[0].type;
-            console.debug(form_json.tts_gender + "-" + form_json.tts_voice);
-        }
+        // 恢复音色选中
+        $('#tts_voice option[value="' + form_json.tts_voice + '"]').prop('selected', true);
+        // 恢复音色选中，主动触发事件
+        $('#tts_voice').siblings('.layui-form-select').find('dl dd[lay-value="' + form_json.tts_voice + '"]').click();
     };
 
     // 查找模型
@@ -157,12 +180,58 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
         var selectedOptgroup = selectedOption.closest('optgroup');  // 获取该选项所在的 optgroup
         form_json.tts_voice = data.elem.value;
         form_json.tts_type = selectedOptgroup.id
-        console.debug(form_json.tts_gender + "-" + form_json.tts_voice);
+        const cleaned = selectedOption.text.replace(/^\d+\./, "").trim();
+        const [gender, locale, speaker] = cleaned.split(" - ").map(s => s.trim());
+        form_json.tts_gender = gender_type(gender);
+        form_json.tts_locale = locale;
+        form_json.tts_speaker = speaker;
+        console.debug(form_json.tts_gender + "-" + form_json.tts_locale + "-" + form_json.tts_speaker + "-" + form_json.tts_voice);
+        // 如果是 azure
+        if (form_json.tts_provider == 'azure') {
+            // 动态渲染说话风格/角色扮演
+            const optionHtml = (list, prefix) => {
+                let html = '';
+                let idx = 1;
+                list.forEach(obj => {
+                    html += `  <option value="${obj}">` + (idx++) + "." + i18n.trans(`azure.${prefix}.${obj}`) + `</option>\n`;
+                    html += `</optgroup>\n`;
+                });
+                return html;
+            };
+            $("#tts_role").empty();
+            $("#tts_role").append(optionHtml(voice_json[form_json.tts_voice].role, "role"));
+            $('#tts_role option[value="' + form_json.tts_role + '"]').prop('selected', true);
+
+            $("#tts_style").empty();
+            $("#tts_style").append(optionHtml(voice_json[form_json.tts_voice].style, "style"));
+            $('#tts_style option[value="' + form_json.tts_style + '"]').prop('selected', true);
+
+            $('#tts_styledegree option[value="' + form_json.tts_styledegree + '"]').prop('selected', true);
+        }
+        // 渲染页面
+        form.render('select');
+    });
+
+    // 角色选择
+    form.on('select(tts_role_filter)', function (data) {
+        form_json.tts_role = data.elem.value
+        play_sample("role", form_json.tts_role)
+    });
+
+    // 风格选择
+    form.on('select(tts_style_filter)', function (data) {
+        form_json.tts_style = data.elem.value
+        play_sample("style", form_json.tts_style)
+    });
+
+    // 风格强度
+    form.on('select(tts_styledegree_filter)', function (data) {
+        form_json.tts_styledegree = data.elem.value
     });
 
     // 试听点击
     util.on('id', {
-        "tts_play": function (othis) {
+        "tts_preview": function (othis) {
             form_json.tts_provider = $('#tts_provider').val()
             form_json.tts_model = $('input[name="tts_model"]').val()
             form_json.locale = $('select[name="locale"] option:selected').val()
@@ -189,11 +258,12 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
                     );
                 var item = findItemByVoice(form_json)
                 if (item != null) {
-                    layer.msg(i18n.trans('tts_playing_cached_audio'), { icon: 1 });
+                    layer.msg(i18n.trans('tts_previewing_cached_audio'), { icon: 1 });
                     return voice_play(item.url);
                 }
+                // 文件名
+                output = `${form_json.tts_provider}_${form_json.tts_locale}_${form_json.tts_speaker}_${form_json.tts_volume}_${form_json.tts_rate}_${form_json.tts_pitch}_${form_json.tts_text.length}_${form_json.tts_remarks.length}`
                 // 生成试听
-                output = `${form_json.tts_provider}_${form_json.tts_voice}_${form_json.tts_volume}_${form_json.tts_rate}_${form_json.tts_pitch}_${form_json.tts_text.length}_${form_json.tts_remarks.length}`
                 tool.post("tts/gen", JSON.stringify({
                     "provider": form_json.tts_provider,
                     "model": form_json.tts_model,
@@ -207,14 +277,21 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
                     "output": output,
                     "extra": {
                         "gender": parseInt(form_json.tts_gender),
-                        "nfe_step": parseInt(form_json.tts_step),
+                        // azure
+                        "role": form_json.tts_role,
+                        "style": form_json.tts_style,
+                        "styledegree": form_json.tts_styledegree,
+                        // cosy
                         "instruct_text": form_json.tts_instruct,
+                        // f5e2
+                        "nfe_step": parseInt(form_json.tts_step),
+                        // other
                         "use_vc": form_json.tts_vc,
                         "file": $("#video_url").val(),
                         "suffix": $("#suffix").val()
                     }
                 }), function (response) {
-                    toast.info(output, i18n.trans('tts_playing_preview'))
+                    toast.info(output, i18n.trans('tts_previewing_preview'))
                     console.debug(response.data)
                     var url = '/file/local?url=' + response.data.path;
                     var duration = response.data.duration;
@@ -222,11 +299,13 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
                     voice_play(url);
                     table_json.unshift({
                         provider: find_provider(form_json.tts_provider).provider,
+                        // 
                         model: form_json.tts_model,
+                        voice: form_json.tts_voice,
                         type: voice_type(form_json.tts_type),
                         gender: form_json.tts_gender,
-                        locale: form_json.locale,
-                        voice: form_json.tts_voice,
+                        locale: form_json.tts_locale,
+                        speaker: form_json.tts_speaker,
                         volume: form_json.tts_volume,
                         rate: form_json.tts_rate,
                         pitch: form_json.tts_pitch,
@@ -248,7 +327,7 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
     });
 
     // 说话人表格
-    var tableInit = function (){
+    var tableInit = function () {
         table.render({
             elem: '#tts_voices_table',
             data: table_json,
@@ -257,15 +336,16 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
                 none: i18n.trans('tts_table_empyt')
             },
             cols: [[
-                { title: i18n.trans('tts_table_col_spk'), width: 80, align: "center", templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.LAY_INDEX + '</div>' },
+                { title: i18n.trans('tts_table_col_spk'), width: 60, align: "center", templet: d => '<div title="' + d.voice + '">' + d.LAY_INDEX + '</div>' },
                 { title: i18n.trans('tts_table_col_model'), width: 80, align: "center", field: 'provider', templet: d => '<div title="' + d.model + '">' + d.provider + '</div>' },
                 { title: i18n.trans('tts_table_col_type'), width: 80, align: "center", field: 'type', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.type + '</div>' },
-                { title: i18n.trans('tts_table_col_gender'), width: 80, align: "center", field: 'gender', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + (d.gender == 1 ? i18n.trans('gender_male') : d.gender == 2 ? i18n.trans('gender_female') : i18n.trans('gender_unknown')) + '</div>' },
-                { title: i18n.trans('tts_table_col_voice'), field: 'voice', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.voice + '</div>' },
+                { title: i18n.trans('tts_table_col_gender'), width: 80, align: "center", field: 'gender', templet: d => '<div title="' + d.text + ' (' + d.remarks + ')">' + (d.gender == 1 ? i18n.trans('gender_male') : d.gender == 2 ? i18n.trans('gender_female') : i18n.trans('gender_unknown')) + '</div>' },
+                { title: i18n.trans('tts_table_col_locale'), width: 80, field: 'locale', templet: d => '<div title="' + d.text + ' (' + d.remarks + ')">' + d.locale + '</div>' },
+                { title: i18n.trans('tts_table_col_speaker'), fixed: 'right', field: 'speaker', templet: d => '<div title="' + d.text + ' (' + d.remarks + ')">' + d.speaker + '</div>' },
                 { title: i18n.trans('tts_table_col_volume'), width: 80, align: "center", field: 'volume', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.volume + '</div>' },
                 { title: i18n.trans('tts_table_col_rate'), width: 80, align: "center", field: 'rate', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.rate + '</div>' },
                 { title: i18n.trans('tts_table_col_pitch'), width: 80, align: "center", field: 'pitch', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.pitch + '</div>' },
-                { title: i18n.trans('tts_table_col_duration'), width: 100, align: "center", field: 'duration', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.duration + '</div>' },
+                { title: i18n.trans('tts_table_col_duration'), fixed: 'right', width: 90, align: "center", field: 'duration', templet: d => '<div title="' + d.text + ' (' + d.remarks + ')">' + d.duration + '</div>' },
                 { title: i18n.trans('tts_table_col_action'), fixed: 'right', width: "220", align: "center", toolbar: "#TPL_tts_voices_table_tools" }
             ]],
         });
@@ -278,7 +358,7 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
         if (obj.event === "preview") {
             voice_play(data.url);
         } else if (obj.event === "del") {
-            layer.confirm(i18n.transFmt('confirm_delete_select_fmt', data.voice), { title: i18n.trans('confirm_title'), icon: 3 }, function (index) {
+            layer.confirm(i18n.transFmt('confirm_delete_select_fmt', data.speaker), { title: i18n.trans('confirm_title'), icon: 3 }, function (index) {
                 obj.del();
                 layer.close(index);
                 if (idx < table_json.length) {
@@ -300,7 +380,7 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
             swapData(idx, idx + 1);
         }
     });
-    
+
     // 说话人表格移动并重载
     var swapData = function swapData(i, j) {
         var temp = table_json[i];
@@ -325,7 +405,30 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
             src: [url],
             format: ['wav'],
             autoplay: true,
-            html5: true
+            html5: true,
+            onload: function () {
+                console.debug('audio loaded');
+            },
+            onloaderror: function () {
+                toast.error(i18n.trans('onload_error'));
+                // console.debug('audio onloaderror');
+            },
+            onplay: function () {
+                console.debug('audio playing');
+            },
+            onplayerror: function () {
+                toast.error(i18n.trans('onplay_error'));
+                // console.debug('audio onplayerror');
+            },
+            onpause: function () {
+                console.debug('audio paused');
+            },
+            onstop: function () {
+                console.debug('audio stopped');
+            },
+            onend: function () {
+                console.debug('audio ended');
+            },
         });
     };
 
@@ -346,21 +449,21 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
             const provider = form_json.tts_provider;
             const model = form_json.tts_model;
             const divs = {
-                xtts: $('#xtts_div'),
-                e2f5: $('#e2f5_div'),
+                azure: $('#azure_div'),
                 cosy: $('#cosy_div'),
+                ctts: $('#ctts_div'),
+                f5e2: $('#f5e2_div'),
                 optVc: $('#opt_vc')
             };
-
             Object.values(divs).forEach(div => div.addClass('layui-hide'));
             if (provider in divs) {
                 divs[provider].removeClass('layui-hide');
-                divs.optVc.toggleClass('layui-hide', provider !== "xtts" && provider !== "cosy");
+                divs.optVc.toggleClass('layui-hide', provider !== "ctts" && provider !== "cosy");
             }
-
             $('input[name="tts_model"]').prop("disabled", !model);
         }
     };
+
     // 输出
     exports('tts', mod);
 });

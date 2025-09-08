@@ -2,27 +2,27 @@
 msgid "asr_align_enable"
 msgstr "Alignment"
 
-#: src/router/i18n.py:18
+#: src/router/i18n.py:13
 msgid "asr_draft_name"
 msgstr "Draft"
 
-#: src/router/i18n.py:13
+#: src/router/i18n.py:14
 msgid "asr_emotion_enable"
 msgstr "Emotion"
 
-#: src/router/i18n.py:14
+#: src/router/i18n.py:15
 msgid "asr_speaker_range"
 msgstr "Spk Range"
 
-#: src/router/i18n.py:15
+#: src/router/i18n.py:16
 msgid "asr_speaker_use_num"
 msgstr "Spk Count"
 
-#: src/router/i18n.py:16
+#: src/router/i18n.py:17
 msgid "asr_subtitle_file"
 msgstr "Subtitle"
 
-#: src/router/i18n.py:17
+#: src/router/i18n.py:18
 msgid "asr_subtitle_placeholder"
 msgstr "Enter subtitle file path (SRT)"
 
@@ -126,43 +126,43 @@ msgstr "Subtitle"
 msgid "dub_translation"
 msgstr "Translation"
 
-#: src/router/i18n.py:49
+#: src/router/i18n.py:48
 msgid "llm_batch_size"
 msgstr "Batch Size"
 
-#: src/router/i18n.py:50
+#: src/router/i18n.py:49
 msgid "llm_configured"
 msgstr "configured"
 
-#: src/router/i18n.py:51
+#: src/router/i18n.py:50
 msgid "llm_ignore"
 msgstr "Ignore"
 
-#: src/router/i18n.py:52
+#: src/router/i18n.py:51
 msgid "llm_instruct"
 msgstr "Instruction"
 
-#: src/router/i18n.py:53
+#: src/router/i18n.py:52
 msgid "llm_instruction_placeholder"
 msgstr "[Remove ending punctuation], [Replace Arabic numerals with Chinese] etc."
 
-#: src/router/i18n.py:54
+#: src/router/i18n.py:53
 msgid "llm_temperature"
 msgstr "Randomness"
 
-#: src/router/i18n.py:55
+#: src/router/i18n.py:54
 msgid "llm_top_p"
 msgstr "Diversity"
 
-#: src/router/i18n.py:56
+#: src/router/i18n.py:55
 msgid "llm_use_cache"
 msgstr "Cache"
 
-#: src/router/i18n.py:57
+#: src/router/i18n.py:56
 msgid "llm_use_cache_tip"
 msgstr "Enabling can avoid duplicate requests and prevent extra token consumption"
 
-#: src/router/i18n.py:48
+#: src/router/i18n.py:57
 msgid "llm_use_oritxt"
 msgstr "Use Original Text"
 
@@ -292,57 +292,73 @@ msgstr "Instruction"
 
 #: src/router/i18n.py:95
 msgid "tts_instruct_placeholder"
-msgstr "[Regional Dialect], [Speaking Style], [Role Play] etc."
+msgstr "[Regional Dialect], [Role Play], [Speaking Style] etc."
 
-#: src/router/i18n.py:99
+#: src/router/i18n.py:96
 msgid "tts_pitch"
 msgstr "Pitch"
 
-#: src/router/i18n.py:96
-msgid "tts_play"
+#: src/router/i18n.py:97
+msgid "tts_preview"
 msgstr "Preview"
 
-#: src/router/i18n.py:97
-msgid "tts_play_tip"
+#: src/router/i18n.py:98
+msgid "tts_preview_click"
 msgstr "Click to preview"
 
-#: src/router/i18n.py:98
+#: src/router/i18n.py:99
+msgid "tts_preview_select"
+msgstr "Select to preview"
+
+#: src/router/i18n.py:100
 msgid "tts_rate"
 msgstr "Rate"
 
-#: src/router/i18n.py:100
+#: src/router/i18n.py:101
 msgid "tts_remarks"
 msgstr "Remarks"
 
-#: src/router/i18n.py:101
+#: src/router/i18n.py:102
 msgid "tts_remarks_placeholder"
 msgstr "Write something"
 
-#: src/router/i18n.py:102
+#: src/router/i18n.py:103
+msgid "tts_role"
+msgstr "Role"
+
+#: src/router/i18n.py:104
 msgid "tts_spk_generate"
 msgstr "Click to generate video speaker voice"
 
-#: src/router/i18n.py:103
+#: src/router/i18n.py:105
 msgid "tts_step"
 msgstr "Sampling Steps"
 
-#: src/router/i18n.py:104
+#: src/router/i18n.py:106
+msgid "tts_style"
+msgstr "Style"
+
+#: src/router/i18n.py:107
+msgid "tts_styledegree"
+msgstr "Style Degree"
+
+#: src/router/i18n.py:108
 msgid "tts_text_placeholder"
 msgstr "Enter preview text"
 
-#: src/router/i18n.py:105
+#: src/router/i18n.py:109
 msgid "tts_vc"
 msgstr "Conversion"
 
-#: src/router/i18n.py:106
+#: src/router/i18n.py:110
 msgid "tts_vc_tip"
 msgstr "Convert source voice to target voice"
 
-#: src/router/i18n.py:107
+#: src/router/i18n.py:111
 msgid "tts_voice"
 msgstr "Voice"
 
-#: src/router/i18n.py:108
+#: src/router/i18n.py:112
 msgid "tts_volume"
 msgstr "Volume"
 
