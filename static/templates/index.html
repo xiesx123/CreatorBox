@@ -373,14 +373,20 @@
                     <div class="layui-form-item">
                       <label class="layui-form-label">{{ __.asr_speaker_range }}</label>
                       <div class="layui-input-inline" style="width: 142px;">
-                        <input type="number" lay-verify="required|number|speaker_len" name="speaker_min"
-                          placeholder="最小值" autocomplete="off" class="layui-input" min="1" max="10" step="1"
-                          lay-affix="number">
+                        <div class="layui-input-wrap">
+                          <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
+                          <input type="number" lay-verify="required|number|speaker_len" name="speaker_min"
+                            placeholder="最小值" autocomplete="off" class="layui-input" min="1" max="10" step="1"
+                            lay-affix="number">
+                        </div>
                       </div>
                       <div class="layui-input-inline" style="width: 142px;">
-                        <input type="number" lay-verify="required|number|speaker_len" name="speaker_max"
-                          placeholder="最大值" autocomplete="off" class="layui-input" min="1" max="10" step="1"
-                          lay-affix="number">
+                        <div class="layui-input-wrap">
+                          <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
+                          <input type="number" lay-verify="required|number|speaker_len" name="speaker_max"
+                            placeholder="最大值" autocomplete="off" class="layui-input" min="1" max="10" step="1"
+                            lay-affix="number">
+                        </div>
                       </div>
                     </div>
 
