@@ -1,4 +1,5 @@
 i18njs = "static/js/jquery/jquery.i18n.properties.js"
+// 加载回调
 loadScript(i18njs, function () {
 	layui.define([], function (exports) {
 		var $ = layui.$;
@@ -58,6 +59,7 @@ loadScript(i18njs, function () {
 	});
 })
 
+// 远程加载
 function loadScript(url, callback) {
 	const script = document.createElement('script');
 	script.type = 'text/javascript';

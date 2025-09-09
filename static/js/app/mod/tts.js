@@ -284,18 +284,18 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
     // 试听点击
     util.on('id', {
         "tts_preview": function (othis) {
+            form_json.locale = $('select[name="locale"] option:selected').val()
             form_json.tts_provider = $('#tts_provider').val()
             form_json.tts_model = $('input[name="tts_model"]').val()
-            form_json.locale = $('select[name="locale"] option:selected').val()
             form_json.tts_volume = $('input[name="tts_volume"]').val();
             form_json.tts_rate = $('input[name="tts_rate"]').val();
             form_json.tts_pitch = $('input[name="tts_pitch"]').val();
-            form_json.tts_remarks = $('input[name="tts_remarks"]').val();
-            form_json.tts_text = $("#tts_text").val()
-            form_json.tts_step = $('input[name="tts_step"]').val()
             form_json.tts_instruct = $('input[name="tts_instruct"]').val()
+            form_json.tts_step = $('input[name="tts_step"]').val()
             form_json.tts_vc = $('input[name="tts_vc"]').is(':checked')
             form_json.tts_seed = $('input[name="tts_seed"]').val()
+            form_json.tts_remarks = $('input[name="tts_remarks"]').val();
+            form_json.tts_text = $("#tts_text").val()
             var isvalid = form.validate('.tts_text');
             if (isvalid) {
                 // 查找缓存
@@ -371,11 +371,11 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
                         // 
                         url: url,
                         duration: duration,
-                        seed: seed,
                         // 
                         nfe_step: form_json.tts_step,
                         instruct_text: form_json.tts_instruct,
                         use_vc: form_json.tts_vc,
+                        seed: seed,
                     })
                     swapData(0, 0)
                 }, true)
@@ -516,8 +516,8 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
             Object.values(divs).forEach(div => div.addClass('layui-hide'));
             if (provider in divs) {
                 divs[provider].removeClass('layui-hide');
-                divs.optVc.toggleClass('layui-hide', provider !== TTS_COSY && provider !== TTS_CTTS);
-                divs.optSeed.toggleClass('layui-hide', provider !== TTS_COSY && provider !== TTS_CTTS && provider !== TTS_FTTS);
+                divs.optVc.toggleClass('layui-hide', ![TTS_COSY, TTS_CTTS].includes(provider));
+                divs.optSeed.toggleClass('layui-hide', ![TTS_COSY, TTS_CTTS, TTS_FTTS].includes(provider));
             }
             $('input[name="tts_model"]').prop("disabled", !model);
         }

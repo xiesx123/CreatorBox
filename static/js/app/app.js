@@ -37,6 +37,7 @@ $(window).load(function () {
 	NProgress.done();
 });
 
+// 页面加载完毕后
 $(window).load(function () {
 
 	// 指示条
