@@ -6,7 +6,7 @@ layui.config({
 	// 信息提示
 	notice: 'ext/toastr',
 	// 国际化
-	i18n: 'i18n/i18n',
+	i18n: 'i18n',
 	// 字幕
 	asr: 'mod/asr',
 	// 翻译

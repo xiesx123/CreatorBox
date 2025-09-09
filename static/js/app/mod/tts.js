@@ -8,7 +8,14 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
     var i18n = layui.i18n;
     var $ = layui.jquery;
 
+    // 基础
     let CREATORBOX = "dubbing"
+    let TTS_AZUR = "azure"
+    let TTS_EDGE = "edge"
+    let TTS_ELAB = "elab"
+    let TTS_COSY = "cosy"
+    let TTS_CTTS = "ctts"
+    let TTS_FTTS = "f5e2"
 
     // 数据
     var form_json = {}
@@ -17,10 +24,10 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
 
     var providers = [];
     var player;
- 
+
     // 类型
     var voice_type = function (type) {
-        types = {
+        const types = {
             1: i18n.trans('type_builtin'),
             2: i18n.trans('type_video'),
             3: i18n.trans('type_user')
@@ -29,7 +36,7 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
     };
 
     // 性别
-    const gender_type = function (type) {
+    var gender_type = function (type) {
         const types = {
             0: i18n.trans('gender_unknown'),
             1: i18n.trans('gender_male'),
@@ -48,13 +55,20 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
     };
 
     // 示例
-    const play_sample = function (key, val) {
-        voice = voice_json[form_json.tts_voice]
+    var play_azure_sample = function (key, val) {
+        const voice = voice_json[form_json.tts_voice]
         const k = key;
         const v = val;
         const array = voice.samples[k] || [];
         const value = array.find(item => item.k === v)?.v;
-        url = `https://ai.azure.com/speechassetscache/ttsvoice/Masterpieces/${value}.wav`
+        const url = `https://ai.azure.com/speechassetscache/ttsvoice/Masterpieces/${value}.wav`
+        voice_play(url)
+    };
+
+    var play_spk_sample = function (key) {
+        const voice = voice_json[form_json.tts_voice]
+        const path = voice["path"];
+        const url = '/file/local?url=' + path;
         voice_play(url)
     };
 
@@ -126,6 +140,10 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
         $("#tts_voice").append(optionHtml(wrappedData))
         // 渲染页面
         form.render('select');
+
+        // 切换语言、提供商时
+        form_json.tts_voice = $("#tts_voice").val()
+
         // 恢复音色选中
         $('#tts_voice option[value="' + form_json.tts_voice + '"]').prop('selected', true);
         // 恢复音色选中，主动触发事件
@@ -139,12 +157,31 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
 
     // 提供商
     form.on('select(tts_provider_filter)', function (data) {
-        item = find_provider(data.elem.value);
+        const item = find_provider(data.elem.value);
         form_json.tts_provider = item.provider;
         form_json.tts_model = item.model;
         $('input[name="tts_model"]').val(form_json.tts_model);
         mod.switch()
         tool.post("tts/search", voice_search_params({ provider: form_json.tts_provider, model: form_json.tts_model, gender: form_json.tts_gender }), voice_search_callback, true)
+        // 
+        if (form_json.tts_provider == TTS_EDGE) {
+            $("#tts_voice_icon").attr("class", "layui-icon layui-icon-mike");
+        }
+        else if (form_json.tts_provider == TTS_EDGE) {
+            $("#tts_voice_icon").attr("class", "layui-icon layui-icon-mike");
+        }
+        else if (form_json.tts_provider == TTS_ELAB) {
+            $("#tts_voice_icon").attr("class", "layui-icon layui-icon-mike");
+        }
+        else if (form_json.tts_provider == TTS_COSY) {
+            $("#tts_voice_icon").attr("class", "layui-icon layui-icon-headset");
+        }
+        else if (form_json.tts_provider == TTS_CTTS) {
+            $("#tts_voice_icon").attr("class", "layui-icon layui-icon-mike");
+        }
+        else if (form_json.tts_provider == TTS_FTTS) {
+            $("#tts_voice_icon").attr("class", "layui-icon layui-icon-headset");
+        }
     });
 
     // 生成配置
@@ -159,8 +196,8 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
                 if (value === '') return elem.focus();
                 value = util.escape(value)
                 form_json.speaker_len = isNaN(value) ? value : Number(value)
-                tts_model = $('input[name="tts_model"]').val()
-                locale = $('select[name="locale"] option:selected').val()
+                const tts_model = $('input[name="tts_model"]').val()
+                const locale = $('select[name="locale"] option:selected').val()
                 tool.post("tts/search", voice_search_params({ provider: form_json.tts_provider, model: tts_model, locale: locale, gender: 0, init: true }), voice_search_callback, true)
                 layer.close(index);
             });
@@ -186,8 +223,8 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
         form_json.tts_locale = locale;
         form_json.tts_speaker = speaker;
         console.debug(form_json.tts_gender + "-" + form_json.tts_locale + "-" + form_json.tts_speaker + "-" + form_json.tts_voice);
-        // 如果是 azure
-        if (form_json.tts_provider == 'azure') {
+        // 
+        if (form_json.tts_provider == TTS_AZUR) {
             // 动态渲染说话风格/角色扮演
             const optionHtml = (list, prefix) => {
                 let html = '';
@@ -208,6 +245,18 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
 
             $('#tts_styledegree option[value="' + form_json.tts_styledegree + '"]').prop('selected', true);
         }
+        else if (form_json.tts_provider == TTS_EDGE) {
+        }
+        else if (form_json.tts_provider == TTS_ELAB) {
+        }
+        else if (form_json.tts_provider == TTS_COSY) {
+            play_spk_sample()
+        }
+        else if (form_json.tts_provider == TTS_CTTS) {
+        }
+        else if (form_json.tts_provider == TTS_FTTS) {
+            play_spk_sample()
+        }
         // 渲染页面
         form.render('select');
     });
@@ -215,13 +264,13 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
     // 角色选择
     form.on('select(tts_role_filter)', function (data) {
         form_json.tts_role = data.elem.value
-        play_sample("role", form_json.tts_role)
+        play_azure_sample("role", form_json.tts_role)
     });
 
     // 风格选择
     form.on('select(tts_style_filter)', function (data) {
         form_json.tts_style = data.elem.value
-        play_sample("style", form_json.tts_style)
+        play_azure_sample("style", form_json.tts_style)
     });
 
     // 风格强度
@@ -256,13 +305,13 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
                         item.text == data.tts_text &&
                         item.remarks == data.tts_remarks
                     );
-                var item = findItemByVoice(form_json)
+                const item = findItemByVoice(form_json)
                 if (item != null) {
                     layer.msg(i18n.trans('tts_previewing_cached_audio'), { icon: 1 });
                     return voice_play(item.url);
                 }
                 // 文件名
-                output = `${form_json.tts_provider}_${form_json.tts_locale}_${form_json.tts_speaker}_${form_json.tts_volume}_${form_json.tts_rate}_${form_json.tts_pitch}_${form_json.tts_text.length}_${form_json.tts_remarks.length}`
+                const output = `${form_json.tts_provider}_${form_json.tts_locale}_${form_json.tts_speaker}_${form_json.tts_volume}_${form_json.tts_rate}_${form_json.tts_pitch}_${form_json.tts_text.length}_${form_json.tts_remarks.length}`
                 // 生成试听
                 tool.post("tts/gen", JSON.stringify({
                     "provider": form_json.tts_provider,
@@ -291,11 +340,14 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
                         "suffix": $("#suffix").val()
                     }
                 }), function (response) {
+                    if (response.code != 0) {
+                        return toast.error(response.message, i18n.trans('confirm_title'));
+                    }
                     toast.info(output, i18n.trans('tts_previewing_preview'))
                     console.debug(response.data)
-                    var url = '/file/local?url=' + response.data.path;
-                    var duration = response.data.duration;
-                    var seed = response.data.seed;
+                    const url = '/file/local?url=' + response.data.path;
+                    const duration = response.data.duration;
+                    const seed = response.data.seed;
                     voice_play(url);
                     table_json.unshift({
                         provider: find_provider(form_json.tts_provider).provider,
