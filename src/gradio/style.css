@@ -1,7 +1,3 @@
-footer {
-    visibility: hidden
-}
-
 /* Table 隐藏滚动条 */
 #output-table::-webkit-scrollbar {
     height: 0px !important; /* 去掉横向滚动条 */
