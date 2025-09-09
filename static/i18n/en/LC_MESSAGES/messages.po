@@ -246,7 +246,7 @@ msgstr "Enter an identifier suffix"
 msgid "scene_video_url"
 msgstr "Video"
 
-#: src/router/i18n.py:81 static/templates/index.html:128
+#: src/router/i18n.py:81 static/templates/index.html:130
 msgid "scene_video_url_placeholder"
 msgstr "Enter audio/video path or link"
 
@@ -327,38 +327,50 @@ msgid "tts_role"
 msgstr "Role"
 
 #: src/router/i18n.py:104
+msgid "tts_seed"
+msgstr "Seed"
+
+#: src/router/i18n.py:105
+msgid "tts_seed_placeholder"
+msgstr "Enter a random seed"
+
+#: src/router/i18n.py:106
+msgid "tts_seed_tip"
+msgstr "Control result reproducibility"
+
+#: src/router/i18n.py:107
 msgid "tts_spk_generate"
 msgstr "Click to generate video speaker voice"
 
-#: src/router/i18n.py:105
+#: src/router/i18n.py:108
 msgid "tts_step"
 msgstr "Sampling Steps"
 
-#: src/router/i18n.py:106
+#: src/router/i18n.py:109
 msgid "tts_style"
 msgstr "Style"
 
-#: src/router/i18n.py:107
+#: src/router/i18n.py:110
 msgid "tts_styledegree"
 msgstr "Style Degree"
 
-#: src/router/i18n.py:108
+#: src/router/i18n.py:111
 msgid "tts_text_placeholder"
 msgstr "Enter preview text"
 
-#: src/router/i18n.py:109
+#: src/router/i18n.py:112
 msgid "tts_vc"
 msgstr "Conversion"
 
-#: src/router/i18n.py:110
+#: src/router/i18n.py:113
 msgid "tts_vc_tip"
 msgstr "Convert source voice to target voice"
 
-#: src/router/i18n.py:111
+#: src/router/i18n.py:114
 msgid "tts_voice"
 msgstr "Voice"
 
-#: src/router/i18n.py:112
+#: src/router/i18n.py:115
 msgid "tts_volume"
 msgstr "Volume"
 

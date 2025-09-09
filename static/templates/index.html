@@ -703,12 +703,24 @@
 
                     </div>
 
-                    <!-- common -->
+                    <!-- opt -->
                     <div class="layui-form-item layui-hide" pane id="opt_vc"
                       lay-tips="{content: '{{__.tts_vc_tip}}', margin: '0 0 0 -10px'}">
                       <label class="layui-form-label">{{ __.tts_vc }}</label>
                       <div class="layui-input-block">
                         <input type="checkbox" name="tts_vc" lay-skin="switch" lay-filter="switch_debug_filter">
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item layui-hide" pane id="opt_seed"
+                      lay-tips="{content: '{{__.tts_seed_tip}}', margin: '0 0 0 -10px'}">
+                      <label class="layui-form-label">{{ __.tts_seed }}</label>
+                      <div class="layui-input-block">
+                        <div class="layui-input-wrap">
+                          <div class="layui-input-prefix"> <i class="layui-icon layui-icon-note"></i> </div>
+                          <input type="number" name="tts_seed" lay-verify="required|number" placeholder="{{__.tts_seed_placeholder}}" autocomplete="off" class="layui-input" 
+                            lay-filter="seed" lay-affix="release" onkeyup="value=value.slice(0,8)"></input>
+                        </div>
                       </div>
                     </div>
 
@@ -892,6 +904,7 @@
 
       // 表单初始
       $('#align_type_div').toggleClass('layui-hide', form_json.mode_type != 1);
+      $("#suffix").val(form_json.locale.slice(0,2))
       $("#tts_text").val() || $("#tts_text").val(i18n.trans('creatorbox'));
 
       // 表单验证 
@@ -949,11 +962,18 @@
         tool.open("player?url=" + video_url + "&autoplay=true", "1100px", "510px");
       });
 
+      // 随机种子
+      form.on('input-affix(seed)', function(data){
+          $('input[name="tts_seed"]').val(tool.random());
+      });
+
       // 地区选择
       form.on('select(locale_filter)', function (data) {
         if (data.elem.value != "") {
           form_json.locale = data.elem.value;
           form_json.tts_gender = 1;
+          // 恢复默认选择
+          $("#suffix").val(form_json.locale.slice(0,2))
           // 恢复默认选择
           $('input[name="tts_gender"][value="1"]').prop('checked', true);
           form.render('radio');

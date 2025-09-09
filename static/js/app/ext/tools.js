@@ -257,10 +257,15 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', 'notice'], 
 		},
 
 		refresh: function () {
-			// 刷新当前页
 			setTimeout(function () {
 				document.location = document.location;
 			}, 1000)
+		},
+
+		random: function (min, max) {
+			const start = min || 10000000;
+			const end = max || 99999999;
+			return Math.floor(Math.random() * (end - start + 1)) + start;
 		}
 	};
 
