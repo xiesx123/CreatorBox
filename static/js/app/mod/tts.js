@@ -473,10 +473,6 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
             onplay: function () {
                 console.debug('audio playing');
             },
-            onplayerror: function () {
-                toast.error(i18n.trans('onplay_error'));
-                // console.debug('audio onplayerror');
-            },
             onpause: function () {
                 console.debug('audio paused');
             },
