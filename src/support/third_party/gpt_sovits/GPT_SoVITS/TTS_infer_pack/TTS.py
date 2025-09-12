@@ -604,7 +604,7 @@ class TTS:
                 del self.vocoder
                 self.empty_cache()
 
-            self.vocoder = BigVGAN.from_pretrained("nvidia/bigvgan_v2_24khz_100band_256x", use_cuda_kernel=False)
+            self.vocoder = BigVGAN.from_pretrained(f"{os.environ.get('sovits')}/models--nvidia--bigvgan_v2_24khz_100band_256x", use_cuda_kernel=False)
             # if True, RuntimeError: Ninja is required to load C++ extensions
             # remove weight norm in the model and set to eval mode
             self.vocoder.remove_weight_norm()

@@ -1,11 +1,3 @@
-custom:
-  bert_base_path: D:\Projects\fast\fast-creator\models\huggingface\hub\models--lj1995--GPT-SoVITS\snapshots\336b2ec4e8d4ac74740798dd40af44e74659ecaf\chinese-roberta-wwm-ext-large
-  cnhuhbert_base_path: D:\Projects\fast\fast-creator\models\huggingface\hub\models--lj1995--GPT-SoVITS\snapshots\336b2ec4e8d4ac74740798dd40af44e74659ecaf\chinese-hubert-base
-  device: cpu
-  is_half: false
-  t2s_weights_path: D:\Projects\fast\fast-creator\models\huggingface\hub\models--lj1995--GPT-SoVITS\snapshots\336b2ec4e8d4ac74740798dd40af44e74659ecaf\s1bert25hz-2kh-longer-epoch=68e-step=50232.ckpt
-  version: v1
-  vits_weights_path: D:\Projects\fast\fast-creator\models\huggingface\hub\models--lj1995--GPT-SoVITS\snapshots\336b2ec4e8d4ac74740798dd40af44e74659ecaf\s2G488k.pth
 v1:
   bert_base_path: chinese-roberta-wwm-ext-large
   cnhuhbert_base_path: chinese-hubert-base
