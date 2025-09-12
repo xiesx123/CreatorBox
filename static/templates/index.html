@@ -582,7 +582,7 @@
                       <label class="layui-form-label">{{ __.tts_voice }}</label>
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
-                          <div class="layui-input-prefix"> <i id="tts_voice_icon" class="layui-icon layui-icon-mike"></i> </div>
+                          <div class="layui-input-prefix"> <i id="tts_voice_icon" class="layui-icon layui-icon-username"></i> </div>
                           <select id="tts_voice" name="tts_voice" lay-verify="required" lay-filter="tts_voice_filter"
                             lay-search="{caseSensitive:false, fuzzy: true}">
                             <option value="">{{ __.common_select_or_search }}</option>
@@ -613,7 +613,7 @@
                       </div>
                     </div>
 
-                    <div class="layui-form-item">
+                    <div class="layui-form-item layui-hide" pane id="opt_pitch">
                       <label class="layui-form-label">{{ __.tts_pitch }}</label>
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
@@ -668,9 +668,20 @@
 
                     </div>
 
+                    <!-- edge -->
+                    <div class="layui-col-md12 layui-hide" id="edge_div">
+                    </div>
+
+                    <!-- elab -->
+                    <div class="layui-col-md12 layui-hide" id="elab_div">
+                    </div>
+
+                    <!-- sovits -->
+                    <div class="layui-col-md12 layui-hide" id="sovits_div">
+                    </div>
+
                     <!-- cosy -->
                     <div class="layui-col-md12 layui-hide" id="cosy_div">
-
                       <div class="layui-form-item">
                         <label class="layui-form-label">{{ __.tts_instruct }}</label>
                         <div class="layui-input-block">

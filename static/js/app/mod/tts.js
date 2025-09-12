@@ -13,6 +13,7 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
     let TTS_AZUR = "azure"
     let TTS_EDGE = "edge"
     let TTS_ELAB = "elab"
+    let TTS_GTTS = "sovits"
     let TTS_COSY = "cosy"
     let TTS_CTTS = "ctts"
     let TTS_FTTS = "f5e2"
@@ -166,25 +167,6 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
         $('input[name="tts_model"]').val(form_json.tts_model);
         mod.switch()
         tool.post("tts/search", voice_search_params({ provider: form_json.tts_provider, model: form_json.tts_model, gender: form_json.tts_gender }), voice_search_callback, true)
-        // 
-        if (form_json.tts_provider == TTS_AZUR) {
-            $("#tts_voice_icon").attr("class", "layui-icon layui-icon-mike");
-        }
-        else if (form_json.tts_provider == TTS_EDGE) {
-            $("#tts_voice_icon").attr("class", "layui-icon layui-icon-mike");
-        }
-        else if (form_json.tts_provider == TTS_ELAB) {
-            $("#tts_voice_icon").attr("class", "layui-icon layui-icon-mike");
-        }
-        else if (form_json.tts_provider == TTS_COSY) {
-            $("#tts_voice_icon").attr("class", "layui-icon layui-icon-headset");
-        }
-        else if (form_json.tts_provider == TTS_CTTS) {
-            $("#tts_voice_icon").attr("class", "layui-icon layui-icon-mike");
-        }
-        else if (form_json.tts_provider == TTS_FTTS) {
-            $("#tts_voice_icon").attr("class", "layui-icon layui-icon-headset");
-        }
     });
 
     // 生成配置
@@ -251,6 +233,9 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
         else if (form_json.tts_provider == TTS_EDGE) {
         }
         else if (form_json.tts_provider == TTS_ELAB) {
+        }
+        else if (form_json.tts_provider == TTS_GTTS) {
+            play_spk_sample()
         }
         else if (form_json.tts_provider == TTS_COSY) {
             play_spk_sample()
@@ -503,17 +488,23 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
             const model = form_json.tts_model;
             const divs = {
                 azure: $('#azure_div'),
+                edge: $('#edge_div'),
+                elab: $('#elab_div'),
+                sovits: $('#sovits_div'),
                 cosy: $('#cosy_div'),
                 ctts: $('#ctts_div'),
                 f5e2: $('#f5e2_div'),
+                
+                optPitch: $('#opt_pitch'),
                 optVc: $('#opt_vc'),
-                optSeed: $('#opt_seed')
+                optSeed: $('#opt_seed'),
             };
             Object.values(divs).forEach(div => div.addClass('layui-hide'));
             if (provider in divs) {
                 divs[provider].removeClass('layui-hide');
-                divs.optVc.toggleClass('layui-hide', ![TTS_COSY, TTS_CTTS].includes(provider));
-                divs.optSeed.toggleClass('layui-hide', ![TTS_COSY, TTS_CTTS, TTS_FTTS].includes(provider));
+                divs.optPitch.toggleClass('layui-hide', ![TTS_AZUR, TTS_EDGE].includes(provider));
+                // divs.optVc.toggleClass('layui-hide', ![TTS_COSY, TTS_CTTS].includes(provider));
+                divs.optSeed.toggleClass('layui-hide', ![TTS_ELAB, TTS_GTTS, TTS_COSY, TTS_CTTS, TTS_FTTS].includes(provider));
             }
             $('input[name="tts_model"]').prop("disabled", !model);
         }
