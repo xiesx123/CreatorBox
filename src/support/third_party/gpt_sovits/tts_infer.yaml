@@ -1,0 +1,56 @@
+custom:
+  bert_base_path: D:\Projects\fast\fast-creator\models\huggingface\hub\models--lj1995--GPT-SoVITS\snapshots\336b2ec4e8d4ac74740798dd40af44e74659ecaf\chinese-roberta-wwm-ext-large
+  cnhuhbert_base_path: D:\Projects\fast\fast-creator\models\huggingface\hub\models--lj1995--GPT-SoVITS\snapshots\336b2ec4e8d4ac74740798dd40af44e74659ecaf\chinese-hubert-base
+  device: cpu
+  is_half: false
+  t2s_weights_path: D:\Projects\fast\fast-creator\models\huggingface\hub\models--lj1995--GPT-SoVITS\snapshots\336b2ec4e8d4ac74740798dd40af44e74659ecaf\s1bert25hz-2kh-longer-epoch=68e-step=50232.ckpt
+  version: v1
+  vits_weights_path: D:\Projects\fast\fast-creator\models\huggingface\hub\models--lj1995--GPT-SoVITS\snapshots\336b2ec4e8d4ac74740798dd40af44e74659ecaf\s2G488k.pth
+v1:
+  bert_base_path: chinese-roberta-wwm-ext-large
+  cnhuhbert_base_path: chinese-hubert-base
+  device: cpu
+  is_half: false
+  t2s_weights_path: s1bert25hz-2kh-longer-epoch=68e-step=50232.ckpt
+  version: v1
+  vits_weights_path: s2G488k.pth
+v2:
+  bert_base_path: chinese-roberta-wwm-ext-large
+  cnhuhbert_base_path: chinese-hubert-base
+  device: cpu
+  is_half: false
+  t2s_weights_path: gsv-v2final-pretrained/s1bert25hz-5kh-longer-epoch=12-step=369668.ckpt
+  version: v2
+  vits_weights_path: gsv-v2final-pretrained/s2G2333k.pth
+v2Pro:
+  bert_base_path: chinese-roberta-wwm-ext-large
+  cnhuhbert_base_path: chinese-hubert-base
+  device: cpu
+  is_half: false
+  t2s_weights_path: s1v3.ckpt
+  version: v2Pro
+  vits_weights_path: v2Pro/s2Gv2Pro.pth
+v2ProPlus:
+  bert_base_path: chinese-roberta-wwm-ext-large
+  cnhuhbert_base_path: chinese-hubert-base
+  device: cpu
+  is_half: false
+  t2s_weights_path: s1v3.ckpt
+  version: v2ProPlus
+  vits_weights_path: v2Pro/s2Gv2ProPlus.pth
+v3:
+  bert_base_path: chinese-roberta-wwm-ext-large
+  cnhuhbert_base_path: chinese-hubert-base
+  device: cpu
+  is_half: false
+  t2s_weights_path: s1v3.ckpt
+  version: v3
+  vits_weights_path: s2Gv3.pth
+v4:
+  bert_base_path: chinese-roberta-wwm-ext-large
+  cnhuhbert_base_path: chinese-hubert-base
+  device: cpu
+  is_half: false
+  t2s_weights_path: s1v3.ckpt
+  version: v4
+  vits_weights_path: gsv-v4-pretrained/s2Gv4.pth
