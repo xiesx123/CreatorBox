@@ -165,10 +165,11 @@
 
 ### 语音
 
-- [x] 多提供商: 支持 `EdgeTTS`、 `AzureTTS`、`ElevenLabs`、`CosyVoice2`、`F5TTS`、`CoquiTTS`切换
+- [x] 多提供商: 支持 `AzureTTS`, `EdgeTTS`、`ElevenLabs`、`GPTSoVITS`、`CosyVoice2`、`F5TTS`、`CoquiTTS`切换
 - [x] 语音试听：实时语音合成及试听
 - [x] 音色库：内置 `内置`、`视频`、`自定义` 3 种音色类型
 - [x] 音色克隆：支持 `语音克隆`、`语音指令`、`语音转换`、`跨语言克隆` 指令
+- [ ] 模型训练：支持`GPTSoVITS` 基准版 `v1`, `v2`, `v2Pro`, `v2ProPlus`, `v3`, `v4` 模型推理及训练（截止0912兼容支持所有版本推理，训练将逐步更新）
 
 ### 草稿
 

@@ -164,10 +164,11 @@
 
 ### Speech
 
-- [x] Multiple Providers: Support switching between `EdgeTTS`, `ElevenLabs`, `ElevenLabs`, `CosyVoice2`, `F5TTS`, and `CoquiTTS`
+- [x] Multiple Providers: Support switching between `AzureTTS`, `EdgeTTS`, `ElevenLabs`, `GPTSoVITS`, `CosyVoice2`, `F5TTS`, and `CoquiTTS`
 - [x] Real-Time Speech Synthesis and Preview
 - [x] Voice Library: Includes `Built-in`, `Video`, and `Custom` voice types
 - [x] Voice Cloning: Supports `Voice Cloning`, `Voice Commands`, `Voice Conversion`, and `Cross-Language Cloning`
+- [ ] Model Training: Supports inference and training for GPTSoVITS baseline models v1, v2, v2Pro, v2ProPlus, v3, and v4 (as of 09/12, inference is compatible with all versions; training support will be gradually updated).
 
 ### Draft
 
