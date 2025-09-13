@@ -219,55 +219,55 @@ class TTS_Config:
             "device": "cpu",
             "is_half": False,
             "version": "v1",
-            "t2s_weights_path": "GPT_SoVITS/pretrained_models/s1bert25hz-2kh-longer-epoch=68e-step=50232.ckpt",
-            "vits_weights_path": "GPT_SoVITS/pretrained_models/s2G488k.pth",
-            "cnhuhbert_base_path": "GPT_SoVITS/pretrained_models/chinese-hubert-base",
-            "bert_base_path": "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large",
+            "t2s_weights_path": "s1bert25hz-2kh-longer-epoch=68e-step=50232.ckpt",
+            "vits_weights_path": "s2G488k.pth",
+            "cnhuhbert_base_path": "chinese-hubert-base",
+            "bert_base_path": "chinese-roberta-wwm-ext-large",
         },
         "v2": {
             "device": "cpu",
             "is_half": False,
             "version": "v2",
-            "t2s_weights_path": "GPT_SoVITS/pretrained_models/gsv-v2final-pretrained/s1bert25hz-5kh-longer-epoch=12-step=369668.ckpt",
-            "vits_weights_path": "GPT_SoVITS/pretrained_models/gsv-v2final-pretrained/s2G2333k.pth",
-            "cnhuhbert_base_path": "GPT_SoVITS/pretrained_models/chinese-hubert-base",
-            "bert_base_path": "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large",
+            "t2s_weights_path": "gsv-v2final-pretrained/s1bert25hz-5kh-longer-epoch=12-step=369668.ckpt",
+            "vits_weights_path": "gsv-v2final-pretrained/s2G2333k.pth",
+            "cnhuhbert_base_path": "chinese-hubert-base",
+            "bert_base_path": "chinese-roberta-wwm-ext-large",
         },
         "v3": {
             "device": "cpu",
             "is_half": False,
             "version": "v3",
-            "t2s_weights_path": "GPT_SoVITS/pretrained_models/s1v3.ckpt",
-            "vits_weights_path": "GPT_SoVITS/pretrained_models/s2Gv3.pth",
-            "cnhuhbert_base_path": "GPT_SoVITS/pretrained_models/chinese-hubert-base",
-            "bert_base_path": "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large",
+            "t2s_weights_path": "s1v3.ckpt",
+            "vits_weights_path": "s2Gv3.pth",
+            "cnhuhbert_base_path": "chinese-hubert-base",
+            "bert_base_path": "chinese-roberta-wwm-ext-large",
         },
         "v4": {
             "device": "cpu",
             "is_half": False,
             "version": "v4",
-            "t2s_weights_path": "GPT_SoVITS/pretrained_models/s1v3.ckpt",
-            "vits_weights_path": "GPT_SoVITS/pretrained_models/gsv-v4-pretrained/s2Gv4.pth",
-            "cnhuhbert_base_path": "GPT_SoVITS/pretrained_models/chinese-hubert-base",
-            "bert_base_path": "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large",
+            "t2s_weights_path": "s1v3.ckpt",
+            "vits_weights_path": "gsv-v4-pretrained/s2Gv4.pth",
+            "cnhuhbert_base_path": "chinese-hubert-base",
+            "bert_base_path": "chinese-roberta-wwm-ext-large",
         },
         "v2Pro": {
             "device": "cpu",
             "is_half": False,
             "version": "v2Pro",
-            "t2s_weights_path": "GPT_SoVITS/pretrained_models/s1v3.ckpt",
-            "vits_weights_path": "GPT_SoVITS/pretrained_models/v2Pro/s2Gv2Pro.pth",
-            "cnhuhbert_base_path": "GPT_SoVITS/pretrained_models/chinese-hubert-base",
-            "bert_base_path": "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large",
+            "t2s_weights_path": "s1v3.ckpt",
+            "vits_weights_path": "v2Pro/s2Gv2Pro.pth",
+            "cnhuhbert_base_path": "chinese-hubert-base",
+            "bert_base_path": "chinese-roberta-wwm-ext-large",
         },
         "v2ProPlus": {
             "device": "cpu",
             "is_half": False,
             "version": "v2ProPlus",
-            "t2s_weights_path": "GPT_SoVITS/pretrained_models/s1v3.ckpt",
-            "vits_weights_path": "GPT_SoVITS/pretrained_models/v2Pro/s2Gv2ProPlus.pth",
-            "cnhuhbert_base_path": "GPT_SoVITS/pretrained_models/chinese-hubert-base",
-            "bert_base_path": "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large",
+            "t2s_weights_path": "s1v3.ckpt",
+            "vits_weights_path": "v2Pro/s2Gv2ProPlus.pth",
+            "cnhuhbert_base_path": "chinese-hubert-base",
+            "bert_base_path": "chinese-roberta-wwm-ext-large",
         },
     }
     configs: dict = {}
@@ -491,7 +491,7 @@ class TTS:
         version, model_version, if_lora_v3 = get_sovits_version_from_path_fast(weights_path)
         if "Pro" in model_version:
             self.init_sv_model()
-        path_sovits = self.configs.default_configs[model_version]["vits_weights_path"]
+        path_sovits = f"{os.environ.get('sovits')}/{self.configs.default_configs[model_version]['vits_weights_path']}"
 
         if if_lora_v3 == True and os.path.exists(path_sovits) == False:
             info = path_sovits + i18n("SoVITS %s 底模缺失，无法加载相应 LoRA 权重" % model_version)

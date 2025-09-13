@@ -66,6 +66,11 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
         voice_play(url)
     };
 
+    var play_elab_sample = function () {
+        const voice = voice_json[form_json.tts_voice]
+        voice_play(voice.samples)
+    };
+
     var play_spk_sample = function () {
         const voice = voice_json[form_json.tts_voice]
         const path = voice["path"];
@@ -143,9 +148,7 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
         form.render('select');
 
         // 切换语言、提供商时
-        if(!form_json.tts_voice){
-            form_json.tts_voice = $("#tts_voice").val()
-        }
+        form_json.tts_voice = $("#tts_voice").val()
 
         // 恢复音色选中
         $('#tts_voice option[value="' + form_json.tts_voice + '"]').prop('selected', true);
@@ -229,10 +232,14 @@ layui.define(['layer', 'table', 'form', 'util', 'tool', 'i18n', 'notice'], funct
             $('#tts_style option[value="' + form_json.tts_style + '"]').prop('selected', true);
 
             $('#tts_styledegree option[value="' + form_json.tts_styledegree + '"]').prop('selected', true);
+
+            play_azure_sample("role", "Default")
         }
         else if (form_json.tts_provider == TTS_EDGE) {
+            play_azure_sample("role", "Default")
         }
         else if (form_json.tts_provider == TTS_ELAB) {
+            play_elab_sample()
         }
         else if (form_json.tts_provider == TTS_GTTS) {
             play_spk_sample()
