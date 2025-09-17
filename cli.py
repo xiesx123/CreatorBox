@@ -15,7 +15,7 @@ def cli():
     """
     CreatorBox CLI
 
-    🚀🎬 Flexible, efficient, and scalable toolbox for editing and dubbing, unleashing creative potential
+    🚀🎬 Flexible, efficient, and scalable toolbox for editing and dubbing, unleashing creative potential.
 
     https://github.com/xiesx123/CreatorBox
     """
