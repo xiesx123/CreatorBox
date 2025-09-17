@@ -148,13 +148,13 @@
 
 ### Subtitles
 
-- [x] Multiple providers: support switching between `Original Subtitles`, `CapCut Draft`, `FunAsr`, and `FasterWhisper`
-- [x] Automatic video download from `YouTube` and `TikTok`
-- [x] Convert video audio to text and extract subtitles
-- [x] Multi-track separation for `vocal`, `accompaniment`, `drums`, `bass`, etc
-- [x] Speaker embedding extraction and alignment with subtitle text
-- [x] Multi-speaker recognition
-- [x] Emotion recognition: supports `Angry`, `Disgusted`, `Fearful`, `Happy`, `Neutral`, `Other`, `Sad`, and `Surprised`
+- [x] Multi-Provider Support: Switch between `Srt`, `Capcut`, `FunAsr`, and `FasterWhisper` for processing.
+- [x] Video Download: Automatically download videos from `YouTube` and `TikTok`.
+- [x] Video-to-Text Transcription: Transcribe audio from videos into text and extract subtitles.
+- [x] Multi-Track Separation: Separate multiple audio tracks including `vocals`, `accompaniment`, `drums`, `bass`, etc.
+- [x] Speaker Recognition & Alignment: Extract speaker voiceprints and align audio precisely with subtitle text.
+- [x] Multi-Speaker Detection: Automatically identify multiple speakers in a video.
+- [x] Emotion Recognition: Recognize emotions such as `Angry`, `Disgusted`, `Fearful`, `Happy`, `Neutral`, `Other`, `Sad`, and `Surprised`.
 
 ### Translation
 
@@ -164,11 +164,13 @@
 
 ### Speech
 
-- [x] Multiple Providers: Support switching between `AzureTTS`, `EdgeTTS`, `ElevenLabs`, `GPTSoVITS`, `CosyVoice2`, `F5TTS`, and `CoquiTTS`
-- [x] Real-Time Speech Synthesis and Preview
-- [x] Voice Library: Includes `Built-in`, `Video`, and `Custom` voice types
-- [x] Voice Cloning: Supports `Voice Cloning`, `Voice Commands`, `Voice Conversion`, and `Cross-Language Cloning`
-- [ ] Model Training: Supports inference and training for GPTSoVITS baseline models v1, v2, v2Pro, v2ProPlus, v3, and v4 (as of 09/12, inference is compatible with all versions; training support will be gradually updated).
+- [x] Multi-Provider Support: Switch between `AzureTTS`, `EdgeTTS`, `ElevenLabs`, `GPTSoVITS`, and `CosyVoice2` for voice synthesis.
+- [x] Real-Time Voice Preview: Supports real-time voice synthesis and preview for quick evaluation.
+- [x] Popular Voices: Provides 559 built-in voices based on `AzureTTS` and `EdgeTTS`, with over 895 sample recordings. Common voices include but are not limited to `Xiaomei`, `Xiaoshuai`, `Dashan`, `Dazhuang`, `General Arthur`, etc.
+- [x] Voice Cloning: Perform voice cloning using `CosyVoice2` and `GPTSoVITS`, supporting voice command control, cross-language cloning, and emotion-aware synthesis.
+- [x] Fine-Tuning Training: Supports emotion fine-tuning and inference on `GPTSoVITS` baseline models (`v1`, `v2`, `v2Pro`, `v2ProPlus`, `v3`, `v4`) to create personalized voice effects.
+- [x] Extended Capabilities: Access the `ElevenLabs` voice library and support voice cloning to easily expand voice expressiveness.
+- [x] Custom Voice Library: Built-in three types of voices: `Built-in`, `Video`, and `Custom`, suitable for various scenarios.
 
 ### Draft
 
