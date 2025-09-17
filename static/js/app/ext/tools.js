@@ -1,4 +1,4 @@
-layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', 'notice'], function (exports) {
+layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'notice'], function (exports) {
 	var layer = layui.layer;
 	var table = layui.table;
 	var form = layui.form;

@@ -44,7 +44,7 @@ layui.define(['form', 'tool'], function (exports) {
         },
         switch: function () {
             const provider = form_json.llm_provider;
-            $('#ignore_div').toggleClass('layui-hide',(provider !='ignore'));
+            $('#ignore_div').toggleClass('layui-hide', (provider != 'ignore'));
             const divs = {
                 // Deeplx: ['#deeplx_div', '#opt_div'],
                 OpenAi: ['#llm_div', '#opt_div'],

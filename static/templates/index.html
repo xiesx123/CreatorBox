@@ -626,30 +626,6 @@
 
                     <!-- azure -->
                     <div class="layui-col-md12 layui-hide" id="azure_div">
-                      
-                      <div class="layui-form-item">
-                        <label class="layui-form-label"lay-tips="{content: '{{__.tts_preview_select}}', margin: '0 0 0 -10px'}">{{ __.tts_role }}</label>
-                        <div class="layui-input-block">
-                          <div class="layui-input-wrap">
-                            <div class="layui-input-prefix"> <i class="layui-icon layui-icon-headset"></i> </div>
-                            <select id="tts_role" name="tts_role" lay-filter="tts_role_filter" lay-search="{caseSensitive:false, fuzzy: true}">
-                              <option value="">{{ __.common_select_or_search }}</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="layui-form-item">
-                        <label class="layui-form-label"lay-tips="{content: '{{__.tts_preview_select}}', margin: '0 0 0 -10px'}">{{ __.tts_style }}</label>
-                        <div class="layui-input-block">
-                          <div class="layui-input-wrap">
-                            <div class="layui-input-prefix"> <i class="layui-icon layui-icon-headset"></i> </div>
-                            <select id="tts_style" name="tts_style" lay-filter="tts_style_filter" lay-search="{caseSensitive:false, fuzzy: true}">
-                              <option value="">{{ __.common_select_or_search }}</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
 
                       <div class="layui-form-item">
                         <label class="layui-form-label">{{ __.tts_styledegree }}</label>
@@ -715,6 +691,32 @@
                     </div>
 
                     <!-- opt -->
+                    <div class="layui-form-item layui-hide" pane id="opt_role"
+                     lay-tips="{content: '{{__.tts_preview_select}}', margin: '0 0 0 -10px'}">
+                      <label class="layui-form-label">{{ __.tts_role }}</label>
+                      <div class="layui-input-block">
+                        <div class="layui-input-wrap">
+                          <div class="layui-input-prefix"> <i class="layui-icon layui-icon-headset"></i> </div>
+                          <select id="tts_role" name="tts_role" lay-filter="tts_role_filter" lay-search="{caseSensitive:false, fuzzy: true}">
+                            <option value="">{{ __.common_select_or_search }}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="layui-form-item layui-hide" pane id="opt_style"
+                       lay-tips="{content: '{{__.tts_preview_select}}', margin: '0 0 0 -10px'}">
+                      <label class="layui-form-label">{{ __.tts_style }}</label>
+                      <div class="layui-input-block">
+                        <div class="layui-input-wrap">
+                          <div class="layui-input-prefix"> <i class="layui-icon layui-icon-headset"></i> </div>
+                          <select id="tts_style" name="tts_style" lay-filter="tts_style_filter" lay-search="{caseSensitive:false, fuzzy: true}">
+                            <option value="">{{ __.common_select_or_search }}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
                     <div class="layui-form-item layui-hide" pane id="opt_vc"
                       lay-tips="{content: '{{__.tts_vc_tip}}', margin: '0 0 0 -10px'}">
                       <label class="layui-form-label">{{ __.tts_vc }}</label>
@@ -887,7 +889,7 @@
       var user = JSON.parse('{{ data.user | tojson }}')
       var os = '{{ os }}'
       console.log("%s %s.%s build on %s at %s (%s %s)", app.title, app.version, app.build.hash, app.build.branch, app.build.date, os, app.serial);
-      console.log("%s %s %s", user.name ?? 'guest', user.subscriber, util.toDateString(user.subexpired));
+      console.log("%s %s %s", user.name, user.subscriber, util.toDateString(user.subexpired));
       console.log(i18n.trans('creatorbox'));
 
       let CREATORBOX = "dubbing"

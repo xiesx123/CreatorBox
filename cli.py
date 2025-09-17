@@ -162,6 +162,7 @@ def proxy(host, port, username, password, site, timeout):
 def auth(action, email, password, proxy):
     try:
         from src.repository.repo import Authentication
+        from src.router.controller import user
 
         auth = Authentication()
         click.echo(f"😊 Starting {action} -> {email}")
@@ -172,8 +173,8 @@ def auth(action, email, password, proxy):
             result = auth.send_email_password_reset(email)
             msg = f"please check your email and click to reset your password."
         elif action == "user":
-            result = auth.get_account_info(email)
-            msg = f"uuid -> {result.uuid} ({result.subscriber.name})"
+            result = user.get_account_info(email)
+            msg = f"uuid -> {result.email} ({result.subscriber.name})"
         else:
             result = auth.sign_in_with_email_and_password(email, password, proxy)
             msg = f"token -> {result.token}"

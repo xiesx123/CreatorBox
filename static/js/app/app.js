@@ -1,6 +1,8 @@
 layui.config({
 	base: '../../static/js/app/'
 }).extend({
+	// 基础枚举
+	enums: 'ext/enums',
 	// 常用操作
 	tool: 'ext/tools',
 	// 信息提示

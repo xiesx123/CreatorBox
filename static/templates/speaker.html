@@ -48,14 +48,6 @@
                                 </div>
                             </div>
 
-                            <div lay-filter="query_filter" class="layui-form-item layui-hide">
-                                <label class="layui-form-label">文本</label>
-                                <div class="layui-input-block">
-                                    <input id="suffix" type="text" name="text" placeholder="请输入音频文本" autocomplete="off"
-                                        class="layui-input" lay-affix="clear">
-                                </div>
-                            </div>
-
                             <div class="layui-form-item">
                                 <label class="layui-form-label">名称</label>
                                 <div class="layui-input-block">
@@ -81,6 +73,22 @@
                                         <option value="{{ item.locale }}">{{ item.name }} - {{ item.locale }}</option>
                                         {% endfor %}
                                     </select>
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">情感</label>
+                                <div class="layui-input-block">
+                                    <input id="emotion" type="text" name="emotion" placeholder="请输入情感"
+                                        lay-verify="required" autocomplete="off" class="layui-input" lay-affix="clear">
+                                </div>
+                            </div>
+
+                            <div lay-filter="query_filter" class="layui-form-item layui-hide">
+                                <label class="layui-form-label">文本</label>
+                                <div class="layui-input-block">
+                                    <input id="suffix" type="text" name="text" placeholder="请输入音频文本" autocomplete="off"
+                                        class="layui-input" lay-affix="clear">
                                 </div>
                             </div>
 
@@ -123,9 +131,9 @@
     <!-- 表格行工具 -->
     <script type="text/html" id="TPL_table_tools">
         <div class="layui-btn-container">
-            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="update">编辑</a>
-            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="test">试听</a>
-            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="download">下载</a>
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="update">{{ __.table_tools_edit }}</a>
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="test">{{ __.table_tools_preview }}</a>
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="download">{{ __.table_tools_download }}</a>
         </div>
     </script>
 
@@ -138,7 +146,7 @@
 
     <script>
 
-        layui.use(['form', 'table', 'layer', 'element', 'upload', 'util', 'notice', 'tool'], function () {
+        layui.use(['form', 'table', 'layer', 'element', 'upload', 'util', 'notice', `enums`, 'tool'], function () {
 
             var form = layui.form;
             var table = layui.table;
@@ -147,14 +155,19 @@
             var upload = layui.upload;
             var util = layui.util;
             var toast = layui.notice;
+            var enums = layui.enums;
             var tool = layui.tool;
+            var i18n = layui.i18n;
             var $ = layui.$;
+            
+            i18n.init('{{request.state.lang}}');
 
             let CREATORBOX = "speaker"
             let cache = layui.data(CREATORBOX)
             let player;
             let action = "query";
 
+            var curr = 1
             var form_json_init = JSON.parse('{{ data.form | tojson }}') // 表单默认值
             var form_json = cache.hasOwnProperty('form') ? cache.form : {}     // 表单
             Object.keys(form_json).length === 0 ? Object.assign(form_json, form_json_init) : Object.assign(form_json_init, form_json)
@@ -191,29 +204,13 @@
                 layer.msg('识别成功', { icon: 1 });
                 if (response.code == 0) {
                     data = response.data
-                    form_json.id = null
+                    form_json.id = $('input[name="id"]').val();
                     form_json.path = data.location
                     form_json.text = data.text
                     form_json.speaker = data.location.split(/[/\\]/).pop().split(".")[0]
                     form_json.gender = data.gender
                     form_json.locale = data.locale
-                    form.val('form_filter', form_json);
-                }
-            })
-
-            // 表单-音频上传
-            tool.upload("#audio_upload", "spk/upload", 'audio', null, function (n, elem, e) {
-                layer.msg('识别中', { icon: 16, time: 30 * 1000 });
-            }, function (response) {
-                layer.msg('识别成功', { icon: 1 });
-                if (response.code == 0) {
-                    data = response.data
-                    form_json.id = null
-                    form_json.path = data.location
-                    form_json.text = data.text
-                    form_json.speaker = data.location.split(/[/\\]/).pop().split(".")[0]
-                    form_json.gender = data.gender
-                    form_json.locale = data.locale
+                    form_json.emotion = data.emotion
                     form.val('form_filter', form_json);
                 }
             })
@@ -230,11 +227,12 @@
                 // 不同行为
                 if (action == 'query') {
                     table.reload('table', {
-                        page: { curr: 1 },
+                        page: { curr: curr },
                         where: {
                             speaker: field.speaker,
                             gender: parseInt(field.gender) || 0,
                             locale: field.locale,
+                            emotion: field.emotion,
                         }
                     });
                 } else if (action == 'add' || action == 'update') {
@@ -283,16 +281,20 @@
                 height: 'full-78', // 最大高度减去其他容器已占有的高度差
                 cols: [[
                     { type: 'checkbox' },
-                    { title: '编号', sort: true, width: 280, align: "left", field: 'id', },
-                    { title: '类型', sort: true, width: 80, align: "center", field: 'type', templet: d => `<div title="${d.type} ${d.type == 1 ? '内置' : d.type == 2 ? '视频' : d.type == 3 ? '用户' : '未知'}">${d.type == 1 ? '内置' : d.type == 2 ? '视频' : d.type == 3 ? '用户' : '未知'}</div>` },
-                    { title: '性别', sort: true, width: 80, align: "center", field: 'gender', templet: d => `<div title="${d.gender} ${d.gender == 1 ? '男' : d.gender == 2 ? '女' : '未知'}">${d.gender == 1 ? '男' : d.gender == 2 ? '女' : '未知'}</div>` },
-                    { title: '语言', sort: true, width: 80, align: "center", field: 'locale', templet: d => '<div title="' + d.locale + '"> ' + d.locale + '</div>' },
-                    { title: '名称', sort: true, width: 250, align: "left", field: 'speaker', templet: d => '<div title="' + d.speaker + '"> ' + d.speaker + '</div>' },
-                    { title: '文本', sort: false, field: 'text', templet: d => '<div title="' + d.text + '">' + d.text + '</div>' },
-                    { title: '时长', sort: true, width: 80, align: "center", field: 'duration', templet: d => '<div title="' + d.duration + '"> ' + d.duration + '</div>' },
-                    { title: "状态", sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_status" },
-                    { title: "操作", sort: false, width: 160, align: "center", fixed: 'right', toolbar: "#TPL_table_tools" }
+                    { title: i18n.trans('table_spk_col_id'), sort: true, width: 110, align: "left", field: 'id' },
+                    // { title: i18n.trans('table_spk_col_type'), sort: true, width: 80, align: "left", field: 'type', templet: d => '<div title="' + enums.voice(d.type) + '">' + enums.voice(d.type) + '</div>' },
+                    { title: i18n.trans('table_spk_col_speaker'), sort: true, width: 150, align: "left", field: 'speaker', templet: d => `<div title="${d.speaker}">${d.speaker}</div>` },
+                    { title: i18n.trans('table_spk_col_gender'), sort: true, width: 105, align: "left", field: 'gender', templet: d => '<div title="' + enums.gender(d.gender) + '">' + enums.gender(d.gender) + '</div>' },
+                    { title: i18n.trans('table_spk_col_locale'), sort: true, width: 105, align: "left", field: 'locale', templet: d => `<div title="${d.locale}">${d.locale}</div>` },
+                    { title: i18n.trans('table_spk_col_emotion'), sort: true, width: 105, align: "left", field: 'emotion', templet: d => `<div title="${d.emotion ?? '-'}">${i18n.trans(`emotion_${d.emotion}`) ?? '-'}</div>` },
+                    { title: i18n.trans('table_spk_col_text'), sort: false, field: 'text', templet: d => `<div title="${d.text}">${d.text}</div>` },
+                    { title: i18n.trans('table_spk_col_duration'), sort: true, width: 105, align: "center", field: 'duration', templet: d => `<div title="${d.duration}">${d.duration}</div>` },
+                    { title: i18n.trans('table_spk_col_status'), sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_status" },
+                    { title: i18n.trans('table_spk_col_action'), sort: false, width: 220, align: "center", fixed: 'right', toolbar: "#TPL_table_tools" }
                 ]],
+                done: function(res, curr, count, origin){
+                    this.curr = curr
+                },
             });
 
             // 工具栏事件
@@ -326,7 +328,7 @@
                         }, true)
                         break;
                     case 'import':
-                        tool.upload("#import", "spk/upsert_batch", 'file', 'json', null, function (response) {
+                        tool.upload("#import", "spk/batch", 'file', 'json', null, function (response) {
                             if (response.code == 0) {
                                 table.reloadData('table', { scrollPos: 'fixed' });
                                 return toast.success("导入【" + response.data + "】条成功", "提示");
@@ -390,6 +392,10 @@
                     html5: true,
                     onload: function () {
                         console.debug('audio loaded');
+                    },
+                    onloaderror: function () {
+                        toast.error(i18n.trans('onload_error'));
+                        // console.debug('audio onloaderror');
                     },
                     onplay: function () {
                         console.debug('audio playing');

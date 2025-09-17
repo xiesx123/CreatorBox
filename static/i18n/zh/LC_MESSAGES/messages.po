@@ -271,106 +271,114 @@ msgid "table_tools_delete"
 msgstr "删除"
 
 #: src/router/i18n.py:89
+msgid "table_tools_download"
+msgstr "下载"
+
+#: src/router/i18n.py:90
+msgid "table_tools_edit"
+msgstr "编辑"
+
+#: src/router/i18n.py:91
 msgid "table_tools_move_down"
 msgstr "下移"
 
-#: src/router/i18n.py:90
+#: src/router/i18n.py:92
 msgid "table_tools_move_up"
 msgstr "上移"
 
-#: src/router/i18n.py:91
+#: src/router/i18n.py:93
 msgid "table_tools_preview"
 msgstr "试听"
 
-#: src/router/i18n.py:93
+#: src/router/i18n.py:95
 msgid "tts_gender"
 msgstr "性别"
 
-#: src/router/i18n.py:94
+#: src/router/i18n.py:96
 msgid "tts_instruct"
 msgstr "指令"
 
-#: src/router/i18n.py:95
+#: src/router/i18n.py:97
 msgid "tts_instruct_placeholder"
 msgstr "【地区方言】、【角色扮演】、【说话风格】等等"
 
-#: src/router/i18n.py:96
+#: src/router/i18n.py:98
 msgid "tts_pitch"
 msgstr "语调"
 
-#: src/router/i18n.py:97
+#: src/router/i18n.py:99
 msgid "tts_preview"
 msgstr "试听"
 
-#: src/router/i18n.py:98
+#: src/router/i18n.py:100
 msgid "tts_preview_click"
 msgstr "点击试听"
 
-#: src/router/i18n.py:99
+#: src/router/i18n.py:101
 msgid "tts_preview_select"
 msgstr "选择试听"
 
-#: src/router/i18n.py:100
+#: src/router/i18n.py:102
 msgid "tts_rate"
 msgstr "语速"
 
-#: src/router/i18n.py:101
+#: src/router/i18n.py:103
 msgid "tts_remarks"
 msgstr "备注"
 
-#: src/router/i18n.py:102
+#: src/router/i18n.py:104
 msgid "tts_remarks_placeholder"
 msgstr "随便写点什么"
 
-#: src/router/i18n.py:103
+#: src/router/i18n.py:105
 msgid "tts_role"
 msgstr "角色扮演"
 
-#: src/router/i18n.py:104
+#: src/router/i18n.py:106
 msgid "tts_seed"
 msgstr "种子"
 
-#: src/router/i18n.py:105
+#: src/router/i18n.py:107
 msgid "tts_seed_placeholder"
 msgstr "请输入随机种子"
 
-#: src/router/i18n.py:106
+#: src/router/i18n.py:108
 msgid "tts_seed_tip"
 msgstr "控制结果可复现"
 
-#: src/router/i18n.py:107
+#: src/router/i18n.py:109
 msgid "tts_spk_generate"
 msgstr "点击生成视频说话人音色"
 
-#: src/router/i18n.py:108
+#: src/router/i18n.py:110
 msgid "tts_step"
 msgstr "采样步数"
 
-#: src/router/i18n.py:109
+#: src/router/i18n.py:111
 msgid "tts_style"
 msgstr "说话风格"
 
-#: src/router/i18n.py:110
+#: src/router/i18n.py:112
 msgid "tts_styledegree"
 msgstr "风格强度"
 
-#: src/router/i18n.py:111
+#: src/router/i18n.py:113
 msgid "tts_text_placeholder"
 msgstr "请输入试听文本"
 
-#: src/router/i18n.py:112
+#: src/router/i18n.py:114
 msgid "tts_vc"
 msgstr "转换"
 
-#: src/router/i18n.py:113
+#: src/router/i18n.py:115
 msgid "tts_vc_tip"
 msgstr "将来源声音转换为目标的声音"
 
-#: src/router/i18n.py:114
+#: src/router/i18n.py:116
 msgid "tts_voice"
 msgstr "音色"
 
-#: src/router/i18n.py:115
+#: src/router/i18n.py:117
 msgid "tts_volume"
 msgstr "音量"
 

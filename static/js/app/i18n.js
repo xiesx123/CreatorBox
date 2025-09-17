@@ -38,7 +38,7 @@ loadScript(i18njs, function () {
 				try {
 					return $.i18n.prop(key) || key;
 				} catch (error) {
-					console.error("i18n error -> "+ key)
+					// console.error("i18n error -> "+ key)
 					return key;
 				}
 			},
@@ -48,7 +48,7 @@ loadScript(i18njs, function () {
 				try {
 					return $.i18n.prop(key,...vals) || key;
 				} catch (error) {
-					console.error("i18n error -> "+ key)
+					// console.error("i18n error -> "+ key)
 					return key;
 				}
 			}

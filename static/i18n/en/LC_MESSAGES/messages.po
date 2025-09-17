@@ -271,106 +271,114 @@ msgid "table_tools_delete"
 msgstr "Del"
 
 #: src/router/i18n.py:89
+msgid "table_tools_download"
+msgstr "DownLoad"
+
+#: src/router/i18n.py:90
+msgid "table_tools_edit"
+msgstr "Edit"
+
+#: src/router/i18n.py:91
 msgid "table_tools_move_down"
 msgstr "Down"
 
-#: src/router/i18n.py:90
+#: src/router/i18n.py:92
 msgid "table_tools_move_up"
 msgstr "Up"
 
-#: src/router/i18n.py:91
+#: src/router/i18n.py:93
 msgid "table_tools_preview"
 msgstr "Preview"
 
-#: src/router/i18n.py:93
+#: src/router/i18n.py:95
 msgid "tts_gender"
 msgstr "Gender"
 
-#: src/router/i18n.py:94
+#: src/router/i18n.py:96
 msgid "tts_instruct"
 msgstr "Instruction"
 
-#: src/router/i18n.py:95
+#: src/router/i18n.py:97
 msgid "tts_instruct_placeholder"
 msgstr "[Regional Dialect], [Role Play], [Speaking Style] etc."
 
-#: src/router/i18n.py:96
+#: src/router/i18n.py:98
 msgid "tts_pitch"
 msgstr "Pitch"
 
-#: src/router/i18n.py:97
+#: src/router/i18n.py:99
 msgid "tts_preview"
 msgstr "Preview"
 
-#: src/router/i18n.py:98
+#: src/router/i18n.py:100
 msgid "tts_preview_click"
 msgstr "Click to preview"
 
-#: src/router/i18n.py:99
+#: src/router/i18n.py:101
 msgid "tts_preview_select"
 msgstr "Select to preview"
 
-#: src/router/i18n.py:100
+#: src/router/i18n.py:102
 msgid "tts_rate"
 msgstr "Rate"
 
-#: src/router/i18n.py:101
+#: src/router/i18n.py:103
 msgid "tts_remarks"
 msgstr "Remarks"
 
-#: src/router/i18n.py:102
+#: src/router/i18n.py:104
 msgid "tts_remarks_placeholder"
 msgstr "Write something"
 
-#: src/router/i18n.py:103
+#: src/router/i18n.py:105
 msgid "tts_role"
 msgstr "Role"
 
-#: src/router/i18n.py:104
+#: src/router/i18n.py:106
 msgid "tts_seed"
 msgstr "Seed"
 
-#: src/router/i18n.py:105
+#: src/router/i18n.py:107
 msgid "tts_seed_placeholder"
 msgstr "Enter a random seed"
 
-#: src/router/i18n.py:106
+#: src/router/i18n.py:108
 msgid "tts_seed_tip"
 msgstr "Control result reproducibility"
 
-#: src/router/i18n.py:107
+#: src/router/i18n.py:109
 msgid "tts_spk_generate"
 msgstr "Click to generate video speaker voice"
 
-#: src/router/i18n.py:108
+#: src/router/i18n.py:110
 msgid "tts_step"
 msgstr "Sampling Steps"
 
-#: src/router/i18n.py:109
+#: src/router/i18n.py:111
 msgid "tts_style"
 msgstr "Style"
 
-#: src/router/i18n.py:110
+#: src/router/i18n.py:112
 msgid "tts_styledegree"
 msgstr "Style Degree"
 
-#: src/router/i18n.py:111
+#: src/router/i18n.py:113
 msgid "tts_text_placeholder"
 msgstr "Enter preview text"
 
-#: src/router/i18n.py:112
+#: src/router/i18n.py:114
 msgid "tts_vc"
 msgstr "Conversion"
 
-#: src/router/i18n.py:113
+#: src/router/i18n.py:115
 msgid "tts_vc_tip"
 msgstr "Convert source voice to target voice"
 
-#: src/router/i18n.py:114
+#: src/router/i18n.py:116
 msgid "tts_voice"
 msgstr "Voice"
 
-#: src/router/i18n.py:115
+#: src/router/i18n.py:117
 msgid "tts_volume"
 msgstr "Volume"
 
