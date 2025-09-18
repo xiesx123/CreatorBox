@@ -10,6 +10,7 @@ loadScript(i18njs, function () {
 			// 初始化语言
 			init: function (lang, callback) {
 				$.i18n.properties({
+					name: 'messages',
 					path: 'static/js/app/i18n',	// 文件路径
 					mode: 'map',
 					language: lang,
