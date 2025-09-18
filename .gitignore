@@ -17,13 +17,15 @@
 *.egg-info/
 .gradio/
 build/
-models/
-webapp/*
+models/creatorbox
+models/huggingface
+models/modelscope
+models/torch
+webapp/
 mapper.txt
 
 ### Exclude ###
 !r3.exe
-!**/matcha/models/
 !webapp/data/gradio.json
 static/i18n/babel.*
 static/i18n/messages.pot
