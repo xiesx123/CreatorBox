@@ -24,7 +24,7 @@ from loguru import logger
 from pydub import AudioSegment
 
 from src.app import config
-from src.router.request import otherParams
+# from src.router.request import otherParams
 from src.support.third_party.gptsovits.config import (
     force_gpu_infer,
     force_half_infer,
@@ -487,37 +487,37 @@ def classic_infer(gpt_model_name, sovits_model_name, ref_audio_path, prompt_text
     return audio_path, msg
 
 
-# =========OpenAI语音合成兼容接口=========
-def openai_like_infer(model, input, voice, response_format, speed, other_options: otherParams):
-    version = model.split("-")[1]
-    if not version_support(version):
-        msg = "不支持该版本！"
-        audio_data = None
-    elif model == "":
-        msg = "请选择模型"
-        audio_data = None
-    elif input == "":
-        msg = "请提供合成文本"
-        audio_data = None
-    elif voice == "":
-        msg = "请选择说话人"
-        audio_data = None
-    else:
-        if other_options.emotion == "随机":
-            ref_audio, lab_content = random_ref_audio(voice, other_options.prompt_lang, version)
-            prompt_text = lab_content
-        else:
-            emo, prompt_text = get_ref_audio(voice, other_options.prompt_lang, other_options.emotion, version)
-            ref_audio = f"models/{version}/{voice}/reference_audios/{other_options.prompt_lang}/emotions/【{emo}】{prompt_text}.wav"
-        load_model(voice, version)
-        if other_options.seed == -1:
-            seed = random_seed()
-        else:
-            seed = other_options.seed
+# # =========OpenAI语音合成兼容接口=========
+# def openai_like_infer(model, input, voice, response_format, speed, other_options: otherParams):
+#     version = model.split("-")[1]
+#     if not version_support(version):
+#         msg = "不支持该版本！"
+#         audio_data = None
+#     elif model == "":
+#         msg = "请选择模型"
+#         audio_data = None
+#     elif input == "":
+#         msg = "请提供合成文本"
+#         audio_data = None
+#     elif voice == "":
+#         msg = "请选择说话人"
+#         audio_data = None
+#     else:
+#         if other_options.emotion == "随机":
+#             ref_audio, lab_content = random_ref_audio(voice, other_options.prompt_lang, version)
+#             prompt_text = lab_content
+#         else:
+#             emo, prompt_text = get_ref_audio(voice, other_options.prompt_lang, other_options.emotion, version)
+#             ref_audio = f"models/{version}/{voice}/reference_audios/{other_options.prompt_lang}/emotions/【{emo}】{prompt_text}.wav"
+#         load_model(voice, version)
+#         if other_options.seed == -1:
+#             seed = random_seed()
+#         else:
+#             seed = other_options.seed
 
-        audio_data = tts_infer(input, other_options.text_lang, ref_audio, prompt_text, other_options.prompt_lang, other_options.top_k, other_options.top_p, other_options.temperature, other_options.text_split_method, other_options.batch_size, other_options.batch_threshold, other_options.split_bucket, speed, other_options.fragment_interval, seed, response_format, other_options.parallel_infer, other_options.repetition_penalty, other_options.sample_steps, other_options.if_sr)
-        msg = "合成成功"
-    return audio_data, msg
+#         audio_data = tts_infer(input, other_options.text_lang, ref_audio, prompt_text, other_options.prompt_lang, other_options.top_k, other_options.top_p, other_options.temperature, other_options.text_split_method, other_options.batch_size, other_options.batch_threshold, other_options.split_bucket, speed, other_options.fragment_interval, seed, response_format, other_options.parallel_infer, other_options.repetition_penalty, other_options.sample_steps, other_options.if_sr)
+#         msg = "合成成功"
+#     return audio_data, msg
 
 
 # ===============一键安装================
