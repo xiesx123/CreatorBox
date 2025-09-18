@@ -3,8 +3,6 @@ torch==2.6.0
 torchaudio==2.6.0
 torchvision==0.21.0
 numpy==1.26.4
-pynini==2.1.5
-diffusers==0.29.2
 transformers==4.51.3
 
 # base
