@@ -222,7 +222,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
         form_json.tts_gender = enums.gender(gender);
         form_json.tts_locale = locale;
         form_json.tts_speaker = speaker;
-        console.debug(form_json.tts_gender + "-" + form_json.tts_locale + "-" + form_json.tts_speaker + "-" + form_json.tts_voice);
+        console.debug(form_json.tts_gender + "," + form_json.tts_locale + "," + form_json.tts_speaker + "," + form_json.tts_voice);
         // 动态渲染说话风格/角色扮演
         const optionHtml = (list, prefix) => {
             let html = '';
@@ -505,6 +505,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                 optPitch: $('#opt_pitch'),
                 optRole: $('#opt_role'),
                 optStyle: $('#opt_style'),
+                optStyleDegree: $('#opt_styledegree'),
                 optVc: $('#opt_vc'),
                 optSeed: $('#opt_seed'),
             };
@@ -514,6 +515,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                 divs.optPitch.toggleClass('layui-hide', ![TTS_AZUR, TTS_EDGE].includes(provider));
                 divs.optRole.toggleClass('layui-hide', ![TTS_AZUR].includes(provider));
                 divs.optStyle.toggleClass('layui-hide', ![TTS_AZUR, TTS_GTTS].includes(provider));
+                divs.optStyleDegree.toggleClass('layui-hide', ![TTS_AZUR].includes(provider));
                 // divs.optVc.toggleClass('layui-hide', ![TTS_COSY, TTS_CTTS].includes(provider));
                 divs.optSeed.toggleClass('layui-hide', ![TTS_ELAB, TTS_GTTS, TTS_COSY, TTS_CTTS, TTS_FTTS].includes(provider));
             }
