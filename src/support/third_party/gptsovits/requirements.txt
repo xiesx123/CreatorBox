@@ -23,7 +23,8 @@ peft==0.17.1
 chardet==5.2.0
 PyYAML==6.0.2
 psutil==7.0.0
-jieba_fast==0.53
+# jieba_fast==0.53
+jieba-next==1.0.0a4
 jieba==0.42.1
 split-lang==2.1.0
 fast_langdetect==0.3.2

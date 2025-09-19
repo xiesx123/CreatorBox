@@ -14,7 +14,7 @@
 from typing import List
 from typing import Tuple
 
-import jieba_fast as jieba
+import jieba_next as jieba
 from pypinyin import lazy_pinyin
 from pypinyin import Style
 

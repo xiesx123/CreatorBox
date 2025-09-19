@@ -3,6 +3,7 @@ torch==2.6.0
 torchaudio==2.6.0
 torchvision==0.21.0
 numpy==1.26.4
+diffusers==0.29.2
 transformers==4.51.3
 
 # base
@@ -31,7 +32,7 @@ scenedetect==0.6.7
 pydub==0.25.1
 librosa==0.10.2
 pyannote.audio==3.3.2
-audio_separator[cpu]==0.30.2
+audio_separator==0.30.2
 
 # asr
 funasr==1.2.7
