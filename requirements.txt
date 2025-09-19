@@ -46,8 +46,8 @@ langchain_google_genai==2.1.9
 dashscope==1.23.5
 
 # tts
-azure_cognitiveservices_speech==1.45.0
 edge_tts==7.2.3
+azure_cognitiveservices_speech==1.45.0
 
 # ocr
 rapidocr==3.3.1
