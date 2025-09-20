@@ -30,3 +30,4 @@ mapper.txt
 !webapp/data/gradio.json
 static/i18n/babel.*
 static/i18n/messages.pot
+
