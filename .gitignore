@@ -17,6 +17,7 @@
 *.egg-info/
 .gradio/
 build/
+models
 models/creatorbox
 models/huggingface
 models/modelscope
