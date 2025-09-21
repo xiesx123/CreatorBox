@@ -394,9 +394,15 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                         // 
                         url: url,
                         duration: duration,
-                        // 
-                        nfe_step: form_json.tts_step,
+                        // azure
+                        role: form_json.tts_role,
+                        style: form_json.tts_style,
+                        styledegree: form_json.tts_styledegree,
+                        // cosy
                         instruct_text: form_json.tts_instruct,
+                        // f5e2
+                        nfe_step: form_json.tts_step,
+                        // other
                         use_vc: form_json.tts_vc,
                         seed: seed,
                     })
