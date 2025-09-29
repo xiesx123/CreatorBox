@@ -116,7 +116,7 @@ msgstr "Base"
 
 #: src/router/i18n.py:44
 msgid "dub_setting"
-msgstr "其他"
+msgstr "Others"
 
 #: src/router/i18n.py:45
 msgid "dub_subtitle"

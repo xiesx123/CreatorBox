@@ -543,7 +543,7 @@
                             lay-filter="tts_provider_filter">
                             {% for item in data.tts.providers %}
                               {% if item.enable %}
-                                <option value="{{ item.provider}}">{{ item.desc }}</option>
+                                <option value="{{ item.provider}}">{{ item.desc }} {{ '- ' + __.llm_configured if item.valid else '' }}</option>
                               {% endif %}>
                             {% endfor %}
                           </select>
