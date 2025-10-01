@@ -1,6 +1,10 @@
 import os
-import subprocess
 import sys
+
+sys.path.insert(0, os.getcwd())
+sys.path.insert(0, os.path.dirname(os.getcwd()))
+
+import subprocess
 import traceback
 
 try:
@@ -26,16 +30,18 @@ def cli():
 @click.option("--host", "-h", type=str, default="0.0.0.0", show_default=True, required=True, help="host")
 @click.option("--port", "-p", type=int, default=8000, show_default=True, required=True, help="port")
 @click.option("--debug", is_flag=True, default=False, show_default=True, help="enable debug mode")
+@click.option("--open", is_flag=True, default=False, show_default=False, help="auto open browser")
 @click.option("--ngrok", is_flag=True, default=False, show_default=True, help="enable ngrok tunnel")
 @click.option("--ngrok_host", "-nh", type=str, default="toucan-real-informally.ngrok-free.app", show_default=True, help="ngrok host")
 @click.option("--ngrok_port", "-np", type=int, default=80, show_default=True, help="ngrok port")
-def start(host, port, debug, ngrok, ngrok_host, ngrok_port):
+def start(host, port, debug, open, ngrok, ngrok_host, ngrok_port):
     # spawn
     import multiprocessing as mp
 
     mp.set_start_method("spawn", force=True)
 
     # args
+    os.environ["open"] = str(open)
     if "REBOOT_ARGS" not in os.environ:
         import json
 
