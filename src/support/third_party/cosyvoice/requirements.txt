@@ -1,13 +1,14 @@
 --extra-index-url https://download.pytorch.org/whl/cu121
 --extra-index-url https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-cuda-12/pypi/simple/ # https://github.com/microsoft/onnxruntime/issues/21684
-pynini==2.1.5
+# pynini==pynini-2.1.6.post1
+pynini @ https://github.com/xiesx123/CreatorBox/releases/download/1.0.23/pynini-2.1.6.post1-cp311-cp311-win_amd64.whl
 conformer==0.3.2
 deepspeed==0.16.5; sys_platform == 'linux'
 diffusers==0.29.2
 fastapi==0.116.1
 fastapi-cli==0.0.4
 gdown==5.1.0
-gradio==5.43.1
+gradio==5.34.0
 # grpcio==1.73.1
 # grpcio-tools==1.73.1
 # grpcio-status==1.73.1
