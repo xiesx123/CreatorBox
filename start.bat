@@ -16,7 +16,7 @@ set FFMPEG_HOME=%CREATORBOX_HOME%\ffmpeg
 :: Python   (e.g.D:\Program Files\CreatorBox\python)
 set PYTHON_HOME=%CREATORBOX_HOME%\python
 :: Conda    (e.g.D:\Program Files\miniconda3)
-set "CONDA_HOME=D:\Projects\miniconda31"
+set "CONDA_HOME=D:\miniconda3"
 set CONDA_ENV=creatorbox
 ::--------------------------------------------------------------------------------------------
 
