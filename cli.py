@@ -85,6 +85,12 @@ def start(host, port, debug, open, ngrok, ngrok_host, ngrok_port):
 @click.option("--force", is_flag=True, default=False, show_default=True, help="Force sync with remote (discard local changes).")
 def update(commit, tag, force):
     try:
+        from src.utils import cbruntime
+
+        checker = cbruntime.check_git(print=True, len=0)
+        if not checker.get_version():
+            click.echo("❌ git is not available. Please install git first.", err=True)
+            return
         if commit and tag:
             click.echo("❌ Cannot use --hash and --tag together.", err=True)
             return
@@ -113,6 +119,12 @@ def install(files):
     try:
         from pathlib import Path
 
+        from src.utils import cbruntime
+
+        checker = cbruntime.check_pip(print=True, len=0)
+        if not checker.get_version():
+            click.echo("❌ pip is not available. Please install pip first.", err=True)
+            return
         if not files:
             default_file = Path("requirements.txt")
             if not default_file.exists():
@@ -127,8 +139,6 @@ def install(files):
             click.echo(f"📦 Installing from {file}...")
             subprocess.run(["pip", "install", "-r", file], check=True)
             click.echo("✅ Installation complete.")
-            from src.utils import cbruntime
-
             _package = cbruntime.get_environment_package(file)
             click.echo("Environment Info:\n" + "\n".join([f"-  {cbruntime.pad_string(k, length=25,align='left')}: {v}" for k, v in _package.items()]))
 
