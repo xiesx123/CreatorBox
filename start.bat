@@ -31,7 +31,10 @@ set PYTHON_CMD="%PYTHON_HOME%\python.exe"
 REM Execute script
 set SCRIPT_PATH=cli.py
 set SCRIPT_ARGS=start -h 0.0.0.0 -p 8000
- 
+if "%~1"=="--debug" (
+    set SCRIPT_ARGS=%SCRIPT_ARGS% --debug
+)
+
 REM Activate environment
 where conda >nul 2>&1
 if %ERRORLEVEL% EQU 0 (
