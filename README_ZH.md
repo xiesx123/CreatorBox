@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://xiesx123.github.io/CreatorBox/favicon.ico" width="120" />
+<img src="https://xiesx123.github.io/CreatorBox/favicon.ico" width="80" />
 
 <h1 align="center">CreatorBox </h1>
 
