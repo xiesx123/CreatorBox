@@ -1,12 +1,18 @@
 <div align="center">
-<h1 align="center">CreatorBox 💸</h1>
 
-[![VitePress](https://img.shields.io/badge/Vitepress-Doc-3E63DD?logo=markdown)](https://xiesx123.github.io/CreatorBox)
-[![Discord](https://img.shields.io/badge/Discord-Online-44CC11?logo=discord&logoColor=white)](https://discord.gg/ZSeETM6bsS)
-![Version](https://img.shields.io/github/tag/xiesx123/CreatorBox.svg?style=flat&label=Release)
-[![GitHub stars](https://img.shields.io/github/stars/xiesx123/CreatorBox)](https://github.com/xiesx123/CreatorBox/stargazers)
-[![Google Colab](https://img.shields.io/badge/Google_Colab-Launch-yellow?logo=googlecolab&)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
-[![Kaggle](https://img.shields.io/badge/Kaggle-Launch-blue?logo=kaggle)](https://www.kaggle.com/code/xiesx123/creatorbox)
+<img src="https://xiesx123.github.io/CreatorBox/favicon.ico" width="120" />
+
+<h1 align="center">CreatorBox </h1>
+
+![GitHub Release](https://img.shields.io/github/tag/xiesx123/CreatorBox.svg?style=flat&label=Release)
+[![GitHub Downloads](https://img.shields.io/github/downloads/xiesx123/CreatorBox/total?logo=github&label=Downloads&color=0078D7)](https://github.com/xiesx123/CreatorBox/releases)
+[![GitHub Stars](https://img.shields.io/github/stars/xiesx123/CreatorBox?logo=github&style=flat&label=Stars&color1=while)](https://github.com/xiesx123/CreatorBox/stargazers)
+
+[![Discord](https://img.shields.io/badge/Discord-Online-44CC11?logo=discord&logoColor=white&)](https://discord.gg/kt6JWax3P6)
+[![VitePress](https://img.shields.io/badge/VitePress-Doc-3E63DD?logo=markdown)](https://xiesx123.github.io/CreatorBox)
+[![Colab](https://img.shields.io/badge/Colab-Launch-yellow?logo=googlecolab)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
+[![Kaggle](https://img.shields.io/badge/Kaggle-Launch-20BEFF?logo=kaggle)](https://www.kaggle.com/code/xiesx123)
+
 
   <h3><a href="README.md">English</a> | 中文 </h3>
 
