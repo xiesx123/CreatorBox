@@ -4,9 +4,9 @@
 
 <h1 align="center">CreatorBox </h1>
 
-![GitHub Release](https://img.shields.io/github/tag/xiesx123/CreatorBox.svg?style=flat&label=Release)
+![GitHub Release](https://img.shields.io/github/tag/xiesx123/CreatorBox.svg?style=flat&label=Release&color=0078D7)
 [![GitHub Downloads](https://img.shields.io/github/downloads/xiesx123/CreatorBox/total?logo=github&label=Downloads&color=0078D7)](https://github.com/xiesx123/CreatorBox/releases)
-[![GitHub Stars](https://img.shields.io/github/stars/xiesx123/CreatorBox?logo=github&style=flat&label=Stars&color1=while)](https://github.com/xiesx123/CreatorBox/stargazers)
+[![GitHub Stars](https://img.shields.io/github/stars/xiesx123/CreatorBox?logo=github&style=flat&label=Stars&color=0078D7)](https://github.com/xiesx123/CreatorBox/stargazers)
 
 [![Discord](https://img.shields.io/badge/Discord-Online-44CC11?logo=discord&logoColor=white&)](https://discord.gg/kt6JWax3P6)
 [![VitePress](https://img.shields.io/badge/VitePress-Doc-3E63DD?logo=markdown)](https://xiesx123.github.io/CreatorBox)
