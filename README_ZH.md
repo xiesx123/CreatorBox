@@ -114,7 +114,7 @@
 
 👉 安装部署指南：[本地安装](https://xiesx123.github.io/CreatorBox/zh/deploy-local) | [远程部署](https://xiesx123.github.io/CreatorBox/zh/deploy-colab)
 
-👉 开发集成指南：[应用组件](https://xiesx123.github.io/zh/CreatorBox/gradio)
+👉 开发集成指南：[应用组件](https://xiesx123.github.io/CreatorBox/zh/gradio)
 
 
 ## 🎨 适用场景
