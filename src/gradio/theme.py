@@ -1,14 +1,26 @@
 import gradio as gr
 
-###################### 主题自定义 ######################
-theme = gr.themes.Ocean(
+# 主题
+default_themes = [
+    gr.themes.Base,
+    gr.themes.Default,
+    gr.themes.Soft,
+    gr.themes.Monochrome,
+    gr.themes.Glass,
+    gr.themes.Origin,
+    gr.themes.Citrus,
+    gr.themes.Ocean,
+]
+
+###################### 自定义 ######################
+custom_theme = gr.themes.Ocean(
     text_size="sm",
 )
-###################### 主题自定义 ######################
+###################### 自定义 ######################
 
 
 def _default_theme():
-    return theme
+    return custom_theme
 
 
 if __name__ == "__main__":

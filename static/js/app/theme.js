@@ -1,7 +1,15 @@
-// 监听主题
+// 监听页面主题变化
 var darkThemeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 darkThemeMediaQuery.addEventListener('change', function (e) {
   setTheme(e.matches ? 'dark' : 'light');
+});
+
+// 监听存储数据变化
+window.addEventListener('storage', (event) => {
+  if (event.key === 'theme') {
+      console.log('Theme changed in another tab:', event.oldValue, '→', event.newValue);
+      setTheme(event.newValue);
+  }
 });
 
 // 手动切换
@@ -14,12 +22,13 @@ if (themeToggle != null) {
   });
 }
 
-// 初始化检查主题
+// 初始检查
 var savedTheme = localStorage.getItem('theme') || (darkThemeMediaQuery.matches ? 'dark' : 'light');
 setTheme(savedTheme);
 
 // 设置主题
 function setTheme(theme) {
+  console.log(theme)
   if (theme === 'dark') {
     document.documentElement.classList.add('dark');
   } else {
