@@ -24,7 +24,7 @@ firebase_admin==6.9.0
 requests_cache==1.2.1
 
 # video
-yt_dlp==2025.8.27
+yt_dlp==2025.10.22
 moviepy==1.0.3
 scenedetect==0.6.7
 
