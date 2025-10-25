@@ -27,7 +27,7 @@ mapper.txt
 
 ### Exclude ###
 !r3.exe
-!webapp/data/gradio.json
+!webapp/data/plugins.json
 static/i18n/babel.*
 static/i18n/messages.pot
 
