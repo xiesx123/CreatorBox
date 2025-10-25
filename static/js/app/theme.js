@@ -7,7 +7,7 @@ darkThemeMediaQuery.addEventListener('change', function (e) {
 // 监听存储数据变化
 window.addEventListener('storage', (event) => {
   if (event.key === 'theme') {
-      console.log('Theme changed in another tab:', event.oldValue, '→', event.newValue);
+      console.debug('Theme changed in another tab:', event.oldValue, '→', event.newValue);
       setTheme(event.newValue);
   }
 });
@@ -28,7 +28,7 @@ setTheme(savedTheme);
 
 // 设置主题
 function setTheme(theme) {
-  console.log(theme)
+  console.debug(theme)
   if (theme === 'dark') {
     document.documentElement.classList.add('dark');
   } else {
