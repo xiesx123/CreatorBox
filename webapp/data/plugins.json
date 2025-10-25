@@ -52,7 +52,7 @@
       "module": "src.gradio.pages.gmt_",
       "attr": "gradio",
       "path": "/gmt",
-      "status": 1
+      "status": 0
     },
     "104": {
       "name": "\u56fe\u50cf\u6c34\u5370\u53bb\u9664",
