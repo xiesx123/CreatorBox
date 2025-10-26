@@ -19,14 +19,6 @@
 
 <h4>Web Interface</h4>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://xiesx123.github.io/CreatorBox/images/gradio_dashboard_dark.png" />
-  <source media="(prefers-color-scheme: light)" srcset="https://xiesx123.github.io/CreatorBox/images/gradio_dashboard_light.png" />
-  <img alt="Gradio App Dashboard" src="https://xiesx123.github.io/CreatorBox/images/gradio_dashboard_light.png" />
-</picture>
-
-<h4>Translation Dubbing</h4>
-
 ![](https://xiesx123.github.io/CreatorBox/images/readme_main_en.png)
 
 <h4>Preview Export</h4>
@@ -102,6 +94,12 @@
 👉 Installation and Deployment Guide: [Local Installation](https://xiesx123.github.io/CreatorBox/deploy-local) | [Remote Deployment](https://xiesx123.github.io/CreatorBox/deploy-colab) 
 
 👉 Development and Integration Guide: [Gradio Apps](https://xiesx123.github.io/CreatorBox/gradio)
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://xiesx123.github.io/CreatorBox/images/gradio_dashboard_dark.png" />
+  <source media="(prefers-color-scheme: light)" srcset="https://xiesx123.github.io/CreatorBox/images/gradio_dashboard_light.png" />
+  <img alt="Gradio App Dashboard" src="https://xiesx123.github.io/CreatorBox/images/gradio_dashboard_light.png" />
+</picture>
 
 ## 🎨 Applicable Scenarios
 

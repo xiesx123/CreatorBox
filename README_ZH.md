@@ -20,14 +20,6 @@
 
   <h4>Web界面</h4>
 
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://xiesx123.github.io/CreatorBox/images/gradio_dashboard_dark.png" />
-    <source media="(prefers-color-scheme: light)" srcset="https://xiesx123.github.io/CreatorBox/images/gradio_dashboard_light.png" />
-    <img alt="Gradio App Dashboard" src="https://xiesx123.github.io/CreatorBox/images/gradio_dashboard_light.png" />
-  </picture>
-
-  <h4>翻译配音</h4>
-
   ![](https://xiesx123.github.io/CreatorBox/images/readme_main_zh.png)
   
   <h4>预览导出</h4>
@@ -103,6 +95,12 @@
 👉 安装部署指南：[本地安装](https://xiesx123.github.io/CreatorBox/zh/deploy-local) | [远程部署](https://xiesx123.github.io/CreatorBox/zh/deploy-colab)
 
 👉 开发集成指南：[应用组件](https://xiesx123.github.io/CreatorBox/zh/gradio)
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://xiesx123.github.io/CreatorBox/images/gradio_dashboard_dark.png" />
+  <source media="(prefers-color-scheme: light)" srcset="https://xiesx123.github.io/CreatorBox/images/gradio_dashboard_light.png" />
+  <img alt="Gradio App Dashboard" src="https://xiesx123.github.io/CreatorBox/images/gradio_dashboard_light.png" />
+</picture>
 
 
 ## 🎨 适用场景
