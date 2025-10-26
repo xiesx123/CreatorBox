@@ -20,13 +20,21 @@
 
   <h4>Web界面</h4>
 
-![](https://xiesx123.github.io/CreatorBox/images/readme_main_zh.png)
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://xiesx123.github.io/CreatorBox/images/gradio_dashboard_dark.png" />
+    <source media="(prefers-color-scheme: light)" srcset="https://xiesx123.github.io/CreatorBox/images/gradio_dashboard_light.png" />
+    <img alt="Gradio App Dashboard" src="https://xiesx123.github.io/CreatorBox/images/gradio_dashboard_light.png" />
+  </picture>
 
-  <h4>配音剪辑</h4>
+  <h4>翻译配音</h4>
+
+  ![](https://xiesx123.github.io/CreatorBox/images/readme_main_zh.png)
+  
+  <h4>预览导出</h4>
     <table>
         <thead>
             <tr>
-                <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔧</g-emoji> 配音</th>
+                <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔧</g-emoji> 预览</th>
                 <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">✂️</g-emoji> 剪辑</th>
             </tr>
         </thead>
@@ -38,26 +46,6 @@
                 <td align="center">
                     <img src="https://xiesx123.github.io/CreatorBox/images/readme_capcut.jpg" alt="readme_capcut">
                 </td>
-            </tr>
-        </tbody>
-    </table>
-
-  <h4>交互式应用</h4>
-    <table>
-        <thead>
-            <tr>
-                <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔇</g-emoji>静音检测切割 sdr</th>
-                <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🎶</g-emoji>人声音轨分离 uvr</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-            <td align="center">
-                <img src="https://xiesx123.github.io/CreatorBox/images/gradio_app_sdr.png" alt="gradio_app_sdr">
-            </td>
-            <td align="center">
-                <img src="https://xiesx123.github.io/CreatorBox/images/gradio_app_uvr.png" alt="gradio_app_uvr">
-            </td>
             </tr>
         </tbody>
     </table>

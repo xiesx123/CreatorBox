@@ -13,21 +13,28 @@
 [![Colab](https://img.shields.io/badge/Colab-Launch-yellow?logo=googlecolab)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
 [![Kaggle](https://img.shields.io/badge/Kaggle-Launch-20BEFF?logo=kaggle)](https://www.kaggle.com/code/xiesx123)
 
-
 <h3>English | <a href="README_ZH.md">中文</a></h3>
 
 🚀🎬 Flexible, efficient, and scalable toolbox for editing and dubbing, unleashing creative potential
 
 <h4>Web Interface</h4>
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://xiesx123.github.io/CreatorBox/images/gradio_dashboard_dark.png" />
+  <source media="(prefers-color-scheme: light)" srcset="https://xiesx123.github.io/CreatorBox/images/gradio_dashboard_light.png" />
+  <img alt="Gradio App Dashboard" src="https://xiesx123.github.io/CreatorBox/images/gradio_dashboard_light.png" />
+</picture>
+
+<h4>Translation Dubbing</h4>
+
 ![](https://xiesx123.github.io/CreatorBox/images/readme_main_en.png)
 
-<h4>Dubbing Editing</h4>
+<h4>Preview Export</h4>
   <table>
     <thead>
       <tr>
-        <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔧</g-emoji> Dubbing</th>
-        <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">✂️</g-emoji> Editing</th>
+        <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔧</g-emoji> Preview</th>
+        <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">✂️</g-emoji> Export</th>
       </tr>
     </thead>
     <tbody>
@@ -40,26 +47,6 @@
         </td>
       </tr>
     </tbody>
-  </table>
-
-<h4>Gradio Apps</h4>
-  <table>
-      <thead>
-          <tr>
-            <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔇</g-emoji>Silence Detect Removal</th>
-            <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🎶</g-emoji>Ultimate Vocal Remover</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr>
-            <td align="center">
-                <img src="https://xiesx123.github.io/CreatorBox/images/gradio_app_sdr.png" width="700" alt="gradio_app_sdr">
-            </td>
-            <td align="center">
-                <img src="https://xiesx123.github.io/CreatorBox/images/gradio_app_uvr.png" width="700" alt="gradio_app_uvr">
-            </td>
-          </tr>
-      </tbody>
   </table>
 
 <h4>Video Demonstration</h4>
