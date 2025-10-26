@@ -423,6 +423,7 @@ class Database:
 
 
 class Storage:
+
     from gcloud import storage
 
     """ Storage Service """
