@@ -3,7 +3,7 @@ import re
 import sys
 
 import torch
-
+sys.path.insert(0, os.path.dirname(__file__))
 from tools.i18n.i18n import I18nAuto
 
 i18n = I18nAuto(language=os.environ.get("language", "Auto"))
