@@ -177,10 +177,10 @@ def proxy(host, port, username, password, site, timeout):
 @click.option("--proxy", is_flag=True, default=False, show_default=True, help="enable proxy")
 def auth(action, email, password, proxy):
     try:
-        from src.repository.repo import Authentication
+        from src.app.repo import Firebase
         from src.router.controller import user
 
-        auth = Authentication()
+        auth = Firebase.Authentication()
         click.echo(f"😊 Starting {action} -> {email}")
         if action == "register":
             result = auth.register_with_email_and_password(email, password, proxy)

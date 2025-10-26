@@ -16,6 +16,7 @@ apscheduler==3.11.0
 func_timeout==4.3.5
 ffmpeg_python==0.2.0
 opencv_python==4.11.0.86
+pyjianyingdraft==0.2.5
 
 # http
 gcloud==0.18.3
@@ -70,10 +71,6 @@ python_jwt==4.1.0
 python_engineio==4.12.2
 python_socketio==5.13.0
 python_multipart==0.0.20
-
-# draft
-pymediainfo==7.0.1
-uiautomation==2.0.20; sys_platform == 'win32'
 
 # other
 srt==3.5.3
