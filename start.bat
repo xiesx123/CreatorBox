@@ -13,36 +13,19 @@ if not defined CREATORBOX_HOME (
 set GIT_HOME=%CREATORBOX_HOME%\git
 :: FFmpeg   (e.g.D:\Program Files\CreatorBox\ffmpeg)
 set FFMPEG_HOME=%CREATORBOX_HOME%\ffmpeg
-:: Python   (e.g.D:\Program Files\CreatorBox\python)
-set PYTHON_HOME=%CREATORBOX_HOME%\python
-:: Conda    (e.g.D:\Program Files\miniconda3)
-set "CONDA_HOME=D:\miniconda3"
-set CONDA_ENV=creatorbox
+
 ::--------------------------------------------------------------------------------------------
 
 :: Set Environment
-set PATH=;%CREATORBOX_HOME%;%PYTHON_HOME%;%PYTHON_HOME%\Scripts;%FFMPEG_HOME%;%GIT_HOME%\cmd;%CONDA_HOME%;%CONDA_HOME%\condabin;"C:\Windows\system32";
+set PATH=;%CREATORBOX_HOME%;%PYTHON_HOME%;%PYTHON_HOME%\Scripts;%FFMPEG_HOME%;%GIT_HOME%\cmd;%CONDA_HOME%;%CONDA_HOME%\condabin;%UV_HOME%;"C:\Windows\system32";
 echo %PATH%
 
-REM Builtin or Custom
-set PYTHON_CMD="%PYTHON_HOME%\python.exe"
-@REM set PYTHON_CMD="D:\miniconda3\envs\creatorbox\python.exe"
-
 REM Execute script
+set PYTHON_CMD=uv run 
 set SCRIPT_PATH=cli.py
 set SCRIPT_ARGS=start -h 0.0.0.0 -p 8000
 if "%~1"=="--debug" (
     set SCRIPT_ARGS=%SCRIPT_ARGS% --debug
-)
-
-REM Activate environment
-where conda >nul 2>&1
-if %ERRORLEVEL% EQU 0 (
-    call conda activate %CONDA_ENV%
-    if %ERRORLEVEL% EQU 0 (
-        echo ✅ Conda environment %CONDA_ENV% activated
-        set PYTHON_CMD=python
-    )
 )
 
 REM Run authentication command (uncomment and replace <EMAIL> and <PASSWORD> with actual values if needed)

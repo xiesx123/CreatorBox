@@ -14,20 +14,17 @@
 **/docs/package-lock.json
 
 ### CreatorBox ###
-*.egg-info/
-.gradio/
-build/
-models
-models/creatorbox
-models/huggingface
-models/modelscope
-models/torch
+extensions/
+logs/
+setup/
+models/
 webapp/
 mapper.txt
 
 ### Exclude ###
 !r3.exe
 !webapp/data/plugins.json
+!webapp/data/azure_*
 static/i18n/babel.*
 static/i18n/messages.pot
 

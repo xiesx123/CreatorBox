@@ -41,7 +41,7 @@ faster_whisper==1.2.0
 
 # llm
 langchain==0.3.27
-langchain_community==0.3.27
+langchain_community==0.3.21
 langchain_openai==0.3.31
 langchain_google_genai==2.1.9
 dashscope==1.23.5
@@ -49,6 +49,7 @@ dashscope==1.23.5
 # tts
 edge_tts==7.2.3
 azure_cognitiveservices_speech==1.45.0
+elevenlabs==2.14.0
 
 # ocr
 rapidocr==3.3.1
