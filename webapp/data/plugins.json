@@ -11,22 +11,22 @@
       "status": 1
     },
     "2": {
-      "name": "AI \u56fe\u50cf\u751f\u6210",
-      "description": "Image Stable Diffusion",
-      "image": "../static/images/img_ext_sd.png",
-      "module": "",
-      "attr": "",
-      "path": "/launcher?project=stable-diffusion-webui&port=8001",
-      "type": 1,
-      "status": 1
-    },
-    "3": {
       "name": "AI \u56fe\u50cf\u4fee\u590d",
       "description": "IOPaint",
       "image": "../static/images/img_ext_iopaint.png",
       "module": "",
       "attr": "",
-      "path": "/launcher?project=iopaint&port=8002",
+      "path": "/launcher?project=iopaint",
+      "type": 1,
+      "status": 1
+    },
+    "3": {
+      "name": "AI \u56fe\u50cf\u751f\u6210",
+      "description": "Image Stable Diffusion",
+      "image": "../static/images/img_ext_sd.png",
+      "module": "",
+      "attr": "",
+      "path": "/launcher?project=stable-diffusion-webui",
       "type": 1,
       "status": 1
     },
@@ -36,7 +36,7 @@
       "image": "../static/images/img_indextts.png",
       "module": "index-tts",
       "attr": "",
-      "path": "/launcher?project=index-tts&port=8003",
+      "path": "/launcher?project=index-tts",
       "type": 1,
       "status": 1
     },

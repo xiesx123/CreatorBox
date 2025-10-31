@@ -111,21 +111,25 @@ def update(commit, tag, force):
 
 @cli.command(help="扩展安装 (Extensions installation)")
 @click.option("--name", "-n", default=None, required=True, help="Name of the extension to install")
-@click.option("--python", "-pv", default="3.10", help="Specify the Python version")
+@click.option("--version", "-v", default="3.10", help="Specify the Python version")
+@click.option("--port", "-p", type=int, default=None, show_default=True, required=True, help="The port number to use during the installation process.")
 @click.option("--start", is_flag=True, default=False, show_default=True, help="Start the extension immediately after installation")
-@click.option("--port", "-p", type=int, default=8001, show_default=True, required=True, help="The port number to use during the installation process. Default is 8001")
-def install(name, python, start, port):
+@click.option("--share", is_flag=True, default=False, show_default=True, help="Share the extension publicly after installation")
+def install(name, version, start, port, share):
     try:
         from src.utils.cbinstaller import Installer
 
-        installer = Installer.builder(name, python)
+        kwargs = {"share": share}
+        if port is not None:
+            kwargs["port"] = port
+        installer = Installer.builder(name, version, **kwargs)
         installer.create()
         click.echo(f"📦 Installing extension '{name}'...")
         installer.install()
         click.echo("✅ Installation complete.")
         if start:
             click.echo(f"🚀 Starting extension '{name}'...")
-            installer.start(port=port)
+            installer.start()
     except Exception as e:
         click.echo(f"❌ error: {str(e)}", err=True)
 
