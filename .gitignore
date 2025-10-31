@@ -14,11 +14,10 @@
 **/docs/package-lock.json
 
 ### CreatorBox ###
-extensions/
-logs/
-setup/
-models/
-webapp/
+extensions
+logs
+models
+webapp
 mapper.txt
 
 ### Exclude ###
