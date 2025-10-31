@@ -34,8 +34,8 @@
                 <div class="layui-colla-item">
                     <div class="layui-card layui-panel">
                         <div class="layui-colla-title">应用</div>
-                        <div class="layui-colla-content layui-show">
-                        </div>
+                        <!-- <div class="layui-colla-content layui-show">
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@
     {% raw %}
     <script type="text/html" id="TPL_table_status">
         <div class="layui-btn-container">
-            <input type="checkbox" name="status" value="{{= d.path }}" lay-skin="primary" lay-filter="switch_status_filter" {{= d.status == 1 || d.local == 0 ? "checked" : "" }}  {{= d.local == 0 ? "disabled" : "" }}>
+            <input type="checkbox" name="status" value="{{= d.path }}" lay-skin="primary" lay-filter="switch_status_filter" {{= d.status == 1 || d.local == 0 ? "checked" : "" }}  {{= d.local == 1 ? "disabled" : "" }}>
         </div>
     </script>
     {% endraw %}
@@ -84,7 +84,7 @@
             // var trans = layui.translate;
             var $ = layui.$;
 
-            var table_json = JSON.parse('{{ data.gradios | tojson }}')
+            var table_json = JSON.parse('{{ data.plugins | tojson }}')
 
             // 应用表格
             var inst = table.render({
@@ -94,7 +94,8 @@
                     curr: 1, //当前页码
                     groups: 5, //只显示 1 个连续页码
                     first: true, //不显示首页
-                    last: true //不显示尾页
+                    last: true, //不显示尾页
+                    limit:20,
                 },
                 request: {
                     pageName: 'page', limitName: 'size'
@@ -114,7 +115,7 @@
                     { title: '编号', sort: true, width: 80, align: "center", templet: d => '<div title="' + d.text + '">' + d.LAY_NUM + '</div>' },
                     { title: '名称', sort: true, width: 220, align: "left", field: 'name', templet: d => '<div title="' + d.name + '"> ' + d.name + '</div>' },
                     { title: '描述', sort: true, align: "left", align: "left", field: 'description', templet: d => '<div title="' + d.description + '">' + d.description + '</div>' },
-                    { title: "自启", sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_status" },
+                    { title: "显示", sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_status" },
                     { title: "操作", sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_tools" }
                 ]],
             });
@@ -175,7 +176,7 @@
                     scrollPos: 'fixed'
                 });
                 // 发送请求
-                tool.post("/gr/mounts", JSON.stringify({ "path": path, "module": module, "attr": attr, "status": status }), function (response) {
+                tool.post("/app/mounts", JSON.stringify({ "path": path, "module": module, "attr": attr, "status": status }), function (response) {
                     console.debug(response.data)
                     var status = response.data.status
                     if (status == 1) {

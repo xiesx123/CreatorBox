@@ -14,10 +14,9 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
     let TTS_AZUR = "azure"
     let TTS_EDGE = "edge"
     let TTS_ELAB = "elab"
+    let TTS_ITTS = "itts"
     let TTS_GTTS = "sovits"
     let TTS_COSY = "cosy"
-    let TTS_CTTS = "ctts"
-    let TTS_FTTS = "f5e2"
 
     // 数据
     var form_json = {}
@@ -84,8 +83,10 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
     var play_spk_sample = function () {
         const voice = voice_json[form_json.tts_voice]
         const path = voice["path"];
-        const url = '/file/local?url=' + path;
-        voice_play(url)
+        if (voice["duration"] > 0) {
+            const url = '/file/local?url=' + path;
+            voice_play(url)
+        }
     };
 
     // 请求参数
@@ -94,8 +95,8 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
         const tts_model = model || form_json?.tts_model;
         const tts_locale = locale || form_json?.locale;
         const tts_gender = gender !== undefined ? parseInt(gender) : parseInt(form_json?.tts_gender) || 1;
-        const video_url = $("#video_url").val();
-        const suffix = $("#suffix").val();
+        const video_url = $("#video_url").val() || form_json?.video_url;;
+        const suffix = $("#suffix").val() || form_json?.suffix;;
         const duration = form_json?.speaker_len || 5;
 
         return JSON.stringify({
@@ -147,7 +148,8 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                 html += `<optgroup id="${obj.type}" label="${obj.group} (${obj.item.length})">\n`;
                 obj.item.forEach(i => {
                     locale = i.locale || selected_locale || i18n.trans('type_unknown')
-                    html += `  <option value="${i.id}">` + (idx++) + "." + enums.gender(i.gender) + " - " + locale + " - " + i.speaker + `</option>\n`;
+                    speaker = i.id == 0 && i.type == 2 ? i18n.trans('tts_spk_voice_original') : i.speaker
+                    html += `  <option value="${i.id}">` + (idx++) + "." + enums.gender(i.gender) + " - " + locale + " - " + speaker + `</option>\n`;
                 });
                 html += `</optgroup>\n`;
             });
@@ -238,13 +240,13 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
             roles = voice_json[form_json.tts_voice].role
             form_json.tts_role = Array.isArray(roles) && roles.length > 0 ? roles[0] : null;
             $("#tts_role").empty();
-            $("#tts_role").append(optionHtml(roles,"role"));
+            $("#tts_role").append(optionHtml(roles, "role"));
             $('#tts_role option[value="' + form_json.tts_role + '"]').prop('selected', true);
 
             styles = voice_json[form_json.tts_voice].style
             form_json.tts_style = Array.isArray(styles) && styles.length > 0 ? styles[0] : null;
             $("#tts_style").empty();
-            $("#tts_style").append(optionHtml(styles,"style"));
+            $("#tts_style").append(optionHtml(styles, "style"));
             $('#tts_style option[value="' + form_json.tts_style + '"]').prop('selected', true);
 
             $('#tts_styledegree option[value="' + form_json.tts_styledegree + '"]').prop('selected', true);
@@ -257,21 +259,18 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
         else if (form_json.tts_provider == TTS_ELAB) {
             play_elab_sample()
         }
+        else if (form_json.tts_provider == TTS_ITTS) {
+            play_spk_sample()
+        }
         else if (form_json.tts_provider == TTS_GTTS) {
             styles = voice_json[form_json.tts_voice].style
             form_json.tts_style = Array.isArray(styles) && styles.length > 0 ? styles[0] : null;
             $("#tts_style").empty();
             $("#tts_style").append(optionHtml(styles));
             $('#tts_style option[value="' + form_json.tts_style + '"]').prop('selected', true);
-
             play_sovits_sample("style")
         }
         else if (form_json.tts_provider == TTS_COSY) {
-            play_spk_sample()
-        }
-        else if (form_json.tts_provider == TTS_CTTS) {
-        }
-        else if (form_json.tts_provider == TTS_FTTS) {
             play_spk_sample()
         }
         // 渲染页面
@@ -314,8 +313,6 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
             form_json.tts_rate = $('input[name="tts_rate"]').val();
             form_json.tts_pitch = $('input[name="tts_pitch"]').val();
             form_json.tts_instruct = $('input[name="tts_instruct"]').val()
-            form_json.tts_step = $('input[name="tts_step"]').val()
-            form_json.tts_vc = $('input[name="tts_vc"]').is(':checked')
             form_json.tts_seed = $('input[name="tts_seed"]').val()
             form_json.tts_remarks = $('input[name="tts_remarks"]').val();
             form_json.tts_text = $("#tts_text").val()
@@ -359,10 +356,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                         "styledegree": form_json.tts_styledegree,
                         // cosy
                         "instruct_text": form_json.tts_instruct,
-                        // f5e2
-                        "nfe_step": parseInt(form_json.tts_step),
                         // other
-                        "use_vc": form_json.tts_vc,
                         "seed": parseInt(form_json.tts_seed),
                         "file": $("#video_url").val(),
                         "suffix": $("#suffix").val()
@@ -376,7 +370,9 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                     const url = '/file/local?url=' + response.data.path;
                     const duration = response.data.duration;
                     const seed = response.data.seed;
-                    voice_play(url);
+                    if (parseInt(form_json.tts_voice) > 0) {
+                        voice_play(url);
+                    }
                     table_json.unshift({
                         provider: find_provider(form_json.tts_provider).provider,
                         // 
@@ -400,10 +396,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                         styledegree: form_json.tts_styledegree,
                         // cosy
                         instruct_text: form_json.tts_instruct,
-                        // f5e2
-                        nfe_step: form_json.tts_step,
                         // other
-                        use_vc: form_json.tts_vc,
                         seed: seed,
                     })
                     swapData(0, 0)
@@ -503,16 +496,14 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                 azure: $('#azure_div'),
                 edge: $('#edge_div'),
                 elab: $('#elab_div'),
+                itts: $('#itts_div'),
                 sovits: $('#sovits_div'),
                 cosy: $('#cosy_div'),
-                ctts: $('#ctts_div'),
-                f5e2: $('#f5e2_div'),
 
                 optPitch: $('#opt_pitch'),
                 optRole: $('#opt_role'),
                 optStyle: $('#opt_style'),
                 optStyleDegree: $('#opt_styledegree'),
-                optVc: $('#opt_vc'),
                 optSeed: $('#opt_seed'),
             };
             Object.values(divs).forEach(div => div.addClass('layui-hide'));
@@ -522,8 +513,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                 divs.optRole.toggleClass('layui-hide', ![TTS_AZUR].includes(provider));
                 divs.optStyle.toggleClass('layui-hide', ![TTS_AZUR, TTS_GTTS].includes(provider));
                 divs.optStyleDegree.toggleClass('layui-hide', ![TTS_AZUR].includes(provider));
-                // divs.optVc.toggleClass('layui-hide', ![TTS_COSY, TTS_CTTS].includes(provider));
-                divs.optSeed.toggleClass('layui-hide', ![TTS_ELAB, TTS_GTTS, TTS_COSY, TTS_CTTS, TTS_FTTS].includes(provider));
+                divs.optSeed.toggleClass('layui-hide', ![TTS_ELAB, TTS_ITTS, TTS_GTTS, TTS_COSY].includes(provider));
             }
             $('input[name="tts_model"]').prop("disabled", !model);
         }

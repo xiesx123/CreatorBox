@@ -509,9 +509,7 @@
                   <div class="layui-colla-content layui-show">
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label" id="video_speaker"
-                        lay-tips="{content: '{{ __.tts_spk_generate }}', margin: '0 0 0 -10px'}">{{ __.common_provider }} <span
-                          class="layui-badge-dot layui-bg-green"></span></label>
+                      <label class="layui-form-label"> {{ __.common_provider }} </label>
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-component"></i> </div>
@@ -612,6 +610,10 @@
                     <div class="layui-col-md12 layui-hide" id="elab_div">
                     </div>
 
+                    <!-- itts -->
+                    <div class="layui-col-md12 layui-hide" id="itts_div">
+                    </div>
+
                     <!-- sovits -->
                     <div class="layui-col-md12 layui-hide" id="sovits_div">
                     </div>
@@ -625,25 +627,6 @@
                             <div class="layui-input-prefix"> <i class="layui-icon layui-icon-note"></i> </div>
                             <input name="tts_instruct" placeholder="{{__.tts_instruct_placeholder}}" lay-affix="error"
                               class="layui-input"></input>
-                          </div>
-                        </div>
-                      </div>
-
-                    </div>
-                    
-                    <!-- ctts -->
-                    <div class="layui-col-md12 layui-hide" id="ctts_div">
-                    </div>
-
-                    <!-- f5e2 -->
-                    <div class="layui-col-md12 layui-hide" id="f5e2_div">
-
-                      <div class="layui-form-item">
-                        <label class="layui-form-label">{{ __.tts_step }}</label>
-                        <div class="layui-input-block">
-                          <div class="layui-input-inline">
-                            <input type="number" lay-verify="required" name="tts_step" placeholder="[4,64]"
-                              autocomplete="off" class="layui-input" min="4" max="64" step="1" lay-affix="number">
                           </div>
                         </div>
                       </div>
@@ -690,14 +673,6 @@
                             {% endfor %}
                           </select>
                         </div>
-                      </div>
-                    </div>
-
-                    <div class="layui-form-item layui-hide" pane id="opt_vc"
-                      lay-tips="{content: '{{__.tts_vc_tip}}', margin: '0 0 0 -10px'}">
-                      <label class="layui-form-label">{{ __.tts_vc }}</label>
-                      <div class="layui-input-block">
-                        <input type="checkbox" name="tts_vc" lay-skin="switch" lay-filter="switch_debug_filter">
                       </div>
                     </div>
 
@@ -938,6 +913,8 @@
       // 视频上传
       tool.upload("#video_upload", "file/upload", 'file', 'mp4|mkv|avi|mp3|wav|m4a', null, function (response) {
         $('[name="video_url"]').val(response.data.location)
+        // 切换语音角色
+        tts.setData(form_json, cache_table)
       })
 
       // 视频播放
