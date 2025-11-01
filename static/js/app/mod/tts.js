@@ -11,12 +11,12 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
 
     // 基础
     let CREATORBOX = "dubbing"
-    let TTS_AZUR = "azure"
     let TTS_EDGE = "edge"
+    let TTS_AZUR = "azure"
     let TTS_ELAB = "elab"
-    let TTS_ITTS = "itts"
-    let TTS_GTTS = "sovits"
     let TTS_COSY = "cosy"
+    let TTS_ITTS = "itts"
+    let TTS_GTTS = "gtts"
 
     // 数据
     var form_json = {}
@@ -236,7 +236,10 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
             });
             return html;
         };
-        if (form_json.tts_provider == TTS_AZUR) {
+        if (form_json.tts_provider == TTS_EDGE) {
+            play_azure_sample("role")
+        }
+        else if (form_json.tts_provider == TTS_AZUR) {
             roles = voice_json[form_json.tts_voice].role
             form_json.tts_role = Array.isArray(roles) && roles.length > 0 ? roles[0] : null;
             $("#tts_role").empty();
@@ -251,9 +254,6 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
 
             $('#tts_styledegree option[value="' + form_json.tts_styledegree + '"]').prop('selected', true);
 
-            play_azure_sample("role")
-        }
-        else if (form_json.tts_provider == TTS_EDGE) {
             play_azure_sample("role")
         }
         else if (form_json.tts_provider == TTS_ELAB) {
@@ -280,7 +280,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
     // 角色选择
     form.on('select(tts_role_filter)', function (data) {
         form_json.tts_role = data.elem.value
-        if ([TTS_AZUR, TTS_EDGE].includes(form_json.tts_provider)) {
+        if ([TTS_EDGE, TTS_AZUR].includes(form_json.tts_provider)) {
             play_azure_sample("role", form_json.tts_role)
         } else if (form_json.tts_provider == TTS_GTTS) {
             play_sovits_sample("role", form_json.tts_role)
@@ -291,7 +291,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
     form.on('select(tts_style_filter)', function (data) {
         form_json.tts_style = data.elem.value
         form_json.tts_role = data.elem.value
-        if ([TTS_AZUR, TTS_EDGE].includes(form_json.tts_provider)) {
+        if ([TTS_EDGE, TTS_AZUR].includes(form_json.tts_provider)) {
             play_azure_sample("style", form_json.tts_role);
         } else if (form_json.tts_provider === TTS_GTTS) {
             play_sovits_sample("style", form_json.tts_role);
@@ -355,7 +355,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                         "style": form_json.tts_style,
                         "styledegree": form_json.tts_styledegree,
                         // cosy
-                        "instruct_text": form_json.tts_instruct,
+                        "instruct": form_json.tts_instruct,
                         // other
                         "seed": parseInt(form_json.tts_seed),
                         "file": $("#video_url").val(),
@@ -370,7 +370,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                     const url = '/file/local?url=' + response.data.path;
                     const duration = response.data.duration;
                     const seed = response.data.seed;
-                    if (parseInt(form_json.tts_voice) > 0) {
+                    if (form_json.tts_voice != "0") {
                         voice_play(url);
                     }
                     table_json.unshift({
@@ -395,7 +395,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                         style: form_json.tts_style,
                         styledegree: form_json.tts_styledegree,
                         // cosy
-                        instruct_text: form_json.tts_instruct,
+                        instruct: form_json.tts_instruct,
                         // other
                         seed: seed,
                     })
@@ -500,20 +500,24 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                 sovits: $('#sovits_div'),
                 cosy: $('#cosy_div'),
 
+                ontRate: $('#opt_rate'),
                 optPitch: $('#opt_pitch'),
                 optRole: $('#opt_role'),
                 optStyle: $('#opt_style'),
                 optStyleDegree: $('#opt_styledegree'),
+                optInstruct: $('#opt_instruct'),
                 optSeed: $('#opt_seed'),
             };
             Object.values(divs).forEach(div => div.addClass('layui-hide'));
             if (provider in divs) {
                 divs[provider].removeClass('layui-hide');
-                divs.optPitch.toggleClass('layui-hide', ![TTS_AZUR, TTS_EDGE].includes(provider));
+                divs.ontRate.toggleClass('layui-hide', ![TTS_EDGE, TTS_AZUR, TTS_ELAB, TTS_COSY].includes(provider));
+                divs.optPitch.toggleClass('layui-hide', ![TTS_EDGE, TTS_AZUR].includes(provider));
                 divs.optRole.toggleClass('layui-hide', ![TTS_AZUR].includes(provider));
                 divs.optStyle.toggleClass('layui-hide', ![TTS_AZUR, TTS_GTTS].includes(provider));
                 divs.optStyleDegree.toggleClass('layui-hide', ![TTS_AZUR].includes(provider));
-                divs.optSeed.toggleClass('layui-hide', ![TTS_ELAB, TTS_ITTS, TTS_GTTS, TTS_COSY].includes(provider));
+                divs.optInstruct.toggleClass('layui-hide', ![TTS_COSY].includes(provider));
+                divs.optSeed.toggleClass('layui-hide', ![TTS_ELAB, TTS_COSY, TTS_GTTS].includes(provider));
             }
             $('input[name="tts_model"]').prop("disabled", !model);
         }
