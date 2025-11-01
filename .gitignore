@@ -21,8 +21,10 @@ mapper.txt
 
 ### Exclude ###
 !r3.exe
-!webapp/data/plugins.json
 !webapp/data/azure_*
+!webapp/data/iopaint.json
+!webapp/data/plugins.json
+!webapp/data/tts.json
 static/i18n/babel.*
 static/i18n/messages.pot
 
