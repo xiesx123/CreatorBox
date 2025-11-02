@@ -10,14 +10,16 @@
 
 [![Discord](https://img.shields.io/badge/Discord-Online-44CC11?logo=discord&logoColor=white&)](https://discord.gg/kt6JWax3P6)
 [![VitePress](https://img.shields.io/badge/VitePress-Doc-3E63DD?logo=markdown)](https://xiesx123.github.io/CreatorBox)
-[![Colab](https://img.shields.io/badge/Colab-Launch-yellow?logo=googlecolab)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
 [![Kaggle](https://img.shields.io/badge/Kaggle-Launch-20BEFF?logo=kaggle)](https://www.kaggle.com/code/xiesx123)
+[![Colab](https://img.shields.io/badge/Colab-Launch-yellow?logo=googlecolab)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
 
 <h3>English | <a href="README_ZH.md">中文</a></h3>
 
 🚀🎬 Flexible, efficient, and scalable toolbox for editing and dubbing, unleashing creative potential
 
 <h4>Web Interface</h4>
+
+![](https://xiesx123.github.io/CreatorBox/images/readme_dashboard.png)
 
 ![](https://xiesx123.github.io/CreatorBox/images/readme_main_en.png)
 
@@ -93,13 +95,7 @@
 
 👉 Installation and Deployment Guide: [Local Installation](https://xiesx123.github.io/CreatorBox/deploy-local) | [Remote Deployment](https://xiesx123.github.io/CreatorBox/deploy-colab) 
 
-👉 Development and Integration Guide: [Gradio Apps](https://xiesx123.github.io/CreatorBox/gradio)
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://xiesx123.github.io/CreatorBox/images/gradio_dashboard_dark.png" />
-  <source media="(prefers-color-scheme: light)" srcset="https://xiesx123.github.io/CreatorBox/images/gradio_dashboard_light.png" />
-  <img alt="Gradio App Dashboard" src="https://xiesx123.github.io/CreatorBox/images/gradio_dashboard_light.png" />
-</picture>
+👉 Development and Integration Guide: [Gradio Apps](https://xiesx123.github.io/CreatorBox/plugin)
 
 ## 🎨 Applicable Scenarios
 
