@@ -1,0 +1,9 @@
+[submodule "extensions/iopaint"]
+	path = extensions/iopaint
+	url = https://github.com/Sanster/IOPaint.git
+[submodule "extensions/stable-diffusion-webui"]
+	path = extensions/stable-diffusion-webui
+	url = https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
+[submodule "extensions/index-tts"]
+	path = extensions/index-tts
+	url = https://github.com/index-tts/index-tts.git

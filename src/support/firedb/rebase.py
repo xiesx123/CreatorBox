@@ -1,3 +1,9 @@
+import os
+import sys
+
+sys.path.insert(0, os.getcwd())
+sys.path.insert(0, os.path.dirname(os.getcwd()))
+
 import datetime
 import json
 import math
@@ -423,10 +429,7 @@ class Database:
 
 
 class Storage:
-
-    from gcloud import storage
-
-    """ Storage Service """
+    """Storage Service"""
 
     def __init__(self, credentials, storage_bucket, requests):
         self.storage_bucket = "https://firebasestorage.googleapis.com/v0/b/" + storage_bucket
@@ -434,6 +437,8 @@ class Storage:
         self.requests = requests
         self.path = ""
         if credentials:
+            from gcloud import storage
+
             client = storage.Client(credentials=credentials, project=storage_bucket)
             self.bucket = client.get_bucket(storage_bucket)
 

@@ -246,7 +246,7 @@ msgstr "Enter an identifier suffix"
 msgid "scene_video_url"
 msgstr "Video"
 
-#: src/router/i18n.py:81 static/templates/index.html:130
+#: src/router/i18n.py:81 static/templates/dubbing.html:106
 msgid "scene_video_url_placeholder"
 msgstr "Enter audio/video path or link"
 

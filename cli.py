@@ -7,11 +7,7 @@ sys.path.insert(0, os.path.dirname(os.getcwd()))
 import subprocess
 import traceback
 
-try:
-    import click
-except:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "click"])
-    import click
+import click
 
 
 @click.group()
@@ -113,39 +109,29 @@ def update(commit, tag, force):
         click.echo(f"❌ error: {str(e)}", err=True)
 
 
-@cli.command(help="依赖安装 (Dependency installation)")
-@click.option("--files", "-f", multiple=True, help="Path(s) to requirements.txt file(s). Can specify multiple.")
-def install(files):
+@cli.command(help="扩展安装 (Extensions installation)")
+@click.option("--name", "-n", default=None, required=True, help="Name of the extension to install")
+@click.option("--version", "-v", default="3.10", help="Specify the Python version")
+@click.option("--port", "-p", type=int, default=None, show_default=True, required=True, help="The port number to use during the installation process.")
+@click.option("--start", is_flag=True, default=False, show_default=True, help="Start the extension immediately after installation")
+@click.option("--share", is_flag=True, default=False, show_default=True, help="Share the extension publicly after installation")
+def install(name, version, start, port, share):
     try:
-        from pathlib import Path
+        from src.utils.cbinstaller import Installer
 
-        from src.utils import cbruntime
-
-        checker = cbruntime.check_pip(print=True, len=0)
-        if not checker.get_version():
-            click.echo("❌ pip is not available. Please install pip first.", err=True)
-            return
-        if not files:
-            default_file = Path("requirements.txt")
-            if not default_file.exists():
-                click.echo("❌ No requirements.txt found in current directory.", err=True)
-                return
-            files = (str(default_file),)
-
-        for file in files:
-            if not Path(file).exists():
-                click.echo(f"⚠️ File not found: {file}", err=True)
-                continue
-            click.echo(f"📦 Installing from {file}...")
-            subprocess.run(["pip", "install", "-r", file], check=True)
-            click.echo("✅ Installation complete.")
-            _package = cbruntime.get_environment_package(file)
-            click.echo("Environment Info:\n" + "\n".join([f"-  {cbruntime.pad_string(k, length=25,align='left')}: {v}" for k, v in _package.items()]))
-
-    except subprocess.CalledProcessError as e:
-        click.echo("❌ Installation failed", err=True)
+        kwargs = {"share": share}
+        if port is not None:
+            kwargs["port"] = port
+        installer = Installer.builder(name, version, **kwargs)
+        installer.create()
+        click.echo(f"📦 Installing extension '{name}'...")
+        installer.install()
+        click.echo("✅ Installation complete.")
+        if start:
+            click.echo(f"🚀 Starting extension '{name}'...")
+            installer.start()
     except Exception as e:
-        click.echo(f"❌ Unexpected error: {str(e)}", err=True)
+        click.echo(f"❌ error: {str(e)}", err=True)
 
 
 @cli.command(help="网络代理 (Proxy settings)")
