@@ -22,7 +22,7 @@
     },
     "3": {
       "name": "AI \u56fe\u50cf\u751f\u6210",
-      "description": "Image Stable Diffusion",
+      "description": "Stable Diffusion",
       "image": "../static/images/img_ext_sd.png",
       "module": "",
       "attr": "",
