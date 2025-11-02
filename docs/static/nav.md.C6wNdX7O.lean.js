@@ -1,0 +1,6 @@
+import{N as u}from"./chunks/nav.css_vue_type_style_index_0_src_true_lang.CbER3oXG.js";import{C as s,c as l,o as t,j as e,G as m,a as n,F as f,B as v,b as c,k as p}from"./chunks/framework.zsPSsrbh.js";const k=JSON.parse('{"title":"Navigation","description":"","frontmatter":{},"headers":[],"relativePath":"nav.md","filePath":"nav.md","lastUpdated":1762081139000}'),N={name:"nav.md"},x=Object.assign(N,{setup(b){return(y,a)=>{const o=s("NolebasePageProperties"),r=s("NavLinks");return t(),l("div",null,[a[0]||(a[0]=e("h2",{id:"s-layout-doclayoutclass-m-nav-layoutsidebar-falseprev-falsenext-false",tabindex:"-1"},[n("s--- layout: doc layoutClass: m-nav-layout sidebar: false prev: false next: false "),e("a",{class:"header-anchor",href:"#s-layout-doclayoutclass-m-nav-layoutsidebar-falseprev-falsenext-false","aria-label":`Permalink to "s---
+layout: doc
+layoutClass: m-nav-layout
+sidebar: false
+prev: false
+next: false"`},"​")],-1)),a[1]||(a[1]=e("h1",{id:"navigation",tabindex:"-1"},[n("Navigation "),e("a",{class:"header-anchor",href:"#navigation","aria-label":'Permalink to "Navigation"'},"​")],-1)),m(o),a[2]||(a[2]=e("blockquote",null,[e("p",null,"Frequently Used Tools & Link Navigation")],-1)),(t(!0),l(f,null,v(p(u),({title:i,items:d})=>(t(),c(r,{title:i,items:d},null,8,["title","items"]))),256))])}}});export{k as __pageData,x as default};
