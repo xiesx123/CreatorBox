@@ -5,7 +5,7 @@ echo %CREATORBOX_HOME%
 
 ::---------------------------------------------------------------------------------------------
 :: Aria2
-set ARIA2_HOME=%CREATORBOX_HOME%aria2
+set ARIA2_HOME=%CREATORBOX_HOME%\aria2
 :: FFmpeg   (e.g.D:\Program Files\CreatorBox\ffmpeg)
 set FFMPEG_HOME=%CREATORBOX_HOME%\ffmpeg
 :: Git      (e.g.D:\Program Files\CreatorBox\git)
