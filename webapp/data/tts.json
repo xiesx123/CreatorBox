@@ -1,19 +1,21 @@
 {
-    "index-tts": {
-      "lang": "en_US",
-      "emo_control_weight":1,
-      "emo_vector":0.8,
-      "emo_text":"",
-      "emo_random": false,
-      "max_text_tokens_per_segment": 120,
-      "do_sample": true,
-      "top_p": 0.8,
-      "top_k": 30,
-      "temperature": 0.8,
-      "length_penalty": 0,
-      "num_beams": 3,
-      "repetition_penalty": 10,
-      "max_mel_tokens": 1500
-    }
+  "cosyvoice": {
+    "model_dir": ""
+  },
+  "index-tts": {
+    "lang": "en_US",
+    "emo_control_weight": 1,
+    "emo_vector": 0.8,
+    "emo_text": "",
+    "emo_random": false,
+    "max_text_tokens_per_segment": 120,
+    "do_sample": true,
+    "top_p": 0.8,
+    "top_k": 30,
+    "temperature": 0.8,
+    "length_penalty": 0,
+    "num_beams": 3,
+    "repetition_penalty": 10,
+    "max_mel_tokens": 1500
   }
-  
+}
