@@ -516,7 +516,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                 divs.optRole.toggleClass('layui-hide', ![TTS_AZUR].includes(provider));
                 divs.optStyle.toggleClass('layui-hide', ![TTS_AZUR, TTS_GTTS].includes(provider));
                 divs.optStyleDegree.toggleClass('layui-hide', ![TTS_AZUR].includes(provider));
-                divs.optInstruct.toggleClass('layui-hide', ![TTS_COSY].includes(provider));
+                divs.optInstruct.toggleClass('layui-hide', ![].includes(provider));
                 divs.optSeed.toggleClass('layui-hide', ![TTS_ELAB, TTS_COSY, TTS_GTTS].includes(provider));
             }
             $('input[name="tts_model"]').prop("disabled", !model);
