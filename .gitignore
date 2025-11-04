@@ -26,6 +26,7 @@ mapper.txt
 !webapp/data/plugins.json
 !webapp/data/tts.json
 !webapp/images/iopaint
+!webapp/extensions/
 static/i18n/babel.*
 static/i18n/messages.pot
 
