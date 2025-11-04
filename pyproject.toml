@@ -11,7 +11,7 @@ dependencies = [
     "babel==2.17.0",
     "click==8.3.0",
     "dashscope==1.23.5",
-    "edge-tts==7.2.3",
+    "edge-tts==7.2.1",
     "elevenlabs==2.14.0",
     "fast-langdetect==0.3.2",
     "fastapi==0.116.1",
