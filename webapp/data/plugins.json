@@ -33,7 +33,7 @@
     "4": {
       "name": "AI \u8bed\u97f3\u5408\u6210",
       "description": "CosyVoice",
-      "image": "../static/images/img_cosyvoice.png",
+      "image": "../static/images/img_ext_cosyvoice.png",
       "module": "index-tts",
       "attr": "",
       "path": "/launcher?project=cosyvoice",
@@ -43,7 +43,7 @@
     "5": {
       "name": "AI \u8bed\u97f3\u5408\u6210",
       "description": "IndexTTS2",
-      "image": "../static/images/img_indextts.png",
+      "image": "../static/images/img_ext_indextts.png",
       "module": "index-tts",
       "attr": "",
       "path": "/launcher?project=index-tts",
