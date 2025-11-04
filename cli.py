@@ -4,7 +4,6 @@ import sys
 sys.path.insert(0, os.getcwd())
 sys.path.insert(0, os.path.dirname(os.getcwd()))
 
-import subprocess
 import traceback
 
 import click
@@ -19,7 +18,6 @@ def cli():
 
     https://github.com/xiesx123/CreatorBox
     """
-    pass
 
 
 @cli.command(help="启动服务 (Start service)")
@@ -73,40 +71,6 @@ def start(host, port, debug, open, ngrok, ngrok_host, ngrok_port):
     except Exception as e:
         click.echo(f"❌ error: {str(e)}", err=True)
         traceback.print_exc()
-
-
-@cli.command(help="检查更新 (Check for updates)")
-@click.option("--commit", "-c", default=None, help="Specify the Git commit hash to checkout.")
-@click.option("--tag", "-t", default=None, help="Specify the Git tag to checkout.")
-@click.option("--force", is_flag=True, default=False, show_default=True, help="Force sync with remote (discard local changes).")
-def update(commit, tag, force):
-    try:
-        from src.utils import cbruntime
-
-        checker = cbruntime.check_git(print=True, len=0)
-        if not checker.get_version():
-            click.echo("❌ git is not available. Please install git first.", err=True)
-            return
-        if commit and tag:
-            click.echo("❌ Cannot use --hash and --tag together.", err=True)
-            return
-        subprocess.run(["git", "fetch", "--all"], check=True)
-        if commit:
-            click.echo(f"📦 Checking out to commit: {commit}")
-            result = subprocess.run(["git", "checkout", commit], capture_output=True, text=True, encoding="utf-8", check=True)
-        elif tag:
-            click.echo(f"📦 Checking out to tag: {tag}")
-            result = subprocess.run(["git", "checkout", "tags/" + tag], capture_output=True, text=True, encoding="utf-8", check=True)
-        elif force:
-            click.echo(f"📦 Force resetting to origin/master...")
-            result = subprocess.run(["git", "reset", "--hard", "origin/master"], capture_output=True, text=True, encoding="utf-8", check=True)
-        else:
-            click.echo("📥 Pulling latest changes from remote...")
-            result = subprocess.run(["git", "pull"], capture_output=True, text=True, encoding="utf-8", check=True)
-        output = result.stdout.strip() + "\n" + result.stderr.strip()
-        click.echo(output)
-    except Exception as e:
-        click.echo(f"❌ error: {str(e)}", err=True)
 
 
 @cli.command(help="扩展安装 (Extensions installation)")
