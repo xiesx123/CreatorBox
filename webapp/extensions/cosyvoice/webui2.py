@@ -14,7 +14,7 @@
 import os
 import sys
 import argparse
-import gradio as gr
+# import gradio as gr
 import numpy as np
 import torch
 import torchaudio
@@ -25,6 +25,8 @@ sys.path.append('{}/third_party/Matcha-TTS'.format(ROOT_DIR))
 from cosyvoice.cli.cosyvoice import CosyVoice, CosyVoice2
 from cosyvoice.utils.file_utils import load_wav, logging
 from cosyvoice.utils.common import set_all_random_seed
+
+import gradio as gr #真tm是巨坑
 
 inference_mode_list = ['预训练音色', '3s极速复刻', '跨语种复刻', '自然语言控制']
 instruct_dict = {'预训练音色': '1. 选择预训练音色\n2. 点击生成音频按钮',
