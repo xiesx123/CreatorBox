@@ -1,0 +1,382 @@
+#: static/templates/dubbing.html:328
+msgid "asr_align_enable"
+msgstr "声纹对齐"
+
+#: static/templates/dubbing.html:230
+msgid "asr_draft_name"
+msgstr "草稿"
+
+#: static/templates/dubbing.html:335
+msgid "asr_emotion_enable"
+msgstr "情感识别"
+
+#: static/templates/dubbing.html:350
+msgid "asr_speaker_range"
+msgstr "说话人区间"
+
+#: static/templates/dubbing.html:342
+msgid "asr_speaker_use_num"
+msgstr "说话人数量"
+
+#: static/templates/dubbing.html:215
+msgid "asr_subtitle_file"
+msgstr "字幕"
+
+#: static/templates/dubbing.html:221 static/templates/dubbing.html:883
+msgid "asr_subtitle_placeholder"
+msgstr "请输入字幕文件路径（SRT）"
+
+#: static/templates/dubbing.html:313
+msgid "asr_uvr"
+msgstr "音轨分离"
+
+#: static/templates/dubbing.html:295
+msgid "asr_whisper_length"
+msgstr "连贯性"
+
+#: static/templates/dubbing.html:263
+msgid "asr_whisper_size"
+msgstr "准确性"
+
+#: static/templates/dubbing.html:279
+msgid "asr_whisper_temperature"
+msgstr "随机性"
+
+#: static/templates/dubbing.html:548 static/templates/dubbing.html:550
+msgid "common_gender_female"
+msgstr "女"
+
+#: static/templates/dubbing.html:543 static/templates/dubbing.html:545
+msgid "common_gender_male"
+msgstr "男"
+
+#: static/templates/dubbing.html:113
+msgid "common_locale"
+msgstr "地区"
+
+#: static/templates/dubbing.html:150
+msgid "common_options"
+msgstr "选项"
+
+#: static/templates/dubbing.html:152
+msgid "common_preview"
+msgstr "预览"
+
+#: static/templates/dubbing.html:198 static/templates/dubbing.html:394
+#: static/templates/dubbing.html:512
+msgid "common_provider"
+msgstr "提供商"
+
+#: static/templates/dubbing.html:153
+msgid "common_rebuild"
+msgstr "重构"
+
+#: static/templates/dubbing.html:118 static/templates/dubbing.html:235
+#: static/templates/dubbing.html:253 static/templates/dubbing.html:268
+#: static/templates/dubbing.html:284 static/templates/dubbing.html:300
+#: static/templates/dubbing.html:318 static/templates/dubbing.html:562
+#: static/templates/dubbing.html:633 static/templates/dubbing.html:646
+msgid "common_select_or_search"
+msgstr "选择或搜索"
+
+#: static/templates/dubbing.html:796
+msgid "common_submit"
+msgstr "执行"
+
+#: static/templates/dubbing.html:100 static/templates/dubbing.html:215
+msgid "common_upload"
+msgstr "上传"
+
+#: static/templates/dubbing.html:191 static/templates/dubbing.html:387
+msgid "debug"
+msgstr "调试"
+
+#: static/templates/dubbing.html:190 static/templates/dubbing.html:386
+msgid "debug_interrupt_alert"
+msgstr "开启调试会中断后续步骤"
+
+#: static/templates/dubbing.html:904
+#, fuzzy
+msgid "draft_name_placeholder"
+msgstr "请输入模型名称"
+
+#: static/templates/dubbing.html:508
+msgid "dub_dubbing"
+msgstr "配音"
+
+#: static/templates/dubbing.html:95
+msgid "dub_scene"
+msgstr "基础"
+
+#: static/templates/dubbing.html:727
+msgid "dub_setting"
+msgstr "其他"
+
+#: static/templates/dubbing.html:182
+msgid "dub_subtitle"
+msgstr "字幕"
+
+#: static/templates/dubbing.html:382
+msgid "dub_translation"
+msgstr "翻译"
+
+#: static/templates/dubbing.html:484
+msgid "llm_batch_size"
+msgstr "批量"
+
+#: static/templates/dubbing.html:402 static/templates/dubbing.html:520
+msgid "llm_configured"
+msgstr "已配置"
+
+#: static/templates/dubbing.html:399
+msgid "llm_ignore"
+msgstr "忽略"
+
+#: static/templates/dubbing.html:473
+msgid "llm_instruct"
+msgstr "指令"
+
+#: static/templates/dubbing.html:475
+msgid "llm_instruction_placeholder"
+msgstr "【去掉结尾的标点】、【阿拉伯数字使用中文代替】等等"
+
+#: static/templates/dubbing.html:443
+msgid "llm_temperature"
+msgstr "随机性"
+
+#: static/templates/dubbing.html:454
+msgid "llm_top_p"
+msgstr "多样性"
+
+#: static/templates/dubbing.html:466
+msgid "llm_use_cache"
+msgstr "缓存"
+
+#: static/templates/dubbing.html:465
+msgid "llm_use_cache_tip"
+msgstr "启用可避免重复请求，防止消耗额外Token"
+
+#: static/templates/dubbing.html:412
+msgid "llm_use_oritxt"
+msgstr "使用原文"
+
+#: static/templates/dubbing.html:248 static/templates/dubbing.html:432
+#: static/templates/dubbing.html:529
+msgid "model"
+msgstr "模型"
+
+#: static/templates/dubbing.html:436 static/templates/dubbing.html:533
+msgid "model_placeholder"
+msgstr "请输入模型名称"
+
+#: static/templates/dubbing.html:74
+msgid "nav_editor"
+msgstr "数据编辑"
+
+#: static/templates/dubbing.html:71
+msgid "nav_group_assist"
+msgstr "辅助"
+
+#: static/templates/dubbing.html:64
+msgid "nav_group_feature"
+msgstr "功能"
+
+#: static/templates/dubbing.html:76
+msgid "nav_play"
+msgstr "视频播放"
+
+#: static/templates/dubbing.html:67
+msgid "nav_speaker"
+msgstr "音色管理"
+
+#: static/templates/dubbing.html:140
+msgid "scene_align_type"
+msgstr "对齐"
+
+#: static/templates/dubbing.html:129
+msgid "scene_mode_type"
+msgstr "模式"
+
+#: static/templates/dubbing.html:158
+msgid "scene_suffix"
+msgstr "后缀"
+
+#: static/templates/dubbing.html:163 static/templates/dubbing.html:1056
+msgid "scene_suffix_placeholder"
+msgstr "请输入后缀"
+
+#: static/templates/dubbing.html:100
+msgid "scene_video_url"
+msgstr "视频"
+
+#: static/templates/dubbing.html:106 static/templates/dubbing.html:876
+#: static/templates/dubbing.html:923 static/templates/dubbing.html:1052
+msgid "scene_video_url_placeholder"
+msgstr "请输入音视频路径或链接"
+
+#: static/templates/dubbing.html:756
+msgid "setting_silence"
+msgstr "静音检测"
+
+#: static/templates/dubbing.html:780
+msgid "setting_silence_tips"
+msgstr "检测阈值、最小时长、保留时长"
+
+#: static/templates/dubbing.html:745
+msgid "setting_volume_background"
+msgstr "背景音量"
+
+#: static/templates/dubbing.html:733
+msgid "setting_volume_native"
+msgstr "原始音量"
+
+#: static/templates/dubbing.html:818
+msgid "table_tools_delete"
+msgstr "删除"
+
+#: static/templates/speaker.html:136
+msgid "table_tools_download"
+msgstr "下载"
+
+#: static/templates/speaker.html:134
+msgid "table_tools_edit"
+msgstr "编辑"
+
+#: static/templates/dubbing.html:820
+msgid "table_tools_move_down"
+msgstr "下移"
+
+#: static/templates/dubbing.html:819
+msgid "table_tools_move_up"
+msgstr "上移"
+
+#: static/templates/dubbing.html:817 static/templates/speaker.html:135
+msgid "table_tools_preview"
+msgstr "试听"
+
+#: static/templates/dubbing.html:540
+msgid "tts_gender"
+msgstr "性别"
+
+#: static/templates/dubbing.html:669
+msgid "tts_instruct"
+msgstr "指令"
+
+#: static/templates/dubbing.html:673
+msgid "tts_instruct_placeholder"
+msgstr "【地区方言】、【角色扮演】、【说话风格】等等"
+
+#: static/templates/dubbing.html:591
+msgid "tts_pitch"
+msgstr "语调"
+
+#: static/templates/dubbing.html:705
+msgid "tts_preview"
+msgstr "试听"
+
+#: static/templates/dubbing.html:704
+msgid "tts_preview_click"
+msgstr "点击试听"
+
+#: static/templates/dubbing.html:627 static/templates/dubbing.html:640
+#: static/templates/dubbing.html:653
+msgid "tts_preview_select"
+msgstr "选择试听"
+
+#: static/templates/dubbing.html:580
+msgid "tts_rate"
+msgstr "语速"
+
+#: static/templates/dubbing.html:692
+msgid "tts_remarks"
+msgstr "备注"
+
+#: static/templates/dubbing.html:696
+msgid "tts_remarks_placeholder"
+msgstr "随便写点什么"
+
+#: static/templates/dubbing.html:628
+msgid "tts_role"
+msgstr "角色扮演"
+
+#: static/templates/dubbing.html:681
+msgid "tts_seed"
+msgstr "种子"
+
+#: static/templates/dubbing.html:685
+msgid "tts_seed_placeholder"
+msgstr "请输入随机种子"
+
+#: static/templates/dubbing.html:680
+msgid "tts_seed_tip"
+msgstr "控制结果可复现"
+
+#: static/templates/dubbing.html:641
+msgid "tts_style"
+msgstr "说话风格"
+
+#: static/templates/dubbing.html:654
+msgid "tts_styledegree"
+msgstr "风格强度"
+
+#: static/templates/dubbing.html:707 static/templates/dubbing.html:708
+#: static/templates/dubbing.html:897
+msgid "tts_text_placeholder"
+msgstr "请输入试听文本"
+
+#: static/templates/dubbing.html:556
+msgid "tts_voice"
+msgstr "音色"
+
+#: static/templates/dubbing.html:569
+msgid "tts_volume"
+msgstr "音量"
+
+#~ msgid "common_run_running"
+#~ msgstr "运行中"
+
+#~ msgid "common_run_starting"
+#~ msgstr "启动中"
+
+#~ msgid "common_run_stopped"
+#~ msgstr "未运行"
+
+#~ msgid "common_run_stopping"
+#~ msgstr "停止运行"
+
+#~ msgid "nav_discord"
+#~ msgstr "加入社区"
+
+#~ msgid "nav_group_doc"
+#~ msgstr "文档"
+
+#~ msgid "nav_masker_painter"
+#~ msgstr "遮罩绘制"
+
+#~ msgid "nav_masker_remove"
+#~ msgstr "遮罩去除"
+
+#~ msgid "nav_plugins"
+#~ msgstr "组件应用"
+
+#~ msgid "nav_set"
+#~ msgstr "偏好设置"
+
+#~ msgid "nav_swagger"
+#~ msgstr "接口文档"
+
+#~ msgid "nav_vitepress"
+#~ msgstr "使用文档"
+
+#~ msgid "tts_step"
+#~ msgstr "采样步数"
+
+#~ msgid "tts_spk_generate"
+#~ msgstr "点击生成视频说话人音色"
+
+#~ msgid "tts_vc"
+#~ msgstr "转换"
+
+#~ msgid "tts_vc_tip"
+#~ msgstr "将来源声音转换为目标的声音"
+

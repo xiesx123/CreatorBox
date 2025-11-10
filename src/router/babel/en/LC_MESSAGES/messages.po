@@ -1,0 +1,382 @@
+#: static/templates/dubbing.html:328
+msgid "asr_align_enable"
+msgstr "Alignment"
+
+#: static/templates/dubbing.html:230
+msgid "asr_draft_name"
+msgstr "Draft"
+
+#: static/templates/dubbing.html:335
+msgid "asr_emotion_enable"
+msgstr "Emotion"
+
+#: static/templates/dubbing.html:350
+msgid "asr_speaker_range"
+msgstr "Spk Range"
+
+#: static/templates/dubbing.html:342
+msgid "asr_speaker_use_num"
+msgstr "Spk Count"
+
+#: static/templates/dubbing.html:215
+msgid "asr_subtitle_file"
+msgstr "Subtitle"
+
+#: static/templates/dubbing.html:221 static/templates/dubbing.html:883
+msgid "asr_subtitle_placeholder"
+msgstr "Enter subtitle file path (SRT)"
+
+#: static/templates/dubbing.html:313
+msgid "asr_uvr"
+msgstr "Separation"
+
+#: static/templates/dubbing.html:295
+msgid "asr_whisper_length"
+msgstr "Coherence"
+
+#: static/templates/dubbing.html:263
+msgid "asr_whisper_size"
+msgstr "Accuracy"
+
+#: static/templates/dubbing.html:279
+msgid "asr_whisper_temperature"
+msgstr "Randomness"
+
+#: static/templates/dubbing.html:548 static/templates/dubbing.html:550
+msgid "common_gender_female"
+msgstr "Female"
+
+#: static/templates/dubbing.html:543 static/templates/dubbing.html:545
+msgid "common_gender_male"
+msgstr "Male"
+
+#: static/templates/dubbing.html:113
+msgid "common_locale"
+msgstr "Locale"
+
+#: static/templates/dubbing.html:150
+msgid "common_options"
+msgstr "Options"
+
+#: static/templates/dubbing.html:152
+msgid "common_preview"
+msgstr "Preview"
+
+#: static/templates/dubbing.html:198 static/templates/dubbing.html:394
+#: static/templates/dubbing.html:512
+msgid "common_provider"
+msgstr "Provider"
+
+#: static/templates/dubbing.html:153
+msgid "common_rebuild"
+msgstr "Rebuild"
+
+#: static/templates/dubbing.html:118 static/templates/dubbing.html:235
+#: static/templates/dubbing.html:253 static/templates/dubbing.html:268
+#: static/templates/dubbing.html:284 static/templates/dubbing.html:300
+#: static/templates/dubbing.html:318 static/templates/dubbing.html:562
+#: static/templates/dubbing.html:633 static/templates/dubbing.html:646
+msgid "common_select_or_search"
+msgstr "Select or Search"
+
+#: static/templates/dubbing.html:796
+msgid "common_submit"
+msgstr "Execute"
+
+#: static/templates/dubbing.html:100 static/templates/dubbing.html:215
+msgid "common_upload"
+msgstr "Upload"
+
+#: static/templates/dubbing.html:191 static/templates/dubbing.html:387
+msgid "debug"
+msgstr "Debug"
+
+#: static/templates/dubbing.html:190 static/templates/dubbing.html:386
+msgid "debug_interrupt_alert"
+msgstr "Enabling will interrupt subsequent steps"
+
+#: static/templates/dubbing.html:904
+#, fuzzy
+msgid "draft_name_placeholder"
+msgstr "Enter model name"
+
+#: static/templates/dubbing.html:508
+msgid "dub_dubbing"
+msgstr "Dubbing"
+
+#: static/templates/dubbing.html:95
+msgid "dub_scene"
+msgstr "Base"
+
+#: static/templates/dubbing.html:727
+msgid "dub_setting"
+msgstr "Others"
+
+#: static/templates/dubbing.html:182
+msgid "dub_subtitle"
+msgstr "Subtitle"
+
+#: static/templates/dubbing.html:382
+msgid "dub_translation"
+msgstr "Translation"
+
+#: static/templates/dubbing.html:484
+msgid "llm_batch_size"
+msgstr "Batch Size"
+
+#: static/templates/dubbing.html:402 static/templates/dubbing.html:520
+msgid "llm_configured"
+msgstr "configured"
+
+#: static/templates/dubbing.html:399
+msgid "llm_ignore"
+msgstr "Ignore"
+
+#: static/templates/dubbing.html:473
+msgid "llm_instruct"
+msgstr "Instruction"
+
+#: static/templates/dubbing.html:475
+msgid "llm_instruction_placeholder"
+msgstr "[Remove ending punctuation], [Replace Arabic numerals with Chinese] etc."
+
+#: static/templates/dubbing.html:443
+msgid "llm_temperature"
+msgstr "Randomness"
+
+#: static/templates/dubbing.html:454
+msgid "llm_top_p"
+msgstr "Diversity"
+
+#: static/templates/dubbing.html:466
+msgid "llm_use_cache"
+msgstr "Cache"
+
+#: static/templates/dubbing.html:465
+msgid "llm_use_cache_tip"
+msgstr "Enabling can avoid duplicate requests and prevent extra token consumption"
+
+#: static/templates/dubbing.html:412
+msgid "llm_use_oritxt"
+msgstr "Use Original Text"
+
+#: static/templates/dubbing.html:248 static/templates/dubbing.html:432
+#: static/templates/dubbing.html:529
+msgid "model"
+msgstr "Model"
+
+#: static/templates/dubbing.html:436 static/templates/dubbing.html:533
+msgid "model_placeholder"
+msgstr "Enter model name"
+
+#: static/templates/dubbing.html:74
+msgid "nav_editor"
+msgstr "Data Editor"
+
+#: static/templates/dubbing.html:71
+msgid "nav_group_assist"
+msgstr "Assist"
+
+#: static/templates/dubbing.html:64
+msgid "nav_group_feature"
+msgstr "Feature"
+
+#: static/templates/dubbing.html:76
+msgid "nav_play"
+msgstr "Video Playback"
+
+#: static/templates/dubbing.html:67
+msgid "nav_speaker"
+msgstr "Speaker"
+
+#: static/templates/dubbing.html:140
+msgid "scene_align_type"
+msgstr "Alignment"
+
+#: static/templates/dubbing.html:129
+msgid "scene_mode_type"
+msgstr "Mode"
+
+#: static/templates/dubbing.html:158
+msgid "scene_suffix"
+msgstr "Suffix"
+
+#: static/templates/dubbing.html:163 static/templates/dubbing.html:1056
+msgid "scene_suffix_placeholder"
+msgstr "Enter an identifier suffix"
+
+#: static/templates/dubbing.html:100
+msgid "scene_video_url"
+msgstr "Video"
+
+#: static/templates/dubbing.html:106 static/templates/dubbing.html:876
+#: static/templates/dubbing.html:923 static/templates/dubbing.html:1052
+msgid "scene_video_url_placeholder"
+msgstr "Enter audio/video path or link"
+
+#: static/templates/dubbing.html:756
+msgid "setting_silence"
+msgstr "Silence Detection"
+
+#: static/templates/dubbing.html:780
+msgid "setting_silence_tips"
+msgstr "Threshold、MinLength、KeepLength"
+
+#: static/templates/dubbing.html:745
+msgid "setting_volume_background"
+msgstr "Background Volume"
+
+#: static/templates/dubbing.html:733
+msgid "setting_volume_native"
+msgstr "Native Volume"
+
+#: static/templates/dubbing.html:818
+msgid "table_tools_delete"
+msgstr "Del"
+
+#: static/templates/speaker.html:136
+msgid "table_tools_download"
+msgstr "DownLoad"
+
+#: static/templates/speaker.html:134
+msgid "table_tools_edit"
+msgstr "Edit"
+
+#: static/templates/dubbing.html:820
+msgid "table_tools_move_down"
+msgstr "Down"
+
+#: static/templates/dubbing.html:819
+msgid "table_tools_move_up"
+msgstr "Up"
+
+#: static/templates/dubbing.html:817 static/templates/speaker.html:135
+msgid "table_tools_preview"
+msgstr "Preview"
+
+#: static/templates/dubbing.html:540
+msgid "tts_gender"
+msgstr "Gender"
+
+#: static/templates/dubbing.html:669
+msgid "tts_instruct"
+msgstr "Instruction"
+
+#: static/templates/dubbing.html:673
+msgid "tts_instruct_placeholder"
+msgstr "[Regional Dialect], [Role Play], [Speaking Style] etc."
+
+#: static/templates/dubbing.html:591
+msgid "tts_pitch"
+msgstr "Pitch"
+
+#: static/templates/dubbing.html:705
+msgid "tts_preview"
+msgstr "Preview"
+
+#: static/templates/dubbing.html:704
+msgid "tts_preview_click"
+msgstr "Click to preview"
+
+#: static/templates/dubbing.html:627 static/templates/dubbing.html:640
+#: static/templates/dubbing.html:653
+msgid "tts_preview_select"
+msgstr "Select to preview"
+
+#: static/templates/dubbing.html:580
+msgid "tts_rate"
+msgstr "Rate"
+
+#: static/templates/dubbing.html:692
+msgid "tts_remarks"
+msgstr "Remarks"
+
+#: static/templates/dubbing.html:696
+msgid "tts_remarks_placeholder"
+msgstr "Write something"
+
+#: static/templates/dubbing.html:628
+msgid "tts_role"
+msgstr "Role"
+
+#: static/templates/dubbing.html:681
+msgid "tts_seed"
+msgstr "Seed"
+
+#: static/templates/dubbing.html:685
+msgid "tts_seed_placeholder"
+msgstr "Enter a random seed"
+
+#: static/templates/dubbing.html:680
+msgid "tts_seed_tip"
+msgstr "Control result reproducibility"
+
+#: static/templates/dubbing.html:641
+msgid "tts_style"
+msgstr "Style"
+
+#: static/templates/dubbing.html:654
+msgid "tts_styledegree"
+msgstr "Style Degree"
+
+#: static/templates/dubbing.html:707 static/templates/dubbing.html:708
+#: static/templates/dubbing.html:897
+msgid "tts_text_placeholder"
+msgstr "Enter preview text"
+
+#: static/templates/dubbing.html:556
+msgid "tts_voice"
+msgstr "Voice"
+
+#: static/templates/dubbing.html:569
+msgid "tts_volume"
+msgstr "Volume"
+
+#~ msgid "common_run_running"
+#~ msgstr "Running"
+
+#~ msgid "common_run_starting"
+#~ msgstr "Starting"
+
+#~ msgid "common_run_stopped"
+#~ msgstr "Stopped"
+
+#~ msgid "common_run_stopping"
+#~ msgstr "Stopping"
+
+#~ msgid "nav_discord"
+#~ msgstr "Discord"
+
+#~ msgid "nav_group_doc"
+#~ msgstr "Docs"
+
+#~ msgid "nav_masker_painter"
+#~ msgstr "Painter Editor"
+
+#~ msgid "nav_masker_remove"
+#~ msgstr "Masker"
+
+#~ msgid "nav_plugins"
+#~ msgstr "Plugins"
+
+#~ msgid "nav_set"
+#~ msgstr "Preferences"
+
+#~ msgid "nav_swagger"
+#~ msgstr "Swagger"
+
+#~ msgid "nav_vitepress"
+#~ msgstr "Tutorial"
+
+#~ msgid "tts_step"
+#~ msgstr "Sampling Steps"
+
+#~ msgid "tts_spk_generate"
+#~ msgstr "Click to generate video speaker voice"
+
+#~ msgid "tts_vc"
+#~ msgstr "Conversion"
+
+#~ msgid "tts_vc_tip"
+#~ msgstr "Convert source voice to target voice"
+
