@@ -9,8 +9,8 @@ set FFMPEG_HOME=%CREATORBOX_HOME%\ffmpeg
 :: Git      (e.g.D:\Program Files\CreatorBox\git)
 set GIT_HOME=%CREATORBOX_HOME%\git
 :: Uv       (e.g.D:\Program Files\CreatorBox\uv)
-@REM set UV_HOME=%CREATORBOX_HOME%\uv
-set UV_HOME="D:\Projects\uv"
+set UV_HOME=%CREATORBOX_HOME%\uv
+@REM set UV_HOME="D:\Projects\uv"
 ::--------------------------------------------------------------------------------------------
 
 :: Set Environment
