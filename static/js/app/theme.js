@@ -7,8 +7,8 @@ darkThemeMediaQuery.addEventListener('change', function (e) {
 // 监听存储数据变化
 window.addEventListener('storage', (event) => {
   if (event.key === 'theme') {
-      console.debug('Theme changed in another tab:', event.oldValue, '→', event.newValue);
-      setTheme(event.newValue);
+    console.debug('Theme changed in another tab:', event.oldValue, '→', event.newValue);
+    setTheme(event.newValue);
   }
 });
 
@@ -22,10 +22,6 @@ if (themeToggle != null) {
   });
 }
 
-// 初始检查
-var savedTheme = localStorage.getItem('theme') || (darkThemeMediaQuery.matches ? 'dark' : 'light');
-setTheme(savedTheme);
-
 // 设置主题
 function setTheme(theme) {
   console.debug(theme)
@@ -35,3 +31,7 @@ function setTheme(theme) {
     document.documentElement.classList.remove('dark');
   }
 }
+
+// 初始检查
+var savedTheme = localStorage.getItem('theme') || (darkThemeMediaQuery.matches ? 'dark' : 'light');
+setTheme(savedTheme);
