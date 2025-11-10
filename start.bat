@@ -1,8 +1,6 @@
 @echo off
 chcp 65001 >nul
 
-echo %CREATORBOX_HOME%
-
 ::---------------------------------------------------------------------------------------------
 :: Aria2
 set ARIA2_HOME=%CREATORBOX_HOME%\aria2
@@ -11,8 +9,8 @@ set FFMPEG_HOME=%CREATORBOX_HOME%\ffmpeg
 :: Git      (e.g.D:\Program Files\CreatorBox\git)
 set GIT_HOME=%CREATORBOX_HOME%\git
 :: Uv       (e.g.D:\Program Files\CreatorBox\uv)
-set UV_HOME=%CREATORBOX_HOME%\uv
-@REM set UV_HOME="D:\Projects\uv"
+@REM set UV_HOME=%CREATORBOX_HOME%\uv
+set UV_HOME="D:\Projects\uv"
 ::--------------------------------------------------------------------------------------------
 
 :: Set Environment
@@ -22,13 +20,10 @@ echo %PATH%
 REM Execute script
 set SCRIPT_CMD=uv run 
 set SCRIPT_PATH=cli.py
-set SCRIPT_ARGS=start -h 0.0.0.0 -p 8000
+set SCRIPT_ARGS=start -h 127.0.0.1 -p 8000
 if "%~1"=="--debug" (
     set SCRIPT_ARGS=%SCRIPT_ARGS% --debug
 )
-
-REM Run authentication command (uncomment and replace <EMAIL> and <PASSWORD> with actual values if needed)
-@REM %PYTHON_CMD% %SCRIPT_PATH% auth -a login -e <EMAIL> -p <PASSWORD>
 
 REM Run the Python script
 %SCRIPT_CMD% %SCRIPT_PATH% %SCRIPT_ARGS%

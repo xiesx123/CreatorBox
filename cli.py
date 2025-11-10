@@ -21,21 +21,21 @@ def cli():
 
 
 @cli.command(help="启动服务 (Start service)")
-@click.option("--host", "-h", type=str, default="0.0.0.0", show_default=True, required=True, help="host")
+@click.option("--host", "-h", type=str, default="127.0.0.1", show_default=True, required=True, help="host")
 @click.option("--port", "-p", type=int, default=8000, show_default=True, required=True, help="port")
 @click.option("--debug", is_flag=True, default=False, show_default=True, help="enable debug mode")
-@click.option("--open", is_flag=True, default=False, show_default=False, help="auto open browser")
+@click.option("--browser", is_flag=True, default=False, show_default=False, help="auto open browser")
 @click.option("--ngrok", is_flag=True, default=False, show_default=True, help="enable ngrok tunnel")
 @click.option("--ngrok_host", "-nh", type=str, default="toucan-real-informally.ngrok-free.app", show_default=True, help="ngrok host")
 @click.option("--ngrok_port", "-np", type=int, default=80, show_default=True, help="ngrok port")
-def start(host, port, debug, open, ngrok, ngrok_host, ngrok_port):
+def start(host, port, debug, browser, ngrok, ngrok_host, ngrok_port):
     # spawn
     import multiprocessing as mp
 
     mp.set_start_method("spawn", force=True)
 
     # args
-    os.environ["open"] = str(open)
+    os.environ["browser"] = str(browser)
     if "REBOOT_ARGS" not in os.environ:
         import json
 
@@ -121,29 +121,25 @@ def proxy(host, port, username, password, site, timeout):
 
 
 @cli.command(help="认证鉴权 (Authentication)")
-@click.option("--action", "-a", type=click.Choice(["register", "login", "resetpwd", "user"]), default="login", show_default=True, required=True, help="choose action")
+@click.option("--action", "-a", type=click.Choice(["register", "resetpwd", "login"]), default="login", show_default=True, required=True, help="choose action")
 @click.option("--email", "-e", type=str, required=True, help="email")
 @click.option("--password", "-p", type=str, help="password")
 @click.option("--proxy", is_flag=True, default=False, show_default=True, help="enable proxy")
 def auth(action, email, password, proxy):
     try:
         from src.app.repo import Firebase
-        from src.router.controller import user
 
         auth = Firebase.Authentication()
         click.echo(f"😊 Starting {action} -> {email}")
         if action == "register":
-            result = auth.register_with_email_and_password(email, password, proxy)
+            result = auth.sign_up(email, password, proxy)
             msg = f"please check your email to verify."
         elif action == "resetpwd":
             result = auth.send_email_password_reset(email)
             msg = f"please check your email and click to reset your password."
-        elif action == "user":
-            result = user.get_account_info(email)
-            msg = f"uuid -> {result.email} ({result.subscriber.name})"
         else:
-            result = auth.sign_in_with_email_and_password(email, password, proxy)
-            msg = f"token -> {result.token}"
+            result = auth.sign_in(email, password, proxy)
+            msg = f"token -> {result}"
         click.echo(f"✅ {action.capitalize()} successfully. {msg}")
     except Exception as e:
         click.echo(f"❌ error: {str(e)}", err=True)

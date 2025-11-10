@@ -4,9 +4,9 @@
 [submodule "extensions/stable-diffusion-webui"]
 	path = extensions/stable-diffusion-webui
 	url = https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
-[submodule "extensions/cosyvoice"]
-	path = extensions/cosyvoice
-	url = https://github.com/FunAudioLLM/CosyVoice.git
 [submodule "extensions/index-tts"]
 	path = extensions/index-tts
 	url = https://github.com/index-tts/index-tts.git
+[submodule "extensions/cosyvoice"]
+	path = extensions/cosyvoice
+	url = https://github.com/FunAudioLLM/CosyVoice.git
