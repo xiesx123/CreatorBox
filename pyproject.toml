@@ -3,7 +3,7 @@ name = "creatorbox"
 version="1.0.25"
 description="🚀🎬 Flexible, efficient, and scalable toolbox for editing and dubbing, unleashing creative potential"
 readme = "README.md"
-requires-python = ">=3.10,<3.14"
+requires-python = ">3.11,<3.14"
 dependencies = [
      "asyncio==4.0.0",
      "azure-cognitiveservices-speech==1.46.0",
@@ -11,9 +11,9 @@ dependencies = [
      "click==8.3.0",
      "dashscope==1.25.0",
      "edge-tts==7.2.1",
-     "elevenlabs==2.22.0",
+     "elevenlabs==2.22.1",
      "fast-langdetect==1.0.0",
-     "fastapi==0.121.0",
+     "fastapi==0.121.1",
      "fastapi-profiler-lite==0.3.2",
      "faster-whisper==1.2.1",
      "ffmpeg-python==0.2.0",
@@ -45,10 +45,11 @@ dependencies = [
      "python-multipart==0.0.20",
      "python-socketio==5.14.3",
      "requests-cache==1.2.1",
+     "sqlmodel==0.0.27",
+     "sqlmodel-repo>=0.0.4",
      "srt==3.5.3",
      "sseclient==0.0.27",
      "tenacity==9.1.2",
-     "tinydb==4.8.2",
      "torch==2.6.0",
      "torchaudio==2.6.0",
      "torchvision==0.21.0",
@@ -69,13 +70,9 @@ dev = [
     "py-spy>=0.4.1",
     "importtime-output-wrapper>=1.1.0",
 ]
-uvr = [
+gr = [
     "audio-separator==0.30.2",
-]
-vsd = [
     "scenedetect==0.6.7",
-]
-vse = [
     "rapidocr==3.4.2",
 ]
 
