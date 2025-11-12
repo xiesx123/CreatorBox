@@ -82,7 +82,7 @@
                 if (input_url.length != 32) {
                     return video_play(input_url, 1)
                 }
-                tool.get("/app/result/" + input_url, {}, function (response) {
+                tool.get("/result/" + input_url, {}, function (response) {
                     console.debug(JSON.stringify(response, null, 2))
                     if (response.code == 0) {
                         video_play(response.data.result.video_dub)

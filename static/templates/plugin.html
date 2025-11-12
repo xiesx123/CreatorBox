@@ -51,8 +51,9 @@
     <!-- 表格工具栏 -->
     <script type="text/html" id="TPL_table_toolbar">
         <!-- <div class="layui-inline" lay-event="query"><i class="layui-icon layui-icon-search"></i></div>
-        <div class="layui-inline" lay-event="add"><i class="layui-icon layui-icon-add-circle"></i></div>
-        <div class="layui-inline" lay-event="delete"><i class="layui-icon layui-icon-delete"></i></div> -->
+        <div class="layui-inline" lay-event="add"><i class="layui-icon layui-icon-add-circle"></i></div>-->
+        <div class="layui-inline" lay-event="enable"><i class="layui-icon layui-icon-radio"></i></div> 
+        <div class="layui-inline" lay-event="disable"><i class="layui-icon layui-icon-circle"></i></div> 
     </script>
 
     <!-- 表格行工具 -->
@@ -82,7 +83,10 @@
             var toast = layui.notice;
             var tool = layui.tool;
             // var trans = layui.translate;
+            var i18n = layui.i18n;
             var $ = layui.$;
+
+            i18n.init('{{request.state.lang}}');
 
             var table_json = JSON.parse('{{ data.plugins | tojson }}')
 
@@ -115,7 +119,7 @@
                     { title: '编号', sort: true, width: 80, align: "center", templet: d => '<div title="' + d.text + '">' + d.LAY_NUM + '</div>' },
                     { title: '名称', sort: true, width: 220, align: "left", field: 'name', templet: d => '<div title="' + d.name + '"> ' + d.name + '</div>' },
                     { title: '描述', sort: true, align: "left", align: "left", field: 'description', templet: d => '<div title="' + d.description + '">' + d.description + '</div>' },
-                    { title: "显示", sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_status" },
+                    { title: "状态", sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_status" },
                     { title: "操作", sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_tools" }
                 ]],
             });
@@ -127,12 +131,43 @@
                 var othis = lay(this);
                 action = obj.event
                 switch (obj.event) {
+                    case 'enable':
+                        var data = checkStatus.data;
+                        var ids = data.map(item => item.id).join(",");
+                        if (ids.length == 0) {
+                            layer.msg(i18n.trans('confirm_select'));
+                            return;
+                        }
+                        tool.post("/plugin/status", JSON.stringify({ "ids": ids, "status": 1 }), function (response) {
+                            console.debug(response.data)
+                            // table.reloadData(id, { scrollPos: 'fixed' });
+                            toast.info(response.data.updated.length, "操作成功");
+                            setTimeout(function () {
+                                tool.refresh()
+                            }, 1 * 1000)
+                        }, true)
+                        break;
+                    case 'disable':
+                        var data = checkStatus.data;
+                        var ids = data.map(item => item.id).join(",");
+                        if (ids.length == 0) {
+                            layer.msg(i18n.trans('confirm_select'));
+                            return;
+                        }
+                        tool.post("/plugin/status", JSON.stringify({ "ids": ids, "status": 0}), function (response) {
+                            console.debug(response.data)
+                            toast.info(response.data.updated.length, "操作成功");
+                            setTimeout(function () {
+                                tool.refresh()
+                            }, 1 * 1000)
+                        }, true)
+                        break;
                     case 'reboot':
                         // 确认执行
                         layer.confirm('确定重启吗？', { title: '提示', icon: 3 }, function (index) {
                             layer.close(index);
                             // 请求调用
-                            tool.get("app/reboot")
+                            tool.get("/reboot")
                             setTimeout(function () {
                                 tool.refresh()
                             }, 10 * 1000)
@@ -145,7 +180,7 @@
             table.on('tool(' + inst.config.id + ')', function (obj) {
                 var id = obj.config.id;
                 var data = obj.data;
-                url = `${window.location.protocol}//${window.location.host}${data.path}`;
+                url = `${window.location.protocol}//${window.location.host}${data.url}`;
                 if (data.status == 0) {
                     return toast.warning("服务未开启，无法访问", "提示");
                 }
@@ -156,35 +191,41 @@
 
             // 开关操作
             form.on('checkbox(switch_status_filter)', function (obj) {
-                var path = this.value;
-                var module = null;
-                var attr = null;
-                var status = obj.elem.checked ? 1 : 0;
-                // 更新状态
-                var cache = layui.table.cache['gradio_table'];
-                for (let i = 0; i < cache.length; i++) {
-                    if (cache[i].path === path) {
-                        module = cache[i].module
-                        attr = cache[i].attr
-                        cache[i].status = status;
-                        break;
-                    }
+                // 获取当前行数据
+                var $tr = $(this).closest('tr');
+                var index = $tr.attr('data-index');
+                var rowData = table.getData('gradio_table')[index];
+                if (!rowData) {
+                    return toast.error("无法获取当前行数据", "错误");
                 }
-                // 重载表格（不重置分页）
-                layui.table.reloadData('gradio_table', {
-                    data: cache,
-                    scrollPos: 'fixed'
-                });
+
+                // 更新状态
+                var status = obj.elem.checked ? 1 : 0;
+                rowData.status = status;
+
                 // 发送请求
-                tool.post("/app/mounts", JSON.stringify({ "path": path, "module": module, "attr": attr, "status": status }), function (response) {
-                    console.debug(response.data)
-                    var status = response.data.status
+                tool.post("/plugin/upsert", JSON.stringify(rowData), function (response) {
+                    console.debug(response.data);
+                    var status = response.data.status;
                     if (status == 1) {
-                        toast.info("开启成功,重启后生效", "提示");
+                        toast.info("重启后生效", "开启成功");
                     } else {
-                        toast.success(status == 0 ? "关闭成功" : "开启成功", "提示");
+                        toast.success("重启后生效", status == 0 ? "关闭成功" : "开启成功");
                     }
-                }, true)
+                    // 更新状态
+                    var cache = layui.table.cache['gradio_table'];
+                    for (let i = 0; i < cache.length; i++) {
+                        if (cache[i].url === rowData.url) {
+                            cache[i].status = status;
+                            break;
+                        }
+                    }
+                    // 重载表格（不重置分页）
+                    table.reloadData('gradio_table', {
+                        data: cache,
+                        scrollPos: 'fixed'
+                    });
+                }, true);
             });
 
             //// 设置本地语种
