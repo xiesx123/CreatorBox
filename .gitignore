@@ -21,8 +21,8 @@ webapp
 ### Exclude ###
 !r3.exe
 !webapp/data/azure_*
+!webapp/data/db.db
 !webapp/data/iopaint.json
-!webapp/data/plugins.json
 !webapp/data/tts.json
 !webapp/images/iopaint
 !webapp/extensions/
