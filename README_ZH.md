@@ -19,7 +19,7 @@
 
 <h4>Web界面</h4>
 
-![](https://xiesx123.github.io/CreatorBox/images/readme_dashboard.png)
+![](https://xiesx123.github.io/CreatorBox/images/readme_dashboard_zh.png)
 
 ![](https://xiesx123.github.io/CreatorBox/images/readme_main_zh.png)
 

@@ -19,7 +19,7 @@
 
 <h4>Web Interface</h4>
 
-![](https://xiesx123.github.io/CreatorBox/images/readme_dashboard.png)
+![](https://xiesx123.github.io/CreatorBox/images/readme_dashboard_en.png)
 
 ![](https://xiesx123.github.io/CreatorBox/images/readme_main_en.png)
 
