@@ -1,0 +1,74 @@
+/* ========================================== 首页 start ========================================== */
+.padding.svelte-phx28p {
+    padding: 0;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* 卡片间距 */
+    gap: 16px;
+    padding: 10px;
+    width: 100%;
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
+}
+
+.card {
+    background-color: var(--background-fill-secondary);
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid transparent;
+}
+
+.card:hover {
+    /* 放大 5% */
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    /* 使用 button 主色作为边框 */
+    border-color: var(--button-primary-background);
+    /* 背景可稍微亮一点，保持层次 */
+    background-color: var(--background-fill-secondary);
+
+}
+
+.card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 14px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    /* 自动随主题切换 */
+    color: var(--body-text-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-desc {
+    font-size: 14px;
+    /* 次级文字色 */
+    color: var(--body-text-color-subdued);
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
