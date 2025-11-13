@@ -22,6 +22,7 @@ dependencies = [
      "func-timeout==4.3.5",
      "gputil==1.4.0",
      "gradio-bottombar==0.0.2",
+     "gradio-iframecomponent>=0.0.1",
      "gradio-videoslider==0.0.2",
      "gradio[mcp]==5.49.1",
      "langchain==0.3.27",
