@@ -28,6 +28,6 @@ if __name__ == "__main__":
     # 1、run `python -m theme.py` to open the theme builder
     # 2、see https://huggingface.co/spaces/gradio/theme_builder
 
-    from src.gradio import themes as t
+    from gradio import themes as t
 
     t.builder()
