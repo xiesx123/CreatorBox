@@ -24,7 +24,8 @@ webapp
 !webapp/data/db.db
 !webapp/data/iopaint.json
 !webapp/data/tts.json
-!webapp/images/iopaint
+!webapp/data/azure_*
+!webapp/sample/
 !webapp/extensions/
 static/i18n/babel.*
 static/i18n/messages.pot
