@@ -6,6 +6,8 @@
 *.mp4
 *.pyc
 **/temp/
+**/babel/babel.*
+**/babel/messages.pot
 
 ### Node ###
 **/node_modules/
@@ -26,7 +28,5 @@ webapp
 !webapp/data/azure_*
 !webapp/sample/
 !webapp/extensions/
-static/i18n/babel.*
-static/i18n/messages.pot
 
 
