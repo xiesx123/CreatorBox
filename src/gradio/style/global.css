@@ -1,3 +1,7 @@
+.toggle-label.svelte-1871vx.svelte-1871vx {
+    color: var(--checkbox-label-text-color);
+}
+
 .gr-image-toolbar {
     display: none !important;
 }
