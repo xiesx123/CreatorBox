@@ -22,7 +22,6 @@ webapp
 !r3.exe
 !webapp/data/azure_*
 !webapp/data/db.db
-!webapp/data/iopaint.json
 !webapp/data/tts.json
 !webapp/data/azure_*
 !webapp/sample/
