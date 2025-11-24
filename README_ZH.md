@@ -14,80 +14,15 @@
 [![Colab](https://img.shields.io/badge/Colab-Launch-yellow?logo=googlecolab)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
 
 <h3><a href="README.md">English</a> | 中文 </h3>
-
 🚀🎬 灵活、高效、可扩展，专属剪辑配音工具箱，释放创作潜力
 
 <h4>Web界面</h4>
 
-![](https://xiesx123.github.io/CreatorBox/images/readme_dashboard_zh.png)
-
-![](https://xiesx123.github.io/CreatorBox/images/readme_main_zh.png)
-
-<h4>预览导出</h4>
-  <table>
-      <thead>
-          <tr>
-              <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔧</g-emoji> 预览</th>
-              <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">✂️</g-emoji> 剪辑</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr>
-              <td align="center">
-                  <img src="https://xiesx123.github.io/CreatorBox/images/readme_debug.jpg" alt="readme_debug">
-              </td>
-              <td align="center">
-                  <img src="https://xiesx123.github.io/CreatorBox/images/readme_capcut.jpg" alt="readme_capcut">
-              </td>
-          </tr>
-      </tbody>
-  </table>
-
-  <h4>视频演示</h4>
-    <table>
-        <thead>
-            <tr>
-                <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 原始</th>
-                <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔁 配音</th>
-            </tr>
-        </thead>
-        <!-- 大话西游 -->
-        <tbody>
-            <tr>
-                <td align="center"><video
-                        src="https://github.com/user-attachments/assets/b6e30353-5b08-4c12-8407-8d759233d193"></video></td>
-                <td align="center"><video
-                        src="https://github.com/user-attachments/assets/f57363c5-3110-4b1b-be3f-769c0e65fe9a"></video></td>
-            </tr>
-        </tbody>
-      <!-- 求职面试 
-      <tbody>
-            <tr>
-                <td align="center"><video
-                        src="https://github.com/user-attachments/assets/327b819c-c811-4265-960b-83117e0da670"></video></td>
-                <td align="center"><video
-                        src="https://github.com/user-attachments/assets/ed6449df-dd04-45f0-9ab1-ce4a2a5b600c"></video></td>
-            </tr>
-        </tbody>-->
-      <!-- 黑神话
-      <tbody>
-            <tr>
-                <td align="center"><video
-                        src="https://github.com/user-attachments/assets/c68c376e-54ef-4a6b-a195-fbe926c0de37"></video></td>
-                <td align="center"><video
-                        src="https://github.com/user-attachments/assets/e9424df6-0986-4118-af82-b5f140398471"></video></td>
-            </tr>
-        </tbody>-->
-        <!-- 商品介绍-->
-      <tbody>
-            <tr>
-                <td align="center"><video
-                        src="https://github.com/user-attachments/assets/a1c9ea12-a3a0-4d0d-9d68-43659e6cc180"></video></td>
-                <td align="center"><video
-                        src="https://github.com/user-attachments/assets/6babdb77-90db-4ea7-b6eb-9614438fa0f1"></video></td>
-            </tr>
-        </tbody>
-    </table>
+<picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://xiesx123.github.io/CreatorBox/images/readme_dashboard_zh.png" />
+   <source media="(prefers-color-scheme: light)" srcset="https://xiesx123.github.io/CreatorBox/images/readme_dashboard_light_zh.png" />
+   <img alt="Star History Chart" src="https://xiesx123.github.io/CreatorBox/images/readme_dashboard_zh.png" />
+ </picture>
 
 </div>
 
@@ -95,8 +30,87 @@
 
 👉 安装部署指南：[本地安装](https://xiesx123.github.io/CreatorBox/zh/deploy-local) | [远程部署](https://xiesx123.github.io/CreatorBox/zh/deploy-colab)
 
-👉 开发集成指南：[应用组件](https://xiesx123.github.io/CreatorBox/zh/plugin)
+## 📥 组件预览
 
+### 视频翻译配音
+
+  <table>
+      <thead>
+          <tr>
+              <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 原始</th>
+              <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔁 配音</th>
+          </tr>
+      </thead>
+      <!-- 大话西游 -->
+      <tbody>
+          <tr>
+              <td align="center"><video
+                      src="https://github.com/user-attachments/assets/b6e30353-5b08-4c12-8407-8d759233d193" width="200"></video></td>
+              <td align="center"><video
+                      src="https://github.com/user-attachments/assets/f57363c5-3110-4b1b-be3f-769c0e65fe9a" width="200"></video></td>
+          </tr>
+      </tbody>
+    <!-- 求职面试 
+    <tbody>
+          <tr>
+              <td align="center"><video
+                      src="https://github.com/user-attachments/assets/327b819c-c811-4265-960b-83117e0da670"></video></td>
+              <td align="center"><video
+                      src="https://github.com/user-attachments/assets/ed6449df-dd04-45f0-9ab1-ce4a2a5b600c"></video></td>
+          </tr>
+      </tbody>-->
+    <!-- 黑神话
+    <tbody>
+          <tr>
+              <td align="center"><video
+                      src="https://github.com/user-attachments/assets/c68c376e-54ef-4a6b-a195-fbe926c0de37"></video></td>
+              <td align="center"><video
+                      src="https://github.com/user-attachments/assets/e9424df6-0986-4118-af82-b5f140398471"></video></td>
+          </tr>
+      </tbody>-->
+      <!-- 商品介绍-->
+    <tbody>
+          <tr>
+              <td align="center"><video
+                      src="https://github.com/user-attachments/assets/a1c9ea12-a3a0-4d0d-9d68-43659e6cc180" width="200"></video></td>
+              <td align="center"><video
+                      src="https://github.com/user-attachments/assets/6babdb77-90db-4ea7-b6eb-9614438fa0f1" width="200"></video></td>
+          </tr>
+      </tbody>
+  </table>
+
+### 视频掩码修复
+
+<table>
+      <thead>
+          <tr>
+              <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">▶️ 原始</th>
+              <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔁 预处理</th>
+              <th align="center"><g-emoji class="g-emoji" alias="arrow_forward">🔁 修复</th>
+          </tr>
+      </thead>
+      <!-- 跳伞 -->
+      <tbody>
+          <tr>
+              <td align="center"><video
+                      src="https://github.com/user-attachments/assets/04b42cfc-9a17-411e-9c24-775e2c5cbd9f"></video></td>
+              <td align="center"><video
+                      src="https://github.com/user-attachments/assets/7f8b613f-d64a-4385-a4e3-caef99ea6208"></video></td>      
+              <td align="center"><video
+                      src="https://github.com/user-attachments/assets/da2b2e1f-b5e4-44a1-a3b7-3c83522b45d8"></video></td>
+          </tr>
+      </tbody>
+      <!-- 晚餐 -->
+      <tbody>
+          <tr>
+              <td align="center"><video
+                      src="https://github.com/user-attachments/assets/e99af835-57e6-4c27-8212-83e74eba6368"width="200"></video></td>
+              <td align="center"><img src="https://github.com/user-attachments/assets/726accaf-fa28-47e3-8e27-e4bb7d7c1bb0"width="200"/></td>      
+              <td align="center"><video
+                      src="https://github.com/user-attachments/assets/3ba3ef62-c8a3-4857-ae0b-ebff89c2c713"width="200"></video></td>
+          </tr>
+      </tbody>
+  </table>
 
 ## 🎨 适用场景
 
@@ -104,75 +118,9 @@
 
 - 🌍 **多语言翻译/配音**：运营海外本地化内容创作、跨语言发布
 
+- 🧩 **应用组件**：内置多种应用组件，高效协作，灵活调用
+
 - ⚙️ **独立部署**：本地部署，灵活配置，保障隐私
-
-## 🎯 功能特性
-
-- **🎤 字幕识别**
-
-  精准转录视频和音频中的人声，灵活调整配置适应不同设备和场景，确保高质量文本生成
-
-- **🌐 语言翻译**
-
-  多种语言互译，允许切换翻译提供商并调整高级参数，优化翻译效果，轻松跨越语言障碍
-
-- **🎧 语音合成**
-
-  丰富的语音库与定制选项，提供个性化配音体验，满足创作需求，实时试听确保创作精准
-
-- **✂️ 剪映草稿**
-
-  支持将素材导出至剪映，提供画面、声音、字幕等多维度精细控制，助力后期调整与定制
-
-- **🧩 应用组件**
-
-  内置多种应用组件，高效协作，灵活调用，适应不同用户需求
-
-- **🔧 预览与调试**
-
-  提供灵活、高效的配置调整，确保每个环节的完美呈现，提升创作效率与质量
-
-## 📅 计划支持
-
-### 字幕
-
-- [x] 多提供商支持：可切换使用 `Srt`、`Capcut`、`FunAsr`、`FasterWhisper` 进行处理
-- [x] 视频下载：自动下载 `YouTube`、`TikTok` 视频
-- [x] 视频转文字：将视频中的声音转录为文字，并提取字幕
-- [x] 多音轨分离：支持分离 `人声`、`伴奏`、`鼓`、`贝斯` 等多种音轨
-- [x] 声纹识别与对齐：提取声纹信息，并将语音与字幕文字进行精确对齐
-- [x] 多说话人识别：自动识别视频中的多位说话人
-- [x] 情感识别：支持识别 `生气`、`厌恶`、`恐惧`、`开心`、`中立`、`其他`、`难过`、`吃惊` 等情绪
-
-### 翻译
-
-- [x] 多提供商: 支持 `OpenAi`、`Gemini`、`DashScope` 切换
-- [x] 自定义模型，指令提示词
-- [x] 超长文本批次处理
-
-### 语音
-
-- [x] 多提供商支持：可切换使用 `AzureTTS`、`EdgeTTS`、`ElevenLabs`、`GPTSoVITS`、`CosyVoice2` 等多种语音合成服务
-- [x] 语音试听：支持实时语音合成与试听，方便快速预览效果
-- [x] 主流音色：提供基于 `AzureTTS` 和 `EdgeTTS` 的内置音色 559 个，样例语音超 895 条。常用包括不限于：`小美`、`小帅`、`大山`、`大壮`、`五星上将阿瑟` 等
-- [x] 音色克隆：可使用 `CosyVoice2` 与 `GPTSoVITS` 进行语音克隆，支持语音指令控制、跨语言克隆及情感识别语音合成
-- [x] 训练微调：支持 `GPTSoVITS` 基准模型 (`v1`, `v2`, `v2Pro`, `v2ProPlus`, `v3`, `v4`) 可进行情感微调训练与推理，打造个性化语音效果
-- [x] 扩展能力：可接入 `ElevenLabs` 音色库，并支持音色克隆，轻松扩展语音表现力
-- [x] 自定义音色库：内置三大类型：`内置`、`视频`、`自定义`，满足多场景需求
-
-
-### 草稿
-
-- [x] 轨道控制：支持 `画面`、`声音` 、`字幕` 最高 `6` 个轨道等控制
-- [x] 字幕生成：支持 `大小`、`位置`、`颜色`、`描边` 字体设置
-- [x] 音量调节：支持 `原声`、`说话声`、`背景音乐` 音量调节
-
-### 其他
-
-- [x] 配音模式：`视频`、`音频` 、`自适应` 3 种模式选择
-- [x] 翻译模式：将视频从原声语言翻译为另一种语言
-- [ ] 解说模式：计划中...
-- [ ] 自动化投稿
 
 ## 📢 反馈建议
 
@@ -181,7 +129,7 @@
 
 - 欢迎加入 [Discord](https://discord.gg/ZSeETM6bsS) 进行用法或新功能的讨论
 
-## 📌 Project Status
+<!-- ## 📌 Project Status
 
 ![Status](https://repobeats.axiom.co/api/embed/afc79d9210faea79913ee2e2c7e776886295e052.svg)
 
@@ -194,3 +142,4 @@
    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=xiesx123/CreatorBox&type=Date" />
  </picture>
 </a>
+ -->
