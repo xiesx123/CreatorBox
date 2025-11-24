@@ -888,7 +888,7 @@
           if ($('input[name="llm_debug"]').is(':checked')) return;
           speaker_min = $('input[name="speaker_min"]').val()
           if (cache_table.length < speaker_min) {
-            return i18n.trans('please_check_voice_count_cannot_less_than_speaker_count');
+            return i18n.trans('【配音人数】不能低于【说话人数量】');
           }
         },
         tts_text: function (value, elem) {
@@ -944,7 +944,7 @@
           // 切换语音角色
           tts.setData(form_json, cache_table)
           if (form_json.llm_provider == 'ignore') {
-            return layer.msg(i18n.trans('please_select_translation_provider'), { icon: 3 });
+            return layer.msg(i18n.trans('请选择翻译提供商'), { icon: 3 });
           }
           // 切换试听文本
           tool.post("trans/translator", JSON.stringify({
@@ -982,14 +982,14 @@
         data = JSON.stringify(field, null, 2);
         console.debug(field)
         // 确认执行
-        layer.confirm(i18n.trans('confirm_submit'), { title: i18n.trans('confirm_title'), icon: 3 }, function (index) {
+        layer.confirm(i18n.trans('确定提交？'), { title: i18n.trans('提示'), icon: 3 }, function (index) {
           layer.close(index);
           // 禁用预览
           $("button[lay-on='video_preview']").addClass("layui-btn-disabled").prop("disabled", true);
           // 请求调用
           tool.post("dubb/pipeline", data, function (response) {
             var taskId = response.data.task_id
-            toast.info(taskId, i18n.trans('task_submit_success'));
+            toast.info(taskId, i18n.trans('任务提交成功'));
             // 任务存储
             localStorage.setItem('task', taskId)
           }, true)
@@ -1000,14 +1000,14 @@
       // 回调通知
       tool.connect(function (data) {
         if (data.type == "video") {
-          toast.success(localStorage.getItem('task'), i18n.trans('task_process_success'));
+          toast.success(localStorage.getItem('task'), i18n.trans('任务处理成功'));
           $("button[lay-on='video_preview']").removeClass("layui-btn-disabled").prop("disabled", false);
         }
         else if (data.type == "masker") {
           toast.info(data.message);
         }
         else if (data.type == "error") {
-          toast.error(data.message, i18n.trans('task_process_error'));
+          toast.error(data.message, i18n.trans('任务处理异常'));
         }
       })
 
@@ -1020,10 +1020,10 @@
 
       // 固定条
       var bars = [
-        // { type: i18n.trans('fixbar_log'), icon: 'layui-icon-export' }
-        { type: i18n.trans('fixbar_data'), icon: 'layui-icon-fonts-code' },
-        { type: i18n.trans('fixbar_preview'), icon: 'layui-icon-video' },
-        // { type: i18n.trans('fixbar_backup'), icon: 'layui-icon-export' }
+        // { type: i18n.trans('日志'), icon: 'layui-icon-export' }
+        { type: i18n.trans('数据'), icon: 'layui-icon-fonts-code' },
+        { type: i18n.trans('预览'), icon: 'layui-icon-video' },
+        // { type: i18n.trans('备份'), icon: 'layui-icon-export' }
       ];
       util.fixbar({
         bars: bars,
@@ -1043,10 +1043,10 @@
           }
         },
         click: function (type) {
-          if (type == i18n.trans('fixbar_log')) {
+          if (type == i18n.trans('日志')) {
             util.openWin({ url: "log" });
           }
-          else if (type == i18n.trans('fixbar_data')) {
+          else if (type == i18n.trans('数据')) {
             filename = $("#video_url").val().split(/[/\\]/).pop().split(".")[0];
             if (filename == "") {
               return layer.msg('{{ _("scene_video_url_placeholder") }}', { icon: 3 });
@@ -1058,14 +1058,14 @@
             title = `{{ data.app.title }} - ${filename}_${suf}`;
             util.openWin({ url: `editor?title=${title}&upload=file/upload&remote=file/local?url=webapp/temp/${filename}/${filename}_${suf}.json` });
           }
-          else if (type == i18n.trans('fixbar_preview')) {
+          else if (type == i18n.trans('预览')) {
             if (localStorage.getItem('task')) {
               tool.open("player?url=" + localStorage.getItem('task') + "&autoplay=true", "1100px", "510px");
             } else {
               util.openWin({ url: "player?url=&autoplay=true" });
             }
           }
-          else if (type == i18n.trans('fixbar_backup')) {
+          else if (type == i18n.trans('备份')) {
             layer.confirm('请选择？', { title: '提示', icon: 3, btn: ['备份', '导入', '取消'] }, function (index) {
               filename = $("#video_url").val().split(/[/\\]/).pop().split(".")[0];
               cache = layui.data(CREATORBOX)

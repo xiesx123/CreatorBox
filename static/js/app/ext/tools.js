@@ -58,7 +58,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 				dataType: 'json',
 				beforeSend: function (xhr, status) {
 					if (progress) {
-						idx = layer.msg(i18n.trans('loading'), { icon: 16, time: timeout });
+						idx = layer.msg(i18n.trans('请稍后'), { icon: 16, time: timeout });
 					}
 				},
 				success: function (data, status) {
@@ -66,7 +66,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 					if (data?.code === 0) {
 						callback?.(data);
 					} else {
-						toast.error(data?.message || "", i18n.trans('confirm_title'));
+						toast.error(data?.message || "", i18n.trans('提示'));
 					}
 					layer.close(idx);
 				},
@@ -86,7 +86,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 				dataType: 'json',
 				beforeSend: function (xhr, status) {
 					if (progress) {
-						idx = layer.msg(i18n.trans('loading'), { icon: 16, time: timeout });
+						idx = layer.msg(i18n.trans('请稍后'), { icon: 16, time: timeout });
 					}
 				},
 				success: function (data, status) {
@@ -94,7 +94,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 					if (data?.code === 0) {
 						callback?.(data);
 					} else {
-						toast.error(data?.message || "", i18n.trans('confirm_title'));
+						toast.error(data?.message || "", i18n.trans('提示'));
 					}
 					layer.close(idx);
 				},
@@ -106,10 +106,10 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 		},
 
 		form: function (url, parames, callback) {
-			layer.confirm(i18n.trans('confirm_submit'), {
+			layer.confirm(i18n.trans('确定提交？'), {
 				icon: 3,
-				title: i18n.trans('confirm_title'),
-				btn: [i18n.trans('confirm_ok'), i18n.trans('confirm_cancel')]
+				title: i18n.trans('提示'),
+				btn: [i18n.trans('确定'), i18n.trans('取消')]
 			}, function () {
 				$.ajax({
 					type: 'POST',
@@ -117,14 +117,14 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 					data: parames,
 					dataType: 'json',
 					beforeSend: function (xhr, status) {
-						idx = layer.msg(i18n.trans('loading'), { icon: 16, time: timeout });
+						idx = layer.msg(i18n.trans('请稍后'), { icon: 16, time: timeout });
 					},
 					success: function (data, status) {
 						console.debug(data)
 						if (data?.code === 0) {
 							callback?.(data);
 						} else {
-							toast.error(data?.message || "", i18n.trans('confirm_title'));
+							toast.error(data?.message || "", i18n.trans('提示'));
 						}
 						layer.close(idx);
 					},
@@ -141,14 +141,14 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 			var data = checkStatus.data;
 			var ids = data.map(item => item.id).join(",");
 			if (ids.length == 0) {
-				layer.msg(i18n.trans('confirm_delete_select'));
-				toast.error(i18n.trans('confirm_delete_select'), i18n.trans('confirm_title'));
+				layer.msg(i18n.trans('请选择删除数据'));
+				toast.error(i18n.trans('请选择删除数据'), i18n.trans('提示'));
 				return;
 			}
-			layer.confirm(i18n.trans('confirm_delete'), {
+			layer.confirm(i18n.trans('确认删除？'), {
 				icon: 3,
-				title: i18n.trans('confirm_title'),
-				btn: [i18n.trans('confirm_ok'), i18n.trans('confirm_cancel')]
+				title: i18n.trans('提示'),
+				btn: [i18n.trans('确定'), i18n.trans('取消')]
 			}, function (index) {
 				idx = index
 				mod.post(url, JSON.stringify({ "ids": ids }), callback)
@@ -156,7 +156,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 		},
 
 		download: function (url, parames, filename) {
-			idx = layer.msg(i18n.trans('loading'), { icon: 16, time: timeout });
+			idx = layer.msg(i18n.trans('请稍后'), { icon: 16, time: timeout });
 			fetch(url, {
 				method: "POST",
 				body: parames,
@@ -175,7 +175,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 					layer.close(idx);
 				})
 				.catch(error => {
-					toast.error(error, i18n.trans('confirm_title'));
+					toast.error(error, i18n.trans('提示'));
 				});
 		},
 
@@ -187,25 +187,25 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 				exts: exts_,
 				before: function (obj) {
 					element.progress('progress_filter', '0%');
-					layer.msg(i18n.trans('upload_uploading'), { icon: 16, time: timeout });
+					layer.msg(i18n.trans('上传中'), { icon: 16, time: timeout });
 				},
 				progress: function (n, elem, e) {
 					element.progress('progress_filter', n + '%');
 					if (n == 100) {
-						layer.msg(i18n.trans('upload_complete'));
+						layer.msg(i18n.trans('上传完毕'));
 					}
 					if (progress_) {
 						progress_(n, elem, e);
 					}
 				},
 				done: function (response) {
-					layer.msg(i18n.trans('upload_success'), { icon: 1 });
+					layer.msg(i18n.trans('上传成功'), { icon: 1 });
 					if (done_) {
 						done_(response);
 					}
 				},
 				error: function () {
-					toast.error(i18n.trans('upload_failed'));
+					toast.error(i18n.trans('上传失败'));
 				}
 			}
 			if (exts_ == null) {
@@ -227,7 +227,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 				isOutAnim: false,
 				scrollbar: false,
 				btnAlign: 'r',
-				btn: [i18n.trans('confirm_ok'), i18n.trans('confirm_cancel')],
+				btn: [i18n.trans('确定'), i18n.trans('取消')],
 				yes: function (index, layero) {
 					// 得到iframe页的窗口对象
 					// var iframeWin = window[layero.find('iframe')[0]['name']];

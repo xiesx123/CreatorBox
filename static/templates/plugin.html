@@ -117,7 +117,7 @@
                 cols: [[
                     { type: 'checkbox' },
                     { title: '编号', sort: true, width: 80, align: "center", templet: d => '<div title="' + d.text + '">' + d.LAY_NUM + '</div>' },
-                    { title: '名称', sort: true, width: 220, align: "left", field: 'name', templet: d => '<div title="' + d.name + '"> ' + d.name + '</div>' },
+                    { title: '语言', sort: true, width: 220, align: "left", field: 'name', templet: d => '<div title="' + d.name + '"> ' + d.name + '</div>' },
                     { title: '描述', sort: true, align: "left", align: "left", field: 'description', templet: d => '<div title="' + d.description + '">' + d.description + '</div>' },
                     { title: "状态", sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_status" },
                     { title: "操作", sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_tools" }
@@ -135,7 +135,7 @@
                         var data = checkStatus.data;
                         var ids = data.map(item => item.id).join(",");
                         if (ids.length == 0) {
-                            layer.msg(i18n.trans('confirm_select'));
+                            layer.msg(i18n.trans('请选择数据'));
                             return;
                         }
                         tool.post("/plugin/status", JSON.stringify({ "ids": ids, "status": 1 }), function (response) {
@@ -151,7 +151,7 @@
                         var data = checkStatus.data;
                         var ids = data.map(item => item.id).join(",");
                         if (ids.length == 0) {
-                            layer.msg(i18n.trans('confirm_select'));
+                            layer.msg(i18n.trans('请选择数据'));
                             return;
                         }
                         tool.post("/plugin/status", JSON.stringify({ "ids": ids, "status": 0}), function (response) {

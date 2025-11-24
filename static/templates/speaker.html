@@ -49,9 +49,9 @@
                             </div>
 
                             <div class="layui-form-item">
-                                <label class="layui-form-label">名称</label>
+                                <label class="layui-form-label">语言</label>
                                 <div class="layui-input-block">
-                                    <input id="suffix" type="text" name="speaker" placeholder="请输入名称"
+                                    <input id="suffix" type="text" name="speaker" placeholder="请输入语言"
                                         lay-verify="required" autocomplete="off" class="layui-input" lay-affix="clear">
                                 </div>
                             </div>
@@ -281,16 +281,16 @@
                 height: 'full-78', // 最大高度减去其他容器已占有的高度差
                 cols: [[
                     { type: 'checkbox' },
-                    { title: i18n.trans('table_spk_col_id'), sort: true, width: 110, align: "left", field: 'id' },
-                    // { title: i18n.trans('table_spk_col_type'), sort: true, width: 80, align: "left", field: 'type', templet: d => '<div title="' + enums.voice(d.type) + '">' + enums.voice(d.type) + '</div>' },
-                    { title: i18n.trans('table_spk_col_speaker'), sort: true, width: 150, align: "left", field: 'speaker', templet: d => `<div title="${d.speaker}">${d.speaker}</div>` },
-                    { title: i18n.trans('table_spk_col_gender'), sort: true, width: 105, align: "left", field: 'gender', templet: d => '<div title="' + enums.gender(d.gender) + '">' + enums.gender(d.gender) + '</div>' },
-                    { title: i18n.trans('table_spk_col_locale'), sort: true, width: 105, align: "left", field: 'locale', templet: d => `<div title="${d.locale}">${d.locale}</div>` },
-                    { title: i18n.trans('table_spk_col_emotion'), sort: true, width: 105, align: "left", field: 'emotion', templet: d => `<div title="${d.emotion ?? '-'}">${i18n.trans(`emotion_${d.emotion}`) ?? '-'}</div>` },
-                    { title: i18n.trans('table_spk_col_text'), sort: false, field: 'text', templet: d => `<div title="${d.text}">${d.text}</div>` },
-                    { title: i18n.trans('table_spk_col_duration'), sort: true, width: 105, align: "center", field: 'duration', templet: d => `<div title="${d.duration}">${d.duration}</div>` },
-                    { title: i18n.trans('table_spk_col_status'), sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_status" },
-                    { title: i18n.trans('table_spk_col_action'), sort: false, width: 220, align: "center", fixed: 'right', toolbar: "#TPL_table_tools" }
+                    { title: i18n.trans('编号'), sort: true, width: 110, align: "left", field: 'id' },
+                    // { title: i18n.trans('类型'), sort: true, width: 80, align: "left", field: 'type', templet: d => '<div title="' + enums.voice(d.type) + '">' + enums.voice(d.type) + '</div>' },
+                    { title: i18n.trans('语音'), sort: true, width: 150, align: "left", field: 'speaker', templet: d => `<div title="${d.speaker}">${d.speaker}</div>` },
+                    { title: i18n.trans('性别'), sort: true, width: 105, align: "left", field: 'gender', templet: d => '<div title="' + enums.gender(d.gender) + '">' + enums.gender(d.gender) + '</div>' },
+                    { title: i18n.trans('语言'), sort: true, width: 105, align: "left", field: 'locale', templet: d => `<div title="${d.locale}">${d.locale}</div>` },
+                    { title: i18n.trans('情感'), sort: true, width: 105, align: "left", field: 'emotion', templet: d => `<div title="${d.emotion ?? '-'}">${i18n.trans(`emotion_${d.emotion}`) ?? '-'}</div>` },
+                    { title: i18n.trans('文本'), sort: false, field: 'text', templet: d => `<div title="${d.text}">${d.text}</div>` },
+                    { title: i18n.trans('时长'), sort: true, width: 105, align: "center", field: 'duration', templet: d => `<div title="${d.duration}">${d.duration}</div>` },
+                    { title: i18n.trans('状态'), sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_status" },
+                    { title: i18n.trans('操作'), sort: false, width: 220, align: "center", fixed: 'right', toolbar: "#TPL_table_tools" }
                 ]],
                 done: function(res, curr, count, origin){
                     this.curr = curr
@@ -394,7 +394,7 @@
                         console.debug('audio loaded');
                     },
                     onloaderror: function () {
-                        toast.error(i18n.trans('onload_error'));
+                        toast.error(i18n.trans('加载失败'));
                         // console.debug('audio onloaderror');
                     },
                     onplay: function () {

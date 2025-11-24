@@ -40,7 +40,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                 console.debug('audio loaded');
             },
             onloaderror: function () {
-                toast.error(i18n.trans('onload_error'));
+                toast.error(i18n.trans('加载失败'));
                 // console.debug('audio onloaderror');
             },
             onplay: function () {
@@ -118,9 +118,9 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
         // 清空原有选项
         $("#tts_voice").empty();
         if (response.data.length == 0) {
-            toast.warning(i18n.trans('tts_voice_no_data'), i18n.trans('tts_voice_list_title'));
+            toast.warning(i18n.trans('暂无可用语音'), i18n.trans('语音列表'));
         } else {
-            toast.success(i18n.transFmt('tts_voice_found', response.data.length), i18n.trans('tts_voice_list_title'));
+            toast.success(i18n.transFmt('format.voice_found', response.data.length), i18n.trans('语音列表'));
         }
         // 记录音色数据
         response.data.forEach(obj => {
@@ -147,8 +147,8 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
             (list || []).forEach(obj => {
                 html += `<optgroup id="${obj.type}" label="${obj.group} (${obj.item.length})">\n`;
                 obj.item.forEach(i => {
-                    locale = i.locale || selected_locale || i18n.trans('type_unknown')
-                    speaker = i.id == 0 && i.type == 2 ? i18n.trans('tts_spk_voice_original') : i.speaker
+                    locale = i.locale || selected_locale || i18n.trans('未知')
+                    speaker = i.id == 0 && i.type == 2 ? i18n.trans('原声音色') : i.speaker
                     html += `  <option value="${i.id}">` + (idx++) + "." + enums.gender(i.gender) + " - " + locale + " - " + speaker + `</option>\n`;
                 });
                 html += `</optgroup>\n`;
@@ -188,8 +188,8 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
     util.on('id', {
         "video_speaker": function (othis) {
             layer.prompt({
-                title: i18n.trans('tts_spk_config_prompt_title'),
-                placeholder: i18n.trans('tts_spk_config_prompt_placeholder'),
+                title: i18n.trans('确定生成说话人配置？'),
+                placeholder: i18n.trans('请输入片段长度'),
                 value: form_json.speaker_len,
                 maxlength: 5
             }, function (value, index, elem) {
@@ -331,7 +331,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                     );
                 const item = findItemByVoice(form_json)
                 if (item != null) {
-                    layer.msg(i18n.trans('tts_previewing_cached_audio'), { icon: 1 });
+                    layer.msg(i18n.trans('正在播放缓存音频'), { icon: 1 });
                     return voice_play(item.url);
                 }
                 // 文件名
@@ -363,9 +363,9 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                     }
                 }), function (response) {
                     if (response.code != 0) {
-                        return toast.error(response.message, i18n.trans('confirm_title'));
+                        return toast.error(response.message, i18n.trans('提示'));
                     }
-                    toast.info(output, i18n.trans('tts_previewing_preview'))
+                    toast.info(output, i18n.trans('语音试听'))
                     console.debug(response.data)
                     const url = '/file/local?url=' + response.data.path;
                     const duration = response.data.duration;
@@ -412,20 +412,20 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
             data: table_json,
             page: false,
             text: {
-                none: i18n.trans('tts_table_empyt')
+                none: i18n.trans('无数据')
             },
             cols: [[
-                { title: i18n.trans('table_tts_col_spk'), width: 60, align: "center", templet: d => '<div title="' + d.voice + ' (' + d.seed + ')">' + d.LAY_INDEX + '</div>' },
-                { title: i18n.trans('table_tts_col_model'), width: 80, align: "center", field: 'provider', templet: d => '<div title="' + d.model + '">' + d.provider + '</div>' },
-                { title: i18n.trans('table_tts_col_type'), width: 80, align: "center", field: 'type', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + enums.voice(d.type) + '</div>' },
-                { title: i18n.trans('table_tts_col_gender'), width: 80, align: "center", field: 'gender', templet: d => '<div title="' + d.text + ' (' + d.remarks + ')">' + (d.gender == 1 ? i18n.trans('gender_male') : d.gender == 2 ? i18n.trans('gender_female') : i18n.trans('gender_unknown')) + '</div>' },
-                { title: i18n.trans('table_tts_col_locale'), width: 80, field: 'locale', templet: d => '<div title="' + d.text + ' (' + d.remarks + ')">' + d.locale + '</div>' },
-                { title: i18n.trans('table_tts_col_speaker'), fixed: 'right', field: 'speaker', templet: d => '<div title="' + d.text + ' (' + d.remarks + ')">' + d.speaker + '</div>' },
-                { title: i18n.trans('table_tts_col_volume'), width: 80, align: "center", field: 'volume', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.volume + '</div>' },
-                { title: i18n.trans('table_tts_col_rate'), width: 80, align: "center", field: 'rate', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.rate + '</div>' },
-                { title: i18n.trans('table_tts_col_pitch'), width: 80, align: "center", field: 'pitch', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.pitch + '</div>' },
-                { title: i18n.trans('table_tts_col_duration'), fixed: 'right', width: 90, align: "center", field: 'duration', templet: d => '<div title="' + d.text + ' (' + d.remarks + ')">' + d.duration + '</div>' },
-                { title: i18n.trans('table_tts_col_action'), fixed: 'right', width: "220", align: "center", toolbar: "#TPL_tts_voices_table_tools" }
+                { title: 'spk', width: 60, align: "center", templet: d => '<div title="' + d.voice + ' (' + d.seed + ')">' + d.LAY_INDEX + '</div>' },
+                { title: i18n.trans('模型'), width: 80, align: "center", field: 'provider', templet: d => '<div title="' + d.model + '">' + d.provider + '</div>' },
+                { title: i18n.trans('类型'), width: 80, align: "center", field: 'type', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + enums.voice(d.type) + '</div>' },
+                { title: i18n.trans('性别'), width: 80, align: "center", field: 'gender', templet: d => '<div title="' + d.text + ' (' + d.remarks + ')">' + (d.gender == 1 ? i18n.trans('男') : d.gender == 2 ? i18n.trans('女') : i18n.trans('未知')) + '</div>' },
+                { title: i18n.trans('地区'), width: 80, field: 'locale', templet: d => '<div title="' + d.text + ' (' + d.remarks + ')">' + d.locale + '</div>' },
+                { title: i18n.trans('音色'), fixed: 'right', field: 'speaker', templet: d => '<div title="' + d.text + ' (' + d.remarks + ')">' + d.speaker + '</div>' },
+                { title: i18n.trans('音量'), width: 80, align: "center", field: 'volume', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.volume + '</div>' },
+                { title: i18n.trans('语速'), width: 80, align: "center", field: 'rate', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.rate + '</div>' },
+                { title: i18n.trans('语调'), width: 80, align: "center", field: 'pitch', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + d.pitch + '</div>' },
+                { title: i18n.trans('时长'), fixed: 'right', width: 90, align: "center", field: 'duration', templet: d => '<div title="' + d.text + ' (' + d.remarks + ')">' + d.duration + '</div>' },
+                { title: i18n.trans('操作'), fixed: 'right', width: "220", align: "center", toolbar: "#TPL_tts_voices_table_tools" }
             ]],
         });
     }
@@ -437,7 +437,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
         if (obj.event === "preview") {
             voice_play(data.url);
         } else if (obj.event === "del") {
-            layer.confirm(i18n.transFmt('confirm_delete_select_fmt', data.speaker), { title: i18n.trans('confirm_title'), icon: 3 }, function (index) {
+            layer.confirm(i18n.transFmt('format.confirm_delete', data.speaker), { title: i18n.trans('提示'), icon: 3 }, function (index) {
                 obj.del();
                 layer.close(index);
                 if (idx < table_json.length) {
@@ -447,13 +447,13 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
             });
         } else if (obj.event === 'up') {
             if (idx === 0) {
-                layer.msg(i18n.trans('tts_table_pinned_top'));
+                layer.msg(i18n.trans('已置顶'));
                 return;
             }
             swapData(idx, idx - 1);
         } else if (obj.event === 'down') {
             if (idx === table_json.length - 1) {
-                layer.msg(i18n.trans('tts_table_pinned_bottom'));
+                layer.msg(i18n.trans('已置底'));
                 return;
             }
             swapData(idx, idx + 1);
