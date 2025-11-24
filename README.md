@@ -35,7 +35,6 @@
 
 ### Video Translation and Dubbing
 
-<h4>Video Demonstration</h4>
 <table>
     <!-- 大话西游 -->
     <tbody>
