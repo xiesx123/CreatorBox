@@ -33,6 +33,7 @@ dependencies = [
      "librosa==0.11.0",
      "litellm[caching]==1.80.0",
      "loguru==0.7.3",
+     "nltk==3.9.2",
      "numpy==1.26.4",
      "opencv-python==4.11.0.86",
      "psutil==7.1.3",
