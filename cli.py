@@ -127,7 +127,7 @@ def proxy(host, port, username, password, site, timeout):
 @click.option("--proxy", is_flag=True, default=False, show_default=True, help="enable proxy")
 def auth(action, email, password, proxy):
     try:
-        from src.app.repo import Firebase
+        from src.db.repo import Firebase
 
         auth = Firebase.Authentication()
         click.echo(f"😊 Starting {action} -> {email}")
