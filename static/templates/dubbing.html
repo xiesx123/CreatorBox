@@ -439,36 +439,6 @@
                         </div>
                       </div>
 
-                      <div class="layui-form-item">
-                        <label class="layui-form-label">{{ _("llm_temperature") }}</label>
-                        <div class="layui-input-block">
-                          <div class="layui-input-wrap">
-                            <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
-                            <input type="number" name="llm_temperature" lay-verify="required" placeholder="[0,1]"
-                              autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="layui-form-item">
-                        <label class="layui-form-label">{{ _("llm_top_p") }}</label>
-                        <div class="layui-input-block">
-                          <div class="layui-input-wrap">
-                            <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
-                            <input type="number" name="llm_top_p" lay-verify="required" placeholder="[0,1]"
-                              autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="layui-form-item" pane
-                        lay-tips="{content: '{{_("llm_use_cache_tip")}}', margin: '0 0 0 -10px'}">
-                        <label class="layui-form-label">{{ _("llm_use_cache") }}</label>
-                        <div class="layui-input-block">
-                          <input type="checkbox" name="llm_use_cache" lay-skin="switch">
-                        </div>
-                      </div>
-
                       <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">{{ _("llm_instruct") }}</label>
                         <div class="layui-input-block">
@@ -952,12 +922,7 @@
             "model": $('input[name="llm_model"]').val(),
             "language": form_json.locale,
             "text": $("#tts_text").val(),
-            "extra": {
-              "temperature": $('input[name="llm_temperature"]').val(),
-              "top_p": $('input[name="llm_top_p"]').val(),
-              "debug": $('input[name="llm_debug"]').is(':checked'),
-              "cache": $('input[name="llm_use_cache"]').is(':checked')
-            },
+            "extra": {},
           }), function (response) {
             form_json.tts_text = response.data;
             $("#tts_text").val(form_json.tts_text)
