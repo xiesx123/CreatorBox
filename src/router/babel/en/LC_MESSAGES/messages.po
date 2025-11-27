@@ -134,7 +134,7 @@ msgstr "Provider"
 
 #: static/templates/player.html:50
 msgid "播放"
-msgstr "Player"
+msgstr "Play"
 
 #: static/templates/plugin.html:123
 msgid "操作"
