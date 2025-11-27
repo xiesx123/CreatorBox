@@ -11,108 +11,116 @@
     <script src="static/js/jquery/jquery.min.js"></script>
     <script src="static/js/ext/howler.min.js"></script>
     <!-- nprogress -->
-    <link href="static/js/nprogress/nprogress.min.css" rel="stylesheet">
+    <link href="static/js/nprogress/nprogress.min.css" rel="stylesheet" />
     <script src="static/js/nprogress/nprogress.min.js"></script>
     <!-- layui -->
-    <link href="static/js/layui/css/layui.css" rel="stylesheet">
-    <link href="static/js/layui/css/layui-dark.css" rel="stylesheet">
+    <link href="static/js/layui/css/layui.css" rel="stylesheet" />
+    <link href="static/js/layui/css/layui-dark.css" rel="stylesheet" />
     <script src="static/js/layui/layui.js"></script>
     <!-- app -->
     <script src="static/js/app/app.js"></script>
 </head>
 
 <body class="collapse" layadmin-themealias="default">
-
     <div class="layui-layout layui-layout-admin">
-
         <form class="layui-form layui-form-pane" lay-filter="form_filter">
-
             <!-- 说话人 -->
             <div class="layui-collapse" lay-filter="collapse_filter_speaker">
                 <div class="layui-colla-item">
                     <div class="layui-card layui-panel">
-                        <div class="layui-colla-title">说话人
+                        <div class="layui-colla-title">
+                            {{_("说话人")}}
                             <!-- <i class="layui-icon layui-icon-tips" lay-tips="要支持的噢"></i> -->
                         </div>
 
                         <div class="layui-colla-content layui-show">
-
-                            <input type="hidden" name="id">
+                            <input type="hidden" name="id" />
 
                             <div lay-filter="query_filter" class="layui-form-item layui-hide">
-                                <label class="layui-form-label" id="audio_upload">音频 <span
-                                    class="layui-badge-dot layui-bg-green"></span></label>
+                                <label class="layui-form-label" id="audio_upload">{{_("音频")}} <span
+                                        class="layui-badge-dot layui-bg-green"></span></label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="path" lay-verify="path" placeholder="请输入音频路径、链接"
-                                        autocomplete="off" class="layui-input" lay-affix="clear">
-                                </div>
-                            </div>
+                                    <input type="text" name="path" lay-verify="path" placeholder='{{_("请输入音频路径、链接")}}''
+                    autocomplete="off" class="layui-input" lay-affix="clear">
+                  </div>
+                </div>
 
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">语言</label>
-                                <div class="layui-input-block">
-                                    <input id="suffix" type="text" name="speaker" placeholder="请输入语言"
-                                        lay-verify="required" autocomplete="off" class="layui-input" lay-affix="clear">
+                <div class="layui-form-item">
+                  <label class="layui-form-label">{{_("说话人")}}</label>
+                  <div class="layui-input-block">
+                    <input
+                      id="suffix"
+                      type="text"
+                      name="speaker"
+                      placeholder='{{_("请输入说话人名称")}}' lay-verify="required" autocomplete="off" class="layui-input"
+                                        lay-affix="clear" />
                                 </div>
                             </div>
 
                             <div class="layui-form-item" pane>
-                                <label class="layui-form-label">性别</label>
+                                <label class="layui-form-label">{{_("性别")}}</label>
                                 <div class="layui-input-block">
-                                    <input type="radio" name="gender" value="1" lay-filter="gender_filter" title="男">
-                                    <input type="radio" name="gender" value="2" lay-filter="gender_filter" title="女">
+                                    <input type="radio" name="gender" value="1" lay-filter="gender_filter"
+                                        title='{{_("男")}}' checked />
+                                    <input type="radio" name="gender" value="2" lay-filter="gender_filter"
+                                        title='{{_("女")}}' />
                                 </div>
                             </div>
 
                             <div class="layui-form-item">
-                                <label class="layui-form-label">语言</label>
+                                <label class="layui-form-label">{{_("地区")}}</label>
                                 <div class="layui-input-block">
                                     <select id="locale" name="locale" lay-verify="required" lay-filter="locale_filter">
-                                        <option value="">选择或搜索</option>
+                                        <option value="">{{_("选择或搜索")}}</option>
                                         {% for item in data.locales %}
-                                        <option value="{{ item.locale }}">{{ item.name }} - {{ item.locale }}</option>
+                                        <option value="{{ item.locale }}">
+                                            {{ item.locale }} - {{ item.name if request.state.lang
+                                            == 'zh' else item.country }}
+                                        </option>
                                         {% endfor %}
                                     </select>
                                 </div>
                             </div>
 
                             <div class="layui-form-item">
-                                <label class="layui-form-label">情感</label>
+                                <label class="layui-form-label">{{_("情感")}}</label>
                                 <div class="layui-input-block">
-                                    <input id="emotion" type="text" name="emotion" placeholder="请输入情感"
-                                        lay-verify="required" autocomplete="off" class="layui-input" lay-affix="clear">
+                                    <input id="emotion" type="text" name="emotion" placeholder='{{_("请输入情感")}}'
+                                        lay-verify="required" autocomplete="off" class="layui-input"
+                                        lay-affix="clear" />
                                 </div>
                             </div>
 
                             <div lay-filter="query_filter" class="layui-form-item layui-hide">
-                                <label class="layui-form-label">文本</label>
+                                <label class="layui-form-label">{{_("文本")}}</label>
                                 <div class="layui-input-block">
-                                    <input id="suffix" type="text" name="text" placeholder="请输入音频文本" autocomplete="off"
-                                        class="layui-input" lay-affix="clear">
+                                    <input id="suffix" type="text" name="text" placeholder='{{_("请输入音频文本")}}'
+                                        autocomplete="off" class="layui-input" lay-affix="clear" />
                                 </div>
                             </div>
 
-                            <div class="layui-form-item layui-col-space15" style="margin-bottom: 0px;">
+                            <div class="layui-form-item layui-col-space15" style="margin-bottom: 0px">
                                 <div class="layui-col-md10">
                                     <button type="submit" class="layui-btn layui-btn-primary layui-btn-fluid" lay-submit
-                                        lay-filter="form_submit">查询</button>
+                                        lay-filter="form_submit">
+                                        {{_("查询")}}
+                                    </button>
                                 </div>
                                 <div class="layui-col-md2">
                                     <button type="reset"
-                                        class="layui-btn layui-btn-primary layui-border layui-btn-fluid">重置</button>
+                                        class="layui-btn layui-btn-primary layui-border layui-btn-fluid">
+                                        {{_("重置")}}
+                                    </button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
-
         </form>
 
         <div style="padding: 10px">
-            <table id="table" class="layui-table" style="margin: 0px;">
-            </table>
+            <table id="table" class="layui-table" style="margin: 0px"></table>
         </div>
     </div>
 
@@ -120,33 +128,46 @@
         <input type="hidden" id="import" />
     </div>
 
-
     <!-- 表格工具栏 -->
     <script type="text/html" id="TPL_table_toolbar">
-        <div class="layui-inline" lay-event="query"><i class="layui-icon layui-icon-search"></i></div>
-        <div class="layui-inline" lay-event="add"><i class="layui-icon layui-icon-add-circle"></i></div>
-        <div class="layui-inline" lay-event="delete"><i class="layui-icon layui-icon-delete"></i></div>
+      <div class="layui-inline" lay-event="query">
+        <i class="layui-icon layui-icon-search"></i>
+      </div>
+      <div class="layui-inline" lay-event="add">
+        <i class="layui-icon layui-icon-add-circle"></i>
+      </div>
+      <div class="layui-inline" lay-event="delete">
+        <i class="layui-icon layui-icon-delete"></i>
+      </div>
     </script>
 
     <!-- 表格行工具 -->
     <script type="text/html" id="TPL_table_tools">
-        <div class="layui-btn-container">
-            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="update">{{ _("table_tools_edit") }}</a>
-            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="test">{{ _("table_tools_preview") }}</a>
-            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="download">{{ _("table_tools_download") }}</a>
-        </div>
+      <div class="layui-btn-container">
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="update"
+          >{{_("编辑")}}</a
+        >
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="test"
+          >{{_("试听")}}</a
+        >
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="download"
+          >{{_("下载")}}</a
+        >
+      </div>
     </script>
 
     <!-- 启用禁用 -->
     {% raw %}
     <script type="text/html" id="TPL_table_status">
-        <input type="checkbox" name="status" value={{d.status}} lay-skin="primary" mid={{d.id}}  lay-filter="table_status_filter" {{ d.status == '1' ? 'checked' : '' }}>
+      <input type="checkbox" name="status" value={{d.status}} lay-skin="primary"
+      mid={{d.id}} lay-filter="table_status_filter" {{ d.status == '1' ?
+      'checked' : '' }}>
     </script>
     {% endraw %}
 
     <script>
 
-        layui.use(['form', 'table', 'layer', 'element', 'upload', 'util', 'notice', `enums`, 'tool'], function () {
+        layui.use(['form', 'table', 'layer', 'element', 'upload', 'util', 'notice', `enums`, 'tool', 'i18n'], function () {
 
             var form = layui.form;
             var table = layui.table;
@@ -159,7 +180,7 @@
             var tool = layui.tool;
             var i18n = layui.i18n;
             var $ = layui.$;
-            
+
             i18n.init('{{request.state.lang}}');
 
             let CREATORBOX = "speaker"
@@ -175,7 +196,7 @@
             // 表单渲染
             form.val('form_filter', form_json);
 
-            // 表单验证 
+            // 表单验证
             form.verify({
                 required: function (value, elem) {
                     if (value.length == 0 && action != "query") {
@@ -184,13 +205,13 @@
                         } else if (elem.nodeName == 'SELECT') {
                             return elem.options[0].text
                         } else {
-                            return '不能为空'
+                            return i18n.trans("不能为空");
                         }
                     }
                 },
                 path: function (value, elem) {
                     if (value.length == 0 && !["query", "import"].includes(action)) {
-                        return '请输入本地路径、网络链接';
+                        return i18n.trans("请输入本地路径");
                     }
                 }
             });
@@ -199,9 +220,9 @@
 
             // 表单-音频上传
             tool.upload("#audio_upload", "spk/upload", 'audio', null, function (n, elem, e) {
-                layer.msg('识别中', { icon: 16, time: 30 * 1000 });
+                layer.msg(i18n.trans("识别中"), { icon: 16, time: 30 * 1000 });
             }, function (response) {
-                layer.msg('识别成功', { icon: 1 });
+                layer.msg(i18n.trans("识别成功"), { icon: 1 });
                 if (response.code == 0) {
                     data = response.data
                     form_json.id = $('input[name="id"]').val();
@@ -236,14 +257,14 @@
                         }
                     });
                 } else if (action == 'add' || action == 'update') {
-                    title = '保存'
+                    title = i18n.trans("保存")
                     if (action == 'update') {
-                        title = '修改'
+                        title = i18n.trans("修改")
                     }
-                    layer.confirm(`确定${title}吗？`, { title: '提示', icon: 3 }, function (index) {
+                    layer.confirm(i18n.trans("确定提交？"), { title: i18n.trans("提示"), icon: 3 }, function (index) {
                         tool.post("/spk/upsert", data, function (response) {
                             console.debug(response.data)
-                            toast.success(`${field.speaker}`, `${title}成功`);
+                            toast.success(`${field.speaker}`, i18n.trans("操作成功"));
                             table.reloadData('table', { scrollPos: 'fixed' });
                         }, true)
                     });
@@ -271,7 +292,7 @@
                 },
                 toolbar: '#TPL_table_toolbar',
                 defaultToolbar: [{
-                    title: '导入',
+                    title: i18n.trans("导入"),
                     layEvent: 'import',
                     icon: 'layui-icon-export',
                     onClick: function (obj) {
@@ -281,18 +302,18 @@
                 height: 'full-78', // 最大高度减去其他容器已占有的高度差
                 cols: [[
                     { type: 'checkbox' },
-                    { title: i18n.trans('编号'), sort: true, width: 110, align: "left", field: 'id' },
-                    // { title: i18n.trans('类型'), sort: true, width: 80, align: "left", field: 'type', templet: d => '<div title="' + enums.voice(d.type) + '">' + enums.voice(d.type) + '</div>' },
-                    { title: i18n.trans('语音'), sort: true, width: 150, align: "left", field: 'speaker', templet: d => `<div title="${d.speaker}">${d.speaker}</div>` },
-                    { title: i18n.trans('性别'), sort: true, width: 105, align: "left", field: 'gender', templet: d => '<div title="' + enums.gender(d.gender) + '">' + enums.gender(d.gender) + '</div>' },
-                    { title: i18n.trans('语言'), sort: true, width: 105, align: "left", field: 'locale', templet: d => `<div title="${d.locale}">${d.locale}</div>` },
-                    { title: i18n.trans('情感'), sort: true, width: 105, align: "left", field: 'emotion', templet: d => `<div title="${d.emotion ?? '-'}">${i18n.trans(`emotion_${d.emotion}`) ?? '-'}</div>` },
-                    { title: i18n.trans('文本'), sort: false, field: 'text', templet: d => `<div title="${d.text}">${d.text}</div>` },
-                    { title: i18n.trans('时长'), sort: true, width: 105, align: "center", field: 'duration', templet: d => `<div title="${d.duration}">${d.duration}</div>` },
-                    { title: i18n.trans('状态'), sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_status" },
-                    { title: i18n.trans('操作'), sort: false, width: 220, align: "center", fixed: 'right', toolbar: "#TPL_table_tools" }
+                    { title: i18n.trans("编号"), sort: true, width: 110, align: "center", templet: d => '<div title="' + d.text + '">' + d.LAY_NUM + '</div>' },
+                    // { title: i18n.trans("类型"), sort: true, width: 80, align: "left", field: 'type', templet: d => '<div title="' + enums.voice(d.type) + '">' + enums.voice(d.type) + '</div>' },
+                    { title: i18n.trans("说话人"), sort: true, width: 150, align: "left", field: 'speaker', templet: d => `<div title="${d.speaker}">${d.speaker}</div>` },
+                    { title: i18n.trans("性别"), sort: true, width: 105, align: "left", field: 'gender', templet: d => '<div title="' + enums.gender(d.gender) + '">' + enums.gender(d.gender) + '</div>' },
+                    { title: i18n.trans("语言"), sort: true, width: 105, align: "left", field: 'locale', templet: d => `<div title="${d.locale}">${d.locale}</div>` },
+                    { title: i18n.trans("情感"), sort: true, width: 105, align: "left", field: 'emotion', templet: d => `<div title="${d.emotion ?? '-'}">${i18n.trans(`emotion.${d.emotion}`) ?? '-'}</div>` },
+                    { title: i18n.trans("文本"), sort: false, field: 'text', templet: d => `<div title="${d.text}">${d.text}</div>` },
+                    { title: i18n.trans("时长"), sort: true, width: 105, align: "center", field: 'duration', templet: d => `<div title="${d.duration}">${d.duration}</div>` },
+                    { title: i18n.trans("状态"), sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_status" },
+                    { title: i18n.trans("操作"), sort: false, width: 220, align: "center", fixed: 'right', toolbar: "#TPL_table_tools" }
                 ]],
-                done: function(res, curr, count, origin){
+                done: function (res, curr, count, origin) {
                     this.curr = curr
                 },
             });
@@ -306,7 +327,7 @@
                 switch (obj.event) {
                     case 'query':
                         action = "query";
-                        $('button[type="submit"]').text('查询');
+                        $('button[type="submit"]').text(i18n.trans("查询"));
                         $('button[type="submit"]').removeClass('layui-border-blue');
                         $('button[type="reset"]').click();
                         $('[lay-filter="query_filter"]').addClass('layui-hide');
@@ -315,7 +336,7 @@
                     case 'add':
                         action = "add";
                         $('input[name="id"]').val(null);
-                        $('button[type="submit"]').text('保存');
+                        $('button[type="submit"]').text(i18n.trans("保存"));
                         $('button[type="submit"]').addClass('layui-border-blue');
                         $('button[type="reset"]').click();
                         $('[lay-filter="query_filter"]').removeClass('layui-hide');
@@ -331,9 +352,9 @@
                         tool.upload("#import", "spk/batch", 'file', 'json', null, function (response) {
                             if (response.code == 0) {
                                 table.reloadData('table', { scrollPos: 'fixed' });
-                                return toast.success("导入【" + response.data + "】条成功", "提示");
+                                return toast.success(i18n.transFmt("voice_import", response.data), i18n.trans("提示"));
                             } else {
-                                return toast.error(response.message, "提示");
+                                return toast.error(response.message, i18n.trans("提示"));
                             }
                         })
                         $("#import").click();
@@ -349,7 +370,7 @@
                 if (obj.event === "update") {
                     action = "update";
                     form.val('form_filter', data);
-                    $('button[type="submit"]').text('编辑');
+                    $('button[type="submit"]').text(i18n.trans("编辑"));
                     $('button[type="submit"]').addClass('layui-border-blue');
                     $('[lay-filter="query_filter"]').removeClass('layui-hide');
                     $('[lay-filter="collapse_filter_speaker"] .layui-colla-content').addClass('layui-show');
@@ -372,10 +393,11 @@
                 data = JSON.stringify({ "id": id, "status": obj.elem.checked ? 1 : 0 });
                 tool.post("/spk/status", data, function (response) {
                     console.debug(response.data)
-                    if (obj.elem.checked) {
-                        toast.success("已开启", "提示");
+                    var status = response.data.status;
+                    if (status == 1) {
+                        toast.success(i18n.trans("开启成功"));
                     } else {
-                        toast.info("已关闭", "提示");
+                        toast.info(i18n.trans("关闭成功"));
                     }
                 }, true)
             });
@@ -394,7 +416,7 @@
                         console.debug('audio loaded');
                     },
                     onloaderror: function () {
-                        toast.error(i18n.trans('加载失败'));
+                        toast.error(i18n.trans("加载失败"));
                         // console.debug('audio onloaderror');
                     },
                     onplay: function () {
@@ -412,7 +434,6 @@
                 });
             };
         });
-
     </script>
     <script src="static/js/app/theme.js"></script>
 </body>

@@ -11,7 +11,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', 'notice'], 
     var mod = {
 
         // 语音类型
-        voice : function (type) {
+        voice: function (type) {
             const types = {
                 1: i18n.trans('内置'),
                 2: i18n.trans('视频'),
@@ -21,7 +21,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', 'notice'], 
         },
 
         // 性别
-        gender : function (type) {
+        gender: function (type) {
             const types = {
                 0: i18n.trans('未知'),
                 1: i18n.trans('男'),

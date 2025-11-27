@@ -33,7 +33,7 @@
             <div class="layui-collapse" lay-filter="collapse_filter_gradio">
                 <div class="layui-colla-item">
                     <div class="layui-card layui-panel">
-                        <div class="layui-colla-title">应用</div>
+                        <div class="layui-colla-title">{{_("组件")}}</div>
                         <!-- <div class="layui-colla-content layui-show">
                         </div> -->
                     </div>
@@ -52,14 +52,14 @@
     <script type="text/html" id="TPL_table_toolbar">
         <!-- <div class="layui-inline" lay-event="query"><i class="layui-icon layui-icon-search"></i></div>
         <div class="layui-inline" lay-event="add"><i class="layui-icon layui-icon-add-circle"></i></div>-->
-        <div class="layui-inline" lay-event="enable"><i class="layui-icon layui-icon-radio"></i></div> 
-        <div class="layui-inline" lay-event="disable"><i class="layui-icon layui-icon-circle"></i></div> 
+    <div class="layui-inline" lay-event="enable"><i class="layui-icon layui-icon-radio"></i></div>
+    <div class="layui-inline" lay-event="disable"><i class="layui-icon layui-icon-circle"></i></div>
     </script>
 
     <!-- 表格行工具 -->
     <script type="text/html" id="TPL_table_tools">
         <div class="layui-btn-container">
-            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="open">打开</a>
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="open">{{_("打开")}}</a>
         </div>
     </script>
 
@@ -74,7 +74,7 @@
 
     <script>
 
-        layui.use(['form', 'layer', 'table', 'util', 'notice', 'tool'], function () {
+        layui.use(['form', 'layer', 'table', 'util', 'notice', 'tool', 'i18n'], function () {
 
             var form = layui.form;
             var layer = layui.layer;
@@ -99,14 +99,14 @@
                     groups: 5, //只显示 1 个连续页码
                     first: true, //不显示首页
                     last: true, //不显示尾页
-                    limit:20,
+                    limit: 20,
                 },
                 request: {
                     pageName: 'page', limitName: 'size'
                 },
                 toolbar: '#TPL_table_toolbar',
                 defaultToolbar: [{
-                    title: '重启',
+                    title: '{{_("重启")}}',
                     layEvent: 'reboot',
                     icon: 'layui-icon-logout',
                     onClick: function (obj) {
@@ -116,11 +116,11 @@
                 height: 'full-68', // 最大高度减去其他容器已占有的高度差
                 cols: [[
                     { type: 'checkbox' },
-                    { title: '编号', sort: true, width: 80, align: "center", templet: d => '<div title="' + d.text + '">' + d.LAY_NUM + '</div>' },
-                    { title: '语言', sort: true, width: 220, align: "left", field: 'name', templet: d => '<div title="' + d.name + '"> ' + d.name + '</div>' },
-                    { title: '描述', sort: true, align: "left", align: "left", field: 'description', templet: d => '<div title="' + d.description + '">' + d.description + '</div>' },
-                    { title: "状态", sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_status" },
-                    { title: "操作", sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_tools" }
+                    { title: '{{_("编号")}}', sort: true, width: 80, align: "center", templet: d => '<div title="' + d.text + '">' + d.LAY_NUM + '</div>' },
+                    { title: '{{_("标题")}}', sort: true, width: 220, align: "left", field: 'name', templet: d => '<div title="' + d.name + '"> ' + d.name + '</div>' },
+                    { title: '{{_("描述")}}', sort: true, align: "left", align: "left", field: 'description', templet: d => '<div title="' + d.description + '">' + d.description + '</div>' },
+                    { title: '{{_("状态")}}', sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_status" },
+                    { title: '{{_("操作")}}', sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_tools" }
                 ]],
             });
 
@@ -135,13 +135,13 @@
                         var data = checkStatus.data;
                         var ids = data.map(item => item.id).join(",");
                         if (ids.length == 0) {
-                            layer.msg(i18n.trans('请选择数据'));
+                            layer.msg(i18n.trans("请选择数据"));
                             return;
                         }
                         tool.post("/plugin/status", JSON.stringify({ "ids": ids, "status": 1 }), function (response) {
                             console.debug(response.data)
                             // table.reloadData(id, { scrollPos: 'fixed' });
-                            toast.info(response.data.updated.length, "操作成功");
+                            toast.info(response.data.updated.length, i18n.trans("操作成功"));
                             setTimeout(function () {
                                 tool.refresh()
                             }, 1 * 1000)
@@ -151,12 +151,12 @@
                         var data = checkStatus.data;
                         var ids = data.map(item => item.id).join(",");
                         if (ids.length == 0) {
-                            layer.msg(i18n.trans('请选择数据'));
+                            layer.msg(i18n.trans("请选择数据"));
                             return;
                         }
-                        tool.post("/plugin/status", JSON.stringify({ "ids": ids, "status": 0}), function (response) {
+                        tool.post("/plugin/status", JSON.stringify({ "ids": ids, "status": 0 }), function (response) {
                             console.debug(response.data)
-                            toast.info(response.data.updated.length, "操作成功");
+                            toast.info(response.data.updated.length, i18n.trans("操作成功"));
                             setTimeout(function () {
                                 tool.refresh()
                             }, 1 * 1000)
@@ -164,7 +164,7 @@
                         break;
                     case 'reboot':
                         // 确认执行
-                        layer.confirm('确定重启吗？', { title: '提示', icon: 3 }, function (index) {
+                        layer.confirm(i18n.trans("确定重启？"), { title: i18n.trans("提示"), icon: 3 }, function (index) {
                             layer.close(index);
                             // 请求调用
                             tool.get("/reboot")
@@ -182,7 +182,7 @@
                 var data = obj.data;
                 url = `${window.location.protocol}//${window.location.host}${data.url}`;
                 if (data.status == 0) {
-                    return toast.warning("服务未开启，无法访问", "提示");
+                    return toast.warning(i18n.trans("服务未开启，无法访问"), i18n.trans("提示"));
                 }
                 if (obj.event === "open") {
                     util.openWin({ url: url });
@@ -196,7 +196,7 @@
                 var index = $tr.attr('data-index');
                 var rowData = table.getData('gradio_table')[index];
                 if (!rowData) {
-                    return toast.error("无法获取当前行数据", "错误");
+                    return toast.error(i18n.trans("无法获取当前行数据"), i18n.trans("操作失败"));
                 }
 
                 // 更新状态
@@ -208,9 +208,9 @@
                     console.debug(response.data);
                     var status = response.data.status;
                     if (status == 1) {
-                        toast.info("重启后生效", "开启成功");
+                        toast.success(i18n.trans("重启后生效"), i18n.trans("开启成功"));
                     } else {
-                        toast.success("重启后生效", status == 0 ? "关闭成功" : "开启成功");
+                        toast.info(i18n.trans("重启后生效"), status == 0 ? i18n.trans("关闭成功") : i18n.trans("开启成功"));
                     }
                     // 更新状态
                     var cache = layui.table.cache['gradio_table'];

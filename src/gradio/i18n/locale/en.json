@@ -30,6 +30,7 @@
     "匹配": "Match",
     "参数": "Parameters",
     "启用": "Enable",
+    "启用可避免重复请求，防止消耗额外Token": "Enabling can avoid duplicate requests and prevent extra token consumption",
     "图像放大倍数": "Image scale factor",
     "图像最大边长": "Maximum image side length",
     "图片": "Image",
@@ -73,7 +74,6 @@
     "掩码膨胀": "Mask dilation",
     "掩码预膨胀": "Mask pre dilation",
     "描边": "Stroke",
-    "提供商": "Provider",
     "提取": "Extract",
     "提示：VideoSubFinder": "Tip: VideoSubFinder [Download Link](https://sourceforge.net/projects/videosubfinder/)",
     "提示：适用于剪映5.9及以上版本": "Tip: Compatible with CapCut 5.9 and Above",
@@ -213,6 +213,5 @@
     "音频识别": "Audio Recognition",
     "预览": "Preview",
     "颜色": "Color",
-    "高度": "Height",
-    "启用可避免重复请求，防止消耗额外Token":"Enabling can avoid duplicate requests and prevent extra token consumption"
+    "高度": "Height"
 }

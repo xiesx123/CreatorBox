@@ -45,9 +45,9 @@ loadScript(i18njs, function () {
 			},
 
 			// 获取翻译
-			transFmt: function (key,...vals) {
+			transFmt: function (key, ...vals) {
 				try {
-					return $.i18n.prop(key,...vals) || key;
+					return $.i18n.prop(key, ...vals) || key;
 				} catch (error) {
 					// console.error("i18n error -> "+ key)
 					return key;

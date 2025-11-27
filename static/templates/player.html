@@ -23,7 +23,7 @@
     <style>
         #player-container {
             width: 100%;
-            margin: 0px auto;
+            background-color: black;
         }
     </style>
 </head>
@@ -33,13 +33,13 @@
 
         <div style="padding: 10px">
             <div class="layui-card layui-panel">
-                <div class="layui-card-header">视频播放</div>
+                <!-- <div class="layui-card-header">{{_("视频")}}</div> -->
                 <div class="layui-card-body">
 
                     <div class="layui-form-item layui-col-space15" style="margin-bottom:0px">
                         <div class="layui-col-md10">
                             <div class="layui-input-wrap">
-                                <input id="url" value="{{ data.url }}" type="text" placeholder="请输入任务ID、视频地址"
+                                <input id="url" value="{{ data.url }}" type="text" placeholder='{{_("请输入任务ID、视频链接")}}'
                                     class="layui-input">
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                         <div class="layui-col-md2">
                             <div class="layui-input-wrap">
                                 <button id="play" type="button"
-                                    class="layui-btn layui-btn-primary layui-border-blue layui-btn-fluid">播放</button>
+                                    class="layui-btn layui-btn-primary layui-border-blue layui-btn-fluid">{{_("播放")}}</button>
                             </div>
                         </div>
                     </div>
@@ -67,12 +67,15 @@
 
         let player;
 
-        layui.use(['layer', 'util', 'tool'], function () {
+        layui.use(['layer', 'util', 'tool', 'i18n'], function () {
 
             var layer = layui.layer;
             var util = layui.util;
             var tool = layui.tool;
+            var i18n = layui.i18n;
             var $ = layui.$;
+
+            i18n.init('{{request.state.lang}}');
 
             var autoplay = layui.url().search.autoplay;
 
@@ -101,21 +104,22 @@
             // 视频播放
             var video_play = function (url) {
                 if (!url) {
-                    layer.msg('请输入任务ID/视频地址');
+                    layer.msg(i18n.trans("请输入任务ID、视频链接"));
                     return;
                 }
                 if (player) {
                     player.destroy();
                 }
                 player = new Player({
-                    "id": "player-container",
-                    "url": build_url(url),
-                    "playsinline": true,
-                    "autoplay": true,
+                    id: "player-container",
+                    url: build_url(url),
+                    playsinline: true,
+                    autoplay: true,
                     // "download": true,
-                    "pip": true,
-                    "width": "100%",
-                    "volume": 1
+                    pip: true,
+                    width: "100%",
+                    height: resizePlayer(),
+                    volume: 1
                 });
             }
 
@@ -124,6 +128,22 @@
                     $("#play").click();
                 }
             });
+
+            function resizePlayer() {
+                // 获取整个视口高度
+                const vh = window.innerHeight;
+
+                // 获取顶部占用的高度（输入框 + 上方 card）
+                const topElements = document.querySelectorAll('.layui-card');
+                let topHeight = 0;
+                topElements.forEach(el => {
+                    topHeight += el.offsetHeight+20;
+                });
+
+                // 计算剩余高度
+                const player = document.getElementById('player-container');
+                return (vh - topHeight) + 'px';
+            }
         });
 
     </script>
