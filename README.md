@@ -20,9 +20,9 @@
 <h4>Web Interface</h4>
 
 <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://xiesx123.github.io/CreatorBox/images/readme_dashboard_en.png" />
-   <source media="(prefers-color-scheme: light)" srcset="https://xiesx123.github.io/CreatorBox/images/readme_dashboard_light_en.png" />
-   <img alt="Star History Chart" src="https://xiesx123.github.io/CreatorBox/images/readme_dashboard_en.png" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://xiesx123.github.io/CreatorBox/images/dashboard_en_dark.png" />
+   <source media="(prefers-color-scheme: light)" srcset="https://xiesx123.github.io/CreatorBox/images/dashboard_en_light.png" />
+   <img alt="dashboard" src="https://xiesx123.github.io/CreatorBox/images/dashboard_en_dark.png" />
  </picture>
 
 </div>
@@ -31,7 +31,23 @@
 
 👉 Installation and Deployment Guide: [Local Installation](https://xiesx123.github.io/CreatorBox/deploy-local) | [Remote Deployment](https://xiesx123.github.io/CreatorBox/deploy-colab)
 
-## 📥 Component Preview
+## 🎨 Applicable Scenarios
+
+- 🎥 **Content Creators**: Enhance creative efficiency and unleash creative potential.
+
+- 🧩 **App Components**：Fully customizable, supports video mask inpaint, watermark removal, and more
+
+- 📤 **Extended Capabilities**：Supports IOPaint, Stable Diffusion, CosyVoice, GPTSoVITS, etc.
+
+- 🚀 **Independent Deployment**：Flexible deployment, supports local, server, and Colab, ensuring data security
+
+## 📢 Feedback and Suggestions
+
+- Submit via [Issues](https://github.com/xiesx123/CreatorBox/issues) or [Email](mailto:xiesx123@gmail.com?subject=CreatoxBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?).
+
+- Welcome to join [Discord](https://discord.gg/kt6JWax3P6) for discussions on usage or new features.
+
+## 📥 Preview
 
 ### Video Translation and Dubbing
 
@@ -86,22 +102,6 @@
           </tr>
       </tbody>
   </table>
-
-## 🎨 Applicable Scenarios
-
-- 🎥 **Content Creators**: Optimize video dubbing, translation, and editing workflows to enhance efficiency and unleash creative potential
-
-- 🌍 **Multilingual Translation/Dubbing**: Create localized content for overseas audiences and publish across languages
-
-- 🧩 **Application Components**: Built-in application components for efficient collaboration and flexible usage, catering to diverse user needs
-
-- ⚙️ **Independent Deployment**: Deploy locally with flexible configurations to ensure privacy
-
-## 📢 Feedback and Suggestions
-
-- Submit via [Issues](https://github.com/xiesx123/CreatorBox/issues) or [Email](mailto:xiesx123@gmail.com?subject=CreatoxBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?).
-
-- Welcome to join [Discord](https://discord.gg/kt6JWax3P6) for discussions on usage or new features.
 
 <!--
 ## 📌 Project Status

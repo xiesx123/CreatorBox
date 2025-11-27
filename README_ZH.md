@@ -19,9 +19,9 @@
 <h4>Web界面</h4>
 
 <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://xiesx123.github.io/CreatorBox/images/readme_dashboard_zh.png" />
-   <source media="(prefers-color-scheme: light)" srcset="https://xiesx123.github.io/CreatorBox/images/readme_dashboard_light_zh.png" />
-   <img alt="Star History Chart" src="https://xiesx123.github.io/CreatorBox/images/readme_dashboard_zh.png" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://xiesx123.github.io/CreatorBox/images/dashboard_zh_dark.png" />
+   <source media="(prefers-color-scheme: light)" srcset="https://xiesx123.github.io/CreatorBox/images/dashboard_zh_light.png" />
+   <img alt="dashboard" src="https://xiesx123.github.io/CreatorBox/images/dashboard_zh_dark.png" />
  </picture>
 
 </div>
@@ -30,7 +30,39 @@
 
 👉 安装部署指南：[本地安装](https://xiesx123.github.io/CreatorBox/zh/deploy-local) | [远程部署](https://xiesx123.github.io/CreatorBox/zh/deploy-colab)
 
-## 📥 组件预览
+## 🎨 适用场景
+
+- 🎬 **内容创作**：提升创作效率，释放创作潜力
+
+- 🧩 **应用组件**：自由定制，支持视频掩码修复、水印去除等
+
+- 📤 **扩展能力**：支持 IOPaint、Stable Diffusion、CosyVoice、GPTSoVITS 等
+
+- 🚀 **独立部署**：灵活部署，支持本地、服务器、Colab，保障数据安全
+
+## 📢 反馈建议
+
+- 可以提交 [Issues](https://github.com/xiesx123/CreatorBox/issues)
+  或 [Email](mailto:xiesx123@gmail.com?subject=CreatoxBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?)
+
+- 欢迎加入 [Discord](https://discord.gg/ZSeETM6bsS) 进行用法或新功能的讨论
+
+<!-- ## 📌 Project Status
+
+![Status](https://repobeats.axiom.co/api/embed/afc79d9210faea79913ee2e2c7e776886295e052.svg)
+
+## ⭐ Star History
+
+<a href="https://www.star-history.com/#xiesx123/CreatorBox&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=xiesx123/CreatorBox&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=xiesx123/CreatorBox&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=xiesx123/CreatorBox&type=Date" />
+ </picture>
+</a>
+ -->
+
+## 📥 预览
 
 ### 视频翻译配音
 
@@ -85,35 +117,3 @@
           </tr>
       </tbody>
   </table>
-
-## 🎨 适用场景
-
-- 🎥 **自媒体创作者**：优化视频配音、翻译、剪辑流程，提升创作效率，释放创作潜力
-
-- 🌍 **多语言翻译/配音**：运营海外本地化内容创作、跨语言发布
-
-- 🧩 **应用组件**：内置多种应用组件，高效协作，灵活调用
-
-- ⚙️ **独立部署**：本地部署，灵活配置，保障隐私
-
-## 📢 反馈建议
-
-- 可以提交 [Issues](https://github.com/xiesx123/CreatorBox/issues)
-  或 [Email](mailto:xiesx123@gmail.com?subject=CreatoxBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?)
-
-- 欢迎加入 [Discord](https://discord.gg/ZSeETM6bsS) 进行用法或新功能的讨论
-
-<!-- ## 📌 Project Status
-
-![Status](https://repobeats.axiom.co/api/embed/afc79d9210faea79913ee2e2c7e776886295e052.svg)
-
-## ⭐ Star History
-
-<a href="https://www.star-history.com/#xiesx123/CreatorBox&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=xiesx123/CreatorBox&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=xiesx123/CreatorBox&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=xiesx123/CreatorBox&type=Date" />
- </picture>
-</a>
- -->
