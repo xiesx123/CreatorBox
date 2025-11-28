@@ -41,13 +41,7 @@
 
 - 🚀 **Independent Deployment**：Flexible deployment, supports local, server, and Colab, ensuring data security
 
-## 📢 Feedback and Suggestions
-
-- Submit via [Issues](https://github.com/xiesx123/CreatorBox/issues) or [Email](mailto:xiesx123@gmail.com?subject=CreatoxBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?).
-
-- Welcome to join [Discord](https://discord.gg/kt6JWax3P6) for discussions on usage or new features.
-
-## 📥 Preview
+## 📥 Example
 
 ### Video Translation and Dubbing
 
@@ -55,8 +49,8 @@
     <!-- 大话西游 -->
     <tbody>
         <tr>
-            <td align="center"><video src="https://github.com/user-attachments/assets/b6e30353-5b08-4c12-8407-8d759233d193" width="200"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/f57363c5-3110-4b1b-be3f-769c0e65fe9a" width="200"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/b6e30353-5b08-4c12-8407-8d759233d193"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/f57363c5-3110-4b1b-be3f-769c0e65fe9a"></video></td>
         </tr>
     </tbody>
     <!-- 求职面试 
@@ -76,8 +70,8 @@
     <!-- 商品介绍-->
     <tbody>
         <tr>
-            <td align="center"><video src="https://github.com/user-attachments/assets/a1c9ea12-a3a0-4d0d-9d68-43659e6cc180" width="200"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/6babdb77-90db-4ea7-b6eb-9614438fa0f1" width="200"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/a1c9ea12-a3a0-4d0d-9d68-43659e6cc180"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/6babdb77-90db-4ea7-b6eb-9614438fa0f1"></video></td>
         </tr>
     </tbody>
 </table>
@@ -85,23 +79,31 @@
 ### Video Mask Inpaint
 
 <table>
-      <!-- 跳伞 -->
-      <tbody>
-          <tr>
-              <td align="center"><video src="https://github.com/user-attachments/assets/04b42cfc-9a17-411e-9c24-775e2c5cbd9f" width="200"></video></td>
-              <td align="center"><video src="https://github.com/user-attachments/assets/7f8b613f-d64a-4385-a4e3-caef99ea6208" width="200"></video></td>      
-              <td align="center"><video src="https://github.com/user-attachments/assets/da2b2e1f-b5e4-44a1-a3b7-3c83522b45d8" width="200"></video></td>
-          </tr>
-      </tbody>
-      <!-- 晚餐 -->
-      <tbody>
-          <tr>
-              <td align="center"><video src="https://github.com/user-attachments/assets/e99af835-57e6-4c27-8212-83e74eba6368"width="200"></video></td>
-              <td align="center"><img src="https://github.com/user-attachments/assets/726accaf-fa28-47e3-8e27-e4bb7d7c1bb0"width="200"/></td>      
-              <td align="center"><video src="https://github.com/user-attachments/assets/3ba3ef62-c8a3-4857-ae0b-ebff89c2c713"width="200"></video></td>
-          </tr>
-      </tbody>
-  </table>
+    <!-- 跳伞 -->
+    <tbody>
+        <tr>
+            <td align="center"><video src="https://xiesx123.github.io/CreatorBox/videos/video_paragliding.mp4"></video></td>
+            <td align="center"><video src="https://xiesx123.github.io/CreatorBox/videos/video_paragliding_track.mp4"></video></td>      
+            <td align="center"><video src="https://xiesx123.github.io/CreatorBox/videos/videos/video_paragliding_inpaint.mp4"></video></td>
+        </tr>
+    </tbody>
+    <!-- 晚餐 -->
+    <tbody>
+        <tr>
+            <td align="center"><video src="https://xiesx123.github.io/CreatorBox/videos/video_dinner.mp4"></video></td>
+            <td align="center"><img src="https://xiesx123.github.io/CreatorBox/videos/video_dinner.webp"/></td>      
+            <td align="center"><video src="https://xiesx123.github.io/CreatorBox/videos/video_dinner_inpaint.mp4"></video></td>
+        </tr>
+    </tbody>
+    <!-- 黑神话 -->
+    <tbody>
+        <tr>
+            <td align="center"><video src="https://xiesx123.github.io/CreatorBox/videos/videos/video_heishenhua.mp4"></video></td>
+            <td align="center"><img src="https://xiesx123.github.io/CreatorBox/videos/video_heishenhua_track.mp4"/></td>      
+            <td align="center"><video src="https://xiesx123.github.io/CreatorBox/videos/video_heishenhua_inpaint.mp4"></video></td>
+        </tr>
+    </tbody>
+</table>
 
 <!--
 ## 📌 Project Status
@@ -118,3 +120,13 @@
  </picture>
 </a>
  -->
+
+## 📢 Feedback and Suggestions
+
+- Submit via [Issues](https://github.com/xiesx123/CreatorBox/issues) or [Email](mailto:xiesx123@gmail.com?subject=CreatoxBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?).
+
+- Welcome to join [Discord](https://discord.gg/kt6JWax3P6) for discussions on usage or new features.
+
+## Disclaimer
+
+The content above is for demonstration purposes only. Some examples are sourced from the internet. If any content infringes on your rights, please contact us to request its removal.
