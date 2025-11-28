@@ -96,25 +96,25 @@
     <!-- 跳伞 -->
     <tbody>
         <tr>
-            <td align="center"><video src="https://xiesx123.github.io/CreatorBox/videos/video_paragliding.mp4"></video></td>
-            <td align="center"><video src="https://xiesx123.github.io/CreatorBox/videos/video_paragliding_track.mp4"></video></td>      
-            <td align="center"><video src="https://xiesx123.github.io/CreatorBox/videos/videos/video_paragliding_inpaint.mp4"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/04b42cfc-9a17-411e-9c24-775e2c5cbd9f" width="200"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/7f8b613f-d64a-4385-a4e3-caef99ea6208" width="200"></video></td>      
+            <td align="center"><video src="https://github.com/user-attachments/assets/da2b2e1f-b5e4-44a1-a3b7-3c83522b45d8" width="200"></video></td>
         </tr>
     </tbody>
     <!-- 晚餐 -->
     <tbody>
         <tr>
-            <td align="center"><video src="https://xiesx123.github.io/CreatorBox/videos/video_dinner.mp4"></video></td>
-            <td align="center"><img src="https://xiesx123.github.io/CreatorBox/videos/video_dinner.webp"/></td>      
-            <td align="center"><video src="https://xiesx123.github.io/CreatorBox/videos/video_dinner_inpaint.mp4"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/e99af835-57e6-4c27-8212-83e74eba6368" width="200"></video></td>
+            <td align="center"><img src="https://github.com/user-attachments/assets/726accaf-fa28-47e3-8e27-e4bb7d7c1bb0"   width="200"/></td>      
+            <td align="center"><video src="https://github.com/user-attachments/assets/3ba3ef62-c8a3-4857-ae0b-ebff89c2c713" width="200"></video></td>
         </tr>
     </tbody>
     <!-- 黑神话 -->
     <tbody>
         <tr>
-            <td align="center"><video src="https://xiesx123.github.io/CreatorBox/videos/videos/video_heishenhua.mp4"></video></td>
-            <td align="center"><img src="https://xiesx123.github.io/CreatorBox/videos/video_heishenhua_track.mp4"/></td>      
-            <td align="center"><video src="https://xiesx123.github.io/CreatorBox/videos/video_heishenhua_inpaint.mp4"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/14849275-1e45-4814-bc38-f62d45afd907" width="200"></video></td>
+            <td align="center"><img src="https://github.com/user-attachments/assets/823cba86-1042-4549-b88e-96df5b2981be" width="200"/></td>      
+            <td align="center"><video src="https://github.com/user-attachments/assets/d48bf797-e371-40df-b30c-fb5f964b94e3" width="200"></video></td>
         </tr>
     </tbody>
 </table>
