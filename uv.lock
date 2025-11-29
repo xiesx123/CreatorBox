@@ -835,9 +835,7 @@ dependencies = [
 [package.dev-dependencies]
 dev = [
     { name = "autoflake" },
-    { name = "babel" },
     { name = "black" },
-    { name = "importtime-output-wrapper" },
     { name = "pip" },
     { name = "polib" },
     { name = "py-spy" },
@@ -906,9 +904,7 @@ requires-dist = [
 [package.metadata.requires-dev]
 dev = [
     { name = "autoflake", specifier = ">=2.3.1" },
-    { name = "babel", specifier = ">=2.17.0" },
     { name = "black", specifier = ">=25.9.0" },
-    { name = "importtime-output-wrapper", specifier = ">=1.1.0" },
     { name = "pip", specifier = ">=25.3" },
     { name = "polib", specifier = ">=1.2.0" },
     { name = "py-spy", specifier = ">=0.4.1" },
@@ -2124,15 +2120,6 @@ dependencies = [
 sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/76/66/650a33bd90f786193e4de4b3ad86ea60b53c89b669a5c7be931fac31cdb0/importlib_metadata-8.7.0.tar.gz", hash = "sha256:d13b81ad223b890aa16c5471f2ac3056cf76c5f10f82d6f9292f0b415f389000", size = 56641, upload-time = "2025-04-27T15:29:01.736Z" }
 wheels = [
     { url = "https://pypi.tuna.tsinghua.edu.cn/packages/20/b0/36bd937216ec521246249be3bf9855081de4c5e06a0c9b4219dbeda50373/importlib_metadata-8.7.0-py3-none-any.whl", hash = "sha256:e5dd1551894c77868a30651cef00984d50e1002d06942a7101d34870c5f02afd", size = 27656, upload-time = "2025-04-27T15:29:00.214Z" },
-]
-
-[[package]]
-name = "importtime-output-wrapper"
-version = "1.1.0"
-source = { registry = "https://pypi.tuna.tsinghua.edu.cn/simple" }
-sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/88/ee/cb6246cdab6863d35f9f164e0782c316b53a9aea8be84f2cda33035a3f32/importtime_output_wrapper-1.1.0.tar.gz", hash = "sha256:236f52d4f7243c2b0d18211e86bbc8032e97bad1f746688ae12e86a07261da9d", size = 7039, upload-time = "2022-01-12T21:03:03.002Z" }
-wheels = [
-    { url = "https://pypi.tuna.tsinghua.edu.cn/packages/71/39/a233c9c403e2774bdcb62c191f694e2158ff5f20566e96cba6d60e1c1874/importtime_output_wrapper-1.1.0-py3-none-any.whl", hash = "sha256:f60f07e2fce61e30fad0f13f3f2c2380523a2421904b7f83f1c460ecf05bcd7a", size = 7728, upload-time = "2022-01-12T21:03:01.716Z" },
 ]
 
 [[package]]
@@ -3581,6 +3568,7 @@ dependencies = [
 sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/e9/00/3b96ca7ad0641e4f64cfaa2af153dc7da0998ff972280e1c1681b1fcc243/pyannote_audio-3.3.2.tar.gz", hash = "sha256:b2115e86b0db5faedb9f36ee1a150cebd07f7758e65e815accdac1a12ca9c777", size = 13664309, upload-time = "2024-09-11T11:07:48.274Z" }
 wheels = [
     { url = "https://pypi.tuna.tsinghua.edu.cn/packages/17/e6/76049470d90217f9a15a34abf3e92d782cabc3fb4ab27515c9baaa5495d1/pyannote.audio-3.3.2-py2.py3-none-any.whl", hash = "sha256:599c694acd5d193215147ff82d0bf638bb191204ed502bd9fde8ff582e20aa1c", size = 898707, upload-time = "2024-09-11T11:07:46.12Z" },
+    { url = "https://pypi.tuna.tsinghua.edu.cn/packages/b7/9a/98a8992727e762b031ed30451d5726ece46cf8bb7b872a9dba5cef011e5d/pyannote_audio-3.3.2-py2.py3-none-any.whl", hash = "sha256:23e0dcedda920cb2e154e146bcd9663289ee7942d0e012663dad76f2e571ebeb", size = 897827, upload-time = "2025-11-26T16:09:04.748Z" },
 ]
 
 [[package]]
