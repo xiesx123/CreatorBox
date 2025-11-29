@@ -337,7 +337,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                 // 文件名
                 const output = `${form_json.tts_provider}_${form_json.tts_locale}_${form_json.tts_speaker}_${form_json.tts_volume}_${form_json.tts_rate}_${form_json.tts_pitch}_${form_json.tts_text.length}_${form_json.tts_remarks.length}`
                 // 生成试听
-                tool.post("tts/gen", JSON.stringify({
+                tool.post("tts/generate", JSON.stringify({
                     "provider": form_json.tts_provider,
                     "model": form_json.tts_model,
                     "locale": form_json.locale,

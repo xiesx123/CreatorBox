@@ -398,7 +398,7 @@
                             <option value="ignore">{{_("忽略")}}</option>
                             {% for item in data.llm.providers %}
                             <option value="{{ item.provider}}" {% if not item.enable %}disabled{% endif %}>
-                              {{ item.provider }} {{ '- ' + _("已配置") if item.valid else '' }}
+                              {{ item.provider }} {{ '- ' + _("可用") if item.valid else '' }}
                             </option>
                             {% endfor %}
                           </select>
@@ -486,7 +486,7 @@
                             lay-filter="tts_provider_filter">
                             {% for item in data.tts.providers %}
                               {% if item.enable %}
-                                <option value="{{ item.provider}}">{{ item.desc }} {{ '- ' + _("已配置") if item.valid else '' }}</option>
+                                <option value="{{ item.provider}}">{{ item.desc }} {{ '- ' + _("可用") if item.valid else '' }}</option>
                               {% endif %}>
                             {% endfor %}
                           </select>
@@ -675,7 +675,7 @@
                       <div class="layui-input-block">
                         <textarea id="tts_text" name="tts_text" placeholder='{{_("请输入试听文本")}}'
                           lay-verify="tts_text" lay-reqtext='{{_("请输入试听文本")}}' lay-affix="error"
-                          class="layui-textarea tts_text" maxlength="9999"></textarea>
+                          class="layui-textarea tts_text" maxlength="1000"></textarea>
                       </div>
                     </div>
 
@@ -966,9 +966,6 @@
         if (data.type == "video") {
           toast.success(localStorage.getItem('task'), i18n.trans("任务处理成功"));
           $("button[lay-on='video_preview']").removeClass("layui-btn-disabled").prop("disabled", false);
-        }
-        else if (data.type == "masker") {
-          toast.info(data.message);
         }
         else if (data.type == "error") {
           toast.error(data.message, i18n.trans("任务处理异常"));

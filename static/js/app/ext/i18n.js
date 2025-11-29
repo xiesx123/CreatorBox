@@ -6,8 +6,9 @@ loadScript(i18njs, function () {
 
 		// 模块对象
 		var mod = {
-			lang: 'zh',
-			// 初始化语言
+			// 默认语言
+			lang: 'en',
+			// 语言
 			init: function (lang, callback) {
 				$.i18n.properties({
 					name: 'messages',
