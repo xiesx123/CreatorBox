@@ -29,6 +29,7 @@
 
 ## 📦 Quick Start
 
+
 👉 Installation and Deployment Guide: [Local Installation](https://xiesx123.github.io/CreatorBox/deploy-local) | [Remote Deployment](https://xiesx123.github.io/CreatorBox/deploy-colab)
 
 ## 🎨 Applicable Scenarios
@@ -49,29 +50,30 @@
     <!-- 大话西游 -->
     <tbody>
         <tr>
-            <td align="center"><video src="https://github.com/user-attachments/assets/b6e30353-5b08-4c12-8407-8d759233d193"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/f57363c5-3110-4b1b-be3f-769c0e65fe9a"></video></td>
+            <td align="center">
+            <video src="https://github.com/user-attachments/assets/b6e30353-5b08-4c12-8407-8d759233d193" width="120"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/f57363c5-3110-4b1b-be3f-769c0e65fe9a" width="120"></video></td>
         </tr>
     </tbody>
     <!-- 求职面试 
     <tbody>
         <tr>
-            <td align="center"><video src="https://github.com/user-attachments/assets/327b819c-c811-4265-960b-83117e0da670"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/ed6449df-dd04-45f0-9ab1-ce4a2a5b600c"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/327b819c-c811-4265-960b-83117e0da670" width="120"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/ed6449df-dd04-45f0-9ab1-ce4a2a5b600c" width="120"></video></td>
         </tr>
     </tbody>-->
     <!-- 黑神话
     <tbody>
         <tr>
-            <td align="center"><video src="https://github.com/user-attachments/assets/c68c376e-54ef-4a6b-a195-fbe926c0de37"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/e9424df6-0986-4118-af82-b5f140398471"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/c68c376e-54ef-4a6b-a195-fbe926c0de37" width="120"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/e9424df6-0986-4118-af82-b5f140398471" width="120"></video></td>
         </tr>
     </tbody>-->
     <!-- 商品介绍-->
     <tbody>
         <tr>
-            <td align="center"><video src="https://github.com/user-attachments/assets/a1c9ea12-a3a0-4d0d-9d68-43659e6cc180"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/6babdb77-90db-4ea7-b6eb-9614438fa0f1"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/a1c9ea12-a3a0-4d0d-9d68-43659e6cc180" width="120"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/6babdb77-90db-4ea7-b6eb-9614438fa0f1" width="120"></video></td>
         </tr>
     </tbody>
 </table>
@@ -82,33 +84,40 @@
     <!-- 跳伞 -->
     <tbody>
         <tr>
-            <td align="center"><video src="https://github.com/user-attachments/assets/04b42cfc-9a17-411e-9c24-775e2c5cbd9f" width="200"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/7f8b613f-d64a-4385-a4e3-caef99ea6208" width="200"></video></td>      
-            <td align="center"><video src="https://github.com/user-attachments/assets/da2b2e1f-b5e4-44a1-a3b7-3c83522b45d8" width="200"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/04b42cfc-9a17-411e-9c24-775e2c5cbd9f" width="120"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/7f8b613f-d64a-4385-a4e3-caef99ea6208" width="120"></video></td>      
+            <td align="center"><video src="https://github.com/user-attachments/assets/da2b2e1f-b5e4-44a1-a3b7-3c83522b45d8" width="120"></video></td>
         </tr>
     </tbody>
     <!-- 晚餐 -->
     <tbody>
         <tr>
-            <td align="center"><video src="https://github.com/user-attachments/assets/e99af835-57e6-4c27-8212-83e74eba6368" width="200"></video></td>
-            <td align="center"><img src="https://github.com/user-attachments/assets/726accaf-fa28-47e3-8e27-e4bb7d7c1bb0"   width="200"/></td>      
-            <td align="center"><video src="https://github.com/user-attachments/assets/3ba3ef62-c8a3-4857-ae0b-ebff89c2c713" width="200"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/e99af835-57e6-4c27-8212-83e74eba6368" width="120"></video></td>
+            <td align="center"><img src="https://github.com/user-attachments/assets/726accaf-fa28-47e3-8e27-e4bb7d7c1bb0" width="120"/></td>      
+            <td align="center"><video src="https://github.com/user-attachments/assets/3ba3ef62-c8a3-4857-ae0b-ebff89c2c713" width="120"></video></td>
         </tr>
     </tbody>
     <!-- 黑神话 -->
     <tbody>
         <tr>
-            <td align="center"><video src="https://github.com/user-attachments/assets/14849275-1e45-4814-bc38-f62d45afd907" width="200"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/823cba86-1042-4549-b88e-96df5b2981be" width="200"></video></td> 
-            <td align="center"><video src="https://github.com/user-attachments/assets/d48bf797-e371-40df-b30c-fb5f964b94e3" width="200"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/14849275-1e45-4814-bc38-f62d45afd907" width="120"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/823cba86-1042-4549-b88e-96df5b2981be" width="120"></video></td> 
+            <td align="center"><video src="https://github.com/user-attachments/assets/d48bf797-e371-40df-b30c-fb5f964b94e3" width="120"></video></td>
         </tr>
     </tbody>
 </table>
 
-<!--
+## 📢 Feedback and Suggestions
+
+- Submit via [Issues](https://github.com/xiesx123/CreatorBox/issues) or [Email](mailto:xiesx123@gmail.com?subject=CreatoxBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?).
+
+- Welcome to join [Discord](https://discord.gg/kt6JWax3P6) for discussions on usage or new features.
+
 ## 📌 Project Status
 
 ![Status](https://repobeats.axiom.co/api/embed/afc79d9210faea79913ee2e2c7e776886295e052.svg)
+
+<!--
 
 ## ⭐ Star History
 
@@ -120,12 +129,6 @@
  </picture>
 </a>
  -->
-
-## 📢 Feedback and Suggestions
-
-- Submit via [Issues](https://github.com/xiesx123/CreatorBox/issues) or [Email](mailto:xiesx123@gmail.com?subject=CreatoxBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?).
-
-- Welcome to join [Discord](https://discord.gg/kt6JWax3P6) for discussions on usage or new features.
 
 ## Disclaimer
 
