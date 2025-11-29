@@ -57,9 +57,7 @@ class HuggingfaceHubSearch(Component):
             sumbit_on_select: If true, the component will submit when the user selects a value from the dropdown.
         """
         self.placeholder = placeholder
-        self.search_type = (
-            [search_type] if isinstance(search_type, str) else search_type or []
-        )
+        self.search_type = [search_type] if isinstance(search_type, str) else search_type or []
         self.sumbit_on_select = sumbit_on_select
         super().__init__(
             label=label,

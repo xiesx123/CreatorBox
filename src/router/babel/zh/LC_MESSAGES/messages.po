@@ -46,6 +46,10 @@ msgstr "功能"
 msgid "原始音量"
 msgstr "原始音量"
 
+#: static/templates/dubbing.html:401 static/templates/dubbing.html:489
+msgid "可用"
+msgstr "可用"
+
 #: static/templates/dubbing.html:157
 msgid "后缀"
 msgstr "后缀"
@@ -78,10 +82,6 @@ msgstr "字幕"
 #: static/templates/dubbing.html:139
 msgid "对齐"
 msgstr "对齐"
-
-#: static/templates/dubbing.html:401 static/templates/dubbing.html:489
-msgid "已配置"
-msgstr "已配置"
 
 #: static/templates/dubbing.html:189 static/templates/dubbing.html:385
 msgid "开启调试会中断后续步骤"
@@ -255,7 +255,7 @@ msgstr "请使用sdr组件获取参数"
 msgid "请输入任务ID、视频链接"
 msgstr "请输入任务ID、视频链接"
 
-#: static/templates/dubbing.html:162 static/templates/dubbing.html:1020
+#: static/templates/dubbing.html:162 static/templates/dubbing.html:1017
 msgid "请输入后缀"
 msgstr "请输入后缀"
 
@@ -286,7 +286,7 @@ msgid "请输入随机种子"
 msgstr "请输入随机种子"
 
 #: static/templates/dubbing.html:106 static/templates/dubbing.html:845
-#: static/templates/dubbing.html:892 static/templates/dubbing.html:1016
+#: static/templates/dubbing.html:892 static/templates/dubbing.html:1013
 msgid "请输入音视频路径或链接"
 msgstr "请输入音视频路径或链接"
 

@@ -46,6 +46,10 @@ msgstr "Feature"
 msgid "原始音量"
 msgstr "Native Volume"
 
+#: static/templates/dubbing.html:401 static/templates/dubbing.html:489
+msgid "可用"
+msgstr "available"
+
 #: static/templates/dubbing.html:157
 msgid "后缀"
 msgstr "Suffix"
@@ -78,10 +82,6 @@ msgstr "Subtitle"
 #: static/templates/dubbing.html:139
 msgid "对齐"
 msgstr "Alignment"
-
-#: static/templates/dubbing.html:401 static/templates/dubbing.html:489
-msgid "已配置"
-msgstr "configured"
 
 #: static/templates/dubbing.html:189 static/templates/dubbing.html:385
 msgid "开启调试会中断后续步骤"
@@ -255,7 +255,7 @@ msgstr "Please use the SDR component to obtain parameters"
 msgid "请输入任务ID、视频链接"
 msgstr "Please enter task ID, video url"
 
-#: static/templates/dubbing.html:162 static/templates/dubbing.html:1020
+#: static/templates/dubbing.html:162 static/templates/dubbing.html:1017
 msgid "请输入后缀"
 msgstr "Enter an identifier suffix"
 
@@ -286,7 +286,7 @@ msgid "请输入随机种子"
 msgstr "Enter a random seed"
 
 #: static/templates/dubbing.html:106 static/templates/dubbing.html:845
-#: static/templates/dubbing.html:892 static/templates/dubbing.html:1016
+#: static/templates/dubbing.html:892 static/templates/dubbing.html:1013
 msgid "请输入音视频路径或链接"
 msgstr "Enter audio/video path or link"
 
