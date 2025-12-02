@@ -82,7 +82,7 @@
             // 预览事件
             $('#play').on('click', function () {
                 const input_url = $("#url").val();
-                if (input_url.length != 32) {
+                if (input_url.length != 17) {
                     return video_play(input_url, 1)
                 }
                 tool.get("/result/" + input_url, {}, function (response) {

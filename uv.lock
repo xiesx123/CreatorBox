@@ -791,7 +791,6 @@ dependencies = [
     { name = "ffmpeg-python" },
     { name = "firebase-admin" },
     { name = "funasr" },
-    { name = "func-timeout" },
     { name = "gputil" },
     { name = "gradio", extra = ["mcp"] },
     { name = "gradio-bottombar" },
@@ -860,7 +859,6 @@ requires-dist = [
     { name = "ffmpeg-python", specifier = "==0.2.0" },
     { name = "firebase-admin", specifier = "==7.1.0" },
     { name = "funasr", specifier = "==1.2.7" },
-    { name = "func-timeout", specifier = "==4.3.5" },
     { name = "gputil", specifier = "==1.4.0" },
     { name = "gradio", extras = ["mcp"], specifier = "==5.49.1" },
     { name = "gradio-bottombar", specifier = "==0.0.2" },
@@ -1531,12 +1529,6 @@ sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/4d/ca/0f3e0df85bfea7
 wheels = [
     { url = "https://pypi.tuna.tsinghua.edu.cn/packages/f7/6f/491bc744f9d23be35d848479dd21ba6576788e4a2cffbdd410725669fe5c/funasr-1.2.7-py3-none-any.whl", hash = "sha256:b53f748e479e5bf6af172407c50eccaa6818ed91bdf8656abcd7ea6c5e3d2b0d", size = 703175, upload-time = "2025-08-15T07:23:05.026Z" },
 ]
-
-[[package]]
-name = "func-timeout"
-version = "4.3.5"
-source = { registry = "https://pypi.tuna.tsinghua.edu.cn/simple" }
-sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/b3/0d/bf0567477f7281d9a3926c582bfef21bff7498fc0ffd3e9de21811896a0b/func_timeout-4.3.5.tar.gz", hash = "sha256:74cd3c428ec94f4edfba81f9b2f14904846d5ffccc27c92433b8b5939b5575dd", size = 44264, upload-time = "2019-08-19T21:32:07.43Z" }
 
 [[package]]
 name = "future"
