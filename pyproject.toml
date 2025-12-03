@@ -38,6 +38,7 @@ dependencies = [
      "psutil==7.1.3",
      "pyannote-audio==3.3.2",
      "pyarmor==9.1.2",
+     "pycapcut==0.0.3",
      "pydub==0.25.1",
      "pyjianyingdraft==0.2.5",
      "pyngrok==7.5.0",
