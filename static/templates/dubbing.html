@@ -857,7 +857,7 @@
           if ($('input[name="llm_debug"]').is(':checked')) return;
           speaker_min = $('input[name="speaker_min"]').val()
           if (cache_table.length < speaker_min) {
-            return i18n.trans("【配音人数】不能低于【说话人数量】，请先试听语音");
+            return i18n.trans("【配音说话人数】不能低于【说话人区间最小值】，请先试听语音");
           }
         },
         tts_text: function (value, elem) {
