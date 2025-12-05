@@ -28,6 +28,7 @@ dependencies = [
      "gradio-toggle==2.0.2",
      "gradio-videoslider==0.0.2",
      "gradio[mcp]==5.49.1",
+     "json5==0.12.1",
      "language-tags==1.2.0",
      "librosa==0.11.0",
      "litellm[caching]==1.80.0",
