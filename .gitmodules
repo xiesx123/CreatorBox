@@ -1,12 +1,15 @@
 [submodule "extensions/iopaint"]
 	path = extensions/iopaint
 	url = https://github.com/Sanster/IOPaint.git
-[submodule "extensions/stable-diffusion-webui"]
-	path = extensions/stable-diffusion-webui
+[submodule "extensions/stable_diffusion_webui"]
+	path = extensions/stable_diffusion_webui
 	url = https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
-[submodule "extensions/index-tts"]
-	path = extensions/index-tts
-	url = https://github.com/index-tts/index-tts.git
 [submodule "extensions/cosyvoice"]
 	path = extensions/cosyvoice
 	url = https://github.com/FunAudioLLM/CosyVoice.git
+[submodule "extensions/index_tts"]
+	path = extensions/index_tts
+	url = https://github.com/index-tts/index-tts.git
+[submodule "extensions/gpt_sovits"]
+	path = extensions/gpt_sovits
+	url = https://github.com/RVC-Boss/GPT-SoVITS.git
