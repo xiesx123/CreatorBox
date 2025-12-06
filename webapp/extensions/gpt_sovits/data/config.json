@@ -1,0 +1,26 @@
+{
+    "request": {
+        "top_k": 5,
+        "top_p": 1.0,
+        "temperature": 1.0,
+        "text_split_method": "cut5",
+        "batch_size": 1,
+        "batch_threshold": 0.75,
+        "split_bucket": true,
+        "fragment_interval": 0.3,
+        "media_type": "wav",
+        "streaming_mode": false,
+        "parallel_infer": true,
+        "repetition_penalty": 1.35,
+        "sample_steps": 32,
+        "super_sampling": false,
+        "overlap_length": 2,
+        "min_chunk_length": 16
+    },
+    "models": {
+        "test": {
+            "gpt": "webapp/extensions/gpt_sovits/train/weights/GPT_weights_v2Pro/test-e4.ckpt",
+            "sovits": "webapp/extensions/gpt_sovits/train/weights/SoVITS_weights_v2Pro/test_e4_s80.pth"
+        }
+    }
+}

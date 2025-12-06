@@ -493,6 +493,16 @@
                         </div>
                       </div>
                     </div>
+                    
+                    <div class="layui-form-item layui-hide" pane id="opt_server">
+                      <label class="layui-form-label">{{_("服务地址")}}</label>
+                      <div class="layui-input-block">
+                        <div class="layui-input-wrap">
+                          <div class="layui-input-prefix"> <i class="layui-icon layui-icon-note"></i> </div>
+                            <input type="text" name="tts_server" placeholder="{{ _("请输入服务地址")}}" autocomplete="off" class="layui-input" lay-affix="error" disabled>
+                        </div>
+                      </div>
+                    </div>
 
                     <div class="layui-form-item">
                       <label class="layui-form-label">{{_("模型")}}</label>
@@ -568,28 +578,17 @@
                     </div>
 
                     <!-- azure -->
-                    <div class="layui-col-md12 layui-hide" id="azure_div">
-                    </div>
-
+                    <div class="layui-col-md12 layui-hide" id="azure_div"></div>
                     <!-- edge -->
-                    <div class="layui-col-md12 layui-hide" id="edge_div">
-                    </div>
-
+                    <div class="layui-col-md12 layui-hide" id="edge_div"></div>
                     <!-- elab -->
-                    <div class="layui-col-md12 layui-hide" id="elab_div">
-                    </div>
-
-                    <!-- itts -->
-                    <div class="layui-col-md12 layui-hide" id="itts_div">
-                    </div>
-
-                    <!-- sovits -->
-                    <div class="layui-col-md12 layui-hide" id="sovits_div">
-                    </div>
-
+                    <div class="layui-col-md12 layui-hide" id="elab_div"></div>
                     <!-- cosy -->
-                    <div class="layui-col-md12 layui-hide" id="cosy_div">
-                    </div>
+                    <div class="layui-col-md12 layui-hide" id="cosy_div"></div>
+                    <!-- itts -->
+                    <div class="layui-col-md12 layui-hide" id="itts_div"></div>
+                    <!-- sovits -->
+                    <div class="layui-col-md12 layui-hide" id="gtts_div"></div>
 
                     <!-- opt -->
                     <div class="layui-form-item layui-hide" pane id="opt_role"
