@@ -24,7 +24,6 @@ webapp
 !r3.exe
 !webapp/data/azure_*
 !webapp/data/db.db
-!webapp/data/azure_*
 !webapp/extensions/
 !webapp/sample/
 
