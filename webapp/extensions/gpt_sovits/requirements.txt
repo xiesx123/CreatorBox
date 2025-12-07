@@ -22,7 +22,7 @@ peft==0.17.1
 chardet==5.2.0
 PyYAML==6.0.2
 psutil==7.0.0
-https://github.com/xiesx123/CreatorBox/releases/download/1.0.23/jieba_fast-0.53-cp311-cp311-win_amd64.whl
+https://github.com/xiesx123/CreatorBox/releases/download/1.0.20/jieba_fast-0.53-cp311-cp311-win_amd64.whl
 jieba==0.42.1
 split-lang==2.1.0
 fast_langdetect==0.3.2
