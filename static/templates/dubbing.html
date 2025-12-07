@@ -877,7 +877,7 @@
       // =======================================
 
       // 视频上传
-      tool.upload("#video_upload", "file/upload", 'file', 'mp4|mkv|avi|mp3|wav|m4a', null, function (response) {
+      tool.upload("#video_upload", "file/upload", 'file', 'mp4|mkv|avi|mp3|wav|m4a|flac', null, function (response) {
         $('[name="video_url"]').val(response.data.location)
         // 切换语音角色
         tts.setData(form_json, cache_table)
