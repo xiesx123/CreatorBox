@@ -72,14 +72,6 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
         voice_play(voice.samples)
     };
 
-    var play_sovits_sample = function (key, val) {
-        const voice = voice_json[form_json.tts_voice]
-        const obj = voice?.samples?.[key] || {};
-        const value = (val && obj[val]) || obj[Object.keys(obj)[0]];
-        const url = value ? `/spk/audio?id=${value}` : `/file/local?url=${voice["path"]}`
-        voice_play(url)
-    };
-
     var play_spk_sample = function () {
         const voice = voice_json[form_json.tts_voice]
         const path = voice["path"];
@@ -261,18 +253,13 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
         else if (form_json.tts_provider == TTS_ELAB) {
             play_elab_sample()
         }
+        else if (form_json.tts_provider == TTS_COSY) {
+            play_spk_sample()
+        }
         else if (form_json.tts_provider == TTS_ITTS) {
             play_spk_sample()
         }
         else if (form_json.tts_provider == TTS_GTTS) {
-            styles = voice_json[form_json.tts_voice].style
-            form_json.tts_style = Array.isArray(styles) && styles.length > 0 ? styles[0] : null;
-            $("#tts_style").empty();
-            $("#tts_style").append(optionHtml(styles));
-            $('#tts_style option[value="' + form_json.tts_style + '"]').prop('selected', true);
-            play_sovits_sample("style")
-        }
-        else if (form_json.tts_provider == TTS_COSY) {
             play_spk_sample()
         }
         // 渲染页面
@@ -284,9 +271,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
         form_json.tts_role = data.elem.value
         if ([TTS_EDGE, TTS_AZUR].includes(form_json.tts_provider)) {
             play_azure_sample("role", form_json.tts_role)
-        } else if (form_json.tts_provider == TTS_GTTS) {
-            play_sovits_sample("role", form_json.tts_role)
-        }
+        } 
     });
 
     // 风格选择
@@ -295,9 +280,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
         form_json.tts_role = data.elem.value
         if ([TTS_EDGE, TTS_AZUR].includes(form_json.tts_provider)) {
             play_azure_sample("style", form_json.tts_role);
-        } else if (form_json.tts_provider === TTS_GTTS) {
-            play_sovits_sample("style", form_json.tts_role);
-        }
+        } 
     });
 
     // 风格强度
