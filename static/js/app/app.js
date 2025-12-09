@@ -12,7 +12,7 @@ layui.config({
 	// 字幕
 	asr: 'mod/asr',
 	// 翻译
-	llm: 'mod/llm',
+	trans: 'mod/trans',
 	// 配音
 	tts: 'mod/tts',
 });

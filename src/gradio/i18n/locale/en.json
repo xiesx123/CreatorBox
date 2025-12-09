@@ -207,5 +207,8 @@
     "音频识别": "Audio Recognition",
     "预览": "Preview",
     "颜色": "Color",
-    "高度": "Height"
+    "高度": "Height",
+    "代理地址": "Proxy Address",
+    "请输入模型名称": "Please Enter Model Name",
+    "请输入代理地址": "Please Enter Proxy Address"
 }

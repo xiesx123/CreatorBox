@@ -15,18 +15,9 @@ layui.define(['form', 'tool'], function (exports) {
 
     // 提供商
     form.on('select(llm_provider_filter)', function (data) {
-        if (data.elem.value == 0) {
-            return $('input[name="llm_model"]').val("");
-        }
         item = find_provider(data.elem.value);
         if (item != null) {
             form_json.llm_provider = item.provider;
-            form_json.llm_model = item.model;
-            if (form_json.llm_provider == "Deeplx") {
-                $('input[name="deeplx_server"]').val(form_json.llm_model);
-            } else {
-                $('input[name="llm_model"]').val(form_json.llm_model);
-            }
         } else {
             form_json.llm_provider = "ignore";
         }
@@ -43,21 +34,18 @@ layui.define(['form', 'tool'], function (exports) {
             providers = data;
         },
         switch: function () {
-            const provider = form_json.llm_provider;
+            const provider = form_json.llm_provider.toLowerCase();
             $('#ignore_div').toggleClass('layui-hide', (provider != 'ignore'));
             const divs = {
-                // Deeplx: ['#deeplx_div', '#opt_div'],
-                OpenAi: ['#llm_div', '#opt_div'],
-                Gemini: ['#llm_div', '#opt_div'],
-                DashScope: ['#llm_div', '#opt_div'],
+                llm: ['#llm_div', '#opt_div'],
                 ignore: []
             };
-            ['#deeplx_div', '#llm_div', '#opt_div'].forEach(selector => {
+            ['#llm_div', '#opt_div'].forEach(selector => {
                 $(selector).toggleClass('layui-hide', !divs[provider]?.includes(selector));
             });
         },
     };
 
     // 输出
-    exports('llm', mod);
+    exports('trans', mod);
 });

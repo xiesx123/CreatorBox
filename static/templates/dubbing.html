@@ -116,7 +116,7 @@
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-location"></i> </div>
                             <select id="locale" name="locale" lay-verify="required" lay-filter="locale_filter">
                               <option value="">{{_("选择或搜索")}}</option>
-                              {% for item in data.llm.locales %}
+                              {% for item in data.base.locales %}
                               <option value="{{ item.locale }}">{{ item.locale }} - {{ item.name if request.state.lang == 'zh' else item.country }}</option>
                               {% endfor %}
                             </select>
@@ -396,9 +396,9 @@
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-component"></i> </div>
                           <select name="llm_provider" lay-filter="llm_provider_filter">
                             <option value="ignore">{{_("忽略")}}</option>
-                            {% for item in data.llm.providers %}
+                            {% for item in data.trans.providers %}
                             <option value="{{ item.provider}}" {% if not item.enable %}disabled{% endif %}>
-                              {{ item.provider }} {{ '- ' + _("可用") if item.valid else '' }}
+                              {{ item.provider }}
                             </option>
                             {% endfor %}
                           </select>
@@ -414,35 +414,14 @@
                         </div>
                       </div>
                     </div>
-
-                    <!-- <div class="layui-col-md12 layui-hide" id="deeplx_div">
-                      <div class="layui-form-item">
-                        <label class="layui-form-label">地址</label>
-                        <div class="layui-input-block">
-                          <input type="text" name="deeplx_server" placeholder="请输入服务地址" autocomplete="off"
-                            class="layui-input" lay-affix="error">
-                        </div>
-                      </div>
-                    </div> -->
-
+ 
                     <div class="layui-col-md12 layui-hide" id="llm_div">
-
-                      <div class="layui-form-item">
-                        <label class="layui-form-label">{{_("模型")}}</label>
-                        <div class="layui-input-block">
-                          <div class="layui-input-wrap">
-                            <div class="layui-input-prefix"> <i class="layui-icon layui-icon-template-1"></i> </div>
-                            <input type="text" name="llm_model" placeholder="{{ _("请输入模型名称")}}" autocomplete="off"
-                              class="layui-input" lay-affix="error">
-                          </div>
-                        </div>
-                      </div>
 
                       <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">{{_("指令")}}</label>
                         <div class="layui-input-block">
                           <textarea name="指令" placeholder='{{_("【去掉结尾的标点】、【阿拉伯数字使用中文代替】等等")}}'
-                            lay-affix="error" class="layui-textarea" style="min-height: 161px"></textarea>
+                            lay-affix="error" class="layui-textarea" style="min-height: 214px"></textarea>
                         </div>
                       </div>
 
@@ -791,7 +770,7 @@
 
   <script>
 
-    layui.use(['form', 'layer', 'element', 'util', 'notice', 'tool', 'i18n', 'asr', 'llm', 'tts'], function () {
+    layui.use(['form', 'layer', 'element', 'util', 'notice', 'tool', 'i18n', 'asr', 'trans', 'tts'], function () {
 
       var form = layui.form;
       var layer = layui.layer;
@@ -821,9 +800,9 @@
       asr.setData(form_json)
       asr.setProviderData(JSON.parse('{{ data.asr.providers | tojson }}'))
 
-      var llm = layui.llm;
-      llm.setData(form_json)
-      llm.setProviderData(JSON.parse('{{ data.llm.providers | tojson }}'))
+      var trans = layui.trans;
+      trans.setData(form_json)
+      trans.setProviderData(JSON.parse('{{ data.trans.providers | tojson }}'))
 
       var tts = layui.tts;
       tts.setData(form_json, cache_table)
