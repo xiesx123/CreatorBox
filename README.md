@@ -47,6 +47,16 @@
 ### Video Translation and Dubbing
 
 <table>
+    <!-- 三体 -->
+    <tbody>
+        <tr>
+            <td align="center">
+            <video src="https://github.com/user-attachments/assets/1834ee4f-dedd-4b0a-a007-3ec9d95cdba0" width="120"></video></td>
+            <td align="center">
+            <video src="https://github.com/user-attachments/assets/d892bd52-763a-4fdb-875a-3912d9da19d0" width="120"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/d7a93ac7-0b80-4f20-903b-bf9d4d376ff6" width="120"></video></td>
+        </tr>
+    </tbody>
     <!-- 大话西游 -->
     <tbody>
         <tr>
