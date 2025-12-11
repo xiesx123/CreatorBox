@@ -10,9 +10,9 @@
     "local_files_only": false,
     "cpu_textencoder": false,
     "device": "cpu",
-    "input": "",
-    "mask_dir": "",
-    "output_dir": "",
+    "input": null,
+    "mask_dir": null,
+    "output_dir": null,
     "quality": 95,
     "enable_interactive_seg": false,
     "interactive_seg_model": "sam2_1_tiny",
@@ -28,5 +28,6 @@
     "gfpgan_device": "cpu",
     "enable_restoreformer": false,
     "restoreformer_device": "cpu",
-    "model_dir": ""
+    "model_dir": "D:\\Projects\\fast\\fast-creator\\models",
+    "mode": 0
 }

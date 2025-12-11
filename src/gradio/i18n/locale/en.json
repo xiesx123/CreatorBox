@@ -12,6 +12,7 @@
     "下载资源失败": "Failed to Download Resources",
     "不透明度": "Opacity",
     "人工字幕": "Manual Subtitles",
+    "代理地址": "Proxy Address",
     "代理验证": "Proxy Authentication",
     "位置": "Position",
     "保存成功": "Save Successful",
@@ -161,11 +162,13 @@
     "请输入IP": "Please Enter IP",
     "请输入Logo地址": "Please Enter Logo Address",
     "请输入VSF路径": "Please Enter VSF Path",
+    "请输入代理地址": "Please Enter Proxy Address",
     "请输入字幕格式": "Please Enter Subtitle Format",
     "请输入字幕语言代码": "Please Enter Subtitle Language Code",
     "请输入密码": "Please Enter Password",
     "请输入排除文件夹": "Please Enter Excluded Folder",
     "请输入排除表达式": "Please Enter Exclusion Expression",
+    "请输入模型名称": "Please Enter Model Name",
     "请输入模型目录": "Please Enter Download Directory",
     "请输入目录路径": "Please Enter Directory Path",
     "请输入端口": "Please Enter Port",
@@ -208,7 +211,5 @@
     "预览": "Preview",
     "颜色": "Color",
     "高度": "Height",
-    "代理地址": "Proxy Address",
-    "请输入模型名称": "Please Enter Model Name",
-    "请输入代理地址": "Please Enter Proxy Address"
+    "邮件已发送，请注意查收": "The email has been sent. Please check your inbox."
 }
