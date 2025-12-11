@@ -49,11 +49,9 @@
     <!-- 三体 -->
     <tbody>
         <tr>
-            <td align="center">
-            <video src="https://github.com/user-attachments/assets/fb37e76a-5402-493d-b2f3-3b55acf6d5a4" width="120"></video></td>
-            <td align="center">
-            <video src="https://github.com/user-attachments/assets/ce768d89-95fb-4023-9bd0-b22e8cb6e290" width="120"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/113c9c7b-92a9-475f-ad31-ca8b6c171d21" width="120"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/6ddd82e6-c37f-43a1-9797-c8c20b22b345" width="120"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/28687213-d9ac-410c-b5cf-5208b1973174" width="120"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/8b40ea96-2e6a-4892-b529-a9855517be10" width="120"></video></td>
         </tr>
     </tbody>
     <!-- 大话西游 -->
