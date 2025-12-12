@@ -50,9 +50,9 @@
     <!-- 三体 -->
     <tbody>
         <tr>
-            <td align="center"><video src="https://github.com/user-attachments/assets/6ddd82e6-c37f-43a1-9797-c8c20b22b345" width="120"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/28687213-d9ac-410c-b5cf-5208b1973174" width="120"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/8b40ea96-2e6a-4892-b529-a9855517be10" width="120"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/2ef251a3-deb7-4498-8d7c-b91d3fa65794" width="120"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/fec0e803-6289-4b90-8628-fc011bbb2147" width="120"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/18915119-26da-42c3-bdf8-049965d51bfe" width="120"></video></td>
         </tr>
     </tbody>
     <!-- 大话西游 -->
