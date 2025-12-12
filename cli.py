@@ -107,7 +107,7 @@ def install(name, version, start, port, share):
 @click.option("--timeout", "-t", type=int, default=5, show_default=True, help="timeout")
 def proxy(host, port, username, password, site, timeout):
     try:
-        from src.app.proxy import ProxyHelper
+        from src.app.network import ProxyHelper
 
         proxy = ProxyHelper(ip=host, port=port, username=username, password=password)
         click.echo(f"🌐 Starting proxy verify. -> {site}")
