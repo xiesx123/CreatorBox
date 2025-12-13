@@ -28,18 +28,7 @@
 </div>
 
 ## 📦 Quick Start
-totalForks
-: 
-193
-Kernels
-: 
-4
-votes
-: 
-75
-Forks
-: 
-6
+
 
 👉 Installation and Deployment Guide: [Local Installation](https://xiesx123.github.io/CreatorBox/deploy-local) | [Remote Deployment](https://xiesx123.github.io/CreatorBox/deploy-colab)
 
