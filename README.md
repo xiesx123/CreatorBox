@@ -4,15 +4,15 @@
 
 <h1 align="center">CreatorBox </h1>
 
-![GitHub Release](https://img.shields.io/github/tag/xiesx123/CreatorBox.svg?style=flat&label=Release&color=0078D7)
+[![GitHub Release](https://img.shields.io/github/tag/xiesx123/CreatorBox.svg?logo=github&label=Release&color=0078D7)](https://github.com/xiesx123/CreatorBox/releases)
 [![GitHub Downloads](https://img.shields.io/github/downloads/xiesx123/CreatorBox/total?logo=github&label=Downloads&color=0078D7)](https://github.com/xiesx123/CreatorBox/releases)
 [![GitHub Stars](https://img.shields.io/github/stars/xiesx123/CreatorBox?logo=github&style=flat&label=Stars&color=0078D7)](https://github.com/xiesx123/CreatorBox/stargazers)
-
+[![Kaggle](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fwww.kaggle.com%2Fapi%2Fi%2Fkernels.KernelsService%2FGetUserKernelAchievements%3FuserId%3D24459621&query=totalForks&logo=kaggle&logoSize=20&label=Kaggle&color1=20BEFF)](https://www.kaggle.com/code/xiesx123)
 [![Discord](https://img.shields.io/badge/Discord-Online-44CC11?logo=discord&logoColor=white&)](https://discord.gg/kt6JWax3P6)
 [![VitePress](https://img.shields.io/badge/VitePress-Doc-3E63DD?logo=markdown)](https://xiesx123.github.io/CreatorBox)
-[![Kaggle](https://img.shields.io/badge/Kaggle-Launch-20BEFF?logo=kaggle)](https://www.kaggle.com/code/xiesx123)
-[![Colab](https://img.shields.io/badge/Colab-Launch-yellow?logo=googlecolab)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
 
+<!-- [![Colab](https://img.shields.io/badge/Colab-Launch-yellow?logo=googlecolab)](https://colab.research.google.com/drive/1VFN9991PEg2mRWWwdKhAdAmQyut7Wfu5?usp=sharing)
+ -->
 <h3>English | <a href="README_ZH.md">中文</a></h3>
 
 🚀🎬 Flexible, efficient, and scalable toolbox for editing and dubbing, unleashing creative potential
@@ -28,7 +28,18 @@
 </div>
 
 ## 📦 Quick Start
-
+totalForks
+: 
+193
+Kernels
+: 
+4
+votes
+: 
+75
+Forks
+: 
+6
 
 👉 Installation and Deployment Guide: [Local Installation](https://xiesx123.github.io/CreatorBox/deploy-local) | [Remote Deployment](https://xiesx123.github.io/CreatorBox/deploy-colab)
 
