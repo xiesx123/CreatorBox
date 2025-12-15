@@ -1,36 +1,36 @@
-#: static/templates/dubbing.html:620
+#: static/templates/dubbing.html:594
 msgid "【地区方言】、【角色扮演】、【说话风格】等等"
 msgstr "【地区方言】、【角色扮演】、【说话风格】等等"
 
-#: static/templates/dubbing.html:100 static/templates/dubbing.html:214
+#: static/templates/dubbing.html:104 static/templates/dubbing.html:210
 msgid "上传"
 msgstr "上传"
 
-#: static/templates/dubbing.html:766
+#: static/templates/dubbing.html:727
 msgid "上移"
 msgstr "上移"
 
-#: static/templates/dubbing.html:767
+#: static/templates/dubbing.html:728
 msgid "下移"
 msgstr "下移"
 
-#: static/templates/speaker.html:154
+#: static/templates/speaker.html:140
 msgid "下载"
 msgstr "下载"
 
-#: static/templates/dubbing.html:411
+#: static/templates/dubbing.html:398
 msgid "使用原文"
 msgstr "使用原文"
 
-#: static/templates/dubbing.html:674
+#: static/templates/dubbing.html:641
 msgid "其他"
 msgstr "其他"
 
-#: static/templates/dubbing.html:262
+#: static/templates/dubbing.html:255
 msgid "准确性"
 msgstr "准确性"
 
-#: static/templates/dubbing.html:765
+#: static/templates/dubbing.html:726
 msgid "删除"
 msgstr "删除"
 
@@ -38,40 +38,40 @@ msgstr "删除"
 msgid "功能"
 msgstr "功能"
 
-#: static/templates/dubbing.html:680
+#: static/templates/dubbing.html:647
 msgid "原始音量"
 msgstr "原始音量"
 
-#: static/templates/dubbing.html:468
+#: static/templates/dubbing.html:452
 msgid "可用"
 msgstr "可用"
 
-#: static/templates/dubbing.html:157
+#: static/templates/dubbing.html:156
 msgid "后缀"
 msgstr "后缀"
 
-#: static/templates/dubbing.html:113 static/templates/speaker.html:71
+#: static/templates/dubbing.html:115 static/templates/speaker.html:62
 msgid "地区"
 msgstr "地区"
 
-#: static/templates/dubbing.html:95
+#: static/templates/dubbing.html:100
 msgid "基础"
 msgstr "基础"
 
-#: static/templates/dubbing.html:327
+#: static/templates/dubbing.html:320
 msgid "声纹对齐"
 msgstr "声纹对齐"
 
-#: static/templates/dubbing.html:639
+#: static/templates/dubbing.html:610
 msgid "备注"
 msgstr "备注"
 
-#: static/templates/dubbing.html:506 static/templates/dubbing.html:508
-#: static/templates/speaker.html:66
+#: static/templates/dubbing.html:487 static/templates/dubbing.html:489
+#: static/templates/speaker.html:57
 msgid "女"
 msgstr "女"
 
-#: static/templates/dubbing.html:181 static/templates/dubbing.html:214
+#: static/templates/dubbing.html:178 static/templates/dubbing.html:210
 msgid "字幕"
 msgstr "字幕"
 
@@ -79,23 +79,23 @@ msgstr "字幕"
 msgid "对齐"
 msgstr "对齐"
 
-#: static/templates/dubbing.html:189 static/templates/dubbing.html:385
+#: static/templates/dubbing.html:185 static/templates/dubbing.html:372
 msgid "开启调试会中断后续步骤"
 msgstr "开启调试会中断后续步骤"
 
-#: static/templates/dubbing.html:398
+#: static/templates/dubbing.html:385
 msgid "忽略"
 msgstr "忽略"
 
-#: static/templates/dubbing.html:498 static/templates/speaker.html:61
+#: static/templates/dubbing.html:481 static/templates/speaker.html:54
 msgid "性别"
 msgstr "性别"
 
-#: static/templates/speaker.html:86
+#: static/templates/speaker.html:77
 msgid "情感"
 msgstr "情感"
 
-#: static/templates/dubbing.html:334
+#: static/templates/dubbing.html:327
 msgid "情感识别"
 msgstr "情感识别"
 
@@ -103,19 +103,19 @@ msgstr "情感识别"
 msgid "打开"
 msgstr "打开"
 
-#: static/templates/dubbing.html:743
+#: static/templates/dubbing.html:704
 msgid "执行"
 msgstr "执行"
 
-#: static/templates/dubbing.html:432
+#: static/templates/dubbing.html:418
 msgid "批量"
 msgstr "批量"
 
-#: static/templates/dubbing.html:616
+#: static/templates/dubbing.html:590
 msgid "指令"
 msgstr ""
 
-#: static/templates/dubbing.html:627
+#: static/templates/dubbing.html:599
 msgid "控制结果可复现"
 msgstr "控制结果可复现"
 
@@ -123,16 +123,16 @@ msgstr "控制结果可复现"
 msgid "描述"
 msgstr "描述"
 
-#: static/templates/dubbing.html:197 static/templates/dubbing.html:393
-#: static/templates/dubbing.html:460
+#: static/templates/dubbing.html:193 static/templates/dubbing.html:380
+#: static/templates/dubbing.html:445
 msgid "提供商"
 msgstr "提供商"
 
-#: static/templates/dubbing.html:421
+#: static/templates/dubbing.html:408
 msgid "提示词"
 msgstr "提示词"
 
-#: static/templates/dubbing.html:423
+#: static/templates/dubbing.html:410
 msgid "提示词示例"
 msgstr ""
 "你是一名翻译专家，根据我提供的信息，准确翻译成{{lang}}目标地区语言\n"
@@ -140,12 +140,11 @@ msgstr ""
 "要求:\n"
 "1、其中'text'是原文，'text_trans'是译文\n"
 "2、符合目标地区的【文化习惯】和【正常口语化表达】\n"
-"..."
-"\n"
+"...\n"
 "内容：\n"
 "{{text}}"
 
-#: static/templates/player.html:50
+#: static/templates/player.html:48
 msgid "播放"
 msgstr "播放"
 
@@ -153,19 +152,19 @@ msgstr "播放"
 msgid "操作"
 msgstr "操作"
 
-#: static/templates/dubbing.html:74
+#: static/templates/dubbing.html:75
 msgid "数据编辑"
 msgstr "数据编辑"
 
-#: static/templates/speaker.html:95
+#: static/templates/speaker.html:84
 msgid "文本"
 msgstr "文本"
 
-#: static/templates/dubbing.html:477
+#: static/templates/dubbing.html:461
 msgid "服务地址"
 msgstr ""
 
-#: static/templates/speaker.html:106
+#: static/templates/speaker.html:93
 msgid "查询"
 msgstr "查询"
 
@@ -173,15 +172,15 @@ msgstr "查询"
 msgid "标题"
 msgstr "标题"
 
-#: static/templates/dubbing.html:247 static/templates/dubbing.html:487
+#: static/templates/dubbing.html:240 static/templates/dubbing.html:471
 msgid "模型"
 msgstr "模型"
 
-#: static/templates/dubbing.html:128
+#: static/templates/dubbing.html:130
 msgid "模式"
 msgstr "模式"
 
-#: static/templates/dubbing.html:651
+#: static/templates/dubbing.html:620
 msgid "点击试听"
 msgstr "点击试听"
 
@@ -189,12 +188,12 @@ msgstr "点击试听"
 msgid "状态"
 msgstr "状态"
 
-#: static/templates/dubbing.html:501 static/templates/dubbing.html:503
-#: static/templates/speaker.html:64
+#: static/templates/dubbing.html:483 static/templates/dubbing.html:485
+#: static/templates/speaker.html:56
 msgid "男"
 msgstr "男"
 
-#: static/templates/dubbing.html:628
+#: static/templates/dubbing.html:600
 msgid "种子"
 msgstr "种子"
 
@@ -206,64 +205,64 @@ msgstr "组件"
 msgid "编号"
 msgstr "编号"
 
-#: static/templates/speaker.html:148
+#: static/templates/speaker.html:134
 msgid "编辑"
 msgstr "编辑"
 
-#: static/templates/dubbing.html:381
+#: static/templates/dubbing.html:369
 msgid "翻译"
 msgstr "翻译"
 
-#: static/templates/dubbing.html:692
+#: static/templates/dubbing.html:658
 msgid "背景音量"
 msgstr "背景音量"
 
-#: static/templates/dubbing.html:229
+#: static/templates/dubbing.html:222
 msgid "草稿"
 msgstr "草稿"
 
-#: static/templates/dubbing.html:100 static/templates/player.html:36
+#: static/templates/dubbing.html:104 static/templates/player.html:36
 msgid "视频"
 msgstr "视频"
 
-#: static/templates/dubbing.html:76
+#: static/templates/dubbing.html:79
 msgid "视频播放"
 msgstr "视频播放"
 
-#: static/templates/dubbing.html:575
+#: static/templates/dubbing.html:551
 msgid "角色扮演"
 msgstr "角色扮演"
 
-#: static/templates/dubbing.html:652 static/templates/dubbing.html:764
-#: static/templates/speaker.html:151
+#: static/templates/dubbing.html:621 static/templates/dubbing.html:725
+#: static/templates/speaker.html:137
 msgid "试听"
 msgstr "试听"
 
-#: static/templates/dubbing.html:549
+#: static/templates/dubbing.html:527
 msgid "语调"
 msgstr "语调"
 
-#: static/templates/dubbing.html:538
+#: static/templates/dubbing.html:517
 msgid "语速"
 msgstr "语速"
 
-#: static/templates/speaker.html:32 static/templates/speaker.html:49
+#: static/templates/speaker.html:32 static/templates/speaker.html:47
 msgid "说话人"
 msgstr "说话人"
 
-#: static/templates/dubbing.html:349
+#: static/templates/dubbing.html:341
 msgid "说话人区间"
 msgstr "说话人区间"
 
-#: static/templates/dubbing.html:341
+#: static/templates/dubbing.html:334
 msgid "说话人数量"
 msgstr "说话人数量"
 
-#: static/templates/dubbing.html:588
+#: static/templates/dubbing.html:563
 msgid "说话风格"
 msgstr "说话风格"
 
-#: static/templates/dubbing.html:727
+#: static/templates/dubbing.html:688
 msgid "请使用sdr组件获取参数"
 msgstr "请使用sdr组件获取参数"
 
@@ -271,53 +270,52 @@ msgstr "请使用sdr组件获取参数"
 msgid "请输入任务ID、视频链接"
 msgstr "请输入任务ID、视频链接"
 
-#: static/templates/dubbing.html:162 static/templates/dubbing.html:995
+#: static/templates/dubbing.html:160 static/templates/dubbing.html:960
 msgid "请输入后缀"
 msgstr "请输入后缀"
 
-#: static/templates/dubbing.html:220 static/templates/dubbing.html:830
+#: static/templates/dubbing.html:214 static/templates/dubbing.html:791
 msgid "请输入字幕文件路径（SRT）"
 msgstr "请输入字幕文件路径（SRT）"
 
-#: static/templates/speaker.html:88
+#: static/templates/speaker.html:79
 msgid "请输入情感"
 msgstr "请输入情感"
 
-#: static/templates/dubbing.html:481
+#: static/templates/dubbing.html:465
 msgid "请输入服务地址"
 msgstr ""
 
-#: static/templates/dubbing.html:491 static/templates/dubbing.html:851
+#: static/templates/dubbing.html:475 static/templates/dubbing.html:812
 msgid "请输入模型名称"
 msgstr "请输入模型名称"
 
-#: static/templates/dubbing.html:654 static/templates/dubbing.html:655
-#: static/templates/dubbing.html:844
+#: static/templates/dubbing.html:623 static/templates/dubbing.html:805
 msgid "请输入试听文本"
 msgstr "请输入试听文本"
 
-#: static/templates/speaker.html:55
+#: static/templates/speaker.html:49
 msgid "请输入说话人名称"
 msgstr "请输入说话人名称"
 
-#: static/templates/dubbing.html:632
+#: static/templates/dubbing.html:604
 msgid "请输入随机种子"
 msgstr "请输入随机种子"
 
-#: static/templates/dubbing.html:106 static/templates/dubbing.html:823
-#: static/templates/dubbing.html:870 static/templates/dubbing.html:991
+#: static/templates/dubbing.html:109 static/templates/dubbing.html:784
+#: static/templates/dubbing.html:831 static/templates/dubbing.html:956
 msgid "请输入音视频路径或链接"
 msgstr "请输入音视频路径或链接"
 
-#: static/templates/speaker.html:97
+#: static/templates/speaker.html:86
 msgid "请输入音频文本"
 msgstr "请输入音频文本"
 
-#: static/templates/speaker.html:43
+#: static/templates/speaker.html:42
 msgid "请输入音频路径、链接"
 msgstr "请输入音频路径、链接"
 
-#: static/templates/dubbing.html:190 static/templates/dubbing.html:386
+#: static/templates/dubbing.html:186 static/templates/dubbing.html:373
 msgid "调试"
 msgstr "调试"
 
@@ -325,29 +323,29 @@ msgstr "调试"
 msgid "辅助"
 msgstr "辅助"
 
-#: static/templates/dubbing.html:294
+#: static/templates/dubbing.html:287
 msgid "连贯性"
 msgstr "连贯性"
 
-#: static/templates/dubbing.html:118 static/templates/dubbing.html:234
-#: static/templates/dubbing.html:252 static/templates/dubbing.html:267
-#: static/templates/dubbing.html:283 static/templates/dubbing.html:299
-#: static/templates/dubbing.html:317 static/templates/dubbing.html:520
-#: static/templates/dubbing.html:580 static/templates/dubbing.html:593
-#: static/templates/speaker.html:74
+#: static/templates/dubbing.html:120 static/templates/dubbing.html:227
+#: static/templates/dubbing.html:245 static/templates/dubbing.html:260
+#: static/templates/dubbing.html:276 static/templates/dubbing.html:292
+#: static/templates/dubbing.html:310 static/templates/dubbing.html:500
+#: static/templates/dubbing.html:556 static/templates/dubbing.html:568
+#: static/templates/speaker.html:65
 msgid "选择或搜索"
 msgstr "选择或搜索"
 
-#: static/templates/dubbing.html:574 static/templates/dubbing.html:587
-#: static/templates/dubbing.html:600
+#: static/templates/dubbing.html:550 static/templates/dubbing.html:562
+#: static/templates/dubbing.html:574
 msgid "选择试听"
 msgstr "选择试听"
 
-#: static/templates/dubbing.html:149
+#: static/templates/dubbing.html:148
 msgid "选项"
 msgstr "选项"
 
-#: static/templates/dubbing.html:456
+#: static/templates/dubbing.html:441
 msgid "配音"
 msgstr "配音"
 
@@ -355,27 +353,27 @@ msgstr "配音"
 msgid "重启"
 msgstr "重启"
 
-#: static/templates/dubbing.html:152
+#: static/templates/dubbing.html:151
 msgid "重构"
 msgstr "重构"
 
-#: static/templates/speaker.html:112
+#: static/templates/speaker.html:98
 msgid "重置"
 msgstr "重启"
 
-#: static/templates/dubbing.html:643
+#: static/templates/dubbing.html:614
 msgid "随便写点什么"
 msgstr "随便写点什么"
 
-#: static/templates/dubbing.html:278
+#: static/templates/dubbing.html:271
 msgid "随机性"
 msgstr "随机性"
 
-#: static/templates/dubbing.html:703
+#: static/templates/dubbing.html:668
 msgid "静音检测"
 msgstr "静音检测"
 
-#: static/templates/dubbing.html:514
+#: static/templates/dubbing.html:495
 msgid "音色"
 msgstr "音色"
 
@@ -383,11 +381,11 @@ msgstr "音色"
 msgid "音色管理"
 msgstr "音色管理"
 
-#: static/templates/dubbing.html:312
+#: static/templates/dubbing.html:305
 msgid "音轨分离"
 msgstr "音轨分离"
 
-#: static/templates/dubbing.html:527
+#: static/templates/dubbing.html:507
 msgid "音量"
 msgstr "音量"
 
@@ -395,11 +393,11 @@ msgstr "音量"
 msgid "音频"
 msgstr "音频"
 
-#: static/templates/dubbing.html:151
+#: static/templates/dubbing.html:150
 msgid "预览"
 msgstr "预览"
 
-#: static/templates/dubbing.html:601
+#: static/templates/dubbing.html:575
 msgid "风格强度"
 msgstr "风格强度"
 
