@@ -164,14 +164,18 @@
                         break;
                     case 'reboot':
                         // 确认执行
-                        layer.confirm(i18n.trans("确定重启？"), { title: i18n.trans("提示"), icon: 3 }, function (index) {
+                        layer.confirm(i18n.trans("确定重启？"), {
+                            icon: 3,
+                            title: i18n.trans('提示'),
+                            btn: [i18n.trans('确定'), i18n.trans('取消')]
+                        }, function (index) {
                             layer.close(index);
-                            // 请求调用
-                            tool.get("/reboot")
-                            setTimeout(function () {
-                                tool.refresh()
-                            }, 10 * 1000)
-                        });
+                            tool.get("/reboot", {}, function (response) {
+                                setTimeout(function () {
+                                    tool.refresh()
+                                }, 10 * 1000)
+                            })
+                        }, true);
                         break;
                 };
             });

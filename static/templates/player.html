@@ -39,15 +39,13 @@
                     <div class="layui-form-item layui-col-space15" style="margin-bottom:0px">
                         <div class="layui-col-md10">
                             <div class="layui-input-wrap">
-                                <input id="url" value="{{ data.url }}" type="text" placeholder='{{_("请输入任务ID、视频链接")}}'
-                                    class="layui-input">
+                                <input id="url" value="{{ data.url }}" type="text" placeholder='{{_("请输入任务ID、视频链接")}}' class="layui-input">
                             </div>
                         </div>
 
                         <div class="layui-col-md2">
                             <div class="layui-input-wrap">
-                                <button id="play" type="button"
-                                    class="layui-btn layui-btn-primary layui-border-blue layui-btn-fluid">{{_("播放")}}</button>
+                                <button id="play" type="button" class="layui-btn layui-btn-primary layui-border-blue layui-btn-fluid">{{_("播放")}}</button>
                             </div>
                         </div>
                     </div>
@@ -56,9 +54,7 @@
             </div>
 
             <div class="layui-card layui-panel" style="padding-top: 15dp; background-color: black;">
-
                 <div id="player-container"></div>
-
             </div>
         </div>
     </div>
@@ -137,7 +133,7 @@
                 const topElements = document.querySelectorAll('.layui-card');
                 let topHeight = 0;
                 topElements.forEach(el => {
-                    topHeight += el.offsetHeight+20;
+                    topHeight += el.offsetHeight + 20;
                 });
 
                 // 计算剩余高度

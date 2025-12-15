@@ -37,33 +37,24 @@
                             <input type="hidden" name="id" />
 
                             <div lay-filter="query_filter" class="layui-form-item layui-hide">
-                                <label class="layui-form-label" id="audio_upload">{{_("音频")}} <span
-                                        class="layui-badge-dot layui-bg-green"></span></label>
+                                <label class="layui-form-label" id="audio_upload">{{_("音频")}} <span class="layui-badge-dot layui-bg-green"></span></label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="path" lay-verify="path" placeholder='{{_("请输入音频路径、链接")}}''
-                    autocomplete="off" class="layui-input" lay-affix="clear">
-                  </div>
-                </div>
+                                    <input type="text" name="path" lay-verify="path" placeholder='{{_("请输入音频路径、链接")}}' autocomplete="off" class="layui-input" lay-affix="clear">
+                                </div>
+                            </div>
 
-                <div class="layui-form-item">
-                  <label class="layui-form-label">{{_("说话人")}}</label>
-                  <div class="layui-input-block">
-                    <input
-                      id="suffix"
-                      type="text"
-                      name="speaker"
-                      placeholder='{{_("请输入说话人名称")}}' lay-verify="required" autocomplete="off" class="layui-input"
-                                        lay-affix="clear" />
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">{{_("说话人")}}</label>
+                                <div class="layui-input-block">
+                                    <input id="suffix" type="text" name="speaker" placeholder=' {{_("请输入说话人名称")}}' lay-verify="required" autocomplete="off" class="layui-input" lay-affix="clear" />
                                 </div>
                             </div>
 
                             <div class="layui-form-item" pane>
                                 <label class="layui-form-label">{{_("性别")}}</label>
                                 <div class="layui-input-block">
-                                    <input type="radio" name="gender" value="1" lay-filter="gender_filter"
-                                        title='{{_("男")}}' checked />
-                                    <input type="radio" name="gender" value="2" lay-filter="gender_filter"
-                                        title='{{_("女")}}' />
+                                    <input type="radio" name="gender" value="1" lay-filter="gender_filter" title='{{_("男")}}' checked />
+                                    <input type="radio" name="gender" value="2" lay-filter="gender_filter" title='{{_("女")}}' />
                                 </div>
                             </div>
 
@@ -85,30 +76,25 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">{{_("情感")}}</label>
                                 <div class="layui-input-block">
-                                    <input id="emotion" type="text" name="emotion" placeholder='{{_("请输入情感")}}'
-                                        lay-verify="required" autocomplete="off" class="layui-input"
-                                        lay-affix="clear" />
+                                    <input id="emotion" type="text" name="emotion" placeholder='{{_("请输入情感")}}' lay-verify="required" autocomplete="off" class="layui-input" lay-affix="clear" />
                                 </div>
                             </div>
 
                             <div lay-filter="query_filter" class="layui-form-item layui-hide">
                                 <label class="layui-form-label">{{_("文本")}}</label>
                                 <div class="layui-input-block">
-                                    <input id="suffix" type="text" name="text" placeholder='{{_("请输入音频文本")}}'
-                                        autocomplete="off" class="layui-input" lay-affix="clear" />
+                                    <input id="suffix" type="text" name="text" placeholder='{{_("请输入音频文本")}}' autocomplete="off" class="layui-input" lay-affix="clear" />
                                 </div>
                             </div>
 
                             <div class="layui-form-item layui-col-space15" style="margin-bottom: 0px">
                                 <div class="layui-col-md10">
-                                    <button type="submit" class="layui-btn layui-btn-primary layui-btn-fluid" lay-submit
-                                        lay-filter="form_submit">
+                                    <button type="submit" class="layui-btn layui-btn-primary layui-btn-fluid" lay-submit lay-filter="form_submit">
                                         {{_("查询")}}
                                     </button>
                                 </div>
                                 <div class="layui-col-md2">
-                                    <button type="reset"
-                                        class="layui-btn layui-btn-primary layui-border layui-btn-fluid">
+                                    <button type="reset" class="layui-btn layui-btn-primary layui-border layui-btn-fluid">
                                         {{_("重置")}}
                                     </button>
                                 </div>
@@ -159,9 +145,7 @@
     <!-- 启用禁用 -->
     {% raw %}
     <script type="text/html" id="TPL_table_status">
-      <input type="checkbox" name="status" value={{d.status}} lay-skin="primary"
-      mid={{d.id}} lay-filter="table_status_filter" {{ d.status == '1' ?
-      'checked' : '' }}>
+      <input type="checkbox" name="status" value={{d.status}} lay-skin="primary" mid={{d.id}} lay-filter="table_status_filter" {{ d.status == '1' ? 'checked' : '' }}>
     </script>
     {% endraw %}
 
@@ -343,7 +327,7 @@
                         $('[lay-filter="collapse_filter_speaker"] .layui-colla-content').addClass('layui-show');
                         break;
                     case 'delete':
-                        tool.delids("/spk/delete", function (response) {
+                        tool.deleteIds("/spk/delete", function (response) {
                             console.debug(response.data)
                             table.reloadData(id, { scrollPos: 'fixed' });
                         }, true)

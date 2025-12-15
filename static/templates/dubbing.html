@@ -70,10 +70,15 @@
           <li class="layui-nav-item layui-nav-itemed">
             <a href="javascript:;">{{_("辅助")}}</a>
             <dl class="layui-nav-child">
-              <dd><a data-path="/editor?lang={{request.state.lang}}" href="javascript:;"><i style="font-size: 18px"
-                    class="layui-icon layui-icon-code-circle"></i> {{_("数据编辑")}}</a></dd>
-              <dd><a data-path="/player?lang={{request.state.lang}}&url=webapp\sample\video_amazing.mp4&autoplay=true" href="javascript:;"><i style="font-size: 18px"
-                    class="layui-icon layui-icon-play"></i> {{_("视频播放")}}</a></dd>
+              <dd>
+                <a data-path="/editor?lang={{request.state.lang}}" href="javascript:;">
+                  <i style="font-size: 18px" class="layui-icon layui-icon-code-circle"></i> {{_("数据编辑")}}
+                </a>
+              </dd>
+              <dd><a data-path="/player?lang={{request.state.lang}}&url=webapp\sample\video_amazing.mp4&autoplay=true" href="javascript:;">
+                  <i style="font-size: 18px" class="layui-icon layui-icon-play"></i> {{_("视频播放")}}
+                </a>
+              </dd>
             </dl>
           </li>
         </ul>
@@ -96,15 +101,12 @@
                   <div class="layui-colla-content layui-show">
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label" id="video_upload"
-                        lay-tips="{content: '{{_("上传")}}', margin: '0 0 0 -10px'}">{{_("视频")}}
+                      <label class="layui-form-label" id="video_upload" lay-tips="{content: '{{_('上传')}}', margin: '0 0 0 -10px' }">{{_("视频")}}
                         <span class="layui-badge-dot layui-bg-green"></span></label>
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-video"></i> </div>
-                          <input id="video_url" type="text" name="video_url" lay-verify="path"
-                          placeholder='{{_("请输入音视频路径或链接")}}' autocomplete="off" class="layui-input"
-                          lay-filter="play" lay-affix="play">
+                          <input id="video_url" type="text" name="video_url" lay-verify="path" placeholder='{{_("请输入音视频路径或链接")}}' autocomplete="off" class="layui-input" lay-filter="play" lay-affix="play">
                         </div>
                       </div>
                     </div>
@@ -114,13 +116,13 @@
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-location"></i> </div>
-                            <select id="locale" name="locale" lay-verify="required" lay-filter="locale_filter">
-                              <option value="">{{_("选择或搜索")}}</option>
-                              {% for item in data.base.locales %}
-                              <option value="{{ item.locale }}">{{ item.locale }} - {{ item.name if request.state.lang == 'zh' else item.country }}</option>
-                              {% endfor %}
-                            </select>
-                          </div>
+                          <select id="locale" name="locale" lay-verify="required" lay-filter="locale_filter">
+                            <option value="">{{_("选择或搜索")}}</option>
+                            {% for item in data.base.locales %}
+                            <option value="{{ item.locale }}">{{ item.locale }} - {{ item.name if request.state.lang == 'zh' else item.country }}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
                       </div>
                     </div>
 
@@ -128,9 +130,7 @@
                       <label class="layui-form-label">{{_("模式")}}</label>
                       <div class="layui-input-block">
                         {% for item in data.base.mode_types %}
-                        <input type="radio" name="mode_type" value="{{ item.val }}" lay-filter="mode_type_filter"
-                          title="{{ item.desc_zh if request.state.lang == 'zh' else item.desc_en }}" {% if not
-                          item.enable %}disabled{% endif %}>
+                        <input type="radio" name="mode_type" value="{{ item.val }}" lay-filter="mode_type_filter" title="{{ item.desc_zh if request.state.lang == 'zh' else item.desc_en }}" {% if not item.enable %}disabled{% endif %}>
                         {% endfor %}
                       </div>
                     </div>
@@ -139,8 +139,7 @@
                       <label class="layui-form-label">{{_("对齐")}}</label>
                       <div class="layui-input-block">
                         {% for item in data.base.align_types %}
-                        <input type="radio" name="align_type" value="{{ item.val }}"
-                          title="{{ item.desc_zh if request.state.lang == 'zh' else item.desc_en }}">
+                        <input type="radio" name="align_type" value="{{ item.val }}" title="{{ item.desc_zh if request.state.lang == 'zh' else item.desc_en }}">
                         {% endfor %}
                       </div>
                     </div>
@@ -158,9 +157,7 @@
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-note"></i> </div>
-                          <input id="suffix" type="text" name="suffix" lay-verify="required"
-                            placeholder='{{_("请输入后缀")}}' autocomplete="off" class="layui-input"
-                            lay-affix="error">
+                          <input id="suffix" type="text" name="suffix" lay-verify="required" placeholder='{{_("请输入后缀")}}' autocomplete="off" class="layui-input" lay-affix="error">
                         </div>
                       </div>
                     </div>
@@ -185,8 +182,7 @@
                   </div>
                   <div class="layui-colla-content layui-show">
 
-                    <div class="layui-form-item" pane
-                      lay-tips="{content: '{{_("开启调试会中断后续步骤")}}', margin: '0 0 0 -10px'}">
+                    <div class="layui-form-item" pane lay-tips="{content: '{{_('开启调试会中断后续步骤')}}', margin: '0 0 0 -10px' }">
                       <label class="layui-form-label">{{_("调试")}}</label>
                       <div class="layui-input-block">
                         <input type="checkbox" name="asr_debug" lay-skin="switch" lay-filter="switch_debug_filter">
@@ -211,14 +207,11 @@
 
                     <div class="layui-col-md12 layui-hide" id="subtitle_div">
                       <div class="layui-form-item">
-                        <label class="layui-form-label" id="subtitle_upload" lay-tips="{content: '{{_("上传")}}', margin: '0 0 0 -10px'}">{{_("字幕")}} <span
-                            class="layui-badge-dot layui-bg-green"></span></label>
+                        <label class="layui-form-label" id="subtitle_upload" lay-tips="{content: '{{_('上传')}}', margin: '0 0 0 -10px' }">{{_("字幕")}} <span class="layui-badge-dot layui-bg-green"></span></label>
                         <div class="layui-input-block">
                           <div class="layui-input-wrap">
                             <div class="layui-input-prefix"> <i class="layui-icon layui-icon-file-b"></i> </div>
-                            <input id="subtitle_file" type="text" name="subtitle_file" lay-verify="subtitle_srt"
-                              placeholder='{{_("请输入字幕文件路径（SRT）")}}' autocomplete="off" class="layui-input"
-                              lay-affix="error">
+                            <input id="subtitle_file" type="text" name="subtitle_file" lay-verify="subtitle_srt" placeholder='{{_("请输入字幕文件路径（SRT）")}}' autocomplete="off" class="layui-input" lay-affix="error">
                           </div>
                         </div>
                       </div>
@@ -340,8 +333,7 @@
                     <div class="layui-form-item" pane>
                       <label class="layui-form-label">{{_("说话人数量")}}</label>
                       <div class="layui-input-block">
-                        <input type="checkbox" name="speaker_use_num" lay-skin="switch"
-                          lay-filter="switch_speaker_filter">
+                        <input type="checkbox" name="speaker_use_num" lay-skin="switch" lay-filter="switch_speaker_filter">
                       </div>
                     </div>
 
@@ -350,17 +342,13 @@
                       <div class="layui-input-inline" style="width: 142px;">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
-                          <input type="number" lay-verify="required|number|speaker_len" name="speaker_min"
-                            placeholder="最小值" autocomplete="off" class="layui-input" min="1" max="10" step="1"
-                            lay-affix="number">
+                          <input type="number" lay-verify="required|number|speaker_len" name="speaker_min" placeholder="最小值" autocomplete="off" class="layui-input" min="1" max="10" step="1" lay-affix="number">
                         </div>
                       </div>
                       <div class="layui-input-inline" style="width: 142px;">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
-                          <input type="number" lay-verify="required|number|speaker_len" name="speaker_max"
-                            placeholder="最大值" autocomplete="off" class="layui-input" min="1" max="10" step="1"
-                            lay-affix="number">
+                          <input type="number" lay-verify="required|number|speaker_len" name="speaker_max" placeholder="最大值" autocomplete="off" class="layui-input" min="1" max="10" step="1" lay-affix="number">
                         </div>
                       </div>
                     </div>
@@ -381,8 +369,7 @@
                   <div class="layui-colla-title">{{_("翻译")}}</div>
                   <div class="layui-colla-content layui-show">
 
-                    <div class="layui-form-item" pane
-                      lay-tips="{content: '{{_("开启调试会中断后续步骤")}}', margin: '0 0 0 -10px'}">
+                    <div class="layui-form-item" pane lay-tips="{content: '{{_('开启调试会中断后续步骤')}}', margin: '0 0 0 -10px' }">
                       <label class="layui-form-label">{{_("调试")}}</label>
                       <div class="layui-input-block">
                         <input type="checkbox" name="llm_debug" lay-skin="switch" lay-filter="switch_debug_filter">
@@ -414,14 +401,13 @@
                         </div>
                       </div>
                     </div>
- 
+
                     <div class="layui-col-md12 layui-hide" id="llm_div">
 
                       <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">{{_("提示词")}}</label>
                         <div class="layui-input-block">
-                          <textarea name="llm_prompt" placeholder='{{_("提示词示例")}}'
-                            lay-affix="error" class="layui-textarea" style="min-height: 214px"></textarea>
+                          <textarea name="llm_prompt" placeholder='{{_("提示词示例")}}' lay-affix="error" class="layui-textarea" style="min-height: 214px"></textarea>
                         </div>
                       </div>
 
@@ -433,8 +419,7 @@
                         <div class="layui-input-block">
                           <div class="layui-input-wrap">
                             <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
-                            <input type="number" name="llm_batch_size" lay-verify="required" placeholder="[10,100]"
-                              autocomplete="off" class="layui-input" min="10" max="100" step="10" lay-affix="number">
+                            <input type="number" name="llm_batch_size" lay-verify="required" placeholder="[10,100]" autocomplete="off" class="layui-input" min="10" max="100" step="10" lay-affix="number">
                           </div>
                         </div>
                       </div>
@@ -461,24 +446,23 @@
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-component"></i> </div>
-                          <select id="tts_provider" name="tts_provider" lay-verify="required"
-                            lay-filter="tts_provider_filter">
+                          <select id="tts_provider" name="tts_provider" lay-verify="required" lay-filter="tts_provider_filter">
                             {% for item in data.tts.providers %}
-                              {% if item.enable %}
-                                <option value="{{ item.provider}}">{{ item.desc }} {{ '- ' + _("可用") if item.valid else '' }}</option>
-                              {% endif %}>
+                            {% if item.enable %}
+                            <option value="{{ item.provider}}">{{ item.desc }} {{ '- ' + _("可用") if item.valid else '' }}</option>
+                            {% endif %}>
                             {% endfor %}
                           </select>
                         </div>
                       </div>
                     </div>
-                    
+
                     <div class="layui-form-item layui-hide" pane id="opt_server">
                       <label class="layui-form-label">{{_("服务地址")}}</label>
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-website"></i> </div>
-                            <input type="text" name="tts_server" placeholder="{{ _("请输入服务地址")}}" autocomplete="off" class="layui-input" lay-affix="error" disabled>
+                          <input type="text" name="tts_server" placeholder="{{ _('请输入服务地址')}}" autocomplete="off" class="layui-input" lay-affix="error" disabled>
                         </div>
                       </div>
                     </div>
@@ -487,9 +471,8 @@
                       <label class="layui-form-label">{{_("模型")}}</label>
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
-                            <div class="layui-input-prefix"> <i class="layui-icon layui-icon-template-1"></i> </div>
-                          <input type="text" name="tts_model" placeholder="{{ _("请输入模型名称")}}" autocomplete="off"
-                            class="layui-input" lay-affix="error" disabled>
+                          <div class="layui-input-prefix"> <i class="layui-icon layui-icon-template-1"></i> </div>
+                          <input type="text" name="tts_model" placeholder="{{ _('请输入模型名称')}}" autocomplete="off" class="layui-input" lay-affix="error" disabled>
                         </div>
                       </div>
                     </div>
@@ -497,16 +480,14 @@
                     <div class="layui-form-item" pane>
                       <label class="layui-form-label">{{_("性别")}}</label>
                       <div class="layui-input-block">
-                        <input type="radio" name="tts_gender" value="1" lay-filter="tts_gender_filter"
-                          title='{{_("男")}}'>
-                          <div lay-radio>
-                            <span>{{_("男")}} <i class="layui-icon layui-icon-male"></i></span>
-                          </div>
-                        <input type="radio" name="tts_gender" value="2" lay-filter="tts_gender_filter"
-                          title='{{_("女")}}'>
-                          <div lay-radio>
-                            <span>{{_("女")}} <i class="layui-icon layui-icon-female"></i></span>
-                          </div>
+                        <input type="radio" name="tts_gender" value="1" lay-filter="tts_gender_filter" title='{{_("男")}}'>
+                        <div lay-radio>
+                          <span>{{_("男")}} <i class="layui-icon layui-icon-male"></i></span>
+                        </div>
+                        <input type="radio" name="tts_gender" value="2" lay-filter="tts_gender_filter" title='{{_("女")}}'>
+                        <div lay-radio>
+                          <span>{{_("女")}} <i class="layui-icon layui-icon-female"></i></span>
+                        </div>
                       </div>
                     </div>
 
@@ -515,8 +496,7 @@
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i id="tts_voice_icon" class="layui-icon layui-icon-username"></i> </div>
-                          <select id="tts_voice" name="tts_voice" lay-verify="required" lay-filter="tts_voice_filter"
-                            lay-search="{caseSensitive:false, fuzzy: true}">
+                          <select id="tts_voice" name="tts_voice" lay-verify="required" lay-filter="tts_voice_filter" lay-search="{caseSensitive:false, fuzzy: true}">
                             <option value="">{{_("选择或搜索")}}</option>
                           </select>
                         </div>
@@ -528,19 +508,17 @@
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
-                          <input type="number" lay-verify="required" name="tts_volume" placeholder="[0,1]"
-                            autocomplete="off" class="layui-input" min="0" max="2" step="0.01" lay-affix="number">
+                          <input type="number" lay-verify="required" name="tts_volume" placeholder="[0,1]" autocomplete="off" class="layui-input" min="0" max="2" step="0.01" lay-affix="number">
                         </div>
                       </div>
                     </div>
-                    
+
                     <div class="layui-form-item layui-hide" pane id="opt_rate">
                       <label class="layui-form-label">{{_("语速")}}</label>
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
-                          <input type="number" lay-verify="required" name="tts_rate" placeholder="[0,2]"
-                            autocomplete="off" class="layui-input" min="0" max="2" step="0.01" lay-affix="number">
+                          <input type="number" lay-verify="required" name="tts_rate" placeholder="[0,2]" autocomplete="off" class="layui-input" min="0" max="2" step="0.01" lay-affix="number">
                         </div>
                       </div>
                     </div>
@@ -550,8 +528,7 @@
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
-                          <input type="number" lay-verify="required" name="tts_pitch" placeholder="[0,2]"
-                            autocomplete="off" class="layui-input" min="0" max="2" step="0.01" lay-affix="number">
+                          <input type="number" lay-verify="required" name="tts_pitch" placeholder="[0,2]" autocomplete="off" class="layui-input" min="0" max="2" step="0.01" lay-affix="number">
                         </div>
                       </div>
                     </div>
@@ -570,8 +547,7 @@
                     <div class="layui-col-md12 layui-hide" id="gtts_div"></div>
 
                     <!-- opt -->
-                    <div class="layui-form-item layui-hide" pane id="opt_role"
-                     lay-tips="{content: '{{_("选择试听")}}', margin: '0 0 0 -10px'}">
+                    <div class="layui-form-item layui-hide" pane id="opt_role" lay-tips="{content: '{{_('选择试听')}}', margin: '0 0 0 -10px' }">
                       <label class="layui-form-label">{{_("角色扮演")}}</label>
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
@@ -583,8 +559,7 @@
                       </div>
                     </div>
 
-                    <div class="layui-form-item layui-hide" pane id="opt_style"
-                       lay-tips="{content: '{{_("选择试听")}}', margin: '0 0 0 -10px'}">
+                    <div class="layui-form-item layui-hide" pane id="opt_style" lay-tips="{content: '{{_('选择试听')}}', margin: '0 0 0 -10px' }">
                       <label class="layui-form-label">{{_("说话风格")}}</label>
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
@@ -596,8 +571,7 @@
                       </div>
                     </div>
 
-                    <div class="layui-form-item layui-hide" pane id="opt_styledegree"
-                       lay-tips="{content: '{{_("选择试听")}}', margin: '0 0 0 -10px'}">
+                    <div class="layui-form-item layui-hide" pane id="opt_styledegree" lay-tips="{content: '{{_('选择试听')}}', margin: '0 0 0 -10px' }">
                       <label class="layui-form-label">{{_("风格强度")}}</label>
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
@@ -617,20 +591,17 @@
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-note"></i> </div>
-                          <input name="tts_instruct" placeholder='{{_("【地区方言】、【角色扮演】、【说话风格】等等")}}' lay-affix="error"
-                            class="layui-input"></input>
+                          <input name="tts_instruct" placeholder='{{_("【地区方言】、【角色扮演】、【说话风格】等等")}}' lay-affix="error" class="layui-input"></input>
                         </div>
                       </div>
                     </div>
 
-                    <div class="layui-form-item layui-hide" pane id="opt_seed"
-                      lay-tips="{content: '{{_("控制结果可复现")}}', margin: '0 0 0 -10px'}">
+                    <div class="layui-form-item layui-hide" pane id="opt_seed" lay-tips="{content: '{{_('控制结果可复现')}}', margin: '0 0 0 -10px' }">
                       <label class="layui-form-label">{{_("种子")}}</label>
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-note"></i> </div>
-                          <input type="number" name="tts_seed" lay-verify="required|number" placeholder='{{_("请输入随机种子")}}' autocomplete="off" class="layui-input" 
-                            lay-filter="seed" lay-affix="release" onkeyup="value=value.slice(0,8)"></input>
+                          <input type="number" name="tts_seed" lay-verify="required|number" placeholder='{{_("请输入随机种子")}}' autocomplete="off" class="layui-input" lay-filter="seed" lay-affix="release" onkeyup="value=value.slice(0,8)"></input>
                         </div>
                       </div>
                     </div>
@@ -640,20 +611,16 @@
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-note"></i> </div>
-                          <input name="tts_remarks" placeholder='{{_("随便写点什么")}}' lay-affix="error"
-                            class="layui-input"></input>
+                          <input name="tts_remarks" placeholder='{{_("随便写点什么")}}' lay-affix="error" class="layui-input"></input>
                         </div>
                       </div>
                     </div>
 
                     <div class="layui-form-item layui-form-text">
-                      <label class="layui-form-label" id="tts_preview"
-                        lay-tips="{content: '{{_("点击试听")}}', margin: '0 0 0 -10px'}">{{
+                      <label class="layui-form-label" id="tts_preview" lay-tips="{content: '{{_('点击试听')}}', margin: '0 0 0 -10px' }">{{
                         _("试听") }} <i class="layui-icon layui-icon-headset"></i></label>
                       <div class="layui-input-block">
-                        <textarea id="tts_text" name="tts_text" placeholder='{{_("请输入试听文本")}}'
-                          lay-verify="tts_text" lay-reqtext='{{_("请输入试听文本")}}' lay-affix="error"
-                          class="layui-textarea tts_text" maxlength="1000"></textarea>
+                        <textarea id="tts_text" name="tts_text" placeholder='{{_("请输入试听文本")}}' lay-verify="tts_text" lay-reqtext='{{_("请输入试听文本")}}' lay-affix="error" class="layui-textarea tts_text" maxlength="1000"></textarea>
                       </div>
                     </div>
 
@@ -677,54 +644,48 @@
                   <div class="layui-colla-content layui-show">
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label"lay-tips="{content: '{{_("原始音量")}}', margin: '0 0 0 -10px'}">{{_("原始音量")}}</label>
+                      <label class="layui-form-label" lay-tips="{content: '{{_('原始音量')}}', margin: '0 0 0 -10px' }">{{_("原始音量")}}</label>
 
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
-                          <input type="number" lay-verify="required" name="volume_native" placeholder="[0,1]"
-                            autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
+                          <input type="number" lay-verify="required" name="volume_native" placeholder="[0,1]" autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
                         </div>
                       </div>
                     </div>
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label"lay-tips="{content: '{{_("背景音量")}}', margin: '0 0 0 -10px'}">{{_("背景音量")}}</label>
+                      <label class="layui-form-label" lay-tips="{content: '{{_('背景音量')}}', margin: '0 0 0 -10px' }">{{_("背景音量")}}</label>
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
-                          <input type="number" lay-verify="required" name="volume_background" placeholder="[0,1]"
-                            autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
+                          <input type="number" lay-verify="required" name="volume_background" placeholder="[0,1]" autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
                         </div>
                       </div>
                     </div>
 
                     <div class="layui-form-item layui-show">
-                      <label class="layui-form-label"lay-tips="{content: '{{_("静音检测")}}', margin: '0 0 0 -20px'}">{{_("静音检测")}}</label>
-                      <div class="layui-input-inline"  style="width: 142px;">
+                      <label class="layui-form-label" lay-tips="{content: '{{_('静音检测')}}', margin: '0 0 0 -20px' }">{{_("静音检测")}}</label>
+                      <div class="layui-input-inline" style="width: 142px;">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
-                          <input type="number" lay-verify="required" name="silence_threshold" placeholder="[-100,0]"
-                            autocomplete="off" class="layui-input" min="-100" max="0" step="10" lay-affix="number">
+                          <input type="number" lay-verify="required" name="silence_threshold" placeholder="[-100,0]" autocomplete="off" class="layui-input" min="-100" max="0" step="10" lay-affix="number">
                         </div>
                       </div>
-                      <div class="layui-input-inline"  style="width: 142px;">
+                      <div class="layui-input-inline" style="width: 142px;">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
-                          <input type="number" lay-verify="required" name="silence_min_len" placeholder="[1,1000]"
-                            autocomplete="off" class="layui-input" min="1" max="1000" step="1" lay-affix="number">
+                          <input type="number" lay-verify="required" name="silence_min_len" placeholder="[1,1000]" autocomplete="off" class="layui-input" min="1" max="1000" step="1" lay-affix="number">
                         </div>
                       </div>
-                      <div class="layui-input-inline"  style="width: 142px;">
+                      <div class="layui-input-inline" style="width: 142px;">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
-                          <input type="number" lay-verify="required" name="silence_keep" placeholder="[1,1000]"
-                            autocomplete="off" class="layui-input" min="1" max="1000" step="1" lay-affix="number">
+                          <input type="number" lay-verify="required" name="silence_keep" placeholder="[1,1000]" autocomplete="off" class="layui-input" min="1" max="1000" step="1" lay-affix="number">
                         </div>
                       </div>
                       <div class="layui-form-mid layui-text-em">
-                        <i class="layui-icon layui-icon-tips"
-                          lay-tips="{content: '{{_("请使用sdr组件获取参数")}}', margin: '0 0 0 -10px'}"></i>
+                        <i class="layui-icon layui-icon-tips" lay-tips="{content: '{{_('请使用sdr组件获取参数')}}', margin: '0 0 0 -10px' }"></i>
                       </div>
                     </div>
 
@@ -780,7 +741,7 @@
       var tool = layui.tool;
       var i18n = layui.i18n;
       var $ = layui.$;
-      
+
       i18n.init('{{request.state.lang}}');
 
       var app = JSON.parse('{{ data.app | tojson }}')
@@ -813,7 +774,7 @@
 
       // 表单初始
       $('#align_type_div').toggleClass('layui-hide', form_json.mode_type != 1);
-      $("#suffix").val(form_json.locale.slice(0,2))
+      $("#suffix").val(form_json.locale.slice(0, 2))
       $("#tts_text").val() || $("#tts_text").val(i18n.trans("creatorbox"));
 
       // 表单验证 
@@ -863,10 +824,10 @@
       })
 
       // 视频播放
-      form.on('input-affix(play)', function(data){
+      form.on('input-affix(play)', function (data) {
         var elem = data.elem;
         var video_url = elem.value;
-        if(!video_url){
+        if (!video_url) {
           layer.msg('{{_("请输入音视频路径或链接")}}');
           return elem.focus()
         };
@@ -874,8 +835,8 @@
       });
 
       // 随机种子
-      form.on('input-affix(seed)', function(data){
-          $('input[name="tts_seed"]').val(tool.random());
+      form.on('input-affix(seed)', function (data) {
+        $('input[name="tts_seed"]').val(tool.random());
       });
 
       // 地区选择
@@ -884,7 +845,7 @@
           form_json.locale = data.elem.value;
           form_json.tts_gender = 1;
           // 恢复默认选择
-          $("#suffix").val(form_json.locale.slice(0,2))
+          $("#suffix").val(form_json.locale.slice(0, 2))
           // 恢复默认选择
           $('input[name="tts_gender"][value="1"]').prop('checked', true);
           form.render('radio');
@@ -924,7 +885,11 @@
         data = JSON.stringify(field, null, 2);
         console.debug(field)
         // 确认执行
-        layer.confirm(i18n.trans("确定提交？"), { title: i18n.trans("提示"), icon: 3 }, function (index) {
+        layer.confirm(i18n.trans("确定提交？"), {
+          icon: 3,
+          title: i18n.trans('提示'),
+          btn: [i18n.trans('确定'), i18n.trans('取消')]
+        }, function (index) {
           layer.close(index);
           // 禁用预览
           $("button[lay-on='video_preview']").addClass("layui-btn-disabled").prop("disabled", true);
@@ -1005,7 +970,7 @@
             }
           }
           else if (type == i18n.trans("备份")) {
-            layer.confirm('请选择？', { title: '提示', icon: 3, btn: ['备份', '导入', '取消'] }, function (index) {
+            layer.confirm('请选择？', { icon: 3, title: '提示', btn: ['备份', '导入', '取消'] }, function (index) {
               filename = $("#video_url").val().split(/[/\\]/).pop().split(".")[0];
               cache = layui.data(CREATORBOX)
               cache.version = '{{ data.app.version }}'

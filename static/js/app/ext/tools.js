@@ -136,7 +136,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 			});
 		},
 
-		delids: function (url, callback) {
+		deleteIds: function (url, callback) {
 			var checkStatus = table.checkStatus(identifier);
 			var data = checkStatus.data;
 			var ids = data.map(item => item.id).join(",");

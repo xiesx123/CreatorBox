@@ -271,16 +271,15 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
         form_json.tts_role = data.elem.value
         if ([TTS_EDGE, TTS_AZUR].includes(form_json.tts_provider)) {
             play_azure_sample("role", form_json.tts_role)
-        } 
+        }
     });
 
     // 风格选择
     form.on('select(tts_style_filter)', function (data) {
         form_json.tts_style = data.elem.value
-        form_json.tts_role = data.elem.value
         if ([TTS_EDGE, TTS_AZUR].includes(form_json.tts_provider)) {
-            play_azure_sample("style", form_json.tts_role);
-        } 
+            play_azure_sample("style", form_json.tts_style);
+        }
     });
 
     // 风格强度
@@ -385,7 +384,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                         instruct: form_json.tts_instruct,
                         // other
                         seed: seed,
-                        server:form_json.tts_server,
+                        server: form_json.tts_server,
                     })
                     swapData(0, 0)
                 }, true)
@@ -425,7 +424,11 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
         if (obj.event === "preview") {
             voice_play(data.url);
         } else if (obj.event === "del") {
-            layer.confirm(i18n.transFmt('format.confirm_delete', data.speaker), { title: i18n.trans('提示'), icon: 3 }, function (index) {
+            layer.confirm(i18n.transFmt('format.confirm_delete', data.speaker), {
+                icon: 3,
+                title: i18n.trans('提示'),
+                btn: [i18n.trans('确定'), i18n.trans('取消')]
+            }, function (index) {
                 obj.del();
                 layer.close(index);
                 if (idx < table_json.length) {
