@@ -336,7 +336,7 @@
                         tool.upload("#import", "spk/batch", 'file', 'json', null, function (response) {
                             if (response.code == 0) {
                                 table.reloadData('table', { scrollPos: 'fixed' });
-                                return toast.success(i18n.transFmt("voice_import", response.data), i18n.trans("提示"));
+                                return toast.success(i18n.transFmt("format.voice_import", response.data), i18n.trans("提示"));
                             } else {
                                 return toast.error(response.message, i18n.trans("提示"));
                             }
