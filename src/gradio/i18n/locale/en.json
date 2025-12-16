@@ -83,8 +83,8 @@
     "新对话": "New Chat",
     "是否裁掉头尾静音": "Trim Silent Parts at Start/End",
     "显示位置": "Display Position",
+    "显示语言": "UI Language",
     "更多": "More",
-    "更新": "Update",
     "最小时长 (ms)": "Minimum Duration (ms)",
     "朗读": "Read Aloud",
     "未登录": "Not Logged In",
@@ -97,8 +97,6 @@
     "样式": "Style",
     "格式": "Format",
     "框选模式": "Box selection mode",
-    "检查更新失败...": "Failed to Check for Updates...",
-    "检查更新，请稍后...": "Checking for Updates, Please Wait...",
     "检测器": "Detector",
     "检测阈值 (dBFS)": "Detection Threshold (dBFS)",
     "模型": "Model",
@@ -195,8 +193,10 @@
     "选择掩码": "Mask Selection",
     "选择范围": "Selection Range",
     "透明度": "Transparency",
+    "邮件已发送，请注意查收": "The email has been sent. Please check your inbox.",
     "邮箱": "Email",
     "配音": "Dubbing",
+    "配音语言": "Dubbing Language",
     "重启": "Restart",
     "重启服务失败...": "Failed to Restart Service...",
     "重启服务，请稍后...": "Restarting Service, Please Wait...",
@@ -210,6 +210,5 @@
     "音频识别": "Audio Recognition",
     "预览": "Preview",
     "颜色": "Color",
-    "高度": "Height",
-    "邮件已发送，请注意查收": "The email has been sent. Please check your inbox."
+    "高度": "Height"
 }

@@ -280,7 +280,9 @@ msgstr "请输入字幕文件路径（SRT）"
 
 #: static/templates/speaker.html:79
 msgid "请输入情感"
-msgstr "请输入情感"
+msgstr ""
+"请输入情感. "
+"选项:(angry,disgusted,fearful,happy,neutral,other,sad,surprised,unknown)"
 
 #: static/templates/dubbing.html:465
 msgid "请输入服务地址"
@@ -359,7 +361,7 @@ msgstr "重构"
 
 #: static/templates/speaker.html:98
 msgid "重置"
-msgstr "重启"
+msgstr "重置"
 
 #: static/templates/dubbing.html:614
 msgid "随便写点什么"

@@ -282,7 +282,9 @@ msgstr "Enter subtitle file path (SRT)"
 
 #: static/templates/speaker.html:79
 msgid "请输入情感"
-msgstr "Enter emotion"
+msgstr ""
+"Enter emotion. "
+"options:(angry,disgusted,fearful,happy,neutral,other,sad,surprised,unknown)"
 
 #: static/templates/dubbing.html:465
 msgid "请输入服务地址"
