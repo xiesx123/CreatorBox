@@ -350,43 +350,44 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                 }), function (response) {
                     if (response.code != 0) {
                         return toast.error(response.message, i18n.trans('提示'));
+                    } else {
+                        toast.info(output, i18n.trans('语音试听'))
+                        console.debug(response.data)
+                        const url = '/file/local?url=' + response.data.path;
+                        const duration = response.data.duration;
+                        const seed = response.data.seed;
+                        if (form_json.tts_voice != "0") {
+                            voice_play(url);
+                        }
+                        table_json.unshift({
+                            provider: find_provider(form_json.tts_provider).provider,
+                            // 
+                            model: form_json.tts_model,
+                            voice: form_json.tts_voice,
+                            type: form_json.tts_type,
+                            gender: form_json.tts_gender,
+                            locale: form_json.tts_locale,
+                            speaker: form_json.tts_speaker,
+                            volume: form_json.tts_volume,
+                            rate: form_json.tts_rate,
+                            pitch: form_json.tts_pitch,
+                            remarks: form_json.tts_remarks,
+                            text: form_json.tts_text,
+                            // 
+                            url: url,
+                            duration: duration,
+                            // azure
+                            role: form_json.tts_role,
+                            style: form_json.tts_style,
+                            styledegree: form_json.tts_styledegree,
+                            // cosy
+                            instruct: form_json.tts_instruct,
+                            // other
+                            seed: seed,
+                            server: form_json.tts_server,
+                        })
+                        swapData(0, 0)
                     }
-                    toast.info(output, i18n.trans('语音试听'))
-                    console.debug(response.data)
-                    const url = '/file/local?url=' + response.data.path;
-                    const duration = response.data.duration;
-                    const seed = response.data.seed;
-                    if (form_json.tts_voice != "0") {
-                        voice_play(url);
-                    }
-                    table_json.unshift({
-                        provider: find_provider(form_json.tts_provider).provider,
-                        // 
-                        model: form_json.tts_model,
-                        voice: form_json.tts_voice,
-                        type: form_json.tts_type,
-                        gender: form_json.tts_gender,
-                        locale: form_json.tts_locale,
-                        speaker: form_json.tts_speaker,
-                        volume: form_json.tts_volume,
-                        rate: form_json.tts_rate,
-                        pitch: form_json.tts_pitch,
-                        remarks: form_json.tts_remarks,
-                        text: form_json.tts_text,
-                        // 
-                        url: url,
-                        duration: duration,
-                        // azure
-                        role: form_json.tts_role,
-                        style: form_json.tts_style,
-                        styledegree: form_json.tts_styledegree,
-                        // cosy
-                        instruct: form_json.tts_instruct,
-                        // other
-                        seed: seed,
-                        server: form_json.tts_server,
-                    })
-                    swapData(0, 0)
                 }, true)
             }
         }
