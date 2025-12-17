@@ -75,7 +75,7 @@
                   <i style="font-size: 18px" class="layui-icon layui-icon-code-circle"></i> {{_("数据编辑")}}
                 </a>
               </dd>
-              <dd><a data-path="/player?lang={{request.state.lang}}&url=webapp\sample\video_amazing.mp4&autoplay=true" href="javascript:;">
+              <dd><a data-path="/player?lang={{request.state.lang}}&url=webapp\sample\video_draft.mp4&autoplay=true" href="javascript:;">
                   <i style="font-size: 18px" class="layui-icon layui-icon-play"></i> {{_("视频播放")}}
                 </a>
               </dd>
@@ -101,7 +101,7 @@
                   <div class="layui-colla-content layui-show">
 
                     <div class="layui-form-item">
-                      <label class="layui-form-label" id="video_upload" lay-tips="{content: '{{_('上传')}}', margin: '0 0 0 -10px' }">{{_("视频")}}
+                      <label class="layui-form-label" id="video_upload" lay-tips="{content: '{{_('上传')}}', margin: '0 0 0 -10px' }">{{_("文件")}}
                         <span class="layui-badge-dot layui-bg-green"></span></label>
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
@@ -157,7 +157,7 @@
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-note"></i> </div>
-                          <input id="suffix" type="text" name="suffix" lay-verify="required" placeholder='{{_("请输入后缀")}}' autocomplete="off" class="layui-input" lay-affix="error">
+                          <input id="suffix" type="text" name="suffix" lay-verify="required" placeholder='{{_("请输入后缀")}}' autocomplete="off" class="layui-input" lay-affix="clear">
                         </div>
                       </div>
                     </div>
@@ -211,7 +211,7 @@
                         <div class="layui-input-block">
                           <div class="layui-input-wrap">
                             <div class="layui-input-prefix"> <i class="layui-icon layui-icon-file-b"></i> </div>
-                            <input id="subtitle_file" type="text" name="subtitle_file" lay-verify="subtitle_srt" placeholder='{{_("请输入字幕文件路径（SRT）")}}' autocomplete="off" class="layui-input" lay-affix="error">
+                            <input id="subtitle_file" type="text" name="subtitle_file" lay-verify="subtitle_srt" placeholder='{{_("请输入字幕文件路径（SRT）")}}' autocomplete="off" class="layui-input" lay-affix="clear">
                           </div>
                         </div>
                       </div>
@@ -407,7 +407,7 @@
                       <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">{{_("提示词")}}</label>
                         <div class="layui-input-block">
-                          <textarea name="llm_prompt" placeholder='{{_("提示词示例")}}' lay-affix="error" class="layui-textarea" style="min-height: 214px"></textarea>
+                          <textarea name="llm_prompt" placeholder='{{_("提示词示例")}}' lay-affix="clear" class="layui-textarea" style="min-height: 214px"></textarea>
                         </div>
                       </div>
 
@@ -462,7 +462,7 @@
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-website"></i> </div>
-                          <input type="text" name="tts_server" placeholder="{{ _('请输入服务地址')}}" autocomplete="off" class="layui-input" lay-affix="error" disabled>
+                          <input type="text" name="tts_server" placeholder="{{ _('请输入服务地址')}}" autocomplete="off" class="layui-input" lay-affix="clear" disabled>
                         </div>
                       </div>
                     </div>
@@ -472,7 +472,7 @@
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-template-1"></i> </div>
-                          <input type="text" name="tts_model" placeholder="{{ _('请输入模型名称')}}" autocomplete="off" class="layui-input" lay-affix="error" disabled>
+                          <input type="text" name="tts_model" placeholder="{{ _('请输入模型名称')}}" autocomplete="off" class="layui-input" lay-affix="clear" disabled>
                         </div>
                       </div>
                     </div>
@@ -591,7 +591,7 @@
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-note"></i> </div>
-                          <input name="tts_instruct" placeholder='{{_("【地区方言】、【角色扮演】、【说话风格】等等")}}' lay-affix="error" class="layui-input"></input>
+                          <input name="tts_instruct" placeholder='{{_("【地区方言】、【角色扮演】、【说话风格】等等")}}' lay-affix="clear" class="layui-input"></input>
                         </div>
                       </div>
                     </div>
@@ -611,7 +611,7 @@
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-note"></i> </div>
-                          <input name="tts_remarks" placeholder='{{_("随便写点什么")}}' lay-affix="error" class="layui-input"></input>
+                          <input name="tts_remarks" placeholder='{{_("随便写点什么")}}' lay-affix="clear" class="layui-input"></input>
                         </div>
                       </div>
                     </div>
@@ -620,7 +620,7 @@
                       <label class="layui-form-label" id="tts_preview" lay-tips="{content: '{{_('点击试听')}}', margin: '0 0 0 -10px' }">{{
                         _("试听") }} <i class="layui-icon layui-icon-headset"></i></label>
                       <div class="layui-input-block">
-                        <textarea id="tts_text" name="tts_text" placeholder='{{_("请输入试听文本")}}' lay-verify="tts_text" lay-reqtext='{{_("请输入试听文本")}}' lay-affix="error" class="layui-textarea tts_text" maxlength="1000"></textarea>
+                        <textarea id="tts_text" name="tts_text" placeholder='{{_("请输入试听文本")}}' lay-verify="tts_text" lay-reqtext='{{_("请输入试听文本")}}' lay-affix="clear" class="layui-textarea tts_text" maxlength="1000"></textarea>
                       </div>
                     </div>
 

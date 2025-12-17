@@ -158,13 +158,17 @@ msgstr "Action"
 msgid "数据编辑"
 msgstr "Data Editor"
 
+#: static/templates/dubbing.html:104
+msgid "文件"
+msgstr "File"
+
 #: static/templates/speaker.html:84
 msgid "文本"
 msgstr "Text"
 
 #: static/templates/dubbing.html:461
 msgid "服务地址"
-msgstr ""
+msgstr "Api"
 
 #: static/templates/speaker.html:93
 msgid "查询"
@@ -223,7 +227,7 @@ msgstr "Background Volume"
 msgid "草稿"
 msgstr "Draft"
 
-#: static/templates/dubbing.html:104 static/templates/player.html:36
+#: static/templates/player.html:36
 msgid "视频"
 msgstr "Video"
 
@@ -288,7 +292,7 @@ msgstr ""
 
 #: static/templates/dubbing.html:465
 msgid "请输入服务地址"
-msgstr ""
+msgstr "Enter api url"
 
 #: static/templates/dubbing.html:475 static/templates/dubbing.html:812
 msgid "请输入模型名称"
