@@ -798,7 +798,6 @@ dependencies = [
     { name = "click" },
     { name = "craft-detector" },
     { name = "edge-tts" },
-    { name = "elevenlabs" },
     { name = "fast-langdetect" },
     { name = "fastapi" },
     { name = "fastapi-profiler-lite" },
@@ -867,7 +866,6 @@ requires-dist = [
     { name = "click", specifier = "==8.3.1" },
     { name = "craft-detector", specifier = "==0.2.1" },
     { name = "edge-tts", specifier = "==7.2.7" },
-    { name = "elevenlabs", specifier = "==2.22.1" },
     { name = "fast-langdetect", specifier = "==1.0.0" },
     { name = "fastapi", specifier = "==0.124.4" },
     { name = "fastapi-profiler-lite", specifier = "==0.3.4" },
@@ -1161,23 +1159,6 @@ source = { registry = "https://pypi.tuna.tsinghua.edu.cn/simple" }
 sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/e5/81/df4fbe24dff8ba3934af99044188e20a98ed441ad17a274539b74e82e126/einops-0.8.1.tar.gz", hash = "sha256:de5d960a7a761225532e0f1959e5315ebeafc0cd43394732f103ca44b9837e84", size = 54805, upload-time = "2025-02-09T03:17:00.434Z" }
 wheels = [
     { url = "https://pypi.tuna.tsinghua.edu.cn/packages/87/62/9773de14fe6c45c23649e98b83231fffd7b9892b6cf863251dc2afa73643/einops-0.8.1-py3-none-any.whl", hash = "sha256:919387eb55330f5757c6bea9165c5ff5cfe63a642682ea788a6d472576d81737", size = 64359, upload-time = "2025-02-09T03:17:01.998Z" },
-]
-
-[[package]]
-name = "elevenlabs"
-version = "2.22.1"
-source = { registry = "https://pypi.tuna.tsinghua.edu.cn/simple" }
-dependencies = [
-    { name = "httpx" },
-    { name = "pydantic" },
-    { name = "pydantic-core" },
-    { name = "requests" },
-    { name = "typing-extensions" },
-    { name = "websockets" },
-]
-sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/e1/82/6372ab2b1956223ba587ffa0da2aefd128961f7761af5681a40ccf74c973/elevenlabs-2.22.1.tar.gz", hash = "sha256:c45254dce38702e4775d6401ad5b3e4e3d12c4f9a3d55747258e0b13f01135e4", size = 419622, upload-time = "2025-11-11T11:41:41.55Z" }
-wheels = [
-    { url = "https://pypi.tuna.tsinghua.edu.cn/packages/d5/18/ed55f46a5d25f705e623f07decc8309294fe09b6e08149604cde2b519ae8/elevenlabs-2.22.1-py3-none-any.whl", hash = "sha256:3f3cfec2cca6959497e0d35ab039bbf793fd7f66f802322b7ed9234be2b97820", size = 1123688, upload-time = "2025-11-11T11:41:39.855Z" },
 ]
 
 [[package]]

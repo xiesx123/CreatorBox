@@ -12,7 +12,6 @@ dependencies = [
     "click==8.3.1",
     "craft-detector==0.2.1",
     "edge-tts==7.2.7",
-    "elevenlabs==2.22.1",
     "fast-langdetect==1.0.0",
     "fastapi==0.124.4",
     "fastapi-profiler-lite==0.3.4",
