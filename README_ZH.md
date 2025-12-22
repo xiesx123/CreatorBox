@@ -49,9 +49,8 @@
     <!-- 三体 -->
     <tbody>
         <tr>
-            <td align="center"><video src="https://github.com/user-attachments/assets/2ef251a3-deb7-4498-8d7c-b91d3fa65794" width="120"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/fec0e803-6289-4b90-8628-fc011bbb2147" width="120"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/18915119-26da-42c3-bdf8-049965d51bfe" width="120"></video></td>
+            <td align="center"><a href="https://www.bilibili.com/video/BV1rumqBZECW?t=403" target="_blank"><img src="https://img.youtube.com/vi/mjjJF1qA30I/hqdefault.jpg" width="120" /></a></td>
+            <td align="center"><a href="https://www.bilibili.com/video/BV1rumqBZECW?t=0.0" target="_blank"><img src="https://img.youtube.com/vi/mjjJF1qA30I/hqdefault.jpg" width="120" /></a></td>
         </tr>
     </tbody>
     <!-- 大话西游 -->
