@@ -58,7 +58,7 @@
     <!-- 导航区域 -->
     <div class="layui-side">
       <div class="layui-side-scroll">
-        <div class="layui-logo ">{{ data.app.title }}</div>
+        <div class="layui-logo "></div>
         <ul class="layui-nav layui-nav-tree layui-bg-gray" lay-unselect lay-filter="nav-side" id="ws-nav-side">
           <li class="layui-nav-item layui-nav-itemed">
             <a href="javascript:;">{{_("功能")}}</a>
@@ -960,7 +960,7 @@
               return layer.msg('{{_("请输入后缀")}}', { icon: 3 });
             }
             title = `{{ data.app.title }} - ${filename}_${suf}`;
-            util.openWin({ url: `editor?title=${title}&upload=file/upload&remote=file/local?url=webapp/temp/${filename}/${filename}_${suf}.json` });
+            util.openWin({ url: `editor?title=${title}&upload=file/upload&remote=file/local?url=webapp/dubb/${filename}/${suf}/${filename}.json` });
           }
           else if (type == i18n.trans("预览")) {
             if (localStorage.getItem('task')) {
