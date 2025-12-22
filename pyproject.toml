@@ -29,7 +29,6 @@ dependencies = [
     "gradio[mcp]==5.49.1",
     "json5==0.12.1",
     "language-tags==1.2.0",
-    "librosa==0.11.0",
     "litellm[caching]==1.80.10",
     "loguru==0.7.3",
     "nltk==3.9.2",
