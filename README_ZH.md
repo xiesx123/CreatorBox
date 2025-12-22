@@ -45,21 +45,32 @@
 
 ### 视频翻译配音
 
+#### 翻译
 <table>
+    <thead>
+        <tr>
+            <th align="center">zh</th>
+            <th align="center">en</th>
+        </tr>
+    </thead>
     <!-- 三体 -->
     <tbody>
         <tr>
-            <td align="center"><a href="https://www.bilibili.com/video/BV1rumqBZECW?t=403" target="_blank"><img src="https://img.youtube.com/vi/mjjJF1qA30I/hqdefault.jpg" width="120" /></a></td>
-            <td align="center"><a href="https://www.bilibili.com/video/BV1rumqBZECW?t=0.0" target="_blank"><img src="https://img.youtube.com/vi/mjjJF1qA30I/hqdefault.jpg" width="120" /></a></td>
+            <td align="center">
+                <a href="https://www.bilibili.com/video/BV1rumqBZECW?t=403" target="_blank">
+                    <img src="https://i0.hdslb.com/bfs/archive/50d5d4cf67f4840c8bd969c64c13af093419eaeb.jpg" />
+                </a>
+            </td>
+            <td align="center"><a href="https://www.bilibili.com/video/BV1rumqBZECW?t=0.0" target="_blank"><img src="https://i0.hdslb.com/bfs/archive/50d5d4cf67f4840c8bd969c64c13af093419eaeb.jpg" /></a></td>
         </tr>
     </tbody>
-    <!-- 大话西游 -->
+    <!-- 大话西游 
     <tbody>
         <tr>
             <td align="center"><video src="https://github.com/user-attachments/assets/b6e30353-5b08-4c12-8407-8d759233d193" width="200"></video></td>
             <td align="center"><video src="https://github.com/user-attachments/assets/f57363c5-3110-4b1b-be3f-769c0e65fe9a" width="200"></video></td>
         </tr>
-    </tbody>
+    </tbody>-->
     <!-- 求职面试 
     <tbody>
         <tr>
@@ -74,6 +85,16 @@
             <td align="center"><video src="https://github.com/user-attachments/assets/e9424df6-0986-4118-af82-b5f140398471"></video></td>
         </tr>
     </tbody>-->
+</table>
+
+#### 配音
+<table>
+    <thead>
+        <tr>
+            <th align="center">en</th>
+            <th align="center">zh</th>
+        </tr>
+   </thead>
     <!-- 商品介绍-->
     <tbody>
         <tr>
