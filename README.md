@@ -123,7 +123,7 @@
     <tbody>
         <tr>
             <td align="center"><video src="https://github.com/user-attachments/assets/e99af835-57e6-4c27-8212-83e74eba6368" width="120"></video></td>
-            <td align="center"><img src="https://github.com/user-attachments/assets/726accaf-fa28-47e3-8e27-e4bb7d7c1bb0" width="120"/></td>      
+            <td align="center"><img src="https://github.com/user-attachments/assets/726accaf-fa28-47e3-8e27-e4bb7d7c1bb0"/></td>      
             <td align="center"><video src="https://github.com/user-attachments/assets/3ba3ef62-c8a3-4857-ae0b-ebff89c2c713" width="120"></video></td>
         </tr>
     </tbody>
