@@ -128,7 +128,7 @@ import{_ as n,C as l,c as h,o as t,j as i,G as p,aI as k,a as e}from"./chunks/fr
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">           OPENAI_API_KEY:</span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">           GEMINI_API_KEY:</span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">            AZURE_API_KEY:</span></span>
-<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">       ELEVENLABS_API_KEY:</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">       GENAIPRO_API_KEY:</span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> HUGGINGFACEHUB_API_TOKEN:</span></span>
 <span class="line"></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Network</span></span>
