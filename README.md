@@ -7,7 +7,7 @@
 [![GitHub Release](https://img.shields.io/github/tag/xiesx123/CreatorBox.svg?logo=github&label=Release&color=0078D7)](https://github.com/xiesx123/CreatorBox/releases)
 [![GitHub Downloads](https://img.shields.io/github/downloads/xiesx123/CreatorBox/total?logo=github&label=Downloads&color=0078D7)](https://github.com/xiesx123/CreatorBox/releases)
 [![GitHub Stars](https://img.shields.io/github/stars/xiesx123/CreatorBox?logo=github&style=flat&label=Stars&color=0078D7)](https://github.com/xiesx123/CreatorBox/stargazers)
-[![Kaggle](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fwww.kaggle.com%2Fapi%2Fi%2Fkernels.KernelsService%2FGetUserKernelAchievements%3FuserId%3D24459621&query=totalForks&logo=kaggle&logoSize=20&label=Kaggle&color1=20BEFF)](https://www.kaggle.com/code/xiesx123)
+[![Kaggle](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fwww.kaggle.com%2Fapi%2Fi%2Fkernels.KernelsService%2FGetUserKernelAchievements%3FuserId%3D24459621&query=totalForks&logo=kaggle&logoSize=20&label=Kaggle&color1=20BEFF)](https://www.kaggle.com/xiesx123)
 [![Discord](https://img.shields.io/badge/Discord-Online-44CC11?logo=discord&logoColor=white&)](https://discord.gg/kt6JWax3P6)
 [![VitePress](https://img.shields.io/badge/VitePress-Doc-3E63DD?logo=markdown)](https://xiesx123.github.io/CreatorBox)
 
