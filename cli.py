@@ -80,12 +80,13 @@ def start(host, port, debug, browser, ngrok, ngrok_host, ngrok_port):
 @click.option("--share", is_flag=True, default=False, show_default=True, help="Share the extension publicly after installation")
 def install(name, version, start, port, share):
     try:
-        from src.utils.cbinstaller import Installer
+        from src.app.launcher import Launcher
 
-        kwargs = {"share": share}
+        kwargs = {"pyv": version, "share": share}
         if port is not None:
             kwargs["port"] = port
-        installer = Installer.builder(name, version, **kwargs)
+
+        installer = Launcher.builder(name, **kwargs)
         installer.create()
         click.echo(f"📦 Installing extension '{name}'...")
         installer.install()
