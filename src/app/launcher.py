@@ -10,6 +10,7 @@ from src.utils.cblauncher import (
     IOPaintLauncher,
     LauncherProvider,
     StableDiffusionLauncher,
+    VoxCPMLauncher,
 )
 
 
@@ -27,6 +28,8 @@ class Launcher:
             return IndexTTSLauncher(project, **kwargs)
         if project.lower() == "gpt_sovits":
             return GptSovitsLauncher(project, **kwargs)
+        if project.lower() == "voxcpm":
+            return VoxCPMLauncher(project, **kwargs)
         else:
             raise RuntimeError(message=f"not support {project} extension")
 
