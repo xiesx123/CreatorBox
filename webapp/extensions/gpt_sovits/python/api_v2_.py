@@ -566,7 +566,7 @@ async def set_sovits_weights(weights_path: str = None):
 
 @APP.get("/")
 def index():
-    return {"code":0,"message":"install success , only api call"}
+    return {"code":0,"message":"install success, only api call"}
     
 if __name__ == "__main__":
     try:

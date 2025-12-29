@@ -1,0 +1,6 @@
+{
+    "cfg_value_input": 2,
+    "inference_timesteps_input": 10,
+    "do_normalize": false,
+    "denoise": false
+}
