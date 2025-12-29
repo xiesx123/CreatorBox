@@ -29,7 +29,7 @@ dependencies = [
     "torchaudio==2.6.0",
     "transformers==4.57.1",
     "einops",
-    "gradio<6",
+    "gradio==5.50.0",
     "inflect",
     "addict",
     "wetext",
