@@ -13,3 +13,6 @@
 [submodule "extensions/gpt_sovits"]
 	path = extensions/gpt_sovits
 	url = https://github.com/RVC-Boss/GPT-SoVITS.git
+[submodule "extensions/voxcpm"]
+	path = extensions/voxcpm
+	url = https://github.com/OpenBMB/VoxCPM.git
