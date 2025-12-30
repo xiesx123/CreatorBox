@@ -776,7 +776,6 @@
 
       // 表单初始
       $('#align_type_div').toggleClass('layui-hide', form_json.mode_type != 1);
-      $("#suffix").val(form_json.locale.slice(0, 2))
       $("#tts_text").val() || $("#tts_text").val(i18n.trans("creatorbox"));
 
       // 表单验证 
@@ -846,8 +845,6 @@
         if (data.elem.value != "") {
           form_json.locale = data.elem.value;
           form_json.tts_gender = 1;
-          // 恢复默认选择
-          $("#suffix").val(form_json.locale.slice(0, 2))
           // 恢复默认选择
           $('input[name="tts_gender"][value="1"]').prop('checked', true);
           form.render('radio');

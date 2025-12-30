@@ -211,7 +211,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
         var selectedOption = data.elem.options[data.elem.selectedIndex]; // 获取选中的 option
         var selectedOptgroup = selectedOption.closest('optgroup');  // 获取该选项所在的 optgroup
         form_json.tts_voice = data.elem.value;
-        form_json.tts_type = selectedOptgroup.id
+        form_json.tts_voice_type = selectedOptgroup.id
         form_json.tts_role = null
         form_json.tts_style = null
         const cleaned = selectedOption.text.replace(/^\d+\./, "").trim();
@@ -334,10 +334,12 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                     "volume": form_json.tts_volume,
                     "rate": form_json.tts_rate,
                     "pitch": form_json.tts_pitch,
-                    "remarks": form_json.tts_remarks,
                     "text": form_json.tts_text,
                     "output": output,
                     "extra": {
+                        "file": $("#video_url").val(),
+                        "suffix": $("#suffix").val(),
+                        "server": form_json.tts_server,
                         "gender": parseInt(form_json.tts_gender),
                         // azure
                         "role": form_json.tts_role,
@@ -347,9 +349,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                         "instruct": form_json.tts_instruct,
                         // other
                         "seed": parseInt(form_json.tts_seed),
-                        "server": form_json.tts_server,
-                        "file": $("#video_url").val(),
-                        "suffix": $("#suffix").val()
+                        "remarks": form_json.tts_remarks,
                     }
                 }), function (response) {
                     if (response.code != 0) {
@@ -364,22 +364,22 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                             voice_play(url);
                         }
                         table_json.unshift({
+                            //
                             provider: find_provider(form_json.tts_provider).provider,
-                            // 
                             model: form_json.tts_model,
-                            voice: form_json.tts_voice,
-                            type: form_json.tts_type,
-                            gender: form_json.tts_gender,
                             locale: form_json.tts_locale,
-                            speaker: form_json.tts_speaker,
+                            voice: form_json.tts_voice, voice_type: form_json.tts_voice_type,
                             volume: form_json.tts_volume,
                             rate: form_json.tts_rate,
                             pitch: form_json.tts_pitch,
-                            remarks: form_json.tts_remarks,
                             text: form_json.tts_text,
                             // 
                             url: url,
                             duration: duration,
+                            // 
+                            server: form_json.tts_server,
+                            gender: form_json.tts_gender,
+                            speaker: form_json.tts_speaker,
                             // azure
                             role: form_json.tts_role,
                             style: form_json.tts_style,
@@ -388,7 +388,8 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                             instruct: form_json.tts_instruct,
                             // other
                             seed: seed,
-                            server: form_json.tts_server,
+                            remarks: form_json.tts_remarks,
+
                         })
                         swapData(0, 0)
                     }
@@ -409,7 +410,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
             cols: [[
                 { title: 'spk', width: 60, align: "center", templet: d => '<div title="' + d.voice + ' (' + d.seed + ')">' + d.LAY_INDEX + '</div>' },
                 { title: i18n.trans('模型'), width: 80, align: "center", field: 'provider', templet: d => '<div title="' + d.model + '">' + d.provider + '</div>' },
-                { title: i18n.trans('类型'), width: 80, align: "center", field: 'type', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + enums.voice(d.type) + '</div>' },
+                { title: i18n.trans('类型'), width: 80, align: "center", field: 'type', templet: d => '<div title="' + d.text + ' (' + d.remarks + ') ">' + enums.voice(d.voice_type) + '</div>' },
                 { title: i18n.trans('性别'), width: 80, align: "center", field: 'gender', templet: d => '<div title="' + d.text + ' (' + d.remarks + ')">' + (d.gender == 1 ? i18n.trans('男') : d.gender == 2 ? i18n.trans('女') : i18n.trans('未知')) + '</div>' },
                 { title: i18n.trans('地区'), width: 80, field: 'locale', templet: d => '<div title="' + d.text + ' (' + d.remarks + ')">' + d.locale + '</div>' },
                 { title: i18n.trans('音色'), fixed: 'right', field: 'speaker', templet: d => '<div title="' + d.text + ' (' + d.remarks + ')">' + d.speaker + '</div>' },
