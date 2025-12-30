@@ -28,6 +28,6 @@
     "gfpgan_device": "cpu",
     "enable_restoreformer": false,
     "restoreformer_device": "cpu",
-    "model_dir": "D:\\Projects\\fast\\fast-creator\\models",
+    "model_dir": "",
     "mode": 0
 }
