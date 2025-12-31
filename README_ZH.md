@@ -34,18 +34,18 @@
 
 - 🎬 **内容创作**：提升创作效率，释放创作潜力
 
-- 🧩 **应用组件**：自由定制，支持视频掩码修复、水印去除等
+- 🧩 **应用组件**：支持 视频掩码修复、视频水印去除、视频字幕提取、人声音轨分离.等
 
-- 📤 **扩展能力**：支持 IOPaint、Stable Diffusion、CosyVoice、GPTSoVITS 等
+- 📤 **扩展能力**：支持 IOPaint、VoxCPM1.5、Index-TTS2、CosyVoice3、GPT-SoVITS4.等
 
-- 🚀 **独立部署**：灵活部署，支持本地、服务器、Colab，保障数据安全
-
+- 🚀 **独立部署**：灵活部署，支持本地、服务器、Kaggle、Colab，保障数据安全
 
 ## 📥 示例
 
 ### 视频翻译配音
 
 #### 翻译
+
 <table>
     <thead>
         <tr>
@@ -88,6 +88,7 @@
 </table>
 
 #### 配音
+
 <table>
     <thead>
         <tr>
@@ -144,7 +145,7 @@
 
 ![Status](https://repobeats.axiom.co/api/embed/afc79d9210faea79913ee2e2c7e776886295e052.svg)
 
-<!-- 
+<!--
 ## ⭐ Star History
 
 <a href="https://www.star-history.com/#xiesx123/CreatorBox&Date">

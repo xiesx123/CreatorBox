@@ -35,17 +35,18 @@
 
 - 🎥 **Content Creators**: Enhance creative efficiency and unleash creative potential.
 
-- 🧩 **App Components**：Fully customizable, supports video mask inpaint, watermark removal, and more
+- 🧩 **App Components**：Supports Video Mask Inpaint, Video Subtitle Extractor, Ultimate Vocal Remover, etc.
 
-- 📤 **Extended Capabilities**：Supports IOPaint, Stable Diffusion, CosyVoice, GPTSoVITS, etc.
+- 📤 **Extended Capabilities**：Supports IOPaint, VoxCPM1.5, Index-TTS2, CosyVoice3, GPT-SoVITS4, etc.
 
-- 🚀 **Independent Deployment**：Flexible deployment, supports local, server, and Colab, ensuring data security
+- 🚀 **Independent Deployment**：Flexible deployment, supports local, server, Kaggle and Colab, ensuring data security
 
 ## 📥 Example
 
 ### Video Translation and Dubbing
 
 #### Translation
+
 <table>
     <thead>
         <tr>
@@ -92,6 +93,7 @@
 </table>
 
 #### Dubbing
+
 <table>
     <thead>
         <tr>
