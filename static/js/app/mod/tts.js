@@ -14,10 +14,11 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
     let TTS_EDGE = "edge"
     let TTS_AZUR = "azure"
     let TTS_ELAB = "elab"
-    let TTS_COSY = "cosy"
-    let TTS_ITTS = "itts"
-    let TTS_GTTS = "gtts"
     let TTS_VOXM = "voxm"
+    let TTS_ITTS = "itts"
+    let TTS_COSY = "cosy"
+    let TTS_GTTS = "gtts"
+
 
     // 数据
     var form_json = {}
@@ -254,16 +255,16 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
         else if (form_json.tts_provider == TTS_ELAB) {
             play_elab_sample()
         }
-        else if (form_json.tts_provider == TTS_COSY) {
+        else if (form_json.tts_provider == TTS_VOXM) {
             play_spk_sample()
         }
         else if (form_json.tts_provider == TTS_ITTS) {
             play_spk_sample()
         }
-        else if (form_json.tts_provider == TTS_GTTS) {
+        else if (form_json.tts_provider == TTS_COSY) {
             play_spk_sample()
         }
-        else if (form_json.tts_provider == TTS_VOXM) {
+        else if (form_json.tts_provider == TTS_GTTS) {
             play_spk_sample()
         }
         // 渲染页面
@@ -494,10 +495,10 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                 azure: $('#azure_div'),
                 edge: $('#edge_div'),
                 elab: $('#elab_div'),
-                cosy: $('#cosy_div'),
-                itts: $('#itts_div'),
-                gtts: $('#gtts_div'),
                 voxm: $('#voxm_div'),
+                itts: $('#itts_div'),
+                cosy: $('#cosy_div'),
+                gtts: $('#gtts_div'),
 
                 ontRate: $('#opt_rate'),
                 optPitch: $('#opt_pitch'),
@@ -512,14 +513,14 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
             Object.values(divs).forEach(div => div.addClass('layui-hide'));
             if (provider in divs) {
                 divs[provider].removeClass('layui-hide');
-                divs.ontRate.toggleClass('layui-hide', ![TTS_EDGE, TTS_AZUR, TTS_ELAB, TTS_COSY, TTS_GTTS, TTS_VOXM].includes(provider));
+                divs.ontRate.toggleClass('layui-hide', ![TTS_EDGE, TTS_AZUR, TTS_ELAB, TTS_COSY, TTS_GTTS].includes(provider));
                 divs.optPitch.toggleClass('layui-hide', ![TTS_EDGE, TTS_AZUR].includes(provider));
                 divs.optRole.toggleClass('layui-hide', ![TTS_AZUR].includes(provider));
                 divs.optStyle.toggleClass('layui-hide', ![TTS_AZUR].includes(provider));
                 divs.optStyleDegree.toggleClass('layui-hide', ![TTS_AZUR].includes(provider));
                 divs.optInstruct.toggleClass('layui-hide', ![].includes(provider));
-                divs.optSeed.toggleClass('layui-hide', ![TTS_ELAB, TTS_COSY, TTS_ITTS, TTS_GTTS].includes(provider));
-                divs.optServer.toggleClass('layui-hide', ![TTS_COSY, TTS_ITTS, TTS_GTTS, TTS_VOXM].includes(provider));
+                divs.optSeed.toggleClass('layui-hide', ![TTS_ELAB, TTS_ITTS, TTS_COSY, TTS_GTTS].includes(provider));
+                divs.optServer.toggleClass('layui-hide', ![TTS_VOXM, TTS_ITTS, TTS_COSY, TTS_GTTS].includes(provider));
             }
             $('input[name="tts_model"]').prop("disabled", !model);
             $('input[name="tts_server"]').prop("disabled", !server);
