@@ -214,5 +214,11 @@
     "音频识别": "Audio Recognition",
     "预览": "Preview",
     "颜色": "Color",
-    "高度": "Height"
+    "高度": "Height",
+    "请输入密钥": "Please Enter Key",
+    "可用性测试": "Availability Test",
+    "测试": "Test",
+    "密钥": "Key",
+    "测试失败": "Test Failed",
+    "测试成功": "Test Successful"
 }

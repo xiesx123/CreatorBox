@@ -6,6 +6,19 @@
     display: none !important;
 }
 
+/* btn */
+.btn-wrap {
+    overflow: hidden;
+}
+
+.scale-btn {
+    transition: transform 0.15s ease;
+}
+
+.scale-btn:hover {
+    transform: scale(1.05);
+}
+
 /* table */
 #output-table {
     overflow-x: hidden !important;
