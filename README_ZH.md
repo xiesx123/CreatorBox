@@ -36,7 +36,7 @@
 
 - 🧩 **应用组件**：支持 视频掩码修复、视频水印去除、视频字幕提取、人声音轨分离.等
 
-- 📤 **扩展能力**：支持 IOPaint、VoxCPM1.5、Index-TTS2、CosyVoice3、GPT-SoVITS4.等
+- 📤 **扩展能力**：支持 IOPaint、VoxCPM1.5、IndexTTS2、CosyVoice3、GPT-SoVITS4.等
 
 - 🚀 **独立部署**：灵活部署，支持本地、服务器、Kaggle、Colab，保障数据安全
 
