@@ -144,14 +144,6 @@
                       </div>
                     </div>
 
-                    <div class="layui-form-item" pane>
-                      <label class="layui-form-label">{{_("选项")}}</label>
-                      <div class="layui-input-block">
-                        <input type="checkbox" name="preview" title='{{_("预览")}}'>
-                        <input type="checkbox" name="rebuild" title='{{_("重构")}}'>
-                      </div>
-                    </div>
-
                     <div class="layui-form-item">
                       <label class="layui-form-label">{{_("后缀")}}</label>
                       <div class="layui-input-block">
@@ -300,22 +292,7 @@
                       </div>
 
                     </div>
-
-                    <div class="layui-form-item" pane>
-                      <label class="layui-form-label">{{_("音轨分离")}}</label>
-                      <div class="layui-input-block">
-                        <div class="layui-input-wrap">
-                          <div class="layui-input-prefix"> <i class="layui-icon layui-icon-template-1"></i> </div>
-                          <select name="uvr_model" lay-search>
-                            <option value="">{{_("选择或搜索")}}</option>
-                            {% for item in data.asr.uvrmodels %}
-                            <option value="{{ item }}">{{ item }}</option>
-                            {% endfor %}
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-
+                     
                     <div class="layui-form-item" pane>
                       <label class="layui-form-label">{{_("声纹对齐")}}</label>
                       <div class="layui-input-block">
@@ -404,10 +381,17 @@
 
                     <div class="layui-col-md12 layui-hide" id="llm_div">
 
-                      <div class="layui-form-item layui-form-text">
-                        <label class="layui-form-label">{{_("提示词")}}</label>
+                      <div class="layui-form-item pane">
+                        <label class="layui-form-label">{{_("提示词模版")}}</label>
                         <div class="layui-input-block">
-                          <textarea name="llm_prompt" placeholder='{{_("提示词示例")}}' lay-affix="clear" class="layui-textarea" style="min-height: 214px"></textarea>
+                          <input type="text" name="llm_prompt_id" placeholder='{{_("请输入提示词模版ID")}}' autocomplete="off" class="layui-input" lay-affix="clear">
+                        </div>
+                      </div>
+
+                      <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">{{_("自定义提示词模版")}}</label>
+                        <div class="layui-input-block">
+                          <textarea name="llm_prompt_custom" placeholder='{{_("提示词模版自定义示例")}}' lay-affix="clear" class="layui-textarea" style="min-height: 162px"></textarea>
                         </div>
                       </div>
 
@@ -547,7 +531,7 @@
                     <div class="layui-col-md12 layui-hide" id="gtts_div"></div>
                     <!-- voxm -->
                     <div class="layui-col-md12 layui-hide" id="voxm_div"></div>
-                    
+
                     <!-- opt -->
                     <div class="layui-form-item layui-hide" pane id="opt_role" lay-tips="{content: '{{_('选择试听')}}', margin: '0 0 0 -10px' }">
                       <label class="layui-form-label">{{_("角色扮演")}}</label>
@@ -627,70 +611,6 @@
                     </div>
 
                     <table id="tts_voices_table" class="layui-table"></table>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-          <!-- 其他 -->
-          <div class="layui-col-md12" id="settings_div">
-            <div class="layui-collapse" lay-filter="collapse_filter_settings">
-              <div class="layui-colla-item">
-
-                <div class="layui-card layui-panel">
-                  <div class="layui-colla-title">{{_("其他")}}
-                    <!-- <i class="layui-icon layui-icon-tips" lay-tips="要支持的噢"></i> -->
-                  </div>
-                  <div class="layui-colla-content layui-show">
-
-                    <div class="layui-form-item">
-                      <label class="layui-form-label" lay-tips="{content: '{{_('原始音量')}}', margin: '0 0 0 -10px' }">{{_("原始音量")}}</label>
-
-                      <div class="layui-input-block">
-                        <div class="layui-input-wrap">
-                          <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
-                          <input type="number" lay-verify="required" name="volume_native" placeholder="[0,1]" autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="layui-form-item">
-                      <label class="layui-form-label" lay-tips="{content: '{{_('背景音量')}}', margin: '0 0 0 -10px' }">{{_("背景音量")}}</label>
-                      <div class="layui-input-block">
-                        <div class="layui-input-wrap">
-                          <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
-                          <input type="number" lay-verify="required" name="volume_background" placeholder="[0,1]" autocomplete="off" class="layui-input" min="0" max="1" step="0.1" lay-affix="number">
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="layui-form-item layui-show">
-                      <label class="layui-form-label" lay-tips="{content: '{{_('静音检测')}}', margin: '0 0 0 -20px' }">{{_("静音检测")}}</label>
-                      <div class="layui-input-inline" style="width: 142px;">
-                        <div class="layui-input-wrap">
-                          <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
-                          <input type="number" lay-verify="required" name="silence_threshold" placeholder="[-100,0]" autocomplete="off" class="layui-input" min="-100" max="0" step="10" lay-affix="number">
-                        </div>
-                      </div>
-                      <div class="layui-input-inline" style="width: 142px;">
-                        <div class="layui-input-wrap">
-                          <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
-                          <input type="number" lay-verify="required" name="silence_min_len" placeholder="[1,1000]" autocomplete="off" class="layui-input" min="1" max="1000" step="1" lay-affix="number">
-                        </div>
-                      </div>
-                      <div class="layui-input-inline" style="width: 142px;">
-                        <div class="layui-input-wrap">
-                          <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
-                          <input type="number" lay-verify="required" name="silence_keep" placeholder="[1,1000]" autocomplete="off" class="layui-input" min="1" max="1000" step="1" lay-affix="number">
-                        </div>
-                      </div>
-                      <div class="layui-form-mid layui-text-em">
-                        <i class="layui-icon layui-icon-tips" lay-tips="{content: '{{_('请使用sdr组件获取参数')}}', margin: '0 0 0 -10px' }"></i>
-                      </div>
-                    </div>
-
                   </div>
                 </div>
 
@@ -854,7 +774,7 @@
             return layer.msg(i18n.trans("请选择翻译提供商"), { icon: 3 });
           }
           // 切换试听文本
-          tool.post("trans/translator", JSON.stringify({
+          tool.post("/translator", JSON.stringify({
             "provider": form_json.llm_provider,
             "model": $('input[name="llm_model"]').val(),
             "language": form_json.locale,
