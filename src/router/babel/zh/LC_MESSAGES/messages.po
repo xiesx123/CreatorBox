@@ -34,10 +34,6 @@ msgstr "删除"
 msgid "功能"
 msgstr "功能"
 
-#: static/templates/dubbing.html:436
-msgid "可用"
-msgstr "可用"
-
 #: static/templates/dubbing.html:148
 msgid "后缀"
 msgstr "后缀"
@@ -259,11 +255,15 @@ msgstr "说话人数量"
 msgid "说话风格"
 msgstr "说话风格"
 
+#: static/templates/dubbing.html:719
+msgid "请至少添加一个配音角色"
+msgstr "请至少添加一个配音角色"
+
 #: static/templates/player.html:42
 msgid "请输入任务ID、视频链接"
 msgstr "请输入任务ID、视频链接"
 
-#: static/templates/dubbing.html:152 static/templates/dubbing.html:879
+#: static/templates/dubbing.html:152 static/templates/dubbing.html:872
 msgid "请输入后缀"
 msgstr "请输入后缀"
 
@@ -285,11 +285,11 @@ msgstr "请输入提示词模版ID"
 msgid "请输入服务地址"
 msgstr "请输入服务地址"
 
-#: static/templates/dubbing.html:459 static/templates/dubbing.html:733
+#: static/templates/dubbing.html:459 static/templates/dubbing.html:732
 msgid "请输入模型名称"
 msgstr "请输入模型名称"
 
-#: static/templates/dubbing.html:609 static/templates/dubbing.html:726
+#: static/templates/dubbing.html:609 static/templates/dubbing.html:725
 msgid "请输入试听文本"
 msgstr "请输入试听文本"
 
@@ -302,7 +302,7 @@ msgid "请输入随机种子"
 msgstr "请输入随机种子"
 
 #: static/templates/dubbing.html:109 static/templates/dubbing.html:705
-#: static/templates/dubbing.html:752 static/templates/dubbing.html:875
+#: static/templates/dubbing.html:751 static/templates/dubbing.html:868
 msgid "请输入音视频路径或链接"
 msgstr "请输入音视频路径或链接"
 
@@ -378,31 +378,4 @@ msgstr "音频"
 #: static/templates/dubbing.html:561
 msgid "风格强度"
 msgstr "风格强度"
-
-#~ msgid "音轨分离"
-#~ msgstr "音轨分离"
-
-#~ msgid "其他"
-#~ msgstr "其他"
-
-#~ msgid "原始音量"
-#~ msgstr "原始音量"
-
-#~ msgid "背景音量"
-#~ msgstr "背景音量"
-
-#~ msgid "请使用sdr组件获取参数"
-#~ msgstr "请使用sdr组件获取参数"
-
-#~ msgid "静音检测"
-#~ msgstr "静音检测"
-
-#~ msgid "选项"
-#~ msgstr "选项"
-
-#~ msgid "重构"
-#~ msgstr "重构"
-
-#~ msgid "预览"
-#~ msgstr "预览"
 

@@ -34,10 +34,6 @@ msgstr "Del"
 msgid "功能"
 msgstr "Feature"
 
-#: static/templates/dubbing.html:436
-msgid "可用"
-msgstr "available"
-
 #: static/templates/dubbing.html:148
 msgid "后缀"
 msgstr "Suffix"
@@ -261,11 +257,15 @@ msgstr "Spk Count"
 msgid "说话风格"
 msgstr "Style"
 
+#: static/templates/dubbing.html:719
+msgid "请至少添加一个配音角色"
+msgstr "Please add at least one speaker"
+
 #: static/templates/player.html:42
 msgid "请输入任务ID、视频链接"
 msgstr "Please enter task ID, video url"
 
-#: static/templates/dubbing.html:152 static/templates/dubbing.html:879
+#: static/templates/dubbing.html:152 static/templates/dubbing.html:872
 msgid "请输入后缀"
 msgstr "Enter an identifier suffix"
 
@@ -287,11 +287,11 @@ msgstr "Enter prompt template ID"
 msgid "请输入服务地址"
 msgstr "Enter api url"
 
-#: static/templates/dubbing.html:459 static/templates/dubbing.html:733
+#: static/templates/dubbing.html:459 static/templates/dubbing.html:732
 msgid "请输入模型名称"
 msgstr "Enter model name"
 
-#: static/templates/dubbing.html:609 static/templates/dubbing.html:726
+#: static/templates/dubbing.html:609 static/templates/dubbing.html:725
 msgid "请输入试听文本"
 msgstr "Enter preview text"
 
@@ -304,7 +304,7 @@ msgid "请输入随机种子"
 msgstr "Enter a random seed"
 
 #: static/templates/dubbing.html:109 static/templates/dubbing.html:705
-#: static/templates/dubbing.html:752 static/templates/dubbing.html:875
+#: static/templates/dubbing.html:751 static/templates/dubbing.html:868
 msgid "请输入音视频路径或链接"
 msgstr "Enter audio/video path or link"
 
@@ -380,31 +380,4 @@ msgstr "Audio"
 #: static/templates/dubbing.html:561
 msgid "风格强度"
 msgstr "Style Degree"
-
-#~ msgid "音轨分离"
-#~ msgstr "Separation"
-
-#~ msgid "其他"
-#~ msgstr "Others"
-
-#~ msgid "原始音量"
-#~ msgstr "Native Volume"
-
-#~ msgid "背景音量"
-#~ msgstr "Background Volume"
-
-#~ msgid "请使用sdr组件获取参数"
-#~ msgstr "Please use the SDR component to obtain parameters"
-
-#~ msgid "静音检测"
-#~ msgstr "Silence Detection"
-
-#~ msgid "选项"
-#~ msgstr "Options"
-
-#~ msgid "重构"
-#~ msgstr "Rebuild"
-
-#~ msgid "预览"
-#~ msgstr "Preview"
 
