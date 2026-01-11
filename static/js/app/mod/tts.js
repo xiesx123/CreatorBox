@@ -84,25 +84,24 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
     };
 
     // 请求参数
-    var voice_search_params = ({ provider, model, locale, gender, init = false } = {}) => {
+    var voice_search_params = ({ provider, model, locale, gender } = {}) => {
         const tts_provider = provider || form_json?.tts_provider;
         const tts_model = model || form_json?.tts_model;
         const tts_locale = locale || form_json?.locale;
         const tts_gender = gender !== undefined ? parseInt(gender) : parseInt(form_json?.tts_gender) || 1;
-        const video_url = $("#video_url").val() || form_json?.video_url;;
-        const suffix = $("#suffix").val() || form_json?.suffix;;
-        const duration = form_json?.speaker_len || 5;
+        const video_url = $("#video_url").val() || form_json?.video_url;
+        const suffix = $("#suffix").val() || form_json?.suffix;
+        const server = $("#tts_server").val() || form_json?.tts_server;
 
         return JSON.stringify({
             provider: tts_provider,
             model: tts_model,
             locale: tts_locale,
-            isinit: init,
             extra: {
-                gender: tts_gender,
                 file: video_url,
                 suffix: suffix,
-                duration: duration
+                server: server,
+                gender: tts_gender,
             }
         });
     };
@@ -194,7 +193,7 @@ layui.define(['layer', 'table', 'form', 'util', 'i18n', 'notice', `enums`, 'tool
                 form_json.speaker_len = isNaN(value) ? value : Number(value)
                 const tts_model = $('input[name="tts_model"]').val()
                 const locale = $('select[name="locale"] option:selected').val()
-                tool.post("tts/search", voice_search_params({ provider: form_json.tts_provider, model: tts_model, locale: locale, gender: 0, init: true }), voice_search_callback, true)
+                tool.post("tts/search", voice_search_params({ provider: form_json.tts_provider, model: tts_model, locale: locale, gender: 0}), voice_search_callback, true)
                 layer.close(index);
             });
         }

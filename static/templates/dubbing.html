@@ -319,13 +319,13 @@
                       <div class="layui-input-inline" style="width: 142px;">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
-                          <input type="number" lay-verify="required|number|speaker_len" name="speaker_min" placeholder="最小值" autocomplete="off" class="layui-input" min="1" max="10" step="1" lay-affix="number">
+                          <input type="number" lay-verify="required|number" name="speaker_min" placeholder="最小值" autocomplete="off" class="layui-input" min="1" max="10" step="1" lay-affix="number">
                         </div>
                       </div>
                       <div class="layui-input-inline" style="width: 142px;">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
-                          <input type="number" lay-verify="required|number|speaker_len" name="speaker_max" placeholder="最大值" autocomplete="off" class="layui-input" min="1" max="10" step="1" lay-affix="number">
+                          <input type="number" lay-verify="required|number" name="speaker_max" placeholder="最大值" autocomplete="off" class="layui-input" min="1" max="10" step="1" lay-affix="number">
                         </div>
                       </div>
                     </div>
@@ -430,10 +430,10 @@
                       <div class="layui-input-block">
                         <div class="layui-input-wrap">
                           <div class="layui-input-prefix"> <i class="layui-icon layui-icon-component"></i> </div>
-                          <select id="tts_provider" name="tts_provider" lay-verify="required" lay-filter="tts_provider_filter">
+                          <select id="tts_provider" name="tts_provider" lay-verify="required|tts_provider" lay-filter="tts_provider_filter">
                             {% for item in data.tts.providers %}
                             {% if item.enable %}
-                            <option value="{{ item.provider}}">{{ item.desc }} {{ '- ' + _("可用") if item.valid else '' }}</option>
+                            <option value="{{ item.provider}}">{{ item.desc }}</option>
                             {% endif %}>
                             {% endfor %}
                           </select>
@@ -712,12 +712,10 @@
             return '{{_("请输入字幕文件路径（SRT）")}}';
           }
         },
-        speaker_len: function (value, elem) {
-          if ($('input[name="asr_debug"]').is(':checked')) return;
-          if ($('input[name="llm_debug"]').is(':checked')) return;
-          speaker_min = $('input[name="speaker_min"]').val()
-          if (cache_table.length < speaker_min) {
-            return i18n.trans("【配音说话人数】不能低于【说话人区间最小值】，请先试听语音");
+        tts_provider: function (value, elem) {
+          var tableData = layui.table.cache['tts_voices_table'];
+          if (tableData.length == 0 && $('select[name="tts_provider"]').val() != 'itts') {
+            return '{{_("请至少添加一个配音角色")}}'; // 目前只有itts支持无角色配音，voxm、 cosy、gtts 暂时必须先试听选角色
           }
         },
         tts_text: function (value, elem) {
@@ -810,8 +808,6 @@
           btn: [i18n.trans('确定'), i18n.trans('取消')]
         }, function (index) {
           layer.close(index);
-          // 禁用预览
-          $("button[lay-on='video_preview']").addClass("layui-btn-disabled").prop("disabled", true);
           // 请求调用
           tool.post("dubb/pipeline", data, function (response) {
             var taskId = response.data.task_id
@@ -827,7 +823,6 @@
       tool.connect(function (data) {
         if (data.type == "video") {
           toast.success(localStorage.getItem('task'), i18n.trans("任务处理成功"));
-          $("button[lay-on='video_preview']").removeClass("layui-btn-disabled").prop("disabled", false);
         }
         else if (data.type == "error") {
           toast.error(data.message, i18n.trans("任务处理异常"));
@@ -866,10 +861,7 @@
           }
         },
         click: function (type) {
-          if (type == i18n.trans("日志")) {
-            util.openWin({ url: "log" });
-          }
-          else if (type == i18n.trans("数据")) {
+          if (type == i18n.trans("数据")) {
             filename = $("#video_url").val().split(/[/\\]/).pop().split(".")[0];
             if (filename == "") {
               return layer.msg('{{_("请输入音视频路径或链接")}}', { icon: 3 });
@@ -887,32 +879,6 @@
             } else {
               util.openWin({ url: "player?url=&autoplay=true" });
             }
-          }
-          else if (type == i18n.trans("备份")) {
-            layer.confirm('请选择？', { icon: 3, title: '提示', btn: ['备份', '导入', '取消'] }, function (index) {
-              filename = $("#video_url").val().split(/[/\\]/).pop().split(".")[0];
-              cache = layui.data(CREATORBOX)
-              cache.version = '{{ data.app.version }}'
-              if (!cache.hasOwnProperty('form')) {
-                return layer.msg('请先执行', { icon: 3 });
-              } else if (!cache.hasOwnProperty('table')) {
-                return layer.msg('请先试听', { icon: 3 });
-              }
-              tool.download("dubb/export", JSON.stringify(cache), filename)
-            }, function () {
-              tool.upload("#import", "dubb/import", 'file', 'zip', null, function (response) {
-                if (response.code != 0) {
-                  return toast.error(response.message, "提示");
-                }
-                layer.msg('即将刷新此页面', { icon: 1 });
-                layui.data(CREATORBOX, { key: 'form', value: response.data.form })
-                layui.data(CREATORBOX, { key: 'table', value: response.data.table })
-                setTimeout(function () {
-                  tool.refresh()
-                }, 2 * 1000)
-              })
-              $("#import").click();
-            }, function () { });
           }
         }
       });
