@@ -100,9 +100,9 @@
     <!-- 商品介绍-->
     <tbody>
         <tr>
-            <td align="center"><video src="https://github.com/user-attachments/assets/a1c9ea12-a3a0-4d0d-9d68-43659e6cc180" width="200"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/f8f399de-27e9-42c4-a97d-f1090d6f568b" width="200"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/6babdb77-90db-4ea7-b6eb-9614438fa0f1" width="200"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/a1c9ea12-a3a0-4d0d-9d68-43659e6cc180" width="120"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/f8f399de-27e9-42c4-a97d-f1090d6f568b" width="120"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/6babdb77-90db-4ea7-b6eb-9614438fa0f1" width="120"></video></td>
         </tr>
     </tbody>
 </table>
