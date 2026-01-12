@@ -1,16 +1,32 @@
 import gradio as gr
 
-# 主题
-default_themes = [
-    gr.themes.Base,
-    gr.themes.Default,
-    gr.themes.Soft,
-    gr.themes.Monochrome,
-    gr.themes.Glass,
-    gr.themes.Origin,
-    gr.themes.Citrus,
-    gr.themes.Ocean,
-]
+# 主题名称映射（按首字母排序）
+theme_mapping = {
+    "Base": gr.themes.Base,
+    "Citrus": gr.themes.Citrus,
+    "Default": gr.themes.Default,
+    "Glass": gr.themes.Glass,
+    "Monochrome": gr.themes.Monochrome,
+    "Ocean": gr.themes.Ocean,
+    "Origin": gr.themes.Origin,
+    "Soft": gr.themes.Soft,
+}
+
+
+# 获取所有可用主题名称
+def get_theme_names():
+    return list(theme_mapping.keys()) + ["Custom"]
+
+
+# 根据主题名称获取主题实例
+def get_theme_by_name(theme_name: str):
+    if theme_name == "Custom":
+        return custom_theme
+    elif theme_name in theme_mapping:
+        return theme_mapping[theme_name](text_size="sm")  # 默认字体sm
+    else:
+        return custom_theme
+
 
 ###################### 自定义 ######################
 custom_theme = gr.themes.Ocean(
@@ -19,8 +35,16 @@ custom_theme = gr.themes.Ocean(
 ###################### 自定义 ######################
 
 
+# 根据配置返回默认主题
 def _default_theme():
-    return custom_theme
+    try:
+        from src.app import prefs
+
+        cfg = prefs.get()
+        theme_name = getattr(cfg.base, "theme", "Custom")
+        return get_theme_by_name(theme_name)
+    except:
+        return custom_theme
 
 
 if __name__ == "__main__":
@@ -30,4 +54,4 @@ if __name__ == "__main__":
 
     from gradio import themes as t
 
-    t.builder()
+    t.builder(inbrowser=True)
