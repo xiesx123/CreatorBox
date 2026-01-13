@@ -838,10 +838,8 @@
 
       // 固定条
       var bars = [
-        // { type: i18n.trans("日志"), icon: 'layui-icon-export' }
         { type: i18n.trans("数据"), icon: 'layui-icon-fonts-code' },
-        { type: i18n.trans("预览"), icon: 'layui-icon-video' },
-        // { type: i18n.trans("备份"), icon: 'layui-icon-export' }
+        // { type: i18n.trans("预览"), icon: 'layui-icon-video' },
       ];
       util.fixbar({
         bars: bars,
@@ -872,13 +870,6 @@
             }
             title = `{{ data.app.title }} - ${filename}_${suf}`;
             util.openWin({ url: `editor?title=${title}&upload=file/upload&remote=file/local?url=webapp/dubb/${filename}/${suf}/${filename}.json` });
-          }
-          else if (type == i18n.trans("预览")) {
-            if (localStorage.getItem('task')) {
-              tool.open("player?lang={{request.state.lang}}&url=" + localStorage.getItem('task') + "&autoplay=true", "1100px", "510px");
-            } else {
-              util.openWin({ url: "player?url=&autoplay=true" });
-            }
           }
         }
       });
