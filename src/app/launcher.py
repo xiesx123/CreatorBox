@@ -20,32 +20,18 @@ class Launcher:
     # 获取项目启动器
     @staticmethod
     def _get_launcher_map():
-        """获取项目启动器映射表"""
         return {
             "iopaint": IOPaintLauncher,
             "stable_diffusion_webui": StableDiffusionLauncher,
-            "cosyvoice": CosyVoiceLauncher,
-            "index_tts": IndexTTSLauncher,
-            "gpt_sovits": GptSovitsLauncher,
             "voxcpm": VoxCPMLauncher,
+            "index_tts": IndexTTSLauncher,
+            "cosyvoice": CosyVoiceLauncher,
+            "gpt_sovits": GptSovitsLauncher,
         }
 
-    # 构建项目启动器实例
+    # 构建启动器实例
     @staticmethod
     def builder(project, **kwargs) -> LauncherProvider:
-        """
-        构建项目启动器实例
-
-        Args:
-            project: 项目名称
-            **kwargs: 启动器参数
-
-        Returns:
-            LauncherProvider: 启动器实例
-
-        Raises:
-            RuntimeError: 当项目类型不支持时抛出异常
-        """
         project_key = project.lower()
         launcher_map = Launcher._get_launcher_map()
         if project_key in launcher_map:
@@ -60,17 +46,13 @@ class Launcher:
 
 
 if __name__ == "__main__":
-    project = "iopaint"
-    python = "3.10"
-    kwargs = {
-        "index": "https://mirrors.aliyun.com/pypi/simple",
-        "pyv": python,
-        "host": "127.0.0.1",
-        "port": 9000,
-        "share": False,
-    }
+    DEFAULT_INDEX = "https://pypi.org/simple"
+    DEFAULT_INDEX_TSINGHUA = "https://pypi.tuna.tsinghua.edu.cn/simple"
+    PROJECT = "iopaint"
+    # 启动参数
+    kwargs = {"index": DEFAULT_INDEX_TSINGHUA, "pyv": "3.11", "host": "127.0.0.1", "port": 9000, "share": False}
     # 创建启动器
-    launcher = Launcher.builder(project, **kwargs)
+    launcher = Launcher.builder(PROJECT, **kwargs)
     # 执行流程
     launcher.create()
     launcher.install()
