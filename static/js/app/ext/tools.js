@@ -71,6 +71,10 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 					layer.close(idx);
 				},
 				complete: function (xhr, status) {
+					if (xhr.responseJSON?.code < 0) {
+						toast.error(xhr.responseJSON?.message || "", i18n.trans('提示'));
+					}
+					layer.close(idx);
 				},
 				cancel: function () {
 				}
@@ -99,6 +103,10 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 					layer.close(idx);
 				},
 				complete: function (xhr, status) {
+					if (xhr.responseJSON?.code < 0) {
+						toast.error(xhr.responseJSON?.message || "", i18n.trans('提示'));
+					}
+					layer.close(idx);
 				},
 				cancel: function () {
 				}
@@ -129,6 +137,10 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 						layer.close(idx);
 					},
 					complete: function (xhr, status) {
+						if (xhr.responseJSON?.code < 0) {
+							toast.error(xhr.responseJSON?.message || "", i18n.trans('提示'));
+						}
+						layer.close(idx);
 					},
 					cancel: function () {
 					}

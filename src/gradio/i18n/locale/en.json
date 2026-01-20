@@ -1,6 +1,5 @@
 {
     "API": "Open API",
-    "FPL": "Profiler",
     "GPT 模型训练开始": "GPT Model Training Started",
     "GPT 模型训练结束": "GPT Model Training Completed",
     "ID": "ID",
@@ -83,6 +82,7 @@
     "扩展": "Extension",
     "批量大小": "Batch Size",
     "排除": "Exclude",
+    "接口地址": "API Address",
     "掩码": "Mask Image",
     "掩码帧与原始帧数量不匹配，请重新生成掩码": "Mask frames do not match the number of original frames. Please regenerate the mask.",
     "掩码膨胀": "Mask dilation",
@@ -139,6 +139,7 @@
     "水印": "Watermark",
     "水平偏移": "Horizontal Offset",
     "注册": "Signup",
+    "注册成功，邮件已发送，请注意查收": "Registration Successful, Email Sent, Please Check Your Inbox",
     "浅色": "Light",
     "测试": "Test",
     "测试失败": "Test Failed",
@@ -214,6 +215,7 @@
     "请输入密钥": "Please Enter API Key",
     "请输入排除文件夹": "Please Enter Excluded Folder",
     "请输入排除表达式": "Please Enter Exclusion Expression",
+    "请输入接口地址": "Please Enter API Address",
     "请输入模型名称": "Please Enter Model Name",
     "请输入模型目录": "Please Enter Model Directory",
     "请输入模版ID": "Please Enter Template ID",
@@ -248,7 +250,6 @@
     "选择界面显示语言": "Choose Interface Display Language",
     "选择范围": "Selection Range",
     "透明度": "Transparency",
-    "邮件已发送，请注意查收": "The email has been sent. Please check your inbox.",
     "邮箱": "Email",
     "配音": "Dubbing",
     "配音语言": "Dubbing Language",
@@ -272,6 +273,5 @@
     "音频识别": "Audio Recognition",
     "预览": "Preview",
     "颜色": "Color",
-    "高度": "Height",
-    "总共安装了 {} 个软件包": "Total {} packages installed"
+    "高度": "Height"
 }

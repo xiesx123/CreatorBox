@@ -1,15 +1,18 @@
-import gradio as gr
+try:
+    from gradio import themes
+except ImportError:
+    import gradio.themes as themes
 
 # 主题名称映射（按首字母排序）
 theme_mapping = {
-    "Base": gr.themes.Base,
-    "Citrus": gr.themes.Citrus,
-    "Default": gr.themes.Default,
-    "Glass": gr.themes.Glass,
-    "Monochrome": gr.themes.Monochrome,
-    "Ocean": gr.themes.Ocean,
-    "Origin": gr.themes.Origin,
-    "Soft": gr.themes.Soft,
+    "Base": themes.Base,
+    "Citrus": themes.Citrus,
+    "Default": themes.Default,
+    "Glass": themes.Glass,
+    "Monochrome": themes.Monochrome,
+    "Ocean": themes.Ocean,
+    "Origin": themes.Origin,
+    "Soft": themes.Soft,
 }
 
 
@@ -29,7 +32,7 @@ def get_theme_by_name(theme_name: str):
 
 
 ###################### 自定义 ######################
-custom_theme = gr.themes.Ocean(
+custom_theme = themes.Ocean(
     text_size="sm",
 )
 ###################### 自定义 ######################
