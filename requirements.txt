@@ -1,77 +1,72 @@
-# dependency
+#  ---- 深度学习 ----
+numpy==1.26.4
 torch==2.6.0
 torchaudio==2.6.0
 torchvision==0.21.0
-numpy==1.26.4
 transformers==4.57.1
 
-# base
-loguru==0.7.3
-asyncio==4.0.0
-litellm[caching]==1.80.11
-langfuse==2.60.10
-pyngrok==7.5.0
-tenacity==9.1.2
-requests-cache==1.2.1
-fake-useragent==2.2.0
-pycapcut==0.0.3
-pyjianyingdraft==0.2.5
-
-# web
-uvicorn==0.40.0
+#  ---- Web ----
 fastapi==0.128.0
-fastapi-profiler-lite==0.3.4
 python-engineio==4.12.3
-python-socketio==5.14.3
 python-multipart==0.0.20
-sseclient==0.0.27
+python-socketio==5.14.3
+sqlmodel==0.0.31
+uvicorn==0.40.0
 
-# video
-pytorchcv==0.0.73
-ffmpeg-python==0.2.0
-opencv-python==4.11.0.86
-
-# audio
-pydub==0.25.1
-pyannote.audio==3.4.0
-
-# asr
-funasr==1.2.9
-faster-whisper==1.2.1
-
-# tts
-edge-tts==7.2.7
-azure-cognitiveservices-speech==1.47.0
-
-# gradio
+#  ---- Gradio ----
 gradio[mcp]==5.50.0
-gradio-modal==0.0.4
-gradio-toggle==2.0.2
 gradio-bottombar==0.0.2
 gradio-buttonplus==0.0.1
-gradio-textboxplus==0.0.4
 gradio-dropdownplus==0.0.3
-gradio-videoslider==0.0.2
-gradio-rangeslider==0.0.8
 gradio-image-annotation==0.4.1
+gradio-modal==0.0.4
+gradio-rangeslider==0.0.8
+gradio-textboxplus==0.0.4
+gradio-toggle==2.0.2
+gradio-videoslider==0.0.2
 
-# component
-yt-dlp==2025.12.8
+#  ---- Tool ----
+asyncio==4.0.0
+click==8.3.1
+fake-useragent==2.2.0
+loguru==0.7.3
+langfuse==2.60.10
+litellm[caching]==1.80.11
+pyngrok==7.5.0
+requests-cache==1.2.1
+tenacity==9.1.2
+
+#  语音
+azure-cognitiveservices-speech==1.47.0
+edge-tts==7.2.7
+faster-whisper==1.2.1
+funasr==1.2.9
+
+#  内容
+craft-detector==0.2.1
+nltk==3.9.2
+pycapcut==0.0.3
+pyjianyingdraft==0.2.5
 rapidocr==3.4.5
 scenedetect==0.6.7
-craft-detector==0.2.1
-audio-separator==0.30.2
-
-# repo
-sqlmodel==0.0.31
-firebase-admin==7.1.0
-
-# utils
 srt==3.5.3
-nltk==3.9.2
-click==8.3.1
+yt-dlp==2025.12.8
+
+#  音频
+audio-separator==0.30.2
+pyannote.audio==3.4.0
+pydub==0.25.1
+
+#  视频
+ffmpeg-python==0.2.0
+opencv-python==4.11.0.86
+pytorchcv==0.0.73
+
+#  系统监控 
 gputil==1.4.0
 psutil==7.2.1
+
+#  国际化 
 babel==2.17.0
-language-tags==1.2.0
 fast-langdetect==1.0.0
+language-tags==1.2.0
