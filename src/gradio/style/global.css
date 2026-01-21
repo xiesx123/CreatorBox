@@ -1,9 +1,11 @@
-.toggle-label.svelte-1871vx.svelte-1871vx {
-    color: var(--checkbox-label-text-color);
-}
-
+/* image-toolbar */
 .gr-image-toolbar {
     display: none !important;
+}
+
+/* toggle */
+.toggle-label.svelte-1871vx.svelte-1871vx {
+    color: var(--checkbox-label-text-color);
 }
 
 /* btn */
