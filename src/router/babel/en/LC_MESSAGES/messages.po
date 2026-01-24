@@ -38,6 +38,10 @@ msgstr "Feature"
 msgid "后缀"
 msgstr "Suffix"
 
+#: static/templates/plugin.html:122
+msgid "启用"
+msgstr "Enable"
+
 #: static/templates/dubbing.html:115 static/templates/speaker.html:62
 msgid "地区"
 msgstr "Locale"
@@ -178,10 +182,6 @@ msgstr "Mode"
 #: static/templates/dubbing.html:606
 msgid "点击试听"
 msgstr "Click to preview"
-
-#: static/templates/plugin.html:122
-msgid "状态"
-msgstr "Status"
 
 #: static/templates/dubbing.html:467 static/templates/dubbing.html:469
 #: static/templates/speaker.html:56
@@ -380,4 +380,7 @@ msgstr "Audio"
 #: static/templates/dubbing.html:561
 msgid "风格强度"
 msgstr "Style Degree"
+
+#~ msgid "状态"
+#~ msgstr "Status"
 

@@ -38,6 +38,10 @@ msgstr "功能"
 msgid "后缀"
 msgstr "后缀"
 
+#: static/templates/plugin.html:122
+msgid "启用"
+msgstr "启用"
+
 #: static/templates/dubbing.html:115 static/templates/speaker.html:62
 msgid "地区"
 msgstr "地区"
@@ -176,10 +180,6 @@ msgstr "模式"
 #: static/templates/dubbing.html:606
 msgid "点击试听"
 msgstr "点击试听"
-
-#: static/templates/plugin.html:122
-msgid "状态"
-msgstr "状态"
 
 #: static/templates/dubbing.html:467 static/templates/dubbing.html:469
 #: static/templates/speaker.html:56
@@ -378,4 +378,7 @@ msgstr "音频"
 #: static/templates/dubbing.html:561
 msgid "风格强度"
 msgstr "风格强度"
+
+#~ msgid "状态"
+#~ msgstr "状态"
 
