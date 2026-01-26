@@ -230,7 +230,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 			layer.open({
 				type: 2,
 				title: false,
-				content: [url],
+				content: [url, 'no'],
 				shade: 0.6,
 				resize: true,
 				area: ['64%', h],
@@ -257,7 +257,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 			layer.open({
 				type: 2,// iframe层
 				title: false,//弹层标题
-				content: url,//弹层内容
+				content: [url, 'no'],//弹层内容
 				shade: 0.6,// 遮罩透明度
 				shadeClose: true,// 点击遮罩区域，关闭弹层
 				resize: true,//右下角允许拖拽

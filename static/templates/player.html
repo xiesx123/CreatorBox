@@ -24,6 +24,7 @@
         #player-container {
             width: 100%;
             background-color: black;
+            overflow-y: hidden; /* 隐藏y轴滚动条 */
         }
     </style>
 </head>
@@ -53,7 +54,7 @@
                 </div>
             </div>
 
-            <div class="layui-card layui-panel" style="padding-top: 15dp; background-color: black;">
+            <div class="layui-card layui-panel" style="padding-top: 15px; background-color: black;">
                 <div id="player-container"></div>
             </div>
         </div>
@@ -79,14 +80,19 @@
             $('#play').on('click', function () {
                 const input_url = $("#url").val();
                 if (input_url.length != 17) {
-                    return video_play(input_url, 1)
+                    return video_play(input_url)
                 }
                 tool.get("/result/" + input_url, {}, function (response) {
                     console.debug(JSON.stringify(response, null, 2))
                     if (response.code == 0) {
                         video_play(response.data.result.video_dub)
+                    } else {
+                        layer.msg(i18n.trans("获取视频信息失败") + ": " + (response.msg || "未知错误"));
                     }
-                }, true)
+                }, true, function(error) {
+                    layer.msg(i18n.trans("请求失败，请检查网络连接"));
+                    console.error("API request failed:", error);
+                });
             });
 
             // 资源地址
@@ -103,21 +109,51 @@
                     layer.msg(i18n.trans("请输入任务ID、视频链接"));
                     return;
                 }
-                if (player) {
-                    player.destroy();
+                try {
+                    if (player) {
+                        player.destroy();
+                        player = null;
+                    }
+                    player = new Player({
+                        id: "player-container",
+                        url: build_url(url),
+                        playsinline: true,
+                        autoplay: true,
+                        // "download": true,
+                        pip: true,
+                        width: "100%",
+                        height: resizePlayer(),
+                        volume: 1
+                    });
+                } catch (error) {
+                    layer.msg(i18n.trans("播放器初始化失败"));
+                    console.error("Player initialization failed:", error);
                 }
-                player = new Player({
-                    id: "player-container",
-                    url: build_url(url),
-                    playsinline: true,
-                    autoplay: true,
-                    // "download": true,
-                    pip: true,
-                    width: "100%",
-                    height: resizePlayer(),
-                    volume: 1
-                });
             }
+
+            // 监听窗口大小调整，调整播放器高度
+            window.addEventListener('resize', function() {
+                if (player) {
+                    const newHeight = resizePlayer();
+                    if(typeof player.resize === 'function') {
+                        player.resize(newHeight);
+                    } else {
+                        // 如果 xgplayer 不支持 resize，重建播放器
+                        const currentUrl = player.config.url;
+                        player.destroy();
+                        player = new Player({
+                            id: "player-container",
+                            url: currentUrl,
+                            playsinline: true,
+                            autoplay: false,
+                            pip: true,
+                            width: "100%",
+                            height: newHeight,
+                            volume: 1
+                        });
+                    }
+                }
+            });
 
             $(document).ready(function () {
                 if (autoplay) {
@@ -126,19 +162,33 @@
             });
 
             function resizePlayer() {
-                // 获取整个视口高度
+                // 获取播放器容器
+                const playerContainer = document.getElementById('player-container');
+                if (!playerContainer) return '360px';
+                const playerCard = playerContainer.parentElement;
+
+                // 获取视口高度
                 const vh = window.innerHeight;
 
-                // 获取顶部占用的高度（输入框 + 上方 card）
-                const topElements = document.querySelectorAll('.layui-card');
-                let topHeight = 0;
-                topElements.forEach(el => {
-                    topHeight += el.offsetHeight + 20;
-                });
+                // 获取播放器容器距离视口顶部的距离
+                const rect = playerCard.getBoundingClientRect();
+                const topOffset = rect.top;
 
-                // 计算剩余高度
-                const player = document.getElementById('player-container');
-                return (vh - topHeight) + 'px';
+                // 获取播放器容器的 padding-top
+                const paddingTop = parseInt(window.getComputedStyle(playerCard).paddingTop, 10) || 0;
+
+                // 底部保留空间
+                const bottomMargin = 10;
+
+                // 计算可用高度
+                let availableHeight = vh - topOffset - paddingTop - bottomMargin;
+
+                // 防止高度过小或负值
+                if (availableHeight < 360) {
+                    availableHeight = 360;
+                }
+
+                return availableHeight + 'px';
             }
         });
 
