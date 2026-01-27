@@ -120,30 +120,5 @@ def proxy(host, port, username, password, site, timeout):
         click.echo(f"❌ error: {str(e)}", err=True)
 
 
-@cli.command(help="认证鉴权 (Authentication)")
-@click.option("--action", "-a", type=click.Choice(["register", "resetpwd", "login"]), default="login", show_default=True, required=True, help="choose action")
-@click.option("--email", "-e", type=str, required=True, help="email")
-@click.option("--password", "-p", type=str, help="password")
-@click.option("--proxy", is_flag=True, default=False, show_default=True, help="enable proxy")
-def auth(action, email, password, proxy):
-    try:
-        from src.db.repo import Firebase
-
-        auth = Firebase.Authentication()
-        click.echo(f"😊 Starting {action} -> {email}")
-        if action == "register":
-            result = auth.sign_up(email, password, proxy)
-            msg = f"please check your email to verify."
-        elif action == "resetpwd":
-            result = auth.send_email_password_reset(email)
-            msg = f"please check your email and click to reset your password."
-        else:
-            result = auth.sign_in(email, password, proxy)
-            msg = f"token -> {result}"
-        click.echo(f"✅ {action.capitalize()} successfully. {msg}")
-    except Exception as e:
-        click.echo(f"❌ error: {str(e)}", err=True)
-
-
 if __name__ == "__main__":
     cli()
