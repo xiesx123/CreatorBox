@@ -14,7 +14,7 @@ msgstr "Up"
 msgid "下移"
 msgstr "Down"
 
-#: static/templates/speaker.html:140
+#: static/templates/speaker.html:138
 msgid "下载"
 msgstr "DownLoad"
 
@@ -83,7 +83,7 @@ msgstr "Ignore"
 msgid "性别"
 msgstr "Gender"
 
-#: static/templates/speaker.html:77
+#: static/templates/speaker.html:76
 msgid "情感"
 msgstr "Emotion"
 
@@ -139,7 +139,7 @@ msgstr ""
 "Content:\n"
 "{{text}}"
 
-#: static/templates/player.html:48
+#: static/templates/player.html:49
 msgid "播放"
 msgstr "Play"
 
@@ -155,7 +155,7 @@ msgstr "Data Editor"
 msgid "文件"
 msgstr "File"
 
-#: static/templates/speaker.html:84
+#: static/templates/speaker.html:88
 msgid "文本"
 msgstr "Text"
 
@@ -163,7 +163,7 @@ msgstr "Text"
 msgid "服务地址"
 msgstr "Api"
 
-#: static/templates/speaker.html:93
+#: static/templates/speaker.html:97
 msgid "查询"
 msgstr "Search"
 
@@ -200,7 +200,7 @@ msgstr "Component"
 msgid "编号"
 msgstr "ID"
 
-#: static/templates/speaker.html:134
+#: static/templates/speaker.html:139
 msgid "编辑"
 msgstr "Edit"
 
@@ -216,7 +216,7 @@ msgstr "Prompt Custom"
 msgid "草稿"
 msgstr "Draft"
 
-#: static/templates/player.html:36
+#: static/templates/player.html:37
 msgid "视频"
 msgstr "Video"
 
@@ -261,7 +261,7 @@ msgstr "Style"
 msgid "请至少添加一个配音角色"
 msgstr "Please add at least one speaker"
 
-#: static/templates/player.html:42
+#: static/templates/player.html:43
 msgid "请输入任务ID、视频链接"
 msgstr "Please enter task ID, video url"
 
@@ -272,12 +272,6 @@ msgstr "Enter an identifier suffix"
 #: static/templates/dubbing.html:206 static/templates/dubbing.html:712
 msgid "请输入字幕文件路径（SRT）"
 msgstr "Enter subtitle file path (SRT)"
-
-#: static/templates/speaker.html:79
-msgid "请输入情感"
-msgstr ""
-"Enter emotion. "
-"options:(angry,disgusted,fearful,happy,neutral,other,sad,surprised,unknown)"
 
 #: static/templates/dubbing.html:387
 msgid "请输入提示词模版ID"
@@ -308,7 +302,7 @@ msgstr "Enter a random seed"
 msgid "请输入音视频路径或链接"
 msgstr "Enter audio/video path or link"
 
-#: static/templates/speaker.html:86
+#: static/templates/speaker.html:90
 msgid "请输入音频文本"
 msgstr "Enter preview text"
 
@@ -333,6 +327,7 @@ msgstr "Coherence"
 #: static/templates/dubbing.html:268 static/templates/dubbing.html:284
 #: static/templates/dubbing.html:484 static/templates/dubbing.html:542
 #: static/templates/dubbing.html:554 static/templates/speaker.html:65
+#: static/templates/speaker.html:79
 msgid "选择或搜索"
 msgstr "Select or Search"
 
@@ -349,7 +344,7 @@ msgstr "Dubbing"
 msgid "重启"
 msgstr "Reboot"
 
-#: static/templates/speaker.html:98
+#: static/templates/speaker.html:102
 msgid "重置"
 msgstr "Rest"
 
@@ -381,6 +376,8 @@ msgstr "Audio"
 msgid "风格强度"
 msgstr "Style Degree"
 
-#~ msgid "状态"
-#~ msgstr "Status"
+#~ msgid "请输入情感"
+#~ msgstr ""
+#~ "Enter emotion. "
+#~ "options:(angry,disgusted,fearful,happy,neutral,other,sad,surprised,unknown)"
 

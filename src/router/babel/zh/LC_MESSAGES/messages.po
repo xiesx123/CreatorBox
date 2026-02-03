@@ -14,7 +14,7 @@ msgstr "上移"
 msgid "下移"
 msgstr "下移"
 
-#: static/templates/speaker.html:140
+#: static/templates/speaker.html:138
 msgid "下载"
 msgstr "下载"
 
@@ -83,7 +83,7 @@ msgstr "忽略"
 msgid "性别"
 msgstr "性别"
 
-#: static/templates/speaker.html:77
+#: static/templates/speaker.html:76
 msgid "情感"
 msgstr "情感"
 
@@ -137,7 +137,7 @@ msgstr ""
 "内容：\n"
 "{{text}}"
 
-#: static/templates/player.html:48
+#: static/templates/player.html:49
 msgid "播放"
 msgstr "播放"
 
@@ -153,7 +153,7 @@ msgstr "数据编辑"
 msgid "文件"
 msgstr "文件"
 
-#: static/templates/speaker.html:84
+#: static/templates/speaker.html:88
 msgid "文本"
 msgstr "文本"
 
@@ -161,7 +161,7 @@ msgstr "文本"
 msgid "服务地址"
 msgstr "服务地址"
 
-#: static/templates/speaker.html:93
+#: static/templates/speaker.html:97
 msgid "查询"
 msgstr "查询"
 
@@ -198,7 +198,7 @@ msgstr "组件"
 msgid "编号"
 msgstr "编号"
 
-#: static/templates/speaker.html:134
+#: static/templates/speaker.html:139
 msgid "编辑"
 msgstr "编辑"
 
@@ -214,7 +214,7 @@ msgstr "自定义提示词模版"
 msgid "草稿"
 msgstr "草稿"
 
-#: static/templates/player.html:36
+#: static/templates/player.html:37
 msgid "视频"
 msgstr "视频"
 
@@ -259,7 +259,7 @@ msgstr "说话风格"
 msgid "请至少添加一个配音角色"
 msgstr "请至少添加一个配音角色"
 
-#: static/templates/player.html:42
+#: static/templates/player.html:43
 msgid "请输入任务ID、视频链接"
 msgstr "请输入任务ID、视频链接"
 
@@ -270,12 +270,6 @@ msgstr "请输入后缀"
 #: static/templates/dubbing.html:206 static/templates/dubbing.html:712
 msgid "请输入字幕文件路径（SRT）"
 msgstr "请输入字幕文件路径（SRT）"
-
-#: static/templates/speaker.html:79
-msgid "请输入情感"
-msgstr ""
-"请输入情感. "
-"选项:(angry,disgusted,fearful,happy,neutral,other,sad,surprised,unknown)"
 
 #: static/templates/dubbing.html:387
 msgid "请输入提示词模版ID"
@@ -306,7 +300,7 @@ msgstr "请输入随机种子"
 msgid "请输入音视频路径或链接"
 msgstr "请输入音视频路径或链接"
 
-#: static/templates/speaker.html:86
+#: static/templates/speaker.html:90
 msgid "请输入音频文本"
 msgstr "请输入音频文本"
 
@@ -331,6 +325,7 @@ msgstr "连贯性"
 #: static/templates/dubbing.html:268 static/templates/dubbing.html:284
 #: static/templates/dubbing.html:484 static/templates/dubbing.html:542
 #: static/templates/dubbing.html:554 static/templates/speaker.html:65
+#: static/templates/speaker.html:79
 msgid "选择或搜索"
 msgstr "选择或搜索"
 
@@ -347,7 +342,7 @@ msgstr "配音"
 msgid "重启"
 msgstr "重启"
 
-#: static/templates/speaker.html:98
+#: static/templates/speaker.html:102
 msgid "重置"
 msgstr "重置"
 
@@ -379,6 +374,8 @@ msgstr "音频"
 msgid "风格强度"
 msgstr "风格强度"
 
-#~ msgid "状态"
-#~ msgstr "状态"
+#~ msgid "请输入情感"
+#~ msgstr ""
+#~ "请输入情感. "
+#~ "选项:(angry,disgusted,fearful,happy,neutral,other,sad,surprised,unknown)"
 
