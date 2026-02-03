@@ -1,6 +1,6 @@
 {
-    "emo_control_weight": 1,
-    "emo_vector": 0.8,
+    "emo_control_weight": 0.65,
+    "emo_vector": 0,
     "emo_text": "",
     "emo_random": false,
     "max_text_tokens_per_segment": 120,
