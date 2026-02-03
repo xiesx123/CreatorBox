@@ -65,8 +65,7 @@
                                         <option value="">{{_("选择或搜索")}}</option>
                                         {% for item in data.locales %}
                                         <option value="{{ item.locale }}">
-                                            {{ item.locale }} - {{ item.name if request.state.lang
-                                            == 'zh' else item.country }}
+                                            {{ item.locale }} - {{ item.name if request.state.lang == 'zh' else item.country }}
                                         </option>
                                         {% endfor %}
                                     </select>
@@ -76,14 +75,19 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">{{_("情感")}}</label>
                                 <div class="layui-input-block">
-                                    <input id="emotion" type="text" name="emotion" placeholder='{{_("请输入情感")}}' lay-verify="required" autocomplete="off" class="layui-input" lay-affix="clear" />
+                                    <select id="emotion" name="emotion" lay-verify="required" lay-filter="emotion_filter">
+                                        <option value="">{{_("选择或搜索")}}</option>
+                                        {% for item in data.emotions %}
+                                        <option value="{{ item.value }}"> {{ item.value }} </option>
+                                        {% endfor %}
+                                    </select>
                                 </div>
                             </div>
 
                             <div lay-filter="query_filter" class="layui-form-item layui-hide">
                                 <label class="layui-form-label">{{_("文本")}}</label>
                                 <div class="layui-input-block">
-                                    <input id="suffix" type="text" name="text" placeholder='{{_("请输入音频文本")}}' autocomplete="off" class="layui-input" lay-affix="clear" />
+                                    <input id="suffix" type="text" name="text" placeholder='{{_("请输入音频文本")}}' autocomplete="off" class="layui-input" lay-verify="required" lay-affix="clear" />
                                 </div>
                             </div>
 
@@ -130,15 +134,9 @@
     <!-- 表格行工具 -->
     <script type="text/html" id="TPL_table_tools">
       <div class="layui-btn-container">
-        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="update"
-          >{{_("编辑")}}</a
-        >
-        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="test"
-          >{{_("试听")}}</a
-        >
-        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="download"
-          >{{_("下载")}}</a
-        >
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="test">{{_("试听")}}</a>
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="download">{{_("下载")}}</a>
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="update">{{_("编辑")}}</a>
       </div>
     </script>
 
@@ -167,18 +165,11 @@
 
             i18n.init('{{request.state.lang}}');
 
-            let CREATORBOX = "speaker"
-            let cache = layui.data(CREATORBOX)
             let player;
             let action = "query";
 
             var curr = 1
-            var form_json_init = JSON.parse('{{ data.form | tojson }}') // 表单默认值
-            var form_json = cache.hasOwnProperty('form') ? cache.form : {}     // 表单
-            Object.keys(form_json).length === 0 ? Object.assign(form_json, form_json_init) : Object.assign(form_json_init, form_json)
-
-            // 表单渲染
-            form.val('form_filter', form_json);
+            var form_json = {}
 
             // 表单验证
             form.verify({
@@ -224,8 +215,6 @@
             form.on('submit(form_submit)', function (data) {
                 var field = data.field;
                 var elem = data.elem;
-                // 本地存储
-                layui.data(CREATORBOX, { key: 'form', value: field });
                 // 请求数据
                 data = JSON.stringify(field, null, 2);
                 console.debug(field)
@@ -294,7 +283,7 @@
                     { title: i18n.trans("情感"), sort: true, width: 105, align: "left", field: 'emotion', templet: d => `<div title="${d.emotion ?? '-'}">${i18n.trans(`emotion.${d.emotion}`) ?? '-'}</div>` },
                     { title: i18n.trans("文本"), sort: false, field: 'text', templet: d => `<div title="${d.text}">${d.text}</div>` },
                     { title: i18n.trans("时长"), sort: true, width: 105, align: "center", field: 'duration', templet: d => `<div title="${d.duration}">${d.duration}</div>` },
-                    { title: i18n.trans("状态"), sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_status" },
+                    { title: i18n.trans("启用"), sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_status" },
                     { title: i18n.trans("操作"), sort: false, width: 220, align: "center", fixed: 'right', toolbar: "#TPL_table_tools" }
                 ]],
                 done: function (res, curr, count, origin) {
