@@ -58,11 +58,13 @@ buttons.refresh = {
   async onClick(e) {
     e.target.classList.add('rotating');
     if (args.has('remote')) {
-      location.reload(true);
+      const url = new URL(location.href);
+      url.searchParams.set('_t', Date.now());
+      location.href = url.toString();
     } else {
       try {
         const [r] = await Promise.all([
-          fetch(location.href, { signal: AbortSignal.timeout(5000) }),
+          fetch(location.href, { signal: AbortSignal.timeout(5000), cache: 'no-store' }),
           new Promise(resolve => setTimeout(resolve, 1000))
         ]);
         const text = await r.text();
@@ -99,7 +101,7 @@ buttons.save = {
     // 远程上传
     if (args.has('remote') && args.has('upload')) {
       const params = new URLSearchParams(args.get('remote').split('?')[1]);
-      let url = params.get('url')
+      let url = params.get('url') || params.get('path') || '';
       let lastIndex = url.lastIndexOf("/");
       let formData = new FormData();
       formData.append("file", blob, url.substring(lastIndex + 1));
@@ -143,7 +145,7 @@ async function render() {
   }
 
   const prefs = {
-    mode: localStorage.getItem('editor') || 'tree',
+    mode: args.get('mode') || localStorage.getItem('editor') || 'tree',
     expandLevel: parseInt(localStorage.getItem('expandLevel') || '2', 10),
     autoFormat: localStorage.getItem('auto-format') === 'true'
   };
@@ -161,7 +163,7 @@ async function render() {
   theme();
 
   try {
-    const { createJSONEditor } = await import('/static/js/editor/standalone.js');
+    const { createJSONEditor } = await import('/static/js/thirdparty/editor/standalone.js');
 
     const props = {
       mode: prefs.mode,

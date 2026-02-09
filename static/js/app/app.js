@@ -2,19 +2,17 @@ layui.config({
 	base: '../../static/js/app/'
 }).extend({
 	// 基础枚举
-	enums: 'ext/enums',
+	enums: 'common/enums',
 	// 常用操作
-	tool: 'ext/tools',
+	tool: 'common/tools',
 	// 信息提示
-	notice: 'ext/toastr',
+	notice: 'common/toastr',
 	// 国际化
-	i18n: 'ext/i18n',
-	// 字幕
-	asr: 'mod/asr',
-	// 翻译
-	trans: 'mod/trans',
+	i18n: 'common/i18n',
+	// 示例
+	example: 'extend/example',
 	// 配音
-	tts: 'mod/tts',
+	tts: 'extend/tts',
 });
 
 // 节流函数

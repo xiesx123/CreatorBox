@@ -1,7 +1,6 @@
-layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'notice'], function (exports) {
+layui.define(['layer', 'table', 'element', 'upload', 'i18n', `enums`, 'notice'], function (exports) {
 	var layer = layui.layer;
 	var table = layui.table;
-	var form = layui.form;
 	var element = layui.element;
 	var upload = layui.upload;
 	var toast = layui.notice;
@@ -50,7 +49,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 			return socket
 		},
 
-		get: function (url, parames, callback, progress) {
+		get: function (url, parames, callback, progress = true) {
 			$.ajax({
 				type: 'GET',
 				url: url,
@@ -81,7 +80,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 			});
 		},
 
-		post: function (url, parames, callback, progress) {
+		post: function (url, parames, callback, progress = true) {
 			$.ajax({
 				type: 'POST',
 				url: url,
@@ -153,8 +152,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 			var data = checkStatus.data;
 			var ids = data.map(item => item.id).join(",");
 			if (ids.length == 0) {
-				layer.msg(i18n.trans('请选择删除数据'));
-				toast.error(i18n.trans('请选择删除数据'), i18n.trans('提示'));
+				layer.msg(i18n.trans('请选择删除数据'), { icon: 0 });
 				return;
 			}
 			layer.confirm(i18n.trans('确认删除？'), {
@@ -191,12 +189,12 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 				});
 		},
 
-		upload: function (elem_, url_, accept_, exts_, progress_, done_) {
+		upload: function (elem, url, accept, exts, callback, progress = true) {
 			data = {
-				elem: elem_,
-				url: url_ || 'file/upload',
-				accept: accept_ || 'file',
-				exts: exts_,
+				elem: elem,
+				url: url || 'file/upload',
+				accept: accept || 'file',
+				exts: exts,
 				before: function (obj) {
 					element.progress('progress_filter', '0%');
 					layer.msg(i18n.trans('上传中'), { icon: 16, time: timeout });
@@ -204,29 +202,29 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 				progress: function (n, elem, e) {
 					element.progress('progress_filter', n + '%');
 					if (n == 100) {
-						layer.msg(i18n.trans('上传完毕'));
+						layer.msg(i18n.trans('上传完毕'), { icon: 6 });
 					}
-					if (progress_) {
-						progress_(n, elem, e);
+					if (progress) {
+						progress(n, elem, e);
 					}
 				},
 				done: function (response) {
 					layer.msg(i18n.trans('上传成功'), { icon: 1 });
-					if (done_) {
-						done_(response);
+					if (callback) {
+						callback(response);
 					}
 				},
 				error: function () {
-					toast.error(i18n.trans('上传失败'));
+					toast.error(i18n.trans('上传失败'), { icon: 2 });
 				}
 			}
-			if (exts_ == null) {
+			if (exts == null) {
 				delete data.exts;
 			}
 			upload.render(data);
 		},
 
-		dialog: function (url, h) {
+		dialog: function (url, h = "70%") {
 			layer.open({
 				type: 2,
 				title: false,
@@ -253,7 +251,7 @@ layui.define(['layer', 'table', 'form', 'element', 'upload', 'i18n', `enums`, 'n
 			});
 		},
 
-		open: function (url, w, h) {
+		open: function (url, w = "85%", h = "70%") {
 			layer.open({
 				type: 2,// iframe层
 				title: false,//弹层标题

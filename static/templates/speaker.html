@@ -9,15 +9,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <!-- jquery -->
     <script src="static/js/jquery/jquery.min.js"></script>
-    <script src="static/js/ext/howler.min.js"></script>
+    <!-- aplayer -->
+    <link href="static/js/thirdparty/aplayer/aplayer.min.css" rel="stylesheet">
+    <script src="static/js/thirdparty/aplayer/aplayer.min.js"></script>
     <!-- nprogress -->
-    <link href="static/js/nprogress/nprogress.min.css" rel="stylesheet" />
-    <script src="static/js/nprogress/nprogress.min.js"></script>
+    <link href="static/js/thirdparty/nprogress/nprogress.min.css" rel="stylesheet">
+    <script src="static/js/thirdparty/nprogress/nprogress.min.js"></script>
     <!-- layui -->
     <link href="static/js/layui/css/layui.css" rel="stylesheet" />
     <link href="static/js/layui/css/layui-dark.css" rel="stylesheet" />
     <script src="static/js/layui/layui.js"></script>
     <!-- app -->
+    <link href="static/js/app/app.css" rel="stylesheet">
     <script src="static/js/app/app.js"></script>
 </head>
 
@@ -30,7 +33,6 @@
                     <div class="layui-card layui-panel">
                         <div class="layui-colla-title">
                             {{_("说话人")}}
-                            <!-- <i class="layui-icon layui-icon-tips" lay-tips="要支持的噢"></i> -->
                         </div>
 
                         <div class="layui-colla-content layui-show">
@@ -53,8 +55,8 @@
                             <div class="layui-form-item" pane>
                                 <label class="layui-form-label">{{_("性别")}}</label>
                                 <div class="layui-input-block">
-                                    <input type="radio" name="gender" value="1" lay-filter="gender_filter" title='{{_("男")}}' checked />
-                                    <input type="radio" name="gender" value="2" lay-filter="gender_filter" title='{{_("女")}}' />
+                                    <input type="radio" name="gender" value="1" lay-verify="required" lay-filter="gender_filter" title='{{_("男")}}' />
+                                    <input type="radio" name="gender" value="2" lay-verify="required" lay-filter="gender_filter" title='{{_("女")}}' />
                                 </div>
                             </div>
 
@@ -109,14 +111,13 @@
             </div>
         </form>
 
-        <div style="padding: 10px">
+        <div style="padding: 6px">
             <table id="table" class="layui-table" style="margin: 0px"></table>
         </div>
     </div>
 
-    <div>
-        <input type="hidden" id="import" />
-    </div>
+    <!-- APlayer 播放器容器 -->
+    <div id="aplayer"></div>
 
     <!-- 表格工具栏 -->
     <script type="text/html" id="TPL_table_toolbar">
@@ -134,7 +135,7 @@
     <!-- 表格行工具 -->
     <script type="text/html" id="TPL_table_tools">
       <div class="layui-btn-container">
-        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="test">{{_("试听")}}</a>
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="preview">{{_("试听")}}</a>
         <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="download">{{_("下载")}}</a>
         <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="update">{{_("编辑")}}</a>
       </div>
@@ -185,7 +186,7 @@
                     }
                 },
                 path: function (value, elem) {
-                    if (value.length == 0 && !["query", "import"].includes(action)) {
+                    if (value.length == 0 && !["query"].includes(action)) {
                         return i18n.trans("请输入本地路径");
                     }
                 }
@@ -194,9 +195,7 @@
             // 表单=============
 
             // 表单-音频上传
-            tool.upload("#audio_upload", "spk/upload", 'audio', null, function (n, elem, e) {
-                layer.msg(i18n.trans("识别中"), { icon: 16, time: 30 * 1000 });
-            }, function (response) {
+            tool.upload("#audio_upload", "spk/upload", 'audio', 'mp3|wav|m4a|flac', function (response) {
                 layer.msg(i18n.trans("识别成功"), { icon: 1 });
                 if (response.code == 0) {
                     data = response.data
@@ -209,6 +208,8 @@
                     form_json.emotion = data.emotion
                     form.val('form_filter', form_json);
                 }
+            }, function (n, elem, e) {
+                layer.msg(i18n.trans("识别中"), { icon: 16, time: 30 * 1000 });
             })
 
             // 表单-提交事件
@@ -239,7 +240,7 @@
                             console.debug(response.data)
                             toast.success(`${field.speaker}`, i18n.trans("操作成功"));
                             table.reloadData('table', { scrollPos: 'fixed' });
-                        }, true)
+                        })
                     });
                 }
                 return false;
@@ -256,23 +257,15 @@
                 page: {
                     curr: 1, //当前页码
                     groups: 5, //只显示 1 个连续页码
-                    limit: 15,
                     first: true, //不显示首页
-                    last: true //不显示尾页
+                    last: true, //不显示尾页
+                    limit: 20,
                 },
                 request: {
                     pageName: 'page', limitName: 'size'
                 },
                 toolbar: '#TPL_table_toolbar',
-                defaultToolbar: [{
-                    title: i18n.trans("导入"),
-                    layEvent: 'import',
-                    icon: 'layui-icon-export',
-                    onClick: function (obj) {
-                        console.debug("toolbar import click")
-                    }
-                }],
-                height: 'full-78', // 最大高度减去其他容器已占有的高度差
+                height: 'full-68',
                 cols: [[
                     { type: 'checkbox' },
                     { title: i18n.trans("编号"), sort: true, width: 110, align: "center", templet: d => '<div title="' + d.text + '">' + d.LAY_NUM + '</div>' },
@@ -321,17 +314,6 @@
                             table.reloadData(id, { scrollPos: 'fixed' });
                         }, true)
                         break;
-                    case 'import':
-                        tool.upload("#import", "spk/batch", 'file', 'json', null, function (response) {
-                            if (response.code == 0) {
-                                table.reloadData('table', { scrollPos: 'fixed' });
-                                return toast.success(i18n.transFmt("format.voice_import", response.data), i18n.trans("提示"));
-                            } else {
-                                return toast.error(response.message, i18n.trans("提示"));
-                            }
-                        })
-                        $("#import").click();
-                        break;
                 };
             });
 
@@ -339,7 +321,7 @@
             table.on('tool(' + inst.config.id + ')', function (obj) {
                 var id = obj.config.id;
                 var data = obj.data;
-                var url = '/file/local?url=' + data.path;
+                var url = '/file/download?path=' + data.path;
                 if (obj.event === "update") {
                     action = "update";
                     form.val('form_filter', data);
@@ -347,8 +329,8 @@
                     $('button[type="submit"]').addClass('layui-border-blue');
                     $('[lay-filter="query_filter"]').removeClass('layui-hide');
                     $('[lay-filter="collapse_filter_speaker"] .layui-colla-content').addClass('layui-show');
-                } else if (obj.event === "test") {
-                    voice_play(url);
+                } else if (obj.event === "preview") {
+                    voice_play(url, data.speaker);
                 } else if (obj.event === "download") {
                     var link = document.createElement('a');
                     link.href = url;
@@ -372,39 +354,50 @@
                     } else {
                         toast.info(i18n.trans("关闭成功"));
                     }
-                }, true)
+                })
             });
 
-            // 音频播放
-            var voice_play = function (url) {
-                if (player) {
-                    player.unload();
-                }
-                player = new Howl({
-                    src: [url],
-                    format: ['wav'],
-                    autoplay: true,
-                    html5: true,
-                    onload: function () {
-                        console.debug('audio loaded');
-                    },
-                    onloaderror: function () {
+            // 音频播放 - 使用 APlayer
+            var voice_play = function (url, name) {
+                if (!player) {
+                    player = new APlayer({
+                        container: document.getElementById('aplayer'),
+                        fixed: true,
+                        mini: true,
+                        autoplay: true,
+                        loop: 'none',
+                        audio: []
+                    });
+
+                    // 监听错误事件
+                    player.on('error', function () {
                         toast.error(i18n.trans("加载失败"));
-                        // console.debug('audio onloaderror');
-                    },
-                    onplay: function () {
-                        console.debug('audio playing');
-                    },
-                    onpause: function () {
-                        console.debug('audio paused');
-                    },
-                    onstop: function () {
-                        console.debug('audio stopped');
-                    },
-                    onend: function () {
-                        console.debug('audio ended');
-                    },
+                    });
+
+                    // 播放结束后隐藏播放器
+                    player.on('ended', function () {
+                        var container = document.querySelector('.aplayer.aplayer-fixed');
+                        if (container) {
+                            container.style.display = 'none';
+                        }
+                    });
+                }
+
+                // 显示播放器
+                var container = document.querySelector('.aplayer.aplayer-fixed');
+                if (container) {
+                    container.style.display = '';
+                }
+
+                // 清空播放列表并添加新音频
+                player.list.clear();
+                player.list.add({
+                    name: name || i18n.trans("音频"),
+                    artist: 'CreatorBox',
+                    url: url,
+                    cover: 'static/images/launcher.png'
                 });
+                player.play();
             };
         });
     </script>

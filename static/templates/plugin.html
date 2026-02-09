@@ -9,16 +9,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <!-- jquery -->
     <script src="static/js/jquery/jquery.min.js"></script>
-    <script src="static/js/ext/xgplayer.js"></script>
+    <script src="static/js/thirdparty/xgplayer.js"></script>
     <!-- nprogress -->
-    <link href="static/js/nprogress/nprogress.min.css" rel="stylesheet">
-    <script src="static/js/nprogress/nprogress.min.js"></script>
+    <link href="static/js/thirdparty/nprogress/nprogress.min.css" rel="stylesheet">
+    <script src="static/js/thirdparty/nprogress/nprogress.min.js"></script>
     <!-- layui -->
     <link href="static/js/layui/css/layui.css" rel="stylesheet">
     <link href="static/js/layui/css/layui-dark.css" rel="stylesheet">
     <script src="static/js/layui/layui.js"></script>
     <!-- iconify -->
-    <script src="static/js/ext/iconify.min.js"></script>
+    <script src="static/js/thirdparty/iconify.min.js"></script>
     <!-- app -->
     <script src="static/js/app/app.js"></script>
 </head>
@@ -31,29 +31,25 @@
 
             <!-- 应用 -->
             <div class="layui-collapse" lay-filter="collapse_filter_gradio">
-                <div class="layui-colla-item">
+                <!-- <div class="layui-colla-item">
                     <div class="layui-card layui-panel">
                         <div class="layui-colla-title">{{_("组件")}}</div>
-                        <!-- <div class="layui-colla-content layui-show">
-                        </div> -->
+                        <div class="layui-colla-content layui-hide">
+                        </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
-            <div style="padding: 10px">
-                <table id="gradio_table" class="layui-table" style="margin: 0px;">
-                </table>
-            </div>
+            <table id="gradio_table" class="layui-table" style="margin: 0px;">
+            </table>
 
         </form>
     </div>
 
     <!-- 表格工具栏 -->
     <script type="text/html" id="TPL_table_toolbar">
-        <!-- <div class="layui-inline" lay-event="query"><i class="layui-icon layui-icon-search"></i></div>
-        <div class="layui-inline" lay-event="add"><i class="layui-icon layui-icon-add-circle"></i></div>-->
-    <div class="layui-inline" lay-event="enable"><i class="layui-icon layui-icon-radio"></i></div>
-    <div class="layui-inline" lay-event="disable"><i class="layui-icon layui-icon-circle"></i></div>
+    <div class="layui-inline" lay-event="enable"><i class="layui-icon layui-icon-star-fill"></i></div>
+    <div class="layui-inline" lay-event="disable"><i class="layui-icon layui-icon-star"></i></div>
     </script>
 
     <!-- 表格行工具 -->
@@ -113,7 +109,7 @@
                         console.debug("toolbar reboot click")
                     }
                 }],
-                height: 'full-68', // 最大高度减去其他容器已占有的高度差
+                height: 'full-18',
                 cols: [[
                     { type: 'checkbox' },
                     { title: '{{_("编号")}}', sort: true, width: 80, align: "center", templet: d => '<div title="' + d.text + '">' + d.LAY_NUM + '</div>' },
@@ -135,7 +131,7 @@
                         var data = checkStatus.data;
                         var ids = data.map(item => item.id).join(",");
                         if (ids.length == 0) {
-                            layer.msg(i18n.trans("请选择数据"));
+                            layer.msg(i18n.trans("请选择数据"), { icon: 0 });
                             return;
                         }
                         tool.post("/plugin/status", JSON.stringify({ "ids": ids, "status": 1 }), function (response) {
@@ -145,13 +141,13 @@
                             setTimeout(function () {
                                 tool.refresh()
                             }, 1 * 1000)
-                        }, true)
+                        })
                         break;
                     case 'disable':
                         var data = checkStatus.data;
                         var ids = data.map(item => item.id).join(",");
                         if (ids.length == 0) {
-                            layer.msg(i18n.trans("请选择数据"));
+                            layer.msg(i18n.trans("请选择数据"), { icon: 0 });
                             return;
                         }
                         tool.post("/plugin/status", JSON.stringify({ "ids": ids, "status": 0 }), function (response) {
@@ -160,7 +156,7 @@
                             setTimeout(function () {
                                 tool.refresh()
                             }, 1 * 1000)
-                        }, true)
+                        })
                         break;
                     case 'reboot':
                         // 确认执行
@@ -175,7 +171,7 @@
                                     tool.refresh()
                                 }, 10 * 1000)
                             })
-                        }, true);
+                        });
                         break;
                 };
             });
@@ -229,7 +225,7 @@
                         data: cache,
                         scrollPos: 'fixed'
                     });
-                }, true);
+                });
             });
 
             //// 设置本地语种

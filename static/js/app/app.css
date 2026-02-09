@@ -43,8 +43,15 @@
   left: -1px;
 }
 
-/* 底部浮动 */
-.floating-div {
+/* ================================ 底部浮动按钮 ================================ */
+
+/* 浮动按钮容器 - 默认状态（在页面流中） */
+#floating-div {
+  transition: all 0.3s ease;
+}
+
+/* 浮动按钮容器 - 浮动状态 */
+#floating-div.floating-div {
   position: fixed;
   left: 0;
   bottom: 0;
@@ -52,6 +59,145 @@
   background-color: #393D52;
   color: white;
   text-align: center;
-  padding: 0px 0;
+  padding: 10px 15px;
   z-index: 9999;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* 浮动状态下的按钮样式 */
+#floating-div.floating-div .layui-btn {
+  margin: 0;
+}
+
+/* 深色主题浮动按钮 */
+.dark #floating-div.floating-div {
+  background-color: var(--lay-color-bg-5);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 按钮悬浮过渡效果 */
+.layui-btn {
+  transition: all 0.3s ease;
+}
+
+.layui-btn:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.layui-btn:active {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 主按钮悬浮效果 */
+.layui-btn-fluid:hover {
+  opacity: 0.9;
+  box-shadow: 0 2px 8px rgba(22, 186, 170, 0.3);
+}
+
+/* 深色主题按钮效果 */
+.dark .layui-btn:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark .layui-btn-fluid:hover {
+  box-shadow: 0 2px 8px rgba(22, 186, 170, 0.4);
+}
+
+/* ================================ APlayer 主题适配 ================================ */
+
+/* APlayer 基础样式 */
+.aplayer {
+  font-family: inherit;
+}
+
+/* APlayer Fixed 模式样式 */
+.aplayer.aplayer-fixed {
+  z-index: 99999;
+}
+
+.aplayer.aplayer-fixed .aplayer-body {
+  background-color: #fafafa;
+  border: 1px solid #e2e2e2;
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 移除顶部白线 */
+.aplayer.aplayer-fixed .aplayer-info {
+  border-top: none !important;
+  border-bottom-color: #e2e2e2;
+}
+
+.aplayer.aplayer-fixed .aplayer-info .aplayer-music .aplayer-title {
+  color: #333333;
+}
+
+.aplayer.aplayer-fixed .aplayer-info .aplayer-music .aplayer-author {
+  color: #666666;
+}
+
+.aplayer.aplayer-fixed .aplayer-miniswitcher {
+  background-color: #16baaa;
+  border-radius: 0 4px 0 0;
+}
+
+.aplayer.aplayer-fixed .aplayer-miniswitcher .aplayer-icon path {
+  fill: #fff;
+}
+
+/* ================================ APlayer 深色主题适配 ================================ */
+
+.dark .aplayer.aplayer-fixed .aplayer-body {
+  background-color: var(--lay-color-bg-5);
+  border-color: var(--lay-color-border-2);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-info {
+  border-top: none !important;
+  border-bottom-color: var(--lay-color-border-2);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-pic .aplayer-button {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-info .aplayer-music .aplayer-title {
+  color: var(--lay-color-text-1);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-info .aplayer-music .aplayer-author {
+  color: var(--lay-color-text-3);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-info .aplayer-controller .aplayer-time {
+  color: var(--lay-color-text-2);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon path {
+  fill: var(--lay-color-text-2);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon:hover path {
+  fill: var(--lay-color-text-1);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar {
+  background: var(--lay-color-border-2);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-loaded {
+  background: var(--lay-color-border-3);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-miniswitcher {
+  background-color: var(--lay-color-primary);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-miniswitcher .aplayer-icon path {
+  fill: #fff;
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-miniswitcher:hover {
+  background-color: var(--lay-color-primary-hover);
 }
