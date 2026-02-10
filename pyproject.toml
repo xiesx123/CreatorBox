@@ -22,6 +22,7 @@ dependencies = [
     "gradio-bottombar==0.0.2",
     "gradio-buttonplus==0.0.1",
     "gradio-dropdownplus==0.0.3",
+    "gradio-htmlinjector==0.0.1",
     "gradio-image-annotation==0.4.1",
     "gradio-modal==0.0.4",
     "gradio-rangeslider==0.0.8",
