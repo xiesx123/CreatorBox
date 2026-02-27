@@ -55,19 +55,17 @@ if __name__ == "__main__":
 
     # ==================== 启动器示例 ====================
 
-    # DEFAULT_INDEX = "https://pypi.org/simple"
-    # DEFAULT_INDEX_TSINGHUA = "https://pypi.tuna.tsinghua.edu.cn/simple"
-    # PROJECT = "iopaint"
+    DEFAULT_INDEX = "https://pypi.org/simple"
+    DEFAULT_INDEX_TSINGHUA = "https://pypi.tuna.tsinghua.edu.cn/simple"
+    PROJECT = "stable_diffusion_webui"
 
     # 启动参数
-    # kwargs = {"index": DEFAULT_INDEX_TSINGHUA, "pyv": "3.11", "host": "127.0.0.1", "port": 9000, "share": False}
+    kwargs = {"index": DEFAULT_INDEX_TSINGHUA, "pyv": "3.11", "host": "127.0.0.1", "port": 9000, "share": False}
 
     # 创建启动器
-    # launcher = Launcher.builder(PROJECT, **kwargs)
+    launcher = Launcher.builder(PROJECT, **kwargs)
 
     # 执行流程
-    # launcher.create()
-    # launcher.install()
-    # launcher.start().wait()
-
-    pass
+    launcher.create()
+    launcher.install()
+    launcher.start().wait()
