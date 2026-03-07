@@ -10,7 +10,6 @@ set FFMPEG_HOME=%CREATORBOX_HOME%\ffmpeg
 set GIT_HOME=%CREATORBOX_HOME%\git
 :: Uv       (e.g.D:\Program Files\CreatorBox\uv)
 set UV_HOME=%CREATORBOX_HOME%\uv
-@REM set UV_HOME="D:\Projects\uv"
 ::--------------------------------------------------------------------------------------------
 
 :: Set Environment
@@ -18,9 +17,9 @@ set PATH=;%CREATORBOX_HOME%;%ARIA2_HOME%;%FFMPEG_HOME%;%GIT_HOME%\cmd;%UV_HOME%;
 echo %PATH%
 
 REM Execute script
-set SCRIPT_CMD=uv run 
+set SCRIPT_CMD=uv run --extra gpu 
 set SCRIPT_PATH=cli.py
-set SCRIPT_ARGS=start -h 127.0.0.1 -p 8000
+set SCRIPT_ARGS=start -h 0.0.0.0 -p 8000
 if "%~1"=="--debug" (
     set SCRIPT_ARGS=%SCRIPT_ARGS% --debug
 )

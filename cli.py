@@ -20,7 +20,7 @@ def cli():
 
 
 @cli.command(help="启动服务 (Start service)")
-@click.option("--host", "-h", type=str, default="127.0.0.1", show_default=True, required=True, help="host")
+@click.option("--host", "-h", type=str, default="0.0.0.0", show_default=True, required=True, help="host")
 @click.option("--port", "-p", type=int, default=8000, show_default=True, required=True, help="port")
 @click.option("--debug", is_flag=True, default=False, show_default=True, help="enable debug mode")
 @click.option("--browser", is_flag=True, default=False, show_default=False, help="auto open browser")
