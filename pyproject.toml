@@ -1,23 +1,25 @@
 [project]
 name = "creatorbox"
-version="1.0.29"
+version="1.0.30"
 description="🚀🎬 Flexible, efficient, and scalable toolbox for editing and dubbing, unleashing creative potential"
 readme = "README.md"
 requires-python = ">3.11,<3.14"
 dependencies = [
+    "apstone==0.0.8",
     "asyncio==4.0.0",
     "audio-separator==0.30.2",
     "azure-cognitiveservices-speech==1.47.0",
     "babel==2.17.0",
     "click==8.3.1",
     "craft-detector==0.2.1",
+    "cv2box==0.6.0",
     "edge-tts==7.2.7",
     "fake-useragent==2.2.0",
     "fast-langdetect==1.0.0",
-    "fastapi==0.128.0",
+    "fastapi==0.135.1",
     "faster-whisper==1.2.1",
     "ffmpeg-python==0.2.0",
-    "funasr==1.3.0",
+    "funasr==1.3.1",
     "gputil==1.4.0",
     "gradio-bottombar==0.0.2",
     "gradio-buttonplus==0.0.1",
@@ -35,22 +37,23 @@ dependencies = [
     "litellm[caching]==1.80.11",
     "loguru==0.7.3",
     "nltk==3.9.2",
+    "numexpr==2.8.6",
     "numpy==1.26.4",
-    "onnxruntime==1.23.2",
     "opencv-python==4.11.0.86",
     "psutil==7.2.1",
     "pyannote-audio==3.4.0",
     "pycapcut==0.0.3",
     "pydub==0.25.1",
     "pyjianyingdraft==0.2.5",
-    "pyngrok==7.5.0",
+    "pyngrok==7.5.1",
     "python-engineio==4.12.3",
     "python-multipart==0.0.20",
     "python-socketio==5.14.3",
     "pytorchcv==0.0.74",
-    "rapidocr==3.5.0",
-    "requests-cache==1.2.1",
+    "rapidocr==3.7.0",
+    "requests-cache==1.3.1",
     "scenedetect==0.6.7",
+    "sounddevice==0.5.5",
     "sqlmodel==0.0.31",
     "srt==3.5.3",
     "tenacity==9.1.2",
@@ -58,17 +61,15 @@ dependencies = [
     "torchaudio==2.6.0",
     "torchvision==0.21.0",
     "transformers==4.57.1",
-    "uvicorn==0.40.0",
-    "yt-dlp==2025.12.8",
+    "typeguard==2.13.3",
+    "uvicorn==0.41.0",
+    "yt-dlp==2026.3.3",
 ]
-
-[project.optional-dependencies]
-gpu = ["onnxruntime-gpu==1.23.2"]
 
 [dependency-groups]
 dev = [
-    "autoflake>=2.3.1",
-    "black>=25.9.0",
+    "autoflake>=2.3.3",
+    "black>=26.3.0",
     "pip>=25.3",
     "polib>=1.2.0",
     "ruff>=0.14.2",
@@ -78,6 +79,51 @@ dev = [
     "pyarmor==9.1.2",
 ]
 
+[project.optional-dependencies]
+cpu = [
+    "torch==2.6.0",
+    "torchaudio==2.6.0",
+    "torchvision==0.21.0",
+    "onnxruntime==1.23.2",
+]
+gpu = [
+    "torch==2.6.0",
+    "torchaudio==2.6.0",
+    "torchvision==0.21.0",
+    "onnxruntime-gpu==1.23.2",
+]
+
+[tool.uv]
+conflicts = [
+    [
+        { extra = "cpu" },
+        { extra = "gpu" },
+    ],
+]
+ 
+[tool.uv.sources]
+torch = [
+  { index = "pytorch-cpu", extra = "cpu" },
+  { index = "pytorch-gpu", extra = "gpu" },
+]
+torchaudio = [
+  { index = "pytorch-cpu", extra = "cpu" },
+  { index = "pytorch-gpu", extra = "gpu" },
+]
+torchvision = [
+  { index = "pytorch-cpu", extra = "cpu" },
+  { index = "pytorch-gpu", extra = "gpu" },
+]
+
 [[tool.uv.index]]
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+name = "pytorch-cpu"
+# https://pypi.org/simple
+url = "https://pypi.tuna.tsinghua.edu.cn/simple" 
+explicit = true
 default = true
+
+[[tool.uv.index]]
+name = "pytorch-gpu"
+# url = "https://download.pytorch.org/whl/cu126"
+url = "https://mirrors.nju.edu.cn/pytorch/whl/cu126"
+explicit = true

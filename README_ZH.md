@@ -87,6 +87,26 @@
     </tbody>-->
 </table>
 
+
+#### 数字人
+
+<table>
+    <thead>
+        <tr>
+            <th align="center">zh</th>
+            <th align="center">en</th>
+            <th align="center">jp</th>
+        </tr>
+   </thead>
+    <tbody>
+        <tr>
+            <td align="center"><video src="https://github.com/user-attachments/assets/95ce8512-3247-4004-a1c2-b8697afa7f78" width="120"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/8ed423b9-f1d9-4180-8c4e-211e636825d6" width="120"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/4808e825-e3b3-47f9-8777-f2bab66b90fb" width="120"></video></td>
+        </tr>
+    </tbody>
+</table>
+
 #### 配音
 
 <table>
