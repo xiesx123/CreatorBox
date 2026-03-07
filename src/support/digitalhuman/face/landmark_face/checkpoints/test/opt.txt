@@ -1,0 +1,74 @@
+----------------- Options ---------------
+             aspect_ratio: 1.0                           
+            audio_feature: 3dmm                          
+               batch_size: 16                            
+          checkpoints_dir: ./landmark2face/checkpoints
+                crop_size: 256                           
+                 dataroot: ./data                        
+             dataset_mode: Facereala3dmm                 
+                direction: AtoB                          
+          display_winsize: 256                           
+              distributed: False                         
+                    epoch: latest                        
+                     eval: False                         
+                 feat_num: 3                             
+             feature_path: ../AnnI_deep3dface_256_contains_id/
+                     fp16: True                          
+                  gpu_ids: 0                             
+                 img_size: 256                           
+                init_gain: 0.02                          
+                init_type: normal                        
+                 input_nc: 3                             
+            instance_feat: False                         
+                  isTrain: False                         	[default: None]
+               label_feat: False                         
+                 lan_size: 1                             
+            load_features: False                         
+                load_iter: 0                             	[default: 0]
+                load_size: 286                           
+               local_rank: -1                            
+         max_dataset_size: inf                           
+               mfcc0_rate: 0.2                           
+                    model: pirender_3dmm_mouth_hd        
+               model_path: ./landmark2face/checkpoints/anylang/dinet_v1_20240131.pth
+                 n_blocks: 9                             
+          n_blocks_global: 9                             
+           n_blocks_local: 3                             
+               n_clusters: 10                            
+           n_downsample_E: 2                             
+      n_downsample_global: 4                             
+               n_layers_D: 3                             
+        n_local_enhancers: 1                             
+                     name: test                          
+                      ndf: 64                            
+                      nef: 16                            
+                     netD: basic                         
+                     netG: pirender                      
+                      ngf: 64                            
+         niter_fix_global: 0                             
+               no_dropout: True                          
+                  no_flip: False                         
+          no_ganFeat_loss: False                         
+              no_instance: False                         
+                     norm: instance                      
+                    ntest: inf                           
+                    num_D: 2                             
+                 num_test: 50                            
+              num_threads: 8                             
+                output_nc: 3                             
+        perceptual_layers: ['relu_1_1', 'relu_2_1', 'relu_3_1', 'relu_4_1', 'relu_5_1']
+       perceptual_network: vgg19                         
+    perceptual_num_scales: 4                             
+perceptual_use_style_loss: True                          
+       perceptual_weights: [4, 4, 4, 4, 4]               
+                    phase: test                          
+               preprocess: none                          
+              resize_size: 512                           
+              results_dir: ./results/                    
+           serial_batches: False                         
+                   suffix:                               
+          test_audio_path: None                          
+               test_muban: None                          
+                  verbose: False                         
+weight_style_to_perceptual: 250                           
+----------------- End -------------------
