@@ -98,27 +98,5 @@ def install(name, version, start, port, share):
         click.echo(f"❌ error: {str(e)}", err=True)
 
 
-@cli.command(help="网络代理 (Proxy settings)")
-@click.option("--host", "-h", type=str, default="127.0.0.1", show_default=True, required=True, help="host")
-@click.option("--port", "-p", type=int, default=10808, show_default=True, required=True, help="port")
-@click.option("--username", "-u", type=str, default=None, help="username")
-@click.option("--password", "-pwd", type=str, default=None, help="password")
-@click.option("--site", "-s", type=str, default="https://www.google.com", show_default=True, help="website")
-@click.option("--timeout", "-t", type=int, default=5, show_default=True, help="timeout")
-def proxy(host, port, username, password, site, timeout):
-    try:
-        from src.utils.cbrequest import ProxyHelper
-
-        proxy = ProxyHelper(ip=host, port=port, username=username, password=password)
-        click.echo(f"🌐 Starting proxy verify. -> {site}")
-        if proxy.verify(url=site, timeout=timeout):
-            proxy.configure()
-            click.echo(f"✅ Proxy verified successfully.")
-        else:
-            click.echo("❌ Proxy verified failed. please check your proxy.")
-    except Exception as e:
-        click.echo(f"❌ error: {str(e)}", err=True)
-
-
 if __name__ == "__main__":
     cli()

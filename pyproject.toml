@@ -36,6 +36,7 @@ dependencies = [
     "language-tags==1.2.0",
     "litellm[caching]==1.80.11",
     "loguru==0.7.3",
+    "ml-dtypes==0.5.4",
     "nltk==3.9.2",
     "numexpr==2.8.6",
     "numpy==1.26.4",
@@ -90,6 +91,7 @@ gpu = [
     "torch==2.6.0",
     "torchaudio==2.6.0",
     "torchvision==0.21.0",
+    "onnxruntime==1.23.2 ; python_version < '0'",
     "onnxruntime-gpu==1.23.2",
 ]
 
@@ -99,6 +101,11 @@ conflicts = [
         { extra = "cpu" },
         { extra = "gpu" },
     ],
+]
+override-dependencies = [
+    "onnxruntime==1.23.2 ; extra == 'cpu'",
+    "onnxruntime-gpu==1.23.2 ; extra == 'gpu'",
+    "numpy==1.26.4",
 ]
  
 [tool.uv.sources]
