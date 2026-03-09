@@ -26,9 +26,6 @@
 
 </div>
 
-### 📦 快速开始
-
-👉 安装部署指南：[本地安装](https://xiesx123.github.io/CreatorBox/zh/deploy-local) | [远程部署](https://xiesx123.github.io/CreatorBox/zh/deploy-colab)
 
 ### 🎨 适用场景
 
@@ -47,62 +44,45 @@
 ##### 翻译
 
 <table>
+    <!-- 三体 -->
     <thead>
         <tr>
             <th align="center">zh</th>
             <th align="center">en</th>
         </tr>
-    </thead>
-    <!-- 三体 -->
+   </thead>
     <tbody>
         <tr>
             <td align="center">
-                <a href="https://www.bilibili.com/video/BV1rumqBZECW?t=403" target="_blank">
+                <a href="https://xiesx123.github.io/CreatorBox/zh/component/dubbing#translation" target="_blank">
                     <img src="https://i0.hdslb.com/bfs/archive/50d5d4cf67f4840c8bd969c64c13af093419eaeb.jpg" />
                 </a>
             </td>
-            <td align="center"><a href="https://www.bilibili.com/video/BV1rumqBZECW?t=0.0" target="_blank"><img src="https://i0.hdslb.com/bfs/archive/50d5d4cf67f4840c8bd969c64c13af093419eaeb.jpg" /></a></td>
+            <td align="center">
+                <a href="https://xiesx123.github.io/CreatorBox/zh/component/dubbing#translation" target="_blank">
+                    <img src="https://i0.hdslb.com/bfs/archive/50d5d4cf67f4840c8bd969c64c13af093419eaeb.jpg" />
+                </a>
+            </td>
         </tr>
     </tbody>
-    <!-- 大话西游 
-    <tbody>
-        <tr>
-            <td align="center"><video src="https://github.com/user-attachments/assets/b6e30353-5b08-4c12-8407-8d759233d193" width="200"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/f57363c5-3110-4b1b-be3f-769c0e65fe9a" width="200"></video></td>
-        </tr>
-    </tbody>-->
-    <!-- 求职面试 
-    <tbody>
-        <tr>
-            <td align="center"><video src="https://github.com/user-attachments/assets/327b819c-c811-4265-960b-83117e0da670"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/ed6449df-dd04-45f0-9ab1-ce4a2a5b600c"></video></td>
-        </tr>
-    </tbody>-->
-    <!-- 黑神话
-    <tbody>
-        <tr>
-            <td align="center"><video src="https://github.com/user-attachments/assets/c68c376e-54ef-4a6b-a195-fbe926c0de37"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/e9424df6-0986-4118-af82-b5f140398471"></video></td>
-        </tr>
-    </tbody>-->
 </table>
 
 ##### 配音
 
 <table>
-    <thead>
-        <tr>
-            <th align="center">en 原声</th>
-            <th align="center">en 克隆 </th>
-            <th align="center">zh 克隆 + 配音</th>
-        </tr>
-   </thead>
     <!-- 商品介绍-->
     <tbody>
         <tr>
-            <td align="center"><video src="https://github.com/user-attachments/assets/a1c9ea12-a3a0-4d0d-9d68-43659e6cc180" width="120"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/f8f399de-27e9-42c4-a97d-f1090d6f568b" width="120"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/6babdb77-90db-4ea7-b6eb-9614438fa0f1" width="120"></video></td>
+            <td align="center">
+                <a href="https://xiesx123.github.io/CreatorBox/zh/component/dubbing#dubbing" target="_blank">
+                    <img src="https://xiesx123.github.io/CreatorBox/videos/video_product.png" />
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://xiesx123.github.io/CreatorBox/zh/component/dubbing#dubbing" target="_blank">
+                    <img src="https://xiesx123.github.io/CreatorBox/videos/video_product.png" />
+                </a>
+            </td>
         </tr>
     </tbody>
 </table>
@@ -110,18 +90,18 @@
 #### 数字人
 
 <table>
-    <thead>
-        <tr>
-            <th align="center">zh</th>
-            <th align="center">en</th>
-            <th align="center">jp</th>
-        </tr>
-   </thead>
     <tbody>
         <tr>
-            <td align="center"><video src="https://github.com/user-attachments/assets/95ce8512-3247-4004-a1c2-b8697afa7f78" width="120"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/8ed423b9-f1d9-4180-8c4e-211e636825d6" width="120"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/4808e825-e3b3-47f9-8777-f2bab66b90fb" width="120"></video></td>
+            <td align="center">
+                <a href="https://xiesx123.github.io/CreatorBox/zh/component/dh" target="_blank">
+                    <img src="https://xiesx123.github.io/CreatorBox/videos/video_digitalhuman_1.png" />
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://xiesx123.github.io/CreatorBox/zh/component/dh" target="_blank">
+                    <img src="https://xiesx123.github.io/CreatorBox/videos/video_digitalhuman_2.png" />
+                </a>
+            </td>
         </tr>
     </tbody>
 </table>
@@ -132,35 +112,78 @@
     <!-- 跳伞 -->
     <tbody>
         <tr>
-            <td align="center"><video src="https://github.com/user-attachments/assets/04b42cfc-9a17-411e-9c24-775e2c5cbd9f" width="120"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/7f8b613f-d64a-4385-a4e3-caef99ea6208" width="120"></video></td>      
-            <td align="center"><video src="https://github.com/user-attachments/assets/da2b2e1f-b5e4-44a1-a3b7-3c83522b45d8" width="120"></video></td>
+            <td align="center">
+                <a href="https://xiesx123.github.io/CreatorBox/zh/component/vmi" target="_blank">
+                    <img src="https://xiesx123.github.io/CreatorBox/videos/video_paragliding.png" />
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://xiesx123.github.io/CreatorBox/zh/component/vmi" target="_blank">
+                    <img src="https://xiesx123.github.io/CreatorBox/videos/video_paragliding_track.png" />
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://xiesx123.github.io/CreatorBox/zh/component/vmi" target="_blank">
+                    <img src="https://xiesx123.github.io/CreatorBox/videos/video_paragliding_inpaint.png" />
+                </a>
+            </td>
         </tr>
     </tbody>
     <!-- 晚餐 -->
     <tbody>
         <tr>
-            <td align="center"><video src="https://github.com/user-attachments/assets/e99af835-57e6-4c27-8212-83e74eba6368" width="120"></video></td>
-            <td align="center"><img src="https://github.com/user-attachments/assets/726accaf-fa28-47e3-8e27-e4bb7d7c1bb0" /></td>      
-            <td align="center"><video src="https://github.com/user-attachments/assets/3ba3ef62-c8a3-4857-ae0b-ebff89c2c713" width="120"></video></td>
+            <td align="center">
+                <a href="https://xiesx123.github.io/CreatorBox/zh/component/vmi" target="_blank">
+                    <img src="https://xiesx123.github.io/CreatorBox/videos/video_dinner.png" />
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://xiesx123.github.io/CreatorBox/zh/component/vmi" target="_blank">
+                    <img src="https://xiesx123.github.io/CreatorBox/videos/video_dinner.webp" />
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://xiesx123.github.io/CreatorBox/zh/component/vmi" target="_blank">
+                    <img src="https://xiesx123.github.io/CreatorBox/videos/video_dinner_inpaint.png" />
+                </a>
+            </td>
         </tr>
     </tbody>
     <!-- 黑神话 -->
     <tbody>
         <tr>
-            <td align="center"><video src="https://github.com/user-attachments/assets/14849275-1e45-4814-bc38-f62d45afd907" width="120"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/823cba86-1042-4549-b88e-96df5b2981be" width="120"></video></td>      
-            <td align="center"><video src="https://github.com/user-attachments/assets/d48bf797-e371-40df-b30c-fb5f964b94e3" width="120"></video></td>
+            <td align="center">
+                <a href="https://xiesx123.github.io/CreatorBox/zh/component/vmi" target="_blank">
+                    <img src="https://xiesx123.github.io/CreatorBox/videos/video_heishenhua.png" />
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://xiesx123.github.io/CreatorBox/zh/component/vmi" target="_blank">
+                    <img src="https://xiesx123.github.io/CreatorBox/videos/video_heishenhua_track.png" />
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://xiesx123.github.io/CreatorBox/zh/component/vmi" target="_blank">
+                    <img src="https://xiesx123.github.io/CreatorBox/videos/video_heishenhua_inpaint.png" />
+                </a>
+            </td>
         </tr>
     </tbody>
 </table>
+
+### 📦 快速开始
+
+- 👉 安装部署指南：[本地](https://xiesx123.github.io/CreatorBox/zh/deploy-local) | [远程](https://xiesx123.github.io/CreatorBox/zh/deploy-colab)
+
+- 👉 开发集成指南：[应用](https://xiesx123.github.io/CreatorBox/zh/component) | [扩展](https://xiesx123.github.io/CreatorBox/zh/extensions)
+
 
 ### 📢 反馈
 
 - 可以提交 [Issues](https://github.com/xiesx123/CreatorBox/issues)
   或 [Email](mailto:xiesx123@gmail.com?subject=CreatoxBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?)
 
-- 欢迎加入 [Discord](https://discord.gg/ZSeETM6bsS) 进行用法或新功能的讨论
+- 加入 [Discord](https://discord.gg/ZSeETM6bsS) 进行用法或新功能的讨论
 
 ### 📌 Project Status
 
