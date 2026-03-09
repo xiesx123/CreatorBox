@@ -27,11 +27,11 @@
 
 </div>
 
-## 📦 Quick Start
+### 📦 Quick Start
 
 👉 Installation and Deployment Guide: [Local Installation](https://xiesx123.github.io/CreatorBox/deploy-local) | [Remote Deployment](https://xiesx123.github.io/CreatorBox/deploy-colab)
 
-## 🎨 Applicable Scenarios
+### 🎨 Applicable Scenarios
 
 - 🎥 **Content Creators**: Enhance creative efficiency and unleash creative potential.
 
@@ -41,11 +41,11 @@
 
 - 🚀 **Independent Deployment**：Flexible deployment, supports local, server, Kaggle and Colab, ensuring data security
 
-## 📥 Example
+### 📥 Example
 
-### Video Translation and Dubbing
+#### Translation and Dubbing
 
-#### Translation
+##### Translation
 
 <table>
     <thead>
@@ -92,26 +92,7 @@
     </tbody>-->
 </table>
 
-#### Digital Human
-
-<table>
-    <thead>
-        <tr>
-            <th align="center">zh</th>
-            <th align="center">en</th>
-            <th align="center">jp</th>
-        </tr>
-   </thead>
-    <tbody>
-        <tr>
-            <td align="center"><video src="https://github.com/user-attachments/assets/95ce8512-3247-4004-a1c2-b8697afa7f78" width="120"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/8ed423b9-f1d9-4180-8c4e-211e636825d6" width="120"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/4808e825-e3b3-47f9-8777-f2bab66b90fb" width="120"></video></td>
-        </tr>
-    </tbody>
-</table>
-
-#### Dubbing
+##### Dubbing
 
 <table>
     <thead>
@@ -131,7 +112,26 @@
     </tbody>
 </table>
 
-### Video Mask Inpaint
+#### Digital Human
+
+<table>
+    <thead>
+        <tr>
+            <th align="center">zh</th>
+            <th align="center">en</th>
+            <th align="center">jp</th>
+        </tr>
+   </thead>
+    <tbody>
+        <tr>
+            <td align="center"><video src="https://github.com/user-attachments/assets/95ce8512-3247-4004-a1c2-b8697afa7f78" width="120"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/8ed423b9-f1d9-4180-8c4e-211e636825d6" width="120"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/4808e825-e3b3-47f9-8777-f2bab66b90fb" width="120"></video></td>
+        </tr>
+    </tbody>
+</table>
+
+#### Video Mask Inpaint
 
 <table>
     <!-- 跳伞 -->
@@ -160,13 +160,13 @@
     </tbody>
 </table>
 
-## 📢 Feedback and Suggestions
+### 📢 Feedback
 
 - Submit via [Issues](https://github.com/xiesx123/CreatorBox/issues) or [Email](mailto:xiesx123@gmail.com?subject=CreatoxBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?).
 
 - Welcome to join [Discord](https://discord.gg/kt6JWax3P6) for discussions on usage or new features.
 
-## 📌 Project Status
+### 📌 Project Status
 
 ![Status](https://repobeats.axiom.co/api/embed/afc79d9210faea79913ee2e2c7e776886295e052.svg)
 
@@ -183,6 +183,6 @@
 </a>
  -->
 
-## Disclaimer
+### Disclaimer
 
 The content above is for demonstration purposes only. Some examples are sourced from the internet. If any content infringes on your rights, please contact us to request its removal.

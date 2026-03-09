@@ -26,11 +26,11 @@
 
 </div>
 
-## 📦 快速开始
+### 📦 快速开始
 
 👉 安装部署指南：[本地安装](https://xiesx123.github.io/CreatorBox/zh/deploy-local) | [远程部署](https://xiesx123.github.io/CreatorBox/zh/deploy-colab)
 
-## 🎨 适用场景
+### 🎨 适用场景
 
 - 🎬 **内容创作**：提升创作效率，释放创作潜力
 
@@ -40,11 +40,11 @@
 
 - 🚀 **独立部署**：灵活部署，支持本地、服务器、Kaggle、Colab，保障数据安全
 
-## 📥 示例
+### 📥 示例
 
-### 视频翻译配音
+#### 翻译配音
 
-#### 翻译
+##### 翻译
 
 <table>
     <thead>
@@ -87,6 +87,25 @@
     </tbody>-->
 </table>
 
+##### 配音
+
+<table>
+    <thead>
+        <tr>
+            <th align="center">en 原声</th>
+            <th align="center">en 克隆 </th>
+            <th align="center">zh 克隆 + 配音</th>
+        </tr>
+   </thead>
+    <!-- 商品介绍-->
+    <tbody>
+        <tr>
+            <td align="center"><video src="https://github.com/user-attachments/assets/a1c9ea12-a3a0-4d0d-9d68-43659e6cc180" width="120"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/f8f399de-27e9-42c4-a97d-f1090d6f568b" width="120"></video></td>
+            <td align="center"><video src="https://github.com/user-attachments/assets/6babdb77-90db-4ea7-b6eb-9614438fa0f1" width="120"></video></td>
+        </tr>
+    </tbody>
+</table>
 
 #### 数字人
 
@@ -107,27 +126,7 @@
     </tbody>
 </table>
 
-#### 配音
-
-<table>
-    <thead>
-        <tr>
-            <th align="center">en 原声</th>
-            <th align="center">en 克隆 </th>
-            <th align="center">zh 克隆 + 配音</th>
-        </tr>
-   </thead>
-    <!-- 商品介绍-->
-    <tbody>
-        <tr>
-            <td align="center"><video src="https://github.com/user-attachments/assets/a1c9ea12-a3a0-4d0d-9d68-43659e6cc180" width="120"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/f8f399de-27e9-42c4-a97d-f1090d6f568b" width="120"></video></td>
-            <td align="center"><video src="https://github.com/user-attachments/assets/6babdb77-90db-4ea7-b6eb-9614438fa0f1" width="120"></video></td>
-        </tr>
-    </tbody>
-</table>
-
-### 视频掩码修复
+#### 视频掩码去除
 
 <table>
     <!-- 跳伞 -->
@@ -156,14 +155,14 @@
     </tbody>
 </table>
 
-## 📢 反馈建议
+### 📢 反馈
 
 - 可以提交 [Issues](https://github.com/xiesx123/CreatorBox/issues)
   或 [Email](mailto:xiesx123@gmail.com?subject=CreatoxBox%20Discussions&body=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20project.%20Could%20you%20provide%20more%20details?)
 
 - 欢迎加入 [Discord](https://discord.gg/ZSeETM6bsS) 进行用法或新功能的讨论
 
-## 📌 Project Status
+### 📌 Project Status
 
 ![Status](https://repobeats.axiom.co/api/embed/afc79d9210faea79913ee2e2c7e776886295e052.svg)
 
@@ -179,6 +178,6 @@
 </a>
  -->
 
-## 免责声明
+### 声明
 
 以上内容仅展示能力，示例来源于互联网。如果有任何内容侵犯了您的权利，请联系我们申请删除。
