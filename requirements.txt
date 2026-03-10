@@ -67,6 +67,7 @@ pytorchcv==0.0.74
 #  系统 
 gputil==1.4.0
 psutil==7.2.1
+pygrabber==0.2
 sounddevice==0.5.5
 
 #  语言 

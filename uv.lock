@@ -895,6 +895,7 @@ dependencies = [
     { name = "pyannote-audio" },
     { name = "pycapcut" },
     { name = "pydub" },
+    { name = "pygrabber" },
     { name = "pyjianyingdraft" },
     { name = "pyngrok" },
     { name = "python-engineio" },
@@ -996,6 +997,7 @@ requires-dist = [
     { name = "pyannote-audio", specifier = "==3.4.0" },
     { name = "pycapcut", specifier = "==0.0.3" },
     { name = "pydub", specifier = "==0.25.1" },
+    { name = "pygrabber", specifier = "==0.2" },
     { name = "pyjianyingdraft", specifier = "==0.2.5" },
     { name = "pyngrok", specifier = "==7.5.1" },
     { name = "python-engineio", specifier = "==4.12.3" },
@@ -3922,6 +3924,19 @@ source = { registry = "https://pypi.tuna.tsinghua.edu.cn/simple" }
 sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/b0/77/a5b8c569bf593b0140bde72ea885a803b82086995367bf2037de0159d924/pygments-2.19.2.tar.gz", hash = "sha256:636cb2477cec7f8952536970bc533bc43743542f70392ae026374600add5b887", size = 4968631, upload-time = "2025-06-21T13:39:12.283Z" }
 wheels = [
     { url = "https://pypi.tuna.tsinghua.edu.cn/packages/c7/21/705964c7812476f378728bdf590ca4b771ec72385c533964653c68e86bdc/pygments-2.19.2-py3-none-any.whl", hash = "sha256:86540386c03d588bb81d44bc3928634ff26449851e99741617ecb9037ee5ec0b", size = 1225217, upload-time = "2025-06-21T13:39:07.939Z" },
+]
+
+[[package]]
+name = "pygrabber"
+version = "0.2"
+source = { registry = "https://pypi.tuna.tsinghua.edu.cn/simple" }
+dependencies = [
+    { name = "comtypes" },
+    { name = "numpy" },
+]
+sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/d4/24/e7e5efa1d915853f3f34cedf751cbee9d88bee47a41122d495ee95452dad/pygrabber-0.2.tar.gz", hash = "sha256:e584b119d4c9b9a8f339eb34d1fe7fdd16214a2bf5a1876171145caebdb9e413" }
+wheels = [
+    { url = "https://pypi.tuna.tsinghua.edu.cn/packages/7a/51/0359e171686a7eeda5e975d7f9dfba6a67e04b33c7ddad1f7a343c171e55/pygrabber-0.2-py3-none-any.whl", hash = "sha256:5ac8bbe5f6a5dfb7c1c9c55d80ca9b9457743abd3ac8efa21cb9e302bdbf03ac" },
 ]
 
 [[package]]

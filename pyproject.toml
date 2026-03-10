@@ -45,6 +45,7 @@ dependencies = [
     "pyannote-audio==3.4.0",
     "pycapcut==0.0.3",
     "pydub==0.25.1",
+    "pygrabber==0.2",
     "pyjianyingdraft==0.2.5",
     "pyngrok==7.5.1",
     "python-engineio==4.12.3",
