@@ -27,16 +27,6 @@
 
 </div>
 
-### 🎨 Applicable Scenarios
-
-- 🎥 **Content Creators**: Enhance creative efficiency and unleash creative potential.
-
-- 🧩 **App Components**：Supports Video Mask Inpaint, Video Subtitle Extractor, Ultimate Vocal Remover, etc.
-
-- 📤 **Extended Capabilities**：Supports IOPaint, VoxCPM1.5, Index-TTS2, CosyVoice3, GPT-SoVITS4, etc.
-
-- 🚀 **Independent Deployment**：Flexible deployment, supports local, server, Kaggle and Colab, ensuring data security
-
 ### 📥 Example
 
 #### Video Translation Dubbing
@@ -171,6 +161,16 @@
         </tr>
     </tbody>
 </table>
+
+### 🎨 Applicable Scenarios
+
+- 🎥 **Content Creators**: Enhance creative efficiency and unleash creative potential.
+
+- 🧩 **App Components**：Supports Video Mask Inpaint, Video Subtitle Extractor, Ultimate Vocal Remover, etc.
+
+- 📤 **Extended Capabilities**：Supports IOPaint, VoxCPM1.5, Index-TTS2, CosyVoice3, GPT-SoVITS4, etc.
+
+- 🚀 **Independent Deployment**：Flexible deployment, supports local, server, Kaggle and Colab, ensuring data security
 
 ### 📦 Quick Start
 

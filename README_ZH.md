@@ -26,17 +26,6 @@
 
 </div>
 
-
-### 🎨 适用场景
-
-- 🎬 **内容创作**：提升创作效率，释放创作潜力
-
-- 🧩 **应用组件**：支持 视频掩码修复、视频水印去除、视频字幕提取、人声音轨分离.等
-
-- 📤 **扩展能力**：支持 IOPaint、VoxCPM1.5、IndexTTS2、CosyVoice3、GPT-SoVITS4.等
-
-- 🚀 **独立部署**：灵活部署，支持本地、服务器、Kaggle、Colab，保障数据安全
-
 ### 📥 示例
 
 #### 翻译配音
@@ -171,12 +160,21 @@
     </tbody>
 </table>
 
+### 🎨 适用场景
+
+- 🎬 **内容创作**：提升创作效率，释放创作潜力
+
+- 🧩 **应用组件**：支持 视频掩码修复、视频水印去除、视频字幕提取、人声音轨分离.等
+
+- 📤 **扩展能力**：支持 IOPaint、VoxCPM1.5、IndexTTS2、CosyVoice3、GPT-SoVITS4.等
+
+- 🚀 **独立部署**：灵活部署，支持本地、服务器、Kaggle、Colab，保障数据安全
+
 ### 📦 快速开始
 
 - 👉 安装部署指南：[本地](https://xiesx123.github.io/CreatorBox/zh/deploy-local) | [远程](https://xiesx123.github.io/CreatorBox/zh/deploy-colab)
 
 - 👉 开发集成指南：[应用](https://xiesx123.github.io/CreatorBox/zh/component) | [扩展](https://xiesx123.github.io/CreatorBox/zh/extensions)
-
 
 ### 📢 反馈
 
