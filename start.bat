@@ -2,18 +2,20 @@
 chcp 65001 >nul
 
 ::---------------------------------------------------------------------------------------------
-:: Aria2
-set ARIA2_HOME=%CREATORBOX_HOME%\aria2
-:: FFmpeg   (e.g.D:\Program Files\CreatorBox\ffmpeg)
-set FFMPEG_HOME=%CREATORBOX_HOME%\ffmpeg
-:: Git      (e.g.D:\Program Files\CreatorBox\git)
-set GIT_HOME=%CREATORBOX_HOME%\git
 :: Uv       (e.g.D:\Program Files\CreatorBox\uv)
 set UV_HOME=%CREATORBOX_HOME%\uv
+:: Git      (e.g.D:\Program Files\CreatorBox\git)
+set GIT_HOME=%CREATORBOX_HOME%\git
+:: Mpv      (e.g.D:\Program Files\CreatorBox\mpv)
+set MPV_HOME=%CREATORBOX_HOME%\mpv
+:: FFmpeg   (e.g.D:\Program Files\CreatorBox\ffmpeg)
+set FFMPEG_HOME=%CREATORBOX_HOME%\ffmpeg
+:: Aria2
+set ARIA2_HOME=%CREATORBOX_HOME%\aria2
 ::--------------------------------------------------------------------------------------------
 
 :: Set Environment
-set PATH=;%CREATORBOX_HOME%;%ARIA2_HOME%;%FFMPEG_HOME%;%GIT_HOME%\cmd;%UV_HOME%;"C:\Windows\system32";
+set PATH=;%CREATORBOX_HOME%;%UV_HOME%;%GIT_HOME%\cmd;%MPV_HOME%;%FFMPEG_HOME%;%ARIA2_HOME%;"C:\Windows\system32";
 echo %PATH%
 
 REM Execute script
