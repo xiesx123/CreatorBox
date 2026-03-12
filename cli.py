@@ -80,7 +80,7 @@ def start(host, port, debug, browser, ngrok, ngrok_host, ngrok_port):
 @click.option("--share", is_flag=True, default=False, show_default=True, help="Share the extension publicly after installation")
 def install(name, version, start, port, share):
     try:
-        from src.app.launcher import Launcher
+        from src.router.launch.launcher import Launcher
 
         kwargs = {"pyv": version, "share": share}
         if port is not None:
