@@ -1,0 +1,59 @@
+<!-- 播放队列行工具栏模板 -->
+<script type="text/html" id="TPL_ap_queue_tools">
+  <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="exec">执行</a>
+  <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+</script>
+
+<!-- 播放队列头部工具栏模板 -->
+<script type="text/html" id="TPL_ap_queue_header">
+  <div class="layui-btn-group">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="clearAll">清空</a>
+  </div>
+</script>
+
+<!-- 控制器 -->
+<fieldset class="layui-elem-field">
+  <legend>控制器</legend>
+  <div class="layui-field-box">
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">配音</label>
+      <div class="layui-input-block">
+        <div class="layui-input-wrap">
+          <div class="layui-input-prefix"><i class="layui-icon layui-icon-template-1"></i></div>
+          <select id="ap-filename" lay-filter="ap-filename" name="ap_filename">
+            <option value="">请选择配音</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">{{ _("后缀") }}</label>
+      <div class="layui-input-block">
+        <div class="layui-input-wrap">
+          <div class="layui-input-prefix"><i class="layui-icon layui-icon-note"></i></div>
+          <select id="ap-suffix" lay-filter="ap-suffix" name="ap_suffix">
+            <option value="">请选择后缀</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button type="button" id="ap-expand-btn" class="layui-btn layui-btn-primary layui-border">折叠</button>
+        <button type="button" id="ap-add-btn" class="layui-btn layui-btn-primary layui-border">添加</button>
+        <button type="button" id="ap-toggle-play-btn" class="layui-btn layui-btn-primary layui-border-blue">播放</button>
+        <button type="button" id="ap-mute-btn" class="layui-btn layui-btn-primary layui-border-blue">静音</button>
+        <button type="button" id="ap-loop-btn" class="layui-btn layui-btn-primary layui-border-blue">轮播</button>
+      </div>
+    </div>
+  </div>
+</fieldset>
+
+<!-- 播放队列 -->
+<table id="ap-queue-table" class="layui-table" lay-filter="ap-queue-table"></table>
+
+<!-- 播放器 -->
+<div id="aplayer_ctr"></div>

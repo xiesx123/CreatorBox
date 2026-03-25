@@ -8,23 +8,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <!-- jquery -->
-    <script src="static/js/jquery/jquery.min.js"></script>
+    <script src="static/js/thirdparty/jquery.min.js"></script>
     <script src="static/js/thirdparty/xgplayer.js"></script>
     <!-- nprogress -->
     <link href="static/js/thirdparty/nprogress/nprogress.min.css" rel="stylesheet">
     <script src="static/js/thirdparty/nprogress/nprogress.min.js"></script>
     <!-- layui -->
-    <link href="static/js/layui/css/layui.css" rel="stylesheet">
-    <link href="static/js/layui/css/layui-dark.css" rel="stylesheet">
-    <script src="static/js/layui/layui.js"></script>
-    <!-- iconify -->
-    <script src="static/js/thirdparty/iconify.min.js"></script>
+    <link href="static/js/thirdparty/layui/css/layui.css" rel="stylesheet">
+    <link href="static/js/thirdparty/layui/css/layui-dark.css" rel="stylesheet">
+    <script src="static/js/thirdparty/layui/layui.js"></script>
     <!-- app -->
     <script src="static/js/app/app.js"></script>
 </head>
 
 <body class="collapse" layadmin-themealias="default">
-
     <div class="layui-layout layui-layout-admin">
 
         <form class="layui-form layui-form-pane" lay-filter="form_filter">
@@ -70,16 +67,15 @@
 
     <script>
 
-        layui.use(['form', 'layer', 'table', 'util', 'notice', 'tool', 'i18n'], function () {
+        layui.use(['form', 'layer', 'table', 'util', 'i18n_', 'toastr', 'tools'], function () {
 
             var form = layui.form;
             var layer = layui.layer;
             var table = layui.table;
             var util = layui.util;
-            var toast = layui.notice;
-            var tool = layui.tool;
-            // var trans = layui.translate;
-            var i18n = layui.i18n;
+            var i18n = layui.i18n_;
+            var toast = layui.toastr;
+            var tools = layui.tools;
             var $ = layui.$;
 
             i18n.init('{{request.state.lang}}');
@@ -134,12 +130,12 @@
                             layer.msg(i18n.trans("请选择数据"), { icon: 0 });
                             return;
                         }
-                        tool.post("/plugin/status", JSON.stringify({ "ids": ids, "status": 1 }), function (response) {
+                        tools.post("/plugin/status", JSON.stringify({ "ids": ids, "status": 1 }), function (response) {
                             console.debug(response.data)
                             // table.reloadData(id, { scrollPos: 'fixed' });
                             toast.info(response.data.updated.length, i18n.trans("操作成功"));
                             setTimeout(function () {
-                                tool.refresh()
+                                tools.refresh()
                             }, 1 * 1000)
                         })
                         break;
@@ -150,11 +146,11 @@
                             layer.msg(i18n.trans("请选择数据"), { icon: 0 });
                             return;
                         }
-                        tool.post("/plugin/status", JSON.stringify({ "ids": ids, "status": 0 }), function (response) {
+                        tools.post("/plugin/status", JSON.stringify({ "ids": ids, "status": 0 }), function (response) {
                             console.debug(response.data)
                             toast.info(response.data.updated.length, i18n.trans("操作成功"));
                             setTimeout(function () {
-                                tool.refresh()
+                                tools.refresh()
                             }, 1 * 1000)
                         })
                         break;
@@ -166,9 +162,9 @@
                             btn: [i18n.trans('确定'), i18n.trans('取消')]
                         }, function (index) {
                             layer.close(index);
-                            tool.get("/reboot", {}, function (response) {
+                            tools.get("/reboot", {}, function (response) {
                                 setTimeout(function () {
-                                    tool.refresh()
+                                    tools.refresh()
                                 }, 10 * 1000)
                             })
                         });
@@ -204,7 +200,7 @@
                 rowData.status = status;
 
                 // 发送请求
-                tool.post("/plugin/upsert", JSON.stringify(rowData), function (response) {
+                tools.post("/plugin/upsert", JSON.stringify(rowData), function (response) {
                     console.debug(response.data);
                     var status = response.data.status;
                     if (status == 1) {
@@ -227,14 +223,6 @@
                     });
                 });
             });
-
-            //// 设置本地语种
-            // trans.language.setLocal('chinese_simplified');
-            ////设置翻译通道
-            // trans.service.use('client.edge');
-            // window.onload = function () {
-            //     trans.execute();
-            // };  
         });
 
     </script>

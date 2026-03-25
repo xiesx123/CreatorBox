@@ -1,0 +1,66 @@
+<fieldset class="layui-elem-field">
+  <legend>数字人</legend>
+  <div class="layui-field-box">
+
+    <!-- 虚拟主播文件上传 -->
+    <div class="layui-form-item">
+      <label class="layui-form-label" id="dh-avatar-upload" lay-tips="{content: '上传', margin: '0 0 0 -10px' }">虚拟主播&nbsp;&nbsp;<span class="layui-badge-dot layui-bg-green"></span></label>
+      <div class="layui-input-block">
+        <div class="layui-input-wrap">
+          <div class="layui-input-prefix"><i class="layui-icon layui-icon-video"></i></div>
+          <input id="dh-avatar-path" type="text" name="dh_avatar_path" placeholder="请选择或上传视频文件" autocomplete="off" class="layui-input">
+        </div>
+      </div>
+    </div>
+
+    <!-- 音频输入 -->
+    <div class="layui-form-item">
+      <label class="layui-form-label">声音选择</label>
+      <div class="layui-input-block">
+        <div class="layui-input-wrap">
+          <div class="layui-input-prefix"><i class="layui-icon layui-icon-headset"></i></div>
+          <select id="dh-audio-source" lay-filter="dh-audio-source" class="layui-input">
+            <option value="audio" selected>音频</option>
+            <option value="microphone" disabled>麦克风</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- 音频文件上传区域 -->
+    <div class="layui-form-item" id="dh-audio-file-row">
+      <label class="layui-form-label" id="dh-audio-upload" lay-tips="{content: '上传', margin: '0 0 0 -10px' }">音频文件&nbsp;&nbsp;<span class="layui-badge-dot layui-bg-green"></span></label>
+      <div class="layui-input-block">
+        <div class="layui-input-wrap">
+          <div class="layui-input-prefix"><i class="layui-icon layui-icon-voice"></i></div>
+          <input id="dh-audio-path" type="text" name="dh_audio_path" placeholder="请选择或上传音频文件" autocomplete="off" class="layui-input">
+        </div>
+      </div>
+    </div>
+    
+    <!-- 预览窗口 -->
+    <div class="layui-form-item">
+      <label class="layui-form-label">预览</label>
+      <div class="layui-input-block">
+        <div class="layui-input-wrap">
+          <div class="layui-input-prefix"><i class="layui-icon layui-icon-layer"></i></div>
+          <select id="dh-preview-model" lay-filter="dh-preview-model" class="layui-input">
+            <option value="mpv" selected>mpv</option>
+            <option value="ffplay">ffplay</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- 操作按钮 -->
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button type="button" id="dh-toggle-btn" class="layui-btn layui-btn-primary layui-border">启动</button>
+        <button type="button" id="dh-clear-btn" class="layui-btn layui-btn-primary layui-border-orange" disabled>清空</button>
+        <button type="button" id="dh-interrupt-btn" class="layui-btn layui-btn-primary layui-border-orange" disabled>中断</button>
+        <button type="button" id="dh-send-btn" class="layui-btn layui-btn-primary layui-border-blue" disabled>发送</button>
+      </div>
+    </div>
+
+  </div>
+</fieldset>

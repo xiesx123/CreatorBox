@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block header_extra %}
+<!-- sortable -->
+<script src="static/js/thirdparty/sortable.min.js"></script>
+<!-- aplayer -->
+<link href="static/js/thirdparty/aplayer/aplayer.min.css" rel="stylesheet">
+<link href="static/js/thirdparty/aplayer/aplayer.dark.css" rel="stylesheet">
+<script src="static/js/thirdparty/aplayer/aplayer.min.js"></script>
+{% endblock %}
+
+{% block header_content %}
+<div class="layui-header">
+  <!-- 头部区域（可配合layui 已有的水平导航） -->
+  <ul class="layui-nav layui-layout-left" lay-filter="nav-top">
+    <li class="layui-nav-item" lay-header-event="menuLeft">
+      <i class="layui-icon layui-icon-spread-left" style="font-size: 18px"></i>
+    </li>
+    <li class="layui-nav-item" lay-header-event="menuLeft">
+      <span style="padding: 15px; font-size: 16px; background-color: unset">{{ data.app.version }} </span>
+    </li>
+  </ul>
+  <ul class="layui-nav layui-layout-right" lay-filter="nav-top">
+    <li class="layui-nav-item">
+      <a id="change-theme" style="padding-left: 8px;padding-right: 8px;" lay-tips="{content: '{{_('主题')}}', margin: '0 0 0 -10px' }">
+        <i class="layui-icon layui-icon-moon" style="font-size: 18px"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+{% endblock %}
+
+{% block body_content %}
+
+<div class="layui-tabs layui-form layui-form-pane layui-panel" id="tabs" style="padding: 10px">
+  <ul class="layui-tabs-header">
+    <li class="layui-this">直播设置</li>
+    <li>互动消息</li>
+    <li>自动回复</li>
+    <li>语音合成</li>
+  </ul>
+  <div class="layui-tabs-body">
+    <div class="layui-tabs-item layui-show">
+      <blockquote class="layui-elem-quote layui-quote-nm">
+        OBS、数字人音频驱动设置
+      </blockquote>
+      {% include "extend/obs.html" %}
+      {% include "extend/dh.html" %}
+      {% include "extend/ctr.html" %}
+    </div>
+    <div class="layui-tabs-item">
+      <blockquote class="layui-elem-quote layui-quote-nm">
+        根据粉丝消息，自定义回复
+      </blockquote>
+      {% include "extend/room.html" %}
+    </div>
+    <div class="layui-tabs-item">
+      <blockquote class="layui-elem-quote layui-quote-nm">
+        消息关键词配置，自动触发回复
+      </blockquote>
+    </div>
+    <div class="layui-tabs-item">
+      <blockquote class="layui-elem-quote layui-quote-nm">
+        模板参数配置、试听预览
+      </blockquote>
+      {% include "extend/tts.html" %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts_extra %}
+<script>
+  // ================================ 页面初始化 ================================
+
+  layui.use(['form', 'layer', 'i18n_', 'tools', 'obs', 'dh', 'ctr', 'room', 'tts'], function () {
+    var form = layui.form;
+    var layer = layui.layer;
+    var util = layui.util;
+    var i18n = layui.i18n_;
+    var tabs = layui.tabs;
+    var $ = layui.jquery;
+    var tools = layui.tools;
+    var obs = layui.obs;
+    var dh = layui.dh;
+    var ctr = layui.ctr;
+    var room = layui.room;
+    var tts = layui.tts;
+
+    var ws = null;
+    var obsManager = null;
+    var dhManager = null;
+    var ctrManager = null;
+    var roomManager = null;
+
+    // ================================ 表单初始化 ================================
+
+    // 国际化
+    i18n.init('{{request.state.lang}}');
+
+    // Tab 标签
+    var TAB_KEY = 'liveio_tab_index';
+    tabs.change('tabs', parseInt(localStorage.getItem(TAB_KEY)) || 0);
+    tabs.on('beforeChange(tabs)', function () {
+      var index = $(this).index();
+      localStorage.setItem(TAB_KEY, index);
+    });
+
+    // 连接 WebSocket
+    ws = tools.connect('{{data.app.debug}}', function (message) {
+      if (!message.type) return;
+      switch (message.type) {
+        case 'Error':
+          layer.msg(message.payload.message, { icon: 2 });
+          break;
+      }
+    });
+
+    // 管理器
+    obsManager = obs.create(ws);
+    dhManager = dh.create(ws);
+    ctrManager = ctr.create(ws);
+    roomManager = room.create(ws);
+
+    dhManager.setCtrManager(ctrManager);
+    ctrManager.setDHManager(dhManager);
+    roomManager.setTtsManager(tts);
+
+    // TTS
+    var STATE_KEY_DUBBING = "dubb_form";
+    var form_cache_raw = localStorage.getItem(STATE_KEY_DUBBING);
+    var form_cache = form_cache_raw ? JSON.parse(form_cache_raw) : {};
+    var form_json = JSON.parse('{{ data.form | tojson }}')
+    var form_data = Object.keys(form_cache).length === 0 ? Object.assign({}, form_json) : Object.assign({}, form_json, form_cache)
+
+    var STATE_KEY_TTS_TABLE_LIST = "tts_table_list";
+    var voice_cache = localStorage.getItem(STATE_KEY_TTS_TABLE_LIST);
+    var voice_data = voice_cache ? JSON.parse(voice_cache) : []
+
+    tts.setData(form_data, voice_data)
+
+  });
+</script>
+{% endblock %}

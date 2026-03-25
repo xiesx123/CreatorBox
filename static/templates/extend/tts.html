@@ -1,0 +1,195 @@
+<!-- 配音控制 -->
+<div class="layui-form-item">
+  <label class="layui-form-label"> {{_("提供商")}} </label>
+  <div class="layui-input-block">
+    <div class="layui-input-wrap">
+      <div class="layui-input-prefix"> <i class="layui-icon layui-icon-component"></i> </div>
+      <select id="tts_provider" name="tts_provider" lay-verify="required|tts_provider" lay-filter="tts_provider_filter">
+        <option value="">{{_("选择或搜索")}}</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="layui-form-item layui-hide" pane id="opt_server">
+  <label class="layui-form-label">{{_("服务地址")}}</label>
+  <div class="layui-input-block">
+    <div class="layui-input-wrap">
+      <div class="layui-input-prefix"> <i class="layui-icon layui-icon-website"></i> </div>
+      <input type="text" name="tts_server" placeholder="{{ _('请输入服务地址')}}" autocomplete="off" class="layui-input" lay-affix="clear" disabled>
+    </div>
+  </div>
+</div>
+
+<div class="layui-form-item">
+  <label class="layui-form-label">{{_("模型")}}</label>
+  <div class="layui-input-block">
+    <div class="layui-input-wrap">
+      <div class="layui-input-prefix"> <i class="layui-icon layui-icon-template-1"></i> </div>
+      <input type="text" name="tts_model" placeholder="{{ _('请输入模型名称')}}" autocomplete="off" class="layui-input" lay-affix="clear" disabled>
+    </div>
+  </div>
+</div>
+
+<div class="layui-form-item" pane>
+  <label class="layui-form-label">{{_("性别")}}</label>
+  <div class="layui-input-block">
+    <input type="radio" name="tts_gender" value="1" lay-filter="tts_gender_filter" title='{{_("男")}}'>
+    <div lay-radio>
+      <span>{{_("男")}} <i class="layui-icon layui-icon-male"></i></span>
+    </div>
+    <input type="radio" name="tts_gender" value="2" lay-filter="tts_gender_filter" title='{{_("女")}}'>
+    <div lay-radio>
+      <span>{{_("女")}} <i class="layui-icon layui-icon-female"></i></span>
+    </div>
+  </div>
+</div>
+
+<div class="layui-form-item">
+  <label class="layui-form-label">{{_("音色")}}</label>
+  <div class="layui-input-block">
+    <div class="layui-input-wrap">
+      <div class="layui-input-prefix"> <i id="tts_voice_icon" class="layui-icon layui-icon-username"></i> </div>
+      <select id="tts_voice" name="tts_voice" lay-verify="required" lay-filter="tts_voice_filter" lay-search="{caseSensitive:false, fuzzy: true}">
+        <option value="">{{_("选择或搜索")}}</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="layui-form-item">
+  <label class="layui-form-label">{{_("音量")}}</label>
+  <div class="layui-input-block">
+    <div class="layui-input-wrap">
+      <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
+      <input type="number" lay-verify="required" name="tts_volume" placeholder="[0,1]" autocomplete="off" class="layui-input" min="0" max="2" step="0.01" lay-affix="number">
+    </div>
+  </div>
+</div>
+
+<div class="layui-form-item layui-hide" pane id="opt_rate">
+  <label class="layui-form-label">{{_("语速")}}</label>
+  <div class="layui-input-block">
+    <div class="layui-input-wrap">
+      <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
+      <input type="number" lay-verify="required" name="tts_rate" placeholder="[0,2]" autocomplete="off" class="layui-input" min="0" max="2" step="0.01" lay-affix="number">
+    </div>
+  </div>
+</div>
+
+<div class="layui-form-item layui-hide" pane id="opt_pitch">
+  <label class="layui-form-label">{{_("语调")}}</label>
+  <div class="layui-input-block">
+    <div class="layui-input-wrap">
+      <div class="layui-input-prefix"> <i class="layui-icon layui-icon-slider"></i> </div>
+      <input type="number" lay-verify="required" name="tts_pitch" placeholder="[0,2]" autocomplete="off" class="layui-input" min="0" max="2" step="0.01" lay-affix="number">
+    </div>
+  </div>
+</div>
+
+<!-- azure -->
+<div class="layui-col-md12 layui-hide" id="azure_div"></div>
+<!-- edge -->
+<div class="layui-col-md12 layui-hide" id="edge_div"></div>
+<!-- elab -->
+<div class="layui-col-md12 layui-hide" id="elab_div"></div>
+<!-- cosy -->
+<div class="layui-col-md12 layui-hide" id="cosy_div"></div>
+<!-- itts -->
+<div class="layui-col-md12 layui-hide" id="itts_div"></div>
+<!-- sovits -->
+<div class="layui-col-md12 layui-hide" id="gtts_div"></div>
+<!-- voxm -->
+<div class="layui-col-md12 layui-hide" id="voxm_div"></div>
+
+<!-- opt -->
+<div class="layui-form-item layui-hide" pane id="opt_role" lay-tips="{content: '{{_('选择试听')}}', margin: '0 0 0 -10px' }">
+  <label class="layui-form-label">{{_("角色扮演")}}</label>
+  <div class="layui-input-block">
+    <div class="layui-input-wrap">
+      <div class="layui-input-prefix"> <i class="layui-icon layui-icon-headset"></i> </div>
+      <select id="tts_role" name="tts_role" lay-filter="tts_role_filter" lay-search="{caseSensitive:false, fuzzy: true}">
+        <option value="">{{_("选择或搜索")}}</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="layui-form-item layui-hide" pane id="opt_style" lay-tips="{content: '{{_('选择试听')}}', margin: '0 0 0 -10px' }">
+  <label class="layui-form-label">{{_("说话风格")}}</label>
+  <div class="layui-input-block">
+    <div class="layui-input-wrap">
+      <div class="layui-input-prefix"> <i class="layui-icon layui-icon-headset"></i> </div>
+      <select id="tts_style" name="tts_style" lay-filter="tts_style_filter" lay-search="{caseSensitive:false, fuzzy: true}">
+        <option value="">{{_("选择或搜索")}}</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="layui-form-item layui-hide" pane id="opt_styledegree" lay-tips="{content: '{{_('选择试听')}}', margin: '0 0 0 -10px' }">
+  <label class="layui-form-label">{{_("风格强度")}}</label>
+  <div class="layui-input-block">
+    <div class="layui-input-wrap">
+      <div class="layui-input-prefix"> <i class="layui-icon layui-icon-search"></i> </div>
+      <select id="tts_styledegree" name="tts_styledegree" lay-filter="tts_styledegree_filter" lay-search>
+        {% for item in data.tts.styledegrees %}
+        <option value="{{ item.val }}">{{ loop.index }}.{{ item.desc_zh if request.state.lang == 'zh' else item.desc_en }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="layui-form-item layui-hide" pane id="opt_seed" lay-tips="{content: '{{_('控制结果可复现')}}', margin: '0 0 0 -10px' }">
+  <label class="layui-form-label">{{_("种子")}}</label>
+  <div class="layui-input-block">
+    <div class="layui-input-wrap">
+      <div class="layui-input-prefix"> <i class="layui-icon layui-icon-note"></i> </div>
+      <input type="number" name="tts_seed" lay-verify="required|number" placeholder='{{_("请输入随机种子")}}' autocomplete="off" class="layui-input" lay-filter="seed" lay-affix="release" onkeyup="value=value.slice(0,8)"></input>
+    </div>
+  </div>
+</div>
+
+<div class="layui-form-item">
+  <label class="layui-form-label">{{_("备注")}}</label>
+  <div class="layui-input-block">
+    <div class="layui-input-wrap">
+      <div class="layui-input-prefix"> <i class="layui-icon layui-icon-note"></i> </div>
+      <input name="tts_remarks" placeholder='{{_("随便写点什么")}}' lay-affix="clear" class="layui-input"></input>
+    </div>
+  </div>
+</div>
+
+<div class="layui-form-item layui-form-text">
+  <label class="layui-form-label" id="tts_preview" lay-tips="{content: '{{_('点击试听')}}', margin: '0 0 0 -10px' }">{{
+    _("试听") }} <i class="layui-icon layui-icon-headset"></i></label>
+  <div class="layui-input-block">
+    <textarea id="tts_text" name="tts_text" placeholder='{{_("请输入试听文本")}}' lay-verify="tts_text" lay-reqtext='{{_("请输入试听文本")}}' lay-affix="clear" class="layui-textarea tts_text" maxlength="1000"></textarea>
+  </div>
+</div>
+
+<fieldset class="layui-elem-field layui-field-title">
+  <legend>{{_("生成语音")}}</legend>
+</fieldset>
+
+<!-- 生成历史行工具栏模板 -->
+<script type="text/html" id="TPL_tts_voices_table_tools">
+    <div class="layui-btn-container">
+      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="preview">{{_("试听")}}</a>
+      <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="del">{{_("删除")}}</a>
+    </div>
+</script>
+
+<!-- 生成历史头部工具栏模板 -->
+<script type="text/html" id="TPL_tts_voices_table_header">
+  <div class="layui-btn-group">
+    <a class="layui-btn layui-btn-xs layui-btn-primary layui-border" lay-event="refreshAll">刷新</a>
+  </div>
+</script>
+
+<!-- 生成历史 -->
+<table id="tts_voices_table" class="layui-table"></table>
+
+<!-- 播放器 -->
+<div id="aplayer_tts"></div>

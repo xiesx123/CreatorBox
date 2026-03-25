@@ -8,15 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <!-- jquery -->
-    <script src="static/js/jquery/jquery.min.js"></script>
+    <script src="static/js/thirdparty/jquery.min.js"></script>
     <script src="static/js/thirdparty/xgplayer.js"></script>
     <!-- nprogress -->
     <link href="static/js/thirdparty/nprogress/nprogress.min.css" rel="stylesheet">
     <script src="static/js/thirdparty/nprogress/nprogress.min.js"></script>
     <!-- layui -->
-    <link href="static/js/layui/css/layui.css" rel="stylesheet">
-    <link href="static/js/layui/css/layui-dark.css" rel="stylesheet">
-    <script src="static/js/layui/layui.js"></script>
+    <link href="static/js/thirdparty/layui/css/layui.css" rel="stylesheet">
+    <link href="static/js/thirdparty/layui/css/layui-dark.css" rel="stylesheet">
+    <script src="static/js/thirdparty/layui/layui.js"></script>
     <!-- creator -->
     <script src="static/js/app/theme.js"></script>
     <script src="static/js/app/app.js"></script>
@@ -24,7 +24,8 @@
         #player-container {
             width: 100%;
             background-color: black;
-            overflow-y: hidden; /* 隐藏y轴滚动条 */
+            overflow-y: hidden;
+            /* 隐藏y轴滚动条 */
         }
     </style>
 </head>
@@ -64,12 +65,12 @@
 
         let player;
 
-        layui.use(['layer', 'util', 'tool', 'i18n'], function () {
+        layui.use(['layer', 'util', 'i18n_', 'tools'], function () {
 
             var layer = layui.layer;
             var util = layui.util;
-            var tool = layui.tool;
-            var i18n = layui.i18n;
+            var i18n = layui.i18n_;
+            var tools = layui.tools;
             var $ = layui.$;
 
             i18n.init('{{request.state.lang}}');
@@ -82,7 +83,7 @@
                 if (input_url.length != 17) {
                     return video_play(input_url)
                 }
-                tool.get("/result/" + input_url, {}, function (response) {
+                tools.get("/result/" + input_url, {}, function (response) {
                     console.debug(JSON.stringify(response, null, 2))
                     video_play(response.data.result.video_dub)
                 });
@@ -124,10 +125,10 @@
             }
 
             // 监听窗口大小调整，调整播放器高度
-            window.addEventListener('resize', function() {
+            window.addEventListener('resize', function () {
                 if (player) {
                     const newHeight = resizePlayer();
-                    if(typeof player.resize === 'function') {
+                    if (typeof player.resize === 'function') {
                         player.resize(newHeight);
                     } else {
                         // 如果 xgplayer 不支持 resize，重建播放器

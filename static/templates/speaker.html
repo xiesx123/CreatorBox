@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <!-- jquery -->
-    <script src="static/js/jquery/jquery.min.js"></script>
+    <script src="static/js/thirdparty/jquery.min.js"></script>
     <!-- aplayer -->
     <link href="static/js/thirdparty/aplayer/aplayer.min.css" rel="stylesheet">
     <script src="static/js/thirdparty/aplayer/aplayer.min.js"></script>
@@ -16,9 +16,9 @@
     <link href="static/js/thirdparty/nprogress/nprogress.min.css" rel="stylesheet">
     <script src="static/js/thirdparty/nprogress/nprogress.min.js"></script>
     <!-- layui -->
-    <link href="static/js/layui/css/layui.css" rel="stylesheet" />
-    <link href="static/js/layui/css/layui-dark.css" rel="stylesheet" />
-    <script src="static/js/layui/layui.js"></script>
+    <link href="static/js/thirdparty/layui/css/layui.css" rel="stylesheet" />
+    <link href="static/js/thirdparty/layui/css/layui-dark.css" rel="stylesheet" />
+    <script src="static/js/thirdparty/layui/layui.js"></script>
     <!-- app -->
     <link href="static/js/app/app.css" rel="stylesheet">
     <script src="static/js/app/app.js"></script>
@@ -26,6 +26,7 @@
 
 <body class="collapse" layadmin-themealias="default">
     <div class="layui-layout layui-layout-admin">
+
         <form class="layui-form layui-form-pane" lay-filter="form_filter">
             <!-- 说话人 -->
             <div class="layui-collapse" lay-filter="collapse_filter_speaker">
@@ -150,7 +151,7 @@
 
     <script>
 
-        layui.use(['form', 'table', 'layer', 'element', 'upload', 'util', 'notice', `enums`, 'tool', 'i18n'], function () {
+        layui.use(['form', 'table', 'layer', 'element', 'upload', 'util', 'i18n_', `enums`, 'toastr', 'tools'], function () {
 
             var form = layui.form;
             var table = layui.table;
@@ -158,10 +159,10 @@
             var element = layui.element;
             var upload = layui.upload;
             var util = layui.util;
-            var toast = layui.notice;
+            var i18n = layui.i18n_;
             var enums = layui.enums;
-            var tool = layui.tool;
-            var i18n = layui.i18n;
+            var toast = layui.toastr;
+            var tools = layui.tools;
             var $ = layui.$;
 
             i18n.init('{{request.state.lang}}');
@@ -195,7 +196,7 @@
             // 表单=============
 
             // 表单-音频上传
-            tool.upload("#audio_upload", "spk/upload", 'audio', 'mp3|wav|m4a|flac', function (response) {
+            tools.upload("#audio_upload", "spk/upload", 'audio', 'mp3|wav|m4a|flac', function (response) {
                 layer.msg(i18n.trans("识别成功"), { icon: 1 });
                 if (response.code == 0) {
                     data = response.data
@@ -236,7 +237,7 @@
                         title = i18n.trans("修改")
                     }
                     layer.confirm(i18n.trans("确定提交？"), { title: i18n.trans("提示"), icon: 3 }, function (index) {
-                        tool.post("/spk/upsert", data, function (response) {
+                        tools.post("/spk/upsert", data, function (response) {
                             console.debug(response.data)
                             toast.success(`${field.speaker}`, i18n.trans("操作成功"));
                             table.reloadData('table', { scrollPos: 'fixed' });
@@ -257,8 +258,6 @@
                 page: {
                     curr: 1, //当前页码
                     groups: 5, //只显示 1 个连续页码
-                    first: true, //不显示首页
-                    last: true, //不显示尾页
                     limit: 20,
                 },
                 request: {
@@ -309,7 +308,7 @@
                         $('[lay-filter="collapse_filter_speaker"] .layui-colla-content').addClass('layui-show');
                         break;
                     case 'delete':
-                        tool.deleteIds("/spk/delete", function (response) {
+                        tools.delete("/spk/delete", function (response) {
                             console.debug(response.data)
                             table.reloadData(id, { scrollPos: 'fixed' });
                         }, true)
@@ -346,7 +345,7 @@
             form.on('checkbox(table_status_filter)', function (obj) {
                 id = obj.elem.attributes['mid'].nodeValue;
                 data = JSON.stringify({ "id": id, "status": obj.elem.checked ? 1 : 0 });
-                tool.post("/spk/status", data, function (response) {
+                tools.post("/spk/status", data, function (response) {
                     console.debug(response.data)
                     var status = response.data.status;
                     if (status == 1) {

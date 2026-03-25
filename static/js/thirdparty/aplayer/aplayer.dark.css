@@ -1,0 +1,214 @@
+/* APlayer 基础样式 */
+.aplayer {
+    font-family: inherit;
+}
+
+/* APlayer Fixed 模式样式 */
+.aplayer.aplayer-fixed {
+    z-index: 99999;
+}
+
+.aplayer.aplayer-fixed .aplayer-body {
+    background-color: #fafafa;
+    border: 1px solid #e2e2e2;
+    border-radius: 4px 4px 0 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 移除顶部白线 */
+.aplayer.aplayer-fixed .aplayer-info {
+    border-top: none !important;
+    border-bottom-color: #e2e2e2;
+}
+
+.aplayer.aplayer-fixed .aplayer-info .aplayer-music .aplayer-title {
+    color: #333333;
+}
+
+.aplayer.aplayer-fixed .aplayer-info .aplayer-music .aplayer-author {
+    color: #666666;
+}
+
+.aplayer.aplayer-fixed .aplayer-miniswitcher {
+    background-color: #16baaa;
+    border-radius: 0 4px 0 0;
+}
+
+.aplayer.aplayer-fixed .aplayer-miniswitcher .aplayer-icon path {
+    fill: #fff;
+}
+
+/* ================================ APlayer Fixed 模式深色主题适配 ================================ */
+
+.dark .aplayer.aplayer-fixed .aplayer-body {
+    background-color: var(--lay-color-bg-5);
+    border-color: var(--lay-color-border-2);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-info {
+    border-top: none !important;
+    border-bottom-color: var(--lay-color-border-2);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-pic .aplayer-button {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-info .aplayer-music .aplayer-title {
+    color: var(--lay-color-text-1);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-info .aplayer-music .aplayer-author {
+    color: var(--lay-color-text-3);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-info .aplayer-controller .aplayer-time {
+    color: var(--lay-color-text-2);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon path {
+    fill: var(--lay-color-text-2);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon:hover path {
+    fill: var(--lay-color-text-1);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar {
+    background: var(--lay-color-border-2);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-loaded {
+    background: var(--lay-color-border-3);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-miniswitcher {
+    background-color: var(--lay-color-primary);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-miniswitcher .aplayer-icon path {
+    fill: #fff;
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-miniswitcher:hover {
+    background-color: var(--lay-color-primary-hover);
+}
+
+/* APlayer Fixed 模式播放列表深色适配 */
+.dark .aplayer.aplayer-fixed .aplayer-list {
+    background-color: var(--lay-color-bg-5);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-list ol li {
+    border-top-color: var(--lay-color-border-2);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-list ol li:hover {
+    background-color: var(--lay-color-bg-4);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-list ol li.aplayer-list-light {
+    background-color: var(--lay-color-bg-4);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-list ol li .aplayer-list-cur {
+    background-color: var(--lay-color-primary);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-list ol li .aplayer-list-title {
+    color: var(--lay-color-text-1);
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-list ol li .aplayer-list-author {
+    color: var(--lay-color-text-3);
+}
+
+/* ================================ APlayer 非 Fixed 模式深色适配 ================================ */
+
+.dark .aplayer:not(.aplayer-fixed) {
+    background-color: var(--lay-color-bg-5);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.dark .aplayer:not(.aplayer-fixed) .aplayer-pic .aplayer-button {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.dark .aplayer:not(.aplayer-fixed) .aplayer-info .aplayer-music .aplayer-title {
+    color: var(--lay-color-text-1);
+}
+
+.dark .aplayer:not(.aplayer-fixed) .aplayer-info .aplayer-music .aplayer-author {
+    color: var(--lay-color-text-3);
+}
+
+.dark .aplayer:not(.aplayer-fixed) .aplayer-info .aplayer-controller .aplayer-time {
+    color: var(--lay-color-text-2);
+}
+
+.dark .aplayer:not(.aplayer-fixed) .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon path {
+    fill: var(--lay-color-text-2);
+}
+
+.dark .aplayer:not(.aplayer-fixed) .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon:hover path {
+    fill: var(--lay-color-text-1);
+}
+
+.dark .aplayer:not(.aplayer-fixed) .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar {
+    background: var(--lay-color-border-2);
+}
+
+.dark .aplayer:not(.aplayer-fixed) .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-loaded {
+    background: var(--lay-color-border-3);
+}
+
+.dark .aplayer:not(.aplayer-fixed).aplayer-withlist .aplayer-info {
+    border-bottom-color: var(--lay-color-border-2);
+}
+
+/* APlayer 非 Fixed 模式播放列表深色适配 */
+.dark .aplayer:not(.aplayer-fixed) .aplayer-list {
+    background-color: var(--lay-color-bg-5);
+}
+
+.dark .aplayer:not(.aplayer-fixed) .aplayer-list ol li {
+    border-top-color: var(--lay-color-border-2);
+}
+
+.dark .aplayer:not(.aplayer-fixed) .aplayer-list ol li:hover {
+    background-color: var(--lay-color-bg-4);
+}
+
+.dark .aplayer:not(.aplayer-fixed) .aplayer-list ol li.aplayer-list-light {
+    background-color: var(--lay-color-bg-4);
+}
+
+.dark .aplayer:not(.aplayer-fixed) .aplayer-list ol li .aplayer-list-cur {
+    background-color: var(--lay-color-primary);
+}
+
+.dark .aplayer:not(.aplayer-fixed) .aplayer-list ol li .aplayer-list-title {
+    color: var(--lay-color-text-1);
+}
+
+.dark .aplayer:not(.aplayer-fixed) .aplayer-list ol li .aplayer-list-author {
+    color: var(--lay-color-text-3);
+}
+
+/* APlayer 非 Fixed 模式歌词深色适配 */
+.dark .aplayer:not(.aplayer-fixed) .aplayer-lrc:before {
+    background: linear-gradient(180deg, var(--lay-color-bg-5) 0, transparent);
+}
+
+.dark .aplayer:not(.aplayer-fixed) .aplayer-lrc:after {
+    background: linear-gradient(180deg, transparent 0, var(--lay-color-bg-5));
+}
+
+.dark .aplayer:not(.aplayer-fixed) .aplayer-lrc p {
+    color: var(--lay-color-text-3);
+}
+
+.dark .aplayer:not(.aplayer-fixed) .aplayer-lrc p.aplayer-lrc-current {
+    color: var(--lay-color-text-1);
+}
