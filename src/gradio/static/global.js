@@ -1,4 +1,7 @@
 () => {
+	// 页面缩放 
+	document.body.style.zoom = 0.8;
+
 	// body
 	var body = document.querySelector('body');
 
@@ -34,13 +37,13 @@
 		} else {
 			body.classList.remove('dark');
 		}
-        if(themeToggle){
-        	// const textNode = Array.from(themeToggle.childNodes).reverse().find(n => n.nodeType === Node.TEXT_NODE);
+		if (themeToggle) {
+			// const textNode = Array.from(themeToggle.childNodes).reverse().find(n => n.nodeType === Node.TEXT_NODE);
 			// if (textNode) textNode.textContent = (theme =='dark') ? '深色' : '浅色';
-        }
+		}
 	}
-    
-    // 初始检查
+
+	// 初始检查
 	var savedTheme = localStorage.getItem('theme') || (darkThemeMediaQuery.matches ? 'dark' : 'light');
 	setTheme(savedTheme);
 }
