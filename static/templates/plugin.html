@@ -74,11 +74,11 @@
             var table = layui.table;
             var util = layui.util;
             var i18n = layui.i18n_;
+            i18n.init('{{request.state.lang}}');
+
             var toast = layui.toastr;
             var tools = layui.tools;
             var $ = layui.$;
-
-            i18n.init('{{request.state.lang}}');
 
             var table_json = JSON.parse('{{ data.plugins | tojson }}')
 

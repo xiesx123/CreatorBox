@@ -1,4 +1,20 @@
 <!-- 配音控制 -->
+
+<div class="layui-form-item">
+  <label class="layui-form-label">{{_("语言")}}</label>
+  <div class="layui-input-block">
+    <div class="layui-input-wrap">
+      <div class="layui-input-prefix"><i class="layui-icon layui-icon-location"></i></div>
+      <select id="locale" name="locale" lay-verify="required" lay-filter="locale_filter">
+        <option value="">{{_("选择或搜索")}}</option>
+        {% for item in data.form.locales %}
+        <option value="{{ item.locale }}">{{ item.locale }} - {{ item.name if request.state.lang == 'zh' else item.country }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+</div>
+
 <div class="layui-form-item">
   <label class="layui-form-label"> {{_("提供商")}} </label>
   <div class="layui-input-block">

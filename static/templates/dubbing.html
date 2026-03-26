@@ -98,21 +98,6 @@
           </div>
 
           <div class="layui-form-item">
-            <label class="layui-form-label">{{_("地区")}}</label>
-            <div class="layui-input-block">
-              <div class="layui-input-wrap">
-                <div class="layui-input-prefix"><i class="layui-icon layui-icon-location"></i></div>
-                <select id="locale" name="locale" lay-verify="required" lay-filter="locale_filter">
-                  <option value="">{{_("选择或搜索")}}</option>
-                  {% for item in data.base.locales %}
-                  <option value="{{ item.locale }}">{{ item.locale }} - {{ item.name if request.state.lang == 'zh' else item.country }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <div class="layui-form-item">
             <label class="layui-form-label">{{_("后缀")}}</label>
             <div class="layui-input-block">
               <div class="layui-input-wrap">
@@ -142,7 +127,7 @@
     <div class="layui-col-md12">
       <div class="layui-form-item layui-col-space15">
         <div id="floating-div" class="layui-col-md12">
-          <button type="submit" class="layui-btn layui-btn-fluid" lay-submit lay-filter="form_submit">{{
+          <button type="submit" class="layui-btn layui-btn-primary layui-border-green layui-btn-fluid" lay-submit lay-filter="form_submit">{{
             _("执行") }}</button>
         </div>
       </div>
@@ -169,11 +154,11 @@
     var toast = layui.toastr;
     var tools = layui.tools;
     var i18n = layui.i18n_;
-    var tts = layui.tts;
-    var example = layui.example;
+    i18n.init('{{request.state.lang}}');
     var $ = layui.$;
 
-    i18n.init('{{request.state.lang}}');
+    var tts = layui.tts;
+    var example = layui.example;
 
     var STATE_KEY_DUBBING = "dubb_form";
     var form_cache_raw = localStorage.getItem(STATE_KEY_DUBBING);
@@ -185,8 +170,8 @@
     var voice_cache = localStorage.getItem(STATE_KEY_TTS_TABLE_LIST);
     var voice_data = voice_cache ? JSON.parse(voice_cache) : []
 
-    // 表单渲染
-    form.val('form_filter', form_data);
+    // 示例扩展
+    example.init('#example-selector');
 
     // 表单初始
     $('#align_type_div').toggleClass('layui-hide', form_data.mode_type != 3);
@@ -257,27 +242,6 @@
       tools.open(`editor?upload=file/upload&remote=file/download?path=${data_url}&mode=table`);
     });
 
-    // 随机种子
-    form.on('input-affix(seed)', function (data) {
-      var random = Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000
-      $('input[name="tts_seed"]').val(random);
-    });
-
-    // 地区选择
-    form.on('select(locale_filter)', function (data) {
-      if (data.elem.value != "") {
-        form_data.locale = data.elem.value;
-        form_data.tts_gender = 1;
-        // 恢复默认选择
-        $('input[name="tts_gender"][value="1"]').prop('checked', true);
-        form.render('radio');
-        // 刷新提供商
-        tts.getProvidersByLocale(form_data.locale, function (providers) {
-          console.debug("Providers refreshed for locale: " + form_data.locale);
-        });
-      }
-    });
-
     // 处理模式
     form.on('radio(mode_type_filter)', function (data) {
       var mode_type = data.elem.value;
@@ -326,22 +290,24 @@
       }
     })
 
+    // 顶部导航
+    element.on('nav(nav-top)', function (elem) {
+      var path = elem.data('path');
+      if (path) {
+        tools.open(path);
+      }
+    });
+
     // 固定条
-    var bars = [
-      { type: i18n.trans("数据"), icon: 'layui-icon-fonts-code' },
-    ];
     util.fixbar({
-      bars: bars,
+      bars: [{ type: i18n.trans("数据"), icon: 'layui-icon-fonts-code' },],
       bar1: false,
       bar2: false,
       bgcolor: '#393D52',
       css: { bottom: 80 },
       on: {
         mouseenter: function (desc) {
-          layer.tips(desc, this, {
-            tips: 4,
-            fixed: true
-          });
+          layer.tips(desc, this, { tips: 4, fixed: true });
         },
         mouseleave: function (type) {
           layer.closeAll('tips');
@@ -367,15 +333,7 @@
       }
     });
 
-    element.on('nav(nav-top)', function (elem) {
-      var path = elem.data('path');
-      if (path) {
-        tools.open(path);
-      }
-    });
 
-    // 示例扩展
-    example.init('#example-selector');
   });
 
 </script>

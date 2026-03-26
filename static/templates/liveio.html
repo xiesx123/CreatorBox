@@ -31,43 +31,43 @@
 {% endblock %}
 
 {% block body_content %}
-
-<div class="layui-tabs layui-form layui-form-pane layui-panel" id="tabs" style="padding: 10px">
-  <ul class="layui-tabs-header">
-    <li class="layui-this">直播设置</li>
-    <li>互动消息</li>
-    <li>自动回复</li>
-    <li>语音合成</li>
-  </ul>
-  <div class="layui-tabs-body">
-    <div class="layui-tabs-item layui-show">
-      <blockquote class="layui-elem-quote layui-quote-nm">
-        OBS、数字人音频驱动设置
-      </blockquote>
-      {% include "extend/obs.html" %}
-      {% include "extend/dh.html" %}
-      {% include "extend/ctr.html" %}
-    </div>
-    <div class="layui-tabs-item">
-      <blockquote class="layui-elem-quote layui-quote-nm">
-        根据粉丝消息，自定义回复
-      </blockquote>
-      {% include "extend/room.html" %}
-    </div>
-    <div class="layui-tabs-item">
-      <blockquote class="layui-elem-quote layui-quote-nm">
-        消息关键词配置，自动触发回复
-      </blockquote>
-    </div>
-    <div class="layui-tabs-item">
-      <blockquote class="layui-elem-quote layui-quote-nm">
-        模板参数配置、试听预览
-      </blockquote>
-      {% include "extend/tts.html" %}
+<form class="layui-form layui-form-pane" lay-filter="form_filter">
+  <div class="layui-tabs layui-form layui-form-pane layui-panel" id="tabs" style="padding: 10px">
+    <ul class="layui-tabs-header">
+      <li class="layui-this">直播设置</li>
+      <li>互动消息</li>
+      <li>自动回复</li>
+      <li>语音合成</li>
+    </ul>
+    <div class="layui-tabs-body">
+      <div class="layui-tabs-item layui-show">
+        <blockquote class="layui-elem-quote layui-quote-nm">
+          OBS、数字人音频驱动设置
+        </blockquote>
+        {% include "extend/obs.html" %}
+        {% include "extend/dh.html" %}
+        {% include "extend/ctr.html" %}
+      </div>
+      <div class="layui-tabs-item">
+        <blockquote class="layui-elem-quote layui-quote-nm">
+          根据粉丝消息，自定义回复
+        </blockquote>
+        {% include "extend/room.html" %}
+      </div>
+      <div class="layui-tabs-item">
+        <blockquote class="layui-elem-quote layui-quote-nm">
+          消息关键词配置，自动触发回复
+        </blockquote>
+      </div>
+      <div class="layui-tabs-item">
+        <blockquote class="layui-elem-quote layui-quote-nm">
+          模板参数配置、试听预览
+        </blockquote>
+        {% include "extend/tts.html" %}
+      </div>
     </div>
   </div>
-</div>
-
+</form>
 {% endblock %}
 
 {% block scripts_extra %}
@@ -79,6 +79,7 @@
     var layer = layui.layer;
     var util = layui.util;
     var i18n = layui.i18n_;
+    i18n.init('{{request.state.lang}}');
     var tabs = layui.tabs;
     var $ = layui.jquery;
     var tools = layui.tools;
@@ -93,11 +94,6 @@
     var dhManager = null;
     var ctrManager = null;
     var roomManager = null;
-
-    // ================================ 表单初始化 ================================
-
-    // 国际化
-    i18n.init('{{request.state.lang}}');
 
     // Tab 标签
     var TAB_KEY = 'liveio_tab_index';

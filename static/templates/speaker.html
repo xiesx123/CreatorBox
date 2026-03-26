@@ -160,12 +160,12 @@
             var upload = layui.upload;
             var util = layui.util;
             var i18n = layui.i18n_;
+            i18n.init('{{request.state.lang}}');
+
             var enums = layui.enums;
             var toast = layui.toastr;
             var tools = layui.tools;
             var $ = layui.$;
-
-            i18n.init('{{request.state.lang}}');
 
             let player;
             let action = "query";

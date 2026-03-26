@@ -70,10 +70,10 @@
             var layer = layui.layer;
             var util = layui.util;
             var i18n = layui.i18n_;
+            i18n.init('{{request.state.lang}}');
+
             var tools = layui.tools;
             var $ = layui.$;
-
-            i18n.init('{{request.state.lang}}');
 
             var autoplay = layui.url().search.autoplay;
 
