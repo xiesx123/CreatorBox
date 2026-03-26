@@ -52,7 +52,7 @@
         <blockquote class="layui-elem-quote layui-quote-nm">
           根据粉丝消息，自定义回复
         </blockquote>
-        {% include "extend/room.html" %}
+        {% include "extend/msg.html" %}
       </div>
       <div class="layui-tabs-item">
         <blockquote class="layui-elem-quote layui-quote-nm">
@@ -74,7 +74,7 @@
 <script>
   // ================================ 页面初始化 ================================
 
-  layui.use(['form', 'layer', 'i18n_', 'tools', 'obs', 'dh', 'ctr', 'room', 'tts'], function () {
+  layui.use(['form', 'layer', 'i18n_', 'tools', 'obs', 'dh', 'ctr', 'msg', 'tts'], function () {
     var form = layui.form;
     var layer = layui.layer;
     var util = layui.util;
@@ -86,17 +86,20 @@
     var obs = layui.obs;
     var dh = layui.dh;
     var ctr = layui.ctr;
-    var room = layui.room;
+    var msg = layui.msg;
     var tts = layui.tts;
 
     var ws = null;
     var obsManager = null;
     var dhManager = null;
     var ctrManager = null;
-    var roomManager = null;
+    var msgManager = null;
+
+    var STATE_KEY_TOKEN = "token";
+    localStorage.setItem(STATE_KEY_TOKEN, '{{data.token}}');
 
     // Tab 标签
-    var TAB_KEY = 'liveio_tab_index';
+    var TAB_KEY = 'liveio_tabs_idx';
     tabs.change('tabs', parseInt(localStorage.getItem(TAB_KEY)) || 0);
     tabs.on('beforeChange(tabs)', function () {
       var index = $(this).index();
@@ -104,24 +107,24 @@
     });
 
     // 连接 WebSocket
-    ws = tools.connect('{{data.app.debug}}', function (message) {
+    ws = tools.connect(function (message) {
       if (!message.type) return;
       switch (message.type) {
         case 'Error':
           layer.msg(message.payload.message, { icon: 2 });
           break;
       }
-    });
+    }, '{{data.app.debug}}');
 
     // 管理器
     obsManager = obs.create(ws);
     dhManager = dh.create(ws);
     ctrManager = ctr.create(ws);
-    roomManager = room.create(ws);
+    msgManager = msg.create(ws);
 
     dhManager.setCtrManager(ctrManager);
     ctrManager.setDHManager(dhManager);
-    roomManager.setTtsManager(tts);
+    msgManager.setTtsManager(tts);
 
     // TTS
     var STATE_KEY_DUBBING = "dubb_form";

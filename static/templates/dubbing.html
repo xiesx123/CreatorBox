@@ -160,6 +160,9 @@
     var tts = layui.tts;
     var example = layui.example;
 
+    var STATE_KEY_TOKEN = "token";
+    localStorage.setItem(STATE_KEY_TOKEN, '{{data.token}}');
+
     var STATE_KEY_DUBBING = "dubb_form";
     var form_cache_raw = localStorage.getItem(STATE_KEY_DUBBING);
     var form_cache = form_cache_raw ? JSON.parse(form_cache_raw) : {};
@@ -228,7 +231,7 @@
         layer.msg('{{_("请输入音视频路径或链接")}}', { icon: 0 });
         return elem.focus()
       };
-      tools.open(`player?url=${video_url}&autoplay=true`);
+      tools.open(`player?url=${video_url}&search=false`);
     });
 
     // 数据编辑
@@ -281,14 +284,14 @@
     });
 
     // 回调通知
-    tools.connect('{{data.app.debug}}', function (message) {
+    tools.connect(function (message) {
       if (message.type == "video") {
         toast.success(localStorage.getItem('task'), i18n.trans("任务处理成功"));
       }
       else if (message.type == "error") {
         toast.error(message.payload, i18n.trans("任务处理异常"));
       }
-    })
+    }, '{{data.app.debug}}')
 
     // 顶部导航
     element.on('nav(nav-top)', function (elem) {
@@ -332,7 +335,6 @@
         }
       }
     });
-
 
   });
 
