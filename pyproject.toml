@@ -126,7 +126,7 @@ torchvision = [
 
 [[tool.uv.index]]
 name = "pytorch-cpu"
-# https://pypi.org/simple
+# url = "https://pypi.org/simple"
 url = "https://pypi.tuna.tsinghua.edu.cn/simple" 
 explicit = true
 default = true
