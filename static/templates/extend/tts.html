@@ -5,7 +5,7 @@
   <div class="layui-input-block">
     <div class="layui-input-wrap">
       <div class="layui-input-prefix"><i class="layui-icon layui-icon-location"></i></div>
-      <select id="locale" name="locale" lay-verify="required" lay-filter="locale_filter">
+      <select id="locale" name="locale" lay-verify="required" lay-filter="locale_filter" lay-search>
         <option value="">{{_("选择或搜索")}}</option>
         {% for item in data.form.locales %}
         <option value="{{ item.locale }}">{{ item.locale }} - {{ item.name if request.state.lang == 'zh' else item.country }}</option>
@@ -20,7 +20,7 @@
   <div class="layui-input-block">
     <div class="layui-input-wrap">
       <div class="layui-input-prefix"> <i class="layui-icon layui-icon-component"></i> </div>
-      <select id="tts_provider" name="tts_provider" lay-verify="required|tts_provider" lay-filter="tts_provider_filter">
+      <select id="tts_provider" name="tts_provider" lay-verify="required|tts_provider" lay-filter="tts_provider_filter" lay-search>
         <option value="">{{_("选择或搜索")}}</option>
       </select>
     </div>

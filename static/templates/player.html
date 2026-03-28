@@ -70,15 +70,13 @@
             var tools = layui.tools;
             var $ = layui.$;
 
-            // ================================ URL 参数解析 ================================
-
+            // URL 参数解析
             var urlParams = layui.url().search;
             var autoplay = urlParams.autoplay === 'true' || urlParams.autoplay === '1';
             var showSearch = urlParams.search !== 'false' && urlParams.search !== '0';
             var defaultUrl = "{{ data.url }}";
 
-            // ================================ 资源地址处理 ================================
-
+            // 资源地址处理
             var build_url = function (url) {
                 if (!url.startsWith('http')) {
                     url = `${window.location.protocol}//${window.location.host}/file/download?path=${encodeURIComponent(url)}`;
@@ -86,8 +84,7 @@
                 return url;
             };
 
-            // ================================ 计算播放器高度 ================================
-
+            // 计算播放器高度
             function resizePlayer() {
                 const playerContainer = document.getElementById('player-container');
                 if (!playerContainer) return '360px';
@@ -102,8 +99,7 @@
                 return Math.max(availableHeight, 360) + 'px';
             }
 
-            // ================================ 视频播放 ================================
-
+            // 视频播放
             var video_play = function (url, shouldAutoplay) {
                 if (shouldAutoplay === undefined) shouldAutoplay = true;
                 if (!url) {
@@ -130,8 +126,7 @@
                 }
             };
 
-            // ================================ 播放事件处理 ================================
-
+            // 播放事件处理
             $('#play').click(function () {
                 const input_url = $("#url").val();
                 if (input_url.length !== 17) {
@@ -143,8 +138,7 @@
                 });
             });
 
-            // ================================ 窗口大小调整 ================================
-
+            // 窗口大小调整
             var resizeTimer;
             window.addEventListener('resize', function () {
                 clearTimeout(resizeTimer);
@@ -156,14 +150,12 @@
                 }, 200);
             });
 
-            // ================================ 初始化 UI ================================
-
+            // 初始化 UI
             if (!showSearch) {
                 $('#url_panel').hide();
             }
 
-            // ================================ 自动播放 ================================
-
+            // 自动播放
             $(document).ready(function () {
                 if (defaultUrl && !autoplay) {
                     // 有默认 URL 且不自动播放：加载视频显示画面但不自动开始

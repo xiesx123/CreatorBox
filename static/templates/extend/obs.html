@@ -72,7 +72,7 @@
       <div class="layui-input-block">
         <div class="layui-input-wrap">
           <div class="layui-input-prefix"><i class="layui-icon layui-icon-layouts"></i></div>
-          <select id="scene-select" lay-filter="scene-select">
+          <select id="scene-select" lay-filter="scene-select" lay-search>
             <option value="">请选择场景</option>
           </select>
         </div>
@@ -84,7 +84,7 @@
       <div class="layui-input-block">
         <div class="layui-input-wrap">
           <div class="layui-input-prefix"><i class="layui-icon layui-icon-layer"></i></div>
-          <select id="source-select" lay-filter="source-select" class="layui-input">
+          <select id="source-select" lay-filter="source-select" class="layui-input" lay-search>
             <option value="">请选择画面</option>
           </select>
         </div>
@@ -105,9 +105,10 @@
     <!-- 操作按钮 -->
     <div class="layui-form-item">
       <div class="layui-input-block">
-        <button type="button" id="scene-load-btn" class="layui-btn layui-btn-primary layui-border">切换</button>
+        <button type="button" id="scene-refresh-btn" class="layui-btn layui-btn-primary layui-border">刷新</button>
         <button type="button" id="source-stop-btn" class="layui-btn layui-btn-primary layui-border">停止</button>
         <button type="button" id="source-toggle-play-btn" class="layui-btn layui-btn-primary layui-border-blue">播放</button>
+        <button type="button" id="scene-switch-btn" class="layui-btn layui-btn-primary layui-border-orange">切换</button>
       </div>
     </div>
   </div>

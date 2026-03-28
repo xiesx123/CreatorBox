@@ -1,6 +1,6 @@
 <!-- 播放队列行工具栏模板 -->
 <script type="text/html" id="TPL_ap_queue_tools">
-  <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="exec">执行</a>
+  <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="exec">加载</a>
   <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
 </script>
 
@@ -21,7 +21,7 @@
       <div class="layui-input-block">
         <div class="layui-input-wrap">
           <div class="layui-input-prefix"><i class="layui-icon layui-icon-template-1"></i></div>
-          <select id="ap-filename" lay-filter="ap-filename" name="ap_filename">
+          <select id="ap-filename" lay-filter="ap-filename" name="ap_filename" lay-search>
             <option value="">请选择配音</option>
           </select>
         </div>
@@ -33,7 +33,7 @@
       <div class="layui-input-block">
         <div class="layui-input-wrap">
           <div class="layui-input-prefix"><i class="layui-icon layui-icon-note"></i></div>
-          <select id="ap-suffix" lay-filter="ap-suffix" name="ap_suffix">
+          <select id="ap-suffix" lay-filter="ap-suffix" name="ap_suffix" lay-search>
             <option value="">请选择后缀</option>
           </select>
         </div>

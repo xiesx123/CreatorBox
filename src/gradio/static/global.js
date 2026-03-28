@@ -1,7 +1,4 @@
 () => {
-	// 页面缩放 
-	document.body.style.zoom = 0.8;
-
 	// body
 	var body = document.querySelector('body');
 
