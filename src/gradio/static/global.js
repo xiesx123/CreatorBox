@@ -1,4 +1,6 @@
 () => {
+	console.log("\n %c CreatorBox v1.0.31 %c https://github.com/xiesx123/CreatorBox \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0;")
+
 	// body
 	var body = document.querySelector('body');
 

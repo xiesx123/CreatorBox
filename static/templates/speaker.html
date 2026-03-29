@@ -235,7 +235,7 @@
                     if (action == 'update') {
                         title = i18n.trans("修改")
                     }
-                    layer.confirm(i18n.trans("确定提交？"), { title: i18n.trans("提示"), icon: 3 }, function (index) {
+                    layer.confirm(i18n.trans("确定提交?"), { title: i18n.trans("提示"), icon: 3 }, function (index) {
                         tools.post("/spk/upsert", data, function (response) {
                             console.debug(response.data)
                             toast.success(`${field.speaker}`, i18n.trans("操作成功"));

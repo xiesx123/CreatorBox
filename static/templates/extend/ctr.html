@@ -1,16 +1,3 @@
-<!-- 播放队列行工具栏模板 -->
-<script type="text/html" id="TPL_ap_queue_tools">
-  <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="exec">加载</a>
-  <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
-</script>
-
-<!-- 播放队列头部工具栏模板 -->
-<script type="text/html" id="TPL_ap_queue_header">
-  <div class="layui-btn-group">
-      <div class="layui-inline" lay-event="clearAll"><i class="layui-icon layui-icon-delete"></i></div>
-  </div>
-</script>
-
 <!-- 控制器 -->
 <fieldset class="layui-elem-field">
   <legend>控制器</legend>
@@ -56,6 +43,18 @@
   <legend>导播</legend>
 </fieldset>
 
+<!-- 播放队列行工具栏模板 -->
+<script type="text/html" id="TPL_ap_queue_tools">
+  <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="exec">加载</a>
+  <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="del">删除</a>
+</script>
+
+<!-- 播放队列头部工具栏模板 -->
+<script type="text/html" id="TPL_ap_queue_header">
+  <div class="layui-btn-group">
+      <div class="layui-inline" lay-event="clearAll"><i class="layui-icon layui-icon-delete"></i></div>
+  </div>
+</script>
 <!-- 导播队列 -->
 <table id="ap-queue-table" class="layui-table" lay-filter="ap-queue-table"></table>
 

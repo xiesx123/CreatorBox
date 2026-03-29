@@ -1,20 +1,20 @@
-#: static/templates/dubbing.html:79 static/templates/dubbing.html:90
+#: static/templates/dubbing.html:74 static/templates/dubbing.html:85
 msgid "上传"
 msgstr "上传"
 
-#: static/templates/speaker.html:140
+#: static/templates/speaker.html:139
 msgid "下载"
 msgstr "下载"
 
-#: static/templates/dubbing.html:41 static/templates/liveio.html:25
+#: static/templates/dubbing.html:36 static/templates/liveio.html:25
 msgid "主题"
 msgstr "主题"
 
-#: static/templates/extend/tts.html:196
+#: static/templates/extend/tts.html:195
 msgid "删除"
 msgstr "删除"
 
-#: static/templates/dubbing.html:101 static/templates/extend/ctr.html:32
+#: static/templates/dubbing.html:96 static/templates/extend/ctr.html:19
 msgid "后缀"
 msgstr "后缀"
 
@@ -26,24 +26,24 @@ msgstr "启用"
 msgid "地区"
 msgstr ""
 
-#: static/templates/dubbing.html:57
+#: static/templates/dubbing.html:52
 msgid "基础"
 msgstr "基础"
 
-#: static/templates/extend/tts.html:171
+#: static/templates/extend/tts.html:170
 msgid "备注"
 msgstr "备注"
 
-#: static/templates/extend/tts.html:57 static/templates/extend/tts.html:59
+#: static/templates/extend/tts.html:56 static/templates/extend/tts.html:58
 #: static/templates/speaker.html:60
 msgid "女"
 msgstr "女"
 
-#: static/templates/dubbing.html:70
+#: static/templates/dubbing.html:65
 msgid "对齐"
 msgstr "对齐"
 
-#: static/templates/extend/tts.html:51 static/templates/speaker.html:57
+#: static/templates/extend/tts.html:50 static/templates/speaker.html:57
 msgid "性别"
 msgstr "性别"
 
@@ -55,11 +55,11 @@ msgstr "情感"
 msgid "打开"
 msgstr "打开"
 
-#: static/templates/dubbing.html:131
+#: static/templates/dubbing.html:126
 msgid "执行"
 msgstr "执行"
 
-#: static/templates/extend/tts.html:160
+#: static/templates/extend/tts.html:159
 msgid "控制结果可复现"
 msgstr "控制结果可复现"
 
@@ -67,11 +67,11 @@ msgstr "控制结果可复现"
 msgid "描述"
 msgstr "描述"
 
-#: static/templates/extend/tts.html:19
+#: static/templates/extend/tts.html:18
 msgid "提供商"
 msgstr "提供商"
 
-#: static/templates/player.html:50
+#: static/templates/player.html:46
 msgid "播放"
 msgstr "播放"
 
@@ -79,11 +79,11 @@ msgstr "播放"
 msgid "操作"
 msgstr "操作"
 
-#: static/templates/dubbing.html:90
+#: static/templates/dubbing.html:85
 msgid "数据"
 msgstr "数据"
 
-#: static/templates/dubbing.html:79
+#: static/templates/dubbing.html:74
 msgid "文件"
 msgstr "文件"
 
@@ -91,7 +91,7 @@ msgstr "文件"
 msgid "文本"
 msgstr "文本"
 
-#: static/templates/extend/tts.html:31
+#: static/templates/extend/tts.html:30
 msgid "服务地址"
 msgstr "服务地址"
 
@@ -103,24 +103,19 @@ msgstr "查询"
 msgid "标题"
 msgstr "标题"
 
-#: static/templates/extend/tts.html:41
+#: static/templates/extend/tts.html:40
 msgid "模型"
 msgstr "模型"
 
-#: static/templates/dubbing.html:61
+#: static/templates/dubbing.html:56
 msgid "模式"
 msgstr "模式"
 
-#: static/templates/extend/tts.html:181
+#: static/templates/extend/tts.html:180
 msgid "点击试听"
 msgstr "点击试听"
 
-#: static/templates/extend/tts.html:189
-#, fuzzy
-msgid "生成语音"
-msgstr "生成语音"
-
-#: static/templates/extend/tts.html:53 static/templates/extend/tts.html:55
+#: static/templates/extend/tts.html:52 static/templates/extend/tts.html:54
 #: static/templates/speaker.html:59
 msgid "男"
 msgstr "男"
@@ -129,11 +124,11 @@ msgstr "男"
 msgid "示例"
 msgstr "示例"
 
-#: static/templates/extend/tts.html:161
+#: static/templates/extend/tts.html:160
 msgid "种子"
 msgstr "种子"
 
-#: static/templates/dubbing.html:36 static/templates/plugin.html:33
+#: static/templates/plugin.html:33
 msgid "组件"
 msgstr "组件"
 
@@ -141,77 +136,77 @@ msgstr "组件"
 msgid "编号"
 msgstr "编号"
 
-#: static/templates/speaker.html:141
+#: static/templates/speaker.html:140
 msgid "编辑"
 msgstr "编辑"
 
-#: static/templates/player.html:38
-msgid "视频"
-msgstr "视频"
-
-#: static/templates/extend/tts.html:123
+#: static/templates/extend/tts.html:122
 msgid "角色扮演"
 msgstr "角色扮演"
 
-#: static/templates/extend/tts.html:182 static/templates/extend/tts.html:195
-#: static/templates/speaker.html:139
+#: static/templates/extend/tts.html:181 static/templates/extend/tts.html:194
+#: static/templates/speaker.html:138
 msgid "试听"
 msgstr "试听"
 
-#: static/templates/extend/tts.html:4
+#: static/templates/extend/tts.html:3
 msgid "语言"
 msgstr "语言"
 
-#: static/templates/extend/tts.html:97
+#: static/templates/extend/tts.html:96
 msgid "语调"
 msgstr "语调"
 
-#: static/templates/extend/tts.html:87
+#: static/templates/extend/tts.html:86
 msgid "语速"
 msgstr "语速"
 
-#: static/templates/dubbing.html:118
+#: static/templates/dubbing.html:113
 msgid "语音合成"
 msgstr "语音合成"
+
+#: static/templates/extend/tts.html:188
+msgid "语音模版"
+msgstr "语音模版"
 
 #: static/templates/dubbing.html:31 static/templates/speaker.html:36
 #: static/templates/speaker.html:50
 msgid "说话人"
 msgstr "说话人"
 
-#: static/templates/extend/tts.html:135
+#: static/templates/extend/tts.html:134
 msgid "说话风格"
 msgstr "说话风格"
 
-#: static/templates/dubbing.html:197
+#: static/templates/dubbing.html:195
 msgid "请至少添加一个配音角色"
 msgstr "请至少添加一个配音角色"
 
-#: static/templates/dubbing.html:95
+#: static/templates/dubbing.html:90
 msgid "请输入JSON数据文件路径"
 msgstr "请输入JSON数据文件路径"
 
-#: static/templates/player.html:44
+#: static/templates/player.html:40
 msgid "请输入任务ID、视频链接"
 msgstr "请输入任务ID、视频链接"
 
-#: static/templates/dubbing.html:105 static/templates/dubbing.html:347
+#: static/templates/dubbing.html:100 static/templates/dubbing.html:326
 msgid "请输入后缀"
 msgstr "请输入后缀"
 
-#: static/templates/dubbing.html:191 static/templates/dubbing.html:239
+#: static/templates/dubbing.html:189 static/templates/dubbing.html:237
 msgid "请输入数据文件路径"
 msgstr "请输入数据文件路径"
 
-#: static/templates/extend/tts.html:35
+#: static/templates/extend/tts.html:34
 msgid "请输入服务地址"
 msgstr "请输入服务地址"
 
-#: static/templates/extend/tts.html:45
+#: static/templates/extend/tts.html:44
 msgid "请输入模型名称"
 msgstr "请输入模型名称"
 
-#: static/templates/dubbing.html:203 static/templates/extend/tts.html:184
+#: static/templates/dubbing.html:201 static/templates/extend/tts.html:183
 msgid "请输入试听文本"
 msgstr "请输入试听文本"
 
@@ -219,12 +214,12 @@ msgstr "请输入试听文本"
 msgid "请输入说话人名称"
 msgstr "请输入说话人名称"
 
-#: static/templates/extend/tts.html:165
+#: static/templates/extend/tts.html:164
 msgid "请输入随机种子"
 msgstr "请输入随机种子"
 
-#: static/templates/dubbing.html:84 static/templates/dubbing.html:186
-#: static/templates/dubbing.html:228 static/templates/dubbing.html:339
+#: static/templates/dubbing.html:79 static/templates/dubbing.html:184
+#: static/templates/dubbing.html:226 static/templates/dubbing.html:318
 msgid "请输入音视频路径或链接"
 msgstr "请输入音视频路径或链接"
 
@@ -236,15 +231,15 @@ msgstr "请输入音频文本"
 msgid "请输入音频路径、链接"
 msgstr "请输入音频路径、链接"
 
-#: static/templates/extend/tts.html:9 static/templates/extend/tts.html:24
-#: static/templates/extend/tts.html:70 static/templates/extend/tts.html:128
-#: static/templates/extend/tts.html:140 static/templates/speaker.html:68
+#: static/templates/extend/tts.html:8 static/templates/extend/tts.html:23
+#: static/templates/extend/tts.html:69 static/templates/extend/tts.html:127
+#: static/templates/extend/tts.html:139 static/templates/speaker.html:68
 #: static/templates/speaker.html:82
 msgid "选择或搜索"
 msgstr "选择或搜索"
 
-#: static/templates/extend/tts.html:122 static/templates/extend/tts.html:134
-#: static/templates/extend/tts.html:146
+#: static/templates/extend/tts.html:121 static/templates/extend/tts.html:133
+#: static/templates/extend/tts.html:145
 msgid "选择试听"
 msgstr "选择试听"
 
@@ -256,15 +251,15 @@ msgstr "重启"
 msgid "重置"
 msgstr "重置"
 
-#: static/templates/extend/tts.html:175
+#: static/templates/extend/tts.html:174
 msgid "随便写点什么"
 msgstr "随便写点什么"
 
-#: static/templates/extend/tts.html:65
+#: static/templates/extend/tts.html:64
 msgid "音色"
 msgstr "音色"
 
-#: static/templates/extend/tts.html:77
+#: static/templates/extend/tts.html:76
 msgid "音量"
 msgstr "音量"
 
@@ -272,7 +267,6 @@ msgstr "音量"
 msgid "音频"
 msgstr "音频"
 
-#: static/templates/extend/tts.html:147
+#: static/templates/extend/tts.html:146
 msgid "风格强度"
 msgstr "风格强度"
-
