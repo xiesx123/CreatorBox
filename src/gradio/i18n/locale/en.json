@@ -367,5 +367,7 @@
     "高度": "Height",
     "麦克风": "Microphone",
     "麦克风已在运行中": "Microphone is Running",
-    "麦克风输入已启动": "Microphone Input Started"
+    "麦克风输入已启动": "Microphone Input Started",
+    "选填": "Optional",
+    "摄像头": "Camera"
 }
