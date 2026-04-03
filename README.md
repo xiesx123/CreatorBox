@@ -176,7 +176,7 @@
 
 - 👉 Installation and Deployment Guide: [Local](https://xiesx123.github.io/CreatorBox/deploy-local) | [Remote](https://xiesx123.github.io/CreatorBox/deploy-colab)
 
-- 👉 Development & Integration Guide: [Component](https://xiesx123.github.io/CreatorBox/component) | [Extensions](https://xiesx123.github.io/CreatorBox/extensions)
+- 👉 Development & Integration Guide: [Component](https://xiesx123.github.io/CreatorBox/component) | [Extensions](https://xiesx123.github.io/CreatorBox/extension)
 
 ### 📢 Feedback
 

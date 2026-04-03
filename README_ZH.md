@@ -174,7 +174,7 @@
 
 - 👉 安装部署指南：[本地](https://xiesx123.github.io/CreatorBox/zh/deploy-local) | [远程](https://xiesx123.github.io/CreatorBox/zh/deploy-colab)
 
-- 👉 开发集成指南：[应用](https://xiesx123.github.io/CreatorBox/zh/component) | [扩展](https://xiesx123.github.io/CreatorBox/zh/extensions)
+- 👉 开发集成指南：[应用](https://xiesx123.github.io/CreatorBox/zh/component) | [扩展](https://xiesx123.github.io/CreatorBox/zh/extension)
 
 ### 📢 反馈
 
