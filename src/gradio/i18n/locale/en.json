@@ -124,6 +124,7 @@
     "提示：VideoSubFinder": "Tip: VideoSubFinder [Download Link](https://sourceforge.net/projects/videosubfinder/)",
     "提示：适用于剪映5.9及以上版本": "Tip: Compatible with CapCut 5.9 and Above",
     "提示：阈值越小越敏感；太高会检测不到场景，太低会碎片化": "Tip: Lower threshold = more sensitive; too high = no scene detection, too low = fragmentation",
+    "摄像头": "Camera",
     "撤销": "Undo",
     "支持纯文本或 JSON 格式，例如:\n你好，世界！\n或\n[{\"text\": \"你好\"}, {\"text\": \"世界\"}]": "Supports plain text or JSON format, for example:\nHello, world!\nor\n[{\"text\": \"Hello\"}, {\"text\": \"world\"}]",
     "支持通配符": "Wildcard Supported",
@@ -232,6 +233,7 @@
     "翻译语气正式": "Formal",
     "翻译语气随意": "Casual",
     "翻译输出简洁": "Short",
+    "翻译配音": "翻译配音",
     "翻译风格创意改编": "Creative",
     "翻译风格意译": "Free",
     "翻译风格逐字翻译": "Literal",
@@ -328,6 +330,7 @@
     "运行环境": "Runtime Environment",
     "连接置信度阈值": "Link confidence threshold",
     "选中的音频": "Selected Audio",
+    "选填": "Optional",
     "选择掩码": "Mask Selection",
     "选择无效": "Invalid Selection",
     "选择界面主题风格": "Choose Interface Theme Style",
@@ -335,7 +338,6 @@
     "选择范围": "Selection Range",
     "透明度": "Transparency",
     "邮箱": "Email",
-    "配音": "Dubbing",
     "配音语言": "Dubbing Language",
     "重启": "Restart",
     "重启服务失败": "Failed to Restart Service...",
@@ -367,7 +369,5 @@
     "高度": "Height",
     "麦克风": "Microphone",
     "麦克风已在运行中": "Microphone is Running",
-    "麦克风输入已启动": "Microphone Input Started",
-    "选填": "Optional",
-    "摄像头": "Camera"
+    "麦克风输入已启动": "Microphone Input Started"
 }
