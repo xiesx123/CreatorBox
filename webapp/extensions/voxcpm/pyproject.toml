@@ -27,6 +27,7 @@ requires-python = ">=3.10"
 dependencies = [
     "torch==2.6.0",
     "torchaudio==2.6.0",
+    "torchcodec",
     "transformers==4.57.1",
     "einops",
     "gradio==5.50.0",
@@ -56,7 +57,6 @@ dev = [
     "pytest-cov>=2.0",
     "black>=21.0",
     "flake8>=3.8",
-    "mypy>=0.800",
     "pre-commit>=2.0",
 ]
 
@@ -89,10 +89,32 @@ extend-exclude = '''
   \.eggs
   | \.git
   | \.hg
-  | \.mypy_cache
   | \.tox
   | \.venv
   | build
   | dist
 )/
 '''
+
+[tool.uv.sources]
+# Install PyTorch with CUDA support on Linux/Windows (CUDA doesn't exist for Mac).
+# NOTE: We must explicitly request them as `dependencies` above. These improved
+# versions will not be selected if they're only third-party dependencies.
+torch = [
+  { index = "pytorch-cuda", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+torchaudio = [
+  { index = "pytorch-cuda", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+torchvision = [
+  { index = "pytorch-cuda", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cuda"
+# Use PyTorch built for NVIDIA Toolkit version 12.6.
+# Available versions: https://pytorch.org/get-started/locally/
+# url = "https://download.pytorch.org/whl/cu126"
+url = "https://mirrors.nju.edu.cn/pytorch/whl/cu126"
+# Only use this index when explicitly requested by `tool.uv.sources`.
+explicit = true

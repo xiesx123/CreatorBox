@@ -28,6 +28,9 @@ dependencies = [
   # and update the lockfile after editing anything below.
   # WARNING: Ensure that you don't have a local `uv.toml` which overrides PyPI
   # while generating the lockfile: https://github.com/astral-sh/uv/issues/15741
+  "torch==2.6.0",
+  "torchaudio==2.6.0",
+  "torchvision==0.21.0",
   "accelerate==1.8.1",
   "cn2an==0.5.22",
   "cython==3.0.7",
@@ -108,8 +111,9 @@ torchvision = [
 
 [[tool.uv.index]]
 name = "pytorch-cuda"
-# Use PyTorch built for NVIDIA Toolkit version 12.8.
+# Use PyTorch built for NVIDIA Toolkit version 12.6.
 # Available versions: https://pytorch.org/get-started/locally/
-url = "https://download.pytorch.org/whl/cu128"
+# url = "https://download.pytorch.org/whl/cu126"
+url = "https://mirrors.nju.edu.cn/pytorch/whl/cu126"
 # Only use this index when explicitly requested by `tool.uv.sources`.
 explicit = true

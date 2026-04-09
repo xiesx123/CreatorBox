@@ -55,7 +55,7 @@ msgstr "情感"
 msgid "打开"
 msgstr "打开"
 
-#: static/templates/dubbing.html:126
+#: static/templates/dubbing.html:125
 msgid "执行"
 msgstr "执行"
 
@@ -132,10 +132,6 @@ msgstr "种子"
 msgid "组件"
 msgstr "组件"
 
-#: static/templates/plugin.html:111
-msgid "编号"
-msgstr "编号"
-
 #: static/templates/speaker.html:140
 msgid "编辑"
 msgstr "编辑"
@@ -161,7 +157,7 @@ msgstr "语调"
 msgid "语速"
 msgstr "语速"
 
-#: static/templates/dubbing.html:113
+#: static/templates/dubbing.html:112
 msgid "语音合成"
 msgstr "语音合成"
 
@@ -178,9 +174,9 @@ msgstr "说话人"
 msgid "说话风格"
 msgstr "说话风格"
 
-#: static/templates/dubbing.html:195
-msgid "请至少添加一个配音角色"
-msgstr "请至少添加一个配音角色"
+#: static/templates/dubbing.html:200
+msgid "请先试听，至少添加一个配音角色"
+msgstr "请先试听，至少添加一个配音角色"
 
 #: static/templates/dubbing.html:90
 msgid "请输入JSON数据文件路径"
@@ -190,11 +186,11 @@ msgstr "请输入JSON数据文件路径"
 msgid "请输入任务ID、视频链接"
 msgstr "请输入任务ID、视频链接"
 
-#: static/templates/dubbing.html:100 static/templates/dubbing.html:326
+#: static/templates/dubbing.html:100 static/templates/dubbing.html:325
 msgid "请输入后缀"
 msgstr "请输入后缀"
 
-#: static/templates/dubbing.html:189 static/templates/dubbing.html:237
+#: static/templates/dubbing.html:188 static/templates/dubbing.html:236
 msgid "请输入数据文件路径"
 msgstr "请输入数据文件路径"
 
@@ -206,7 +202,7 @@ msgstr "请输入服务地址"
 msgid "请输入模型名称"
 msgstr "请输入模型名称"
 
-#: static/templates/dubbing.html:201 static/templates/extend/tts.html:183
+#: static/templates/dubbing.html:194 static/templates/extend/tts.html:183
 msgid "请输入试听文本"
 msgstr "请输入试听文本"
 
@@ -218,8 +214,8 @@ msgstr "请输入说话人名称"
 msgid "请输入随机种子"
 msgstr "请输入随机种子"
 
-#: static/templates/dubbing.html:79 static/templates/dubbing.html:184
-#: static/templates/dubbing.html:226 static/templates/dubbing.html:318
+#: static/templates/dubbing.html:79 static/templates/dubbing.html:183
+#: static/templates/dubbing.html:225 static/templates/dubbing.html:317
 msgid "请输入音视频路径或链接"
 msgstr "请输入音视频路径或链接"
 
@@ -270,3 +266,7 @@ msgstr "音频"
 #: static/templates/extend/tts.html:146
 msgid "风格强度"
 msgstr "风格强度"
+
+#~ msgid "编号"
+#~ msgstr "编号"
+
