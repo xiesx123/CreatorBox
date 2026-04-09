@@ -4,7 +4,7 @@ import sys
 sys.path.insert(0, os.getcwd())
 from typing import Any, Dict, Type
 
-from src.router.launch.provider import (
+from src.support.launcher.provider import (
     CosyVoiceLauncher,
     GptSovitsLauncher,
     IndexTTSLauncher,
@@ -62,7 +62,10 @@ if __name__ == "__main__":
     # PROJECT = "stable_diffusion_webui"
     # kwargs = {"index": DEFAULT_INDEX_TSINGHUA, "pyv": "3.11", "host": "127.0.0.1", "port": 9000, "share": False}
 
-    PROJECT = "voxcpm"
+    # PROJECT = "voxcpm"
+    # kwargs = {"index": DEFAULT_INDEX_TSINGHUA, "pyv": "3.11", "host": "127.0.0.1", "port": 9000, "share": False}
+
+    PROJECT = "cosyvoice"
     kwargs = {"index": DEFAULT_INDEX_TSINGHUA, "pyv": "3.11", "host": "127.0.0.1", "port": 9000, "share": False}
 
     # 创建启动器
