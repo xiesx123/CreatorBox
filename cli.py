@@ -74,7 +74,7 @@ def start(host, port, debug, browser, ngrok, ngrok_host, ngrok_port):
 
 @cli.command(help="扩展安装 (Extensions installation)")
 @click.option("--name", "-n", default=None, required=True, help="Name of the extension to install")
-@click.option("--version", "-v", default="3.10", help="Specify the Python version")
+@click.option("--version", "-v", default="3.11", help="Specify the Python version")
 @click.option("--port", "-p", type=int, default=None, show_default=True, required=True, help="The port number to use during the installation process.")
 @click.option("--start", is_flag=True, default=False, show_default=True, help="Start the extension immediately after installation")
 @click.option("--share", is_flag=True, default=False, show_default=True, help="Share the extension publicly after installation")

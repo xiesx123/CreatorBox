@@ -168,7 +168,7 @@
 
 - 🧩 **App Components**：Supports Video Mask Inpaint, Video Subtitle Extractor, Ultimate Vocal Remover, etc.
 
-- 📤 **Extended Capabilities**：Supports IOPaint, VoxCPM1.5, Index-TTS2, CosyVoice3, GPT-SoVITS4, etc.
+- 📤 **Extended Capabilities**：Supports IOPaint, VoxCPM2, Index-TTS2, CosyVoice3, GPT-SoVITS4, etc.
 
 - 🚀 **Independent Deployment**：Flexible deployment, supports local, server, Kaggle and Colab, ensuring data security
 
