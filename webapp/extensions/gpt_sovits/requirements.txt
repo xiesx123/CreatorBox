@@ -6,8 +6,8 @@ numba==0.61.2
 pytorch-lightning==2.5.3
 gradio==5.34.0
 ffmpeg_python==0.2.0
-onnxruntime==1.22.0; sys_platform == 'darwin' or sys_platform == 'win32'
-onnxruntime-gpu==1.22.0; sys_platform == 'linux'
+onnxruntime==1.23.2; sys_platform == 'darwin' or sys_platform == 'win32'
+onnxruntime-gpu==1.23.2; sys_platform == 'linux'
 tqdm==4.67.1
 funasr==1.2.7
 cn2an==0.5.23
@@ -39,5 +39,4 @@ torchmetrics==1.5.0
 pydantic==2.10.6
 ctranslate2==4.6.0
 av==15.0.0
-tqdm
 matplotlib
