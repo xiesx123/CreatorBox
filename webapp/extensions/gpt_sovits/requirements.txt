@@ -1,4 +1,9 @@
+# --extra-index-url https://download.pytorch.org/whl/cu126
+--extra-index-url https://mirrors.nju.edu.cn/pytorch/whl/cu126
 numpy==1.26.4
+torch==2.6.0
+torchaudio==2.6.0
+torchvision==0.21.0
 scipy==1.16.1
 tensorboard==2.19.0
 librosa==0.10.2
@@ -14,7 +19,6 @@ cn2an==0.5.23
 pypinyin==0.53.0
 # pyopenjtalk>=0.4.1
 g2p_en==2.1.0
-torchaudio==2.6.0
 modelscope==1.10.0
 sentencepiece==0.2.1
 transformers==4.51.3
