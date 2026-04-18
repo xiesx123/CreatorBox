@@ -301,7 +301,6 @@
       bar1: false,
       bar2: false,
       bgcolor: '#393D52',
-      css: { bottom: 80 },
       on: {
         mouseenter: function (desc) {
           layer.tips(desc, this, { tips: 4, fixed: true });
@@ -315,9 +314,6 @@
           filename = $("#video_url").val().split(/[/\\]/).pop().split(".")[0];
           if (filename == "") {
             layer.msg('{{_("请输入音视频路径或链接")}}', { icon: 0 });
-            setTimeout(function () {
-              util.openWin({ url: `editor?mode=tree` });
-            }, 1000);
             return
           }
           suf = $("#suffix").val();

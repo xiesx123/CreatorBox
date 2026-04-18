@@ -74,7 +74,7 @@
 <script>
   // ================================ 页面初始化 ================================
 
-  layui.use(['form', 'layer', 'i18n_', 'tools', 'obs', 'dh', 'ctr', 'msg', 'tts'], function () {
+  layui.use(['form', 'layer', 'util', 'i18n_', 'tools', 'obs', 'dh', 'ctr', 'msg', 'tts'], function () {
     var form = layui.form;
     var layer = layui.layer;
     var util = layui.util;
@@ -139,6 +139,23 @@
 
     tts.setData(form_data, voice_data)
 
+    // 固定条
+    util.fixbar({
+      bgcolor: '#393D52',
+      on: {
+        mouseenter: function (desc) {
+          layer.tips(desc, this, { tips: 4, fixed: true });
+        },
+        mouseleave: function (type) {
+          layer.closeAll('tips');
+        }
+      },
+      click: function (type) {
+        if (type === 'bar1') {
+          $('#change-theme').trigger('click');
+        }
+      }
+    });
   });
 </script>
 {% endblock %}
