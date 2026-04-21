@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Socket.IO API Docs</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f6fa;color:#333;height:100vh;overflow:hidden}
+#app{display:flex;height:100vh}
+#sidebar{width:280px;min-width:280px;background:#1e2130;color:#c9d1d9;display:flex;flex-direction:column;overflow:hidden}
+.sidebar-header{padding:20px 16px 12px;border-bottom:1px solid #2d3148}
+.logo{font-size:18px;font-weight:700;color:#fff;letter-spacing:.5px}
+.subtitle{font-size:11px;color:#6e7891;margin-top:4px}
+.connect-bar{padding:12px 16px;border-bottom:1px solid #2d3148;display:flex;flex-direction:column;gap:6px}
+.connect-bar input{background:#2d3148;border:1px solid #3d4468;border-radius:6px;padding:6px 10px;color:#c9d1d9;font-size:12px;outline:none}
+.connect-bar input:focus{border-color:#7c83fd}
+.connect-bar input::placeholder{color:#4a5270}
+#connectBtn{background:#7c83fd;color:#fff;border:none;border-radius:6px;padding:7px;font-size:12px;cursor:pointer;font-weight:600;transition:background .2s}
+#connectBtn:hover{background:#6970e8}
+#connectBtn.connected{background:#ef4444}
+#connectBtn.connected:hover{background:#dc2626}
+.dot{width:8px;height:8px;border-radius:50%;align-self:center;margin-left:auto;flex-shrink:0}
+.dot.disconnected{background:#4a5270}
+.dot.connected{background:#22c55e;box-shadow:0 0 6px #22c55e}
+.dot.connecting{background:#f59e0b;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+#navList{list-style:none;overflow-y:auto;flex:1;padding:8px 0}
+.nav-group{list-style:none}
+.nav-group-title{padding:8px 16px;cursor:pointer;font-size:11px;font-weight:700;color:#8b92b0;text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:6px;transition:color .2s}
+.nav-group-title:hover{color:#c9d1d9}
+.nav-group-title .arrow{font-size:10px;transition:transform .2s}
+.nav-group-title .nav-group-count{margin-left:auto;background:#2d3148;border-radius:10px;padding:1px 6px;font-size:10px}
+.nav-group-list{list-style:none;max-height:500px;overflow:hidden;transition:max-height .3s ease}
+.nav-group-list.collapsed{max-height:0}
+.nav-group-title .arrow.rotated{transform:rotate(-90deg)}
+.nav-item{padding:10px 16px 10px 28px;cursor:pointer;border-left:3px solid transparent;transition:all .15s;display:flex;flex-direction:column;gap:2px}
+.nav-item:hover{background:#2d3148;border-left-color:#7c83fd}
+.nav-item.active{background:#2d3148;border-left-color:#7c83fd;color:#fff}
+.nav-item .nav-tag{font-size:9px;font-weight:700;background:#7c83fd22;color:#7c83fd;border:1px solid #7c83fd44;border-radius:3px;padding:1px 5px;width:fit-content;letter-spacing:.5px}
+.nav-item small{font-size:11px;color:#6e7891;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#content{flex:1;overflow-y:auto;padding:32px 40px;background:#f5f6fa}
+#placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:#aaa;gap:12px}
+.ph-icon{font-size:64px;opacity:.3}
+.event-header{margin-bottom:24px}
+.event-header h1{font-size:22px;font-weight:700;color:#1e2130;font-family:monospace}
+.event-header p{color:#666;margin-top:6px;font-size:14px}
+.section{background:#fff;border-radius:10px;padding:20px 24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.section-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#888;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:8px 12px;background:#f8f9fc;color:#666;font-weight:600;border-bottom:2px solid #eee}
+td{padding:9px 12px;border-bottom:1px solid #f0f0f0;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+.type-badge{background:#e8f4fd;color:#0369a1;border-radius:4px;padding:2px 7px;font-size:11px;font-family:monospace;font-weight:600}
+.default-val{color:#888;font-family:monospace;font-size:12px}
+.no-params{color:#aaa;font-size:13px;font-style:italic}
+#requestBody{width:100%;background:#1e2130;color:#c9d1d9;border:1px solid #2d3148;border-radius:8px;padding:14px;font-family:'Fira Code',monospace;font-size:13px;resize:vertical;outline:none;line-height:1.6}
+#requestBody:focus{border-color:#7c83fd}
+.send-btn{margin-top:12px;background:#7c83fd;color:#fff;border:none;border-radius:8px;padding:10px 28px;font-size:14px;font-weight:600;cursor:pointer;transition:background .2s}
+.send-btn:hover{background:#6970e8}
+.send-btn:disabled{background:#aaa;cursor:not-allowed}
+.clear-btn{background:none;border:1px solid #ddd;border-radius:4px;padding:2px 8px;font-size:11px;cursor:pointer;color:#888;margin-left:8px}
+.clear-btn:hover{background:#f0f0f0}
+.return-tag{display:inline-block;background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;border-radius:5px;padding:3px 10px;font-size:12px;font-family:monospace;margin:3px 4px 3px 0}
+#logArea{max-height:320px;overflow-y:auto;display:flex;flex-direction:column;gap:6px}
+.log-entry{background:#1e2130;border-radius:6px;padding:10px 14px;font-family:'Fira Code',monospace;font-size:12px;color:#c9d1d9;border-left:3px solid #7c83fd;word-break:break-all}
+.log-entry.sent{border-left-color:#f59e0b;color:#fde68a}
+.log-entry.error{border-left-color:#ef4444;color:#fca5a5}
+.log-entry .log-time{color:#4a5270;font-size:11px;margin-bottom:4px}
+.log-entry pre{white-space:pre-wrap;margin:0}
+</style>
+</head>
+<body>
+<div id="app">
+  <aside id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">⚡ Socket.IO</div>
+      <div class="subtitle">CreatorBox Socket API Documentation</div>
+    </div>
+    <div class="connect-bar">
+      <input id="serverUrl" type="text" placeholder="ws://localhost:8000" value="http://127.0.0.1:8000">
+      <input id="authToken" type="text" placeholder="Auth Token">
+      <button id="connectBtn" onclick="toggleConnect()">Connect</button>
+      <span id="statusDot" class="dot disconnected"></span>
+    </div>
+    <ul id="navList"><li class="nav-group"><div class="nav-group-title" onclick="toggleGroup('grp_obs')"><span class="arrow rotated" id="arr_grp_obs">▾</span>obs<span class="nav-group-count">13</span></div><ul id="grp_obs" class="nav-group-list collapsed"><li class="nav-item" data-index="0" onclick="selectEvent(0)"><span class="nav-tag">EVENT</span>get_obs_status<small></small></li>
+<li class="nav-item" data-index="1" onclick="selectEvent(1)"><span class="nav-tag">EVENT</span>connect_obs<small></small></li>
+<li class="nav-item" data-index="2" onclick="selectEvent(2)"><span class="nav-tag">EVENT</span>disconnect_obs<small></small></li>
+<li class="nav-item" data-index="3" onclick="selectEvent(3)"><span class="nav-tag">EVENT</span>get_streaming_status<small></small></li>
+<li class="nav-item" data-index="4" onclick="selectEvent(4)"><span class="nav-tag">EVENT</span>start_streaming<small></small></li>
+<li class="nav-item" data-index="5" onclick="selectEvent(5)"><span class="nav-tag">EVENT</span>stop_streaming<small></small></li>
+<li class="nav-item" data-index="6" onclick="selectEvent(6)"><span class="nav-tag">EVENT</span>get_current_scene<small></small></li>
+<li class="nav-item" data-index="7" onclick="selectEvent(7)"><span class="nav-tag">EVENT</span>get_scenes<small></small></li>
+<li class="nav-item" data-index="8" onclick="selectEvent(8)"><span class="nav-tag">EVENT</span>switch_scene<small></small></li>
+<li class="nav-item" data-index="9" onclick="selectEvent(9)"><span class="nav-tag">EVENT</span>get_scene_sources<small></small></li>
+<li class="nav-item" data-index="10" onclick="selectEvent(10)"><span class="nav-tag">EVENT</span>get_source_info<small></small></li>
+<li class="nav-item" data-index="11" onclick="selectEvent(11)"><span class="nav-tag">EVENT</span>control_source<small></small></li>
+<li class="nav-item" data-index="12" onclick="selectEvent(12)"><span class="nav-tag">EVENT</span>set_source_file<small></small></li></ul></li>
+<li class="nav-group"><div class="nav-group-title" onclick="toggleGroup('grp_dh')"><span class="arrow rotated" id="arr_grp_dh">▾</span>dh<span class="nav-group-count">8</span></div><ul id="grp_dh" class="nav-group-list collapsed"><li class="nav-item" data-index="13" onclick="selectEvent(13)"><span class="nav-tag">EVENT</span>get_dh_camera_list<small></small></li>
+<li class="nav-item" data-index="14" onclick="selectEvent(14)"><span class="nav-tag">EVENT</span>get_dh_status<small></small></li>
+<li class="nav-item" data-index="15" onclick="selectEvent(15)"><span class="nav-tag">EVENT</span>start_dh_streaming<small></small></li>
+<li class="nav-item" data-index="16" onclick="selectEvent(16)"><span class="nav-tag">EVENT</span>stop_dh_streaming<small></small></li>
+<li class="nav-item" data-index="17" onclick="selectEvent(17)"><span class="nav-tag">EVENT</span>interrupt_dh_audio<small></small></li>
+<li class="nav-item" data-index="18" onclick="selectEvent(18)"><span class="nav-tag">EVENT</span>clear_dh_audio<small></small></li>
+<li class="nav-item" data-index="19" onclick="selectEvent(19)"><span class="nav-tag">EVENT</span>send_dh_microphone<small></small></li>
+<li class="nav-item" data-index="20" onclick="selectEvent(20)"><span class="nav-tag">EVENT</span>send_dh_audio<small></small></li></ul></li>
+<li class="nav-group"><div class="nav-group-title" onclick="toggleGroup('grp_Dubb')"><span class="arrow rotated" id="arr_grp_Dubb">▾</span>Dubb<span class="nav-group-count">3</span></div><ul id="grp_Dubb" class="nav-group-list collapsed"><li class="nav-item" data-index="21" onclick="selectEvent(21)"><span class="nav-tag">EVENT</span>get_dubb_names<small></small></li>
+<li class="nav-item" data-index="22" onclick="selectEvent(22)"><span class="nav-tag">EVENT</span>get_dubb_suffixes<small></small></li>
+<li class="nav-item" data-index="23" onclick="selectEvent(23)"><span class="nav-tag">EVENT</span>get_dubb_info<small></small></li></ul></li>
+<li class="nav-group"><div class="nav-group-title" onclick="toggleGroup('grp_Room')"><span class="arrow rotated" id="arr_grp_Room">▾</span>Room<span class="nav-group-count">3</span></div><ul id="grp_Room" class="nav-group-list collapsed"><li class="nav-item" data-index="24" onclick="selectEvent(24)"><span class="nav-tag">EVENT</span>connect_room<small></small></li>
+<li class="nav-item" data-index="25" onclick="selectEvent(25)"><span class="nav-tag">EVENT</span>disconnect_room<small></small></li>
+<li class="nav-item" data-index="26" onclick="selectEvent(26)"><span class="nav-tag">EVENT</span>generate_reply<small></small></li></ul></li></ul>
+  </aside>
+  <main id="content">
+    <div id="placeholder">
+      <div class="ph-icon">⚡</div>
+      <p>选择左侧事件查看详情并测试</p>
+    </div>
+    <div id="eventDetail" style="display:none">
+      <div class="event-header">
+        <h1 id="detailName"></h1>
+        <p id="detailDesc"></p>
+      </div>
+      <div class="section">
+        <div class="section-title">请求参数</div>
+        <div id="paramsArea"></div>
+      </div>
+      <div class="section">
+        <div class="section-title">请求体 (JSON)</div>
+        <textarea id="requestBody" rows="8" spellcheck="false"></textarea>
+        <button class="send-btn" onclick="sendEvent()">▶ 发送事件</button>
+      </div>
+      <div class="section">
+        <div class="section-title">响应消息类型</div>
+        <div id="returnsArea"></div>
+      </div>
+      <div class="section">
+        <div class="section-title">响应日志 <button class="clear-btn" onclick="clearLog()">清空</button></div>
+        <div id="logArea"></div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script>
+const EVENTS = [
+  {
+    "name": "get_obs_status",
+    "description": "",
+    "group": "obs",
+    "params": [],
+    "returns": [
+      "ObsStatus"
+    ],
+    "index": 0
+  },
+  {
+    "name": "connect_obs",
+    "description": "",
+    "group": "obs",
+    "params": [
+      {
+        "name": "host",
+        "type": "str",
+        "default": "localhost"
+      },
+      {
+        "name": "port",
+        "type": "int",
+        "default": 4455
+      },
+      {
+        "name": "password",
+        "type": "str",
+        "default": ""
+      },
+      {
+        "name": "stream_url",
+        "type": "str",
+        "default": ""
+      },
+      {
+        "name": "stream_key",
+        "type": "str",
+        "default": ""
+      }
+    ],
+    "returns": [
+      "ObsConnected"
+    ],
+    "index": 1
+  },
+  {
+    "name": "disconnect_obs",
+    "description": "",
+    "group": "obs",
+    "params": [],
+    "returns": [
+      "ObsDisconnected"
+    ],
+    "index": 2
+  },
+  {
+    "name": "get_streaming_status",
+    "description": "",
+    "group": "obs",
+    "params": [],
+    "returns": [
+      "StreamingStatus"
+    ],
+    "index": 3
+  },
+  {
+    "name": "start_streaming",
+    "description": "",
+    "group": "obs",
+    "params": [
+      {
+        "name": "stream_url",
+        "type": "str",
+        "default": ""
+      },
+      {
+        "name": "stream_key",
+        "type": "str",
+        "default": ""
+      }
+    ],
+    "returns": [
+      "StreamingStarted"
+    ],
+    "index": 4
+  },
+  {
+    "name": "stop_streaming",
+    "description": "",
+    "group": "obs",
+    "params": [],
+    "returns": [
+      "StreamingStopped"
+    ],
+    "index": 5
+  },
+  {
+    "name": "get_current_scene",
+    "description": "",
+    "group": "obs",
+    "params": [],
+    "returns": [
+      "CurrentScene",
+      "Error"
+    ],
+    "index": 6
+  },
+  {
+    "name": "get_scenes",
+    "description": "",
+    "group": "obs",
+    "params": [],
+    "returns": [
+      "ScenesList",
+      "Error"
+    ],
+    "index": 7
+  },
+  {
+    "name": "switch_scene",
+    "description": "",
+    "group": "obs",
+    "params": [
+      {
+        "name": "scene_name",
+        "type": "str",
+        "default": ""
+      }
+    ],
+    "returns": [
+      "Error",
+      "SceneSwitched"
+    ],
+    "index": 8
+  },
+  {
+    "name": "get_scene_sources",
+    "description": "",
+    "group": "obs",
+    "params": [],
+    "returns": [
+      "SourcesList",
+      "Error"
+    ],
+    "index": 9
+  },
+  {
+    "name": "get_source_info",
+    "description": "",
+    "group": "obs",
+    "params": [
+      {
+        "name": "source_name",
+        "type": "str",
+        "default": ""
+      }
+    ],
+    "returns": [
+      "SourceInfo",
+      "Error"
+    ],
+    "index": 10
+  },
+  {
+    "name": "control_source",
+    "description": "",
+    "group": "obs",
+    "params": [
+      {
+        "name": "scene_name",
+        "type": "str",
+        "default": ""
+      },
+      {
+        "name": "source_name",
+        "type": "str",
+        "default": ""
+      },
+      {
+        "name": "action",
+        "type": "str",
+        "default": ""
+      }
+    ],
+    "returns": [
+      "Error",
+      "SourceControlled"
+    ],
+    "index": 11
+  },
+  {
+    "name": "set_source_file",
+    "description": "",
+    "group": "obs",
+    "params": [
+      {
+        "name": "source_name",
+        "type": "str",
+        "default": ""
+      },
+      {
+        "name": "file_path",
+        "type": "str",
+        "default": ""
+      }
+    ],
+    "returns": [
+      "Error",
+      "SourceFileSet"
+    ],
+    "index": 12
+  },
+  {
+    "name": "get_dh_camera_list",
+    "description": "",
+    "group": "dh",
+    "params": [],
+    "returns": [
+      "CameraList"
+    ],
+    "index": 13
+  },
+  {
+    "name": "get_dh_status",
+    "description": "",
+    "group": "dh",
+    "params": [],
+    "returns": [
+      "DHStatus"
+    ],
+    "index": 14
+  },
+  {
+    "name": "start_dh_streaming",
+    "description": "",
+    "group": "dh",
+    "params": [
+      {
+        "name": "preview_model",
+        "type": "str",
+        "default": "cv2"
+      },
+      {
+        "name": "video_path",
+        "type": "str",
+        "default": ""
+      },
+      {
+        "name": "camera_id",
+        "type": "int",
+        "default": 0
+      }
+    ],
+    "returns": [
+      "DHStarted",
+      "DHAudioComplete"
+    ],
+    "index": 15
+  },
+  {
+    "name": "stop_dh_streaming",
+    "description": "",
+    "group": "dh",
+    "params": [],
+    "returns": [
+      "DHStopped"
+    ],
+    "index": 16
+  },
+  {
+    "name": "interrupt_dh_audio",
+    "description": "",
+    "group": "dh",
+    "params": [],
+    "returns": [
+      "DHInterrupted"
+    ],
+    "index": 17
+  },
+  {
+    "name": "clear_dh_audio",
+    "description": "",
+    "group": "dh",
+    "params": [],
+    "returns": [
+      "DHQueueCleared"
+    ],
+    "index": 18
+  },
+  {
+    "name": "send_dh_microphone",
+    "description": "",
+    "group": "dh",
+    "params": [],
+    "returns": [
+      "DHAudioSent"
+    ],
+    "index": 19
+  },
+  {
+    "name": "send_dh_audio",
+    "description": "",
+    "group": "dh",
+    "params": [
+      {
+        "name": "audio_path",
+        "type": "str",
+        "default": ""
+      }
+    ],
+    "returns": [
+      "DHAudioSent"
+    ],
+    "index": 20
+  },
+  {
+    "name": "get_dubb_names",
+    "description": "",
+    "group": "Dubb",
+    "params": [],
+    "returns": [
+      "DubbNames"
+    ],
+    "index": 21
+  },
+  {
+    "name": "get_dubb_suffixes",
+    "description": "",
+    "group": "Dubb",
+    "params": [],
+    "returns": [
+      "DubbSuffixes"
+    ],
+    "index": 22
+  },
+  {
+    "name": "get_dubb_info",
+    "description": "",
+    "group": "Dubb",
+    "params": [
+      {
+        "name": "filename",
+        "type": "str",
+        "default": ""
+      },
+      {
+        "name": "suffix",
+        "type": "str",
+        "default": ""
+      }
+    ],
+    "returns": [
+      "DubbInfo"
+    ],
+    "index": 23
+  },
+  {
+    "name": "connect_room",
+    "description": "",
+    "group": "Room",
+    "params": [],
+    "returns": [
+      "ConnectSuccess",
+      "Error"
+    ],
+    "index": 24
+  },
+  {
+    "name": "disconnect_room",
+    "description": "",
+    "group": "Room",
+    "params": [],
+    "returns": [
+      "RoomDisconnected"
+    ],
+    "index": 25
+  },
+  {
+    "name": "generate_reply",
+    "description": "",
+    "group": "Room",
+    "params": [
+      {
+        "name": "type",
+        "type": "str",
+        "default": "generate"
+      },
+      {
+        "name": "nickname",
+        "type": "str",
+        "default": "用户"
+      },
+      {
+        "name": "message",
+        "type": "str",
+        "default": ""
+      },
+      {
+        "name": "prompt_id",
+        "type": "any",
+        "default": null
+      }
+    ],
+    "returns": [
+      "RoomReplyGenerated"
+    ],
+    "index": 26
+  }
+];
+let socket = null;
+let currentIndex = -1;
+
+function ts() {
+  return new Date().toLocaleTimeString('zh-CN', {hour12:false});
+}
+
+function toggleGroup(gid) {
+  const list = document.getElementById(gid);
+  const arrow = document.getElementById('arr_' + gid);
+  list.classList.toggle('collapsed');
+  arrow.classList.toggle('rotated');
+}
+
+function toggleConnect() {
+  if (socket && socket.connected) {
+    socket.disconnect();
+    return;
+  }
+  const url = document.getElementById('serverUrl').value.trim();
+  const token = document.getElementById('authToken').value.trim();
+  setStatus('connecting');
+  socket = io(url, {
+    auth: token ? {token} : {},
+    transports: ['websocket'],
+    reconnection: false,
+  });
+  socket.on('connect', () => {
+    setStatus('connected');
+    appendLog('系统', `已连接到 ${url}`, 'recv');
+  });
+  socket.on('disconnect', () => {
+    setStatus('disconnected');
+    appendLog('系统', '连接已断开', 'error');
+  });
+  socket.on('connect_error', (e) => {
+    setStatus('disconnected');
+    appendLog('错误', e.message, 'error');
+  });
+  socket.onAny((event, ...args) => {
+    appendLog(event, JSON.stringify(args.length === 1 ? args[0] : args, null, 2), 'recv');
+  });
+}
+
+function setStatus(state) {
+  const dot = document.getElementById('statusDot');
+  const btn = document.getElementById('connectBtn');
+  dot.className = 'dot ' + state;
+  if (state === 'connected') {
+    btn.textContent = 'Disconnect';
+    btn.className = 'connected';
+  } else {
+    btn.textContent = state === 'connecting' ? 'Connecting...' : 'Connect';
+    btn.className = '';
+  }
+}
+
+function selectEvent(index) {
+  currentIndex = index;
+  const ev = EVENTS[index];
+  document.querySelectorAll('.nav-item').forEach((el, i) => {
+    el.classList.toggle('active', i === index);
+  });
+  document.getElementById('placeholder').style.display = 'none';
+  document.getElementById('eventDetail').style.display = 'block';
+  document.getElementById('detailName').textContent = ev.name;
+  document.getElementById('detailDesc').textContent = ev.description || '暂无描述';
+
+  // 参数表
+  const pa = document.getElementById('paramsArea');
+  if (ev.params && ev.params.length > 0) {
+    let rows = ev.params.map(p => `
+      <tr>
+        <td><strong>${p.name}</strong></td>
+        <td><span class="type-badge">${p.type}</span></td>
+        <td><span class="default-val">${p.default !== null && p.default !== undefined ? JSON.stringify(p.default) : '—'}</span></td>
+      </tr>`).join('');
+    pa.innerHTML = `<table><thead><tr><th>字段</th><th>类型</th><th>默认值</th></tr></thead><tbody>${rows}</tbody></table>`;
+  } else {
+    pa.innerHTML = '<p class="no-params">此事件无请求参数</p>';
+  }
+
+  // 请求体预填
+  const body = {};
+  (ev.params || []).forEach(p => {
+    body[p.name] = p.default !== null && p.default !== undefined ? p.default : '';
+  });
+  document.getElementById('requestBody').value = JSON.stringify(body, null, 2);
+
+  // 返回类型
+  const ra = document.getElementById('returnsArea');
+  if (ev.returns && ev.returns.length > 0) {
+    ra.innerHTML = ev.returns.map(r => `<span class="return-tag">${r}</span>`).join('');
+  } else {
+    ra.innerHTML = '<p class="no-params">无明确返回消息类型</p>';
+  }
+}
+
+function sendEvent() {
+  if (!socket || !socket.connected) {
+    appendLog('错误', '请先连接服务器', 'error');
+    return;
+  }
+  if (currentIndex < 0) return;
+  const ev = EVENTS[currentIndex];
+  let payload;
+  try {
+    payload = JSON.parse(document.getElementById('requestBody').value || '{}');
+  } catch(e) {
+    appendLog('错误', 'JSON 格式错误: ' + e.message, 'error');
+    return;
+  }
+  socket.emit(ev.name, payload);
+  appendLog(ev.name, JSON.stringify(payload, null, 2), 'sent');
+}
+
+function appendLog(label, content, type) {
+  const area = document.getElementById('logArea');
+  const entry = document.createElement('div');
+  entry.className = 'log-entry ' + (type || 'recv');
+  entry.innerHTML = `<div class="log-time">${ts()} · ${label}</div><pre>${escHtml(content)}</pre>`;
+  area.appendChild(entry);
+  area.scrollTop = area.scrollHeight;
+}
+
+function clearLog() {
+  document.getElementById('logArea').innerHTML = '';
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+</body>
+</html>
