@@ -22,6 +22,11 @@
   </ul>
   <ul class="layui-nav layui-layout-right" lay-filter="nav-top">
     <li class="layui-nav-item">
+      <a data-path="/socketio" href="javascript:;" style="padding-left: 8px;padding-right: 8px;" lay-tips="{content: 'SocketIo', margin: '0 0 0 -10px' }">
+        <i class="layui-icon layui-icon-release" style="font-size: 18px"></i>
+      </a>
+    </li>
+    <li class="layui-nav-item">
       <a id="change-theme" style="padding-left: 8px;padding-right: 8px;" lay-tips="{content: '{{_('主题')}}', margin: '0 0 0 -10px' }">
         <i class="layui-icon layui-icon-moon" style="font-size: 18px"></i>
       </a>
@@ -74,9 +79,10 @@
 <script>
   // ================================ 页面初始化 ================================
 
-  layui.use(['form', 'layer', 'util', 'i18n_', 'tools', 'obs', 'dh', 'ctr', 'msg', 'tts'], function () {
+  layui.use(['form', 'layer', 'element', 'util', 'i18n_', 'tools', 'obs', 'dh', 'ctr', 'msg', 'tts'], function () {
     var form = layui.form;
     var layer = layui.layer;
+    var element = layui.element;
     var util = layui.util;
     var i18n = layui.i18n_;
     i18n.init('{{request.state.lang}}');
@@ -138,6 +144,14 @@
     var voice_data = voice_cache ? JSON.parse(voice_cache) : []
 
     tts.setData(form_data, voice_data)
+
+    // 顶部导航
+    element.on('nav(nav-top)', function (elem) {
+      var path = elem.data('path');
+      if (path) {
+        tools.open(path);
+      }
+    });
 
     // 固定条
     util.fixbar({

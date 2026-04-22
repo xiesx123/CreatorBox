@@ -23,7 +23,7 @@ def cli():
 @click.option("--host", "-h", type=str, default="0.0.0.0", show_default=True, required=True, help="host")
 @click.option("--port", "-p", type=int, default=8000, show_default=True, required=True, help="port")
 @click.option("--debug", is_flag=True, default=False, show_default=True, help="enable debug mode")
-@click.option("--browser", is_flag=True, default=False, show_default=False, help="auto open browser")
+@click.option("--browser", is_flag=True, default=False, show_default=True, help="auto open browser")
 @click.option("--ngrok", is_flag=True, default=False, show_default=True, help="enable ngrok tunnel")
 @click.option("--ngrok_host", "-nh", type=str, default="toucan-real-informally.ngrok-free.app", show_default=True, help="ngrok host")
 @click.option("--ngrok_port", "-np", type=int, default=80, show_default=True, help="ngrok port")
@@ -96,6 +96,7 @@ def install(name, version, start, port, share):
             installer.start()
     except Exception as e:
         click.echo(f"❌ error: {str(e)}", err=True)
+        traceback.print_exc()
 
 
 if __name__ == "__main__":
