@@ -68,6 +68,21 @@ tr:last-child td{border-bottom:none}
 .log-entry.error{border-left-color:#ef4444;color:#fca5a5}
 .log-entry .log-time{color:#4a5270;font-size:11px;margin-bottom:4px}
 .log-entry pre{white-space:pre-wrap;margin:0}
+body.dark #content{background:#13151f}
+body.dark #placeholder{color:#4a5270}
+body.dark .event-header h1{color:#e6edf3}
+body.dark .event-header p{color:#8b92b0}
+body.dark .section{background:#1e2130;box-shadow:0 1px 4px rgba(0,0,0,.3)}
+body.dark .section-title{color:#6e7891}
+body.dark th{background:#2d3148;color:#8b92b0;border-bottom-color:#3d4468}
+body.dark td{border-bottom-color:#2d3148;color:#c9d1d9}
+body.dark tr:last-child td{border-bottom:none}
+body.dark .type-badge{background:#1c3a5e;color:#7cc3f8}
+body.dark .default-val{color:#6e7891}
+body.dark .no-params{color:#4a5270}
+body.dark .return-tag{background:#14291f;color:#4ade80;border-color:#166534}
+body.dark .clear-btn{border-color:#3d4468;color:#6e7891;background:none}
+body.dark .clear-btn:hover{background:#2d3148}
 </style>
 </head>
 <body>
@@ -564,6 +579,15 @@ const EVENTS = [
 ];
 let socket = null;
 let currentIndex = -1;
+
+// 从 localStorage 初始化 token
+document.getElementById('authToken').value = localStorage.getItem('token') || '';
+
+// 从 localStorage 读取主题，默认深色
+(function() {
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  if (savedTheme === 'dark') document.body.classList.add('dark');
+})();
 
 function ts() {
   return new Date().toLocaleTimeString('zh-CN', {hour12:false});

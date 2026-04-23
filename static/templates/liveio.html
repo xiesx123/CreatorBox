@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "common/base.html" %}
 
 {% block header_extra %}
 <!-- sortable -->
@@ -22,7 +22,7 @@
   </ul>
   <ul class="layui-nav layui-layout-right" lay-filter="nav-top">
     <li class="layui-nav-item">
-      <a data-path="/socketio" href="javascript:;" style="padding-left: 8px;padding-right: 8px;" lay-tips="{content: 'SocketIo', margin: '0 0 0 -10px' }">
+      <a data-path="static/templates/common/socketio.html" href="javascript:;" style="padding-left: 8px;padding-right: 8px;" lay-tips="{content: 'SocketIo', margin: '0 0 0 -10px' }">
         <i class="layui-icon layui-icon-release" style="font-size: 18px"></i>
       </a>
     </li>
@@ -54,20 +54,14 @@
         {% include "extend/ctr.html" %}
       </div>
       <div class="layui-tabs-item">
-        <blockquote class="layui-elem-quote layui-quote-nm">
-          实时消息，数字人口播回复
-        </blockquote>
+        <blockquote class="layui-elem-quote layui-quote-nm"> 实时消息，数字人口播回复 </blockquote>
         {% include "extend/msg.html" %}
       </div>
       <div class="layui-tabs-item">
-        <blockquote class="layui-elem-quote">
-          关键词配置，自动触发数字人回复（计划中）
-        </blockquote>
+        <blockquote class="layui-elem-quote"> 关键词配置，自动触发数字人回复（计划中） </blockquote>
       </div>
       <div class="layui-tabs-item">
-        <blockquote class="layui-elem-quote layui-quote-nm">
-          语音模板参数配置、试听预览
-        </blockquote>
+        <blockquote class="layui-elem-quote layui-quote-nm"> 语音模板参数配置、试听预览 </blockquote>
         {% include "extend/tts.html" %}
       </div>
     </div>

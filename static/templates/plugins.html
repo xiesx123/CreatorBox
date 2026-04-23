@@ -46,7 +46,7 @@
     <!-- 表格工具栏 -->
     <script type="text/html" id="TPL_table_toolbar">
     <div class="layui-inline" lay-event="enable"><i class="layui-icon layui-icon-star-fill"></i></div>
-    <div class="layui-inline" lay-event="disable"><i class="layui-icon layui-icon-star"></i></div>
+    <div class="layui-inline" lay-event="disable"><i class="layui-icon layui-icon-disabled"></i></div>
     </script>
 
     <!-- 表格行工具 -->
@@ -110,7 +110,8 @@
                     { type: 'checkbox' },
                     { title: '#', width: 30, align: "center", templet: d => '<div title="' + d.text + '">' + d.LAY_NUM + '</div>' },
                     { title: '{{_("标题")}}', sort: true, width: 220, align: "left", field: 'name', templet: d => '<div title="' + d.name + '"> ' + d.name + '</div>' },
-                    { title: '{{_("描述")}}', sort: true, align: "left", align: "left", field: 'description', templet: d => '<div title="' + d.description + '">' + d.description + '</div>' },
+                    { title: '{{_("描述")}}', sort: true, align: "left", field: 'description', templet: d => '<div title="' + d.description + '">' + d.description + '</div>' },
+                    { title: '{{_("类型")}}', sort: false, width: 80, align: "center", fixed: 'right', field: 'type', templet: d => '<div>' + (d.type == 1 ? '<i class="layui-icon layui-icon-component"></i>' : '<i class="layui-icon layui-icon-app"></i>') + '</div>' },
                     { title: '{{_("启用")}}', sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_status" },
                     { title: '{{_("操作")}}', sort: false, width: 80, align: "center", fixed: 'right', toolbar: "#TPL_table_tools" }
                 ]],

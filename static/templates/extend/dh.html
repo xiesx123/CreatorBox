@@ -15,13 +15,13 @@
 
     <!-- 音频输入 -->
     <div class="layui-form-item">
-      <label class="layui-form-label">声音选择</label>
+      <label class="layui-form-label">驱动音频</label>
       <div class="layui-input-block">
         <div class="layui-input-wrap">
-          <div class="layui-input-prefix"><i class="layui-icon layui-icon-headset"></i></div>
+          <div class="layui-input-prefix"><i class="layui-icon layui-icon-mike"></i></div>
           <select id="dh-audio-source" lay-filter="dh-audio-source" class="layui-input">
             <option value="audio" selected>音频</option>
-            <option value="microphone" disabled>麦克风</option>
+            <option value="microphone">麦克风</option>
           </select>
         </div>
       </div>
@@ -47,7 +47,7 @@
           <select id="dh-preview-model" lay-filter="dh-preview-model" class="layui-input">
             <option value="cv2" selected>cv2</option>
             <option value="ffplay">ffplay</option>
-            <option value="mpv">mpv</option>
+            <option value="mpv" disabled>mpv</option>
           </select>
         </div>
       </div>
@@ -59,7 +59,7 @@
         <button type="button" id="dh-toggle-btn" class="layui-btn layui-btn-primary layui-border">启动</button>
         <button type="button" id="dh-clear-btn" class="layui-btn layui-btn-primary layui-border-orange" disabled>清空</button>
         <button type="button" id="dh-interrupt-btn" class="layui-btn layui-btn-primary layui-border-orange" disabled>中断</button>
-        <button type="button" id="dh-send-btn" class="layui-btn layui-btn-primary layui-border-blue" disabled>发送</button>
+        <button type="button" id="dh-send-btn" class="layui-btn layui-btn-primary layui-border-orange" disabled>发送</button>
       </div>
     </div>
 
