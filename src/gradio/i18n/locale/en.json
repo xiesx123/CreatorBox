@@ -120,7 +120,6 @@
     "提示词未获取，使用消息": "Prompt not retrieved, using message",
     "提示词获取失败": "Failed to Retrieve Prompt",
     "提示词获取成功": "Prompt Retrieved Successfully",
-    "提示：SocketIO": "Tip: [SocketIO API](http://127.0.0.1:8000/socketio)",
     "提示：VideoSubFinder": "Tip: VideoSubFinder [Download](https://sourceforge.net/projects/videosubfinder/)",
     "提示：适用于剪映5.9及以上版本": "Tip: Compatible with CapCut 5.9 and Above",
     "提示：阈值越小越敏感；太高会检测不到场景，太低会碎片化": "Tip: Lower threshold = more sensitive; too high = no scene detection, too low = fragmentation",

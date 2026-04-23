@@ -6,7 +6,7 @@ msgstr "Upload"
 msgid "下载"
 msgstr "DownLoad"
 
-#: static/templates/dubbing.html:36 static/templates/liveio.html:25
+#: static/templates/dubbing.html:36 static/templates/liveio.html:30
 msgid "主题"
 msgstr "Theme"
 
@@ -18,7 +18,7 @@ msgstr "Del"
 msgid "后缀"
 msgstr "Suffix"
 
-#: static/templates/plugin.html:114
+#: static/templates/plugins.html:115
 msgid "启用"
 msgstr "Enable"
 
@@ -51,7 +51,7 @@ msgstr "Gender"
 msgid "情感"
 msgstr "Emotion"
 
-#: static/templates/plugin.html:55
+#: static/templates/plugins.html:55
 msgid "打开"
 msgstr "Open"
 
@@ -59,11 +59,15 @@ msgstr "Open"
 msgid "执行"
 msgstr "Execute"
 
+#: static/templates/plugins.html:114
+msgid "扩展"
+msgstr "Extension"
+
 #: static/templates/extend/tts.html:159
 msgid "控制结果可复现"
 msgstr "Make results reproducible"
 
-#: static/templates/plugin.html:113
+#: static/templates/plugins.html:113
 msgid "描述"
 msgstr "Description"
 
@@ -75,7 +79,7 @@ msgstr "Provider"
 msgid "播放"
 msgstr "Play"
 
-#: static/templates/plugin.html:115
+#: static/templates/plugins.html:116
 msgid "操作"
 msgstr "Action"
 
@@ -99,7 +103,7 @@ msgstr "Service address"
 msgid "查询"
 msgstr "Search"
 
-#: static/templates/plugin.html:112
+#: static/templates/plugins.html:112
 msgid "标题"
 msgstr "Title"
 
@@ -128,7 +132,11 @@ msgstr "Example"
 msgid "种子"
 msgstr "Seed"
 
-#: static/templates/plugin.html:33
+#: static/templates/plugins.html:114
+msgid "类型"
+msgstr "Type"
+
+#: static/templates/plugins.html:33 static/templates/plugins.html:114
 msgid "组件"
 msgstr "Component"
 
@@ -174,7 +182,7 @@ msgstr "Speaker"
 msgid "说话风格"
 msgstr "Style"
 
-#: static/templates/dubbing.html:200
+#: static/templates/dubbing.html:252
 msgid "请先试听，至少添加一个配音角色"
 msgstr "Please listen to a sample first, and add at least one voice actor"
 
@@ -186,11 +194,11 @@ msgstr "Please enter JSON data file path"
 msgid "请输入任务ID、视频链接"
 msgstr "Please enter task ID, video url"
 
-#: static/templates/dubbing.html:100 static/templates/dubbing.html:325
+#: static/templates/dubbing.html:100 static/templates/dubbing.html:321
 msgid "请输入后缀"
 msgstr "Enter an identifier suffix"
 
-#: static/templates/dubbing.html:188 static/templates/dubbing.html:236
+#: static/templates/dubbing.html:188 static/templates/dubbing.html:230
 msgid "请输入数据文件路径"
 msgstr "Please enter data file path"
 
@@ -215,7 +223,7 @@ msgid "请输入随机种子"
 msgstr "Please enter random seed"
 
 #: static/templates/dubbing.html:79 static/templates/dubbing.html:183
-#: static/templates/dubbing.html:225 static/templates/dubbing.html:317
+#: static/templates/dubbing.html:219 static/templates/dubbing.html:316
 msgid "请输入音视频路径或链接"
 msgstr "Enter audio/video path or link"
 
@@ -239,7 +247,7 @@ msgstr "Select or Search"
 msgid "选择试听"
 msgstr "Select to Preview"
 
-#: static/templates/plugin.html:101
+#: static/templates/plugins.html:101
 msgid "重启"
 msgstr "Reboot"
 
@@ -266,7 +274,4 @@ msgstr "Audio"
 #: static/templates/extend/tts.html:146
 msgid "风格强度"
 msgstr "Style Intensity"
-
-#~ msgid "编号"
-#~ msgstr "ID"
 
