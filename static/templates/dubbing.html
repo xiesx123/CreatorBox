@@ -289,6 +289,7 @@
 
     // 顶部导航
     element.on('nav(nav-top)', function (elem) {
+      elem.parent('.layui-nav-item').removeClass('layui-this');
       var path = elem.data('path');
       if (path) {
         tools.open(path);

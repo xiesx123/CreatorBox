@@ -1,46 +1,36 @@
-.layui-card-header {
-    position: relative;
-  }
-  
-.layui-card-header .layui-icon {
-    line-height: initial;
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    margin-top: -7px
-}
-
-.layui-colla-title {
-  position: relative;
-}
-
-.layui-colla-title .layui-icon {
-  line-height: initial;
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  margin-top: -7px;
-}
-
+/* layui-form-label 输入 */
 .layui-form-pane .layui-form-label {
-    width: 116px;
-    padding: 8px 15px;
-    height: 38px;
-    line-height: 20px;
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 2px 0 0 2px;
-    text-align: left;
-    background-color: #fafafa;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    box-sizing: border-box
+  width: 116px;
+  padding: 8px 15px;
+  height: 38px;
+  line-height: 20px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 2px 0 0 2px;
+  text-align: left;
+  background-color: #fafafa;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  box-sizing: border-box
 }
 
+/* layui-input-block 输入 */
 .layui-form-pane .layui-input-block {
   margin-left: 116px;
   left: -1px;
+}
+
+/* tabs-header 深色底部白线的问题 */
+.dark .layui-tabs-header:after,
+.dark .layui-tabs-scroll:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 0;
+  width: 100%;
+  border-bottom: 3px solid var(--lay-color-border-2)
 }
 
 /* ================================ 底部浮动按钮 ================================ */

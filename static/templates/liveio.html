@@ -22,7 +22,7 @@
   </ul>
   <ul class="layui-nav layui-layout-right" lay-filter="nav-top">
     <li class="layui-nav-item">
-      <a data-path="static/templates/common/socketio.html" href="javascript:;" style="padding-left: 8px;padding-right: 8px;" lay-tips="{content: 'SocketIo', margin: '0 0 0 -10px' }">
+      <a data-path="static/templates/common/socketio.html" href="javascript:;" style="padding-left: 8px;padding-right: 8px;" lay-tips="{content: 'SocketIo Api', margin: '0 0 0 -10px' }">
         <i class="layui-icon layui-icon-release" style="font-size: 18px"></i>
       </a>
     </li>
@@ -141,6 +141,7 @@
 
     // 顶部导航
     element.on('nav(nav-top)', function (elem) {
+      elem.parent('.layui-nav-item').removeClass('layui-this');
       var path = elem.data('path');
       if (path) {
         tools.open(path);
@@ -158,11 +159,6 @@
           layer.closeAll('tips');
         }
       },
-      click: function (type) {
-        if (type === 'bar1') {
-          $('#change-theme').trigger('click');
-        }
-      }
     });
   });
 </script>
