@@ -122,7 +122,7 @@ body.dark .clear-btn:hover{background:#2d3148}
 <li class="nav-group"><div class="nav-group-title" onclick="toggleGroup('grp_Dubb')"><span class="arrow rotated" id="arr_grp_Dubb">▾</span>Dubb<span class="nav-group-count">3</span></div><ul id="grp_Dubb" class="nav-group-list collapsed"><li class="nav-item" data-index="21" onclick="selectEvent(21)"><span class="nav-tag">EVENT</span>get_dubb_names<small>获取配音项目列表</small></li>
 <li class="nav-item" data-index="22" onclick="selectEvent(22)"><span class="nav-tag">EVENT</span>get_dubb_suffixes<small>获取配音项目的后缀列表</small></li>
 <li class="nav-item" data-index="23" onclick="selectEvent(23)"><span class="nav-tag">EVENT</span>get_dubb_info<small>获取配音信息（音频列表+视频路径）</small></li></ul></li>
-<li class="nav-group"><div class="nav-group-title" onclick="toggleGroup('grp_Room')"><span class="arrow rotated" id="arr_grp_Room">▾</span>Room<span class="nav-group-count">3</span></div><ul id="grp_Room" class="nav-group-list collapsed"><li class="nav-item" data-index="24" onclick="selectEvent(24)"><span class="nav-tag">EVENT</span>connect_room<small>连接抖音直播间</small></li>
+<li class="nav-group"><div class="nav-group-title" onclick="toggleGroup('grp_Room')"><span class="arrow rotated" id="arr_grp_Room">▾</span>Room<span class="nav-group-count">3</span></div><ul id="grp_Room" class="nav-group-list collapsed"><li class="nav-item" data-index="24" onclick="selectEvent(24)"><span class="nav-tag">EVENT</span>connect_room<small>连接直播间</small></li>
 <li class="nav-item" data-index="25" onclick="selectEvent(25)"><span class="nav-tag">EVENT</span>disconnect_room<small>断开直播间连接</small></li>
 <li class="nav-item" data-index="26" onclick="selectEvent(26)"><span class="nav-tag">EVENT</span>generate_reply<small>生成直播间回复文本</small></li></ul></li></ul>
   </aside>
@@ -520,11 +520,11 @@ const EVENTS = [
   },
   {
     "name": "connect_room",
-    "description": "连接抖音直播间",
+    "description": "连接直播间",
     "group": "Room",
     "params": [
       {
-        "name": "live_id",
+        "name": "live_url",
         "type": "str",
         "default": ""
       }
