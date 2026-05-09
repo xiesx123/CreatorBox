@@ -52,6 +52,7 @@ dependencies = [
     "pygrabber==0.2",
     "pyjianyingdraft==0.2.5",
     "pyngrok==7.5.1",
+    "pytchat==0.5.5",
     "python-engineio==4.12.3",
     "python-multipart==0.0.20",
     "python-socketio==5.14.3",
