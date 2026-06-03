@@ -230,7 +230,7 @@
         layer.msg('{{_("请输入数据文件路径")}}', { icon: 0 });
         return elem.focus()
       };
-      tools.open(`editor?upload=file/upload&remote=file/download?path=${data_url}&mode=table`);
+      tools.open(`editor?t=${Date.now()}&upload=file/upload&remote=file/download?path=${data_url}&mode=table`);
     });
 
     // 处理模式
@@ -322,7 +322,7 @@
             return layer.msg('{{_("请输入后缀")}}', { icon: 0 });
           }
           title = `{{ data.app.title }} - ${filename}_${suf}`;
-          util.openWin({ url: `editor?upload=file/upload&remote=file/download?path=webapp/dubb/${filename}/_${suf}/${filename}.json&mode=table` });
+          util.openWin({ url: `editor?t=${Date.now()}&upload=file/upload&remote=file/download?path=webapp/dubb/${filename}/_${suf}/${filename}.json&mode=table` });
         }
       }
     });
