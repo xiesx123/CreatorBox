@@ -14,10 +14,6 @@ msgstr "主题"
 msgid "删除"
 msgstr "删除"
 
-#: static/templates/dubbing.html:96 static/templates/extend/ctr.html:19
-msgid "后缀"
-msgstr "后缀"
-
 #: static/templates/plugins.html:115
 msgid "启用"
 msgstr "启用"
@@ -58,10 +54,6 @@ msgstr "打开"
 #: static/templates/dubbing.html:125
 msgid "执行"
 msgstr "执行"
-
-#: static/templates/plugins.html:114
-msgid "扩展"
-msgstr ""
 
 #: static/templates/extend/tts.html:159
 msgid "控制结果可复现"
@@ -119,6 +111,10 @@ msgstr "模式"
 msgid "点击试听"
 msgstr "点击试听"
 
+#: static/templates/dubbing.html:96 static/templates/extend/ctr.html:19
+msgid "版本"
+msgstr "版本"
+
 #: static/templates/extend/tts.html:52 static/templates/extend/tts.html:54
 #: static/templates/speaker.html:59
 msgid "男"
@@ -136,7 +132,7 @@ msgstr "种子"
 msgid "类型"
 msgstr ""
 
-#: static/templates/plugins.html:33 static/templates/plugins.html:114
+#: static/templates/plugins.html:33
 msgid "组件"
 msgstr "组件"
 
@@ -186,19 +182,12 @@ msgstr "说话风格"
 msgid "请先试听，至少添加一个配音角色"
 msgstr "请先试听，至少添加一个配音角色"
 
-#: static/templates/dubbing.html:90
-msgid "请输入JSON数据文件路径"
-msgstr "请输入JSON数据文件路径"
-
 #: static/templates/player.html:40
 msgid "请输入任务ID、视频链接"
 msgstr "请输入任务ID、视频链接"
 
-#: static/templates/dubbing.html:100 static/templates/dubbing.html:321
-msgid "请输入后缀"
-msgstr "请输入后缀"
-
-#: static/templates/dubbing.html:188 static/templates/dubbing.html:230
+#: static/templates/dubbing.html:90 static/templates/dubbing.html:188
+#: static/templates/dubbing.html:230
 msgid "请输入数据文件路径"
 msgstr "请输入数据文件路径"
 
@@ -209,6 +198,11 @@ msgstr "请输入服务地址"
 #: static/templates/extend/tts.html:44
 msgid "请输入模型名称"
 msgstr "请输入模型名称"
+
+#: static/templates/dubbing.html:100 static/templates/dubbing.html:326
+#: static/templates/dubbing.html:340 static/templates/dubbing.html:360
+msgid "请输入版本"
+msgstr "请输入版本"
 
 #: static/templates/dubbing.html:194 static/templates/extend/tts.html:183
 msgid "请输入试听文本"
@@ -223,9 +217,10 @@ msgid "请输入随机种子"
 msgstr "请输入随机种子"
 
 #: static/templates/dubbing.html:79 static/templates/dubbing.html:183
-#: static/templates/dubbing.html:219 static/templates/dubbing.html:316
-msgid "请输入音视频路径或链接"
-msgstr "请输入音视频路径或链接"
+#: static/templates/dubbing.html:219 static/templates/dubbing.html:321
+#: static/templates/dubbing.html:335 static/templates/dubbing.html:355
+msgid "请输入音视频路径"
+msgstr "请输入音视频路径"
 
 #: static/templates/speaker.html:93
 msgid "请输入音频文本"

@@ -33,6 +33,7 @@ dependencies = [
     "gradio-toggle==2.0.2",
     "gradio-videoslider==0.0.2",
     "gradio[mcp]==5.50.0",
+    "hf-xet==1.3.2",
     "langfuse==2.60.10",
     "language-tags==1.2.0",
     "litellm[caching]==1.80.11",

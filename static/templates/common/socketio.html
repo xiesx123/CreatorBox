@@ -120,7 +120,7 @@ body.dark .clear-btn:hover{background:#2d3148}
 <li class="nav-item" data-index="19" onclick="selectEvent(19)"><span class="nav-tag">EVENT</span>send_dh_microphone<small>发送麦克风录音指令</small></li>
 <li class="nav-item" data-index="20" onclick="selectEvent(20)"><span class="nav-tag">EVENT</span>send_dh_audio<small>发送音频文件到播放队列</small></li></ul></li>
 <li class="nav-group"><div class="nav-group-title" onclick="toggleGroup('grp_Dubb')"><span class="arrow rotated" id="arr_grp_Dubb">▾</span>Dubb<span class="nav-group-count">3</span></div><ul id="grp_Dubb" class="nav-group-list collapsed"><li class="nav-item" data-index="21" onclick="selectEvent(21)"><span class="nav-tag">EVENT</span>get_dubb_names<small>获取配音项目列表</small></li>
-<li class="nav-item" data-index="22" onclick="selectEvent(22)"><span class="nav-tag">EVENT</span>get_dubb_suffixes<small>获取配音项目的后缀列表</small></li>
+<li class="nav-item" data-index="22" onclick="selectEvent(22)"><span class="nav-tag">EVENT</span>get_dubb_versiones<small>获取指定配音项目的版本列表</small></li>
 <li class="nav-item" data-index="23" onclick="selectEvent(23)"><span class="nav-tag">EVENT</span>get_dubb_info<small>获取配音信息（音频列表+视频路径）</small></li></ul></li>
 <li class="nav-group"><div class="nav-group-title" onclick="toggleGroup('grp_Room')"><span class="arrow rotated" id="arr_grp_Room">▾</span>Room<span class="nav-group-count">3</span></div><ul id="grp_Room" class="nav-group-list collapsed"><li class="nav-item" data-index="24" onclick="selectEvent(24)"><span class="nav-tag">EVENT</span>connect_room<small>连接直播间</small></li>
 <li class="nav-item" data-index="25" onclick="selectEvent(25)"><span class="nav-tag">EVENT</span>disconnect_room<small>断开直播间连接</small></li>
@@ -482,8 +482,8 @@ const EVENTS = [
     "index": 21
   },
   {
-    "name": "get_dubb_suffixes",
-    "description": "获取配音项目的后缀列表",
+    "name": "get_dubb_versiones",
+    "description": "获取指定配音项目的版本列表",
     "group": "Dubb",
     "params": [
       {
@@ -493,7 +493,7 @@ const EVENTS = [
       }
     ],
     "returns": [
-      "DubbSuffixes"
+      "DubbVersiones"
     ],
     "index": 22
   },
@@ -508,7 +508,7 @@ const EVENTS = [
         "default": ""
       },
       {
-        "name": "suffix",
+        "name": "version",
         "type": "str",
         "default": ""
       }

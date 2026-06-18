@@ -41,6 +41,7 @@ mini-racer==0.14.1
 pyexecjs==1.5.1
 betterproto==1.2.5
 obs-websocket-py==1.0
+hf-xet==1.3.2
 
 #  语音
 azure-cognitiveservices-speech==1.47.0
