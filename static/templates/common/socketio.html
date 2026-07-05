@@ -581,7 +581,7 @@ let socket = null;
 let currentIndex = -1;
 
 // 从 localStorage 初始化 token
-document.getElementById('authToken').value = localStorage.getItem('token') || '';
+document.getElementById('authToken').value = localStorage.getItem('access_token') || '';
 
 // 从 localStorage 读取主题，默认深色
 (function() {
