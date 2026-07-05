@@ -919,7 +919,7 @@ sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/6b/b0/e595ce2a2527e1
 
 [[package]]
 name = "creatorbox"
-version = "1.0.31"
+version = "1.0.32"
 source = { virtual = "." }
 dependencies = [
     { name = "apstone" },
@@ -959,7 +959,6 @@ dependencies = [
     { name = "numpy" },
     { name = "obs-websocket-py" },
     { name = "opencv-python" },
-    { name = "psutil" },
     { name = "pyannote-audio" },
     { name = "pycapcut" },
     { name = "pydub" },
@@ -970,7 +969,6 @@ dependencies = [
     { name = "pyngrok" },
     { name = "pytchat" },
     { name = "python-engineio" },
-    { name = "python-multipart" },
     { name = "python-socketio" },
     { name = "pytorchcv" },
     { name = "rapidocr" },
@@ -978,6 +976,14 @@ dependencies = [
     { name = "sounddevice" },
     { name = "srt" },
     { name = "tenacity" },
+    { name = "torch", version = "2.6.0", source = { registry = "https://pypi.tuna.tsinghua.edu.cn/simple" }, marker = "extra == 'extra-10-creatorbox-cpu' or extra != 'extra-10-creatorbox-gpu'" },
+    { name = "torch", version = "2.6.0+cu126", source = { registry = "https://mirrors.nju.edu.cn/pytorch/whl/cu126" }, marker = "extra == 'extra-10-creatorbox-gpu'" },
+    { name = "torchaudio", version = "2.6.0", source = { registry = "https://mirrors.nju.edu.cn/pytorch/whl/cu126" }, marker = "(platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'extra-10-creatorbox-gpu') or (platform_machine != 'aarch64' and extra == 'extra-10-creatorbox-cpu' and extra == 'extra-10-creatorbox-gpu') or (sys_platform != 'linux' and extra == 'extra-10-creatorbox-cpu' and extra == 'extra-10-creatorbox-gpu')" },
+    { name = "torchaudio", version = "2.6.0", source = { registry = "https://pypi.tuna.tsinghua.edu.cn/simple" }, marker = "extra == 'extra-10-creatorbox-cpu' or extra != 'extra-10-creatorbox-gpu'" },
+    { name = "torchaudio", version = "2.6.0+cu126", source = { registry = "https://mirrors.nju.edu.cn/pytorch/whl/cu126" }, marker = "(platform_machine != 'aarch64' and extra == 'extra-10-creatorbox-gpu') or (sys_platform != 'linux' and extra == 'extra-10-creatorbox-gpu') or (extra == 'extra-10-creatorbox-cpu' and extra == 'extra-10-creatorbox-gpu')" },
+    { name = "torchvision", version = "0.21.0", source = { registry = "https://mirrors.nju.edu.cn/pytorch/whl/cu126" }, marker = "(platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'extra-10-creatorbox-gpu') or (platform_machine != 'aarch64' and extra == 'extra-10-creatorbox-cpu' and extra == 'extra-10-creatorbox-gpu') or (sys_platform != 'linux' and extra == 'extra-10-creatorbox-cpu' and extra == 'extra-10-creatorbox-gpu')" },
+    { name = "torchvision", version = "0.21.0", source = { registry = "https://pypi.tuna.tsinghua.edu.cn/simple" }, marker = "extra == 'extra-10-creatorbox-cpu' or extra != 'extra-10-creatorbox-gpu'" },
+    { name = "torchvision", version = "0.21.0+cu126", source = { registry = "https://mirrors.nju.edu.cn/pytorch/whl/cu126" }, marker = "(platform_machine != 'aarch64' and extra == 'extra-10-creatorbox-gpu') or (sys_platform != 'linux' and extra == 'extra-10-creatorbox-gpu') or (extra == 'extra-10-creatorbox-cpu' and extra == 'extra-10-creatorbox-gpu')" },
     { name = "transformers" },
     { name = "typeguard" },
     { name = "uvicorn" },
@@ -1056,18 +1062,16 @@ requires-dist = [
     { name = "onnxruntime", marker = "extra == 'cpu'", specifier = "==1.23.2" },
     { name = "onnxruntime-gpu", marker = "extra == 'gpu'", specifier = "==1.23.2" },
     { name = "opencv-python", specifier = "==4.11.0.86" },
-    { name = "psutil", specifier = "==7.2.2" },
     { name = "pyannote-audio", specifier = "==3.4.0" },
     { name = "pycapcut", specifier = "==0.0.3" },
     { name = "pydub", specifier = "==0.25.1" },
     { name = "pyexecjs", specifier = "==1.5.1" },
     { name = "pygrabber", specifier = "==0.2" },
     { name = "pyjianyingdraft", specifier = "==0.2.5" },
-    { name = "pykitool", specifier = "==0.0.1" },
+    { name = "pykitool", specifier = "==0.0.7" },
     { name = "pyngrok", specifier = "==7.5.1" },
     { name = "pytchat", specifier = "==0.5.5" },
     { name = "python-engineio", specifier = "==4.12.3" },
-    { name = "python-multipart", specifier = "==0.0.20" },
     { name = "python-socketio", specifier = "==5.14.3" },
     { name = "pytorchcv", specifier = "==0.0.74" },
     { name = "pyvirtualcam", extras = ["gpu"], marker = "extra == 'gpu'", specifier = "==0.15.0" },
@@ -1076,10 +1080,13 @@ requires-dist = [
     { name = "sounddevice", specifier = "==0.5.5" },
     { name = "srt", specifier = "==3.5.3" },
     { name = "tenacity", specifier = "==9.1.2" },
+    { name = "torch", specifier = "==2.6.0" },
     { name = "torch", marker = "extra == 'cpu'", specifier = "==2.6.0", index = "https://pypi.tuna.tsinghua.edu.cn/simple", conflict = { package = "creatorbox", extra = "cpu" } },
     { name = "torch", marker = "extra == 'gpu'", specifier = "==2.6.0", index = "https://mirrors.nju.edu.cn/pytorch/whl/cu126", conflict = { package = "creatorbox", extra = "gpu" } },
+    { name = "torchaudio", specifier = "==2.6.0" },
     { name = "torchaudio", marker = "extra == 'cpu'", specifier = "==2.6.0", index = "https://pypi.tuna.tsinghua.edu.cn/simple", conflict = { package = "creatorbox", extra = "cpu" } },
     { name = "torchaudio", marker = "extra == 'gpu'", specifier = "==2.6.0", index = "https://mirrors.nju.edu.cn/pytorch/whl/cu126", conflict = { package = "creatorbox", extra = "gpu" } },
+    { name = "torchvision", specifier = "==0.21.0" },
     { name = "torchvision", marker = "extra == 'cpu'", specifier = "==0.21.0", index = "https://pypi.tuna.tsinghua.edu.cn/simple", conflict = { package = "creatorbox", extra = "cpu" } },
     { name = "torchvision", marker = "extra == 'gpu'", specifier = "==0.21.0", index = "https://mirrors.nju.edu.cn/pytorch/whl/cu126", conflict = { package = "creatorbox", extra = "gpu" } },
     { name = "transformers", specifier = "==4.57.1" },
@@ -1349,15 +1356,6 @@ source = { registry = "https://pypi.tuna.tsinghua.edu.cn/simple" }
 sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/a2/78/0d2db9382c92a163d7095fc08efff7800880f830a152cfced40161e7638d/emoji-2.15.0.tar.gz", hash = "sha256:eae4ab7d86456a70a00a985125a03263a5eac54cd55e51d7e184b1ed3b6757e4", size = 615483, upload-time = "2025-09-21T12:13:02.755Z" }
 wheels = [
     { url = "https://pypi.tuna.tsinghua.edu.cn/packages/e1/5e/4b5aaaabddfacfe36ba7768817bd1f71a7a810a43705e531f3ae4c690767/emoji-2.15.0-py3-none-any.whl", hash = "sha256:205296793d66a89d88af4688fa57fd6496732eb48917a87175a023c8138995eb", size = 608433, upload-time = "2025-09-21T12:13:01.197Z" },
-]
-
-[[package]]
-name = "fake-useragent"
-version = "2.2.0"
-source = { registry = "https://pypi.tuna.tsinghua.edu.cn/simple" }
-sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/41/43/948d10bf42735709edb5ae51e23297d034086f17fc7279fef385a7acb473/fake_useragent-2.2.0.tar.gz", hash = "sha256:4e6ab6571e40cc086d788523cf9e018f618d07f9050f822ff409a4dfe17c16b2", size = 158898, upload-time = "2025-04-14T15:32:19.238Z" }
-wheels = [
-    { url = "https://pypi.tuna.tsinghua.edu.cn/packages/51/37/b3ea9cd5558ff4cb51957caca2193981c6b0ff30bd0d2630ac62505d99d0/fake_useragent-2.2.0-py3-none-any.whl", hash = "sha256:67f35ca4d847b0d298187443aaf020413746e56acd985a611908c73dba2daa24", size = 161695, upload-time = "2025-04-14T15:32:17.732Z" },
 ]
 
 [[package]]
@@ -4186,24 +4184,27 @@ wheels = [
 
 [[package]]
 name = "pykitool"
-version = "0.0.1"
+version = "0.0.7"
 source = { registry = "https://pypi.tuna.tsinghua.edu.cn/simple" }
 dependencies = [
     { name = "asyncio" },
-    { name = "fake-useragent" },
+    { name = "fastapi" },
     { name = "hutool-python" },
     { name = "loguru" },
     { name = "psutil" },
     { name = "pydantic" },
+    { name = "python-multipart" },
+    { name = "requests" },
     { name = "requests-cache" },
     { name = "sqlalchemy" },
     { name = "sqlmodel" },
-    { name = "starlette" },
+    { name = "sseclient-py" },
     { name = "tqdm" },
+    { name = "typing-extensions" },
 ]
-sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/57/fa/d8965f84214f102fafb7dff180afcc32c2e50f588f7dd897362cbdae3794/pykitool-0.0.1.tar.gz", hash = "sha256:506a3bc8dc75f1359b628077cdfbd38645320c300275cc9a6c6488690ec750e8", size = 37093, upload-time = "2026-06-27T10:09:53.356Z" }
+sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/f5/52/73c06353137a3c35a204ef64d536b78f6be7330f2273c0a21ce747d91de0/pykitool-0.0.7.tar.gz", hash = "sha256:895ce61b190f44963281577edf59ad54ba58f8894cad49538777d19244c0d6b2", size = 62949, upload-time = "2026-07-05T11:38:22.754Z" }
 wheels = [
-    { url = "https://pypi.tuna.tsinghua.edu.cn/packages/5b/3a/c62d2f0fe16dfc086f23f4ec50ff5d70c3615d5258e9e565be28882cafa7/pykitool-0.0.1-py3-none-any.whl", hash = "sha256:e59abb010d2fe627cd24df719b4f73138deed9bd330f9f0f0bb70e6a6962e22d", size = 41540, upload-time = "2026-06-27T10:09:54.901Z" },
+    { url = "https://pypi.tuna.tsinghua.edu.cn/packages/34/ee/a0ed99fbb28d780e548663b0ee79941e41675896d51cdcd00c4927e6747c/pykitool-0.0.7-py3-none-any.whl", hash = "sha256:bd1a6494f0fdd7d3cecdfb26e58338b1c2241f7ba41247d38774742b1d02ee46", size = 77685, upload-time = "2026-07-05T11:38:24.207Z" },
 ]
 
 [[package]]
@@ -5398,6 +5399,14 @@ dependencies = [
 sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/5a/9f/c3695c2d2d4ef70072c3a06992850498b01c6bc9be531950813716b426fa/sse_starlette-3.3.2.tar.gz", hash = "sha256:678fca55a1945c734d8472a6cad186a55ab02840b4f6786f5ee8770970579dcd", size = 32326, upload-time = "2026-02-28T11:24:34.36Z" }
 wheels = [
     { url = "https://pypi.tuna.tsinghua.edu.cn/packages/61/28/8cb142d3fe80c4a2d8af54ca0b003f47ce0ba920974e7990fa6e016402d1/sse_starlette-3.3.2-py3-none-any.whl", hash = "sha256:5c3ea3dad425c601236726af2f27689b74494643f57017cafcb6f8c9acfbb862", size = 14270, upload-time = "2026-02-28T11:24:32.984Z" },
+]
+
+[[package]]
+name = "sseclient-py"
+version = "1.9.0"
+source = { registry = "https://pypi.tuna.tsinghua.edu.cn/simple" }
+wheels = [
+    { url = "https://pypi.tuna.tsinghua.edu.cn/packages/4d/2e/59920f7d66b7f9932a3d83dd0ec53fab001be1e058bf582606fe414a5198/sseclient_py-1.9.0-py3-none-any.whl", hash = "sha256:340062b1587fc2880892811e2ab5b176d98ef3eee98b3672ff3a3ba1e8ed0f6f", size = 8351, upload-time = "2026-01-02T23:39:30.995Z" },
 ]
 
 [[package]]

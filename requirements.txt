@@ -8,7 +8,6 @@ transformers==4.57.1
 #  ---- Web ----
 fastapi==0.135.2
 python-engineio==4.12.3
-python-multipart==0.0.20
 python-socketio==5.14.3
 uvicorn==0.41.0
 
@@ -26,7 +25,7 @@ gradio-toggle==2.0.2
 gradio-videoslider==0.0.2
 
 #  ---- Tool ----
-pykitool=0.0.1
+pykitool==0.0.7
 click==8.3.1
 langfuse==2.60.10
 litellm[caching]==1.80.11
@@ -68,7 +67,6 @@ pytorchcv==0.0.74
 
 #  系统 
 gputil==1.4.0
-psutil==7.2.2
 pygrabber==0.2
 sounddevice==0.5.5
 
