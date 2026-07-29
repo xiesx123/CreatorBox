@@ -48,7 +48,7 @@ dependencies = [
   "pyexecjs==1.5.1",
   "pygrabber==0.2",
   "pyjianyingdraft==0.2.7",
-  "pykitool==0.0.7",
+  "pykitool==0.0.8",
   "pyngrok==8.1.2",
   "pytchat==0.5.5",
   "python-engineio==4.12.3",

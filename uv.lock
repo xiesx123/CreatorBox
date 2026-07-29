@@ -1059,7 +1059,7 @@ requires-dist = [
     { name = "pyexecjs", specifier = "==1.5.1" },
     { name = "pygrabber", specifier = "==0.2" },
     { name = "pyjianyingdraft", specifier = "==0.2.7" },
-    { name = "pykitool", specifier = "==0.0.7" },
+    { name = "pykitool", specifier = "==0.0.8" },
     { name = "pyngrok", specifier = "==8.1.2" },
     { name = "pytchat", specifier = "==0.5.5" },
     { name = "python-engineio", specifier = "==4.12.3" },
@@ -4239,7 +4239,7 @@ wheels = [
 
 [[package]]
 name = "pykitool"
-version = "0.0.7"
+version = "0.0.8"
 source = { registry = "https://pypi.tuna.tsinghua.edu.cn/simple" }
 dependencies = [
     { name = "asyncio" },
@@ -4257,9 +4257,9 @@ dependencies = [
     { name = "tqdm" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/f5/52/73c06353137a3c35a204ef64d536b78f6be7330f2273c0a21ce747d91de0/pykitool-0.0.7.tar.gz", hash = "sha256:895ce61b190f44963281577edf59ad54ba58f8894cad49538777d19244c0d6b2", size = 62949, upload-time = "2026-07-05T11:38:22.754Z" }
+sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/f1/b8/0c1efaaad220ca21619d901a6b4ae85485fcb09b2300f16c11f18951d49a/pykitool-0.0.8.tar.gz", hash = "sha256:484254251f24df26873b617161b8486bcdee8fd921ef8cdaa1636d40a402ad5d", size = 63141, upload-time = "2026-07-22T03:22:14.814Z" }
 wheels = [
-    { url = "https://pypi.tuna.tsinghua.edu.cn/packages/34/ee/a0ed99fbb28d780e548663b0ee79941e41675896d51cdcd00c4927e6747c/pykitool-0.0.7-py3-none-any.whl", hash = "sha256:bd1a6494f0fdd7d3cecdfb26e58338b1c2241f7ba41247d38774742b1d02ee46", size = 77685, upload-time = "2026-07-05T11:38:24.207Z" },
+    { url = "https://pypi.tuna.tsinghua.edu.cn/packages/3a/1f/a4a7e1dd0a405f445b01c677771e5acc3d4fedb637e4c7f258b0d4c11d09/pykitool-0.0.8-py3-none-any.whl", hash = "sha256:1932430abdc4bc46eb92ae94900ee4a591f9b7d04f4d7f80f3661bc142c48f9a", size = 77886, upload-time = "2026-07-22T03:22:16.404Z" },
 ]
 
 [[package]]
